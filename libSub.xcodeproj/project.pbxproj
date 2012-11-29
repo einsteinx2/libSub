@@ -246,14 +246,14 @@
 		536C9B371661B7D4005A73C6 /* ISMSChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959716619360005A73C6 /* ISMSChatMessage.m */; };
 		536C9B381661B7D4005A73C6 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
 		536C9B391661B7D4005A73C6 /* ISMSOldDataModelDecoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959B16619360005A73C6 /* ISMSOldDataModelDecoders.m */; };
-		5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2541661C4CC00529EF3 /* libSubDefines.h */; };
-		5374F2571661C4CC00529EF3 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2551661C4CC00529EF3 /* libSubImports.h */; };
-		5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BB1661C73D00529EF3 /* MKStoreManager.h */; };
-		5374F2C21661C73D00529EF3 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BC1661C73D00529EF3 /* MKStoreManager.m */; };
-		5374F2C31661C73D00529EF3 /* MKStoreObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BD1661C73D00529EF3 /* MKStoreObserver.h */; };
-		5374F2C41661C73D00529EF3 /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BE1661C73D00529EF3 /* MKStoreObserver.m */; };
-		5374F2C51661C73D00529EF3 /* SFHFKeychainUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BF1661C73D00529EF3 /* SFHFKeychainUtils.h */; };
-		5374F2C61661C73D00529EF3 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */; };
+		5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2541661C4CC00529EF3 /* libSubDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5374F2571661C4CC00529EF3 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2551661C4CC00529EF3 /* libSubImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BB1661C73D00529EF3 /* MKStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5374F2C21661C73D00529EF3 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BC1661C73D00529EF3 /* MKStoreManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5374F2C31661C73D00529EF3 /* MKStoreObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BD1661C73D00529EF3 /* MKStoreObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5374F2C41661C73D00529EF3 /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BE1661C73D00529EF3 /* MKStoreObserver.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5374F2C51661C73D00529EF3 /* SFHFKeychainUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BF1661C73D00529EF3 /* SFHFKeychainUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5374F2C61661C73D00529EF3 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53C7F4401661BC3100C5F61E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */; };
 /* End PBXBuildFile section */
@@ -377,13 +377,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 53F15ED6162B9F1B00C24FC1;
 			remoteInfo = EX2Kit;
-		};
-		536C98C916619C16005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C98BA16619BFA005A73C6 /* EX2Kit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 53F15EE8162B9F6800C24FC1;
-			remoteInfo = EX2KitResources;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -711,12 +704,9 @@
 			children = (
 				536C947B16618FA4005A73C6 /* LibSub.h */,
 				536C947D16618FA4005A73C6 /* LibSub.m */,
-				536C96AC1661966C005A73C6 /* NSURLConnectionDelegates */,
-				5374F2581661C4D300529EF3 /* XML Parsers */,
 				536C9776166197CB005A73C6 /* Audio Engine */,
 				536C9755166197AF005A73C6 /* Singletons */,
-				536C959C16619368005A73C6 /* Data Model Objects */,
-				536C9685166195C5005A73C6 /* ISMSStreamManager */,
+				536C959C16619368005A73C6 /* Data Model */,
 				536C96B5166196A3005A73C6 /* Server Loading */,
 				536C947916618FA4005A73C6 /* Supporting Files */,
 			);
@@ -741,7 +731,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		536C959C16619368005A73C6 /* Data Model Objects */ = {
+		536C959C16619368005A73C6 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
 				536C958816619360005A73C6 /* ISMSDataModelObjects.h */,
@@ -765,7 +755,7 @@
 				536C959A16619360005A73C6 /* ISMSOldDataModelDecoders.h */,
 				536C959B16619360005A73C6 /* ISMSOldDataModelDecoders.m */,
 			);
-			name = "Data Model Objects";
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 		536C9685166195C5005A73C6 /* ISMSStreamManager */ = {
@@ -806,6 +796,9 @@
 				536C96BB166196AC005A73C6 /* ISMSUpdateChecker.m */,
 				536C96C2166196B5005A73C6 /* DAOs */,
 				536C96ED166196CC005A73C6 /* Loaders */,
+				536C9685166195C5005A73C6 /* ISMSStreamManager */,
+				536C96AC1661966C005A73C6 /* NSURLConnectionDelegates */,
+				5374F2581661C4D300529EF3 /* XML Parsers */,
 			);
 			name = "Server Loading";
 			sourceTree = "<group>";
@@ -1411,7 +1404,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				536C98CA16619C16005A73C6 /* PBXTargetDependency */,
 				536C98C816619C14005A73C6 /* PBXTargetDependency */,
 				536C98B816619BD1005A73C6 /* PBXTargetDependency */,
 				536C983A16619B92005A73C6 /* PBXTargetDependency */,
@@ -1686,11 +1678,6 @@
 			name = EX2Kit;
 			targetProxy = 536C98C716619C14005A73C6 /* PBXContainerItemProxy */;
 		};
-		536C98CA16619C16005A73C6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = EX2KitResources;
-			targetProxy = 536C98C916619C16005A73C6 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -1715,7 +1702,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"\"$(OBJROOT)/UninstalledProducts/include\"",
+					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
+					/usr/include/libxml2,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -1735,7 +1729,14 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)",
+					"\"$(OBJROOT)/UninstalledProducts/include\"",
+					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
+					/usr/include/libxml2,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = "";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1744,13 +1745,14 @@
 		536C948216618FA4005A73C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEAD_CODE_STRIPPING = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DSTROOT = /tmp/Sub.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sub/libSub-Prefix.pch";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)",
 					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Frameworks/libBASS\"",
 					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
@@ -1761,7 +1763,7 @@
 				PUBLIC_HEADERS_FOLDER_PATH = include/LibSub;
 				SEPARATE_STRIP = NO;
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = all;
+				STRIP_STYLE = debugging;
 			};
 			name = Debug;
 		};
@@ -1769,13 +1771,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
-				DEAD_CODE_STRIPPING = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DSTROOT = /tmp/Sub.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sub/libSub-Prefix.pch";
-				HEADER_SEARCH_PATHS = /usr/include/libxml2;
+				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"$(SRCROOT)",
 					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Frameworks/libBASS\"",
 					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
@@ -1785,7 +1788,7 @@
 				PUBLIC_HEADERS_FOLDER_PATH = include/LibSub;
 				SEPARATE_STRIP = NO;
 				SKIP_INSTALL = YES;
-				STRIP_STYLE = all;
+				STRIP_STYLE = debugging;
 			};
 			name = Release;
 		};
