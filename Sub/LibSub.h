@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Einstein Times Two Software. All rights reserved.
 //
 
-#import "LibSubImports.h"
+#import "libSubImports.h"
 
 // Static class for shared library methods
 @interface LibSub : NSObject

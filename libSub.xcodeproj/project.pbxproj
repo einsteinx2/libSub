@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5344F454166C03E50013B929 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5344F453166C03E50013B929 /* libSubImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		536C947E16618FA4005A73C6 /* LibSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C947D16618FA4005A73C6 /* LibSub.m */; };
 		536C959E166193AE005A73C6 /* ISMSDataModelObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958816619360005A73C6 /* ISMSDataModelObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -247,7 +248,6 @@
 		536C9B381661B7D4005A73C6 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
 		536C9B391661B7D4005A73C6 /* ISMSOldDataModelDecoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959B16619360005A73C6 /* ISMSOldDataModelDecoders.m */; };
 		5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2541661C4CC00529EF3 /* libSubDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		5374F2571661C4CC00529EF3 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2551661C4CC00529EF3 /* libSubImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BB1661C73D00529EF3 /* MKStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C21661C73D00529EF3 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BC1661C73D00529EF3 /* MKStoreManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5374F2C31661C73D00529EF3 /* MKStoreObserver.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BD1661C73D00529EF3 /* MKStoreObserver.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -381,6 +381,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5344F453166C03E50013B929 /* libSubImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubImports.h; sourceTree = "<group>"; };
 		536C947316618FA4005A73C6 /* libSub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		536C947616618FA4005A73C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		536C947A16618FA4005A73C6 /* libSub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libSub-Prefix.pch"; sourceTree = "<group>"; };
@@ -626,7 +627,6 @@
 		536C9AB01661AA61005A73C6 /* SearchXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchXMLParser.h; sourceTree = "<group>"; };
 		536C9AB11661AA61005A73C6 /* SearchXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchXMLParser.m; sourceTree = "<group>"; };
 		5374F2541661C4CC00529EF3 /* libSubDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubDefines.h; sourceTree = "<group>"; };
-		5374F2551661C4CC00529EF3 /* libSubImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubImports.h; sourceTree = "<group>"; };
 		5374F2BB1661C73D00529EF3 /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKStoreManager.h; path = Frameworks/MKStoreManager/MKStoreManager.h; sourceTree = "<group>"; };
 		5374F2BC1661C73D00529EF3 /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKStoreManager.m; path = Frameworks/MKStoreManager/MKStoreManager.m; sourceTree = "<group>"; };
 		5374F2BD1661C73D00529EF3 /* MKStoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKStoreObserver.h; path = Frameworks/MKStoreManager/MKStoreObserver.h; sourceTree = "<group>"; };
@@ -726,7 +726,7 @@
 				536C993B16619F39005A73C6 /* NSError+ISMSError.h */,
 				536C993C16619F39005A73C6 /* NSError+ISMSError.m */,
 				5374F2541661C4CC00529EF3 /* libSubDefines.h */,
-				5374F2551661C4CC00529EF3 /* libSubImports.h */,
+				5344F453166C03E50013B929 /* libSubImports.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1249,6 +1249,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5344F454166C03E50013B929 /* libSubImports.h in Headers */,
 				536C95A9166193AE005A73C6 /* LibSub.h in Headers */,
 				536C959E166193AE005A73C6 /* ISMSDataModelObjects.h in Headers */,
 				536C959F166193AE005A73C6 /* ISMSIndex.h in Headers */,
@@ -1383,7 +1384,6 @@
 				536C9AB21661AA61005A73C6 /* SearchXMLParser.h in Headers */,
 				53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */,
 				5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */,
-				5374F2571661C4CC00529EF3 /* libSubImports.h in Headers */,
 				5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */,
 				5374F2C31661C73D00529EF3 /* MKStoreObserver.h in Headers */,
 				5374F2C51661C73D00529EF3 /* SFHFKeychainUtils.h in Headers */,
@@ -1703,15 +1703,17 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"\"$(OBJROOT)/UninstalledProducts/include\"",
-					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
 					/usr/include/libxml2,
+					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
+					"\"$(SRCROOT)/Frameworks/ZipKit\"",
+					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
+					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -1730,14 +1732,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)",
-					"\"$(OBJROOT)/UninstalledProducts/include\"",
-					"\"$(TARGET_BUILD_DIR)/usr/local/lib/include\"",
 					/usr/include/libxml2,
+					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
+					"\"$(SRCROOT)/Frameworks/ZipKit\"",
+					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
+					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1745,6 +1749,7 @@
 		536C948216618FA4005A73C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DSTROOT = /tmp/Sub.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -1770,6 +1775,7 @@
 		536C948316618FA4005A73C6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DSTROOT = /tmp/Sub.dst;

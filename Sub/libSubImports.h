@@ -2,22 +2,23 @@
 //  libSubImports.h
 //  libSub
 //
-//  Created by Benjamin Baron on 11/24/12.
+//  Created by Benjamin Baron on 12/2/12.
 //  Copyright (c) 2012 Einstein Times Two Software. All rights reserved.
 //
 
-#ifndef Sub_SubImports_h
-#define Sub_SubImports_h
+#ifndef libSub_libSubImports_h
+#define libSub_libSubImports_h
 
 #import "libSubDefines.h"
 
 // Frameworks
-#import <EX2Kit/EX2Kit.h>
-#import <ZipKit/ZipKit.h>
-#import <TBXML/TBXML.h>
-#import <TBXML/TBXML+Compression.h>
-#import <TBXML/TBXML+HTTP.h>
-#import <SBJson/SBJson.h>
+#import "ZipKit.h"
+#import "TBXML.h"
+#import "TBXML+Compression.h"
+#import "TBXML+HTTP.h"
+#import "SBJson.h"
+#import "EX2Kit.h"
+
 #import "FMDatabaseQueueAdditions.h"
 #import "FlurryAnalytics.h"
 
