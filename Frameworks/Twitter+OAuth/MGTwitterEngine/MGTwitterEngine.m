@@ -8,7 +8,7 @@
 
 #import "MGTwitterEngine.h"
 #import "MGTwitterHTTPURLConnection.h"
-#import <TBXML/TBXML+Compression.h>
+#import "TBXML+Compression.h"
 
 #define USE_LIBXML 0
 
