@@ -28,8 +28,8 @@
 // CONFIGURATION STARTS -- Change this in your app
 #define kConsumableBaseFeatureId @"com.einsteinx2.isublite."
 #define kFeaturePlaylistsId @"com.einsteinx2.isublite.playlistUnlock"
-#define kFeatureJukeboxId @"com.einsteinx2.isublite.jukeboxUnlock"
 #define kFeatureCacheId @"com.einsteinx2.isublite.cacheUnlock"
+#define kFeatureVideoId @"com.einsteinx2.isublite.videoUnlock"
 #define kFeatureAllId @"com.einsteinx2.isublite.allUnlock"
 //#define kConsumableFeatureBId @"com.mycompany.myapp.005"
 // consumable features should have only number as the last part of the product name

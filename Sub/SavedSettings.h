@@ -77,14 +77,17 @@ typedef enum
 
 // Lite Version Properties
 @property (readonly) BOOL isPlaylistUnlocked;
-@property (readonly) BOOL isJukeboxUnlocked;
 @property (readonly) BOOL isCacheUnlocked;
+@property (readonly) BOOL isVideoUnlocked;
 
 @property BOOL isForceOfflineMode;
 @property NSInteger recoverSetting;
 @property NSInteger maxBitrateWifi;
 @property NSInteger maxBitrate3G;
 @property (readonly) NSInteger currentMaxBitrate;
+@property NSInteger maxVideoBitrateWifi;
+@property NSInteger maxVideoBitrate3G;
+@property (readonly) NSArray *currentVideoBitrates;
 @property BOOL isSongCachingEnabled;
 @property BOOL isNextSongCacheEnabled;
 @property BOOL isManualCachingOnWWANEnabled;
@@ -132,6 +135,8 @@ typedef enum
 @property BOOL isEqualizerOn;
 
 @property NSUInteger oneTimeRunIncrementor;
+
+@property BOOL isDisableUsageOver3G;
 
 // State Saving
 @property BOOL isRecover;

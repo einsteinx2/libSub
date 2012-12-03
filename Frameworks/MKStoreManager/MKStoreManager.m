@@ -166,7 +166,7 @@ static MKStoreManager* _sharedStoreManager;
 -(void) requestProductData
 {
 	SKProductsRequest *request= [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObjects: 
-								kFeaturePlaylistsId, kFeatureCacheId, kFeatureJukeboxId, kFeatureAllId, nil]];
+								kFeatureVideoId, kFeaturePlaylistsId, kFeatureCacheId, kFeatureAllId, nil]];
 	request.delegate = self;
 	[request start];
 }
@@ -260,7 +260,12 @@ static MKStoreManager* _sharedStoreManager;
 	
 	if ([SKPaymentQueue canMakePayments])
 	{
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"productIdentifier == '%@'", featureId];
+        // TODO: Figure out why the fuck this doesn't work anymore. It worked fine before, never changed the code.
+        //ALog(@"test: %@", [self.purchasableObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"productIdentifier == 'com.einsteinx2.isublite.videoUnlock'"]]);
+        //ALog(@"test2: %@", [self.purchasableObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"productIdentifier == '%@'", featureId]]);
+        //ALog(@"test3: %@", [self.purchasableObjects filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:[NSString stringWithFormat:@"productIdentifier == '%@'", featureId]]]);
+        //NSPredicate *predicate = [NSPredicate predicateWithFormat:@"productIdentifier == '%@'", featureId];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"productIdentifier == '%@'", featureId]];
         SKProduct *product = [[self.purchasableObjects filteredArrayUsingPredicate:predicate] objectAtIndexSafe:0];
         SKPayment *payment = [SKPayment paymentWithProduct:product];
         

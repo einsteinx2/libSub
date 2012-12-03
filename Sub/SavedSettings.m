@@ -368,6 +368,12 @@
 	{
 		self.isLockScreenArtEnabled = YES;
 	}
+    
+    if (![_userDefaults objectForKey:@"maxVideoBitrateWifi"])
+    {
+        self.maxVideoBitrateWifi = 5;
+        self.maxVideoBitrate3G = 5;
+    }
 	
 	[_userDefaults synchronize];
 }
@@ -575,28 +581,25 @@
 
 #pragma mark - Lite Version Properties
 
+// This is necessary because preprocessor macros set in the parent application are not picked up by subprojects during building
+- (BOOL)isLite
+{
+    return [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.einsteinx2.isublite"];
+}
+
 - (BOOL)isPlaylistUnlocked
 {
-	if (!IS_LITE() || [MKStoreManager isFeaturePurchased:kFeaturePlaylistsId] || [MKStoreManager isFeaturePurchased:kFeatureAllId])
-		return YES;
-	
-	return NO;
+	return (![self isLite] || [MKStoreManager isFeaturePurchased:kFeaturePlaylistsId] || [MKStoreManager isFeaturePurchased:kFeatureAllId]);
 }
 
 - (BOOL)isCacheUnlocked
 {
-	if (!IS_LITE() || [MKStoreManager isFeaturePurchased:kFeatureCacheId] || [MKStoreManager isFeaturePurchased:kFeatureAllId])
-		return YES;
-	
-	return NO;
+	return (![self isLite] || [MKStoreManager isFeaturePurchased:kFeatureCacheId] || [MKStoreManager isFeaturePurchased:kFeatureAllId]);
 }
 
-- (BOOL)isJukeboxUnlocked
+- (BOOL)isVideoUnlocked
 {
-	if (!IS_LITE() || [MKStoreManager isFeaturePurchased:kFeatureJukeboxId] || [MKStoreManager isFeaturePurchased:kFeatureAllId])
-		return YES;
-	
-	return NO;
+	return (![self isLite] || [MKStoreManager isFeaturePurchased:kFeatureVideoId] || [MKStoreManager isFeaturePurchased:kFeatureAllId]);
 }
 
 #pragma mark - Other Settings
@@ -674,19 +677,85 @@
 {
 	@synchronized(self)
 	{
-		NSInteger bitrate;
 		switch ([LibSub isWifi] ? self.maxBitrateWifi : self.maxBitrate3G)
 		{
-			case 0: bitrate = 64; break;
-			case 1: bitrate = 96; break;
-			case 2: bitrate = 128; break;
-			case 3: bitrate = 160; break;
-			case 4: bitrate = 192; break;
-			case 5: bitrate = 256; break;
-			case 6: bitrate = 320; break;
-			default: bitrate = 0; break;
+			case 0: return 64;
+			case 1: return 96;
+			case 2: return 128;
+			case 3: return 160;
+			case 4: return 192;
+			case 5: return 256;
+			case 6: return 320;
+			default: return 0;
 		}
-		return bitrate;
+	}
+}
+
+- (NSInteger)maxVideoBitrateWifi
+{
+	@synchronized(self)
+	{
+		return [_userDefaults integerForKey:@"maxVideoBitrateWifi"];
+	}
+}
+
+- (void)setMaxVideoBitrateWifi:(NSInteger)maxVideoBitrateWifi
+{
+	@synchronized(self)
+	{
+		[_userDefaults setInteger:maxVideoBitrateWifi forKey:@"maxVideoBitrateWifi"];
+		[_userDefaults synchronize];
+	}
+}
+
+- (NSInteger)maxVideoBitrate3G
+{
+	@synchronized(self)
+	{
+		return [_userDefaults integerForKey:@"maxVideoBitrate3G"];
+	}
+}
+
+- (void)setMaxVideoBitrate3G:(NSInteger)maxVideoBitrate3G
+{
+	@synchronized(self)
+	{
+		[_userDefaults setInteger:maxVideoBitrate3G forKey:@"maxVideoBitrate3G"];
+		[_userDefaults synchronize];
+	}
+}
+
+- (NSArray *)currentVideoBitrates
+{    
+    @synchronized(self)
+	{
+		switch ([LibSub isWifi] ? self.maxVideoBitrateWifi : self.maxVideoBitrate3G)
+		{
+			case 0: return @[@60];
+			case 1: return @[@256, @60];
+			case 2: return @[@512, @256, @60];
+			case 3: return @[@1024, @512, @256, @60];
+			case 4: return @[@1536, @1024, @512, @256, @60];
+			case 5: return @[@2048, @1536, @1024, @512, @256, @60];
+			default: return nil;
+		}
+	}
+}
+
+- (NSInteger)currentMaxVideoBitrate
+{
+	@synchronized(self)
+	{
+		switch ([LibSub isWifi] ? self.maxVideoBitrateWifi : self.maxVideoBitrate3G)
+		{
+			case 0: return 60;
+			case 1: return 256;
+			case 2: return 512;
+			case 3: return 1024;
+			case 4: return 1536;
+			case 5: return 2048;
+			default: return 0;
+		}
 	}
 }
 
@@ -1014,10 +1083,7 @@
 {
 	@synchronized(self)
 	{
-		if (self.isJukeboxUnlocked)
-			return _isJukeboxEnabled;
-		else
-			return NO;
+		return _isJukeboxEnabled;
 	}
 }
 
@@ -1480,6 +1546,23 @@
 	{
 		_isEqualizerOn = isOn;
 		[_userDefaults setBool:_isEqualizerOn forKey:@"isEqualizerOn"];
+		[_userDefaults synchronize];
+	}
+}
+
+- (BOOL)isDisableUsageOver3G
+{
+	@synchronized(self)
+	{
+		return [_userDefaults boolForKey:@"isDisableUsageOver3G"];
+	}
+}
+
+- (void)setIsDisableUsageOver3G:(BOOL)isDisableUsageOver3G
+{
+	@synchronized(self)
+	{
+		[_userDefaults setBool:isDisableUsageOver3G forKey:@"isDisableUsageOver3G"];
 		[_userDefaults synchronize];
 	}
 }
