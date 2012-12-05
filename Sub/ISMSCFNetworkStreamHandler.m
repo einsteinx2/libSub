@@ -130,6 +130,8 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
                 default: transQuality = @"Extreme"; break;
             }
             [parameters setObject:transQuality forKey:@"transQuality"];
+            [parameters setObject:@"OPUS" forKey:@"transType"];
+            [parameters setObject:@"true" forKey:@"estimateContentLength"];
             request = [NSMutableURLRequest requestWithPMSAction:@"transcode" parameters:parameters byteOffset:self.byteOffset];
         }
         else
