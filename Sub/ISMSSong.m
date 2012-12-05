@@ -19,13 +19,13 @@
 		NSString *songName = N2n([dictionary objectForKey:@"songName"]);
 		NSString *titleKey = !songName || songName.length == 0  ? @"fileName" : @"songName";
 		_title = [(NSString *)N2n([dictionary objectForKey:titleKey]) cleanString];
-		_songId = [(NSString *)N2n([dictionary objectForKey:@"itemId"]) cleanString];
-		_parentId = [(NSString *)N2n([dictionary objectForKey:@"folderId"]) cleanString];
+		_songId = N2n([dictionary objectForKey:@"itemId"]);
+		_parentId = N2n([dictionary objectForKey:@"folderId"]);
 		_artist = [(NSString *)N2n([dictionary objectForKey:@"artistName"]) cleanString];
 		_album = [(NSString *)N2n([dictionary objectForKey:@"albumName"]) cleanString];
 		_genre = [(NSString *)N2n([dictionary objectForKey:@"genreName"]) cleanString];
-		_coverArtId = [(NSString *)N2n([dictionary objectForKey:@"artId"]) cleanString];
-		_suffix = [(NSString *)N2n([dictionary objectForKey:@"fileType"]) cleanString];
+		_coverArtId = N2n([dictionary objectForKey:@"artId"]);
+		_suffix = [[N2n([dictionary objectForKey:@"fileType"]) stringValue] cleanString];
 		_duration = N2n([[dictionary objectForKey:@"duration"] copy]);
 		_bitRate = N2n([[dictionary objectForKey:@"bitrate"] copy]);
 		_track = N2n([[dictionary objectForKey:@"trackNumber"] copy]);
