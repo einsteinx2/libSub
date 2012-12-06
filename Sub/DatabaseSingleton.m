@@ -51,6 +51,7 @@ LOG_LEVEL_ISUB_DEFAULT
 - (void)setupDatabases
 {
 	NSString *urlStringMd5 = [[settingsS urlString] md5];
+    DDLogVerbose(@"Database prefix: %@", urlStringMd5);
 		
 	// Only load Albums, Songs, and Genre databases if this is a newer device
 	if (settingsS.isSongsTabEnabled)
@@ -723,8 +724,17 @@ LOG_LEVEL_ISUB_DEFAULT
 	int i = 0;
 	for (NSString *title in sectionTitles)
 	{
-		NSString *row;
-		row = [database stringForQuery:[NSString stringWithFormat:@"SELECT ROWID FROM %@ WHERE %@ LIKE '%@%%' LIMIT 1", table, column, [sectionTitles objectAtIndexSafe:i]]];
+        NSArray *articles = [NSString indefiniteArticles];
+        
+        NSString *section = [sectionTitles objectAtIndexSafe:i];
+        NSMutableString *query = [NSMutableString stringWithFormat:@"SELECT ROWID FROM %@ WHERE %@ LIKE '%@%%'", table, column, section];
+        for (NSString *article in articles)
+        {
+            [query appendFormat:@"AND %@ NOT LIKE '%@ %%' ", column, article];
+        }
+        [query appendString:@"LIMIT 1"];
+
+		NSString *row = [database stringForQuery:query];
 		if (row != nil)
 		{
 			[sections addObject:[NSArray arrayWithObjects:[sectionTitles objectAtIndexSafe:i], [NSNumber numberWithInt:([row intValue] - 1)], nil]];

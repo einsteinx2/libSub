@@ -32,13 +32,13 @@ typedef enum
 #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #endif
 #else
-#define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_INFO;
+#define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #endif
 
 #ifdef BETA
 #define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #else
-#define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_INFO;
+#define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #endif
 
 #endif

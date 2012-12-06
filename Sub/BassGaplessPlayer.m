@@ -22,7 +22,7 @@ LOG_LEVEL_ISUB_DEBUG
 
 // Stream create failure retry values
 #define ISMS_BassStreamRetryDelay 2.0
-#define ISMS_BassStreamMinFilesizeToFail BytesFromMiB(3)
+#define ISMS_BassStreamMinFilesizeToFail BytesFromMiB(15) //(3) // 3MB is no longer enough with super high resolution artwork
 
 #define startSongRetryTimer @"startSong"
 #define nextSongRetryTimer @"nextSong"
