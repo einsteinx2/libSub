@@ -132,7 +132,7 @@
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	 {
 		 NSString *query = [NSString stringWithFormat:@"INSERT INTO rootFolderIndexCache%@ VALUES (?, ?, ?)", self.tableModifier];
-		 [db executeUpdate:query, [name cleanString], [NSNumber numberWithInt:position], [NSNumber numberWithInt:folderCount]];
+		 [db executeUpdate:query, name, [NSNumber numberWithInt:position], [NSNumber numberWithInt:folderCount]];
 		 hadError = [db hadError];
 	 }];
 	return !hadError;
@@ -147,7 +147,7 @@
 		[self.dbQueue inDatabase:^(FMDatabase *db)
 		 {
 			 NSString *query = @"INSERT INTO rootFolderNameCacheTemp VALUES (?, ?)";
-			 [db executeUpdate:query, folderId, [name cleanString]];
+			 [db executeUpdate:query, folderId, name];
 			 hadError = [db hadError];
 			 self.tempRecordCount++;
 		 }];

@@ -104,26 +104,16 @@
 	if ([result next])
 	{
 		aSong = [[ISMSSong alloc] init];
-		if ([result stringForColumn:@"title"] != nil)
-			aSong.title = [[result stringForColumn:@"title"] cleanString];
-		if ([result stringForColumn:@"songId"] != nil)
-			aSong.songId = [[result stringForColumn:@"songId"] cleanString];
-		if ([result stringForColumn:@"parentId"] != nil)
-			aSong.parentId = [[result stringForColumn:@"parentId"] cleanString];
-		if ([result stringForColumn:@"artist"] != nil)
-			aSong.artist = [[result stringForColumn:@"artist"] cleanString];
-		if ([result stringForColumn:@"album"] != nil)
-			aSong.album = [[result stringForColumn:@"album"] cleanString];
-		if ([result stringForColumn:@"genre"] != nil)
-			aSong.genre = [[result stringForColumn:@"genre"] cleanString];
-		if ([result stringForColumn:@"coverArtId"] != nil)
-			aSong.coverArtId = [[result stringForColumn:@"coverArtId"] cleanString];
-		if ([result stringForColumn:@"path"] != nil)
-			aSong.path = [[result stringForColumn:@"path"] cleanString];
-		if ([result stringForColumn:@"suffix"] != nil)
-			aSong.suffix = [[result stringForColumn:@"suffix"] cleanString];
-		if ([result stringForColumn:@"transcodedSuffix"] != nil)
-			aSong.transcodedSuffix = [[result stringForColumn:@"transcodedSuffix"] cleanString];
+		aSong.title = [result stringForColumn:@"title"];
+		aSong.songId = [result stringForColumn:@"songId"];
+		aSong.parentId = [result stringForColumn:@"parentId"];
+		aSong.artist = [result stringForColumn:@"artist"];
+		aSong.album = [result stringForColumn:@"album"];
+		aSong.genre = [result stringForColumn:@"genre"];
+		aSong.coverArtId = [result stringForColumn:@"coverArtId"];
+		aSong.path = [result stringForColumn:@"path"];
+		aSong.suffix = [result stringForColumn:@"suffix"];
+		aSong.transcodedSuffix = [result stringForColumn:@"transcodedSuffix"];
 		aSong.duration = [NSNumber numberWithInt:[result intForColumn:@"duration"]];
 		aSong.bitRate = [NSNumber numberWithInt:[result intForColumn:@"bitRate"]];
 		aSong.track = [NSNumber numberWithInt:[result intForColumn:@"track"]];
