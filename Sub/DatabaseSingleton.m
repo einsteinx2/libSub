@@ -329,9 +329,21 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		[db executeUpdate:@"PRAGMA cache_size = 1"];
 		
-		if (![db tableExists:@"bookmarks"]) 
+		if ([db tableExists:@"bookmarks"])
+        {
+            // Make sure the isVideo column is there
+            if (![db columnExists:@"isVideo" inTableWithName:@"bookmarks"])
+            {
+                // Doesn't exist so fix the table definition
+                [db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE bookmarksTemp (bookmarkId INTEGER PRIMARY KEY, playlistIndex INTEGER, name TEXT, position INTEGER, %@, bytes INTEGER)", [ISMSSong standardSongColumnSchema]]];
+                [db executeUpdate:@"INSERT INTO bookmarksTemp SELECT bookmarkId, playlistIndex, name, position, title, songId, artist, album, genre, coverArtId, path, suffix, transcodedSuffix, duration, bitRate, track, year, size, parentId, 0, bytes FROM bookmarks"];
+                [db executeUpdate:@"DROP TABLE bookmarks"];
+                [db executeUpdate:@"ALTER TABLE bookmarksTemp RENAME TO bookmarks"];
+                [db executeUpdate:@"CREATE INDEX songId ON bookmarks (songId)"];
+            }
+        }
+        else
 		{
-			//[bookmarksDb executeUpdate:[NSString stringWithFormat:@"CREATE TABLE bookmarks (name TEXT, position INTEGER, %@, bytes INTEGER)", [ISMSSong standardSongColumnSchema]]];
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE bookmarks (bookmarkId INTEGER PRIMARY KEY, playlistIndex INTEGER, name TEXT, position INTEGER, %@, bytes INTEGER)", [ISMSSong standardSongColumnSchema]]];
 			[db executeUpdate:@"CREATE INDEX songId ON bookmarks (songId)"];
 		}

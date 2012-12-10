@@ -26,19 +26,19 @@ typedef enum
 #define ISMSServerCheckTimeout 15.0
 
 #ifdef BETA
-#ifdef SILENT
-#define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_OFF;
+    #ifdef SILENT
+        #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_OFF;
+    #else
+        #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #endif
 #else
-#define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
-#endif
-#else
-#define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #endif
 
 #ifdef BETA
-#define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #else
-#define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 #endif
 
 #endif

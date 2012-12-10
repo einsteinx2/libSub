@@ -34,7 +34,7 @@
 	
 	//NSDate *startTime = [NSDate date];
 	
-	//DLog(@"%@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
+	//NSLog(@"%@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
 	NSError *error;
     TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
 	if (error)
@@ -71,7 +71,7 @@
                 
 					// Parse the shortcut
 					NSString *folderId = [TBXML valueOfAttributeNamed:@"id" forElement:shortcutElement];
-					NSString *name = [TBXML valueOfAttributeNamed:@"name" forElement:shortcutElement];
+					NSString *name = [[TBXML valueOfAttributeNamed:@"name" forElement:shortcutElement] cleanString];
 					//DLog(@"id: %@  name: %@", folderId, name);
 					
 					// Add the record to the cache
@@ -113,7 +113,7 @@
 							{
 								// Parse the top level folder
 								NSString *folderId = [TBXML valueOfAttributeNamed:@"id" forElement:artistElement];
-								NSString *name = [TBXML valueOfAttributeNamed:@"name" forElement:artistElement];
+								NSString *name = [[TBXML valueOfAttributeNamed:@"name" forElement:artistElement] cleanString];
 								//DLog(@"id: %@  name: %@", folderId, name);
 								
 								// Add the folder to the DB
