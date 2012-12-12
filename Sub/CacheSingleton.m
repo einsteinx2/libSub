@@ -17,23 +17,15 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (unsigned long long)totalSpace
 {
-	NSDictionary *attributes;
-    unsigned long long size = 0;
-    
-    attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:settingsS.songCachePath error:NULL];
-	size = [attributes[NSFileSystemSize] unsignedLongLongValue];
-    
-    attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:settingsS.tempCachePath error:NULL];
-	size += [attributes[NSFileSystemSize] unsignedLongLongValue];
-    
-    return size;
+	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:settingsS.songCachePath error:NULL];
+    return [attributes[NSFileSystemSize] unsignedLongLongValue];
 }
 
 - (unsigned long long)freeSpace
 {
 	NSString *path = settingsS.cachesPath;
 	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:path error:NULL];
-	return [[attributes objectForKey:NSFileSystemFreeSize] unsignedLongLongValue];
+	return [attributes[NSFileSystemFreeSize] unsignedLongLongValue];
 }
 
 - (void)startCacheCheckTimerWithInterval:(NSTimeInterval)interval
