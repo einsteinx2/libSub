@@ -423,11 +423,7 @@ LOG_LEVEL_ISUB_DEBUG
 	if (!song)
 		return;
 	
-	ISMSStreamHandler *handler = [[ISMSCFNetworkStreamHandler alloc] initWithSong:song 
-															byteOffset:byteOffset
-														 secondsOffset:secondsOffset
-																isTemp:isTemp
-															  delegate:self];
+	ISMSStreamHandler *handler = [[ISMSCFNetworkStreamHandler alloc] initWithSong:song byteOffset:byteOffset secondsOffset:secondsOffset isTemp:isTemp delegate:self];
 	if (![self.handlerStack containsObject:handler])
 	{
 		[self.handlerStack insertObject:handler atIndex:index];

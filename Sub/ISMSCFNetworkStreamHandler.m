@@ -55,8 +55,8 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	self.totalBytesTransferred = 0;
 	self.bytesTransferred = 0;
     
-    if (!resume)
-        self.byteOffset = 0;
+    //if (!resume)
+    //    self.byteOffset = 0;
     	
 	// Create the file handle
 	self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.filePath];
