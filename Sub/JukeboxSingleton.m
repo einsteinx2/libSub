@@ -366,6 +366,7 @@
 - (void)setup
 {
 	_connectionQueue = [[EX2SimpleConnectionQueue alloc] init];
+    _connectionQueue.numberOfConcurrentConnections = 1;
 
 	[[NSNotificationCenter defaultCenter] addObserver:self 
 											 selector:@selector(didReceiveMemoryWarning) 
