@@ -319,6 +319,11 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
         {
             [self.delegate bassSongEndedCalled:self];
         }
+        
+        if ([self.delegate respondsToSelector:@selector(bassUpdateLockScreenInfo:)])
+        {
+            [self.delegate bassUpdateLockScreenInfo:self];
+        }
 		
 		// Remove the stream from the queue
 		if (userInfo)
@@ -643,7 +648,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 }
 
 - (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds
-{
+{    
 	[EX2Dispatch runInQueue:self.streamGcdQueue waitUntilDone:NO block:^
 	 {
 		 if (!aSong)
@@ -720,6 +725,11 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
                  if ([self.delegate respondsToSelector:@selector(bassFirstStreamStarted:)])
                  {
                      [self.delegate bassFirstStreamStarted:self];
+                 }
+                 
+                 if ([self.delegate respondsToSelector:@selector(bassUpdateLockScreenInfo:)])
+                 {
+                     [self.delegate bassUpdateLockScreenInfo:self];
                  }
 				 
 				 // Prepare the next song
