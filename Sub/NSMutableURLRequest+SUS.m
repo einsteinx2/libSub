@@ -138,7 +138,7 @@ static NSSet *setOfVersions = nil;
 	
 	if (offset > 0)
 	{
-		NSString *rangeString = [NSString stringWithFormat:@"bytes=%i-", offset];
+		NSString *rangeString = [NSString stringWithFormat:@"bytes=%ld-", (long)offset];
 		[request setValue:rangeString forHTTPHeaderField:@"Range"];
 	}
     

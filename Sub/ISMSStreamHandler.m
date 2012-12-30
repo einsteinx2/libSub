@@ -213,7 +213,7 @@
 	[encoder encodeBool:self.isTempCache forKey:@"isTempCache"];
 	[encoder encodeBool:self.isDownloading forKey:@"isDownloading"];
 	[encoder encodeInt64:self.contentLength forKey:@"contentLength"];
-	[encoder encodeInt32:self.maxBitrateSetting forKey:@"maxBitrateSetting"];
+	[encoder encodeInt32:(int32_t)self.maxBitrateSetting forKey:@"maxBitrateSetting"];
     [encoder encodeBool:self.isEnableRateLimiting forKey:@"isEnableRateLimiting"];
 }
 

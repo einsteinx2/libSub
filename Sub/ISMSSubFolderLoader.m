@@ -94,7 +94,7 @@
 	__block BOOL hadError;
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:@"INSERT INTO albumsCacheCount (folderId, count) VALUES (?, ?)", self.myId.md5, [NSNumber numberWithInt:self.albumsCount]];
+		[db executeUpdate:@"INSERT INTO albumsCacheCount (folderId, count) VALUES (?, ?)", self.myId.md5, @(self.albumsCount)];
 		
 		hadError = [db hadError];
 		if ([db hadError])
@@ -109,7 +109,7 @@
 	__block BOOL hadError;
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:@"INSERT INTO songsCacheCount (folderId, count) VALUES (?, ?)", self.myId.md5, [NSNumber numberWithInt:self.songsCount]];
+		[db executeUpdate:@"INSERT INTO songsCacheCount (folderId, count) VALUES (?, ?)", self.myId.md5, @(self.songsCount)];
 		
 		hadError = [db hadError];
 		if (hadError)
@@ -124,7 +124,7 @@
 	__block BOOL hadError;
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:@"INSERT INTO folderLength (folderId, length) VALUES (?, ?)", self.myId.md5, [NSNumber numberWithInt:self.folderLength]];
+		[db executeUpdate:@"INSERT INTO folderLength (folderId, length) VALUES (?, ?)", self.myId.md5, @(self.folderLength)];
 		
 		hadError = [db hadError];
 		if ([db hadError])

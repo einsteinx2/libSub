@@ -50,6 +50,8 @@
 
 #pragma mark - Public DAO methods
 
+#ifdef IOS
+
 - (UIImage *)coverArtImage
 {
     NSData *imageData = [self.dbQueue dataForQuery:@"SELECT data FROM coverArtCache WHERE id = ?", [self.coverArtId md5]];
@@ -63,6 +65,24 @@
 	else
 		return [UIImage imageNamed:@"default-album-art-small.png"];
 }
+
+#else
+
+- (NSImage *)coverArtImage
+{
+    NSData *imageData = [self.dbQueue dataForQuery:@"SELECT data FROM coverArtCache WHERE id = ?", [self.coverArtId md5]];
+    return imageData ? [[NSImage alloc] initWithData:imageData] : self.defaultCoverArtImage;
+}
+
+- (NSImage *)defaultCoverArtImage
+{
+	if (self.isLarge)
+		return IS_IPAD() ? [NSImage imageNamed:@"default-album-art-ipad.png"] : [NSImage imageNamed:@"default-album-art.png"];
+	else
+		return [NSImage imageNamed:@"default-album-art-small.png"];
+}
+
+#endif
 
 - (BOOL)isCoverArtCached
 {

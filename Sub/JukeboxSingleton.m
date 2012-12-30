@@ -33,8 +33,10 @@
 	else 
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 }
@@ -56,8 +58,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 	
@@ -81,8 +85,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 	self.jukeboxIsPlaying = NO;
@@ -93,7 +99,7 @@
 	NSInteger index = playlistS.currentIndex - 1;
 	if (index >= 0)
 	{						
-		[self jukeboxPlaySongAtPosition:[NSNumber numberWithInt:index]];
+		[self jukeboxPlaySongAtPosition:@(index)];
 		
 		self.jukeboxIsPlaying = YES;
 	}
@@ -104,7 +110,7 @@
 	NSInteger index = playlistS.currentIndex + 1;
 	if (index <= ([databaseS.currentPlaylistDbQueue intForQuery:@"SELECT COUNT(*) FROM jukeboxCurrentPlaylist"] - 1))
 	{		
-		[self jukeboxPlaySongAtPosition:[NSNumber numberWithInt:index]];
+		[self jukeboxPlaySongAtPosition:@(index)];
 		
 		self.jukeboxIsPlaying = YES;
 	}
@@ -135,8 +141,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 }
@@ -157,8 +165,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 }
@@ -183,8 +193,10 @@
 		else
 		{
 			// Inform the user that the connection failed.
+#ifdef IOS
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 			[alert show];
+#endif
 		}
 		
 	}
@@ -235,8 +247,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 }
@@ -259,8 +273,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 }
@@ -281,8 +297,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 }
@@ -305,8 +323,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 }
@@ -336,8 +356,10 @@
 	else
 	{
 		// Inform the user that the connection failed.
+#ifdef IOS
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There was an error controlling the Jukebox.\n\nCould not create the network request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 		[alert show];
+#endif
 	}
 	
 	// Keep reloading every 30 seconds if there is no activity so that the player stays updated if visible
@@ -368,10 +390,9 @@
 	_connectionQueue = [[EX2SimpleConnectionQueue alloc] init];
     _connectionQueue.numberOfConcurrentConnections = 1;
 
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(didReceiveMemoryWarning) 
-												 name:UIApplicationDidReceiveMemoryWarningNotification 
-											   object:nil];
+#ifdef IOS
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
 }
 
 + (id)sharedInstance

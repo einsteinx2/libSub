@@ -15,7 +15,7 @@ LOG_LEVEL_ISUB_DEFAULT
 + (void)logError
 {
 #ifdef DEBUG
-	NSInteger errorCode = BASS_ErrorGetCode();
+	int errorCode = BASS_ErrorGetCode();
 	DDLogError(@"[BassWrapper] BASS error: %i - %@", errorCode, [BassWrapper stringFromErrorCode:errorCode]);
 #endif
 }
@@ -236,6 +236,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	return bitrate;
 }
 
+#ifdef IOS
 + (NSInteger)audioSessionSampleRate
 {
 	Float64 sampleRate;
@@ -252,5 +253,7 @@ LOG_LEVEL_ISUB_DEFAULT
 							sizeof(sampleRateFloat), 
 							&sampleRateFloat);
 }
+
+#endif
 
 @end

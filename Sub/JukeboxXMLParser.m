@@ -22,9 +22,11 @@
 }
 
 - (void)subsonicErrorCode:(NSString *)errorCode message:(NSString *)message
-{	
+{
+#ifdef IOS
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Subsonic Error" message:message delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 	[alert show];
+#endif
     
 	if ([errorCode isEqualToString:@"50"])
 	{
@@ -35,8 +37,10 @@
 
 - (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError
 {
+#ifdef IOS
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Subsonic Error" message:@"There was an error parsing the Jukebox XML response." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 	[alert show];
+#endif
 }
 
 - (void)parser:(NSXMLParser *)parser didStartElement:(NSString *)elementName 

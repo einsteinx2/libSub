@@ -8,8 +8,11 @@
 
 #import "JukeboxXMLParser.h"
 #import "JukeboxConnectionDelegate.h"
-#import <MediaPlayer/MediaPlayer.h>
 #import "ISMSStreamHandler.h"
+
+#ifdef IOS
+#import <MediaPlayer/MediaPlayer.h>
+#endif
 
 static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
@@ -63,7 +66,7 @@ double startSongSeconds = 0.0;
 	if (currentSong.isFullyCached)
 	{
 		// The song is fully cached, start streaming from the local copy
-        [audioEngineS startSong:currentSong atIndex:currentIndex withOffsetInBytes:[NSNumber numberWithUnsignedLongLong:startSongBytes] orSeconds:[NSNumber numberWithDouble:startSongSeconds]];
+        [audioEngineS startSong:currentSong atIndex:currentIndex withOffsetInBytes:@(startSongBytes) orSeconds:@(startSongSeconds)];
 		
 		// Fill the stream queue
 		if (!settingsS.isOfflineMode)
@@ -98,7 +101,7 @@ double startSongSeconds = 0.0;
 			if (!audioEngineS.player.isPlaying && handler.isDelegateNotifiedToStartPlayback)
 			{
 				// Only start the player if the handler isn't going to do it itself
-                [audioEngineS startSong:currentSong atIndex:currentIndex withOffsetInBytes:[NSNumber numberWithUnsignedLongLong:startSongBytes] orSeconds:[NSNumber numberWithDouble:startSongSeconds]];
+                [audioEngineS startSong:currentSong atIndex:currentIndex withOffsetInBytes:@(startSongBytes) orSeconds:@(startSongSeconds)];
 			}
 		}
 		else if ([streamManagerS isSongFirstInQueue:currentSong] && ![streamManagerS isQueueDownloading])
@@ -112,7 +115,7 @@ double startSongSeconds = 0.0;
 			if (!audioEngineS.player.isPlaying && handler.isDelegateNotifiedToStartPlayback)
 			{
 				// Only start the player if the handler isn't going to do it itself
-                [audioEngineS startSong:currentSong atIndex:currentIndex withOffsetInBytes:[NSNumber numberWithUnsignedLongLong:startSongBytes] orSeconds:[NSNumber numberWithDouble:startSongSeconds]];
+                [audioEngineS startSong:currentSong atIndex:currentIndex withOffsetInBytes:@(startSongBytes) orSeconds:@(startSongSeconds)];
 			}
 		}
 		else
@@ -162,11 +165,14 @@ double startSongSeconds = 0.0;
         if (currentSong.isVideo)
         {
             currentSong = nil;
+            
+#ifdef IOS
             [EX2SlidingNotification slidingNotificationOnMainWindowWithMessage:@"Cannot play videos in Jukebox mode." image:nil];
+#endif
         }
         else
         {
-            [jukeboxS jukeboxPlaySongAtPosition:[NSNumber numberWithInt:position]];
+            [jukeboxS jukeboxPlaySongAtPosition:@(position)];
         }
 	}
 	else
@@ -192,20 +198,20 @@ double startSongSeconds = 0.0;
 	if (audioEngineS.player.progress > 10.0)
 	{
 		// Past 10 seconds in the song, so restart playback instead of changing songs
-		DDLogVerbose(@"[MusicSingleton] prevSong Past 10 seconds in the song, so restart playback instead of changing songs, calling playSongAtPosition:%u", playlistS.currentIndex);
+		DDLogVerbose(@"[MusicSingleton] prevSong Past 10 seconds in the song, so restart playback instead of changing songs, calling playSongAtPosition:%lu", (unsigned long)playlistS.currentIndex);
 		[self playSongAtPosition:playlistS.currentIndex];
 	}
 	else
 	{
 		// Within first 10 seconds, go to previous song
-		DDLogVerbose(@"[MusicSingleton] prevSong within first 10 seconds, so go to previous, calling playSongAtPosition:%u", playlistS.prevIndex);
+		DDLogVerbose(@"[MusicSingleton] prevSong within first 10 seconds, so go to previous, calling playSongAtPosition:%lu", (unsigned long)playlistS.prevIndex);
 		[self playSongAtPosition:playlistS.prevIndex];
 	}
 }
 
 - (void)nextSong
 {
-	DDLogVerbose(@"[MusicSingleton] nextSong called, calling playSongAtPosition:%u", playlistS.nextIndex);
+	DDLogVerbose(@"[MusicSingleton] nextSong called, calling playSongAtPosition:%lu", (unsigned long)playlistS.nextIndex);
 	[self playSongAtPosition:playlistS.nextIndex];
 }
 
@@ -248,7 +254,8 @@ double startSongSeconds = 0.0;
 
 - (void)updateLockScreenInfo
 {
-	if ([NSClassFromString(@"MPNowPlayingInfoCenter") class])  
+#ifdef IOS
+	if ([NSClassFromString(@"MPNowPlayingInfoCenter") class])
 	{
 		/* we're on iOS 5, so set up the now playing center */
 		NSMutableDictionary *trackInfo = [NSMutableDictionary dictionaryWithCapacity:10];
@@ -264,13 +271,13 @@ double startSongSeconds = 0.0;
 			[trackInfo setObject:currentSong.genre forKey:MPMediaItemPropertyGenre];
 		if (currentSong.duration)
 			[trackInfo setObject:currentSong.duration forKey:MPMediaItemPropertyPlaybackDuration];
-		NSNumber *trackIndex = [NSNumber numberWithInt:playlistS.currentIndex];
+		NSNumber *trackIndex = @(playlistS.currentIndex);
 		if (trackIndex)
 			[trackInfo setObject:trackIndex forKey:MPNowPlayingInfoPropertyPlaybackQueueIndex];
-		NSNumber *playlistCount = [NSNumber numberWithInt:playlistS.count];
+		NSNumber *playlistCount = @(playlistS.count);
 		if (playlistCount)
 			[trackInfo setObject:playlistCount forKey:MPNowPlayingInfoPropertyPlaybackQueueCount];
-		NSNumber *progress = [NSNumber numberWithDouble:audioEngineS.player.progress];
+		NSNumber *progress = @(audioEngineS.player.progress);
 		if (progress)
 			[trackInfo setObject:progress forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
 		
@@ -287,6 +294,7 @@ double startSongSeconds = 0.0;
 	// Run this every 30 seconds to update the progress and keep it in sync
 	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(updateLockScreenInfo) object:nil];
 	[self performSelector:@selector(updateLockScreenInfo) withObject:nil afterDelay:30.0];
+#endif
 }
 
 #pragma mark - Memory management
@@ -306,10 +314,9 @@ double startSongSeconds = 0.0;
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLockScreenInfo) name:ISMSNotification_CurrentPlaylistIndexChanged object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateLockScreenInfo) name:ISMSNotification_AlbumArtLargeDownloaded object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(didReceiveMemoryWarning) 
-												 name:UIApplicationDidReceiveMemoryWarningNotification 
-											   object:nil];
+#ifdef IOS
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
 }
 
 + (id)sharedInstance

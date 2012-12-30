@@ -1,6 +1,6 @@
 /*
 	BASSmix 2.4 C/C++ header file
-	Copyright (c) 2005-2011 Un4seen Developments Ltd.
+	Copyright (c) 2005-2012 Un4seen Developments Ltd.
 
 	See the BASSMIX.CHM file for more detailed documentation
 */
@@ -23,7 +23,6 @@ extern "C" {
 #endif
 
 // additional BASS_SetConfig option
-#define BASS_CONFIG_MIXER_FILTER	0x10600
 #define BASS_CONFIG_MIXER_BUFFER	0x10601
 #define BASS_CONFIG_MIXER_POSEX		0x10602
 #define BASS_CONFIG_SPLIT_BUFFER	0x10610
@@ -35,7 +34,6 @@ extern "C" {
 #define BASS_MIXER_POSEX		0x2000	// enable BASS_Mixer_ChannelGetPositionEx support
 
 // source flags
-#define BASS_MIXER_FILTER		0x1000	// resampling filter
 #define BASS_MIXER_BUFFER		0x2000	// buffer data for BASS_Mixer_ChannelGetData/Level
 #define BASS_MIXER_LIMIT		0x4000	// limit mixer processing to the amount available from this source
 #define BASS_MIXER_MATRIX		0x10000	// matrix mixing

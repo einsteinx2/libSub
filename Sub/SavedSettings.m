@@ -9,7 +9,10 @@
 #import "SavedSettings.h"
 #import "PlaylistSingleton.h"
 #import "BassGaplessPlayer.h"
+
+#ifdef IOS
 #import "MKStoreManager.h"
+#endif
 
 // Test server details
 #define DEFAULT_SERVER_TYPE SUBSONIC
@@ -143,8 +146,7 @@
 		if (_byteOffset != audioEngineS.player.currentByteOffset)
 		{
 			_byteOffset = audioEngineS.player.currentByteOffset;
-			NSNumber *num = [NSNumber numberWithUnsignedLongLong:_byteOffset];
-			[_userDefaults setObject:num forKey:@"byteOffset"];
+			[_userDefaults setObject:@(_byteOffset) forKey:@"byteOffset"];
 			isDefaultsDirty = YES;
 		}
 				
@@ -295,8 +297,8 @@
 		[_userDefaults setBool:YES forKey:@"enableSongCachingSetting"];
 		[_userDefaults setBool:YES forKey:@"enableNextSongCacheSetting"];
 		[_userDefaults setInteger:0 forKey:@"cachingTypeSetting"];
-		[_userDefaults setObject:[NSNumber numberWithUnsignedLongLong:1073741824] forKey:@"maxCacheSize"];
-		[_userDefaults setObject:[NSNumber numberWithUnsignedLongLong:268435456] forKey:@"minFreeSpace"];
+		[_userDefaults setObject:@(1073741824) forKey:@"maxCacheSize"];
+		[_userDefaults setObject:@(268435456) forKey:@"minFreeSpace"];
 		[_userDefaults setBool:YES forKey:@"autoDeleteCacheSetting"];
 		[_userDefaults setInteger:0 forKey:@"autoDeleteCacheTypeSetting"];
 		[_userDefaults setInteger:3 forKey:@"cacheSongCellColorSetting"];
@@ -517,6 +519,7 @@
 // more space left, as will happen if we put the files inside ./Library/Caches
 - (NSString *)currentCacheRoot
 {
+#ifdef IOS
     if (SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
     {
         return self.documentsPath;
@@ -525,6 +528,9 @@
     {
         return self.cachesPath;
     }
+#else
+    return self.documentsPath;
+#endif
 }
 
 - (NSString *)songCachePath
@@ -583,17 +589,29 @@
 
 - (BOOL)isPlaylistUnlocked
 {
+#ifdef IOS
 	return (![self isLite] || [MKStoreManager isFeaturePurchased:kFeaturePlaylistsId] || [MKStoreManager isFeaturePurchased:kFeatureAllId]);
+#else
+    return YES;
+#endif
 }
 
 - (BOOL)isCacheUnlocked
 {
+#ifdef IOS
 	return (![self isLite] || [MKStoreManager isFeaturePurchased:kFeatureCacheId] || [MKStoreManager isFeaturePurchased:kFeatureAllId]);
+#else
+    return YES;
+#endif
 }
 
 - (BOOL)isVideoUnlocked
 {
+#ifdef IOS
 	return (![self isLite] || [MKStoreManager isFeaturePurchased:kFeatureVideoId] || [MKStoreManager isFeaturePurchased:kFeatureAllId]);
+#else
+    return YES;
+#endif
 }
 
 #pragma mark - Other Settings
@@ -671,7 +689,11 @@
 {
 	@synchronized(self)
 	{
+#ifdef IOS
 		switch ([LibSub isWifi] ? self.maxBitrateWifi : self.maxBitrate3G)
+#else
+        switch (self.maxBitrateWifi)
+#endif
 		{
 			case 0: return 64;
 			case 1: return 96;
@@ -723,7 +745,11 @@
 {    
     @synchronized(self)
 	{
+#ifdef IOS
 		switch ([LibSub isWifi] ? self.maxVideoBitrateWifi : self.maxVideoBitrate3G)
+#else
+        switch (self.maxVideoBitrateWifi)
+#endif
 		{
 			case 0: return @[@60];
 			case 1: return @[@256, @60];
@@ -740,8 +766,12 @@
 {
 	@synchronized(self)
 	{
+#ifdef IOS
 		switch ([LibSub isWifi] ? self.maxVideoBitrateWifi : self.maxVideoBitrate3G)
-		{
+#else
+        switch (self.maxVideoBitrateWifi)
+#endif		
+        {
 			case 0: return 60;
 			case 1: return 256;
 			case 2: return 512;
@@ -805,7 +835,11 @@
 		[_userDefaults setBool:isManualCachingOnWWANEnabled forKey:@"isManualCachingOnWWANEnabled"];
 		[_userDefaults synchronize];
         
+#ifdef IOS
         if ([LibSub isWifi])
+#else
+        if (YES)
+#endif
         {
             isManualCachingOnWWANEnabled ? [cacheQueueManagerS startDownloadQueue] : [cacheQueueManagerS stopDownloadQueue];
         }
@@ -841,8 +875,7 @@
 {
 	@synchronized(self)
 	{
-		NSNumber *value = [NSNumber numberWithUnsignedLongLong:maxCacheSize];
-		[_userDefaults setObject:value forKey:@"maxCacheSize"];
+		[_userDefaults setObject:@(maxCacheSize) forKey:@"maxCacheSize"];
 		[_userDefaults synchronize];
 	}
 }
@@ -859,8 +892,7 @@
 {
 	@synchronized(self)
 	{
-		NSNumber *value = [NSNumber numberWithUnsignedLongLong:minFreeSpace];
-		[_userDefaults setObject:value forKey:@"minFreeSpace"];
+		[_userDefaults setObject:@(minFreeSpace) forKey:@"minFreeSpace"];
 		[_userDefaults synchronize];
 	}
 }
@@ -1249,8 +1281,7 @@
 	@synchronized(self)
 	{
 		_byteOffset = bOffset;
-		NSNumber *num = [NSNumber numberWithUnsignedLongLong:_byteOffset];
-		[_userDefaults setObject:num forKey:@"byteOffset"];
+		[_userDefaults setObject:@(_byteOffset) forKey:@"byteOffset"];
 		[_userDefaults synchronize];
 	}
 }
@@ -1272,8 +1303,7 @@
 	@synchronized(self)
 	{
 		_bitRate = rate;
-		NSNumber *num = [NSNumber numberWithInteger:_bitRate];
-		[_userDefaults setObject:num forKey:@"bitRate"];
+		[_userDefaults setObject:@(_bitRate) forKey:@"bitRate"];
 		[_userDefaults synchronize];
 	}
 }
@@ -1369,7 +1399,7 @@
 {
 	@synchronized(self)
 	{
-		return [_userDefaults integerForKey:@"currentVisualizerType"];
+		return (ISMSBassVisualType)[_userDefaults integerForKey:@"currentVisualizerType"];
 	}
 }
 
@@ -1544,10 +1574,12 @@
 #pragma mark - Singleton methods
 
 - (void)setup
-{	
+{
+#ifdef IOS
 	// Disable screen sleep if necessary
 	if (!self.isScreenSleepEnabled)
 		[UIApplication sharedApplication].idleTimerDisabled = YES;
+#endif
 	
 	_userDefaults = [NSUserDefaults standardUserDefaults];
 	_serverList = nil;

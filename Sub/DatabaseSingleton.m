@@ -642,7 +642,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	row++;
 	ISMSAlbum *anAlbum = nil;
 	
-	FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE ROWID = %i", table, row]];
+	FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE ROWID = %lu", table, (unsigned long)row]];
 	if ([db hadError]) 
 	{
 	//DLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -749,7 +749,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		NSString *row = [database stringForQuery:query];
 		if (row != nil)
 		{
-			[sections addObject:[NSArray arrayWithObjects:[sectionTitles objectAtIndexSafe:i], [NSNumber numberWithInt:([row intValue] - 1)], nil]];
+			[sections addObject:[NSArray arrayWithObjects:[sectionTitles objectAtIndexSafe:i], @([row intValue] - 1), nil]];
 		}
 		
 		i++;
@@ -759,7 +759,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		if ([[[sections objectAtIndexSafe:0] objectAtIndexSafe:1] intValue] > 0)
 		{
-			[sections insertObject:[NSArray arrayWithObjects:@"#", [NSNumber numberWithInt:0], nil] atIndex:0];
+			[sections insertObject:[NSArray arrayWithObjects:@"#", @0, nil] atIndex:0];
 		}
 	}
 	else
@@ -768,7 +768,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		NSString *row = [database stringForQuery:[NSString stringWithFormat:@"SELECT ROWID FROM %@ LIMIT 1", table]];
 		if (row)
 		{
-			[sections insertObject:[NSArray arrayWithObjects:@"#", [NSNumber numberWithInt:0], nil] atIndex:0];
+			[sections insertObject:[NSArray arrayWithObjects:@"#", @0, nil] atIndex:0];
 		}
 	}
 	
@@ -910,10 +910,9 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	[self setupDatabases];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(didReceiveMemoryWarning) 
-												 name:UIApplicationDidReceiveMemoryWarningNotification 
-											   object:nil];
+#ifdef IOS
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
 }
 
 + (id)sharedInstance

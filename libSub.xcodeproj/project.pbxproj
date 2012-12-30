@@ -145,6 +145,98 @@
 		5304A0F6168FD51E009B2732 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0F4168FD515009B2732 /* StoreKit.framework */; };
 		5304A0F7168FD547009B2732 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C984016619BAF005A73C6 /* libOAuth.a */; };
 		5304A0FA168FE14A009B2732 /* BassGaplessPlayer_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A0F9168FE14A009B2732 /* BassGaplessPlayer_Test.m */; };
+		5304A19B1690173B009B2732 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A19A1690173B009B2732 /* Cocoa.framework */; };
+		5304A1A51690173B009B2732 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5304A1A31690173B009B2732 /* InfoPlist.strings */; };
+		5304A1A91690173B009B2732 /* libSubOSX.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A1A81690173B009B2732 /* libSubOSX.m */; };
+		5304A1AD169017C4009B2732 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C979D166197FB005A73C6 /* AudioEngine.m */; };
+		5304A1AE169017C4009B2732 /* MusicSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975F166197B8005A73C6 /* MusicSingleton.m */; };
+		5304A1AF169017C4009B2732 /* iSubBassGaplessPlayerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B216619695005A73C6 /* iSubBassGaplessPlayerDelegate.m */; };
+		5304A1B0169017C4009B2732 /* BassWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C978F166197F3005A73C6 /* BassWrapper.m */; };
+		5304A1B1169017C4009B2732 /* BassStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9791166197F3005A73C6 /* BassStream.m */; };
+		5304A1B2169017C4009B2732 /* BassGaplessPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9793166197F3005A73C6 /* BassGaplessPlayer.m */; };
+		5304A1B3169017C4009B2732 /* BassEqualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C977F166197EC005A73C6 /* BassEqualizer.m */; };
+		5304A1B4169017C4009B2732 /* BassParamEqValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9781166197EC005A73C6 /* BassParamEqValue.m */; };
+		5304A1B5169017C4009B2732 /* BassEffectDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9783166197EC005A73C6 /* BassEffectDAO.m */; };
+		5304A1B6169017C4009B2732 /* BassEffectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9785166197EC005A73C6 /* BassEffectValue.m */; };
+		5304A1B7169017C4009B2732 /* BassVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C977B166197E7005A73C6 /* BassVisualizer.m */; };
+		5304A1B8169017C4009B2732 /* SavedSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9757166197B8005A73C6 /* SavedSettings.m */; };
+		5304A1B9169017C4009B2732 /* PlaylistSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9759166197B8005A73C6 /* PlaylistSingleton.m */; };
+		5304A1BA169017C4009B2732 /* CacheSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975B166197B8005A73C6 /* CacheSingleton.m */; };
+		5304A1BB169017C4009B2732 /* DatabaseSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975D166197B8005A73C6 /* DatabaseSingleton.m */; };
+		5304A1BC169017C4009B2732 /* SocialSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9761166197B8005A73C6 /* SocialSingleton.m */; };
+		5304A1BD169017C4009B2732 /* JukeboxSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9765166197B8005A73C6 /* JukeboxSingleton.m */; };
+		5304A1BE169017C4009B2732 /* ISMSIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958A16619360005A73C6 /* ISMSIndex.m */; };
+		5304A1BF169017C4009B2732 /* ISMSArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958C16619360005A73C6 /* ISMSArtist.m */; };
+		5304A1C0169017C4009B2732 /* ISMSAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958E16619360005A73C6 /* ISMSAlbum.m */; };
+		5304A1C1169017C4009B2732 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
+		5304A1C2169017C4009B2732 /* ISMSVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959316619360005A73C6 /* ISMSVideo.m */; };
+		5304A1C3169017C4009B2732 /* ISMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959516619360005A73C6 /* ISMSServer.m */; };
+		5304A1C4169017C4009B2732 /* ISMSChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959716619360005A73C6 /* ISMSChatMessage.m */; };
+		5304A1C5169017C4009B2732 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
+		5304A1C6169017C4009B2732 /* ISMSOldDataModelDecoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959B16619360005A73C6 /* ISMSOldDataModelDecoders.m */; };
+		5304A1C7169017C4009B2732 /* NSMutableURLRequest+SUS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B7166196AC005A73C6 /* NSMutableURLRequest+SUS.m */; };
+		5304A1C8169017C4009B2732 /* NSMutableURLRequest+PMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B9166196AC005A73C6 /* NSMutableURLRequest+PMS.m */; };
+		5304A1C9169017C4009B2732 /* ISMSUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96BB166196AC005A73C6 /* ISMSUpdateChecker.m */; };
+		5304A1CA169017C4009B2732 /* SUSRootFoldersDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C5166196C0005A73C6 /* SUSRootFoldersDAO.m */; };
+		5304A1CB169017C4009B2732 /* SUSSubFolderDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C7166196C0005A73C6 /* SUSSubFolderDAO.m */; };
+		5304A1CC169017E4009B2732 /* SUSAllAlbumsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C9166196C0005A73C6 /* SUSAllAlbumsDAO.m */; };
+		5304A1CD169017E4009B2732 /* SUSAllSongsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CB166196C0005A73C6 /* SUSAllSongsDAO.m */; };
+		5304A1CE169017E4009B2732 /* SUSChatDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CD166196C0005A73C6 /* SUSChatDAO.m */; };
+		5304A1CF169017E4009B2732 /* SUSLyricsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CF166196C0005A73C6 /* SUSLyricsDAO.m */; };
+		5304A1D0169017E4009B2732 /* SUSServerPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* SUSServerPlaylistsDAO.m */; };
+		5304A1D1169017E4009B2732 /* ISMSSong+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D3166196C0005A73C6 /* ISMSSong+DAO.m */; };
+		5304A1D2169017E4009B2732 /* SUSCoverArtDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D5166196C0005A73C6 /* SUSCoverArtDAO.m */; };
+		5304A1D3169017E4009B2732 /* SUSNowPlayingDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D7166196C0005A73C6 /* SUSNowPlayingDAO.m */; };
+		5304A1D4169017E4009B2732 /* ISMSLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96F1166196D4005A73C6 /* ISMSLoader.m */; };
+		5304A1D5169017E4009B2732 /* ISMSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974A16619776005A73C6 /* ISMSStatusLoader.m */; };
+		5304A1D6169017E4009B2732 /* SUSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974C16619776005A73C6 /* SUSStatusLoader.m */; };
+		5304A1D7169017E4009B2732 /* PMSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974E16619776005A73C6 /* PMSStatusLoader.m */; };
+		5304A1D8169017E4009B2732 /* SUSServerPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* SUSServerPlaylistsLoader.m */; };
+		5304A1D9169017E4009B2732 /* ISMSCoverArtLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974216619769005A73C6 /* ISMSCoverArtLoader.m */; };
+		5304A1DA169017E4009B2732 /* ISMSRootFoldersLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C973616619762005A73C6 /* ISMSRootFoldersLoader.m */; };
+		5304A1DB169017E4009B2732 /* SUSRootFoldersLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C973816619762005A73C6 /* SUSRootFoldersLoader.m */; };
+		5304A1DC169017E4009B2732 /* PMSRootFoldersLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C973A16619762005A73C6 /* PMSRootFoldersLoader.m */; };
+		5304A1DD169017E4009B2732 /* ISMSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972A1661975C005A73C6 /* ISMSSubFolderLoader.m */; };
+		5304A1DE169017E4009B2732 /* SUSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972C1661975C005A73C6 /* SUSSubFolderLoader.m */; };
+		5304A1DF169017E4009B2732 /* PMSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972E1661975C005A73C6 /* PMSSubFolderLoader.m */; };
+		5304A1E0169017E4009B2732 /* ISMSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971916619734005A73C6 /* ISMSQueueAllLoader.m */; };
+		5304A1E1169017E4009B2732 /* SUSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971B16619734005A73C6 /* SUSQueueAllLoader.m */; };
+		5304A1E2169017E4009B2732 /* PMSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971D16619734005A73C6 /* PMSQueueAllLoader.m */; };
+		5304A1E3169017E4009B2732 /* SUSAllSongsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9700166196F3005A73C6 /* SUSAllSongsLoader.m */; };
+		5304A1E4169017E4009B2732 /* SUSChatLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9702166196F3005A73C6 /* SUSChatLoader.m */; };
+		5304A1E5169017E4009B2732 /* SUSLyricsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9704166196F3005A73C6 /* SUSLyricsLoader.m */; };
+		5304A1E6169017E4009B2732 /* SUSNowPlayingLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9706166196F3005A73C6 /* SUSNowPlayingLoader.m */; };
+		5304A1E7169017E4009B2732 /* SUSQuickAlbumsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9708166196F3005A73C6 /* SUSQuickAlbumsLoader.m */; };
+		5304A1E81690180C009B2732 /* PMSLoginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96F9166196E5005A73C6 /* PMSLoginLoader.m */; };
+		5304A1E91690180C009B2732 /* ISMSStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C968E166195CF005A73C6 /* ISMSStreamManager.m */; };
+		5304A1EA1690180C009B2732 /* ISMSCacheQueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9690166195CF005A73C6 /* ISMSCacheQueueManager.m */; };
+		5304A1EB1690180C009B2732 /* ISMSStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9692166195CF005A73C6 /* ISMSStreamHandler.m */; };
+		5304A1EC1690180C009B2732 /* ISMSURLConnectionStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9694166195CF005A73C6 /* ISMSURLConnectionStreamHandler.m */; };
+		5304A1ED1690180C009B2732 /* ISMSCFNetworkStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9697166195CF005A73C6 /* ISMSCFNetworkStreamHandler.m */; };
+		5304A1EE1690180C009B2732 /* JukeboxConnectionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96AE16619673005A73C6 /* JukeboxConnectionDelegate.m */; };
+		5304A1EF1690180C009B2732 /* JukeboxXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AA31661AA45005A73C6 /* JukeboxXMLParser.m */; };
+		5304A1F01690180C009B2732 /* SearchXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AB11661AA61005A73C6 /* SearchXMLParser.m */; };
+		5304A1F11690181C009B2732 /* NSError+ISMSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C993C16619F39005A73C6 /* NSError+ISMSError.m */; };
+		5304A20116901832009B2732 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97C216619AE3005A73C6 /* FMDatabase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A20216901832009B2732 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97C416619AE3005A73C6 /* FMDatabaseAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A20316901832009B2732 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A20416901832009B2732 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97C816619AE3005A73C6 /* FMDatabaseQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A20516901832009B2732 /* FMDatabaseQueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97CA16619AE3005A73C6 /* FMDatabaseQueueAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A20616901832009B2732 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97CD16619AE3005A73C6 /* FMResultSet.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A2D216901EE4009B2732 /* libbass_ape.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2CA16901EE4009B2732 /* libbass_ape.dylib */; };
+		5304A2D316901EE4009B2732 /* libbass_fx.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2CB16901EE4009B2732 /* libbass_fx.dylib */; };
+		5304A2D416901EE4009B2732 /* libbass_mpc.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2CC16901EE4009B2732 /* libbass_mpc.dylib */; };
+		5304A2D516901EE4009B2732 /* libbass.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2CD16901EE4009B2732 /* libbass.dylib */; };
+		5304A2D616901EE4009B2732 /* libbassflac.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2CE16901EE4009B2732 /* libbassflac.dylib */; };
+		5304A2D716901EE4009B2732 /* libbassmix.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2CF16901EE4009B2732 /* libbassmix.dylib */; };
+		5304A2D816901EE4009B2732 /* libbassopus.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2D016901EE4009B2732 /* libbassopus.dylib */; };
+		5304A2D916901EE4009B2732 /* libbasswv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2D116901EE4009B2732 /* libbasswv.dylib */; };
+		5304A2DA16901EFB009B2732 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C99A71661A025005A73C6 /* libxml2.dylib */; };
+		5304A2DB16901F1C009B2732 /* EX2KitOSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2B616901D6D009B2732 /* EX2KitOSX.framework */; };
+		5304A2DC16901F1C009B2732 /* libTBXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C983216619B87005A73C6 /* libTBXML.a */; };
+		5304A2DD16901F1C009B2732 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C981D16619B44005A73C6 /* SBJson.framework */; };
+		5304A2DE16901F1C009B2732 /* ZipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C98B216619BC4005A73C6 /* ZipKit.framework */; };
+		5304A2E2169020EA009B2732 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2E1169020EA009B2732 /* StoreKit.framework */; };
 		5344F454166C03E50013B929 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5344F453166C03E50013B929 /* libSubImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		536C947E16618FA4005A73C6 /* LibSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C947D16618FA4005A73C6 /* LibSub.m */; };
@@ -394,6 +486,8 @@
 		5374F2C61661C73D00529EF3 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53C7F4401661BC3100C5F61E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */; };
+		53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; };
+		53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3E70B1690387800F195C5 /* libz.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -424,6 +518,41 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8290352414D9F5B200ACF7E4;
 			remoteInfo = "TBXML-iOS";
+		};
+		5304A2B516901D6D009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C98BA16619BFA005A73C6 /* EX2Kit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5304A20F16901857009B2732;
+			remoteInfo = EX2KitOSX;
+		};
+		5304A2C016901D7D009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C98BA16619BFA005A73C6 /* EX2Kit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 5304A20E16901857009B2732;
+			remoteInfo = EX2KitOSX;
+		};
+		5304A2C216901D8A009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 829FA09B14D5B52A00D18697;
+			remoteInfo = TBXML;
+		};
+		5304A2C416901D8A009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC12323C1391D5CC00131607;
+			remoteInfo = SBJson;
+		};
+		5304A2C616901D8A009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
+			remoteInfo = ZipKit;
 		};
 		536C981C16619B44005A73C6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -576,6 +705,25 @@
 		5304A0F1168FD4D3009B2732 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		5304A0F4168FD515009B2732 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5304A0F9168FE14A009B2732 /* BassGaplessPlayer_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BassGaplessPlayer_Test.m; sourceTree = "<group>"; };
+		5304A1991690173B009B2732 /* libSubOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSubOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5304A19A1690173B009B2732 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		5304A19D1690173B009B2732 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		5304A19E1690173B009B2732 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		5304A19F1690173B009B2732 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		5304A1A21690173B009B2732 /* libSubOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libSubOSX-Info.plist"; sourceTree = "<group>"; };
+		5304A1A41690173B009B2732 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5304A1A61690173B009B2732 /* libSubOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libSubOSX-Prefix.pch"; sourceTree = "<group>"; };
+		5304A1A71690173B009B2732 /* libSubOSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libSubOSX.h; sourceTree = "<group>"; };
+		5304A1A81690173B009B2732 /* libSubOSX.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libSubOSX.m; sourceTree = "<group>"; };
+		5304A2CA16901EE4009B2732 /* libbass_ape.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbass_ape.dylib; path = "Frameworks/libBASS OS X/libbass_ape.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2CB16901EE4009B2732 /* libbass_fx.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbass_fx.dylib; path = "Frameworks/libBASS OS X/libbass_fx.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2CC16901EE4009B2732 /* libbass_mpc.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbass_mpc.dylib; path = "Frameworks/libBASS OS X/libbass_mpc.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2CD16901EE4009B2732 /* libbass.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbass.dylib; path = "Frameworks/libBASS OS X/libbass.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2CE16901EE4009B2732 /* libbassflac.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbassflac.dylib; path = "Frameworks/libBASS OS X/libbassflac.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2CF16901EE4009B2732 /* libbassmix.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbassmix.dylib; path = "Frameworks/libBASS OS X/libbassmix.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2D016901EE4009B2732 /* libbassopus.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbassopus.dylib; path = "Frameworks/libBASS OS X/libbassopus.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2D116901EE4009B2732 /* libbasswv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbasswv.dylib; path = "Frameworks/libBASS OS X/libbasswv.dylib"; sourceTree = SOURCE_ROOT; };
+		5304A2E1169020EA009B2732 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		5344F453166C03E50013B929 /* libSubImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubImports.h; sourceTree = "<group>"; };
 		536C947316618FA4005A73C6 /* libSub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		536C947616618FA4005A73C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -830,6 +978,7 @@
 		5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Frameworks/MKStoreManager/SFHFKeychainUtils.m; sourceTree = "<group>"; };
 		53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
 		53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		53E3E70B1690387800F195C5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -873,6 +1022,29 @@
 				5304A0E4168FD42D009B2732 /* QuartzCore.framework in Frameworks */,
 				5304A0E1168FD411009B2732 /* MediaPlayer.framework in Frameworks */,
 				5304A0D4168FD3C0009B2732 /* MobileCoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5304A1951690173B009B2732 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */,
+				5304A2E2169020EA009B2732 /* StoreKit.framework in Frameworks */,
+				5304A2DB16901F1C009B2732 /* EX2KitOSX.framework in Frameworks */,
+				5304A2DC16901F1C009B2732 /* libTBXML.a in Frameworks */,
+				5304A2DD16901F1C009B2732 /* SBJson.framework in Frameworks */,
+				5304A2DE16901F1C009B2732 /* ZipKit.framework in Frameworks */,
+				5304A19B1690173B009B2732 /* Cocoa.framework in Frameworks */,
+				5304A2D216901EE4009B2732 /* libbass_ape.dylib in Frameworks */,
+				5304A2D316901EE4009B2732 /* libbass_fx.dylib in Frameworks */,
+				5304A2D416901EE4009B2732 /* libbass_mpc.dylib in Frameworks */,
+				5304A2D516901EE4009B2732 /* libbass.dylib in Frameworks */,
+				5304A2D616901EE4009B2732 /* libbassflac.dylib in Frameworks */,
+				5304A2D716901EE4009B2732 /* libbassmix.dylib in Frameworks */,
+				5304A2D816901EE4009B2732 /* libbassopus.dylib in Frameworks */,
+				5304A2D916901EE4009B2732 /* libbasswv.dylib in Frameworks */,
+				5304A2DA16901EFB009B2732 /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -960,11 +1132,68 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5304A19C1690173B009B2732 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5304A19D1690173B009B2732 /* AppKit.framework */,
+				5304A19E1690173B009B2732 /* CoreData.framework */,
+				5304A19F1690173B009B2732 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		5304A1A01690173B009B2732 /* libSubOSX */ = {
+			isa = PBXGroup;
+			children = (
+				5304A2C816901DB7009B2732 /* Frameworks */,
+				5304A1A71690173B009B2732 /* libSubOSX.h */,
+				5304A1A81690173B009B2732 /* libSubOSX.m */,
+				5304A1A11690173B009B2732 /* Supporting Files */,
+			);
+			path = libSubOSX;
+			sourceTree = "<group>";
+		};
+		5304A1A11690173B009B2732 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5304A1A21690173B009B2732 /* libSubOSX-Info.plist */,
+				5304A1A31690173B009B2732 /* InfoPlist.strings */,
+				5304A1A61690173B009B2732 /* libSubOSX-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5304A2C816901DB7009B2732 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				53E3E70B1690387800F195C5 /* libz.dylib */,
+				5304A2E1169020EA009B2732 /* StoreKit.framework */,
+				5304A2C916901DBD009B2732 /* libBASS OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5304A2C916901DBD009B2732 /* libBASS OS X */ = {
+			isa = PBXGroup;
+			children = (
+				5304A2CA16901EE4009B2732 /* libbass_ape.dylib */,
+				5304A2CB16901EE4009B2732 /* libbass_fx.dylib */,
+				5304A2CC16901EE4009B2732 /* libbass_mpc.dylib */,
+				5304A2CD16901EE4009B2732 /* libbass.dylib */,
+				5304A2CE16901EE4009B2732 /* libbassflac.dylib */,
+				5304A2CF16901EE4009B2732 /* libbassmix.dylib */,
+				5304A2D016901EE4009B2732 /* libbassopus.dylib */,
+				5304A2D116901EE4009B2732 /* libbasswv.dylib */,
+			);
+			name = "libBASS OS X";
+			sourceTree = "<group>";
+		};
 		536C946816618FA4005A73C6 = {
 			isa = PBXGroup;
 			children = (
 				5304A024168FB35F009B2732 /* GHUnit Tests */,
 				536C947816618FA4005A73C6 /* libSub */,
+				5304A1A01690173B009B2732 /* libSubOSX */,
 				536C947516618FA4005A73C6 /* Frameworks */,
 				536C947416618FA4005A73C6 /* Products */,
 			);
@@ -975,6 +1204,7 @@
 			children = (
 				536C947316618FA4005A73C6 /* libSub.a */,
 				5304A01D168FB35F009B2732 /* libSubTests.app */,
+				5304A1991690173B009B2732 /* libSubOSX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -995,6 +1225,8 @@
 				536C947616618FA4005A73C6 /* Foundation.framework */,
 				5304A01F168FB35F009B2732 /* UIKit.framework */,
 				5304A022168FB35F009B2732 /* CoreGraphics.framework */,
+				5304A19A1690173B009B2732 /* Cocoa.framework */,
+				5304A19C1690173B009B2732 /* Other Frameworks */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1514,6 +1746,7 @@
 			children = (
 				536C98C316619BFA005A73C6 /* libEX2Kit.a */,
 				536C98C516619BFA005A73C6 /* EX2KitResources.bundle */,
+				5304A2B616901D6D009B2732 /* EX2KitOSX.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1545,6 +1778,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		5304A1961690173B009B2732 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		536C959D1661938C005A73C6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1714,6 +1954,28 @@
 			productReference = 5304A01D168FB35F009B2732 /* libSubTests.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5304A1981690173B009B2732 /* libSubOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5304A1AA1690173B009B2732 /* Build configuration list for PBXNativeTarget "libSubOSX" */;
+			buildPhases = (
+				5304A1941690173B009B2732 /* Sources */,
+				5304A1951690173B009B2732 /* Frameworks */,
+				5304A1961690173B009B2732 /* Headers */,
+				5304A1971690173B009B2732 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5304A2C316901D8A009B2732 /* PBXTargetDependency */,
+				5304A2C516901D8A009B2732 /* PBXTargetDependency */,
+				5304A2C716901D8A009B2732 /* PBXTargetDependency */,
+				5304A2C116901D7D009B2732 /* PBXTargetDependency */,
+			);
+			name = libSubOSX;
+			productName = libSubOSX;
+			productReference = 5304A1991690173B009B2732 /* libSubOSX.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		536C947216618FA4005A73C6 /* libSub */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 536C948116618FA4005A73C6 /* Build configuration list for PBXNativeTarget "libSub" */;
@@ -1776,11 +2038,19 @@
 			targets = (
 				536C947216618FA4005A73C6 /* libSub */,
 				5304A01C168FB35F009B2732 /* libSubTests */,
+				5304A1981690173B009B2732 /* libSubOSX */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		5304A2B616901D6D009B2732 /* EX2KitOSX.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = EX2KitOSX.framework;
+			remoteRef = 5304A2B516901D6D009B2732 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		536C981D16619B44005A73C6 /* SBJson.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -1883,6 +2153,14 @@
 				5304A031168FB35F009B2732 /* Default.png in Resources */,
 				5304A033168FB35F009B2732 /* Default@2x.png in Resources */,
 				5304A035168FB35F009B2732 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5304A1971690173B009B2732 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5304A1A51690173B009B2732 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1991,6 +2269,90 @@
 				5304A02B168FB35F009B2732 /* main.m in Sources */,
 				5304A049168FB54F009B2732 /* ISMSStreamHandler_Test.m in Sources */,
 				5304A0FA168FE14A009B2732 /* BassGaplessPlayer_Test.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5304A1941690173B009B2732 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */,
+				5304A20116901832009B2732 /* FMDatabase.m in Sources */,
+				5304A20216901832009B2732 /* FMDatabaseAdditions.m in Sources */,
+				5304A20316901832009B2732 /* FMDatabasePool.m in Sources */,
+				5304A20416901832009B2732 /* FMDatabaseQueue.m in Sources */,
+				5304A20516901832009B2732 /* FMDatabaseQueueAdditions.m in Sources */,
+				5304A20616901832009B2732 /* FMResultSet.m in Sources */,
+				5304A1F11690181C009B2732 /* NSError+ISMSError.m in Sources */,
+				5304A1E81690180C009B2732 /* PMSLoginLoader.m in Sources */,
+				5304A1E91690180C009B2732 /* ISMSStreamManager.m in Sources */,
+				5304A1EA1690180C009B2732 /* ISMSCacheQueueManager.m in Sources */,
+				5304A1EB1690180C009B2732 /* ISMSStreamHandler.m in Sources */,
+				5304A1EC1690180C009B2732 /* ISMSURLConnectionStreamHandler.m in Sources */,
+				5304A1ED1690180C009B2732 /* ISMSCFNetworkStreamHandler.m in Sources */,
+				5304A1EE1690180C009B2732 /* JukeboxConnectionDelegate.m in Sources */,
+				5304A1EF1690180C009B2732 /* JukeboxXMLParser.m in Sources */,
+				5304A1F01690180C009B2732 /* SearchXMLParser.m in Sources */,
+				5304A1CC169017E4009B2732 /* SUSAllAlbumsDAO.m in Sources */,
+				5304A1CD169017E4009B2732 /* SUSAllSongsDAO.m in Sources */,
+				5304A1CE169017E4009B2732 /* SUSChatDAO.m in Sources */,
+				5304A1CF169017E4009B2732 /* SUSLyricsDAO.m in Sources */,
+				5304A1D0169017E4009B2732 /* SUSServerPlaylistsDAO.m in Sources */,
+				5304A1D1169017E4009B2732 /* ISMSSong+DAO.m in Sources */,
+				5304A1D2169017E4009B2732 /* SUSCoverArtDAO.m in Sources */,
+				5304A1D3169017E4009B2732 /* SUSNowPlayingDAO.m in Sources */,
+				5304A1D4169017E4009B2732 /* ISMSLoader.m in Sources */,
+				5304A1D5169017E4009B2732 /* ISMSStatusLoader.m in Sources */,
+				5304A1D6169017E4009B2732 /* SUSStatusLoader.m in Sources */,
+				5304A1D7169017E4009B2732 /* PMSStatusLoader.m in Sources */,
+				5304A1D8169017E4009B2732 /* SUSServerPlaylistsLoader.m in Sources */,
+				5304A1D9169017E4009B2732 /* ISMSCoverArtLoader.m in Sources */,
+				5304A1DA169017E4009B2732 /* ISMSRootFoldersLoader.m in Sources */,
+				5304A1DB169017E4009B2732 /* SUSRootFoldersLoader.m in Sources */,
+				5304A1DC169017E4009B2732 /* PMSRootFoldersLoader.m in Sources */,
+				5304A1DD169017E4009B2732 /* ISMSSubFolderLoader.m in Sources */,
+				5304A1DE169017E4009B2732 /* SUSSubFolderLoader.m in Sources */,
+				5304A1DF169017E4009B2732 /* PMSSubFolderLoader.m in Sources */,
+				5304A1E0169017E4009B2732 /* ISMSQueueAllLoader.m in Sources */,
+				5304A1E1169017E4009B2732 /* SUSQueueAllLoader.m in Sources */,
+				5304A1E2169017E4009B2732 /* PMSQueueAllLoader.m in Sources */,
+				5304A1E3169017E4009B2732 /* SUSAllSongsLoader.m in Sources */,
+				5304A1E4169017E4009B2732 /* SUSChatLoader.m in Sources */,
+				5304A1E5169017E4009B2732 /* SUSLyricsLoader.m in Sources */,
+				5304A1E6169017E4009B2732 /* SUSNowPlayingLoader.m in Sources */,
+				5304A1E7169017E4009B2732 /* SUSQuickAlbumsLoader.m in Sources */,
+				5304A1AD169017C4009B2732 /* AudioEngine.m in Sources */,
+				5304A1AE169017C4009B2732 /* MusicSingleton.m in Sources */,
+				5304A1AF169017C4009B2732 /* iSubBassGaplessPlayerDelegate.m in Sources */,
+				5304A1B0169017C4009B2732 /* BassWrapper.m in Sources */,
+				5304A1B1169017C4009B2732 /* BassStream.m in Sources */,
+				5304A1B2169017C4009B2732 /* BassGaplessPlayer.m in Sources */,
+				5304A1B3169017C4009B2732 /* BassEqualizer.m in Sources */,
+				5304A1B4169017C4009B2732 /* BassParamEqValue.m in Sources */,
+				5304A1B5169017C4009B2732 /* BassEffectDAO.m in Sources */,
+				5304A1B6169017C4009B2732 /* BassEffectValue.m in Sources */,
+				5304A1B7169017C4009B2732 /* BassVisualizer.m in Sources */,
+				5304A1B8169017C4009B2732 /* SavedSettings.m in Sources */,
+				5304A1B9169017C4009B2732 /* PlaylistSingleton.m in Sources */,
+				5304A1BA169017C4009B2732 /* CacheSingleton.m in Sources */,
+				5304A1BB169017C4009B2732 /* DatabaseSingleton.m in Sources */,
+				5304A1BC169017C4009B2732 /* SocialSingleton.m in Sources */,
+				5304A1BD169017C4009B2732 /* JukeboxSingleton.m in Sources */,
+				5304A1BE169017C4009B2732 /* ISMSIndex.m in Sources */,
+				5304A1BF169017C4009B2732 /* ISMSArtist.m in Sources */,
+				5304A1C0169017C4009B2732 /* ISMSAlbum.m in Sources */,
+				5304A1C1169017C4009B2732 /* ISMSSong.m in Sources */,
+				5304A1C2169017C4009B2732 /* ISMSVideo.m in Sources */,
+				5304A1C3169017C4009B2732 /* ISMSServer.m in Sources */,
+				5304A1C4169017C4009B2732 /* ISMSChatMessage.m in Sources */,
+				5304A1C5169017C4009B2732 /* SUSServerPlaylist.m in Sources */,
+				5304A1C6169017C4009B2732 /* ISMSOldDataModelDecoders.m in Sources */,
+				5304A1C7169017C4009B2732 /* NSMutableURLRequest+SUS.m in Sources */,
+				5304A1C8169017C4009B2732 /* NSMutableURLRequest+PMS.m in Sources */,
+				5304A1C9169017C4009B2732 /* ISMSUpdateChecker.m in Sources */,
+				5304A1CA169017C4009B2732 /* SUSRootFoldersDAO.m in Sources */,
+				5304A1CB169017C4009B2732 /* SUSSubFolderDAO.m in Sources */,
+				5304A1A91690173B009B2732 /* libSubOSX.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2119,6 +2481,26 @@
 			name = "TBXML-iOS";
 			targetProxy = 5304A0A9168FD190009B2732 /* PBXContainerItemProxy */;
 		};
+		5304A2C116901D7D009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EX2KitOSX;
+			targetProxy = 5304A2C016901D7D009B2732 /* PBXContainerItemProxy */;
+		};
+		5304A2C316901D8A009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TBXML;
+			targetProxy = 5304A2C216901D8A009B2732 /* PBXContainerItemProxy */;
+		};
+		5304A2C516901D8A009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SBJson;
+			targetProxy = 5304A2C416901D8A009B2732 /* PBXContainerItemProxy */;
+		};
+		5304A2C716901D8A009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ZipKit;
+			targetProxy = 5304A2C616901D8A009B2732 /* PBXContainerItemProxy */;
+		};
 		536C982516619B6D005A73C6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "sbjson-ios";
@@ -2146,6 +2528,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				5304A028168FB35F009B2732 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		5304A1A31690173B009B2732 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5304A1A41690173B009B2732 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -2219,6 +2609,72 @@
 			};
 			name = Release;
 		};
+		5304A1AB1690173B009B2732 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libSubOSX/libSubOSX-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"OSX=1",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "libSubOSX/libSubOSX-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks/libBASS OS X\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		5304A1AC1690173B009B2732 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SYSTEM_APPS_DIR)/Xcode.app/Contents/Developer/Library/Frameworks\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "libSubOSX/libSubOSX-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "OSX=1";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "libSubOSX/libSubOSX-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks/libBASS OS X\"",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
 		536C947F16618FA4005A73C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -2245,7 +2701,9 @@
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -2280,7 +2738,9 @@
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = (
+					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
+				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
@@ -2300,13 +2760,14 @@
 				DSTROOT = /tmp/Sub.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sub/libSub-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "IOS=1";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Frameworks/libBASS\"",
-					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = Sub;
@@ -2326,13 +2787,14 @@
 				DSTROOT = /tmp/Sub.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Sub/libSub-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "IOS=1";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)",
 					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Frameworks/libBASS\"",
-					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
 				);
 				PRODUCT_NAME = Sub;
 				PUBLIC_HEADERS_FOLDER_PATH = include/LibSub;
@@ -2352,6 +2814,16 @@
 				5304A041168FB35F009B2732 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5304A1AA1690173B009B2732 /* Build configuration list for PBXNativeTarget "libSubOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5304A1AB1690173B009B2732 /* Debug */,
+				5304A1AC1690173B009B2732 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		536C946D16618FA4005A73C6 /* Build configuration list for PBXProject "libSub" */ = {
 			isa = XCConfigurationList;

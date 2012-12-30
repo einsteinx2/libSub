@@ -55,7 +55,9 @@ LOG_LEVEL_ISUB_DEBUG
 
 - (void)dealloc
 {
+#ifdef IOS
     dispatch_release(_streamGcdQueue);
+#endif
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -187,7 +189,7 @@ DWORD CALLBACK MyFileReadProc(void *buffer, DWORD length, void *user)
 			readData = nil;
 		}
 		
-		DWORD bytesRead = readData.length;
+		DWORD bytesRead = (DWORD)readData.length;
 		if (bytesRead > 0)
 		{
 			// Copy the data to the buffer
@@ -290,7 +292,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		return BASS_STREAMPROC_END;
 	}
 	
-	return bytesRead;
+	return (DWORD)bytesRead;
 }
 
 - (void)moveToNextSong
@@ -448,7 +450,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 						BassStream *userInfo = self.currentStream;
 						
 						void *tempBuffer = malloc(sizeof(char) * readSize);
-						DWORD tempLength = BASS_ChannelGetData(self.mixerStream, tempBuffer, readSize);
+						DWORD tempLength = BASS_ChannelGetData(self.mixerStream, tempBuffer, (DWORD)readSize);
 						if (tempLength) 
 						{
 							userInfo.isSongStarted = YES;
@@ -502,8 +504,8 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
                                     									
 									userInfo.neededSize = size + bytesToWait;
 									
-                                    DDLogCVerbose(@"[BassGaplessPlayer] AUDIO ENGINE - calculating wait, bitrate: %u, recentBytesPerSec: %u, bytesToWait: %u", bitrate, handler.recentDownloadSpeedInBytesPerSec, bytesToWait);
-									DDLogCVerbose(@"[BassGaplessPlayer] AUDIO ENGINE - waiting for %u   neededSize: %llu", bytesToWait, userInfo.neededSize);
+                                    DDLogCVerbose(@"[BassGaplessPlayer] AUDIO ENGINE - calculating wait, bitrate: %lu, recentBytesPerSec: %lu, bytesToWait: %lu", (unsigned long)bitrate, (unsigned long)handler.recentDownloadSpeedInBytesPerSec, (unsigned long)bytesToWait);
+									DDLogCVerbose(@"[BassGaplessPlayer] AUDIO ENGINE - waiting for %lu   neededSize: %llu", (unsigned long)bytesToWait, userInfo.neededSize);
 									
 									// Sleep for 10000 microseconds, or 1/100th of a second
 #define sleepTime 10000
@@ -576,15 +578,23 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 	BASS_SetConfig(BASS_CONFIG_IOS_MIXAUDIO, 0); // Disable mixing.	To be called before BASS_Init.
 	BASS_SetConfig(BASS_CONFIG_BUFFER, BASS_GetConfig(BASS_CONFIG_UPDATEPERIOD) + ISMS_BASSBufferSize); // set the buffer length to the minimum amount + 200ms
 	BASS_SetConfig(BASS_CONFIG_FLOATDSP, true); // set DSP effects to use floating point math to avoid clipping within the effects chain
-	if (BASS_Init(-1, sampleRate, 0, NULL, NULL)) 	// Initialize default device.
+	if (BASS_Init(-1, (DWORD)sampleRate, 0, NULL, NULL)) 	// Initialize default device.
 	{
         self.bassOutputBufferLengthMillis = BASS_GetConfig(BASS_CONFIG_BUFFER);
         
+#ifdef IOS
         BASS_PluginLoad(&BASSFLACplugin, 0); // load the Flac plugin
         BASS_PluginLoad(&BASSWVplugin, 0); // load the WavePack plugin
         BASS_PluginLoad(&BASS_APEplugin, 0); // load the Monkey's Audio plugin
         BASS_PluginLoad(&BASS_MPCplugin, 0); // load the MusePack plugin
         BASS_PluginLoad(&BASSOPUSplugin, 0); // load the OPUS plugin
+#else
+        BASS_PluginLoad("libbassflac.dylib", 0); // load the Flac plugin
+        BASS_PluginLoad("libbasswv.dylib", 0); // load the WavePack plugin
+        BASS_PluginLoad("libbass_ape.dylib", 0); // load the Monkey's Audio plugin
+        BASS_PluginLoad("libbass_mpc.dylib", 0); // load the MusePack plugin
+        BASS_PluginLoad("libbassopus.dylib", 0); // load the OPUS plugin
+#endif
 	}
     else
     {
@@ -853,7 +863,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 - (void)updatePlaylistIndex:(NSNotification *)notification
 {
     self.currentPlaylistIndex = [self.delegate bassCurrentPlaylistIndex:self];
-    DDLogVerbose(@"[BassGaplessPlayer] Updating playlist index to: %u", self.currentPlaylistIndex);
+    DDLogVerbose(@"[BassGaplessPlayer] Updating playlist index to: %lu", (unsigned long)self.currentPlaylistIndex);
 }
 
 #pragma mark - Audio Engine Properties
@@ -980,7 +990,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 	{
 		userInfo.isEnded = NO;
 		[self bassFree];
-		[self startSong:self.currentStream.song atIndex:self.currentPlaylistIndex withOffsetInBytes:[NSNumber numberWithUnsignedLongLong:bytes] orSeconds:nil];
+		[self startSong:self.currentStream.song atIndex:self.currentPlaylistIndex withOffsetInBytes:@(bytes) orSeconds:nil];
 	}
 	else
 	{
@@ -998,7 +1008,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
             
             if (fadeVolume)
             {
-                BASS_ChannelSlideAttribute(self.outStream, BASS_ATTRIB_VOL, 0, self.bassOutputBufferLengthMillis);
+                BASS_ChannelSlideAttribute(self.outStream, BASS_ATTRIB_VOL, 0, (DWORD)self.bassOutputBufferLengthMillis);
             }
             
             if ([self.delegate respondsToSelector:@selector(bassSeekToPositionSuccess:)])

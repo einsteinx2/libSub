@@ -178,11 +178,13 @@
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
 {
+#ifdef IOS
 	// Inform the user that the connection failed.
-	NSString *message = [NSString stringWithFormat:@"There was an error loading the album.\n\nError %i: %@", [error code], [error localizedDescription]];
+	NSString *message = [NSString stringWithFormat:@"There was an error loading the album.\n\nError %ld: %@", (long)[error code], [error localizedDescription]];
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alert show];
-	
+#endif
+    
 	self.receivedData = nil;
 	self.connection = nil;
 	
@@ -219,7 +221,7 @@
 	if (self.folderIds.count > 0)
 		[self.folderIds removeObjectAtIndex:0];
 	
-	for (int i = self.listOfAlbums.count - 1; i >= 0; i--)
+	for (NSInteger i = self.listOfAlbums.count - 1; i >= 0; i--)
 	{
 		NSString *albumId = [[self.listOfAlbums objectAtIndexSafe:i] albumId];
 		[self.folderIds insertObject:albumId atIndex:0];

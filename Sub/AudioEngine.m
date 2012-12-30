@@ -22,6 +22,7 @@ LOG_LEVEL_ISUB_DEFAULT
 // Singleton object
 static AudioEngine *sharedInstance = nil;
 
+#ifdef IOS
 void interruptionListenerCallback(void *inUserData, UInt32 interruptionState) 
 {
     if (interruptionState == kAudioSessionBeginInterruption) 
@@ -90,6 +91,8 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     }
 }
 
+#endif
+
 - (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds
 {
 	// Dispose of the old player
@@ -144,13 +147,15 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 #pragma mark - Singleton methods
 
 - (void)setup
-{	
+{
+#ifdef IOS
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	
 	AudioSessionInitialize(NULL, NULL, interruptionListenerCallback, NULL);
 	
 	// Add the callbacks for headphone removal and other audio takeover
 	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, NULL);
+#endif
     
     _delegate = [[iSubBassGaplessPlayerDelegate alloc] init];
     

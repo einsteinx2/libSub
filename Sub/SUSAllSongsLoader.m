@@ -117,7 +117,7 @@ static NSInteger order (id a, id b, void* context)
 		else if (self.iteration < 4)
 		{
 			self.currentRow = [databaseS.allSongsDbQueue intForQuery:@"SELECT albumNum FROM resumeLoad"];
-			self.albumCount = [databaseS.allAlbumsDbQueue intForQuery:[NSString stringWithFormat:@"SELECT COUNT(*) FROM subalbums%i", self.iteration]];
+			self.albumCount = [databaseS.allAlbumsDbQueue intForQuery:[NSString stringWithFormat:@"SELECT COUNT(*) FROM subalbums%ld", (long)self.iteration]];
 		//DLog(@"subalbums%i albumCount: %i", self.iteration, self.albumCount);
 			
 			if (self.albumCount > 0)
@@ -131,7 +131,7 @@ static NSInteger order (id a, id b, void* context)
 				self.iteration = 4;
 				[databaseS.allSongsDbQueue inDatabase:^(FMDatabase *db)
 				{
-					[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", [NSNumber numberWithInt:0], [NSNumber numberWithInt:self.iteration]];
+					[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", @(0), @(self.iteration)];
 				}];
 				
 			//DLog(@"calling loadSort");
@@ -275,7 +275,7 @@ static NSInteger order (id a, id b, void* context)
 		if (self.iteration == 0)
 			self.currentAlbum = [databaseS albumFromDbRow:self.currentRow inTable:@"allAlbumsUnsorted" inDatabaseQueue:databaseS.allAlbumsDbQueue];
 		else
-			self.currentAlbum = [databaseS albumFromDbRow:self.currentRow inTable:[NSString stringWithFormat:@"subalbums%i", self.iteration] inDatabaseQueue:databaseS.allAlbumsDbQueue];
+			self.currentAlbum = [databaseS albumFromDbRow:self.currentRow inTable:[NSString stringWithFormat:@"subalbums%ld", (long)self.iteration] inDatabaseQueue:databaseS.allAlbumsDbQueue];
 	//DLog(@"current album: %@", self.currentAlbum.title);
 		
 		self.currentArtist = [ISMSArtist artistWithName:self.currentAlbum.artistName andArtistId:self.currentAlbum.artistId];
@@ -343,7 +343,7 @@ static NSInteger order (id a, id b, void* context)
 		// Clean up the tables
 		[databaseS.allSongsDbQueue inDatabase:^(FMDatabase *db)
 		{
-			[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", [NSNumber numberWithInt:0], [NSNumber numberWithInt:5]];
+			[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", @0, @5];
 			[db executeUpdate:@"DROP TABLE allSongsUnsorted"];
 			[db executeUpdate:@"DROP TABLE allSongsTemp"];
 		}];
@@ -407,9 +407,9 @@ static NSInteger order (id a, id b, void* context)
 				//DLog(@"position: %i", [position intValue]);
 					NSNumber *count = nil;
 					if (nextSection)
-						count = [NSNumber numberWithInt:([[nextSection objectAtIndexSafe:1] intValue] - [position intValue])];
+						count = @([[nextSection objectAtIndexSafe:1] intValue] - [position intValue]);
 					else
-						count = [NSNumber numberWithInt:[db intForQuery:@"SELECT COUNT(*) FROM allAlbums WHERE ROWID > ?", position]];
+						count = @([db intForQuery:@"SELECT COUNT(*) FROM allAlbums WHERE ROWID > ?", position]);
 					
 					[db executeUpdate:@"INSERT INTO allAlbumsIndexCache (name, position, count) VALUES (?, ?, ?)", name, position, count];
 				}
@@ -426,7 +426,7 @@ static NSInteger order (id a, id b, void* context)
 				}
 			}
 			[result close];
-			[db executeUpdate:@"INSERT INTO allAlbumsCount VALUES (?)", [NSNumber numberWithInt:allAlbumsCount]];
+			[db executeUpdate:@"INSERT INTO allAlbumsCount VALUES (?)", @(allAlbumsCount)];
 		}];
         
 		// Create the section info array
@@ -448,9 +448,9 @@ static NSInteger order (id a, id b, void* context)
 					NSNumber *position = [section objectAtIndexSafe:1];
 					NSNumber *count = nil;
 					if (nextSection)
-						count = [NSNumber numberWithInt:([[nextSection objectAtIndexSafe:1] intValue] - [position intValue])];
+						count = @([[nextSection objectAtIndexSafe:1] intValue] - [position intValue]);
 					else
-						count = [NSNumber numberWithInt:[db intForQuery:@"SELECT COUNT(*) FROM allSongs WHERE ROWID > ?", position]];
+						count = @([db intForQuery:@"SELECT COUNT(*) FROM allSongs WHERE ROWID > ?", position]);
 					
 					[db executeUpdate:@"INSERT INTO allSongsIndexCache (name, position, count) VALUES (?, ?, ?)", name, position, count];
 				}
@@ -467,7 +467,7 @@ static NSInteger order (id a, id b, void* context)
 				}
 			}
 			[result close];
-			[db executeUpdate:@"INSERT INTO allSongsCount VALUES (?)", [NSNumber numberWithInt:allSongsCount]];
+			[db executeUpdate:@"INSERT INTO allSongsCount VALUES (?)", @(allSongsCount)];
 		}];
 				
 		// Check if loading should stop
@@ -485,7 +485,7 @@ static NSInteger order (id a, id b, void* context)
         
 		[databaseS.allSongsDbQueue inDatabase:^(FMDatabase *db)
 		{
-			[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", [NSNumber numberWithInt:0], [NSNumber numberWithInt:6]];
+			[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", @0, @6];
 			[db executeUpdate:@"DROP TABLE resumeLoad"];
 		}];
       		
@@ -677,7 +677,7 @@ static NSString *kName_Error = @"error";
 								else
 								{
 									//Add album object to the subalbums table to be processed in the next iteration
-									[databaseS insertAlbum:anAlbum intoTable:[NSString stringWithFormat:@"subalbums%i", (self.iteration + 1)] inDatabaseQueue:databaseS.allAlbumsDbQueue];
+									[databaseS insertAlbum:anAlbum intoTable:[NSString stringWithFormat:@"subalbums%ld", (long)(self.iteration + 1)] inDatabaseQueue:databaseS.allAlbumsDbQueue];
 								}
 							}
 							
@@ -747,7 +747,7 @@ static NSString *kName_Error = @"error";
 												 }
 												 
 												 NSString *query = @"INSERT INTO genresLayoutTemp (md5, genre, segs, seg1, seg2, seg3, seg4, seg5, seg6, seg7, seg8, seg9) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-												 [db executeUpdate:query, [aSong.path md5], aSong.genre, [NSNumber numberWithInt:[splitPath count]], [segments objectAtIndexSafe:0], [segments objectAtIndexSafe:1], [segments objectAtIndexSafe:2], [segments objectAtIndexSafe:3], [segments objectAtIndexSafe:4], [segments objectAtIndexSafe:5], [segments objectAtIndexSafe:6], [segments objectAtIndexSafe:7], [segments objectAtIndexSafe:8]];
+												 [db executeUpdate:query, [aSong.path md5], aSong.genre, @([splitPath count]), [segments objectAtIndexSafe:0], [segments objectAtIndexSafe:1], [segments objectAtIndexSafe:2], [segments objectAtIndexSafe:3], [segments objectAtIndexSafe:4], [segments objectAtIndexSafe:5], [segments objectAtIndexSafe:6], [segments objectAtIndexSafe:7], [segments objectAtIndexSafe:8]];
 												 self.tempGenresLayoutCount++;
 												 
 												 if (self.tempGenresLayoutCount == WRITE_BUFFER_AMOUNT)
@@ -838,7 +838,7 @@ static NSString *kName_Error = @"error";
 				[databaseS.allAlbumsDbQueue inDatabase:^(FMDatabase *db)
 				{
 					NSUInteger count = [db intForQuery:@"SELECT COUNT(*) FROM allAlbumsUnsorted"];
-					[db executeUpdate:@"INSERT INTO allAlbumsUnsortedCount VALUES (?)", [NSNumber numberWithInt:count]];
+					[db executeUpdate:@"INSERT INTO allAlbumsUnsortedCount VALUES (?)", @(count)];
 				}];
 								
 				[self startLoad];
@@ -847,7 +847,7 @@ static NSString *kName_Error = @"error";
 			{
 				[databaseS.allAlbumsDbQueue inDatabase:^(FMDatabase *db)
 				{
-					[db executeUpdate:@"UPDATE resumeLoad SET artistNum = ?", [NSNumber numberWithInt:self.currentRow]];
+					[db executeUpdate:@"UPDATE resumeLoad SET artistNum = ?", @(self.currentRow)];
 				}];
 				 
 				// Load the next folder
@@ -873,7 +873,7 @@ static NSString *kName_Error = @"error";
 				self.iteration++;
 				[databaseS.allSongsDbQueue inDatabase:^(FMDatabase *db)
 				{
-					[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", [NSNumber numberWithInt:0], [NSNumber numberWithInt:self.iteration]];
+					[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?, iteration = ?", @0, @(self.iteration)];
 				}];
 				
 				// Flush the records to disk
@@ -916,7 +916,7 @@ static NSString *kName_Error = @"error";
 			{
 				[databaseS.allSongsDbQueue inDatabase:^(FMDatabase *db)
 				{
-					[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?", [NSNumber numberWithInt:self.currentRow]];
+					[db executeUpdate:@"UPDATE resumeLoad SET albumNum = ?", @(self.currentRow)];
 				}];
             
 				// Load the next folder

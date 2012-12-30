@@ -108,7 +108,7 @@
 	
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
-		FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM albumsCache WHERE ROWID = %i", row]];
+		FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM albumsCache WHERE ROWID = %lu", (unsigned long)row]];
 		[result next];
 		if ([db hadError]) 
 		{
@@ -148,7 +148,7 @@
 	}
 	
 	// Add the songs to the playlist
-	for (int i = self.albumsCount; i < self.totalCount; i++)
+	for (NSInteger i = self.albumsCount; i < self.totalCount; i++)
 	{
 		@autoreleasepool 
 		{
@@ -214,7 +214,7 @@
 			[db executeUpdate:@"DROP TABLE IF EXISTS albumIndex"];
 			[db executeUpdate:@"CREATE TEMPORARY TABLE albumIndex (title TEXT)"];
 			
-			[db executeUpdate:@"INSERT INTO albumIndex SELECT title FROM albumsCache WHERE rowid >= ? LIMIT ?", [NSNumber numberWithInt:self.albumStartRow], [NSNumber numberWithInt:self.albumsCount]];
+			[db executeUpdate:@"INSERT INTO albumIndex SELECT title FROM albumsCache WHERE rowid >= ? LIMIT ?", @(self.albumStartRow), @(self.albumsCount)];
 			[db executeUpdate:@"CREATE INDEX albumIndexIndex ON albumIndex (title)"];
             
 			sectionInfo = [databaseS sectionInfoFromTable:@"albumIndex" inDatabase:db withColumn:@"title"];

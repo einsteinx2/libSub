@@ -110,7 +110,7 @@
 	
 	if (offset > 0)
 	{
-		NSString *rangeString = [NSString stringWithFormat:@"bytes=%i-", offset];
+		NSString *rangeString = [NSString stringWithFormat:@"bytes=%lu-", (unsigned long)offset];
 		[request setValue:rangeString forHTTPHeaderField:@"Range"];
 	}
 	

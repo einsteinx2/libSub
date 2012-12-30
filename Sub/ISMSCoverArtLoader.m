@@ -245,7 +245,11 @@ static void initialize_navigationBarImages()
     }
     
 	// Check to see if the data is a valid image. If so, use it; if not, use the default image.
+#ifdef IOS
 	if([UIImage imageWithData:self.receivedData])
+#else
+    if([[NSImage alloc] initWithData:self.receivedData])
+#endif
 	{
         DLog(@"art loading completed for: %@", self.coverArtId);
 		[self.dbQueue inDatabase:^(FMDatabase *db)

@@ -7,8 +7,6 @@
 //
 
 #import "SocialSingleton.h"
-#import "SA_OAuthTwitterEngine.h"
-#import "SA_OAuthTwitterController.h"
 #import "BassGaplessPlayer.h"
 #import "PlaylistSingleton.h"
 #import "ISMSStreamManager.h"
@@ -193,6 +191,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)tweetSong
 {
+#ifdef IOS
 	ISMSSong *currentSong = playlistS.currentSong;
 	
     //DLog(@"Asked to tweet %@", currentSong.title);
@@ -219,10 +218,12 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		//DLog(@"------------- not tweeting song because no engine or not enabled --------------");
 	}
+#endif
 }
 
 - (void)createTwitterEngine
 {
+#ifdef IOS
 	if (self.twitterEngine)
 		return;
 	
@@ -232,18 +233,21 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	// Needed to load saved twitter auth info
 	[self.twitterEngine isAuthorized];
+#endif
 }
 
 //=============================================================================================================================
 
 - (void)destroyTwitterEngine
 {
+#ifdef IOS
 	[self.twitterEngine endUserSession];
 	self.twitterEngine = nil;
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	[defaults removeObjectForKey:@"twitterAuthData"];
 	[defaults synchronize];
+#endif
 }
 
 // SA_OAuthTwitterEngineDelegate
@@ -262,6 +266,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	return [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthData"];
 }
 
+#ifdef IOS
 //=============================================================================================================================
 // SA_OAuthTwitterControllerDelegate
 - (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username 
@@ -296,6 +301,8 @@ LOG_LEVEL_ISUB_DEFAULT
 	//DLog(@"Request %@ failed with error: %@", requestIdentifier, error);
 }
 
+#endif
+
 #pragma mark - Memory management
 
 - (void)didReceiveMemoryWarning
@@ -309,7 +316,9 @@ LOG_LEVEL_ISUB_DEFAULT
 {
 	[self createTwitterEngine];
 	
+#ifdef IOS
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
 }
 
 + (id)sharedInstance

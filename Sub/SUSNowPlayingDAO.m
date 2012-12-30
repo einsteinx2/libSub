@@ -58,9 +58,9 @@
 		NSUInteger minutesAgo = [[songDict objectForKey:@"minutesAgo"] intValue];
 		
 		if (minutesAgo == 1)
-			return [NSString stringWithFormat:@"%i min ago", minutesAgo];
+			return [NSString stringWithFormat:@"%lu min ago", (unsigned long)minutesAgo];
 		else
-			return [NSString stringWithFormat:@"%i mins ago", minutesAgo];
+			return [NSString stringWithFormat:@"%lu mins ago", (unsigned long)minutesAgo];
 	}
 	return nil;
 }

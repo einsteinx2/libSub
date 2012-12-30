@@ -20,7 +20,10 @@
 #import "EX2Kit.h"
 
 #import "FMDatabaseQueueAdditions.h"
+
+#if IOS
 #import "FlurryAnalytics.h"
+#endif
 
 // Singletons
 #import "AudioEngine.h"

@@ -21,7 +21,11 @@
 
 @property (weak) id<BassGaplessPlayerDelegate> delegate;
 
+#ifdef IOS
 @property dispatch_queue_t streamGcdQueue;
+#else
+@property (strong) dispatch_queue_t streamGcdQueue;
+#endif
 
 // Ring Buffer
 @property (strong) EX2RingBuffer *ringBuffer;

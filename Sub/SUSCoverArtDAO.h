@@ -17,8 +17,13 @@
 @property (copy) NSString *coverArtId;
 @property BOOL isLarge;
 
+#ifdef IOS
 - (UIImage *)coverArtImage;
 - (UIImage *)defaultCoverArtImage;
+#else
+- (NSImage *)coverArtImage;
+- (NSImage *)defaultCoverArtImage;
+#endif
 @property (readonly) BOOL isCoverArtCached;
 
 - (id)initWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate;

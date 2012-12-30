@@ -608,9 +608,11 @@ LOG_LEVEL_ISUB_DEBUG
 
 	if (handler.totalBytesTransferred == 0)
 	{
+#ifdef IOS
 		// Not a trial issue, but no data was returned at all
 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uh oh!" message:@"We asked for a song, but the server didn't send anything!\n\nIt's likely that Subsonic's transcoding failed.\n\nIf you need help, please tap the Support button on the Home tab." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 		[alert show];
+#endif
 		[[NSFileManager defaultManager] removeItemAtPath:handler.filePath error:NULL];
 		isSuccess = NO;
 	}
@@ -639,9 +641,11 @@ LOG_LEVEL_ISUB_DEBUG
 		
 		if (isLicenseIssue)
 		{
+#ifdef IOS
 			// This is a trial period message, alert the user and stop streaming
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Subsonic API Trial Expired" message:@"You can purchase a license for Subsonic by logging in to the web interface and clicking the red Donate link on the top right.\n\nPlease remember, iSub is a 3rd party client for Subsonic, and this license and trial is for Subsonic and not iSub.\n\nIf you didn't know about the Subsonic license requirement, and do not wish to purchase it, please tap the Support button on the Home tab and contact iSub support for a refund." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 			[alert show];
+#endif
 			[[NSFileManager defaultManager] removeItemAtPath:handler.filePath error:NULL];
 			isSuccess = NO;
 		}	
@@ -750,39 +754,24 @@ LOG_LEVEL_ISUB_DEBUG
 	self.lastCachedSong = nil;
 	self.lyricsDAO = [[SUSLyricsDAO alloc] initWithDelegate:self]; 
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self
-											 selector:@selector(songCachingToggled) 
-												 name:ISMSNotification_SongCachingEnabled object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songCachingToggled) name:ISMSNotification_SongCachingEnabled object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(songCachingToggled) 
-												 name:ISMSNotification_SongCachingDisabled object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songCachingToggled) name:ISMSNotification_SongCachingDisabled object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(currentPlaylistIndexChanged) 
-												 name:ISMSNotification_CurrentPlaylistIndexChanged object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentPlaylistIndexChanged) name:ISMSNotification_CurrentPlaylistIndexChanged object:nil];
 	
 	if (settingsS.isSongCachingEnabled)
-		[[NSNotificationCenter defaultCenter] addObserver:self 
-												 selector:@selector(fillStreamQueue) 
-													 name:ISMSNotification_SongPlaybackEnded object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(fillStreamQueue) name:ISMSNotification_SongPlaybackEnded object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(currentPlaylistOrderChanged) 
-												 name:ISMSNotification_RepeatModeChanged object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentPlaylistOrderChanged) name:ISMSNotification_RepeatModeChanged object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(currentPlaylistOrderChanged) 
-												 name:ISMSNotification_CurrentPlaylistOrderChanged object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentPlaylistOrderChanged) name:ISMSNotification_CurrentPlaylistOrderChanged object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(currentPlaylistOrderChanged) 
-												 name:ISMSNotification_CurrentPlaylistShuffleToggled object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentPlaylistOrderChanged) name:ISMSNotification_CurrentPlaylistShuffleToggled object:nil];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(didReceiveMemoryWarning) 
-												 name:UIApplicationDidReceiveMemoryWarningNotification 
-											   object:nil];
+#ifdef IOS
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
 }
 
 + (id)sharedInstance

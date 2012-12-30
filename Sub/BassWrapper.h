@@ -23,7 +23,10 @@
 + (NSString *)formatForChannel:(HCHANNEL)channel;
 + (NSString *)stringFromErrorCode:(NSInteger)errorCode;
 + (NSUInteger)estimateBitrate:(BassStream *)bassStream;
+
+#ifdef IOS
 + (NSInteger)audioSessionSampleRate;
 + (void)setAudioSessionSampleRate:(NSInteger)audioSessionSampleRate;
+#endif
 
 @end

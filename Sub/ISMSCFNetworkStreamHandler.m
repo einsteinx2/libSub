@@ -107,7 +107,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		
 		if (self.maxBitrateSetting != 0)
 		{
-			NSString *maxBitRate = [[NSString alloc] initWithFormat:@"%i", self.maxBitrateSetting];
+			NSString *maxBitRate = [[NSString alloc] initWithFormat:@"%ld", (long)self.maxBitrateSetting];
 			[parameters setObject:n2N(maxBitRate) forKey:@"maxBitRate"];
 		}
 		request = [NSMutableURLRequest requestWithSUSAction:@"stream" parameters:parameters byteOffset:self.byteOffset];
@@ -191,10 +191,10 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		NSDictionary *sslSettings =
 		[NSDictionary dictionaryWithObjectsAndKeys:
 		 (NSString *)kCFStreamSocketSecurityLevelNegotiatedSSL, kCFStreamSSLLevel,
-		 [NSNumber numberWithBool:YES], kCFStreamSSLAllowsExpiredCertificates,
-		 [NSNumber numberWithBool:YES], kCFStreamSSLAllowsExpiredRoots,
-		 [NSNumber numberWithBool:YES], kCFStreamSSLAllowsAnyRoot,
-		 [NSNumber numberWithBool:NO], kCFStreamSSLValidatesCertificateChain,
+		 @YES, kCFStreamSSLAllowsExpiredCertificates,
+		 @YES, kCFStreamSSLAllowsExpiredRoots,
+		 @YES, kCFStreamSSLAllowsAnyRoot,
+		 @NO, kCFStreamSSLValidatesCertificateChain,
 		 [NSNull null], kCFStreamSSLPeerName,
 		 nil];
 		
@@ -221,8 +221,11 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
     [self startTimeOutTimer];
 	
 	self.isDownloading = YES;
+    
+#ifdef IOS
 	[EX2NetworkIndicator usingNetwork];
-	
+#endif
+    
 	// Start the HTTP connection
 	if (CFReadStreamOpen(_readStreamRef) == false)
 		goto Bail;
@@ -268,8 +271,10 @@ Bail:
 	
 	[EX2Dispatch runInMainThreadAndWaitUntilDone:YES block:^
 	 {
+#ifdef IOS
 		 if (self.isDownloading)
 			 [EX2NetworkIndicator doneUsingNetwork];
+#endif
 		 
 		 self.isDownloading = NO;
 		 
@@ -384,7 +389,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                 NSUInteger bytesPerSec = self.totalBytesTransferred / [[NSDate date] timeIntervalSinceDate:self.startDate];
 				if (!self.isDelegateNotifiedToStartPlayback && self.totalBytesTransferred >= [self.class minBytesToStartPlaybackForKiloBitrate:self.bitrate speedInBytesPerSec:bytesPerSec])
 				{
-					DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %u, total bytes: %llu, bitrate: %u, bytesPerSec: %u", ISMSMinBytesToStartPlayback(self.bitrate), self.totalBytesTransferred, self.bitrate, bytesPerSec);
+					DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %lu, total bytes: %llu, bitrate: %lu, bytesPerSec: %lu", (unsigned long)ISMSMinBytesToStartPlayback(self.bitrate), self.totalBytesTransferred, (unsigned long)self.bitrate, (unsigned long)bytesPerSec);
 					self.isDelegateNotifiedToStartPlayback = YES;
 					
 					if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerStartPlayback:)])
@@ -401,7 +406,11 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                     {
                         NSTimeInterval delay = 0.0;
                         
+#ifdef IOS
                         BOOL isWifi = [LibSub isWifi] || self.delegate == cacheQueueManagerS;
+#else
+                        BOOL isWifi = YES;
+#endif
                         double maxBytesPerInterval = [self.class maxBytesPerIntervalForBitrate:(double)self.bitrate is3G:!isWifi];
                         double numberOfIntervals = intervalSinceLastThrottle / ISMSThrottleTimeInterval;
                         double maxBytesPerTotalInterval = maxBytesPerInterval * numberOfIntervals;

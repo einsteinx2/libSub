@@ -100,7 +100,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		
 		value.handle = handle;
 		
-		[self.eqHandles addObject:[NSNumber numberWithUnsignedInt:handle]];
+		[self.eqHandles addObject:@(handle)];
 	}
 	_isEqActive = YES;
 }
@@ -129,7 +129,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		BASS_FXSetParameters(handle, &value);
 		eqValue.handle = handle;
 		
-		[self.eqHandles addObject:[NSNumber numberWithUnsignedInt:handle]];
+		[self.eqHandles addObject:@(handle)];
 	}
 	
 	return eqValue;
@@ -144,11 +144,11 @@ LOG_LEVEL_ISUB_DEFAULT
 	}
 	
 	// Remove the handle
-	[self.eqHandles removeObject:[NSNumber numberWithUnsignedInt:value.handle]];
+	[self.eqHandles removeObject:@(value.handle)];
 	
 	// Remove the value
 	[self.eqValues removeObject:value];
-	for (int i = value.arrayIndex; i < [self.eqValues count]; i++)
+	for (NSInteger i = value.arrayIndex; i < [self.eqValues count]; i++)
 	{
 		// Adjust the arrayIndex values for the other objects
 		BassParamEqValue *aValue = [self.eqValues objectAtIndexSafe:i];

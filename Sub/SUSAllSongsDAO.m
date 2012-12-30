@@ -79,7 +79,7 @@
 
 - (ISMSSong *)allSongsSongForPositionInSearch:(NSUInteger)position
 {
-	NSUInteger rowId = [self.dbQueue intForQuery:@"SELECT rowIdInAllSongs FROM allSongsNameSearch WHERE ROWID = ?", [NSNumber numberWithInt:position]];
+	NSUInteger rowId = [self.dbQueue intForQuery:@"SELECT rowIdInAllSongs FROM allSongsNameSearch WHERE ROWID = ?", @(position)];
 	return [self allSongsSongForPosition:rowId];
 }
 

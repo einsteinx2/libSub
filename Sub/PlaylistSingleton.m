@@ -83,7 +83,7 @@
 						@autoreleasepool
 						{
 							NSInteger rowId = [index integerValue] + 1;
-							[db executeUpdate:[NSString stringWithFormat:@"DELETE FROM jukeboxCurrentPlaylist WHERE ROWID = %i", rowId]];
+							[db executeUpdate:[NSString stringWithFormat:@"DELETE FROM jukeboxCurrentPlaylist WHERE ROWID = %ld", (long)rowId]];
 						}
 					}
 					
@@ -114,7 +114,7 @@
 							@autoreleasepool 
 							{
 								NSInteger rowId = [index integerValue] + 1;
-								[db executeUpdate:[NSString stringWithFormat:@"DELETE FROM shufflePlaylist WHERE ROWID = %i", rowId]];
+								[db executeUpdate:[NSString stringWithFormat:@"DELETE FROM shufflePlaylist WHERE ROWID = %ld", (long)rowId]];
 							}
 						}
 						
@@ -142,7 +142,7 @@
 							@autoreleasepool 
 							{
 								NSInteger rowId = [index integerValue] + 1;
-								[db executeUpdate:[NSString stringWithFormat:@"DELETE FROM currentPlaylist WHERE ROWID = %i", rowId]];
+								[db executeUpdate:[NSString stringWithFormat:@"DELETE FROM currentPlaylist WHERE ROWID = %ld", (long)rowId]];
 							}
 						}
 						
@@ -156,7 +156,7 @@
 		
 		// Correct the value of currentPlaylistPosition
 		// If the current song was deleted make sure to set goToNextSong so the next song will play
-		if ([indexesMut containsObject:[NSNumber numberWithInt:self.currentIndex]] && audioEngineS.player.isPlaying)
+		if ([indexesMut containsObject:@(self.currentIndex)] && audioEngineS.player.isPlaying)
 		{
 			goToNextSong = YES;
 		}
@@ -476,7 +476,7 @@
 		if (settingsS.isJukeboxEnabled)
 		{
 			[jukeboxS jukeboxReplacePlaylistWithLocal];
-			[jukeboxS jukeboxPlaySongAtPosition:[NSNumber numberWithInt:0]];
+			[jukeboxS jukeboxPlaySongAtPosition:@0];
 		}
 				
 		// Send a notification to update the playlist view
@@ -486,7 +486,7 @@
 	{
 		ISMSSong *currentSong = self.currentSong;
 		
-		NSNumber *oldPlaylistPosition = [NSNumber numberWithInt:(self.currentIndex + 1)];
+		NSNumber *oldPlaylistPosition = @(self.currentIndex + 1);
 		self.shuffleIndex = 0;
 		self.isShuffle = YES;
 		
@@ -509,7 +509,7 @@
 		{
 			[jukeboxS jukeboxReplacePlaylistWithLocal];
 			
-			[jukeboxS jukeboxPlaySongAtPosition:[NSNumber numberWithInt:1]];
+			[jukeboxS jukeboxPlaySongAtPosition:@1];
 			
 			//self.isShuffle = NO;
 		}
@@ -536,10 +536,9 @@
 	normalIndex = 0;
 	repeatMode = ISMSRepeatMode_Normal;
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(didReceiveMemoryWarning) 
-												 name:UIApplicationDidReceiveMemoryWarningNotification 
-											   object:nil];
+#ifdef IOS
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
 }
 
 + (id)sharedInstance

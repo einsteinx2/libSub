@@ -70,7 +70,7 @@
 	__block ISMSAlbum *anAlbum = nil;
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{		
-		FMResultSet *result = [db executeQuery:@"SELECT * FROM allAlbums WHERE ROWID = ?", [NSNumber numberWithInt:position]];
+		FMResultSet *result = [db executeQuery:@"SELECT * FROM allAlbums WHERE ROWID = ?", @(position)];
 		if ([result next])
 		{
 			anAlbum = [[ISMSAlbum alloc] init];
@@ -88,7 +88,7 @@
 
 - (ISMSAlbum *)allAlbumsAlbumForPositionInSearch:(NSUInteger)position
 {
-	NSUInteger rowId = [self.dbQueue intForQuery:@"SELECT rowIdInAllAlbums FROM allAlbumsNameSearch WHERE ROWID = ?", [NSNumber numberWithInt:position]];
+	NSUInteger rowId = [self.dbQueue intForQuery:@"SELECT rowIdInAllAlbums FROM allAlbumsNameSearch WHERE ROWID = ?", @(position)];
 	return [self allAlbumsAlbumForPosition:rowId];
 }
 

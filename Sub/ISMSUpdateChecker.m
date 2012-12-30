@@ -34,14 +34,17 @@
 
 - (void)showAlert
 {
+#ifdef IOS
 	NSString *title = [NSString stringWithFormat:@"Free Update %@ Available", self.theNewVersion];
 	NSString *finalMessage = [self.message stringByReplacingOccurrencesOfString:@"\\n" withString:@"\n"];
 	
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title message:finalMessage delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"App Store", nil];
 	[alert show];
+#endif
 }
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex 
+#ifdef IOS
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
 	if(buttonIndex == 1)
 	{
@@ -52,6 +55,7 @@
 	
     self.selfRef = nil;
 }
+#endif
 
 #pragma mark - Connection Delegate
 
@@ -133,7 +137,7 @@
 			
 			if ([currentVersionPadded count] < 3)
 			{
-				for (int i = [currentVersionPadded count]; i < 3; i++)
+				for (NSInteger i = [currentVersionPadded count]; i < 3; i++)
 				{
 					[currentVersionPadded addObject:@"0"];
 				}
@@ -141,7 +145,7 @@
 			
 			if ([newVersionPadded count] < 3)
 			{
-				for (int i = [newVersionPadded count]; i < 3; i++)
+				for (NSInteger i = [newVersionPadded count]; i < 3; i++)
 				{
 					[newVersionPadded addObject:@"0"];
 				}

@@ -80,7 +80,7 @@
 		 [db executeUpdate:query];
 		 
 		 query = [NSString stringWithFormat:@"SELECT COUNT(*) FROM rootFolderNameCache%@", self.tableModifier];
-		 folderCount = [NSNumber numberWithInt:[db intForQuery:query]];
+		 folderCount = @([db intForQuery:query]);
 		 
 		 query = [NSString stringWithFormat:@"INSERT INTO rootFolderCount%@ VALUES (?)", self.tableModifier];
 		 [db executeUpdate:query, folderCount];
@@ -132,7 +132,7 @@
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	 {
 		 NSString *query = [NSString stringWithFormat:@"INSERT INTO rootFolderIndexCache%@ VALUES (?, ?, ?)", self.tableModifier];
-		 [db executeUpdate:query, name, [NSNumber numberWithInt:position], [NSNumber numberWithInt:folderCount]];
+		 [db executeUpdate:query, name, @(position), @(folderCount)];
 		 hadError = [db hadError];
 	 }];
 	return !hadError;

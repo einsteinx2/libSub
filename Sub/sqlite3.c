@@ -18,6 +18,9 @@
 ** separate file. This file contains only code for the core SQLite library.
 */
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshorten-64-to-32"
+
 //
 //
 // Enable full text searching
@@ -112457,3 +112460,5 @@ SQLITE_PRIVATE void sqlite3Fts3IcuTokenizerModule(
 #endif /* !defined(SQLITE_CORE) || defined(SQLITE_ENABLE_FTS3) */
 
 /************** End of fts3_icu.c ********************************************/
+
+#pragma clang diagnostic pop

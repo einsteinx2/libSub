@@ -83,7 +83,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		
 		if (self.maxBitrateSetting != 0)
 		{
-			NSString *maxBitRate = [[NSString alloc] initWithFormat:@"%i", self.maxBitrateSetting];
+			NSString *maxBitRate = [[NSString alloc] initWithFormat:@"%ld", (long)self.maxBitrateSetting];
 			[parameters setObject:n2N(maxBitRate) forKey:@"maxBitRate"];
 		}
 		self.request = [NSMutableURLRequest requestWithSUSAction:@"stream" parameters:parameters byteOffset:self.byteOffset];
@@ -161,8 +161,10 @@ LOG_LEVEL_ISUB_DEFAULT
 	if (!self.isTempCache)
 		self.mySong.isPartiallyCached = YES;
 	
+#ifdef IOS
 	[EX2NetworkIndicator usingNetwork];
-	
+#endif
+    
 	if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerStarted:)])
 		[self.delegate ISMSStreamHandlerStarted:self];
 }
@@ -181,8 +183,10 @@ LOG_LEVEL_ISUB_DEFAULT
 	//[EX2Dispatch cancelTimerBlockWithName:ISMSDownloadTimeoutTimer];
 	[self performSelectorOnMainThread:@selector(stopTimeOutTimer) withObject:nil waitUntilDone:NO];
 	
-	if (self.isDownloading)	
+#ifdef IOS
+	if (self.isDownloading)
 		[EX2NetworkIndicator doneUsingNetwork];
+#endif
 
 	self.isDownloading = NO;
 	self.isCanceled = YES;
@@ -312,7 +316,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		
 		// Log progress
 		if (isProgressLoggingEnabled)
-			DDLogInfo(@"[ISMSURLConnectionStreamHandler] downloadedLengthA:  %llu   bytesRead: %i", self.totalBytesTransferred, dataLength);
+			DDLogInfo(@"[ISMSURLConnectionStreamHandler] downloadedLengthA:  %llu   bytesRead: %lu", self.totalBytesTransferred, (unsigned long)dataLength);
 		
 		// If near beginning of file, don't throttle
 		if (self.totalBytesTransferred < ISMSMinBytesToStartLimiting(self.bitrate))
@@ -331,7 +335,11 @@ LOG_LEVEL_ISUB_DEFAULT
             {
                 NSTimeInterval delay = 0.0;
                 
+#ifdef IOS
                 double maxBytesPerInterval = [self.class maxBytesPerIntervalForBitrate:(double)self.bitrate is3G:![LibSub isWifi]];
+#else
+                double maxBytesPerInterval = [self.class maxBytesPerIntervalForBitrate:(double)self.bitrate is3G:NO];
+#endif
                 double numberOfIntervals = intervalSinceLastThrottle / ISMSThrottleTimeInterval;
                 double maxBytesPerTotalInterval = maxBytesPerInterval * numberOfIntervals;
                 
@@ -415,9 +423,11 @@ LOG_LEVEL_ISUB_DEFAULT
 - (void)partialPrecachePausedInternal
 {
 	self.isPartialPrecacheSleeping = YES;
-	
+
+#ifdef IOS
 	if (!self.isCanceled)
 		[EX2NetworkIndicator doneUsingNetwork];
+#endif
 	
 	if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerPartialPrecachePaused:)])
 		[self.delegate ISMSStreamHandlerPartialPrecachePaused:self];
@@ -428,8 +438,10 @@ LOG_LEVEL_ISUB_DEFAULT
 {
 	self.isPartialPrecacheSleeping = NO;
 	
+#ifdef IOS
 	if (!self.isCanceled)
 		[EX2NetworkIndicator usingNetwork];
+#endif
 	
 	if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerPartialPrecacheUnpaused:)])
 		[self.delegate ISMSStreamHandlerPartialPrecacheUnpaused:self];
@@ -449,7 +461,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	[self performSelectorOnMainThread:@selector(stopTimeOutTimer) withObject:nil waitUntilDone:NO];
 	
 	DDLogError(@"[ISMSURLConnectionStreamHandler] Connection Failed for %@", self.mySong.title);
-	DDLogError(@"[ISMSURLConnectionStreamHandler] error domain: %@  code: %i description: %@", error.domain, error.code, error.description);
+	DDLogError(@"[ISMSURLConnectionStreamHandler] error domain: %@  code: %ld description: %@", error.domain, (long)error.code, error.description);
 	
 	// Perform these operations on the main thread
 	[self performSelectorOnMainThread:@selector(didFailInternal:) withObject:error waitUntilDone:YES];
@@ -474,7 +486,9 @@ LOG_LEVEL_ISUB_DEFAULT
 	[self.fileHandle closeFile];
 	self.fileHandle = nil;
 	
+#ifdef IOS
 	[EX2NetworkIndicator doneUsingNetwork];
+#endif
 	
 	if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerConnectionFailed:withError:)])
 		[self.delegate ISMSStreamHandlerConnectionFailed:self withError:error];
@@ -526,7 +540,9 @@ LOG_LEVEL_ISUB_DEFAULT
 	[self.fileHandle closeFile];
 	self.fileHandle = nil;
 	
+#ifdef IOS
 	[EX2NetworkIndicator doneUsingNetwork];
+#endif
 	
 	if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerConnectionFinished:)])
 		[self.delegate ISMSStreamHandlerConnectionFinished:self];

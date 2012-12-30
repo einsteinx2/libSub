@@ -108,7 +108,7 @@
 		{
 			@autoreleasepool 
 			{
-				NSNumber *position = [NSNumber numberWithInt:[result intForColumn:@"position"]];
+				NSNumber *position = @([result intForColumn:@"position"]);
 				[positions addObject:position];
 			}
 		}
@@ -133,7 +133,7 @@
 		{
 			@autoreleasepool 
 			{
-				NSNumber *folderCount = [NSNumber numberWithInt:[result intForColumn:@"count"]];
+				NSNumber *folderCount = @([result intForColumn:@"count"]);
 				[counts addObject:folderCount];
 			}
 		}
@@ -152,7 +152,7 @@
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
 		NSString *query = [NSString stringWithFormat:@"SELECT * FROM rootFolderNameCache%@ WHERE ROWID = ?", self.tableModifier];
-		FMResultSet *result = [db executeQuery:query, [NSNumber numberWithInt:position]];
+		FMResultSet *result = [db executeQuery:query, @(position)];
 		while ([result next])
 		{
 			@autoreleasepool 
@@ -174,7 +174,7 @@
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
 		NSString *query = @"SELECT * FROM rootFolderNameSearch WHERE ROWID = ?";
-		FMResultSet *result = [db executeQuery:query, [NSNumber numberWithInt:position]];
+		FMResultSet *result = [db executeQuery:query, @(position)];
 		while ([result next])
 		{
 			@autoreleasepool 
@@ -254,7 +254,7 @@
 		{
 			@autoreleasepool 
 			{
-				NSNumber *folderId = [NSNumber numberWithInt:[result intForColumn:@"id"]];
+				NSNumber *folderId = @([result intForColumn:@"id"]);
 				NSString *folderName = [result stringForColumn:@"name"];
 				[folders setObject:folderName forKey:folderId];
 			}

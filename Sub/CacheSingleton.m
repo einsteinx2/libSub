@@ -161,8 +161,10 @@ LOG_LEVEL_ISUB_DEFAULT
 				// Looks like even removing all of the cache will not be enough so turn off caching
 				settingsS.isSongCachingEnabled = NO;
 				
+#ifdef IOS
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"IMPORTANT" message:@"Free space is running low, but even deleting the entire cache will not bring the free space up higher than your minimum setting. Automatic song caching has been turned off.\n\nYou can re-enable it in the Settings menu (tap the gear, tap Settings at the top)" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 				[alert show];
+#endif
 			}
 			else
 			{
@@ -173,9 +175,11 @@ LOG_LEVEL_ISUB_DEFAULT
 				}
 				else
 				{
+#ifdef IOS
 					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notice" message:@"Free space is running low. Delete some cached songs or lower the minimum free space setting." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 					alert.tag = 4;
 					[alert show];
+#endif
 				}
 			}
 		}
@@ -193,9 +197,11 @@ LOG_LEVEL_ISUB_DEFAULT
 			{
 				settingsS.isSongCachingEnabled = NO;
 				
+#ifdef IOS
 				UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Notice" message:@"The song cache is full. Automatic song caching has been disabled.\n\nYou can re-enable it in the Settings menu (tap the gear, tap Settings at the top)" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
 				alert.tag = 4;
 				[alert show];
+#endif
 			}			
 		}
 	}
@@ -299,10 +305,9 @@ LOG_LEVEL_ISUB_DEFAULT
 	// Do the first check sooner
 	[self performSelector:@selector(checkCache) withObject:nil afterDelay:0.05];
 	
-	[[NSNotificationCenter defaultCenter] addObserver:self 
-											 selector:@selector(didReceiveMemoryWarning) 
-												 name:UIApplicationDidReceiveMemoryWarningNotification 
-											   object:nil];
+#ifdef IOS
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
+#endif
 }
 
 + (id)sharedInstance
