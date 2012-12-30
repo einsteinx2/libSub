@@ -375,6 +375,58 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 	[self performSelectorInBackground:@selector(keepRingBufferFilledInternal) withObject:nil];
 }
 
++ (NSUInteger)bytesToBufferForKiloBitrate:(NSUInteger)rate speedInBytesPerSec:(NSUInteger)speedInBytesPerSec
+{
+    // If start date is nil somehow, or total bytes transferred is 0 somehow, return the default of 10 seconds worth of audio
+    if (rate == 0 || speedInBytesPerSec == 0)
+    {
+        return BytesForSecondsAtBitrate(10, rate);
+    }
+    
+    // Get the download speed in KB/sec
+    double kiloBytesPerSec = (double)speedInBytesPerSec / 1024.;
+    
+    // Find out out many bytes equals 1 second of audio
+    double bytesForOneSecond = BytesForSecondsAtBitrate(1, rate);
+    double kiloBytesForOneSecond = bytesForOneSecond / 1024.;
+    
+    // Calculate the amount of seconds to start as a factor of how many seconds of audio are being downloaded per second
+    double secondsPerSecondFactor = kiloBytesPerSec / kiloBytesForOneSecond;
+    
+    DLog(@"secondsPerSecondsFactor: %f", secondsPerSecondFactor);
+    
+    double numberOfSecondsToBuffer;
+    if (secondsPerSecondFactor < .5)
+    {
+        // Downloading very slow, buffer for a while
+        numberOfSecondsToBuffer = 20.;
+    }
+    else if (secondsPerSecondFactor >= .5 && secondsPerSecondFactor < .7)
+    {
+        // Downloading faster, but not much faster, allow for a long buffer period
+        numberOfSecondsToBuffer = 12.;
+    }
+    else if (secondsPerSecondFactor >= .7 && secondsPerSecondFactor < .9)
+    {
+        // Downloading not much slower than real time, use a smaller buffer period
+        numberOfSecondsToBuffer = 8.;
+    }
+    else if (secondsPerSecondFactor >= .9 && secondsPerSecondFactor < 1.)
+    {
+        // Almost downloading full speed, just buffer for a short time
+        numberOfSecondsToBuffer = 5.;
+    }
+    else
+    {
+        // We're downloading over the speed needed, so probably the connection loss was temporary? Just buffer for a very short time
+        numberOfSecondsToBuffer = 2;
+    }
+    
+    // Convert from seconds to bytes
+    NSUInteger numberOfBytesToBuffer = numberOfSecondsToBuffer * bytesForOneSecond;
+    return numberOfBytesToBuffer;
+}
+
 - (void)keepRingBufferFilledInternal
 {
 	@autoreleasepool 
@@ -438,12 +490,20 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 									
 									unsigned long long size = theSong.localFileSize;
 									NSUInteger bitrate = [BassWrapper estimateBitrate:userInfo];
-									
-									unsigned long long bytesToWait = BytesForSecondsAtBitrate(settingsS.audioEngineBufferNumberOfSeconds, bitrate);
+                                    
+                                    // Get the stream for this song
+                                    ISMSStreamHandler *handler = [streamManagerS handlerForSong:userInfo.song];
+                                    if (!handler && [[cacheQueueManagerS currentQueuedSong] isEqualToSong:userInfo.song])
+                                        handler = [cacheQueueManagerS currentStreamHandler];
+                                    
+                                    // Calculate the bytes to wait based on the recent download speed. If the handler is nil or recent download speed is 0
+                                    // it will just use the default (currently 10 seconds)
+                                    NSUInteger bytesToWait = [self.class bytesToBufferForKiloBitrate:bitrate speedInBytesPerSec:handler.recentDownloadSpeedInBytesPerSec];
+                                    									
 									userInfo.neededSize = size + bytesToWait;
 									
-									DDLogCVerbose(@"[BassGaplessPlayer] audioEngineBufferNumberOfSeconds: %u", settingsS.audioEngineBufferNumberOfSeconds);
-									DDLogCVerbose(@"[BassGaplessPlayer] AUDIO ENGINE - waiting for %llu   neededSize: %llu", bytesToWait, userInfo.neededSize);
+                                    DDLogCVerbose(@"[BassGaplessPlayer] AUDIO ENGINE - calculating wait, bitrate: %u, recentBytesPerSec: %u, bytesToWait: %u", bitrate, handler.recentDownloadSpeedInBytesPerSec, bytesToWait);
+									DDLogCVerbose(@"[BassGaplessPlayer] AUDIO ENGINE - waiting for %u   neededSize: %llu", bytesToWait, userInfo.neededSize);
 									
 									// Sleep for 10000 microseconds, or 1/100th of a second
 #define sleepTime 10000

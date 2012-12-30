@@ -331,7 +331,7 @@ LOG_LEVEL_ISUB_DEFAULT
             {
                 NSTimeInterval delay = 0.0;
                 
-                double maxBytesPerInterval = [self maxBytesPerIntervalForBitrate:(double)self.bitrate is3G:![LibSub isWifi]];
+                double maxBytesPerInterval = [self.class maxBytesPerIntervalForBitrate:(double)self.bitrate is3G:![LibSub isWifi]];
                 double numberOfIntervals = intervalSinceLastThrottle / ISMSThrottleTimeInterval;
                 double maxBytesPerTotalInterval = maxBytesPerInterval * numberOfIntervals;
                 

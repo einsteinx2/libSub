@@ -358,12 +358,6 @@
 		self.isShouldShowEQViewInstructions = YES;
 	}
 	
-	if (![_userDefaults objectForKey:@"audioEngineStartNumberOfSeconds"])
-	{
-		self.audioEngineStartNumberOfSeconds = 10;
-		self.audioEngineBufferNumberOfSeconds = 10;
-	}
-	
 	if (![_userDefaults objectForKey:@"isLockScreenArtEnabled"])
 	{
 		self.isLockScreenArtEnabled = YES;
@@ -1445,48 +1439,6 @@
 	{
 		[_userDefaults setBool:isShouldShowEQViewInstructions forKey:@"isShouldShowEQViewInstructions"];
 		[_userDefaults synchronize];
-	}
-}
-
-- (NSUInteger)audioEngineStartNumberOfSeconds
-{
-	@synchronized(self)
-	{
-		return _audioEngineStartNumberOfSeconds;
-	}
-}
-
-- (void)setAudioEngineStartNumberOfSeconds:(NSUInteger)numSeconds
-{
-	@synchronized(self)
-	{
-		if (_audioEngineStartNumberOfSeconds != numSeconds)
-		{
-			_audioEngineStartNumberOfSeconds = numSeconds;
-			[_userDefaults setInteger:numSeconds forKey:@"audioEngineStartNumberOfSeconds"];
-			[_userDefaults synchronize];
-		}
-	}
-}
-
-- (NSUInteger)audioEngineBufferNumberOfSeconds
-{
-	@synchronized(self)
-	{
-		return _audioEngineBufferNumberOfSeconds;
-	}
-}
-
-- (void)setAudioEngineBufferNumberOfSeconds:(NSUInteger)numSeconds
-{
-	@synchronized(self)
-	{
-		if (_audioEngineBufferNumberOfSeconds != numSeconds)
-		{
-			_audioEngineBufferNumberOfSeconds = numSeconds;
-			[_userDefaults setInteger:numSeconds forKey:@"audioEngineBufferNumberOfSeconds"];
-			[_userDefaults synchronize];
-		}
 	}
 }
 

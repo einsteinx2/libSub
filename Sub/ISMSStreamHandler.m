@@ -104,7 +104,7 @@
 		self.isCurrentSong = YES;
 }
 
-- (double)maxBytesPerIntervalForBitrate:(double)rate is3G:(BOOL)is3G
++ (double)maxBytesPerIntervalForBitrate:(double)rate is3G:(BOOL)is3G
 {
 	double maxBytesDefault = is3G ? (double)ISMSMaxBytesPerInterval3G : (double)ISMSMaxBytesPerIntervalWifi;
 	double maxBytesPerInterval = maxBytesDefault * (rate / 160.0);
@@ -120,6 +120,60 @@
 	}
 	
 	return maxBytesPerInterval;
+}
+
++ (NSUInteger)minBytesToStartPlaybackForKiloBitrate:(double)rate speedInBytesPerSec:(NSUInteger)bytesPerSec
+{
+    // If start date is nil somehow, or total bytes transferred is 0 somehow,
+    if (rate == 0. || bytesPerSec == 0)
+    {
+        return ISMSMinBytesToStartPlayback(rate);
+    }
+    
+    // Get the download speed so far
+    double kiloBytesPerSec = (double)bytesPerSec / 1024.;
+    
+    // Find out out many bytes equals 1 second of audio
+    double bytesForOneSecond = BytesForSecondsAtBitrate(1, rate);
+    double kiloBytesForOneSecond = bytesForOneSecond / 1024.;
+    
+    // Calculate the amount of seconds to start as a factor of how many seconds of audio are being downloaded per second
+    double secondsPerSecondFactor = (double)kiloBytesPerSec / (double)kiloBytesForOneSecond;
+        
+    double minSecondsToStartPlayback;
+    if (secondsPerSecondFactor < 1.0)
+    {
+        // Downloading slower than needed for playback, allow for a long buffer
+        minSecondsToStartPlayback = 16;
+    }
+    else if (secondsPerSecondFactor >= 1.0 && secondsPerSecondFactor < 1.5)
+    {
+        // Downloading faster, but not much faster, allow for a long buffer period
+        minSecondsToStartPlayback = 8;
+    }
+    else if (secondsPerSecondFactor >= 1.5 && secondsPerSecondFactor < 1.8)
+    {
+        minSecondsToStartPlayback = 6;
+    }
+    else if (secondsPerSecondFactor >= 1.8 && secondsPerSecondFactor < 2.0)
+    {
+        // Downloading fast enough for a smaller buffer
+        minSecondsToStartPlayback = 4;
+    }
+    else
+    {
+        // Downloading multiple times playback speed, start quickly
+        minSecondsToStartPlayback = 2;
+    }
+    
+    // Convert from seconds to bytes
+    NSUInteger minBytesToStartPlayback = minSecondsToStartPlayback * bytesForOneSecond;
+    return minBytesToStartPlayback;
+}
+
+- (NSUInteger)totalDownloadSpeedInBytesPerSec
+{
+    return self.totalBytesTransferred / [[NSDate date] timeIntervalSinceDate:self.startDate];
 }
 
 #pragma mark - Overriding equality

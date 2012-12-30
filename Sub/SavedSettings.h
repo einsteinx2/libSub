@@ -120,8 +120,6 @@ typedef enum
 @property BOOL isPartialCacheNextSong;
 @property ISMSBassVisualType currentVisualizerType;
 @property NSUInteger quickSkipNumberOfSeconds;
-@property NSUInteger audioEngineStartNumberOfSeconds;
-@property NSUInteger audioEngineBufferNumberOfSeconds;
 
 @property BOOL isExtraPlayerControlsShowing;
 @property BOOL isPlayerPlaylistShowing;

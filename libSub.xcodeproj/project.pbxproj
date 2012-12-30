@@ -7,6 +7,144 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5304A021168FB35F009B2732 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
+		5304A029168FB35F009B2732 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5304A027168FB35F009B2732 /* InfoPlist.strings */; };
+		5304A02B168FB35F009B2732 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A02A168FB35F009B2732 /* main.m */; };
+		5304A031168FB35F009B2732 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5304A030168FB35F009B2732 /* Default.png */; };
+		5304A033168FB35F009B2732 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5304A032168FB35F009B2732 /* Default@2x.png */; };
+		5304A035168FB35F009B2732 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5304A034168FB35F009B2732 /* Default-568h@2x.png */; };
+		5304A046168FB39A009B2732 /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A043168FB383009B2732 /* GHUnitIOS.framework */; };
+		5304A049168FB54F009B2732 /* ISMSStreamHandler_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A048168FB54F009B2732 /* ISMSStreamHandler_Test.m */; };
+		5304A04D168FB5A5009B2732 /* LibSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C947D16618FA4005A73C6 /* LibSub.m */; };
+		5304A04E168FB5A5009B2732 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C979D166197FB005A73C6 /* AudioEngine.m */; };
+		5304A04F168FB5A5009B2732 /* iSubBassGaplessPlayerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B216619695005A73C6 /* iSubBassGaplessPlayerDelegate.m */; };
+		5304A050168FB5A5009B2732 /* BassWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C978F166197F3005A73C6 /* BassWrapper.m */; };
+		5304A051168FB5A5009B2732 /* BassStream.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9791166197F3005A73C6 /* BassStream.m */; };
+		5304A052168FB5A5009B2732 /* BassGaplessPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9793166197F3005A73C6 /* BassGaplessPlayer.m */; };
+		5304A053168FB5A5009B2732 /* BassEqualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C977F166197EC005A73C6 /* BassEqualizer.m */; };
+		5304A054168FB5A5009B2732 /* BassParamEqValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9781166197EC005A73C6 /* BassParamEqValue.m */; };
+		5304A055168FB5A5009B2732 /* BassEffectDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9783166197EC005A73C6 /* BassEffectDAO.m */; };
+		5304A056168FB5A5009B2732 /* BassEffectValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9785166197EC005A73C6 /* BassEffectValue.m */; };
+		5304A057168FB5A5009B2732 /* BassVisualizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C977B166197E7005A73C6 /* BassVisualizer.m */; };
+		5304A058168FB5A5009B2732 /* SavedSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9757166197B8005A73C6 /* SavedSettings.m */; };
+		5304A059168FB5A5009B2732 /* PlaylistSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9759166197B8005A73C6 /* PlaylistSingleton.m */; };
+		5304A05A168FB5A5009B2732 /* CacheSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975B166197B8005A73C6 /* CacheSingleton.m */; };
+		5304A05B168FB5A5009B2732 /* DatabaseSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975D166197B8005A73C6 /* DatabaseSingleton.m */; };
+		5304A05C168FB5A5009B2732 /* MusicSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975F166197B8005A73C6 /* MusicSingleton.m */; };
+		5304A05D168FB5A5009B2732 /* SocialSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9761166197B8005A73C6 /* SocialSingleton.m */; };
+		5304A05E168FB5A5009B2732 /* JukeboxSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9765166197B8005A73C6 /* JukeboxSingleton.m */; };
+		5304A05F168FB5A5009B2732 /* ISMSIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958A16619360005A73C6 /* ISMSIndex.m */; };
+		5304A060168FB5A5009B2732 /* ISMSArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958C16619360005A73C6 /* ISMSArtist.m */; };
+		5304A061168FB5A5009B2732 /* ISMSAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958E16619360005A73C6 /* ISMSAlbum.m */; };
+		5304A062168FB5A5009B2732 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
+		5304A063168FB5A5009B2732 /* ISMSVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959316619360005A73C6 /* ISMSVideo.m */; };
+		5304A064168FB5A5009B2732 /* ISMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959516619360005A73C6 /* ISMSServer.m */; };
+		5304A065168FB5A5009B2732 /* ISMSChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959716619360005A73C6 /* ISMSChatMessage.m */; };
+		5304A066168FB5A5009B2732 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
+		5304A067168FB5A5009B2732 /* ISMSOldDataModelDecoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959B16619360005A73C6 /* ISMSOldDataModelDecoders.m */; };
+		5304A068168FB5A5009B2732 /* NSMutableURLRequest+SUS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B7166196AC005A73C6 /* NSMutableURLRequest+SUS.m */; };
+		5304A069168FB5A5009B2732 /* NSMutableURLRequest+PMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B9166196AC005A73C6 /* NSMutableURLRequest+PMS.m */; };
+		5304A06A168FB5A5009B2732 /* ISMSUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96BB166196AC005A73C6 /* ISMSUpdateChecker.m */; };
+		5304A06B168FB5A5009B2732 /* SUSRootFoldersDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C5166196C0005A73C6 /* SUSRootFoldersDAO.m */; };
+		5304A06C168FB5A5009B2732 /* SUSSubFolderDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C7166196C0005A73C6 /* SUSSubFolderDAO.m */; };
+		5304A06D168FB5A5009B2732 /* SUSAllAlbumsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C9166196C0005A73C6 /* SUSAllAlbumsDAO.m */; };
+		5304A06E168FB5A5009B2732 /* SUSAllSongsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CB166196C0005A73C6 /* SUSAllSongsDAO.m */; };
+		5304A06F168FB5A5009B2732 /* SUSChatDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CD166196C0005A73C6 /* SUSChatDAO.m */; };
+		5304A070168FB5A5009B2732 /* SUSLyricsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CF166196C0005A73C6 /* SUSLyricsDAO.m */; };
+		5304A071168FB5A5009B2732 /* SUSServerPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* SUSServerPlaylistsDAO.m */; };
+		5304A072168FB5A5009B2732 /* ISMSSong+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D3166196C0005A73C6 /* ISMSSong+DAO.m */; };
+		5304A073168FB5A5009B2732 /* SUSCoverArtDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D5166196C0005A73C6 /* SUSCoverArtDAO.m */; };
+		5304A074168FB5A5009B2732 /* SUSNowPlayingDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D7166196C0005A73C6 /* SUSNowPlayingDAO.m */; };
+		5304A076168FB5A5009B2732 /* ISMSLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96F1166196D4005A73C6 /* ISMSLoader.m */; };
+		5304A077168FB5CE009B2732 /* ISMSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974A16619776005A73C6 /* ISMSStatusLoader.m */; };
+		5304A078168FB5CE009B2732 /* SUSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974C16619776005A73C6 /* SUSStatusLoader.m */; };
+		5304A079168FB5CE009B2732 /* PMSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974E16619776005A73C6 /* PMSStatusLoader.m */; };
+		5304A07A168FB5CE009B2732 /* SUSServerPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* SUSServerPlaylistsLoader.m */; };
+		5304A07B168FB5CE009B2732 /* ISMSCoverArtLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974216619769005A73C6 /* ISMSCoverArtLoader.m */; };
+		5304A07C168FB5CE009B2732 /* ISMSRootFoldersLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C973616619762005A73C6 /* ISMSRootFoldersLoader.m */; };
+		5304A07D168FB5CE009B2732 /* SUSRootFoldersLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C973816619762005A73C6 /* SUSRootFoldersLoader.m */; };
+		5304A07E168FB5CE009B2732 /* PMSRootFoldersLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C973A16619762005A73C6 /* PMSRootFoldersLoader.m */; };
+		5304A07F168FB5CE009B2732 /* ISMSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972A1661975C005A73C6 /* ISMSSubFolderLoader.m */; };
+		5304A080168FB5CE009B2732 /* SUSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972C1661975C005A73C6 /* SUSSubFolderLoader.m */; };
+		5304A081168FB5CE009B2732 /* PMSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972E1661975C005A73C6 /* PMSSubFolderLoader.m */; };
+		5304A082168FB5CE009B2732 /* ISMSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971916619734005A73C6 /* ISMSQueueAllLoader.m */; };
+		5304A083168FB5CE009B2732 /* SUSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971B16619734005A73C6 /* SUSQueueAllLoader.m */; };
+		5304A084168FB5CE009B2732 /* PMSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971D16619734005A73C6 /* PMSQueueAllLoader.m */; };
+		5304A085168FB5CE009B2732 /* SUSAllSongsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9700166196F3005A73C6 /* SUSAllSongsLoader.m */; };
+		5304A086168FB5CE009B2732 /* SUSChatLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9702166196F3005A73C6 /* SUSChatLoader.m */; };
+		5304A087168FB5CE009B2732 /* SUSLyricsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9704166196F3005A73C6 /* SUSLyricsLoader.m */; };
+		5304A088168FB5CE009B2732 /* SUSNowPlayingLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9706166196F3005A73C6 /* SUSNowPlayingLoader.m */; };
+		5304A089168FB5CE009B2732 /* SUSQuickAlbumsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9708166196F3005A73C6 /* SUSQuickAlbumsLoader.m */; };
+		5304A08A168FB5CE009B2732 /* PMSLoginLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96F9166196E5005A73C6 /* PMSLoginLoader.m */; };
+		5304A08B168FB5CE009B2732 /* ISMSStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C968E166195CF005A73C6 /* ISMSStreamManager.m */; };
+		5304A08C168FB5CE009B2732 /* ISMSCacheQueueManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9690166195CF005A73C6 /* ISMSCacheQueueManager.m */; };
+		5304A08D168FB5CE009B2732 /* ISMSStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9692166195CF005A73C6 /* ISMSStreamHandler.m */; };
+		5304A08E168FB5CE009B2732 /* ISMSURLConnectionStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9694166195CF005A73C6 /* ISMSURLConnectionStreamHandler.m */; };
+		5304A08F168FB5CE009B2732 /* ISMSCFNetworkStreamHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9697166195CF005A73C6 /* ISMSCFNetworkStreamHandler.m */; };
+		5304A090168FB5CE009B2732 /* JukeboxConnectionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96AE16619673005A73C6 /* JukeboxConnectionDelegate.m */; };
+		5304A091168FB5CE009B2732 /* JukeboxXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AA31661AA45005A73C6 /* JukeboxXMLParser.m */; };
+		5304A092168FB5CE009B2732 /* SearchXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AB11661AA61005A73C6 /* SearchXMLParser.m */; };
+		5304A093168FD0B8009B2732 /* libEX2Kit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C98C316619BFA005A73C6 /* libEX2Kit.a */; };
+		5304A094168FD0BF009B2732 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C99A71661A025005A73C6 /* libxml2.dylib */; };
+		5304A095168FD0C9009B2732 /* libTBXML-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C983616619B87005A73C6 /* libTBXML-iOS.a */; };
+		5304A096168FD0C9009B2732 /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C98B616619BC4005A73C6 /* libtouchzipkit.a */; };
+		5304A097168FD0D1009B2732 /* libsbjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C982116619B44005A73C6 /* libsbjson-ios.a */; };
+		5304A098168FD0E4009B2732 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97AA166199BB005A73C6 /* libFlurryAnalytics.a */; };
+		5304A099168FD0EE009B2732 /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FA16619B25005A73C6 /* libbass.a */; };
+		5304A09A168FD0F0009B2732 /* libbass_ape.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FB16619B25005A73C6 /* libbass_ape.a */; };
+		5304A09B168FD0FE009B2732 /* libbass_fx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FC16619B25005A73C6 /* libbass_fx.a */; };
+		5304A09C168FD100009B2732 /* libbass_mpc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FD16619B25005A73C6 /* libbass_mpc.a */; };
+		5304A09D168FD103009B2732 /* libbassflac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FE16619B25005A73C6 /* libbassflac.a */; };
+		5304A09E168FD105009B2732 /* libbassmix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FF16619B25005A73C6 /* libbassmix.a */; };
+		5304A09F168FD108009B2732 /* libbassopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C980016619B25005A73C6 /* libbassopus.a */; };
+		5304A0A0168FD10A009B2732 /* libbasswv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C980116619B25005A73C6 /* libbasswv.a */; };
+		5304A0A1168FD16F009B2732 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A022168FB35F009B2732 /* CoreGraphics.framework */; };
+		5304A0A2168FD173009B2732 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A01F168FB35F009B2732 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5304A0AC168FD1CE009B2732 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; };
+		5304A0AD168FD1D5009B2732 /* NSError+ISMSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C993C16619F39005A73C6 /* NSError+ISMSError.m */; };
+		5304A0AE168FD1E4009B2732 /* MGTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C985316619BAF005A73C6 /* MGTwitterEngine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0AF168FD1E4009B2732 /* MGTwitterHTTPURLConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C985716619BAF005A73C6 /* MGTwitterHTTPURLConnection.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B0168FD1E4009B2732 /* MGTwitterLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C985916619BAF005A73C6 /* MGTwitterLibXMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B1168FD1E4009B2732 /* MGTwitterMessagesLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C985B16619BAF005A73C6 /* MGTwitterMessagesLibXMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B2168FD1E4009B2732 /* MGTwitterMessagesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C985D16619BAF005A73C6 /* MGTwitterMessagesParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B3168FD1E4009B2732 /* MGTwitterMiscLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C985F16619BAF005A73C6 /* MGTwitterMiscLibXMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B4168FD1E4009B2732 /* MGTwitterMiscParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C986116619BAF005A73C6 /* MGTwitterMiscParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B5168FD1E4009B2732 /* MGTwitterStatusesLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C986516619BAF005A73C6 /* MGTwitterStatusesLibXMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B6168FD1E4009B2732 /* MGTwitterStatusesParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C986716619BAF005A73C6 /* MGTwitterStatusesParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B7168FD1E4009B2732 /* MGTwitterUsersLibXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C986916619BAF005A73C6 /* MGTwitterUsersLibXMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B8168FD1E4009B2732 /* MGTwitterUsersParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C986B16619BAF005A73C6 /* MGTwitterUsersParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0B9168FD1E4009B2732 /* MGTwitterXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C986D16619BAF005A73C6 /* MGTwitterXMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0BA168FD1E4009B2732 /* NSString+UUID.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C986F16619BAF005A73C6 /* NSString+UUID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0BB168FD1E4009B2732 /* SA_OAuthTwitterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C987216619BAF005A73C6 /* SA_OAuthTwitterController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0BC168FD1E4009B2732 /* SA_OAuthTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C987416619BAF005A73C6 /* SA_OAuthTwitterEngine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0BD168FD1E4009B2732 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97C216619AE3005A73C6 /* FMDatabase.m */; };
+		5304A0BE168FD1E4009B2732 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97C416619AE3005A73C6 /* FMDatabaseAdditions.m */; };
+		5304A0BF168FD1E4009B2732 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */; };
+		5304A0C0168FD1E4009B2732 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97C816619AE3005A73C6 /* FMDatabaseQueue.m */; };
+		5304A0C1168FD1E4009B2732 /* FMDatabaseQueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97CA16619AE3005A73C6 /* FMDatabaseQueueAdditions.m */; };
+		5304A0C2168FD1E4009B2732 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C97CD16619AE3005A73C6 /* FMResultSet.m */; };
+		5304A0C3168FD1E4009B2732 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BC1661C73D00529EF3 /* MKStoreManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0C4168FD1E4009B2732 /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BE1661C73D00529EF3 /* MKStoreObserver.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0C5168FD1E4009B2732 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5304A0C8168FD2A6009B2732 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0C6168FD290009B2732 /* Accelerate.framework */; };
+		5304A0CB168FD353009B2732 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0C9168FD340009B2732 /* AudioToolbox.framework */; };
+		5304A0D1168FD3B6009B2732 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0CD168FD39A009B2732 /* Security.framework */; };
+		5304A0D2168FD3B6009B2732 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0CF168FD3AA009B2732 /* AVFoundation.framework */; };
+		5304A0D4168FD3C0009B2732 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0D3168FD3C0009B2732 /* MobileCoreServices.framework */; };
+		5304A0D6168FD3C5009B2732 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0D5168FD3C5009B2732 /* SystemConfiguration.framework */; };
+		5304A0D8168FD3CB009B2732 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0D7168FD3CA009B2732 /* CFNetwork.framework */; };
+		5304A0DD168FD3F2009B2732 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0DB168FD3E2009B2732 /* CoreText.framework */; };
+		5304A0DE168FD3F2009B2732 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0D9168FD3DC009B2732 /* CoreLocation.framework */; };
+		5304A0E1168FD411009B2732 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0DF168FD409009B2732 /* MediaPlayer.framework */; };
+		5304A0E4168FD42D009B2732 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0E2168FD423009B2732 /* QuartzCore.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5304A0EB168FD47E009B2732 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0E9168FD46C009B2732 /* CoreFoundation.framework */; };
+		5304A0EC168FD47E009B2732 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0E7168FD450009B2732 /* OpenGLES.framework */; };
+		5304A0ED168FD47E009B2732 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0E5168FD448009B2732 /* MessageUI.framework */; };
+		5304A0F0168FD4AD009B2732 /* libSystem.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0EE168FD4A5009B2732 /* libSystem.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5304A0F3168FD4DA009B2732 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0F1168FD4D3009B2732 /* libz.dylib */; };
+		5304A0F6168FD51E009B2732 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0F4168FD515009B2732 /* StoreKit.framework */; };
+		5304A0F7168FD547009B2732 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C984016619BAF005A73C6 /* libOAuth.a */; };
+		5304A0FA168FE14A009B2732 /* BassGaplessPlayer_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A0F9168FE14A009B2732 /* BassGaplessPlayer_Test.m */; };
 		5344F454166C03E50013B929 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5344F453166C03E50013B929 /* libSubImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		536C947E16618FA4005A73C6 /* LibSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C947D16618FA4005A73C6 /* LibSub.m */; };
@@ -259,6 +397,34 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5304A0A3168FD190009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C98BA16619BFA005A73C6 /* EX2Kit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 53F15ED6162B9F1B00C24FC1;
+			remoteInfo = EX2Kit;
+		};
+		5304A0A5168FD190009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CB9B9CED109F6769003E3F8B;
+			remoteInfo = touchzipkit;
+		};
+		5304A0A7168FD190009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BCC2626813920FC7003D9994;
+			remoteInfo = "sbjson-ios";
+		};
+		5304A0A9168FD190009B2732 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8290352414D9F5B200ACF7E4;
+			remoteInfo = "TBXML-iOS";
+		};
 		536C981C16619B44005A73C6 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
@@ -381,6 +547,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5304A01D168FB35F009B2732 /* libSubTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = libSubTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5304A01F168FB35F009B2732 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		5304A022168FB35F009B2732 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		5304A026168FB35F009B2732 /* libSubTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libSubTests-Info.plist"; sourceTree = "<group>"; };
+		5304A028168FB35F009B2732 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5304A02A168FB35F009B2732 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		5304A030168FB35F009B2732 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		5304A032168FB35F009B2732 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		5304A034168FB35F009B2732 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		5304A043168FB383009B2732 /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GHUnitIOS.framework; path = ../Frameworks/GHUnitIOS.framework; sourceTree = "<group>"; };
+		5304A048168FB54F009B2732 /* ISMSStreamHandler_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSStreamHandler_Test.m; sourceTree = "<group>"; };
+		5304A0C6168FD290009B2732 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		5304A0C9168FD340009B2732 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5304A0CD168FD39A009B2732 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		5304A0CF168FD3AA009B2732 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		5304A0D3168FD3C0009B2732 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		5304A0D5168FD3C5009B2732 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		5304A0D7168FD3CA009B2732 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		5304A0D9168FD3DC009B2732 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5304A0DB168FD3E2009B2732 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		5304A0DF168FD409009B2732 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		5304A0E2168FD423009B2732 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		5304A0E5168FD448009B2732 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		5304A0E7168FD450009B2732 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		5304A0E9168FD46C009B2732 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		5304A0EE168FD4A5009B2732 /* libSystem.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.dylib; path = usr/lib/libSystem.dylib; sourceTree = SDKROOT; };
+		5304A0F1168FD4D3009B2732 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		5304A0F4168FD515009B2732 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		5304A0F9168FE14A009B2732 /* BassGaplessPlayer_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BassGaplessPlayer_Test.m; sourceTree = "<group>"; };
 		5344F453166C03E50013B929 /* libSubImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubImports.h; sourceTree = "<group>"; };
 		536C947316618FA4005A73C6 /* libSub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		536C947616618FA4005A73C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -638,6 +833,49 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5304A01A168FB35F009B2732 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5304A0F3168FD4DA009B2732 /* libz.dylib in Frameworks */,
+				5304A0F0168FD4AD009B2732 /* libSystem.dylib in Frameworks */,
+				5304A098168FD0E4009B2732 /* libFlurryAnalytics.a in Frameworks */,
+				5304A099168FD0EE009B2732 /* libbass.a in Frameworks */,
+				5304A09A168FD0F0009B2732 /* libbass_ape.a in Frameworks */,
+				5304A09B168FD0FE009B2732 /* libbass_fx.a in Frameworks */,
+				5304A09C168FD100009B2732 /* libbass_mpc.a in Frameworks */,
+				5304A09D168FD103009B2732 /* libbassflac.a in Frameworks */,
+				5304A09E168FD105009B2732 /* libbassmix.a in Frameworks */,
+				5304A09F168FD108009B2732 /* libbassopus.a in Frameworks */,
+				5304A0A0168FD10A009B2732 /* libbasswv.a in Frameworks */,
+				5304A0F7168FD547009B2732 /* libOAuth.a in Frameworks */,
+				5304A097168FD0D1009B2732 /* libsbjson-ios.a in Frameworks */,
+				5304A095168FD0C9009B2732 /* libTBXML-iOS.a in Frameworks */,
+				5304A096168FD0C9009B2732 /* libtouchzipkit.a in Frameworks */,
+				5304A094168FD0BF009B2732 /* libxml2.dylib in Frameworks */,
+				5304A093168FD0B8009B2732 /* libEX2Kit.a in Frameworks */,
+				5304A0F6168FD51E009B2732 /* StoreKit.framework in Frameworks */,
+				5304A0A2168FD173009B2732 /* UIKit.framework in Frameworks */,
+				5304A0A1168FD16F009B2732 /* CoreGraphics.framework in Frameworks */,
+				5304A046168FB39A009B2732 /* GHUnitIOS.framework in Frameworks */,
+				5304A0EB168FD47E009B2732 /* CoreFoundation.framework in Frameworks */,
+				5304A0EC168FD47E009B2732 /* OpenGLES.framework in Frameworks */,
+				5304A0ED168FD47E009B2732 /* MessageUI.framework in Frameworks */,
+				5304A0DD168FD3F2009B2732 /* CoreText.framework in Frameworks */,
+				5304A0C8168FD2A6009B2732 /* Accelerate.framework in Frameworks */,
+				5304A021168FB35F009B2732 /* Foundation.framework in Frameworks */,
+				5304A0CB168FD353009B2732 /* AudioToolbox.framework in Frameworks */,
+				5304A0D1168FD3B6009B2732 /* Security.framework in Frameworks */,
+				5304A0D2168FD3B6009B2732 /* AVFoundation.framework in Frameworks */,
+				5304A0D8168FD3CB009B2732 /* CFNetwork.framework in Frameworks */,
+				5304A0D6168FD3C5009B2732 /* SystemConfiguration.framework in Frameworks */,
+				5304A0DE168FD3F2009B2732 /* CoreLocation.framework in Frameworks */,
+				5304A0E4168FD42D009B2732 /* QuartzCore.framework in Frameworks */,
+				5304A0E1168FD411009B2732 /* MediaPlayer.framework in Frameworks */,
+				5304A0D4168FD3C0009B2732 /* MobileCoreServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		536C947016618FA4005A73C6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -664,9 +902,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5304A024168FB35F009B2732 /* GHUnit Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5304A047168FB53D009B2732 /* Tests */,
+				5304A025168FB35F009B2732 /* Supporting Files */,
+				5304A0CC168FD373009B2732 /* Frameworks */,
+			);
+			name = "GHUnit Tests";
+			path = libSubTests;
+			sourceTree = "<group>";
+		};
+		5304A025168FB35F009B2732 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5304A026168FB35F009B2732 /* libSubTests-Info.plist */,
+				5304A027168FB35F009B2732 /* InfoPlist.strings */,
+				5304A02A168FB35F009B2732 /* main.m */,
+				5304A030168FB35F009B2732 /* Default.png */,
+				5304A032168FB35F009B2732 /* Default@2x.png */,
+				5304A034168FB35F009B2732 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5304A047168FB53D009B2732 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5304A048168FB54F009B2732 /* ISMSStreamHandler_Test.m */,
+				5304A0F9168FE14A009B2732 /* BassGaplessPlayer_Test.m */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		5304A0CC168FD373009B2732 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5304A0F1168FD4D3009B2732 /* libz.dylib */,
+				5304A0EE168FD4A5009B2732 /* libSystem.dylib */,
+				5304A0F4168FD515009B2732 /* StoreKit.framework */,
+				5304A0E9168FD46C009B2732 /* CoreFoundation.framework */,
+				5304A0E7168FD450009B2732 /* OpenGLES.framework */,
+				5304A0E5168FD448009B2732 /* MessageUI.framework */,
+				5304A0E2168FD423009B2732 /* QuartzCore.framework */,
+				5304A0DF168FD409009B2732 /* MediaPlayer.framework */,
+				5304A0DB168FD3E2009B2732 /* CoreText.framework */,
+				5304A0D9168FD3DC009B2732 /* CoreLocation.framework */,
+				5304A0D7168FD3CA009B2732 /* CFNetwork.framework */,
+				5304A0D5168FD3C5009B2732 /* SystemConfiguration.framework */,
+				5304A0D3168FD3C0009B2732 /* MobileCoreServices.framework */,
+				5304A0CD168FD39A009B2732 /* Security.framework */,
+				5304A043168FB383009B2732 /* GHUnitIOS.framework */,
+				5304A0C9168FD340009B2732 /* AudioToolbox.framework */,
+				5304A0C6168FD290009B2732 /* Accelerate.framework */,
+				5304A0CF168FD3AA009B2732 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		536C946816618FA4005A73C6 = {
 			isa = PBXGroup;
 			children = (
+				5304A024168FB35F009B2732 /* GHUnit Tests */,
 				536C947816618FA4005A73C6 /* libSub */,
 				536C947516618FA4005A73C6 /* Frameworks */,
 				536C947416618FA4005A73C6 /* Products */,
@@ -677,6 +974,7 @@
 			isa = PBXGroup;
 			children = (
 				536C947316618FA4005A73C6 /* libSub.a */,
+				5304A01D168FB35F009B2732 /* libSubTests.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -695,6 +993,8 @@
 				536C97A8166199BB005A73C6 /* FlurryAnalytics */,
 				536C9A2D1661A503005A73C6 /* MKStoreManager */,
 				536C947616618FA4005A73C6 /* Foundation.framework */,
+				5304A01F168FB35F009B2732 /* UIKit.framework */,
+				5304A022168FB35F009B2732 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -968,8 +1268,6 @@
 				536C975B166197B8005A73C6 /* CacheSingleton.m */,
 				536C975C166197B8005A73C6 /* DatabaseSingleton.h */,
 				536C975D166197B8005A73C6 /* DatabaseSingleton.m */,
-				536C975E166197B8005A73C6 /* MusicSingleton.h */,
-				536C975F166197B8005A73C6 /* MusicSingleton.m */,
 				536C9760166197B8005A73C6 /* SocialSingleton.h */,
 				536C9761166197B8005A73C6 /* SocialSingleton.m */,
 				536C9764166197B8005A73C6 /* JukeboxSingleton.h */,
@@ -983,6 +1281,8 @@
 			children = (
 				536C979C166197FB005A73C6 /* AudioEngine.h */,
 				536C979D166197FB005A73C6 /* AudioEngine.m */,
+				536C975E166197B8005A73C6 /* MusicSingleton.h */,
+				536C975F166197B8005A73C6 /* MusicSingleton.m */,
 				536C96B116619695005A73C6 /* iSubBassGaplessPlayerDelegate.h */,
 				536C96B216619695005A73C6 /* iSubBassGaplessPlayerDelegate.m */,
 				536C9777166197D0005A73C6 /* Bass Wrapper */,
@@ -1393,6 +1693,27 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		5304A01C168FB35F009B2732 /* libSubTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5304A03F168FB35F009B2732 /* Build configuration list for PBXNativeTarget "libSubTests" */;
+			buildPhases = (
+				5304A019168FB35F009B2732 /* Sources */,
+				5304A01A168FB35F009B2732 /* Frameworks */,
+				5304A01B168FB35F009B2732 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5304A0A4168FD190009B2732 /* PBXTargetDependency */,
+				5304A0A6168FD190009B2732 /* PBXTargetDependency */,
+				5304A0A8168FD190009B2732 /* PBXTargetDependency */,
+				5304A0AA168FD190009B2732 /* PBXTargetDependency */,
+			);
+			name = libSubTests;
+			productName = libSubTests;
+			productReference = 5304A01D168FB35F009B2732 /* libSubTests.app */;
+			productType = "com.apple.product-type.application";
+		};
 		536C947216618FA4005A73C6 /* libSub */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 536C948116618FA4005A73C6 /* Build configuration list for PBXNativeTarget "libSub" */;
@@ -1454,6 +1775,7 @@
 			projectRoot = "";
 			targets = (
 				536C947216618FA4005A73C6 /* libSub */,
+				5304A01C168FB35F009B2732 /* libSubTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1552,7 +1874,126 @@
 		};
 /* End PBXReferenceProxy section */
 
+/* Begin PBXResourcesBuildPhase section */
+		5304A01B168FB35F009B2732 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5304A029168FB35F009B2732 /* InfoPlist.strings in Resources */,
+				5304A031168FB35F009B2732 /* Default.png in Resources */,
+				5304A033168FB35F009B2732 /* Default@2x.png in Resources */,
+				5304A035168FB35F009B2732 /* Default-568h@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		5304A019168FB35F009B2732 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5304A0AE168FD1E4009B2732 /* MGTwitterEngine.m in Sources */,
+				5304A0AF168FD1E4009B2732 /* MGTwitterHTTPURLConnection.m in Sources */,
+				5304A0B0168FD1E4009B2732 /* MGTwitterLibXMLParser.m in Sources */,
+				5304A0B1168FD1E4009B2732 /* MGTwitterMessagesLibXMLParser.m in Sources */,
+				5304A0B2168FD1E4009B2732 /* MGTwitterMessagesParser.m in Sources */,
+				5304A0B3168FD1E4009B2732 /* MGTwitterMiscLibXMLParser.m in Sources */,
+				5304A0B4168FD1E4009B2732 /* MGTwitterMiscParser.m in Sources */,
+				5304A0B5168FD1E4009B2732 /* MGTwitterStatusesLibXMLParser.m in Sources */,
+				5304A0B6168FD1E4009B2732 /* MGTwitterStatusesParser.m in Sources */,
+				5304A0B7168FD1E4009B2732 /* MGTwitterUsersLibXMLParser.m in Sources */,
+				5304A0B8168FD1E4009B2732 /* MGTwitterUsersParser.m in Sources */,
+				5304A0B9168FD1E4009B2732 /* MGTwitterXMLParser.m in Sources */,
+				5304A0BA168FD1E4009B2732 /* NSString+UUID.m in Sources */,
+				5304A0BB168FD1E4009B2732 /* SA_OAuthTwitterController.m in Sources */,
+				5304A0BC168FD1E4009B2732 /* SA_OAuthTwitterEngine.m in Sources */,
+				5304A0BD168FD1E4009B2732 /* FMDatabase.m in Sources */,
+				5304A0BE168FD1E4009B2732 /* FMDatabaseAdditions.m in Sources */,
+				5304A0BF168FD1E4009B2732 /* FMDatabasePool.m in Sources */,
+				5304A0C0168FD1E4009B2732 /* FMDatabaseQueue.m in Sources */,
+				5304A0C1168FD1E4009B2732 /* FMDatabaseQueueAdditions.m in Sources */,
+				5304A0C2168FD1E4009B2732 /* FMResultSet.m in Sources */,
+				5304A0C3168FD1E4009B2732 /* MKStoreManager.m in Sources */,
+				5304A0C4168FD1E4009B2732 /* MKStoreObserver.m in Sources */,
+				5304A0C5168FD1E4009B2732 /* SFHFKeychainUtils.m in Sources */,
+				5304A0AD168FD1D5009B2732 /* NSError+ISMSError.m in Sources */,
+				5304A0AC168FD1CE009B2732 /* sqlite3.c in Sources */,
+				5304A077168FB5CE009B2732 /* ISMSStatusLoader.m in Sources */,
+				5304A078168FB5CE009B2732 /* SUSStatusLoader.m in Sources */,
+				5304A079168FB5CE009B2732 /* PMSStatusLoader.m in Sources */,
+				5304A07A168FB5CE009B2732 /* SUSServerPlaylistsLoader.m in Sources */,
+				5304A07B168FB5CE009B2732 /* ISMSCoverArtLoader.m in Sources */,
+				5304A07C168FB5CE009B2732 /* ISMSRootFoldersLoader.m in Sources */,
+				5304A07D168FB5CE009B2732 /* SUSRootFoldersLoader.m in Sources */,
+				5304A07E168FB5CE009B2732 /* PMSRootFoldersLoader.m in Sources */,
+				5304A07F168FB5CE009B2732 /* ISMSSubFolderLoader.m in Sources */,
+				5304A080168FB5CE009B2732 /* SUSSubFolderLoader.m in Sources */,
+				5304A081168FB5CE009B2732 /* PMSSubFolderLoader.m in Sources */,
+				5304A082168FB5CE009B2732 /* ISMSQueueAllLoader.m in Sources */,
+				5304A083168FB5CE009B2732 /* SUSQueueAllLoader.m in Sources */,
+				5304A084168FB5CE009B2732 /* PMSQueueAllLoader.m in Sources */,
+				5304A085168FB5CE009B2732 /* SUSAllSongsLoader.m in Sources */,
+				5304A086168FB5CE009B2732 /* SUSChatLoader.m in Sources */,
+				5304A087168FB5CE009B2732 /* SUSLyricsLoader.m in Sources */,
+				5304A088168FB5CE009B2732 /* SUSNowPlayingLoader.m in Sources */,
+				5304A089168FB5CE009B2732 /* SUSQuickAlbumsLoader.m in Sources */,
+				5304A08A168FB5CE009B2732 /* PMSLoginLoader.m in Sources */,
+				5304A08B168FB5CE009B2732 /* ISMSStreamManager.m in Sources */,
+				5304A08C168FB5CE009B2732 /* ISMSCacheQueueManager.m in Sources */,
+				5304A08D168FB5CE009B2732 /* ISMSStreamHandler.m in Sources */,
+				5304A08E168FB5CE009B2732 /* ISMSURLConnectionStreamHandler.m in Sources */,
+				5304A08F168FB5CE009B2732 /* ISMSCFNetworkStreamHandler.m in Sources */,
+				5304A090168FB5CE009B2732 /* JukeboxConnectionDelegate.m in Sources */,
+				5304A091168FB5CE009B2732 /* JukeboxXMLParser.m in Sources */,
+				5304A092168FB5CE009B2732 /* SearchXMLParser.m in Sources */,
+				5304A04D168FB5A5009B2732 /* LibSub.m in Sources */,
+				5304A04E168FB5A5009B2732 /* AudioEngine.m in Sources */,
+				5304A04F168FB5A5009B2732 /* iSubBassGaplessPlayerDelegate.m in Sources */,
+				5304A050168FB5A5009B2732 /* BassWrapper.m in Sources */,
+				5304A051168FB5A5009B2732 /* BassStream.m in Sources */,
+				5304A052168FB5A5009B2732 /* BassGaplessPlayer.m in Sources */,
+				5304A053168FB5A5009B2732 /* BassEqualizer.m in Sources */,
+				5304A054168FB5A5009B2732 /* BassParamEqValue.m in Sources */,
+				5304A055168FB5A5009B2732 /* BassEffectDAO.m in Sources */,
+				5304A056168FB5A5009B2732 /* BassEffectValue.m in Sources */,
+				5304A057168FB5A5009B2732 /* BassVisualizer.m in Sources */,
+				5304A058168FB5A5009B2732 /* SavedSettings.m in Sources */,
+				5304A059168FB5A5009B2732 /* PlaylistSingleton.m in Sources */,
+				5304A05A168FB5A5009B2732 /* CacheSingleton.m in Sources */,
+				5304A05B168FB5A5009B2732 /* DatabaseSingleton.m in Sources */,
+				5304A05C168FB5A5009B2732 /* MusicSingleton.m in Sources */,
+				5304A05D168FB5A5009B2732 /* SocialSingleton.m in Sources */,
+				5304A05E168FB5A5009B2732 /* JukeboxSingleton.m in Sources */,
+				5304A05F168FB5A5009B2732 /* ISMSIndex.m in Sources */,
+				5304A060168FB5A5009B2732 /* ISMSArtist.m in Sources */,
+				5304A061168FB5A5009B2732 /* ISMSAlbum.m in Sources */,
+				5304A062168FB5A5009B2732 /* ISMSSong.m in Sources */,
+				5304A063168FB5A5009B2732 /* ISMSVideo.m in Sources */,
+				5304A064168FB5A5009B2732 /* ISMSServer.m in Sources */,
+				5304A065168FB5A5009B2732 /* ISMSChatMessage.m in Sources */,
+				5304A066168FB5A5009B2732 /* SUSServerPlaylist.m in Sources */,
+				5304A067168FB5A5009B2732 /* ISMSOldDataModelDecoders.m in Sources */,
+				5304A068168FB5A5009B2732 /* NSMutableURLRequest+SUS.m in Sources */,
+				5304A069168FB5A5009B2732 /* NSMutableURLRequest+PMS.m in Sources */,
+				5304A06A168FB5A5009B2732 /* ISMSUpdateChecker.m in Sources */,
+				5304A06B168FB5A5009B2732 /* SUSRootFoldersDAO.m in Sources */,
+				5304A06C168FB5A5009B2732 /* SUSSubFolderDAO.m in Sources */,
+				5304A06D168FB5A5009B2732 /* SUSAllAlbumsDAO.m in Sources */,
+				5304A06E168FB5A5009B2732 /* SUSAllSongsDAO.m in Sources */,
+				5304A06F168FB5A5009B2732 /* SUSChatDAO.m in Sources */,
+				5304A070168FB5A5009B2732 /* SUSLyricsDAO.m in Sources */,
+				5304A071168FB5A5009B2732 /* SUSServerPlaylistsDAO.m in Sources */,
+				5304A072168FB5A5009B2732 /* ISMSSong+DAO.m in Sources */,
+				5304A073168FB5A5009B2732 /* SUSCoverArtDAO.m in Sources */,
+				5304A074168FB5A5009B2732 /* SUSNowPlayingDAO.m in Sources */,
+				5304A076168FB5A5009B2732 /* ISMSLoader.m in Sources */,
+				5304A02B168FB35F009B2732 /* main.m in Sources */,
+				5304A049168FB54F009B2732 /* ISMSStreamHandler_Test.m in Sources */,
+				5304A0FA168FE14A009B2732 /* BassGaplessPlayer_Test.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		536C946F16618FA4005A73C6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1658,6 +2099,26 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5304A0A4168FD190009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = EX2Kit;
+			targetProxy = 5304A0A3168FD190009B2732 /* PBXContainerItemProxy */;
+		};
+		5304A0A6168FD190009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = touchzipkit;
+			targetProxy = 5304A0A5168FD190009B2732 /* PBXContainerItemProxy */;
+		};
+		5304A0A8168FD190009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "sbjson-ios";
+			targetProxy = 5304A0A7168FD190009B2732 /* PBXContainerItemProxy */;
+		};
+		5304A0AA168FD190009B2732 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "TBXML-iOS";
+			targetProxy = 5304A0A9168FD190009B2732 /* PBXContainerItemProxy */;
+		};
 		536C982516619B6D005A73C6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "sbjson-ios";
@@ -1680,7 +2141,84 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		5304A027168FB35F009B2732 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5304A028168FB35F009B2732 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		5304A040168FB35F009B2732 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sub/libSub-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"LIBSUB_UNIT_TESTS=1",
+				);
+				INFOPLIST_FILE = "libSubTests/libSubTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
+					"\"$(SRCROOT)/Frameworks/libBASS\"",
+					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		5304A041168FB35F009B2732 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Sub/libSub-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "LIBSUB_UNIT_TESTS=1";
+				INFOPLIST_FILE = "libSubTests/libSubTests-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
+					"\"$(SRCROOT)/Frameworks/libBASS\"",
+					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+					"-lstdc++",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		536C947F16618FA4005A73C6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1709,6 +2247,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1739,6 +2281,10 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = "";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
 				USER_HEADER_SEARCH_PATHS = "";
@@ -1763,7 +2309,6 @@
 					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Sub;
 				PUBLIC_HEADERS_FOLDER_PATH = include/LibSub;
 				SEPARATE_STRIP = NO;
@@ -1789,7 +2334,6 @@
 					"\"$(SRCROOT)/Frameworks/libBASS\"",
 					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
 				);
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = Sub;
 				PUBLIC_HEADERS_FOLDER_PATH = include/LibSub;
 				SEPARATE_STRIP = NO;
@@ -1801,6 +2345,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5304A03F168FB35F009B2732 /* Build configuration list for PBXNativeTarget "libSubTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5304A040168FB35F009B2732 /* Debug */,
+				5304A041168FB35F009B2732 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		536C946D16618FA4005A73C6 /* Build configuration list for PBXProject "libSub" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

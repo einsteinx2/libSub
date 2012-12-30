@@ -7,11 +7,21 @@
 		<key>libSub.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>17</integer>
+		</dict>
+		<key>libSubTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>20</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>5304A01C168FB35F009B2732</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>536C947216618FA4005A73C6</key>
 		<dict>
 			<key>primary</key>

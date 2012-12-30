@@ -26,7 +26,7 @@
 // Logging
 #define isProgressLoggingEnabled 0
 #define isThrottleLoggingEnabled 1
-#define isSpeedLoggingEnabled 0
+#define isSpeedLoggingEnabled 1
 
 LOG_LEVEL_ISUB_DEFAULT
 
@@ -324,6 +324,9 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
         // Reset the time out timer since the connection responded
         [self startTimeOutTimer];
         
+        self.startDate = [NSDate date];
+        self.speedLoggingDate = nil;
+        
 		DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler: kCFStreamEventOpenCompleted occured");
 		if (!self.isTempCache)
 			self.mySong.isPartiallyCached = YES;
@@ -333,6 +336,12 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 	}
 	else if (type == kCFStreamEventHasBytesAvailable)
 	{
+        if (!self.speedLoggingDate)
+        {
+            self.speedLoggingDate = [NSDate date];
+            self.speedLoggingLastSize = self.totalBytesTransferred;
+        }
+        
 		_bytesRead = CFReadStreamRead(stream, _buffer, sizeof(_buffer));
 				
 		if (_bytesRead > 0)	// If zero bytes were read, wait for the EOF to come.
@@ -372,15 +381,17 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 				//	//DLog(@"downloadedLengthA:  %lu   bytesRead: %ld", [musicControlsRef downloadedLengthA], bytesRead);
 				
 				// Notify delegate if enough bytes received to start playback
-				if (!self.isDelegateNotifiedToStartPlayback && self.totalBytesTransferred >= ISMSMinBytesToStartPlayback(self.bitrate))
+                NSUInteger bytesPerSec = self.totalBytesTransferred / [[NSDate date] timeIntervalSinceDate:self.startDate];
+				if (!self.isDelegateNotifiedToStartPlayback && self.totalBytesTransferred >= [self.class minBytesToStartPlaybackForKiloBitrate:self.bitrate speedInBytesPerSec:bytesPerSec])
 				{
-					DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %u, total bytes: %llu, bitrate: %u", ISMSMinBytesToStartPlayback(self.bitrate), self.totalBytesTransferred, self.bitrate);
+					DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %u, total bytes: %llu, bitrate: %u, bytesPerSec: %u", ISMSMinBytesToStartPlayback(self.bitrate), self.totalBytesTransferred, self.bitrate, bytesPerSec);
 					self.isDelegateNotifiedToStartPlayback = YES;
 					
 					if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerStartPlayback:)])
 						[self.delegate ISMSStreamHandlerStartPlayback:self];
 				}
 				
+                // We're no longer ever setting this to true because Subsonic kills rate limited connections now
                 if (self.isEnableRateLimiting)
                 {
                     // Check if we should throttle
@@ -391,7 +402,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                         NSTimeInterval delay = 0.0;
                         
                         BOOL isWifi = [LibSub isWifi] || self.delegate == cacheQueueManagerS;
-                        double maxBytesPerInterval = [self maxBytesPerIntervalForBitrate:(double)self.bitrate is3G:!isWifi];
+                        double maxBytesPerInterval = [self.class maxBytesPerIntervalForBitrate:(double)self.bitrate is3G:!isWifi];
                         double numberOfIntervals = intervalSinceLastThrottle / ISMSThrottleTimeInterval;
                         double maxBytesPerTotalInterval = maxBytesPerInterval * numberOfIntervals;
                         
@@ -414,6 +425,24 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                     }
                 }
                 
+                // Get the download speed, check every 6 seconds
+                NSTimeInterval speedInteval = [[NSDate date] timeIntervalSinceDate:self.speedLoggingDate];
+                if (speedInteval >= 6.0)
+                {
+                    unsigned long long transferredSinceLastCheck = self.totalBytesTransferred - self.speedLoggingLastSize;
+                    
+                    double speedInBytes = (double)transferredSinceLastCheck / speedInteval;
+                    self.recentDownloadSpeedInBytesPerSec = speedInBytes;
+                    
+#if isSpeedLoggingEnabled
+                    double speedInKbytes = speedInBytes / 1024.;
+                    DDLogInfo(@"[ISMSURLConnectionStreamHandler] rate: %f  speedInterval: %f  transferredSinceLastCheck: %llu", speedInKbytes, speedInteval, transferredSinceLastCheck);
+#endif
+                    
+                    self.speedLoggingLastSize = self.totalBytesTransferred;
+                    self.speedLoggingDate = [NSDate date];
+                }
+                
                 // Handle partial pre-cache next song
                 if (!self.isCurrentSong && !self.isTempCache && settingsS.isPartialCacheNextSong && self.partialPrecacheSleep)
                 {
@@ -425,6 +454,11 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                         {
                             if ([audioEngineS.player testStreamForSong:self.mySong])
                             {
+                                // We're sleeping, so clear the speed logging data as it won't be accurate after the sleep
+                                self.speedLoggingDate = nil;
+                                self.speedLoggingLastSize = 0;
+                                self.recentDownloadSpeedInBytesPerSec = 0;
+                                
                                 // The stream worked, so go ahead and pause the download
                                 self.isPrecacheSleeping = YES;
                                 CFReadStreamUnscheduleFromRunLoop(stream, CFRunLoopGetMain(), kCFRunLoopCommonModes);

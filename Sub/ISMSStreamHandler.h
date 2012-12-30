@@ -10,8 +10,7 @@
 
 #define ISMSNumSecondsToPartialPreCacheDefault 45
 #define ISMSNumBytesToPartialPreCache(bitrate) (BytesForSecondsAtBitrate(self.secondsToPartialPrecache, bitrate))
-
-#define ISMSMinBytesToStartPlayback(bitrate) (BytesForSecondsAtBitrate(settingsS.audioEngineStartNumberOfSeconds, bitrate))
+#define ISMSMinBytesToStartPlayback(bitrate) (BytesForSecondsAtBitrate(10, bitrate))
 
 #define ISMSThrottleTimeInterval 0.1
 
@@ -50,14 +49,18 @@
 @property NSInteger maxBitrateSetting;
 @property (strong) NSDate *speedLoggingDate;
 @property unsigned long long speedLoggingLastSize;
+@property NSUInteger recentDownloadSpeedInBytesPerSec;
 @property BOOL isCanceled;
 @property NSUInteger numberOfContentLengthFailures;
 @property BOOL isPartialPrecacheSleeping;
 @property NSUInteger secondsToPartialPrecache;
 @property BOOL tempBreakPartialPrecache;
 @property (strong) NSFileHandle *fileHandle;
+@property (strong) NSDate *startDate;
 
 @property BOOL isEnableRateLimiting;
+
+@property (readonly) NSUInteger totalDownloadSpeedInBytesPerSec;
 
 - (void)start:(BOOL)resume;
 - (void)start;
@@ -68,6 +71,7 @@
 - (void)startTimeOutTimer;
 - (void)stopTimeOutTimer;
 
-- (double)maxBytesPerIntervalForBitrate:(double)rate is3G:(BOOL)is3G;
++ (double)maxBytesPerIntervalForBitrate:(double)rate is3G:(BOOL)is3G;
++ (NSUInteger)minBytesToStartPlaybackForKiloBitrate:(double)rate speedInBytesPerSec:(NSUInteger)bytesPerSec;
 
 @end
