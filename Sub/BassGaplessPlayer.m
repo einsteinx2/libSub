@@ -780,7 +780,11 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 				 
 				 // Start playback
 				 BASS_ChannelPlay(self.outStream, FALSE);
-				 self.isPlaying = YES;
+                 self.isPlaying = YES;
+                 
+                 // Workaround for lock screen art and status bar play icon not working on new song plays
+                 BASS_Pause();
+                 BASS_Start();
                  
                  if ([self.delegate respondsToSelector:@selector(bassFirstStreamStarted:)])
                  {
