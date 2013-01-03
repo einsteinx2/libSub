@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2FC308169502F700136926 /* libbass_ape.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CA16901EE4009B2732 /* libbass_ape.dylib */; };
+		3B2FC309169502F700136926 /* libbass_fx.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CB16901EE4009B2732 /* libbass_fx.dylib */; };
+		3B2FC30A169502F700136926 /* libbass_mpc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CC16901EE4009B2732 /* libbass_mpc.dylib */; };
+		3B2FC30B169502F700136926 /* libbass.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CD16901EE4009B2732 /* libbass.dylib */; };
+		3B2FC30C169502F700136926 /* libbassflac.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CE16901EE4009B2732 /* libbassflac.dylib */; };
+		3B2FC30D169502F700136926 /* libbassmix.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CF16901EE4009B2732 /* libbassmix.dylib */; };
+		3B2FC30E169502F700136926 /* libbassopus.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2D016901EE4009B2732 /* libbassopus.dylib */; };
+		3B2FC30F169502F700136926 /* libbasswv.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2D116901EE4009B2732 /* libbasswv.dylib */; };
 		5304A021168FB35F009B2732 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		5304A029168FB35F009B2732 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5304A027168FB35F009B2732 /* InfoPlist.strings */; };
 		5304A02B168FB35F009B2732 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A02A168FB35F009B2732 /* main.m */; };
@@ -774,6 +782,26 @@
 			remoteInfo = EX2Kit;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3B2FC300169502E300136926 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				3B2FC308169502F700136926 /* libbass_ape.dylib in CopyFiles */,
+				3B2FC309169502F700136926 /* libbass_fx.dylib in CopyFiles */,
+				3B2FC30A169502F700136926 /* libbass_mpc.dylib in CopyFiles */,
+				3B2FC30B169502F700136926 /* libbass.dylib in CopyFiles */,
+				3B2FC30C169502F700136926 /* libbassflac.dylib in CopyFiles */,
+				3B2FC30D169502F700136926 /* libbassmix.dylib in CopyFiles */,
+				3B2FC30E169502F700136926 /* libbassopus.dylib in CopyFiles */,
+				3B2FC30F169502F700136926 /* libbasswv.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5304A01D168FB35F009B2732 /* libSubTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = libSubTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2162,6 +2190,7 @@
 				5304A1951690173B009B2732 /* Frameworks */,
 				5304A1961690173B009B2732 /* Headers */,
 				5304A1971690173B009B2732 /* Resources */,
+				3B2FC300169502E300136926 /* CopyFiles */,
 			);
 			buildRules = (
 			);

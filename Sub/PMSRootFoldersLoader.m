@@ -37,7 +37,7 @@
 	NSString *responseString = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
     DLog(@"%@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
 	
-	NSDictionary *response = [responseString JSONValue];
+	NSDictionary *response = [[[SBJsonParser alloc] init] objectWithString:responseString];
 	
 	/*// Check for an error response
 	if ([response objectForKey:@"error"])

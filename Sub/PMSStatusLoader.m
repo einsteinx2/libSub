@@ -23,7 +23,7 @@
     self.receivedData = nil;
 	self.connection = nil;
 	
-	NSDictionary *response = [responseString JSONValue];
+	NSDictionary *response = [[[SBJsonParser alloc] init] objectWithString:responseString];
     
     self.error = N2n([response objectForKey:@"error"]);
     if (!response || self.error)

@@ -30,7 +30,7 @@
 {
 	NSString *responseString = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
     //DLog(@"queue all: %@", responseString);
-	NSDictionary *response = [responseString JSONValue];
+	NSDictionary *response = [[[SBJsonParser alloc] init] objectWithString:responseString];
 	
 	NSArray *folders = [response objectForKey:@"folders"];
 	NSArray *songs = [response objectForKey:@"songs"];
