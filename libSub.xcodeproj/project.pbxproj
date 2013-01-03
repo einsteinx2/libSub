@@ -596,6 +596,9 @@
 		53C7F4401661BC3100C5F61E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */; };
 		53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; };
 		53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3E70B1690387800F195C5 /* libz.dylib */; };
+		D0CC42A41695DA9100331944 /* EX2KitOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2B616901D6D009B2732 /* EX2KitOSX.framework */; };
+		D0CC42A51695DA9100331944 /* ZipKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 536C98B216619BC4005A73C6 /* ZipKit.framework */; };
+		D0CC42A61695DA9100331944 /* SBJson.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 536C981D16619B44005A73C6 /* SBJson.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -798,6 +801,18 @@
 				3B2FC30D169502F700136926 /* libbassmix.dylib in CopyFiles */,
 				3B2FC30E169502F700136926 /* libbassopus.dylib in CopyFiles */,
 				3B2FC30F169502F700136926 /* libbasswv.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0CC42A31695DA7000331944 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D0CC42A41695DA9100331944 /* EX2KitOSX.framework in CopyFiles */,
+				D0CC42A51695DA9100331944 /* ZipKit.framework in CopyFiles */,
+				D0CC42A61695DA9100331944 /* SBJson.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2191,6 +2206,7 @@
 				5304A1961690173B009B2732 /* Headers */,
 				5304A1971690173B009B2732 /* Resources */,
 				3B2FC300169502E300136926 /* CopyFiles */,
+				D0CC42A31695DA7000331944 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2860,12 +2876,19 @@
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
+					"\"$(SRCROOT)/Frameworks/ZipKit\"",
+					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
+					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
+				);
 				INFOPLIST_FILE = "libSubOSX/libSubOSX-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks/libBASS OS X\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -2892,12 +2915,19 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "OSX=1";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/include/libxml2,
+					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
+					"\"$(SRCROOT)/Frameworks/ZipKit\"",
+					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
+					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
+				);
 				INFOPLIST_FILE = "libSubOSX/libSubOSX-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Frameworks/libBASS OS X\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				WRAPPER_EXTENSION = framework;
@@ -2926,7 +2956,7 @@
 					/usr/include/libxml2,
 					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
 					"\"$(SRCROOT)/Frameworks/ZipKit\"",
-					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
+					"\"$(SRCROOT)/Frameworks/TBXML\"/**",
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2940,7 +2970,7 @@
 				);
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks/TBXML\"";
 			};
 			name = Debug;
 		};
@@ -2963,7 +2993,7 @@
 					/usr/include/libxml2,
 					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
 					"\"$(SRCROOT)/Frameworks/ZipKit\"",
-					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
+					"\"$(SRCROOT)/Frameworks/TBXML\"/**",
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
@@ -2976,7 +3006,7 @@
 				);
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
-				USER_HEADER_SEARCH_PATHS = "";
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks/TBXML\"";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

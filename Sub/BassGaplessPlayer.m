@@ -55,9 +55,7 @@ LOG_LEVEL_ISUB_DEBUG
 
 - (void)dealloc
 {
-#ifdef IOS
     dispatch_release(_streamGcdQueue);
-#endif
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -719,7 +717,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds
 {    
-	[EX2Dispatch runInQueue:self.streamGcdQueue waitUntilDone:NO block:^
+	[EX2Dispatch runInQueue:_streamGcdQueue waitUntilDone:NO block:^
 	 {
 		 if (!aSong)
 			 return;

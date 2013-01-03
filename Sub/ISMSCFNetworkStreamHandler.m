@@ -87,10 +87,12 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	}
     
     // Mark the new file as no backup
+#ifdef IOS
     if (![[NSURL fileURLWithPath:self.filePath] addSkipBackupAttribute])
     {
         DDLogError(@"Failed to set the no backup flag for %@", self.filePath);
     }
+#endif
 	
 	self.bitrate = self.mySong.estimatedBitrate;
     

@@ -253,6 +253,7 @@ LOG_LEVEL_ISUB_DEFAULT
             {
                 DDLogInfo(@"Moved cache path from %@ to %@", oldPath, settingsS.songCachePath);
                 
+#ifdef IOS
                 // Now set all of the files to not be backed up
                 NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
                 for (NSString *songName in cachedSongNames)
@@ -260,6 +261,7 @@ LOG_LEVEL_ISUB_DEFAULT
                     NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
                     [fileUrl addSkipBackupAttribute];
                 }
+#endif
             }
         }
         else

@@ -12,12 +12,19 @@
 #import "libSubDefines.h"
 
 // Frameworks
+#ifdef IOS
 #import "ZipKit.h"
-#import "TBXML.h"
-#import "TBXML+Compression.h"
-#import "TBXML+HTTP.h"
 #import "SBJson.h"
 #import "EX2Kit.h"
+#else
+#import <ZipKit/ZipKit.h>
+#import <SBJson/SBJson.h>
+#import <EX2KitOSX/EX2Kit.h>
+#endif
+
+#import "TBXML-Headers/TBXML.h"
+#import "TBXML-Headers/TBXML+Compression.h"
+#import "TBXML-Headers/TBXML+HTTP.h"
 
 #import "FMDatabaseQueueAdditions.h"
 

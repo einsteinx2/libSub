@@ -218,7 +218,9 @@ LOG_LEVEL_ISUB_DEFAULT
                 DDLogInfo(@"Moved cache path from %@ to %@", oldPath, path);
                 
                 // Now set the file not to be backed up
+#ifdef IOS
                 [[NSURL fileURLWithPath:path] addSkipBackupAttribute];
+#endif
             }
         }
     }
@@ -283,7 +285,9 @@ LOG_LEVEL_ISUB_DEFAULT
                 DDLogInfo(@"Moved cache path from %@ to %@", oldPath, path);
                 
                 // Now set the file not to be backed up
+#ifdef IOS
                 [[NSURL fileURLWithPath:path] addSkipBackupAttribute];
+#endif
             }
         }
     }
