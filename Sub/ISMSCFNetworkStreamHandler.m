@@ -536,15 +536,29 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 	// Get the response header
 	if (_readStreamRef != NULL)
 	{
-		CFHTTPMessageRef myResponse = (CFHTTPMessageRef)CFReadStreamCopyProperty(_readStreamRef, kCFStreamPropertyHTTPResponseHeader);
-		CFStringRef myStatusLine = CFHTTPMessageCopyResponseStatusLine(myResponse);
-		DDLogInfo(@"[ISMSCFNetworkStreamHandler] http response status: %@", myStatusLine);
-		
-		self.contentLength = [(__bridge_transfer NSString *)CFHTTPMessageCopyHeaderFieldValue(myResponse, CFSTR("Content-Length")) longLongValue];
-		DDLogInfo(@"[ISMSCFNetworkStreamHandler] contentLength: %llu", self.contentLength);
-		
-        CFRelease(myResponse);
-        CFRelease(myStatusLine);
+        CFHTTPMessageRef myResponse = (CFHTTPMessageRef)CFReadStreamCopyProperty(_readStreamRef, kCFStreamPropertyHTTPResponseHeader);
+        if (myResponse != NULL)
+        {
+            // Log the status code
+            DDLogInfo(@"[ISMSCFNetworkStreamHandler] http response status: %lu", CFHTTPMessageGetResponseStatusCode(myResponse));
+            
+            // Get the content length (must grab the dict because using CFHTTPMessageCopyHeaderFieldValue if the value doesn't exist will cause an EXC_BAD_ACCESS
+            CFDictionaryRef headerDict = CFHTTPMessageCopyAllHeaderFields(myResponse);
+            if (headerDict != NULL)
+            {
+                if (CFDictionaryContainsKey(headerDict, CFSTR("Content-Length")))
+                {
+                    CFStringRef length = CFHTTPMessageCopyHeaderFieldValue(myResponse, CFSTR("Content-Length"));
+                    if (length != NULL)
+                    {
+                        self.contentLength = [(__bridge NSString *)length longLongValue];
+                        CFRelease(length);
+                    }
+                }
+                CFRelease(headerDict);
+            }
+            CFRelease(myResponse);
+        }
 	}
 	
 	[self terminateDownload];

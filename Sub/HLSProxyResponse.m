@@ -229,6 +229,9 @@ Bail:
 
 - (void)retreiveHeaderValues
 {
+    if (_readStreamRef == NULL)
+        return;
+    
     self.proxyStatusCode = 0;
     self.proxyContentLength = 0;
     CFHTTPMessageRef myResponse = (CFHTTPMessageRef)CFReadStreamCopyProperty(_readStreamRef, kCFStreamPropertyHTTPResponseHeader);
