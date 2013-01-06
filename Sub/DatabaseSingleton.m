@@ -199,7 +199,7 @@ LOG_LEVEL_ISUB_DEFAULT
     // Handle moving the song cache database if necessary
     path = [[settingsS.currentCacheRoot stringByAppendingPathComponent:@"database"] stringByAppendingPathComponent:@"songCache.db"];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
-    if (![defaultManager fileExistsAtPath:path])
+    if (![defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
     {
         // First check to see if it's in the old Library/Caches location
         NSString *oldPath = [settingsS.cachesPath stringByAppendingPathComponent:@"songCache.db"];
@@ -266,7 +266,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	// Handle moving the song cache database if necessary
 	path = [NSString stringWithFormat:@"%@/database/%@cacheQueue.db", settingsS.currentCacheRoot, settingsS.urlString.md5];
-    if (![defaultManager fileExistsAtPath:path])
+    if (![defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
     {
         // First check to see if it's in the old Library/Caches location
         NSString *oldPath = [NSString stringWithFormat:@"%@/%@cacheQueue.db", settingsS.cachesPath, settingsS.urlString.md5];
@@ -902,15 +902,24 @@ LOG_LEVEL_ISUB_DEFAULT
 {
 	_queueAll = [ISMSQueueAllLoader loader];
 	
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	_databaseFolderPath = [[paths objectAtIndexSafe: 0] stringByAppendingPathComponent:@"database"];
+    _databaseFolderPath = [settingsS.documentsPath stringByAppendingPathComponent:@"database"];
 	
 	// Make sure database directory exists, if not create them
 	BOOL isDir = YES;
 	if (![[NSFileManager defaultManager] fileExistsAtPath:_databaseFolderPath isDirectory:&isDir])
 	{
 		[[NSFileManager defaultManager] createDirectoryAtPath:_databaseFolderPath withIntermediateDirectories:YES attributes:nil error:NULL];
-	}	
+	}
+    
+    // Create the caches folder database path if this is iOS 5.0
+    if (SYSTEM_VERSION_LESS_THAN(@"5.0.1"))
+    {
+        NSString *path = [settingsS.currentCacheRoot stringByAppendingPathComponent:@"database"];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir])
+        {
+            [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
+        }
+    }
 	
 	[self setupDatabases];
 	
