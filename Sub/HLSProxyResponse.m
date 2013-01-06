@@ -6,22 +6,30 @@
 //  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
 //
 
-LOG_LEVEL_ISUB_DEFAULT
+static const int ddLogLevel = LOG_LEVEL_ERROR;
 
 #import "HLSProxyResponse.h"
 #import "HTTPConnection.h"
 
 @interface HLSProxyResponse ()
+{
+    UInt8		_buffer[16 * 1024];				//	Create a 16K buffer
+	CFIndex		_bytesRead;
+    CFReadStreamRef _readStreamRef;
+}
 @property (strong) EX2RingBuffer *proxyBuffer;
-@property (strong) NSURLConnection *proxyConnection;
 @property (strong) NSURLRequest *proxyRequest;
-@property (strong) NSHTTPURLResponse *proxyResponse;
+@property SInt64 proxyContentLength;
+@property SInt64 proxyStatusCode;
 @property BOOL isDownloadStarted;
 @property BOOL isDownloadFinished;
-@property NSThread *downloadThread; // This is needed because we need a runloop and dont want to do this in the GCD thread
+@property NSThread *downloadThread;
+- (void)readStreamClientCallBack:(CFReadStreamRef)stream type:(CFStreamEventType)type;
 @end
 
 @implementation HLSProxyResponse
+
+#pragma mark - Lifecycle
 
 - (id)initWithConnection:(HTTPConnection *)serverConnection
 {
@@ -32,6 +40,13 @@ LOG_LEVEL_ISUB_DEFAULT
     return self;
 }
 
+- (void)dealloc
+{
+    [self performSelector:@selector(terminateDownload) onThread:self.downloadThread withObject:nil waitUntilDone:YES];
+}
+
+#pragma mark - HTTPResponse Protocol Methods
+
 // Don't support range requests
 - (UInt64)offset { return 0; }
 - (void)setOffset:(UInt64)offset { }
@@ -39,31 +54,35 @@ LOG_LEVEL_ISUB_DEFAULT
 // Return the content length we got from the proxy connection
 - (UInt64)contentLength
 {
-    UInt64 contentLength = self.proxyResponse.expectedContentLength < 0 ? 0 : self.proxyResponse.expectedContentLength;
+    UInt64 contentLength = self.proxyContentLength < 0 ? 0 : self.proxyContentLength;
     
     DDLogVerbose(@"HLSProxyResponse asking contentLength, replying with %llu", contentLength);
     return contentLength;
 }
 
-static NSUInteger totalBytesRead = 0;
+// Only reply with done with the connection has finished plus the buffer is empty
+- (BOOL)isDone
+{
+    // Make sure there are bytes if the request and the proxy connection are not in sync, otherwise it hangs for some reason
+    while (self.proxyBuffer.filledSpaceLength == 0 && !self.isDownloadFinished)
+    {
+        // Wait for bytes
+        DDLogVerbose(@"HLSProxyResponse (%@) Waiting for bytes", self);
+        [NSThread sleepForTimeInterval:.01];
+    }
+    
+    BOOL isDone = self.isDownloadFinished && self.proxyBuffer.filledSpaceLength == 0;
+    DDLogVerbose(@"HLSProxyResponse (%@) asking if done, replying %@   isDownloadFinished %@   filledSpaceLength %u", self, NSStringFromBOOL(isDone), NSStringFromBOOL(self.isDownloadFinished), self.proxyBuffer.filledSpaceLength);
+    return isDone;
+}
 
 // Read data from the download buffer
 - (NSData *)readDataOfLength:(NSUInteger)length
 {
-    DDLogVerbose(@"HLSProxyResponse asking for bytes, available in buffer: %u", self.proxyBuffer.filledSpaceLength);
+    DDLogVerbose(@"HLSProxyResponse (%@) asking for bytes, available in buffer: %u", self, self.proxyBuffer.filledSpaceLength);
     NSData *data = [self.proxyBuffer drainData:length];
-    totalBytesRead += data.length;
-    DDLogVerbose(@"HLSProxyResponse read data of length: %u actual length: %u", length, data.length);
-    //DDLogVerbose(@"content: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    DDLogVerbose(@"HLSProxyResponse (%@) read data of length: %u actual length: %u", self, length, data.length);
     return data;
-}
-
-// Only reply with done with the connection has finished plus the buffer is empty
-- (BOOL)isDone
-{
-    BOOL isDone = self.proxyBuffer.filledSpaceLength == 0;//self.isDownloadFinished && self.proxyBuffer.filledSpaceLength == 0;
-    DDLogVerbose(@"HLSProxyResponse asking if done, replying %@", NSStringFromBOOL(isDone));
-    return isDone;
 }
 
 // Delay the response headers so that we can return the correct status code in case we get a 404 or something
@@ -81,13 +100,13 @@ static NSUInteger totalBytesRead = 0;
     
     // If we had a redirect and somehow the final connection didn't update the status code, we return 200 so
     // we don't confuse the client
-    if (self.proxyResponse.statusCode >= 300 && self.proxyResponse.statusCode < 400)
+    if (self.proxyStatusCode >= 300 && self.proxyStatusCode < 400)
     {
         status = 200;
     }
     else
     {
-        status =  self.proxyResponse.statusCode;
+        status =  self.proxyStatusCode;
     }
     DDLogVerbose(@"HLSProxyResponse asking status, replying with %i", status);
     return status;
@@ -104,15 +123,14 @@ static NSUInteger totalBytesRead = 0;
 
 - (void)connectionDidClose
 {
-    DDLogVerbose(@"HLSProxyResponse connectionDidClose, total bytes read %u", totalBytesRead);
+    DDLogVerbose(@"HLSProxyResponse connectionDidClose");
     
-    [self.proxyConnection cancel];
-    self.proxyConnection = nil;
-    self.proxyRequest = nil;
-    self.proxyBuffer = nil;
-    
-    [self stopRunLoop];
+    [self performSelector:@selector(terminateDownload) onThread:self.downloadThread withObject:nil waitUntilDone:NO];
 }
+
+#pragma mark - Proxy Downloading Methods
+
+static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStreamEventHasBytesAvailable | kCFStreamEventEndEncountered | kCFStreamEventErrorOccurred;
 
 - (void)startProxyDownload:(NSURL *)url
 {
@@ -122,113 +140,215 @@ static NSUInteger totalBytesRead = 0;
 
 - (void)startProxyDownloadInternal:(NSURL *)url
 {
-    DDLogVerbose(@"HLSProxyResponse starting download for: %@", url);
     self.proxyRequest = [[NSURLRequest alloc] initWithURL:url];
-    self.proxyConnection = [[NSURLConnection alloc] initWithRequest:self.proxyRequest delegate:self];
-    if (self.proxyConnection)
-    {
-        // Initialize the ring buffer starting with 100KB of space to handle the lowest quality streams,
-        // expanding to up to the amount of the highest quality streams. We should never hit the max though
-        // since the buffer will be drained as it's being filled hopefully
-        //self.proxyBuffer = [[EX2RingBuffer alloc] initWithBufferLength:BytesFromKiB(100)];
-        //self.proxyBuffer.maximumLength = BytesFromMiB(3);
-        self.proxyBuffer = [[EX2RingBuffer alloc] initWithBufferLength:BytesFromMiB(3)];
-        
-        // Start a run loop so we can get delegate callbacks
-        CFRunLoopRun();
-    }
-}
-
-- (void)stopRunLoop
-{
-    [self performSelector:@selector(stopRunLoopInternal) onThread:self.downloadThread withObject:nil waitUntilDone:NO];
-}
-
-- (void)stopRunLoopInternal
-{
-	CFRunLoopStop(CFRunLoopGetCurrent());
-}
-
-#pragma NSURLConnection Delegate
-
-- (NSURLRequest *)connection:(NSURLConnection *)inConnection willSendRequest:(NSURLRequest *)inRequest redirectResponse:(NSURLResponse *)inRedirectResponse
-{
-    if (inRedirectResponse)
-    {
-        NSMutableURLRequest *r = [self.proxyRequest mutableCopy];
-		r.timeoutInterval = ISMSServerCheckTimeout;
-        r.URL = inRequest.URL;
-        return r;
-    }
-    else
-    {
-        return inRequest;
-    }
-}
-
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)space
-{
-	if([[space authenticationMethod] isEqualToString:NSURLAuthenticationMethodServerTrust])
-		return YES; // Self-signed cert will be accepted
+    
+    CFStreamClientContext ctxt = {0, (__bridge void*)self, NULL, NULL, NULL};
 	
-	return NO;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-	if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
-	{
-		[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
-	}
-	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    DDLogError(@"HLSProxyResponse didReceiveResponse called, resetting the proxy buffer");
+	// Create the request
+	CFHTTPMessageRef messageRef = CFHTTPMessageCreateRequest(kCFAllocatorDefault, (__bridge CFStringRef)self.proxyRequest.HTTPMethod, (__bridge CFURLRef)self.proxyRequest.URL, kCFHTTPVersion1_1);
+	if (messageRef == NULL) goto Bail;
     
-    // didReceiveResponse may be called more than once, so always reset the buffer just in case
-    // although it should never be called after didReceiveData, but I've always heard to do this
-    // and do it in the Loader classes, so doing it here as well until we can prove it's not needed
-	[self.proxyBuffer reset];
-    
-    // Save the response so we can access the status code and content length
-    self.proxyResponse = (NSHTTPURLResponse *)response;
-}
-
-static NSUInteger totalBytesDownloaded = 0;
-
-- (void)connection:(NSURLConnection *)theConnection didReceiveData:(NSData *)incrementalData
-{
-    // We do this here because didReceiveResponse may be called more than once
-    if (!self.isDownloadStarted)
+    // Set the URL
+    CFHTTPMessageSetHeaderFieldValue(messageRef, CFSTR("HOST"), (__bridge CFStringRef)[self.proxyRequest.URL host]);
+	
+    // Set the request type
+    if ([self.proxyRequest.HTTPMethod isEqualToString:@"POST"])
     {
-        self.isDownloadStarted = YES;
-        [self.serverConnection responseHasAvailableData:self];
-        totalBytesDownloaded = 0;
-        totalBytesRead = 0;
+        CFHTTPMessageSetBody(messageRef, (__bridge CFDataRef)self.proxyRequest.HTTPBody);
     }
     
-    [self.proxyBuffer fillWithData:incrementalData];
-    DDLogError(@"HLSProxyResponse filling buffer with data of length %u", incrementalData.length);
-    totalBytesDownloaded += incrementalData.length;
+    // Set all the headers
+    if (self.proxyRequest.allHTTPHeaderFields.count > 0)
+    {
+        for (NSString *key in self.proxyRequest.allHTTPHeaderFields.allKeys)
+        {
+            NSString *value = [self.proxyRequest.allHTTPHeaderFields objectForKey:key];
+            if (value)
+                CFHTTPMessageSetHeaderFieldValue(messageRef, (__bridge CFStringRef)key, (__bridge CFStringRef)value);
+        }
+    }
+		
+	// Create the stream for the request.
+	_readStreamRef = CFReadStreamCreateForHTTPRequest(kCFAllocatorDefault, messageRef);
+	if (_readStreamRef == NULL) goto Bail;
+	
+	//	There are times when a server checks the User-Agent to match a well known browser.  This is what Safari used at the time the sample was written
+	//CFHTTPMessageSetHeaderFieldValue( messageRef, CFSTR("User-Agent"), CFSTR("Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/125.5.5 (KHTML, like Gecko) Safari/125"));
+	
+	// Enable stream redirection
+	if (CFReadStreamSetProperty(_readStreamRef, kCFStreamPropertyHTTPShouldAutoredirect, kCFBooleanTrue) == false)
+		goto Bail;
+	
+	// Handle SSL connections
+	if([[self.proxyRequest.URL absoluteString] rangeOfString:@"https"].location != NSNotFound)
+	{
+		NSDictionary *sslSettings =
+		[NSDictionary dictionaryWithObjectsAndKeys:
+		 (NSString *)kCFStreamSocketSecurityLevelNegotiatedSSL, kCFStreamSSLLevel,
+		 @YES, kCFStreamSSLAllowsExpiredCertificates,
+		 @YES, kCFStreamSSLAllowsExpiredRoots,
+		 @YES, kCFStreamSSLAllowsAnyRoot,
+		 @NO, kCFStreamSSLValidatesCertificateChain,
+		 [NSNull null], kCFStreamSSLPeerName,
+		 nil];
+		
+		CFReadStreamSetProperty(_readStreamRef, kCFStreamPropertySSLSettings, (__bridge CFDictionaryRef)sslSettings);
+	}
+	
+	// Handle proxy
+	CFDictionaryRef proxyDict = CFNetworkCopySystemProxySettings();
+	CFReadStreamSetProperty(_readStreamRef, kCFStreamPropertyHTTPProxy, proxyDict);
+    CFRelease(proxyDict);
+	
+	// Set the client notifier
+	if (CFReadStreamSetClient(_readStreamRef, kNetworkEvents, ReadStreamClientCallBack, &ctxt) == false)
+		goto Bail;
+	
+	// Schedule the stream
+	CFReadStreamScheduleWithRunLoop(_readStreamRef, CFRunLoopGetMain(), kCFRunLoopCommonModes);
+    
+	// Start the HTTP connection
+	if (CFReadStreamOpen(_readStreamRef) == false)
+		goto Bail;
+    
+    // Initialize the ring buffer. Choosing a small starting value as it is getting read from about as fast as it's being written to
+    // but just in case we'll use a large enough maximum length to hold a whole segment of the largest bitrate we support
+    self.proxyBuffer = [[EX2RingBuffer alloc] initWithBufferLength:BytesFromKiB(100)];
+    self.proxyBuffer.maximumLength = BytesFromMiB(3.5);
+		
+	if (messageRef != NULL) CFRelease(messageRef);
+	return;
+	
+Bail:
+	if (messageRef != NULL) CFRelease(messageRef);
+	[self terminateDownload];
+	
+	return;
+
 }
 
-- (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
+- (void)retreiveHeaderValues
+{
+    self.proxyStatusCode = 0;
+    self.proxyContentLength = 0;
+    CFHTTPMessageRef myResponse = (CFHTTPMessageRef)CFReadStreamCopyProperty(_readStreamRef, kCFStreamPropertyHTTPResponseHeader);
+    if (myResponse != NULL)
+    {
+        // Get the HTTP status code
+        self.proxyStatusCode = CFHTTPMessageGetResponseStatusCode(myResponse);
+        
+        // Get the content length (must grab the dict because using CFHTTPMessageCopyHeaderFieldValue if the value doesn't exist will cause an EXC_BAD_ACCESS
+        CFDictionaryRef headerDict = CFHTTPMessageCopyAllHeaderFields(myResponse);
+        if (headerDict != NULL)
+        {
+            if (CFDictionaryContainsKey(headerDict, CFSTR("Content-Length")))
+            {
+                CFStringRef length = CFHTTPMessageCopyHeaderFieldValue(myResponse, CFSTR("Content-Length"));
+                if (length != NULL)
+                {
+                    self.proxyContentLength = [(__bridge NSString *)length longLongValue];
+                    CFRelease(length);
+                }
+            }
+            CFRelease(headerDict);
+        }
+        CFRelease(myResponse);
+    }
+    
+    DDLogVerbose(@"HLSProxyResponse got headers, status code: %lli  content length: %lli", self.proxyStatusCode, self.proxyContentLength);
+}
+
+static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType type, void *clientCallBackInfo)
+{
+	@autoreleasepool
+	{
+		[(__bridge HLSProxyResponse *)clientCallBackInfo readStreamClientCallBack:stream type:type];
+	}
+}
+
+- (void)readStreamClientCallBack:(CFReadStreamRef)stream type:(CFStreamEventType)type
+{
+	if (type == kCFStreamEventOpenCompleted)
+	{
+        [self.proxyBuffer reset];
+	}
+	else if (type == kCFStreamEventHasBytesAvailable)
+	{
+		_bytesRead = CFReadStreamRead(stream, _buffer, sizeof(_buffer));
+        
+		if (_bytesRead > 0)	// If zero bytes were read, wait for the EOF to come.
+		{
+            // We do this here because if kCFStreamEventOpenCompleted is like NSURLConnection's didReceiveResponse, it may be called more than once
+            if (!self.isDownloadStarted)
+            {
+                [self retreiveHeaderValues];
+                                
+                self.isDownloadStarted = YES;
+                [self.serverConnection responseHasAvailableData:self];
+            }
+            
+            [self.proxyBuffer fillWithBytes:_buffer length:_bytesRead];
+            DDLogCVerbose(@"HLSProxyResponse (%@) filling buffer with data of length %lu", self, _bytesRead);
+		}
+		else if (_bytesRead < 0)		// Less than zero is an error
+		{
+			DDLogCError(@"[HLSProxyResponse] Stream handler: An occured in the download bytesRead < 0");
+			[self downloadFailed];
+		}
+		else	//	0 assume we are done with the stream
+		{
+			DDLogCVerbose(@"[HLSProxyResponse] Stream handler: bytesRead == 0 occured in the download, so we're assuming we're finished");
+			[self downloadDone];
+		}
+	}
+	else if (type == kCFStreamEventEndEncountered)
+	{
+		DDLogCVerbose(@"[HLSProxyResponse] Stream handler: An kCFStreamEventEndEncountered occured in the download, download is done");
+		[self downloadDone];
+	}
+	else if (type == kCFStreamEventErrorOccurred)
+	{
+		DDLogCError(@"[HLSProxyResponse] Stream handler: An kCFStreamEventErrorOccurred occured in the download");
+		[self downloadFailed];
+	}
+}
+
+- (void)downloadFailed
 {
 	DDLogError(@"HLSProxyResponse failed to download: %@", self.proxyRequest.URL.absoluteString);
     self.isDownloadFinished = YES;
     
-    [self stopRunLoop];
+    [self terminateDownload];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)theConnection
+- (void)downloadDone
 {
 	DDLogVerbose(@"HLSProxyResponse finished download: %@", self.proxyRequest.URL.absoluteString);
-    DDLogVerbose(@"total bytes downloaded: %u", totalBytesDownloaded);
     self.isDownloadFinished = YES;
     
-    [self stopRunLoop];
+    [self terminateDownload];
+}
+
+- (void)terminateDownload
+{	
+    if (_readStreamRef == NULL)
+    {
+        return;
+    }
+    
+    //***	ALWAYS set the stream client (notifier) to NULL if you are releasing it
+    //	otherwise your notifier may be called after you released the stream leaving you with a
+    //	bogus stream within your notifier.
+    //DLog(@"canceling stream: %@", readStreamRef);
+    CFReadStreamSetClient(_readStreamRef, kCFStreamEventNone, NULL, NULL);
+    CFReadStreamUnscheduleFromRunLoop(_readStreamRef, CFRunLoopGetMain(), kCFRunLoopCommonModes);
+    CFReadStreamClose(_readStreamRef);
+    CFRelease(_readStreamRef);
+    
+    _readStreamRef = NULL;
+    
+    // Stop run loop
+    CFRunLoopStop(CFRunLoopGetCurrent());
 }
 
 @end

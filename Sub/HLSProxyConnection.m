@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
 //
 
-LOG_LEVEL_ISUB_DEFAULT
+static const int ddLogLevel = LOG_LEVEL_ERROR;
 
 #import "HLSProxyConnection.h"
 #import "HLSProxyResponse.h"
@@ -17,7 +17,7 @@ LOG_LEVEL_ISUB_DEFAULT
 - (NSObject<HTTPResponse> *)httpResponseForMethod:(NSString *)method URI:(NSString *)path
 {
     // Figure out the new URL
-    NSString *urlString = [settingsS.redirectUrlString ? settingsS.redirectUrlString : settingsS.urlString stringByAppendingPathComponent:path];
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", (settingsS.redirectUrlString ? settingsS.redirectUrlString : settingsS.urlString), path];
     
     // Create the response and tell it to start downloading the chunk
     DDLogVerbose(@"\n\nHTTPProxyConnection: starting proxy connection for %@", urlString);
