@@ -153,7 +153,6 @@
 		5304A0F6168FD51E009B2732 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A0F4168FD515009B2732 /* StoreKit.framework */; };
 		5304A0F7168FD547009B2732 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C984016619BAF005A73C6 /* libOAuth.a */; };
 		5304A0FA168FE14A009B2732 /* BassGaplessPlayer_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A0F9168FE14A009B2732 /* BassGaplessPlayer_Test.m */; };
-		5304A19B1690173B009B2732 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A19A1690173B009B2732 /* Cocoa.framework */; };
 		5304A1A51690173B009B2732 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5304A1A31690173B009B2732 /* InfoPlist.strings */; };
 		5304A1A91690173B009B2732 /* libSubOSX.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A1A81690173B009B2732 /* libSubOSX.m */; };
 		5304A1AD169017C4009B2732 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C979D166197FB005A73C6 /* AudioEngine.m */; };
@@ -585,6 +584,25 @@
 		536C9B371661B7D4005A73C6 /* ISMSChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959716619360005A73C6 /* ISMSChatMessage.m */; };
 		536C9B381661B7D4005A73C6 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
 		536C9B391661B7D4005A73C6 /* ISMSOldDataModelDecoders.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959B16619360005A73C6 /* ISMSOldDataModelDecoders.m */; };
+		536F54DD169A6DB2000F71E6 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDAC16990D1F00DCFC9C /* GCDAsyncSocket.m */; };
+		536F54DE169A6DB2000F71E6 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3A16990CFE00DCFC9C /* DDData.m */; };
+		536F54DF169A6DB2000F71E6 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3C16990CFE00DCFC9C /* DDNumber.m */; };
+		536F54E0169A6DB2000F71E6 /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3E16990CFE00DCFC9C /* DDRange.m */; };
+		536F54E1169A6DB2000F71E6 /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4016990CFE00DCFC9C /* HTTPAuthenticationRequest.m */; };
+		536F54E2169A6DB2000F71E6 /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4216990CFE00DCFC9C /* HTTPConnection.m */; };
+		536F54E3169A6DB2000F71E6 /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4516990CFE00DCFC9C /* HTTPMessage.m */; };
+		536F54E4169A6DB2000F71E6 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4816990CFE00DCFC9C /* HTTPServer.m */; };
+		536F54E5169A6DB2000F71E6 /* MultipartFormDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4B16990CFE00DCFC9C /* MultipartFormDataParser.m */; };
+		536F54E6169A6DB2000F71E6 /* MultipartMessageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4D16990CFE00DCFC9C /* MultipartMessageHeader.m */; };
+		536F54E7169A6DB2000F71E6 /* MultipartMessageHeaderField.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4F16990CFE00DCFC9C /* MultipartMessageHeaderField.m */; };
+		536F54E8169A6DB2000F71E6 /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5216990CFE00DCFC9C /* HTTPAsyncFileResponse.m */; };
+		536F54F0169A6DBE000F71E6 /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5416990CFE00DCFC9C /* HTTPDataResponse.m */; };
+		536F54F1169A6DBE000F71E6 /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5616990CFE00DCFC9C /* HTTPDynamicFileResponse.m */; };
+		536F54F2169A6DBE000F71E6 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5816990CFE00DCFC9C /* HTTPFileResponse.m */; };
+		536F54F3169A6DBE000F71E6 /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5A16990CFE00DCFC9C /* HTTPRedirectResponse.m */; };
+		536F54F4169A6DBE000F71E6 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5C16990CFE00DCFC9C /* WebSocket.m */; };
+		536F54F7169A7149000F71E6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536F54F5169A713D000F71E6 /* Security.framework */; };
+		536F54FA169A715C000F71E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536F54F8169A7154000F71E6 /* Cocoa.framework */; };
 		5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2541661C4CC00529EF3 /* libSubDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BB1661C73D00529EF3 /* MKStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C21661C73D00529EF3 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BC1661C73D00529EF3 /* MKStoreManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -593,83 +611,66 @@
 		5374F2C51661C73D00529EF3 /* SFHFKeychainUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BF1661C73D00529EF3 /* SFHFKeychainUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C61661C73D00529EF3 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		53B3BD5D16990CFE00DCFC9C /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3916990CFE00DCFC9C /* DDData.h */; };
-		53B3BD5E16990CFE00DCFC9C /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3916990CFE00DCFC9C /* DDData.h */; };
+		53B3BD5E16990CFE00DCFC9C /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3916990CFE00DCFC9C /* DDData.h */; settings = {ATTRIBUTES = (); }; };
 		53B3BD5F16990CFE00DCFC9C /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3A16990CFE00DCFC9C /* DDData.m */; };
-		53B3BD6016990CFE00DCFC9C /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3A16990CFE00DCFC9C /* DDData.m */; };
 		53B3BD6116990CFE00DCFC9C /* DDNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3B16990CFE00DCFC9C /* DDNumber.h */; };
-		53B3BD6216990CFE00DCFC9C /* DDNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3B16990CFE00DCFC9C /* DDNumber.h */; };
+		53B3BD6216990CFE00DCFC9C /* DDNumber.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3B16990CFE00DCFC9C /* DDNumber.h */; settings = {ATTRIBUTES = (); }; };
 		53B3BD6316990CFE00DCFC9C /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3C16990CFE00DCFC9C /* DDNumber.m */; };
-		53B3BD6416990CFE00DCFC9C /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3C16990CFE00DCFC9C /* DDNumber.m */; };
 		53B3BD6516990CFE00DCFC9C /* DDRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3D16990CFE00DCFC9C /* DDRange.h */; };
-		53B3BD6616990CFE00DCFC9C /* DDRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3D16990CFE00DCFC9C /* DDRange.h */; };
+		53B3BD6616990CFE00DCFC9C /* DDRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3D16990CFE00DCFC9C /* DDRange.h */; settings = {ATTRIBUTES = (); }; };
 		53B3BD6716990CFE00DCFC9C /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3E16990CFE00DCFC9C /* DDRange.m */; };
-		53B3BD6816990CFE00DCFC9C /* DDRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3E16990CFE00DCFC9C /* DDRange.m */; };
 		53B3BD6916990CFE00DCFC9C /* HTTPAuthenticationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3F16990CFE00DCFC9C /* HTTPAuthenticationRequest.h */; };
-		53B3BD6A16990CFE00DCFC9C /* HTTPAuthenticationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3F16990CFE00DCFC9C /* HTTPAuthenticationRequest.h */; };
+		53B3BD6A16990CFE00DCFC9C /* HTTPAuthenticationRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3F16990CFE00DCFC9C /* HTTPAuthenticationRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD6B16990CFE00DCFC9C /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4016990CFE00DCFC9C /* HTTPAuthenticationRequest.m */; };
-		53B3BD6C16990CFE00DCFC9C /* HTTPAuthenticationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4016990CFE00DCFC9C /* HTTPAuthenticationRequest.m */; };
 		53B3BD6D16990CFE00DCFC9C /* HTTPConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4116990CFE00DCFC9C /* HTTPConnection.h */; };
-		53B3BD6E16990CFE00DCFC9C /* HTTPConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4116990CFE00DCFC9C /* HTTPConnection.h */; };
+		53B3BD6E16990CFE00DCFC9C /* HTTPConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4116990CFE00DCFC9C /* HTTPConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD6F16990CFE00DCFC9C /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4216990CFE00DCFC9C /* HTTPConnection.m */; };
-		53B3BD7016990CFE00DCFC9C /* HTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4216990CFE00DCFC9C /* HTTPConnection.m */; };
 		53B3BD7116990CFE00DCFC9C /* HTTPLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4316990CFE00DCFC9C /* HTTPLogging.h */; };
-		53B3BD7216990CFE00DCFC9C /* HTTPLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4316990CFE00DCFC9C /* HTTPLogging.h */; };
+		53B3BD7216990CFE00DCFC9C /* HTTPLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4316990CFE00DCFC9C /* HTTPLogging.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD7316990CFE00DCFC9C /* HTTPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4416990CFE00DCFC9C /* HTTPMessage.h */; };
-		53B3BD7416990CFE00DCFC9C /* HTTPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4416990CFE00DCFC9C /* HTTPMessage.h */; };
+		53B3BD7416990CFE00DCFC9C /* HTTPMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4416990CFE00DCFC9C /* HTTPMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD7516990CFE00DCFC9C /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4516990CFE00DCFC9C /* HTTPMessage.m */; };
-		53B3BD7616990CFE00DCFC9C /* HTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4516990CFE00DCFC9C /* HTTPMessage.m */; };
 		53B3BD7716990CFE00DCFC9C /* HTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4616990CFE00DCFC9C /* HTTPResponse.h */; };
-		53B3BD7816990CFE00DCFC9C /* HTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4616990CFE00DCFC9C /* HTTPResponse.h */; };
+		53B3BD7816990CFE00DCFC9C /* HTTPResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4616990CFE00DCFC9C /* HTTPResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD7916990CFE00DCFC9C /* HTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4716990CFE00DCFC9C /* HTTPServer.h */; };
-		53B3BD7A16990CFE00DCFC9C /* HTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4716990CFE00DCFC9C /* HTTPServer.h */; };
+		53B3BD7A16990CFE00DCFC9C /* HTTPServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4716990CFE00DCFC9C /* HTTPServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD7B16990CFE00DCFC9C /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4816990CFE00DCFC9C /* HTTPServer.m */; };
-		53B3BD7C16990CFE00DCFC9C /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4816990CFE00DCFC9C /* HTTPServer.m */; };
 		53B3BD7D16990CFE00DCFC9C /* MultipartFormDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4A16990CFE00DCFC9C /* MultipartFormDataParser.h */; };
-		53B3BD7E16990CFE00DCFC9C /* MultipartFormDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4A16990CFE00DCFC9C /* MultipartFormDataParser.h */; };
+		53B3BD7E16990CFE00DCFC9C /* MultipartFormDataParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4A16990CFE00DCFC9C /* MultipartFormDataParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD7F16990CFE00DCFC9C /* MultipartFormDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4B16990CFE00DCFC9C /* MultipartFormDataParser.m */; };
-		53B3BD8016990CFE00DCFC9C /* MultipartFormDataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4B16990CFE00DCFC9C /* MultipartFormDataParser.m */; };
 		53B3BD8116990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4C16990CFE00DCFC9C /* MultipartMessageHeader.h */; };
-		53B3BD8216990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4C16990CFE00DCFC9C /* MultipartMessageHeader.h */; };
+		53B3BD8216990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4C16990CFE00DCFC9C /* MultipartMessageHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD8316990CFE00DCFC9C /* MultipartMessageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4D16990CFE00DCFC9C /* MultipartMessageHeader.m */; };
-		53B3BD8416990CFE00DCFC9C /* MultipartMessageHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4D16990CFE00DCFC9C /* MultipartMessageHeader.m */; };
 		53B3BD8516990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4E16990CFE00DCFC9C /* MultipartMessageHeaderField.h */; };
-		53B3BD8616990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4E16990CFE00DCFC9C /* MultipartMessageHeaderField.h */; };
+		53B3BD8616990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD4E16990CFE00DCFC9C /* MultipartMessageHeaderField.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD8716990CFE00DCFC9C /* MultipartMessageHeaderField.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4F16990CFE00DCFC9C /* MultipartMessageHeaderField.m */; };
-		53B3BD8816990CFE00DCFC9C /* MultipartMessageHeaderField.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD4F16990CFE00DCFC9C /* MultipartMessageHeaderField.m */; };
 		53B3BD8916990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5116990CFE00DCFC9C /* HTTPAsyncFileResponse.h */; };
-		53B3BD8A16990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5116990CFE00DCFC9C /* HTTPAsyncFileResponse.h */; };
+		53B3BD8A16990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5116990CFE00DCFC9C /* HTTPAsyncFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD8B16990CFE00DCFC9C /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5216990CFE00DCFC9C /* HTTPAsyncFileResponse.m */; };
-		53B3BD8C16990CFE00DCFC9C /* HTTPAsyncFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5216990CFE00DCFC9C /* HTTPAsyncFileResponse.m */; };
 		53B3BD8D16990CFE00DCFC9C /* HTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5316990CFE00DCFC9C /* HTTPDataResponse.h */; };
-		53B3BD8E16990CFE00DCFC9C /* HTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5316990CFE00DCFC9C /* HTTPDataResponse.h */; };
+		53B3BD8E16990CFE00DCFC9C /* HTTPDataResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5316990CFE00DCFC9C /* HTTPDataResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD8F16990CFE00DCFC9C /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5416990CFE00DCFC9C /* HTTPDataResponse.m */; };
-		53B3BD9016990CFE00DCFC9C /* HTTPDataResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5416990CFE00DCFC9C /* HTTPDataResponse.m */; };
 		53B3BD9116990CFE00DCFC9C /* HTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5516990CFE00DCFC9C /* HTTPDynamicFileResponse.h */; };
-		53B3BD9216990CFE00DCFC9C /* HTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5516990CFE00DCFC9C /* HTTPDynamicFileResponse.h */; };
+		53B3BD9216990CFE00DCFC9C /* HTTPDynamicFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5516990CFE00DCFC9C /* HTTPDynamicFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD9316990CFE00DCFC9C /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5616990CFE00DCFC9C /* HTTPDynamicFileResponse.m */; };
-		53B3BD9416990CFE00DCFC9C /* HTTPDynamicFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5616990CFE00DCFC9C /* HTTPDynamicFileResponse.m */; };
 		53B3BD9516990CFE00DCFC9C /* HTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5716990CFE00DCFC9C /* HTTPFileResponse.h */; };
-		53B3BD9616990CFE00DCFC9C /* HTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5716990CFE00DCFC9C /* HTTPFileResponse.h */; };
+		53B3BD9616990CFE00DCFC9C /* HTTPFileResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5716990CFE00DCFC9C /* HTTPFileResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD9716990CFE00DCFC9C /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5816990CFE00DCFC9C /* HTTPFileResponse.m */; };
-		53B3BD9816990CFE00DCFC9C /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5816990CFE00DCFC9C /* HTTPFileResponse.m */; };
 		53B3BD9916990CFE00DCFC9C /* HTTPRedirectResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5916990CFE00DCFC9C /* HTTPRedirectResponse.h */; };
-		53B3BD9A16990CFE00DCFC9C /* HTTPRedirectResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5916990CFE00DCFC9C /* HTTPRedirectResponse.h */; };
+		53B3BD9A16990CFE00DCFC9C /* HTTPRedirectResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5916990CFE00DCFC9C /* HTTPRedirectResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD9B16990CFE00DCFC9C /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5A16990CFE00DCFC9C /* HTTPRedirectResponse.m */; };
-		53B3BD9C16990CFE00DCFC9C /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5A16990CFE00DCFC9C /* HTTPRedirectResponse.m */; };
 		53B3BD9D16990CFE00DCFC9C /* WebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5B16990CFE00DCFC9C /* WebSocket.h */; };
-		53B3BD9E16990CFE00DCFC9C /* WebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5B16990CFE00DCFC9C /* WebSocket.h */; };
+		53B3BD9E16990CFE00DCFC9C /* WebSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD5B16990CFE00DCFC9C /* WebSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BD9F16990CFE00DCFC9C /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5C16990CFE00DCFC9C /* WebSocket.m */; };
-		53B3BDA016990CFE00DCFC9C /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5C16990CFE00DCFC9C /* WebSocket.m */; };
 		53B3BDAE16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDAB16990D1F00DCFC9C /* GCDAsyncSocket.h */; };
-		53B3BDAF16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDAB16990D1F00DCFC9C /* GCDAsyncSocket.h */; };
+		53B3BDAF16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDAB16990D1F00DCFC9C /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BDB016990D1F00DCFC9C /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDAC16990D1F00DCFC9C /* GCDAsyncSocket.m */; };
-		53B3BDB116990D1F00DCFC9C /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDAC16990D1F00DCFC9C /* GCDAsyncSocket.m */; };
 		53B3BDB416990DF100DCFC9C /* HLSProxyConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDB216990DF100DCFC9C /* HLSProxyConnection.h */; };
-		53B3BDB516990DF100DCFC9C /* HLSProxyConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDB216990DF100DCFC9C /* HLSProxyConnection.h */; };
+		53B3BDB516990DF100DCFC9C /* HLSProxyConnection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDB216990DF100DCFC9C /* HLSProxyConnection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BDB616990DF100DCFC9C /* HLSProxyConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDB316990DF100DCFC9C /* HLSProxyConnection.m */; };
 		53B3BDB716990DF100DCFC9C /* HLSProxyConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDB316990DF100DCFC9C /* HLSProxyConnection.m */; };
 		53B3BDE51699137500DCFC9C /* HLSProxyResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDE31699137500DCFC9C /* HLSProxyResponse.h */; };
-		53B3BDE61699137500DCFC9C /* HLSProxyResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDE31699137500DCFC9C /* HLSProxyResponse.h */; };
+		53B3BDE61699137500DCFC9C /* HLSProxyResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDE31699137500DCFC9C /* HLSProxyResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BDE71699137500DCFC9C /* HLSProxyResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDE41699137500DCFC9C /* HLSProxyResponse.m */; };
 		53B3BDE81699137500DCFC9C /* HLSProxyResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDE41699137500DCFC9C /* HLSProxyResponse.m */; };
 		53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -929,7 +930,6 @@
 		5304A0F4168FD515009B2732 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5304A0F9168FE14A009B2732 /* BassGaplessPlayer_Test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BassGaplessPlayer_Test.m; sourceTree = "<group>"; };
 		5304A1991690173B009B2732 /* libSubOSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = libSubOSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5304A19A1690173B009B2732 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		5304A19D1690173B009B2732 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		5304A19E1690173B009B2732 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		5304A19F1690173B009B2732 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -1192,6 +1192,8 @@
 		536C9AA31661AA45005A73C6 /* JukeboxXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JukeboxXMLParser.m; sourceTree = "<group>"; };
 		536C9AB01661AA61005A73C6 /* SearchXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchXMLParser.h; sourceTree = "<group>"; };
 		536C9AB11661AA61005A73C6 /* SearchXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchXMLParser.m; sourceTree = "<group>"; };
+		536F54F5169A713D000F71E6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		536F54F8169A7154000F71E6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		5374F2541661C4CC00529EF3 /* libSubDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubDefines.h; sourceTree = "<group>"; };
 		5374F2BB1661C73D00529EF3 /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKStoreManager.h; path = Frameworks/MKStoreManager/MKStoreManager.h; sourceTree = "<group>"; };
 		5374F2BC1661C73D00529EF3 /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKStoreManager.m; path = Frameworks/MKStoreManager/MKStoreManager.m; sourceTree = "<group>"; };
@@ -1292,13 +1294,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536F54FA169A715C000F71E6 /* Cocoa.framework in Frameworks */,
+				536F54F7169A7149000F71E6 /* Security.framework in Frameworks */,
 				53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */,
 				5304A2E2169020EA009B2732 /* StoreKit.framework in Frameworks */,
 				5304A2DB16901F1C009B2732 /* EX2KitOSX.framework in Frameworks */,
 				5304A2DC16901F1C009B2732 /* libTBXML.a in Frameworks */,
 				5304A2DD16901F1C009B2732 /* SBJson.framework in Frameworks */,
 				5304A2DE16901F1C009B2732 /* ZipKit.framework in Frameworks */,
-				5304A19B1690173B009B2732 /* Cocoa.framework in Frameworks */,
 				5304A2D216901EE4009B2732 /* libbass_ape.dylib in Frameworks */,
 				5304A2D316901EE4009B2732 /* libbass_fx.dylib in Frameworks */,
 				5304A2D416901EE4009B2732 /* libbass_mpc.dylib in Frameworks */,
@@ -1489,7 +1492,8 @@
 				536C947616618FA4005A73C6 /* Foundation.framework */,
 				5304A01F168FB35F009B2732 /* UIKit.framework */,
 				5304A022168FB35F009B2732 /* CoreGraphics.framework */,
-				5304A19A1690173B009B2732 /* Cocoa.framework */,
+				536F54F5169A713D000F71E6 /* Security.framework */,
+				536F54F8169A7154000F71E6 /* Cocoa.framework */,
 				5304A19C1690173B009B2732 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -2235,9 +2239,6 @@
 				53067E981694F11C00600396 /* FMDatabaseQueue.h in Headers */,
 				53067E991694F11C00600396 /* FMDatabaseQueueAdditions.h in Headers */,
 				53067E9A1694F11C00600396 /* FMResultSet.h in Headers */,
-				53B3BD5E16990CFE00DCFC9C /* DDData.h in Headers */,
-				53B3BD6216990CFE00DCFC9C /* DDNumber.h in Headers */,
-				53B3BD6616990CFE00DCFC9C /* DDRange.h in Headers */,
 				53B3BD6A16990CFE00DCFC9C /* HTTPAuthenticationRequest.h in Headers */,
 				53B3BD6E16990CFE00DCFC9C /* HTTPConnection.h in Headers */,
 				53B3BD7216990CFE00DCFC9C /* HTTPLogging.h in Headers */,
@@ -2256,6 +2257,9 @@
 				53B3BDAF16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */,
 				53B3BDB516990DF100DCFC9C /* HLSProxyConnection.h in Headers */,
 				53B3BDE61699137500DCFC9C /* HLSProxyResponse.h in Headers */,
+				53B3BD5E16990CFE00DCFC9C /* DDData.h in Headers */,
+				53B3BD6216990CFE00DCFC9C /* DDNumber.h in Headers */,
+				53B3BD6616990CFE00DCFC9C /* DDRange.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2773,6 +2777,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				536F54F0169A6DBE000F71E6 /* HTTPDataResponse.m in Sources */,
+				536F54F1169A6DBE000F71E6 /* HTTPDynamicFileResponse.m in Sources */,
+				536F54F2169A6DBE000F71E6 /* HTTPFileResponse.m in Sources */,
+				536F54F3169A6DBE000F71E6 /* HTTPRedirectResponse.m in Sources */,
+				536F54F4169A6DBE000F71E6 /* WebSocket.m in Sources */,
+				536F54DD169A6DB2000F71E6 /* GCDAsyncSocket.m in Sources */,
+				536F54DE169A6DB2000F71E6 /* DDData.m in Sources */,
+				536F54DF169A6DB2000F71E6 /* DDNumber.m in Sources */,
+				536F54E0169A6DB2000F71E6 /* DDRange.m in Sources */,
+				536F54E1169A6DB2000F71E6 /* HTTPAuthenticationRequest.m in Sources */,
+				536F54E2169A6DB2000F71E6 /* HTTPConnection.m in Sources */,
+				536F54E3169A6DB2000F71E6 /* HTTPMessage.m in Sources */,
+				536F54E4169A6DB2000F71E6 /* HTTPServer.m in Sources */,
+				536F54E5169A6DB2000F71E6 /* MultipartFormDataParser.m in Sources */,
+				536F54E6169A6DB2000F71E6 /* MultipartMessageHeader.m in Sources */,
+				536F54E7169A6DB2000F71E6 /* MultipartMessageHeaderField.m in Sources */,
+				536F54E8169A6DB2000F71E6 /* HTTPAsyncFileResponse.m in Sources */,
 				53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */,
 				5304A20116901832009B2732 /* FMDatabase.m in Sources */,
 				5304A20216901832009B2732 /* FMDatabaseAdditions.m in Sources */,
@@ -2850,23 +2871,6 @@
 				5304A1CA169017C4009B2732 /* SUSRootFoldersDAO.m in Sources */,
 				5304A1CB169017C4009B2732 /* SUSSubFolderDAO.m in Sources */,
 				5304A1A91690173B009B2732 /* libSubOSX.m in Sources */,
-				53B3BD6016990CFE00DCFC9C /* DDData.m in Sources */,
-				53B3BD6416990CFE00DCFC9C /* DDNumber.m in Sources */,
-				53B3BD6816990CFE00DCFC9C /* DDRange.m in Sources */,
-				53B3BD6C16990CFE00DCFC9C /* HTTPAuthenticationRequest.m in Sources */,
-				53B3BD7016990CFE00DCFC9C /* HTTPConnection.m in Sources */,
-				53B3BD7616990CFE00DCFC9C /* HTTPMessage.m in Sources */,
-				53B3BD7C16990CFE00DCFC9C /* HTTPServer.m in Sources */,
-				53B3BD8016990CFE00DCFC9C /* MultipartFormDataParser.m in Sources */,
-				53B3BD8416990CFE00DCFC9C /* MultipartMessageHeader.m in Sources */,
-				53B3BD8816990CFE00DCFC9C /* MultipartMessageHeaderField.m in Sources */,
-				53B3BD8C16990CFE00DCFC9C /* HTTPAsyncFileResponse.m in Sources */,
-				53B3BD9016990CFE00DCFC9C /* HTTPDataResponse.m in Sources */,
-				53B3BD9416990CFE00DCFC9C /* HTTPDynamicFileResponse.m in Sources */,
-				53B3BD9816990CFE00DCFC9C /* HTTPFileResponse.m in Sources */,
-				53B3BD9C16990CFE00DCFC9C /* HTTPRedirectResponse.m in Sources */,
-				53B3BDA016990CFE00DCFC9C /* WebSocket.m in Sources */,
-				53B3BDB116990D1F00DCFC9C /* GCDAsyncSocket.m in Sources */,
 				53B3BDB716990DF100DCFC9C /* HLSProxyConnection.m in Sources */,
 				53B3BDE81699137500DCFC9C /* HLSProxyResponse.m in Sources */,
 			);

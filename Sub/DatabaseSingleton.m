@@ -199,7 +199,11 @@ LOG_LEVEL_ISUB_DEFAULT
     // Handle moving the song cache database if necessary
     path = [[settingsS.currentCacheRoot stringByAppendingPathComponent:@"database"] stringByAppendingPathComponent:@"songCache.db"];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
+#ifdef IOS
     if (![defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
+#else
+    if (![defaultManager fileExistsAtPath:path])
+#endif
     {
         // First check to see if it's in the old Library/Caches location
         NSString *oldPath = [settingsS.cachesPath stringByAppendingPathComponent:@"songCache.db"];
@@ -266,7 +270,11 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	// Handle moving the song cache database if necessary
 	path = [NSString stringWithFormat:@"%@/database/%@cacheQueue.db", settingsS.currentCacheRoot, settingsS.urlString.md5];
+#ifdef IOS
     if (![defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
+#else
+    if (![defaultManager fileExistsAtPath:path])
+#endif
     {
         // First check to see if it's in the old Library/Caches location
         NSString *oldPath = [NSString stringWithFormat:@"%@/%@cacheQueue.db", settingsS.cachesPath, settingsS.urlString.md5];
@@ -911,6 +919,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		[[NSFileManager defaultManager] createDirectoryAtPath:_databaseFolderPath withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
     
+#ifdef IOS
     // Create the caches folder database path if this is iOS 5.0
     if (SYSTEM_VERSION_LESS_THAN(@"5.0.1"))
     {
@@ -920,6 +929,7 @@ LOG_LEVEL_ISUB_DEFAULT
             [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
         }
     }
+#endif
 	
 	[self setupDatabases];
 	
