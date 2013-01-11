@@ -14,6 +14,7 @@
 #import <sys/stat.h>
 #import "BassStream.h"
 #import "ISMSStreamManager.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation AudioEngine
 
@@ -23,32 +24,31 @@ LOG_LEVEL_ISUB_DEFAULT
 static AudioEngine *sharedInstance = nil;
 
 #ifdef IOS
-void interruptionListenerCallback(void *inUserData, UInt32 interruptionState) 
+
+- (void)beginInterruption
 {
-    if (interruptionState == kAudioSessionBeginInterruption) 
-	{
-		DDLogCVerbose(@"[AudioEngine] audio session begin interruption");
-		if (sharedInstance.player.isPlaying)
-		{
-			sharedInstance.shouldResumeFromInterruption = YES;
-			[sharedInstance.player pause];
-		}
-		else
-		{
-			sharedInstance.shouldResumeFromInterruption = NO;
-		}
-    } 
-	else if (interruptionState == kAudioSessionEndInterruption) 
-	{
-        DDLogCVerbose(@"[AudioEngine] audio session interruption ended, isPlaying: %@   isMainThread: %@", NSStringFromBOOL(sharedInstance.player.isPlaying), NSStringFromBOOL([NSThread isMainThread]));
-		if (sharedInstance.shouldResumeFromInterruption)
-		{
-			[sharedInstance.player playPause];
-			
-			// Reset the shouldResumeFromInterruption value
-			sharedInstance.shouldResumeFromInterruption = NO;
-		}
+    DDLogCVerbose(@"[AudioEngine] audio session begin interruption");
+    if (self.player.isPlaying)
+    {
+        self.shouldResumeFromInterruption = YES;
+        [sharedInstance.player pause];
     }
+    else
+    {
+        self.shouldResumeFromInterruption = NO;
+    }
+}
+
+- (void)endInterruptionWithFlags:(NSUInteger)flags
+{
+    DDLogCVerbose(@"[AudioEngine] audio session interruption ended, isPlaying: %@   isMainThread: %@", NSStringFromBOOL(sharedInstance.player.isPlaying), NSStringFromBOOL([NSThread isMainThread]));
+    if (self.shouldResumeFromInterruption && flags == AVAudioSessionInterruptionFlags_ShouldResume)
+    {
+        [self.player playPause];
+    }
+    
+    // Reset the shouldResumeFromInterruption value
+    self.shouldResumeFromInterruption = NO;
 }
 
 void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID inPropertyID, UInt32 inPropertyValueSize, const void *inPropertyValue) 
@@ -116,7 +116,7 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     
     // Create a new player and just initialize BASS, but don't play anything
     self.player = [[BassGaplessPlayer alloc] initWithDelegate:self.delegate];
-    [self.player bassInit];
+    //[self.player bassInit];
     
     // Load the EQ
     //BassEffectDAO *effectDAO = [[BassEffectDAO alloc] initWithType:BassEffectType_ParametricEQ];
@@ -151,7 +151,9 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 #ifdef IOS
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	
-	AudioSessionInitialize(NULL, NULL, interruptionListenerCallback, NULL);
+	AudioSessionInitialize(NULL, NULL, NULL, NULL);
+    
+    [[AVAudioSession sharedInstance] setDelegate:self];
 	
 	// Add the callbacks for headphone removal and other audio takeover
 	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, NULL);

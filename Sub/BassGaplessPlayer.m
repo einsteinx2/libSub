@@ -7,6 +7,7 @@
 //
 
 #import "BassGaplessPlayer.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface BassGaplessPlayer ()
 - (NSUInteger)nextIndex;
@@ -16,6 +17,8 @@
 @implementation BassGaplessPlayer
 
 LOG_LEVEL_ISUB_DEBUG
+
+#define ISMS_BassDeviceNumber 1
 
 #define ISMS_BASSBufferSize 800
 #define ISMS_defaultSampleRate 44100
@@ -63,6 +66,9 @@ LOG_LEVEL_ISUB_DEBUG
 
 void CALLBACK MyStreamSlideCallback(HSYNC handle, DWORD channel, DWORD data, void *user)
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
 	@autoreleasepool
 	{
         BassGaplessPlayer *player = (__bridge BassGaplessPlayer *)user;
@@ -79,7 +85,10 @@ void CALLBACK MyStreamSlideCallback(HSYNC handle, DWORD channel, DWORD data, voi
 
 void CALLBACK MyStreamEndCallback(HSYNC handle, DWORD channel, DWORD data, void *user)
 {
-	@autoreleasepool 
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
+	@autoreleasepool
 	{
         DDLogCVerbose(@"[BassGaplessPlayer] Stream End Callback called");
         
@@ -316,7 +325,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 // songEnded: is called AFTER MyStreamEndCallback, so the next song is already actually decoding into the ring buffer
 - (void)songEnded:(BassStream *)userInfo
 {
-	@autoreleasepool 
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
+	@autoreleasepool
 	{
         self.previousSongForProgress = userInfo.song;
         
@@ -440,7 +452,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 
 - (void)keepRingBufferFilledInternal
 {
-	@autoreleasepool 
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
+	@autoreleasepool
 	{
 		NSUInteger readSize = BytesFromKiB(64);
 		while (!self.stopFillingRingBuffer)
@@ -578,6 +593,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (void)bassInit:(NSUInteger)sampleRate
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
 	sampleRate = ISMS_defaultSampleRate;
 	
 	// Destroy any existing BASS instance
@@ -587,7 +605,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 	BASS_SetConfig(BASS_CONFIG_IOS_MIXAUDIO, 0); // Disable mixing.	To be called before BASS_Init.
 	BASS_SetConfig(BASS_CONFIG_BUFFER, BASS_GetConfig(BASS_CONFIG_UPDATEPERIOD) + ISMS_BASSBufferSize); // set the buffer length to the minimum amount + 200ms
 	BASS_SetConfig(BASS_CONFIG_FLOATDSP, true); // set DSP effects to use floating point math to avoid clipping within the effects chain
-	if (BASS_Init(-1, (DWORD)sampleRate, 0, NULL, NULL)) 	// Initialize default device.
+	if (BASS_Init(1, (DWORD)sampleRate, 0, NULL, NULL)) 	// Initialize default device.
 	{
         self.bassOutputBufferLengthMillis = BASS_GetConfig(BASS_CONFIG_BUFFER);
         
@@ -630,6 +648,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (BOOL)bassFree
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
 	@synchronized(self.visualizer)
 	{
 		[EX2Dispatch cancelTimerBlockWithName:startSongRetryTimer];
@@ -671,6 +692,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (BOOL)testStreamForSong:(ISMSSong *)aSong
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
     DDLogVerbose(@"[BassGaplessPlayer] testing stream for %@  file: %@", aSong.title, aSong.currentPath);
 	if (aSong.fileExists)
 	{
@@ -693,6 +717,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (BassStream *)prepareStreamForSong:(ISMSSong *)aSong
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
 	DDLogVerbose(@"[BassGaplessPlayer] preparing stream for %@  file: %@", aSong.title, aSong.currentPath);
 	if (aSong.fileExists)
 	{	
@@ -733,11 +760,14 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 }
 
 - (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds
-{    
+{
+    if (!aSong)
+        return;
+    
 	[EX2Dispatch runInQueue:_streamGcdQueue waitUntilDone:NO block:^
 	 {
-		 if (!aSong)
-			 return;
+         // Make sure we're using the right device
+         BASS_SetDevice(ISMS_BassDeviceNumber);
          
          self.currentPlaylistIndex = index;
 		 
@@ -764,6 +794,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 				 
 				 self.equalizer.channel = self.outStream;
 				 
+                 // Add gain amplification
+				 [self.equalizer createVolumeFx];
+                 
 				 // Enable the equalizer if it's turned on
 				 if (settingsS.isEqualizerOn)
 				 {
@@ -771,9 +804,6 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 					 [effectDAO selectPresetId:effectDAO.selectedPresetId];
 					 [self.equalizer applyEqualizerValues];
 				 }
-				 
-				 // Add gain amplification
-				 [self.equalizer createVolumeFx];
 				 
 				 // Add the stream to the queue
                  @synchronized(self.streamQueue)
@@ -809,11 +839,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 				 // Start playback
 				 BASS_ChannelPlay(self.outStream, FALSE);
                  self.isPlaying = YES;
-                 
-                 // Workaround for lock screen art and status bar play icon not working on new song plays
-                 BASS_Pause();
-                 BASS_Start();
-                 
+
                  if ([self.delegate respondsToSelector:@selector(bassFirstStreamStarted:)])
                  {
                      [self.delegate bassFirstStreamStarted:self];
@@ -901,7 +927,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 	if (!self.currentStream)
 		return 0;
 	
-	NSInteger pcmBytePosition = BASS_Mixer_ChannelGetPosition(self.currentStream.stream, BASS_POS_BYTE);
+    long long pcmBytePosition = BASS_Mixer_ChannelGetPosition(self.currentStream.stream, BASS_POS_BYTE);
     //DLog(@"pcmBytePosition: %i  self.ringBuffer.filledSpaceLength: %i", pcmBytePosition, self.ringBuffer.filledSpaceLength);
 	pcmBytePosition -= (self.ringBuffer.filledSpaceLength * 2); // Not sure why but this has to be multiplied by 2 for accurate reading
 	pcmBytePosition = pcmBytePosition < 0 ? 0 : pcmBytePosition; 
@@ -938,6 +964,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (void)stop
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
     if ([self.delegate respondsToSelector:@selector(bassStopped:)])
     {
         [self.delegate bassStopped:self];
@@ -960,8 +989,11 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 }
 
 - (void)playPause
-{	
-	if (self.isPlaying) 
+{
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
+	if (self.isPlaying)
 	{
 		BASS_Pause();
 		self.isPlaying = NO;
@@ -1000,6 +1032,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (void)seekToPositionInBytes:(QWORD)bytes fadeVolume:(BOOL)fadeVolume
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
 	BassStream *userInfo = self.currentStream;
 	if (!userInfo)
 		return;
@@ -1048,6 +1083,9 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (void)seekToPositionInSeconds:(double)seconds fadeVolume:(BOOL)fadeVolume
 {
+    // Make sure we're using the right device
+    BASS_SetDevice(ISMS_BassDeviceNumber);
+    
 	QWORD bytes = BASS_ChannelSeconds2Bytes(self.currentStream.stream, seconds);
 	[self seekToPositionInBytes:bytes fadeVolume:fadeVolume];
 }
