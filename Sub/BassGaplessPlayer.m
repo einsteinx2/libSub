@@ -83,34 +83,42 @@ void CALLBACK MyStreamEndCallback(HSYNC handle, DWORD channel, DWORD data, void 
 	{
         DDLogCVerbose(@"[BassGaplessPlayer] Stream End Callback called");
         
-		BassStream *userInfo = (__bridge BassStream *)user;
-		if (userInfo)
-		{
-            // Prepare the next song in the queue
-            ISMSSong *nextSong = [userInfo.player nextSong];
-            DDLogCVerbose(@"[BassGaplessPlayer]  Preparing stream for: %@", nextSong);
-            BassStream *nextStream = [userInfo.player prepareStreamForSong:nextSong];
-            if (nextStream)
-            {
-                DDLogCVerbose(@"[BassGaplessPlayer] Stream prepared successfully for: %@", nextSong);
-                [userInfo.player.streamQueue addObject:nextStream];
-                BASS_Mixer_StreamAddChannel(userInfo.player.mixerStream, nextStream.stream, 0);
-            }
-            else
-            {
-                DDLogCVerbose(@"[BassGaplessPlayer] Could NOT create stream for: %@", nextSong);
-                userInfo.isNextSongStreamFailed = YES;
-            }
-            
-            // Mark as ended and set the buffer space til end for the UI
-            userInfo.bufferSpaceTilSongEnd = userInfo.player.ringBuffer.filledSpaceLength;
-            userInfo.isEnded = YES;
-		}
+        // This must be done in the stream GCD queue because if we do it in this thread
+        // it will pause the audio output momentarily while it's loading the stream
+        BassStream *userInfo = (__bridge BassStream *)user;
+        if (userInfo)
+        {
+            [EX2Dispatch runInQueue:userInfo.player.streamGcdQueue waitUntilDone:NO block:^
+             {
+                 // Prepare the next song in the queue
+                 ISMSSong *nextSong = [userInfo.player nextSong];
+                 DDLogCVerbose(@"[BassGaplessPlayer]  Preparing stream for: %@", nextSong);
+                 BassStream *nextStream = [userInfo.player prepareStreamForSong:nextSong];
+                 if (nextStream)
+                 {
+                     DDLogCVerbose(@"[BassGaplessPlayer] Stream prepared successfully for: %@", nextSong);
+                     @synchronized(userInfo.player.streamQueue)
+                     {
+                         [userInfo.player.streamQueue addObject:nextStream];
+                     }
+                     BASS_Mixer_StreamAddChannel(userInfo.player.mixerStream, nextStream.stream, BASS_MIXER_NORAMPIN);
+                 }
+                 else
+                 {
+                     DDLogCVerbose(@"[BassGaplessPlayer] Could NOT create stream for: %@", nextSong);
+                     userInfo.isNextSongStreamFailed = YES;
+                 }
+                 
+                 // Mark as ended and set the buffer space til end for the UI
+                 userInfo.bufferSpaceTilSongEnd = userInfo.player.ringBuffer.filledSpaceLength;
+                 userInfo.isEnded = YES;
+             }];
+        }
 	}
 }
 
 void CALLBACK MyFileCloseProc(void *user)
-{	
+{
 	if (user == NULL)
 		return;
 	
@@ -330,7 +338,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		{
 			BASS_StreamFree(userInfo.stream);
 		}
-		[self.streamQueue removeObject:userInfo];
+        @synchronized(self.streamQueue)
+        {
+            [self.streamQueue removeObject:userInfo];
+        }
         
         // Instead wait for the playlist index changed notification
         /*// Update our index position
@@ -626,10 +637,13 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 		
 		self.stopFillingRingBuffer = YES;
 		
-		for (BassStream *userInfo in self.streamQueue)
-		{
-			userInfo.shouldBreakWaitLoopForever = YES;
-		}
+        @synchronized(self.streamQueue)
+        {
+            for (BassStream *userInfo in self.streamQueue)
+            {
+                userInfo.shouldBreakWaitLoopForever = YES;
+            }
+        }
 		
 		self.equalizer = nil;
 		self.visualizer = nil;
@@ -644,7 +658,10 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
             [self.delegate bassFreed:self];
         }
 
-		[self.streamQueue removeAllObjects];
+        @synchronized(self.streamQueue)
+        {
+            [self.streamQueue removeAllObjects];
+        }
 		
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassFreed];
 		
@@ -698,7 +715,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 		if (fileStream)
 		{
 			// Add the stream free callback
-			BASS_ChannelSetSync(fileStream, BASS_SYNC_END, 0, MyStreamEndCallback, (__bridge void*)userInfo);
+			BASS_ChannelSetSync(fileStream, BASS_SYNC_END|BASS_SYNC_MIXTIME, 0, MyStreamEndCallback, (__bridge void*)userInfo);
 			
 			// Stream successfully created
 			userInfo.stream = fileStream;
@@ -735,7 +752,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 			 if (userInfo)
 			 {
 				 self.mixerStream = BASS_Mixer_StreamCreate(ISMS_defaultSampleRate, 2, BASS_STREAM_DECODE);//|BASS_MIXER_END);
-				 BASS_Mixer_StreamAddChannel(self.mixerStream, userInfo.stream, 0);
+				 BASS_Mixer_StreamAddChannel(self.mixerStream, userInfo.stream, BASS_MIXER_NORAMPIN);
 				 self.outStream = BASS_StreamCreate(ISMS_defaultSampleRate, 2, 0, &MyStreamProc, (__bridge void*)self);
                  
                  BASS_Start();
@@ -759,7 +776,10 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 				 [self.equalizer createVolumeFx];
 				 
 				 // Add the stream to the queue
-				 [self.streamQueue addObject:userInfo];
+                 @synchronized(self.streamQueue)
+                 {
+                     [self.streamQueue addObject:userInfo];
+                 }
 				 
 				 // Skip to the byte offset
 				 if (byteOffset)
@@ -877,7 +897,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 }
 
 - (double)progress
-{	
+{
 	if (!self.currentStream)
 		return 0;
 	
@@ -886,12 +906,14 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 	pcmBytePosition -= (self.ringBuffer.filledSpaceLength * 2); // Not sure why but this has to be multiplied by 2 for accurate reading
 	pcmBytePosition = pcmBytePosition < 0 ? 0 : pcmBytePosition; 
 	double seconds = BASS_ChannelBytes2Seconds(self.currentStream.stream, pcmBytePosition);
+    //DDLogVerbose(@"progress seconds: %f", seconds);
 	if (seconds < 0)
     {
         // Use the previous song (i.e the one still coming out of the speakers), since we're actually finishing it right now
         /*NSUInteger previousIndex = [self.delegate bassIndexAtOffset:-1 fromIndex:self.currentPlaylistIndex player:self];
         ISMSSong *previousSong = [self.delegate bassSongForIndex:previousIndex player:self];
 		return previousSong.duration.doubleValue + seconds;*/
+        
         
         return self.previousSongForProgress.duration.doubleValue + seconds;
     }
@@ -901,7 +923,10 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 
 - (BassStream *)currentStream
 {
-	return [self.streamQueue firstObjectSafe];
+    @synchronized(self.streamQueue)
+    {
+        return [self.streamQueue firstObjectSafe];
+    }
 }
 
 - (NSInteger)bitRate
