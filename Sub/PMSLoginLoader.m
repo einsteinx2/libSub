@@ -26,6 +26,18 @@
     return self;
 }
 
+- (id)initWithCallbackBlock:(LoaderCallback)theBlock urlString:(NSString *)theUrlString username:(NSString *)theUsername password:(NSString *)thePassword
+{
+    if ((self = [super initWithCallbackBlock:theBlock]))
+    {
+        _urlString = theUrlString;
+        _username = theUsername;
+        _password = thePassword;
+    }
+    return self;
+}
+
+
 - (NSURLRequest *)createRequest
 {
     if (self.urlString == nil || self.username == nil || self.password == nil)

@@ -43,6 +43,19 @@ static void initialize_navigationBarImages()
 	return self;
 }
 
+- (id)initWithCallbackBlock:(LoaderCallback)theBlock coverArtId:(NSString *)artId isLarge:(BOOL)large
+{
+	if ((self = [super initWithCallbackBlock:theBlock]))
+	{
+		_isLarge = large;
+		_coverArtId = [artId copy];
+		
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coverArtDownloadFinished:) name:ISMSNotification_CoverArtFinishedInternal object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(coverArtDownloadFailed:) name:ISMSNotification_CoverArtFailedInternal object:nil];
+	}
+	return self;
+}
+
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];

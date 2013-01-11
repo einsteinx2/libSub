@@ -30,6 +30,14 @@
 	return nil;
 }
 
++ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
+{
+	[NSException raise:NSInternalInconsistencyException
+				format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+	
+	return nil;
+}
+
 - (void)setup
 {
     
@@ -58,6 +66,18 @@
 	return self;
 }
 
+- (id)initWithCallbackBlock:(LoaderCallback)theBlock
+{
+	self = [super init];
+    if (self)
+	{
+        [self setup];
+		_callbackBlock = [theBlock copy];
+	}
+	
+	return self;
+}
+
 - (ISMSLoaderType)type
 {
     return ISMSLoaderType_Generic;
@@ -75,7 +95,8 @@
             // receivedData is an instance variable declared elsewhere.
             self.receivedData = [NSMutableData data];
             
-            self.selfRef = self;
+            if (!self.selfRef)
+                self.selfRef = self;
         }
         else
         {
@@ -122,32 +143,35 @@
 	[self informDelegateLoadingFailed:error];
 }
 
-- (BOOL)informDelegateLoadingFailed:(NSError *)error
+- (void)informDelegateLoadingFailed:(NSError *)error
 {
 	if ([self.delegate respondsToSelector:@selector(loadingFailed:withError:)])
 	{
 		[self.delegate loadingFailed:self withError:error];
-        self.selfRef = nil;
-		return YES;
 	}
-	
-    //DLog(@"delegate (%@) did not respond to loading failed", self.delegate);
+    
+    if (self.callbackBlock)
+    {
+        self.callbackBlock(NO, error, self);
+    }
+        
     self.selfRef = nil;
-	return NO;
 }
 
-- (BOOL)informDelegateLoadingFinished
+- (void)informDelegateLoadingFinished
 {
 	if ([self.delegate respondsToSelector:@selector(loadingFinished:)])
 	{
 		[self.delegate loadingFinished:self];
-        self.selfRef = nil;
-		return YES;
+        
 	}
+    
+    if (self.callbackBlock)
+    {
+        self.callbackBlock(YES, nil, self);
+    }
 	
-	//DLog(@"delegate (%@) did not respond to loading finished", self.delegate);
 	self.selfRef = nil;
-    return NO;
 }
 
 #pragma mark Connection Delegate

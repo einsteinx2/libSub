@@ -10,6 +10,11 @@
 
 @implementation ISMSSubFolderLoader
 
+- (ISMSLoaderType)type
+{
+    return ISMSLoaderType_SubFolders;
+}
+
 + (id)loaderWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
 {
 	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
@@ -23,19 +28,25 @@
 	return nil;
 }
 
-#pragma mark - Lifecycle
++ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
+{
+	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
+	{
+		return [[SUSSubFolderLoader alloc] initWithCallbackBlock:theBlock];
+	}
+	else if ([settingsS.serverType isEqualToString:WAVEBOX])
+	{
+		return [[PMSSubFolderLoader alloc] initWithCallbackBlock:theBlock];
+	}
+	return nil;
+}
+
+#pragma mark - Private DB Methods
 
 - (FMDatabaseQueue *)dbQueue
 {
     return databaseS.albumListCacheDbQueue;
 }
-
-- (ISMSLoaderType)type
-{
-    return ISMSLoaderType_SubFolders;
-}
-
-#pragma mark - Private DB Methods
 
 - (BOOL)resetDb
 {

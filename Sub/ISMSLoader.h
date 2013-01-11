@@ -12,9 +12,13 @@
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"
 
+// Loader callback block, make sure to always check success bool, not error, as error can be nil when success is NO
+typedef void (^LoaderCallback)(BOOL success, NSError *error, ISMSLoader *loader);
+
 @interface ISMSLoader : NSObject <NSURLConnectionDelegate>
 
 @property (weak) NSObject<ISMSLoaderDelegate> *delegate;
+@property (copy) LoaderCallback callbackBlock;
 
 @property (strong) NSURLConnection *connection;
 @property (strong) NSURLRequest *request;
@@ -23,9 +27,11 @@
 
 + (id)loader;
 + (id)loaderWithDelegate:(id <ISMSLoaderDelegate>)theDelegate;
++ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock;
 
 - (void)setup; // Override this
 - (id)initWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate;
+- (id)initWithCallbackBlock:(LoaderCallback)theBlock;
 
 - (void)startLoad;
 - (void)cancelLoad;
@@ -34,8 +40,8 @@
 
 - (void)subsonicErrorCode:(NSInteger)errorCode message:(NSString *)message;
 
-- (BOOL)informDelegateLoadingFailed:(NSError *)error;
-- (BOOL)informDelegateLoadingFinished;
+- (void)informDelegateLoadingFailed:(NSError *)error;
+- (void)informDelegateLoadingFinished;
 
 @end
 

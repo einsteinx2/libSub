@@ -10,6 +10,11 @@
 
 @implementation ISMSRootFoldersLoader
 
+- (ISMSLoaderType)type
+{
+    return ISMSLoaderType_RootFolders;
+}
+
 + (id)loaderWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
 {
 	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
@@ -23,9 +28,17 @@
 	return nil;
 }
 
-- (ISMSLoaderType)type
++ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
 {
-    return ISMSLoaderType_RootFolders;
+	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
+	{
+		return [[SUSRootFoldersLoader alloc] initWithCallbackBlock:theBlock];
+	}
+	else if ([settingsS.serverType isEqualToString:WAVEBOX])
+	{
+		return [[PMSRootFoldersLoader alloc] initWithCallbackBlock:theBlock];
+	}
+	return nil;
 }
 
 #pragma mark - Properties
