@@ -13,19 +13,17 @@
 
 // Frameworks
 #ifdef IOS
-#import "ZipKit.h"
 #import "SBJson.h"
 #import "EX2Kit.h"
 #else
-#import <ZipKit/ZipKit.h>
 #import <SBJson/SBJson.h>
 #import <EX2KitOSX/EX2Kit.h>
 #endif
 
+#import "ZipKit.h"
 #import "TBXML-Headers/TBXML.h"
 #import "TBXML-Headers/TBXML+Compression.h"
 #import "TBXML-Headers/TBXML+HTTP.h"
-
 #import "FMDatabaseQueueAdditions.h"
 
 #if IOS

@@ -13,7 +13,7 @@
 #import "bass_mpc.h"
 #import "bass_ape.h"
 #import "bassmix.h"
-#include <AudioToolbox/AudioToolbox.h>
+#import <AudioToolbox/AudioToolbox.h>
 #import "BassStream.h"
 
 @interface BassWrapper : NSObject

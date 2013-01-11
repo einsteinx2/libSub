@@ -8,8 +8,8 @@
 
 #import "AudioEngine.h"
 #import "BassParamEqValue.h"
-#include <AudioToolbox/AudioToolbox.h>
-#include "MusicSingleton.h"
+#import <AudioToolbox/AudioToolbox.h>
+#import "MusicSingleton.h"
 #import "BassEffectDAO.h"
 #import <sys/stat.h>
 #import "BassStream.h"

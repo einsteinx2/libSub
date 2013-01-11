@@ -72,16 +72,16 @@ static const int ddLogLevel = LOG_LEVEL_ERROR;
     }
     
     BOOL isDone = self.isDownloadFinished && self.proxyBuffer.filledSpaceLength == 0;
-    DDLogVerbose(@"HLSProxyResponse (%@) asking if done, replying %@   isDownloadFinished %@   filledSpaceLength %u", self, NSStringFromBOOL(isDone), NSStringFromBOOL(self.isDownloadFinished), self.proxyBuffer.filledSpaceLength);
+    DDLogVerbose(@"HLSProxyResponse (%@) asking if done, replying %@   isDownloadFinished %@   filledSpaceLength %lu", self, NSStringFromBOOL(isDone), NSStringFromBOOL(self.isDownloadFinished), (unsigned long)self.proxyBuffer.filledSpaceLength);
     return isDone;
 }
 
 // Read data from the download buffer
 - (NSData *)readDataOfLength:(NSUInteger)length
 {
-    DDLogVerbose(@"HLSProxyResponse (%@) asking for bytes, available in buffer: %u", self, self.proxyBuffer.filledSpaceLength);
+    DDLogVerbose(@"HLSProxyResponse (%@) asking for bytes, available in buffer: %lu", self, (unsigned long)self.proxyBuffer.filledSpaceLength);
     NSData *data = [self.proxyBuffer drainData:length];
-    DDLogVerbose(@"HLSProxyResponse (%@) read data of length: %u actual length: %u", self, length, data.length);
+    DDLogVerbose(@"HLSProxyResponse (%@) read data of length: %lu actual length: %lu", self, (unsigned long)length, (unsigned long)data.length);
     return data;
 }
 
@@ -108,7 +108,7 @@ static const int ddLogLevel = LOG_LEVEL_ERROR;
     {
         status =  self.proxyStatusCode;
     }
-    DDLogVerbose(@"HLSProxyResponse asking status, replying with %i", status);
+    DDLogVerbose(@"HLSProxyResponse asking status, replying with %li", (long)status);
     return status;
 }
 
