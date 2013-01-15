@@ -52,6 +52,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	 throttlingDate = nil;
 	 bytesTransferred = 0;*/
 	
+    self.contentLength = ULLONG_MAX;
 	self.totalBytesTransferred = 0;
 	self.bytesTransferred = 0;
     
@@ -105,7 +106,9 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
 	{
 		NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:n2N(self.mySong.songId), @"id", nil];
-		[parameters setObject:@"true" forKey:@"estimateContentLength"];
+        
+        // Causes a problem with some files in Subsonic, it will cut them off halfway
+		//[parameters setObject:@"true" forKey:@"estimateContentLength"];
 		
 		if (self.maxBitrateSetting != 0)
 		{
