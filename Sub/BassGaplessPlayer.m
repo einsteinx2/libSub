@@ -37,6 +37,9 @@ LOG_LEVEL_ISUB_DEBUG
 		_streamQueue = [NSMutableArray arrayWithCapacity:5];
 		_streamGcdQueue = dispatch_queue_create("com.anghami.BassStreamQueue", NULL);
 		_ringBuffer = [EX2RingBuffer ringBufferWithLength:BytesFromKiB(640)];
+        
+        _equalizer = [[BassEqualizer alloc] init];
+        _visualizer = [[BassVisualizer alloc] init];
 		
 		// Keep track of the playlist index
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatePlaylistIndex:) name:ISMSNotification_CurrentPlaylistOrderChanged object:nil];
@@ -791,19 +794,16 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
                  BASS_ChannelSetSync(self.outStream, BASS_SYNC_SLIDE, 0, MyStreamSlideCallback, (__bridge void*)self);
 				 
 				 self.visualizer.channel = self.outStream;
-				 
 				 self.equalizer.channel = self.outStream;
-				 
+                 
                  // Add gain amplification
 				 [self.equalizer createVolumeFx];
                  
-				 // Enable the equalizer if it's turned on
-				 if (settingsS.isEqualizerOn)
-				 {
-					 BassEffectDAO *effectDAO = [[BassEffectDAO alloc] initWithType:BassEffectType_ParametricEQ];
-					 [effectDAO selectPresetId:effectDAO.selectedPresetId];
-					 [self.equalizer applyEqualizerValues];
-				 }
+				 // Prepare the EQ
+                 // This will load the values, and if the EQ was previously enabled, will automatically
+                 // add the EQ values to the stream
+				 BassEffectDAO *effectDAO = [[BassEffectDAO alloc] initWithType:BassEffectType_ParametricEQ];
+                 [effectDAO selectPresetId:effectDAO.selectedPresetId];
 				 
 				 // Add the stream to the queue
                  @synchronized(self.streamQueue)

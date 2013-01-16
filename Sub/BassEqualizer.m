@@ -202,15 +202,14 @@ LOG_LEVEL_ISUB_DEFAULT
 }
 
 - (void)setGain:(float)theGain
-{
+{    
 	_gain = theGain;
 	
 	CGFloat modifiedGainValue = self.isEqActive ? _gain - ISMS_EqualizerGainReduction : _gain;
 	modifiedGainValue = modifiedGainValue < 0. ? 0. : modifiedGainValue;
 	
 	BASS_BFX_VOLUME volumeParamsInit = {0, modifiedGainValue};
-	BASS_BFX_VOLUME *volumeParams = &volumeParamsInit;
-	BASS_FXSetParameters(self.volumeFx, volumeParams);
+	BASS_FXSetParameters(self.volumeFx, &volumeParamsInit);
 }
 
 - (float)gain
