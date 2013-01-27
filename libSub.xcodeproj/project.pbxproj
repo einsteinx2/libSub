@@ -680,6 +680,10 @@
 		D0CC42A41695DA9100331944 /* EX2KitOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2B616901D6D009B2732 /* EX2KitOSX.framework */; };
 		D0CC42A51695DA9100331944 /* ZipKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 536C98B216619BC4005A73C6 /* ZipKit.framework */; };
 		D0CC42A61695DA9100331944 /* SBJson.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 536C981D16619B44005A73C6 /* SBJson.framework */; };
+		D0E6BDE116B43DA800312877 /* WBDatabaseLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E6BDDF16B43DA800312877 /* WBDatabaseLoader.h */; };
+		D0E6BDE216B43DA800312877 /* WBDatabaseLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = D0E6BDDF16B43DA800312877 /* WBDatabaseLoader.h */; };
+		D0E6BDE316B43DA800312877 /* WBDatabaseLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6BDE016B43DA800312877 /* WBDatabaseLoader.m */; };
+		D0E6BDE416B43DA800312877 /* WBDatabaseLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = D0E6BDE016B43DA800312877 /* WBDatabaseLoader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1244,6 +1248,8 @@
 		53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
 		53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		53E3E70B1690387800F195C5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
+		D0E6BDDF16B43DA800312877 /* WBDatabaseLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDatabaseLoader.h; sourceTree = "<group>"; };
+		D0E6BDE016B43DA800312877 /* WBDatabaseLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBDatabaseLoader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1655,6 +1661,8 @@
 				536C96F7166196E5005A73C6 /* PMSLoaders.h */,
 				536C96F8166196E5005A73C6 /* PMSLoginLoader.h */,
 				536C96F9166196E5005A73C6 /* PMSLoginLoader.m */,
+				D0E6BDDF16B43DA800312877 /* WBDatabaseLoader.h */,
+				D0E6BDE016B43DA800312877 /* WBDatabaseLoader.m */,
 			);
 			name = "PMS Specific";
 			sourceTree = "<group>";
@@ -2260,6 +2268,7 @@
 				53B3BD5E16990CFE00DCFC9C /* DDData.h in Headers */,
 				53B3BD6216990CFE00DCFC9C /* DDNumber.h in Headers */,
 				53B3BD6616990CFE00DCFC9C /* DDRange.h in Headers */,
+				D0E6BDE216B43DA800312877 /* WBDatabaseLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2426,6 +2435,7 @@
 				53B3BDAE16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */,
 				53B3BDB416990DF100DCFC9C /* HLSProxyConnection.h in Headers */,
 				53B3BDE51699137500DCFC9C /* HLSProxyResponse.h in Headers */,
+				D0E6BDE116B43DA800312877 /* WBDatabaseLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2873,6 +2883,7 @@
 				5304A1A91690173B009B2732 /* libSubOSX.m in Sources */,
 				53B3BDB716990DF100DCFC9C /* HLSProxyConnection.m in Sources */,
 				53B3BDE81699137500DCFC9C /* HLSProxyResponse.m in Sources */,
+				D0E6BDE416B43DA800312877 /* WBDatabaseLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2994,6 +3005,7 @@
 				53B3BDB016990D1F00DCFC9C /* GCDAsyncSocket.m in Sources */,
 				53B3BDB616990DF100DCFC9C /* HLSProxyConnection.m in Sources */,
 				53B3BDE71699137500DCFC9C /* HLSProxyResponse.m in Sources */,
+				D0E6BDE316B43DA800312877 /* WBDatabaseLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

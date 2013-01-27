@@ -361,7 +361,24 @@ LOG_LEVEL_ISUB_DEFAULT
 		}
 	}];
 	
+    [self setCurrentMetadataDatabase];
 	[self updateTableDefinitions];
+}
+
+/* 
+    The metadata database houses all the metadata for a WaveBox server.  This db queue will get changed every
+    time a new WaveBox server is selected.
+*/
+- (void)setCurrentMetadataDatabase
+{
+    self.metadataDbQueue = nil;
+    
+    NSString *path = [NSString stringWithFormat:@"%@/mediadbs/%@.db", self.databaseFolderPath, settingsS.uuid];
+    self.metadataDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [self.metadataDbQueue inDatabase:^(FMDatabase *db)
+    {
+        [db executeUpdate:@"PRAGMA cache_size = 1"];
+    }];
 }
 
 - (void)updateTableDefinitions

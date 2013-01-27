@@ -1,0 +1,58 @@
+//
+//  WBDatabaseLoader.m
+//  libSub
+//
+//  Created by Justin Hill on 1/26/13.
+//  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
+//
+
+
+#import "WBDatabaseLoader.h"
+LOG_LEVEL_ISUB_DEFAULT
+
+@implementation WBDatabaseLoader
+
+- (id)initWithCallbackBlock:(LoaderCallback)theBlock serverUuid:(NSString *)serverUuid
+{
+    self = [super initWithCallbackBlock:theBlock];
+    self.uuid = serverUuid;
+    
+    return self;
+}
+
+- (NSURLRequest *)createRequest
+{
+    return [NSMutableURLRequest requestWithPMSAction:@"database"];
+}
+
+- (void)processResponse
+{
+    __autoreleasing NSError *err;
+    
+    NSString *dbFolderPath = [databaseS.databaseFolderPath stringByAppendingPathComponent:@"mediadbs"];
+    NSString *dbPath = [dbFolderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", self.uuid]];
+    
+    ALog(@"%@", dbPath);
+    ALog(@"%@", err);
+
+    if(![[NSFileManager defaultManager] fileExistsAtPath:dbFolderPath])
+    {
+        ALog(@"Attempting to create mediadbs directory");
+        [[NSFileManager defaultManager] createDirectoryAtPath:dbFolderPath withIntermediateDirectories:YES attributes:nil error:&err];
+    }
+    
+    if([self.receivedData writeToFile:dbPath atomically:YES])
+    {
+        ALog(@"Database file written to disk successfully");
+    }
+    else
+    {
+        [self informDelegateLoadingFailed:[[NSError alloc] initWithDomain:@"Unable to write database to disk" code:1 userInfo:nil]];
+         return;
+    }
+    
+    // Notify the delegate that the loading is finished
+    [self informDelegateLoadingFinished];
+}
+
+@end

@@ -16,6 +16,8 @@
 	[encoder encodeObject:self.username];
 	[encoder encodeObject:self.password];
 	[encoder encodeObject:self.type];
+    [encoder encodeObject:self.lastQueryId];
+    [encoder encodeObject:self.uuid];
 }
 
 
@@ -27,6 +29,8 @@
 		_username = [[decoder decodeObject] copy];
 		_password = [[decoder decodeObject] copy];
 		_type = [[decoder decodeObject] copy];
+        _lastQueryId = [[decoder decodeObject] copy];
+        _uuid = [[decoder decodeObject] copy];
 	}
 	
 	return self;

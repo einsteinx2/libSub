@@ -23,6 +23,7 @@
 @property (copy) NSString *username;
 @property (copy) NSString *password;
 @property (copy) NSString *type;
-
+@property (copy) NSString *lastQueryId;
+@property (copy) NSString *uuid;
 
 @end

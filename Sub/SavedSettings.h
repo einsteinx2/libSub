@@ -29,6 +29,8 @@ typedef enum
 	__strong NSString *_urlString;
 	__strong NSString *_username;
 	__strong NSString *_password;
+    __strong NSString *_uuid;
+    __strong NSString *_lastQueryId;
     __strong NSString *_sessionId;
 	
 	BOOL _isPopupsEnabled;
@@ -67,6 +69,8 @@ typedef enum
 @property (copy) NSString *urlString;
 @property (copy) NSString *username;
 @property (copy) NSString *password;
+@property (copy) NSString *uuid;
+@property (copy) NSString *lastQueryId;
 @property (copy) NSString *sessionId;
 
 @property (copy) NSString *redirectUrlString;

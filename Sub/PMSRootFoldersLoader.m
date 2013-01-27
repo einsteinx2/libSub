@@ -7,6 +7,7 @@
 //
 
 #import "PMSRootFoldersLoader.h"
+LOG_LEVEL_ISUB_DEFAULT
 
 @implementation PMSRootFoldersLoader
 
@@ -24,6 +25,12 @@
     return [NSMutableURLRequest requestWithPMSAction:action];
 }
 
+- (void)startLoad
+{
+    // processResponse will take care of talking to the metadata db and getting the necessary information.
+    [self processResponse];
+}
+
 - (void)processResponse
 {			
 	// Clear the database
@@ -31,47 +38,31 @@
 	
 	// Create the temp table to store records
 	[self resetRootFolderTempTable];
-	
-	//NSDate *startTime = [NSDate date];
-	
-	NSString *responseString = [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding];
-    DLog(@"%@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
-	
-	NSDictionary *response = [[[SBJsonParser alloc] init] objectWithString:responseString];
-	
-	/*// Check for an error response
-	if ([response objectForKey:@"error"])
-	{
-		// Do something
-	}*/
-	
-	NSArray *folders = [response objectForKey:@"folders"];
-	for (NSDictionary *folder in folders)
-	{
-		@autoreleasepool 
-		{
-			NSString *folderId = [folder objectForKey:@"folderId"];
-			NSString *folderName = [folder objectForKey:@"folderName"];
-			[self addRootFolderToTempCache:folderId name:folderName];
-		}
-	}
-	
-	/*// Treat artists as folders for now
-	NSArray *artists = [response objectForKey:@"artists"];
-	for (NSDictionary *artist in artists)
-	{
-		@autoreleasepool 
-		{
-			NSString *artistId = [artist objectForKey:@"artistId"];
-			NSString *artistName = [artist objectForKey:@"artistName"];
-			[self addRootFolderToTempCache:artistId name:artistName];
-		}
-	}*/
-	
-	[self moveRootFolderTempTableRecordsToMainCache];
-	[self resetRootFolderTempTable];
-	
-	// Update the count
+    
+    [databaseS.metadataDbQueue inDatabase:^(FMDatabase *db)
+    {
+        FMResultSet *mediaFolders = [db executeQuery:@"SELECT * FROM folder WHERE parent_folder_id IS NULL"];
+        while ([mediaFolders next])
+        {
+            NSString *folderId = [mediaFolders stringForColumn:@"folder_id"];
+            FMResultSet *folderContents = [db executeQuery:@"SELECT folder_id, folder_name FROM folder WHERE parent_folder_id = ?", folderId];
+            while ([folderContents next])
+            {
+                NSString *fId = [folderContents stringForColumn:@"folder_id"];
+                NSString *fName = [folderContents stringForColumn:@"folder_name"];
+                
+                [self addRootFolderToTempCache:fId name:fName];
+            }
+            [folderContents close];
+        }
+        [mediaFolders close];
+    }];
+    
+    // Move any remaining temp records to main cache
+    [self moveRootFolderTempTableRecordsToMainCache];
+    [self resetRootFolderTempTable];
+    
+    // Update the count
 	NSInteger totalCount = [self rootFolderUpdateCount];
     
 	NSString *tableName = [NSString stringWithFormat:@"rootFolderNameCache%@", self.tableModifier];
@@ -92,13 +83,38 @@
 	
 	// Save the reload time
 	[settingsS setRootFoldersReloadTime:[NSDate date]];
+    
+    // Update the count
+    [self rootFolderUpdateCount];
+    
+    // Notify the delegate that the loading is finished
+    [self informDelegateLoadingFinished];
+    
 	
-	// Notify the delegate that the loading is finished
-	[self informDelegateLoadingFinished];
-		
-	// Clean up the connection
-	self.connection = nil;
-	self.receivedData = nil;
+//	NSArray *folders = [response objectForKey:@"folders"];
+//	for (NSDictionary *folder in folders)
+//	{
+//		@autoreleasepool 
+//		{
+//			NSString *folderId = [folder objectForKey:@"folderId"];
+//			NSString *folderName = [folder objectForKey:@"folderName"];
+//			[self addRootFolderToTempCache:folderId name:folderName];
+//		}
+//	}
+	
+	/*// Treat artists as folders for now
+	NSArray *artists = [response objectForKey:@"artists"];
+	for (NSDictionary *artist in artists)
+	{
+		@autoreleasepool 
+		{
+			NSString *artistId = [artist objectForKey:@"artistId"];
+			NSString *artistName = [artist objectForKey:@"artistName"];
+			[self addRootFolderToTempCache:artistId name:artistName];
+		}
+	}*/
+	
+
 }
 
 @end
