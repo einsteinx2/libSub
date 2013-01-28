@@ -116,15 +116,6 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     
     // Create a new player and just initialize BASS, but don't play anything
     self.player = [[BassGaplessPlayer alloc] initWithDelegate:self.delegate];
-    //[self.player bassInit];
-    
-    // Load the EQ
-    //BassEffectDAO *effectDAO = [[BassEffectDAO alloc] initWithType:BassEffectType_ParametricEQ];
-    //[effectDAO selectPresetId:effectDAO.selectedPresetId];
-    
-    // Pause the player
-    //BASS_Pause();
-    //self.player.isPlaying = NO;
 }
 
 - (BassEqualizer *)equalizer
