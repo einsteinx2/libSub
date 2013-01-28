@@ -398,6 +398,8 @@
 	_username = _username ? _username : DEFAULT_USER_NAME;
 	_password = [_userDefaults stringForKey:@"password"];
 	_password = _password ? _password : DEFAULT_PASSWORD;
+    _uuid = [_userDefaults stringForKey:@"uuid"];
+    _lastQueryId = [_userDefaults stringForKey:@"lastQueryId"];
     _sessionId = [_userDefaults stringForKey:[NSString stringWithFormat:@"sessionId%@", self.urlString.md5]];
 }
 
@@ -471,6 +473,42 @@
 	{
 		_password = [pass copy];
 		[_userDefaults setObject:pass forKey:@"password"];
+		[_userDefaults synchronize];
+	}
+}
+
+- (NSString *)uuid
+{
+	@synchronized(self)
+	{
+		return _uuid;
+	}
+}
+
+- (void)setUuid:(NSString *)uuid
+{
+	@synchronized(self)
+	{
+		_uuid = [uuid copy];
+		[_userDefaults setObject:uuid forKey:@"uuid"];
+		[_userDefaults synchronize];
+	}
+}
+
+- (NSString *)lastQueryId
+{
+	@synchronized(self)
+	{
+		return _uuid;
+	}
+}
+
+- (void)setLastQueryId:(NSString *)lastQueryId
+{
+	@synchronized(self)
+	{
+		_lastQueryId = [lastQueryId copy];
+		[_userDefaults setObject:lastQueryId forKey:@"lastQueryId"];
 		[_userDefaults synchronize];
 	}
 }

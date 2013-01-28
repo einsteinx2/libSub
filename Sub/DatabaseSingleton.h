@@ -30,12 +30,14 @@
 @property (strong) FMDatabaseQueue *cacheQueueDbQueue;
 @property (strong) FMDatabaseQueue *lyricsDbQueue;
 @property (strong) FMDatabaseQueue *bookmarksDbQueue;
+@property (strong) FMDatabaseQueue *metadataDbQueue;
 
 @property (strong) ISMSQueueAllLoader *queueAll;
 
 + (id)sharedInstance;
 
 - (void)setupDatabases;
+- (void)setCurrentMetadataDatabase;
 - (void)closeAllDatabases;
 - (void)resetCoverArtCache;
 - (void)resetFolderCache;

@@ -10,5 +10,6 @@
 #define iSub_PMSLoaders_h
 
 #import "PMSLoginLoader.h"
+#import "WBDatabaseLoader.h"
 
 #endif
