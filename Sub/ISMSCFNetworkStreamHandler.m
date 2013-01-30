@@ -153,12 +153,14 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	
 	CFStreamClientContext ctxt = {0, (__bridge void*)self, NULL, NULL, NULL};
     
+    CFHTTPMessageRef messageRef = NULL;
+    
     // Make sure the request URL is not nil, or we will have a strange looking SIGTRAP crash with a misleading stack trace
     if (!request.URL)
         goto Bail;
 	
 	// Create the request
-	CFHTTPMessageRef messageRef = CFHTTPMessageCreateRequest(kCFAllocatorDefault, (__bridge CFStringRef)request.HTTPMethod, (__bridge CFURLRef)request.URL, kCFHTTPVersion1_1);
+	messageRef = CFHTTPMessageCreateRequest(kCFAllocatorDefault, (__bridge CFStringRef)request.HTTPMethod, (__bridge CFURLRef)request.URL, kCFHTTPVersion1_1);
 	if (messageRef == NULL) goto Bail;
     
     // Set the URL

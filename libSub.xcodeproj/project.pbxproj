@@ -482,7 +482,7 @@
 		536C979E166197FB005A73C6 /* AudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C979C166197FB005A73C6 /* AudioEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C979F166197FB005A73C6 /* AudioEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C979D166197FB005A73C6 /* AudioEngine.m */; };
 		536C97A216619820005A73C6 /* sqlite3.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C97A016619820005A73C6 /* sqlite3.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		536C97A316619820005A73C6 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; };
+		536C97A316619820005A73C6 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		536C97AB166199BB005A73C6 /* FlurryAnalytics.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C97A9166199BB005A73C6 /* FlurryAnalytics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C97AC166199BB005A73C6 /* libFlurryAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97AA166199BB005A73C6 /* libFlurryAnalytics.a */; };
 		536C97CE16619AE3005A73C6 /* FMDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C97C116619AE3005A73C6 /* FMDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -675,7 +675,7 @@
 		53B3BDE81699137500DCFC9C /* HLSProxyResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDE41699137500DCFC9C /* HLSProxyResponse.m */; };
 		53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53C7F4401661BC3100C5F61E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */; };
-		53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; };
+		53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3E70B1690387800F195C5 /* libz.dylib */; };
 		D0CC42A41695DA9100331944 /* EX2KitOSX.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2B616901D6D009B2732 /* EX2KitOSX.framework */; };
 		D0CC42A51695DA9100331944 /* ZipKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 536C98B216619BC4005A73C6 /* ZipKit.framework */; };
