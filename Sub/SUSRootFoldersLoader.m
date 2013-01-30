@@ -128,7 +128,7 @@
 						}
 					}
 					
-					NSString *indexName = [TBXML valueOfAttributeNamed:@"name" forElement:indexElement];
+					NSString *indexName = [[TBXML valueOfAttributeNamed:@"name" forElement:indexElement] cleanString];
 					[self addRootFolderIndexToCache:rowIndex count:sectionCount name:indexName];
 					//BOOL success = [self addRootFolderIndexToCache:rowIndex count:sectionCount name:indexName];
 					//DLog(@"Adding index %@  count: %i  success: %i", indexName, sectionCount, success);
