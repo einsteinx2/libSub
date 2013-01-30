@@ -155,11 +155,14 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
     
     // Make sure the request URL is not nil, or we will have a strange looking SIGTRAP crash with a misleading stack trace
     if (!request.URL)
-        goto Bail;
+    {
+        [self bail:NULL];
+        return;
+    }
 	
 	// Create the request
 	CFHTTPMessageRef messageRef = CFHTTPMessageCreateRequest(kCFAllocatorDefault, (__bridge CFStringRef)request.HTTPMethod, (__bridge CFURLRef)request.URL, kCFHTTPVersion1_1);
-	if (messageRef == NULL) goto Bail;
+	if (messageRef == NULL) [self bail:NULL];
     
     // Set the URL
     CFHTTPMessageSetHeaderFieldValue(messageRef, CFSTR("HOST"), (__bridge CFStringRef)[request.URL host]);
@@ -185,14 +188,14 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	
 	// Create the stream for the request.
 	_readStreamRef = CFReadStreamCreateForHTTPRequest(kCFAllocatorDefault, messageRef);
-	if (_readStreamRef == NULL) goto Bail;
+	if (_readStreamRef == NULL) [self bail:messageRef];
 	
 	//	There are times when a server checks the User-Agent to match a well known browser.  This is what Safari used at the time the sample was written
 	//CFHTTPMessageSetHeaderFieldValue( messageRef, CFSTR("User-Agent"), CFSTR("Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/125.5.5 (KHTML, like Gecko) Safari/125")); 
 	
 	// Enable stream redirection
 	if (CFReadStreamSetProperty(_readStreamRef, kCFStreamPropertyHTTPShouldAutoredirect, kCFBooleanTrue) == false)
-		goto Bail;
+		[self bail:messageRef];
 	
 	// Handle SSL connections
 	if([[request.URL absoluteString] rangeOfString:@"https"].location != NSNotFound)
@@ -217,7 +220,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	
 	// Set the client notifier
 	if (CFReadStreamSetClient(_readStreamRef, kNetworkEvents, ReadStreamClientCallBack, &ctxt) == false)
-		goto Bail;
+		[self bail:messageRef];
 	
 	if ([self.mySong isEqualToSong:[playlistS currentSong]])
 	{
@@ -237,18 +240,18 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
     
 	// Start the HTTP connection
 	if (CFReadStreamOpen(_readStreamRef) == false)
-		goto Bail;
+		[self bail:messageRef];
 	
 	//DLog(@"--- STARTING HTTP CONNECTION");
 	
 	if (messageRef != NULL) CFRelease(messageRef);
 	return;
-	
-Bail:
-	if (messageRef != NULL) CFRelease(messageRef);
+}
+
+- (void)bail:(CFHTTPMessageRef)messageRef
+{
+    if (messageRef != NULL) CFRelease(messageRef);
 	[self terminateDownload];
-	
-	return;
 }
 
 - (void)cancel

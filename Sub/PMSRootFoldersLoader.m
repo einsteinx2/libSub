@@ -79,7 +79,6 @@ LOG_LEVEL_ISUB_DEFAULT
         DLog(@"name: %@  row: %ld  count: %ld", name, (long)row, (long)count);
 		[self addRootFolderIndexToCache:row count:count name:name];
 	}
-	//[self addRootFolderIndexToCache:1 count:totalCount name:@"All"];
 	
 	// Save the reload time
 	[settingsS setRootFoldersReloadTime:[NSDate date]];
@@ -90,31 +89,9 @@ LOG_LEVEL_ISUB_DEFAULT
     // Notify the delegate that the loading is finished
     [self informDelegateLoadingFinished];
     
-	
-//	NSArray *folders = [response objectForKey:@"folders"];
-//	for (NSDictionary *folder in folders)
-//	{
-//		@autoreleasepool 
-//		{
-//			NSString *folderId = [folder objectForKey:@"folderId"];
-//			NSString *folderName = [folder objectForKey:@"folderName"];
-//			[self addRootFolderToTempCache:folderId name:folderName];
-//		}
-//	}
-	
-	/*// Treat artists as folders for now
-	NSArray *artists = [response objectForKey:@"artists"];
-	for (NSDictionary *artist in artists)
-	{
-		@autoreleasepool 
-		{
-			NSString *artistId = [artist objectForKey:@"artistId"];
-			NSString *artistName = [artist objectForKey:@"artistName"];
-			[self addRootFolderToTempCache:artistId name:artistName];
-		}
-	}*/
-	
-
+    // Clean up the connection
+	self.connection = nil;
+	self.receivedData = nil;
 }
 
 @end

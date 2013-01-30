@@ -28,7 +28,7 @@
 		_album = [(NSString *)N2n([dictionary objectForKey:@"albumName"]) cleanString];
 		_genre = [(NSString *)N2n([dictionary objectForKey:@"genreName"]) cleanString];
 		_coverArtId = N2n([dictionary objectForKey:@"artId"]);
-		_suffix = [[N2n([dictionary objectForKey:@"fileType"]) stringValue] cleanString];
+		_suffix = [N2n([dictionary objectForKey:@"fileType"]) cleanString];
 		_duration = N2n([[dictionary objectForKey:@"duration"] copy]);
 		_bitRate = N2n([[dictionary objectForKey:@"bitrate"] copy]);
 		_track = N2n([[dictionary objectForKey:@"trackNumber"] copy]);

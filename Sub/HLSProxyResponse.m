@@ -146,11 +146,11 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
     
     // Make sure the request URL is not nil, or we will have a strange looking SIGTRAP crash with a misleading stack trace
     if (!self.proxyRequest.URL)
-        goto Bail;
+        [self bail: NULL];
 	
 	// Create the request
 	CFHTTPMessageRef messageRef = CFHTTPMessageCreateRequest(kCFAllocatorDefault, (__bridge CFStringRef)self.proxyRequest.HTTPMethod, (__bridge CFURLRef)self.proxyRequest.URL, kCFHTTPVersion1_1);
-	if (messageRef == NULL) goto Bail;
+	if (messageRef == NULL) [self bail: NULL];
     
     // Set the URL
     CFHTTPMessageSetHeaderFieldValue(messageRef, CFSTR("HOST"), (__bridge CFStringRef)[self.proxyRequest.URL host]);
@@ -174,14 +174,14 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		
 	// Create the stream for the request.
 	_readStreamRef = CFReadStreamCreateForHTTPRequest(kCFAllocatorDefault, messageRef);
-	if (_readStreamRef == NULL) goto Bail;
+	if (_readStreamRef == NULL) [self bail: messageRef];
 	
 	//	There are times when a server checks the User-Agent to match a well known browser.  This is what Safari used at the time the sample was written
 	//CFHTTPMessageSetHeaderFieldValue( messageRef, CFSTR("User-Agent"), CFSTR("Mozilla/5.0 (Macintosh; U; PPC Mac OS X; en-us) AppleWebKit/125.5.5 (KHTML, like Gecko) Safari/125"));
 	
 	// Enable stream redirection
 	if (CFReadStreamSetProperty(_readStreamRef, kCFStreamPropertyHTTPShouldAutoredirect, kCFBooleanTrue) == false)
-		goto Bail;
+		[self bail: messageRef];
 	
 	// Handle SSL connections
 	if([[self.proxyRequest.URL absoluteString] rangeOfString:@"https"].location != NSNotFound)
@@ -206,14 +206,14 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	
 	// Set the client notifier
 	if (CFReadStreamSetClient(_readStreamRef, kNetworkEvents, ReadStreamClientCallBack, &ctxt) == false)
-		goto Bail;
+		[self bail: messageRef];
 	
 	// Schedule the stream
 	CFReadStreamScheduleWithRunLoop(_readStreamRef, CFRunLoopGetMain(), kCFRunLoopCommonModes);
     
 	// Start the HTTP connection
 	if (CFReadStreamOpen(_readStreamRef) == false)
-		goto Bail;
+		[self bail: messageRef];
     
     // Initialize the ring buffer. Choosing a small starting value as it is getting read from about as fast as it's being written to
     // but just in case we'll use a large enough maximum length to hold a whole segment of the largest bitrate we support
@@ -222,13 +222,12 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		
 	if (messageRef != NULL) CFRelease(messageRef);
 	return;
-	
-Bail:
-	if (messageRef != NULL) CFRelease(messageRef);
-	[self terminateDownload];
-	
-	return;
+}
 
+-(void)bail:(CFHTTPMessageRef)messageRef
+{
+    if (messageRef != NULL) CFRelease(messageRef);
+	[self terminateDownload];
 }
 
 - (void)retreiveHeaderValues
