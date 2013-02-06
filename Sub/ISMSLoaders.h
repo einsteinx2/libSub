@@ -15,6 +15,8 @@
 #import "ISMSRootFoldersLoader.h"
 #import "ISMSSubFolderLoader.h"
 #import "ISMSQueueAllLoader.h"
+#import "ISMSServerShuffleLoader.h"
+#import "ISMSDropdownFolderLoader.h"
 
 #import "SUSLoaders.h"
 #import "PMSLoaders.h"

@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B16AFD716C2B4D400787BD8 /* ISMSServerShuffleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFD516C2B4D400787BD8 /* ISMSServerShuffleLoader.h */; };
+		3B16AFD816C2B4D400787BD8 /* ISMSServerShuffleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFD516C2B4D400787BD8 /* ISMSServerShuffleLoader.h */; };
+		3B16AFD916C2B4D400787BD8 /* ISMSServerShuffleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFD616C2B4D400787BD8 /* ISMSServerShuffleLoader.m */; };
+		3B16AFDA16C2B4D400787BD8 /* ISMSServerShuffleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFD616C2B4D400787BD8 /* ISMSServerShuffleLoader.m */; };
+		3B16AFDD16C2B53B00787BD8 /* SUSServerShuffleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFDB16C2B53B00787BD8 /* SUSServerShuffleLoader.h */; };
+		3B16AFDE16C2B53B00787BD8 /* SUSServerShuffleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFDB16C2B53B00787BD8 /* SUSServerShuffleLoader.h */; };
+		3B16AFDF16C2B53B00787BD8 /* SUSServerShuffleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFDC16C2B53B00787BD8 /* SUSServerShuffleLoader.m */; };
+		3B16AFE016C2B53B00787BD8 /* SUSServerShuffleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFDC16C2B53B00787BD8 /* SUSServerShuffleLoader.m */; };
+		3B16AFE316C2B54B00787BD8 /* WBServerShuffleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFE116C2B54B00787BD8 /* WBServerShuffleLoader.h */; };
+		3B16AFE416C2B54B00787BD8 /* WBServerShuffleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFE116C2B54B00787BD8 /* WBServerShuffleLoader.h */; };
+		3B16AFE516C2B54B00787BD8 /* WBServerShuffleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFE216C2B54B00787BD8 /* WBServerShuffleLoader.m */; };
+		3B16AFE616C2B54B00787BD8 /* WBServerShuffleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFE216C2B54B00787BD8 /* WBServerShuffleLoader.m */; };
+		3B16AFEB16C2C95F00787BD8 /* ISMSDropdownFolderLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFE916C2C95F00787BD8 /* ISMSDropdownFolderLoader.h */; };
+		3B16AFEC16C2C95F00787BD8 /* ISMSDropdownFolderLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFE916C2C95F00787BD8 /* ISMSDropdownFolderLoader.h */; };
+		3B16AFED16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFEA16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m */; };
+		3B16AFEE16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFEA16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m */; };
+		3B16AFF116C2C98200787BD8 /* SUSDropdownFolderLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFEF16C2C98200787BD8 /* SUSDropdownFolderLoader.h */; };
+		3B16AFF216C2C98200787BD8 /* SUSDropdownFolderLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFEF16C2C98200787BD8 /* SUSDropdownFolderLoader.h */; };
+		3B16AFF316C2C98200787BD8 /* SUSDropdownFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFF016C2C98200787BD8 /* SUSDropdownFolderLoader.m */; };
+		3B16AFF416C2C98200787BD8 /* SUSDropdownFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFF016C2C98200787BD8 /* SUSDropdownFolderLoader.m */; };
+		3B16AFF716C2C98F00787BD8 /* WBDropdownFolderLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFF516C2C98F00787BD8 /* WBDropdownFolderLoader.h */; };
+		3B16AFF816C2C98F00787BD8 /* WBDropdownFolderLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B16AFF516C2C98F00787BD8 /* WBDropdownFolderLoader.h */; };
+		3B16AFF916C2C98F00787BD8 /* WBDropdownFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFF616C2C98F00787BD8 /* WBDropdownFolderLoader.m */; };
+		3B16AFFA16C2C98F00787BD8 /* WBDropdownFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B16AFF616C2C98F00787BD8 /* WBDropdownFolderLoader.m */; };
 		3B2FC308169502F700136926 /* libbass_ape.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CA16901EE4009B2732 /* libbass_ape.dylib */; };
 		3B2FC309169502F700136926 /* libbass_fx.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CB16901EE4009B2732 /* libbass_fx.dylib */; };
 		3B2FC30A169502F700136926 /* libbass_mpc.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5304A2CC16901EE4009B2732 /* libbass_mpc.dylib */; };
@@ -912,6 +936,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3B16AFD516C2B4D400787BD8 /* ISMSServerShuffleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSServerShuffleLoader.h; sourceTree = "<group>"; };
+		3B16AFD616C2B4D400787BD8 /* ISMSServerShuffleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSServerShuffleLoader.m; sourceTree = "<group>"; };
+		3B16AFDB16C2B53B00787BD8 /* SUSServerShuffleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSServerShuffleLoader.h; sourceTree = "<group>"; };
+		3B16AFDC16C2B53B00787BD8 /* SUSServerShuffleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSServerShuffleLoader.m; sourceTree = "<group>"; };
+		3B16AFE116C2B54B00787BD8 /* WBServerShuffleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBServerShuffleLoader.h; sourceTree = "<group>"; };
+		3B16AFE216C2B54B00787BD8 /* WBServerShuffleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBServerShuffleLoader.m; sourceTree = "<group>"; };
+		3B16AFE916C2C95F00787BD8 /* ISMSDropdownFolderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSDropdownFolderLoader.h; sourceTree = "<group>"; };
+		3B16AFEA16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSDropdownFolderLoader.m; sourceTree = "<group>"; };
+		3B16AFEF16C2C98200787BD8 /* SUSDropdownFolderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSDropdownFolderLoader.h; sourceTree = "<group>"; };
+		3B16AFF016C2C98200787BD8 /* SUSDropdownFolderLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSDropdownFolderLoader.m; sourceTree = "<group>"; };
+		3B16AFF516C2C98F00787BD8 /* WBDropdownFolderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDropdownFolderLoader.h; sourceTree = "<group>"; };
+		3B16AFF616C2C98F00787BD8 /* WBDropdownFolderLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBDropdownFolderLoader.m; sourceTree = "<group>"; };
 		3B38845316BAEA5D009AE1D5 /* ISMSQuickAlbumsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSQuickAlbumsLoader.h; sourceTree = "<group>"; };
 		3B38845416BAEA5D009AE1D5 /* ISMSQuickAlbumsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSQuickAlbumsLoader.m; sourceTree = "<group>"; };
 		3B38845916BAEAD0009AE1D5 /* WBQuickAlbumsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQuickAlbumsLoader.h; sourceTree = "<group>"; };
@@ -1358,6 +1394,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B16AFCE16C2B47400787BD8 /* Server Shuffle */ = {
+			isa = PBXGroup;
+			children = (
+				3B16AFD516C2B4D400787BD8 /* ISMSServerShuffleLoader.h */,
+				3B16AFD616C2B4D400787BD8 /* ISMSServerShuffleLoader.m */,
+				3B16AFDB16C2B53B00787BD8 /* SUSServerShuffleLoader.h */,
+				3B16AFDC16C2B53B00787BD8 /* SUSServerShuffleLoader.m */,
+				3B16AFE116C2B54B00787BD8 /* WBServerShuffleLoader.h */,
+				3B16AFE216C2B54B00787BD8 /* WBServerShuffleLoader.m */,
+			);
+			name = "Server Shuffle";
+			sourceTree = "<group>";
+		};
+		3B16AFE816C2C92E00787BD8 /* Dropdown Folders */ = {
+			isa = PBXGroup;
+			children = (
+				3B16AFE916C2C95F00787BD8 /* ISMSDropdownFolderLoader.h */,
+				3B16AFEA16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m */,
+				3B16AFEF16C2C98200787BD8 /* SUSDropdownFolderLoader.h */,
+				3B16AFF016C2C98200787BD8 /* SUSDropdownFolderLoader.m */,
+				3B16AFF516C2C98F00787BD8 /* WBDropdownFolderLoader.h */,
+				3B16AFF616C2C98F00787BD8 /* WBDropdownFolderLoader.m */,
+			);
+			name = "Dropdown Folders";
+			sourceTree = "<group>";
+		};
 		3B38844C16BAEA39009AE1D5 /* Quick Albums */ = {
 			isa = PBXGroup;
 			children = (
@@ -1711,8 +1773,10 @@
 		536C971416619717005A73C6 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
+				3B16AFE816C2C92E00787BD8 /* Dropdown Folders */,
 				536C97151661971E005A73C6 /* ISMSLoaders.h */,
 				3B38844C16BAEA39009AE1D5 /* Quick Albums */,
+				3B16AFCE16C2B47400787BD8 /* Server Shuffle */,
 				536C972816619751005A73C6 /* Status */,
 				536C97271661974A005A73C6 /* Playlists */,
 				536C972616619744005A73C6 /* Cover Art */,
@@ -2295,6 +2359,12 @@
 				D0E6BDE216B43DA800312877 /* WBDatabaseLoader.h in Headers */,
 				3B38845616BAEA5D009AE1D5 /* ISMSQuickAlbumsLoader.h in Headers */,
 				3B38845C16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.h in Headers */,
+				3B16AFD816C2B4D400787BD8 /* ISMSServerShuffleLoader.h in Headers */,
+				3B16AFDE16C2B53B00787BD8 /* SUSServerShuffleLoader.h in Headers */,
+				3B16AFE416C2B54B00787BD8 /* WBServerShuffleLoader.h in Headers */,
+				3B16AFEC16C2C95F00787BD8 /* ISMSDropdownFolderLoader.h in Headers */,
+				3B16AFF216C2C98200787BD8 /* SUSDropdownFolderLoader.h in Headers */,
+				3B16AFF816C2C98F00787BD8 /* WBDropdownFolderLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2464,6 +2534,12 @@
 				D0E6BDE116B43DA800312877 /* WBDatabaseLoader.h in Headers */,
 				3B38845516BAEA5D009AE1D5 /* ISMSQuickAlbumsLoader.h in Headers */,
 				3B38845B16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.h in Headers */,
+				3B16AFD716C2B4D400787BD8 /* ISMSServerShuffleLoader.h in Headers */,
+				3B16AFDD16C2B53B00787BD8 /* SUSServerShuffleLoader.h in Headers */,
+				3B16AFE316C2B54B00787BD8 /* WBServerShuffleLoader.h in Headers */,
+				3B16AFEB16C2C95F00787BD8 /* ISMSDropdownFolderLoader.h in Headers */,
+				3B16AFF116C2C98200787BD8 /* SUSDropdownFolderLoader.h in Headers */,
+				3B16AFF716C2C98F00787BD8 /* WBDropdownFolderLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2914,6 +2990,12 @@
 				D0E6BDE416B43DA800312877 /* WBDatabaseLoader.m in Sources */,
 				3B38845816BAEA5D009AE1D5 /* ISMSQuickAlbumsLoader.m in Sources */,
 				3B38845E16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.m in Sources */,
+				3B16AFDA16C2B4D400787BD8 /* ISMSServerShuffleLoader.m in Sources */,
+				3B16AFE016C2B53B00787BD8 /* SUSServerShuffleLoader.m in Sources */,
+				3B16AFE616C2B54B00787BD8 /* WBServerShuffleLoader.m in Sources */,
+				3B16AFEE16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m in Sources */,
+				3B16AFF416C2C98200787BD8 /* SUSDropdownFolderLoader.m in Sources */,
+				3B16AFFA16C2C98F00787BD8 /* WBDropdownFolderLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3038,6 +3120,12 @@
 				D0E6BDE316B43DA800312877 /* WBDatabaseLoader.m in Sources */,
 				3B38845716BAEA5D009AE1D5 /* ISMSQuickAlbumsLoader.m in Sources */,
 				3B38845D16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.m in Sources */,
+				3B16AFD916C2B4D400787BD8 /* ISMSServerShuffleLoader.m in Sources */,
+				3B16AFDF16C2B53B00787BD8 /* SUSServerShuffleLoader.m in Sources */,
+				3B16AFE516C2B54B00787BD8 /* WBServerShuffleLoader.m in Sources */,
+				3B16AFED16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m in Sources */,
+				3B16AFF316C2C98200787BD8 /* SUSDropdownFolderLoader.m in Sources */,
+				3B16AFF916C2C98F00787BD8 /* WBDropdownFolderLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
