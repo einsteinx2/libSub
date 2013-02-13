@@ -71,6 +71,14 @@
 		[self.dbQueue inDatabase:^(FMDatabase *db)
 		{
 			[db executeUpdate:@"UPDATE cachedSongs SET finished = 'YES', cachedDate = ? WHERE md5 = ?", @((unsigned long long)[[NSDate date] timeIntervalSince1970]), [self.path md5]];
+            
+            // get the file path so we can check its size
+            NSString *path = [settingsS.songCachePath stringByAppendingPathComponent:self.path.md5];
+            
+            // get the attributes dictionary
+            NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+            [db executeUpdate:@"INSERT INTO sizesSongs VALUES (?, ?)", self.songId, [NSNumber numberWithInt:[attr[@"NSFileSize"] intValue]]];
+            ALog(@"Size for song \"%@\" successfully added to database on cache completion", self.title);
 		}];
 		
 		[self insertIntoCachedSongsLayoutDbQueue];

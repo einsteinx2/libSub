@@ -266,6 +266,40 @@ LOG_LEVEL_ISUB_DEFAULT
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE genresSongs (md5 TEXT UNIQUE, %@)", [ISMSSong standardSongColumnSchema]]];
 			[db executeUpdate:@"CREATE INDEX songGenre ON genresSongs (genre)"];
 		}
+        ALog(@"checking if sizes table exists");
+        if (![db tableExists:@"sizesSongs"])
+        {
+            [db executeUpdate:@"CREATE TABLE sizesSongs(song_id TEXT UNIQUE, size INTEGER)"];
+            
+            FMResultSet *result = [db executeQuery:@"SELECT * FROM cachedSongs"];
+            
+            while ([result next])
+            {
+                NSString *songId = [result stringForColumn:@"songId"];
+                NSString *path = [result stringForColumn:@"path"];
+                NSString *filePath = [settingsS.songCachePath stringByAppendingPathComponent:path.md5];
+                
+                NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+                                
+                if (attr)
+                {
+                    //ALog(@"%@", attr);
+                    NSNumber *fileSize = [NSNumber numberWithInt:[attr[@"NSFileSize"] intValue]];
+                    [db executeUpdate:@"INSERT INTO sizesSongs VALUES(?, ?)", songId, fileSize];
+                    ALog(@"Added %@ to the size table (%@)", [result stringForColumn:@"title"], attr[@"NSFileSize"]);
+                }
+                else
+                {
+                    ALog(@"path: %@", path);
+                }
+                
+            }
+        }
+        else
+        {
+            //ALog(@"Dropping sizesSongs");
+            //[db executeUpdate:@"DROP TABLE sizesSongs"];
+        }
 	}];
 	
 	// Handle moving the song cache database if necessary

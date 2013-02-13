@@ -77,7 +77,15 @@
 				else if ([value isKindOfClass:[NSString class]])
 				{
 					// handle single value for key
-					[postString appendFormat:@"&%@=%@", [key URLEncodeString], [(NSString*)value URLEncodeString]];
+                    // if we're scrobbling, do not url encode the value, as we use commas in the event.
+                    if ([action isEqualToString:@"scrobble"])
+                    {
+                        [postString appendFormat:@"&%@=%@", [key URLEncodeString], (NSString*)value];
+                    }
+                    else
+                    {
+                        [postString appendFormat:@"&%@=%@", [key URLEncodeString], [(NSString*)value URLEncodeString]];
+                    }
 				}
 			}
 		}

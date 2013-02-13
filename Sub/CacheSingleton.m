@@ -127,17 +127,36 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)findCacheSize
 {
-	unsigned long long size = 0;
-	NSFileManager *fileManager = [NSFileManager defaultManager];
-	NSArray *subpaths = [fileManager subpathsAtPath:settingsS.songCachePath];
-	for (NSString *path in subpaths) 
-	{
-		NSString *fullPath = [settingsS.songCachePath stringByAppendingPathComponent:path];
-		NSDictionary *attributes = [fileManager attributesOfItemAtPath:fullPath error:NULL];
-		size += [attributes fileSize];
-	}
-	
-	_cacheSize = size;
+    
+    [databaseS.songCacheDbQueue inDatabase:^(FMDatabase *db)
+    {
+        NSInteger size = [db intForQuery:@"SELECT sum(size) AS s FROM sizesSongs"];
+        
+        FMResultSet *result = [db executeQuery:@"SELECT md5 FROM cachedSongs WHERE finished = 'NO'"];
+        
+        while ([result next])
+        {
+            NSString *path = [settingsS.songCachePath stringByAppendingPathComponent:[result stringForColumn:@"md5"]];
+            NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
+            size += [attr[@"NSFileSize"] intValue];
+            ALog(@"Added %d to size for partially downloaded song", [attr[@"NSFileSize"] intValue]);
+        }
+        
+        ALog(@"Total cache size was found to be: %ld", (long)size);
+        _cacheSize = size;
+        
+    }];
+//	unsigned long long size = 0;
+//	NSFileManager *fileManager = [NSFileManager defaultManager];
+//	NSArray *subpaths = [fileManager subpathsAtPath:settingsS.songCachePath];
+//	for (NSString *path in subpaths) 
+//	{
+//		NSString *fullPath = [settingsS.songCachePath stringByAppendingPathComponent:path];
+//		NSDictionary *attributes = [fileManager attributesOfItemAtPath:fullPath error:NULL];
+//		size += [attributes fileSize];
+//	}
+//	
+//	_cacheSize = size;
 	
 	[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CacheSizeChecked];
 }

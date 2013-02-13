@@ -43,6 +43,7 @@
 @property (nonatomic) BOOL playerHasNotifiedSubsonic;
 @property (nonatomic) BOOL playerHasTweeted;
 @property (nonatomic) BOOL playerHasScrobbled;
+@property (nonatomic) BOOL playerHasSubmittedNowPlaying;
 - (void)playerHandleSocial;
 - (void)playerClearSocial;
 

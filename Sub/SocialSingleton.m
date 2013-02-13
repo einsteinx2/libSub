@@ -26,6 +26,7 @@ LOG_LEVEL_ISUB_DEFAULT
 {
 	self.playerHasTweeted = NO;
 	self.playerHasScrobbled = NO;
+    self.playerHasSubmittedNowPlaying = NO;
     self.playerHasNotifiedSubsonic = NO;
 }
 
@@ -59,6 +60,14 @@ LOG_LEVEL_ISUB_DEFAULT
 			[self scrobbleSongAsSubmission];
 		}];
 	}
+    
+    if (!self.playerHasSubmittedNowPlaying)
+    {
+        self.playerHasSubmittedNowPlaying = YES;
+        [EX2Dispatch runInMainThread:^{
+			[self scrobbleSongAsPlaying];
+		}];
+    }
 }
 
 - (NSTimeInterval)scrobbleDelay
@@ -135,12 +144,16 @@ LOG_LEVEL_ISUB_DEFAULT
 {
 	if (settingsS.isScrobbleEnabled && !settingsS.isOfflineMode)
 	{
-		NSString *isSubmissionString = [NSString stringWithFormat:@"%i", isSubmission];
-		NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:n2N(aSong.songId), @"id", n2N(isSubmissionString), @"submission", nil];
-		NSMutableURLRequest *request = [NSMutableURLRequest requestWithSUSAction:@"scrobble" parameters:parameters];
-		
-		NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-		NSLog(@"%@", conn);
+
+		ISMSScrobbleLoader *loader = [ISMSScrobbleLoader loaderWithCallbackBlock:^(BOOL success, NSError *error, ISMSLoader *loader)
+        {
+            ALog(@"Scrobble successfully completed for song: %@", aSong.title);
+        }];
+        
+        loader.aSong = aSong;
+        loader.isSubmission = isSubmission;
+        
+        [loader startLoad];
 	}
 }
 
@@ -180,11 +193,11 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)connection:(NSURLConnection *)theConnection didFailWithError:(NSError *)error
 {
-	//DLog(@"Subsonic cached song play notification failed\n\nError: %@", [error localizedDescription]);
+	ALog(@"Subsonic cached song play notification failed\n\nError: %@", [error localizedDescription]);
 }	
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)theConnection 
-{	
+{
 }
 
 #pragma mark - Twitter -

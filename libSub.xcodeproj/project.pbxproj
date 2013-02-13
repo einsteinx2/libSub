@@ -47,6 +47,18 @@
 		3B38845C16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B38845916BAEAD0009AE1D5 /* WBQuickAlbumsLoader.h */; };
 		3B38845D16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B38845A16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.m */; };
 		3B38845E16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B38845A16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.m */; };
+		3B53B7CA16C5C940003B6147 /* ISMSScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7C816C5C940003B6147 /* ISMSScrobbleLoader.h */; };
+		3B53B7CB16C5C940003B6147 /* ISMSScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7C816C5C940003B6147 /* ISMSScrobbleLoader.h */; };
+		3B53B7CC16C5C940003B6147 /* ISMSScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7C916C5C940003B6147 /* ISMSScrobbleLoader.m */; };
+		3B53B7CD16C5C940003B6147 /* ISMSScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7C916C5C940003B6147 /* ISMSScrobbleLoader.m */; };
+		3B53B7D016C5C952003B6147 /* SUSScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7CE16C5C952003B6147 /* SUSScrobbleLoader.h */; };
+		3B53B7D116C5C952003B6147 /* SUSScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7CE16C5C952003B6147 /* SUSScrobbleLoader.h */; };
+		3B53B7D216C5C952003B6147 /* SUSScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7CF16C5C952003B6147 /* SUSScrobbleLoader.m */; };
+		3B53B7D316C5C952003B6147 /* SUSScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7CF16C5C952003B6147 /* SUSScrobbleLoader.m */; };
+		3B53B7D616C5C96D003B6147 /* WBScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */; };
+		3B53B7D716C5C96D003B6147 /* WBScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */; };
+		3B53B7D816C5C96D003B6147 /* WBScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */; };
+		3B53B7D916C5C96D003B6147 /* WBScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */; };
 		5304A021168FB35F009B2732 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		5304A029168FB35F009B2732 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5304A027168FB35F009B2732 /* InfoPlist.strings */; };
 		5304A02B168FB35F009B2732 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A02A168FB35F009B2732 /* main.m */; };
@@ -952,6 +964,12 @@
 		3B38845416BAEA5D009AE1D5 /* ISMSQuickAlbumsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSQuickAlbumsLoader.m; sourceTree = "<group>"; };
 		3B38845916BAEAD0009AE1D5 /* WBQuickAlbumsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBQuickAlbumsLoader.h; sourceTree = "<group>"; };
 		3B38845A16BAEAD0009AE1D5 /* WBQuickAlbumsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBQuickAlbumsLoader.m; sourceTree = "<group>"; };
+		3B53B7C816C5C940003B6147 /* ISMSScrobbleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSScrobbleLoader.h; sourceTree = "<group>"; };
+		3B53B7C916C5C940003B6147 /* ISMSScrobbleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSScrobbleLoader.m; sourceTree = "<group>"; };
+		3B53B7CE16C5C952003B6147 /* SUSScrobbleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSScrobbleLoader.h; sourceTree = "<group>"; };
+		3B53B7CF16C5C952003B6147 /* SUSScrobbleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSScrobbleLoader.m; sourceTree = "<group>"; };
+		3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBScrobbleLoader.h; sourceTree = "<group>"; };
+		3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBScrobbleLoader.m; sourceTree = "<group>"; };
 		5304A01D168FB35F009B2732 /* libSubTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = libSubTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5304A01F168FB35F009B2732 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5304A022168FB35F009B2732 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1433,6 +1451,19 @@
 			name = "Quick Albums";
 			sourceTree = "<group>";
 		};
+		3B53B7C116C5C917003B6147 /* Scrobbling */ = {
+			isa = PBXGroup;
+			children = (
+				3B53B7C816C5C940003B6147 /* ISMSScrobbleLoader.h */,
+				3B53B7C916C5C940003B6147 /* ISMSScrobbleLoader.m */,
+				3B53B7CE16C5C952003B6147 /* SUSScrobbleLoader.h */,
+				3B53B7CF16C5C952003B6147 /* SUSScrobbleLoader.m */,
+				3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */,
+				3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */,
+			);
+			name = Scrobbling;
+			sourceTree = "<group>";
+		};
 		5304A024168FB35F009B2732 /* GHUnit Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1773,6 +1804,7 @@
 		536C971416619717005A73C6 /* Generic */ = {
 			isa = PBXGroup;
 			children = (
+				3B53B7C116C5C917003B6147 /* Scrobbling */,
 				3B16AFE816C2C92E00787BD8 /* Dropdown Folders */,
 				536C97151661971E005A73C6 /* ISMSLoaders.h */,
 				3B38844C16BAEA39009AE1D5 /* Quick Albums */,
@@ -2365,6 +2397,9 @@
 				3B16AFEC16C2C95F00787BD8 /* ISMSDropdownFolderLoader.h in Headers */,
 				3B16AFF216C2C98200787BD8 /* SUSDropdownFolderLoader.h in Headers */,
 				3B16AFF816C2C98F00787BD8 /* WBDropdownFolderLoader.h in Headers */,
+				3B53B7CB16C5C940003B6147 /* ISMSScrobbleLoader.h in Headers */,
+				3B53B7D116C5C952003B6147 /* SUSScrobbleLoader.h in Headers */,
+				3B53B7D716C5C96D003B6147 /* WBScrobbleLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2540,6 +2575,9 @@
 				3B16AFEB16C2C95F00787BD8 /* ISMSDropdownFolderLoader.h in Headers */,
 				3B16AFF116C2C98200787BD8 /* SUSDropdownFolderLoader.h in Headers */,
 				3B16AFF716C2C98F00787BD8 /* WBDropdownFolderLoader.h in Headers */,
+				3B53B7CA16C5C940003B6147 /* ISMSScrobbleLoader.h in Headers */,
+				3B53B7D016C5C952003B6147 /* SUSScrobbleLoader.h in Headers */,
+				3B53B7D616C5C96D003B6147 /* WBScrobbleLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2996,6 +3034,9 @@
 				3B16AFEE16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m in Sources */,
 				3B16AFF416C2C98200787BD8 /* SUSDropdownFolderLoader.m in Sources */,
 				3B16AFFA16C2C98F00787BD8 /* WBDropdownFolderLoader.m in Sources */,
+				3B53B7CD16C5C940003B6147 /* ISMSScrobbleLoader.m in Sources */,
+				3B53B7D316C5C952003B6147 /* SUSScrobbleLoader.m in Sources */,
+				3B53B7D916C5C96D003B6147 /* WBScrobbleLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3126,6 +3167,9 @@
 				3B16AFED16C2C95F00787BD8 /* ISMSDropdownFolderLoader.m in Sources */,
 				3B16AFF316C2C98200787BD8 /* SUSDropdownFolderLoader.m in Sources */,
 				3B16AFF916C2C98F00787BD8 /* WBDropdownFolderLoader.m in Sources */,
+				3B53B7CC16C5C940003B6147 /* ISMSScrobbleLoader.m in Sources */,
+				3B53B7D216C5C952003B6147 /* SUSScrobbleLoader.m in Sources */,
+				3B53B7D816C5C96D003B6147 /* WBScrobbleLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
