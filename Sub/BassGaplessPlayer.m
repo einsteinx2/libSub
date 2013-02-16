@@ -1004,7 +1004,8 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
             ISMSSong *currentSong = [self.delegate bassSongForIndex:self.currentPlaylistIndex player:self];
             if (currentSong)
             {
-                [self.delegate bassRetrySongAtOffsetInBytes:self.startByteOffset andSeconds:self.startSecondsOffset player:self];
+//                ALog(@"startByteOffset: %d, startSecondsOffset: %d", audioEngineS.startByteOffset, audioEngineS.startSecondsOffset);
+                [self.delegate bassRetrySongAtOffsetInBytes:audioEngineS.startByteOffset andSeconds:audioEngineS.startSecondsOffset player:self];
             }
             else
             {

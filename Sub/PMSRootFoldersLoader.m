@@ -45,13 +45,13 @@ LOG_LEVEL_ISUB_DEFAULT
         while ([mediaFolders next])
         {
             NSString *folderId = [mediaFolders stringForColumn:@"folder_id"];
-            FMResultSet *folderContents = [db executeQuery:@"SELECT folder_id, folder_name FROM folder WHERE parent_folder_id = ?", folderId];
+            FMResultSet *folderContents = [db executeQuery:@"SELECT folder_id, folder_name FROM folder WHERE parent_folder_id = ? ORDER BY folder_name ASC", folderId];
             while ([folderContents next])
             {
                 NSString *fId = [folderContents stringForColumn:@"folder_id"];
                 NSString *fName = [folderContents stringForColumn:@"folder_name"];
                 
-                [self addRootFolderToTempCache:fId name:fName];
+                [self addRootFolderToMainCache:fId name:fName];
             }
             [folderContents close];
         }

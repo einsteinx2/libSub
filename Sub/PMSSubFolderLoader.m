@@ -78,7 +78,7 @@ LOG_LEVEL_ISUB_DEFAULT
     self.songsCount = 0;
     [databaseS.metadataDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"SELECT song.*, art.art_id, artist.artist_name, album.album_name FROM song LEFT JOIN artist ON artist.artist_id = song.song_artist_id LEFT JOIN album ON album.album_id = song.song_album_id LEFT JOIN art_item ON song.song_id = art_item.item_id LEFT JOIN art ON art.art_id = art_item.art_id WHERE song.song_folder_id = ?";
+         NSString *query = @"SELECT song.*, art_item.art_id, artist.artist_name, album.album_name FROM song LEFT JOIN artist ON artist.artist_id = song.song_artist_id LEFT JOIN album ON album.album_id = song.song_album_id LEFT JOIN art_item ON song.song_id = art_item.item_id WHERE song.song_folder_id = ?";
          FMResultSet *result = [db executeQuery:query, self.myId];
                   
          while ([result next])

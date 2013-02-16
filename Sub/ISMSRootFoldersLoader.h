@@ -27,6 +27,7 @@
 - (BOOL)moveRootFolderTempTableRecordsToMainCache;
 - (void)resetRootFolderCache;
 - (BOOL)addRootFolderIndexToCache:(NSUInteger)position count:(NSUInteger)folderCount name:(NSString*)name;
+- (BOOL)addRootFolderToMainCache:(NSString*)folderId name:(NSString*)name;
 - (BOOL)addRootFolderToTempCache:(NSString*)folderId name:(NSString*)name;
 
 @end
