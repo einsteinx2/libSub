@@ -6,12 +6,8 @@
 //  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
-#import "ISMSLoader.h"
+#import "ISMSQuickAlbumsLoader.h"
 
-@interface SUSQuickAlbumsLoader : ISMSLoader
-
-@property (strong) NSMutableArray *listOfAlbums;
-@property (strong) NSString *modifier;
-@property NSUInteger offset;
+@interface SUSQuickAlbumsLoader : ISMSQuickAlbumsLoader
 
 @end

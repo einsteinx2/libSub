@@ -27341,7 +27341,7 @@ static int proxyTakeConch(unixFile *pFile){
 ** If pFile holds a lock on a conch file, then release that lock.
 */
 static int proxyReleaseConch(unixFile *pFile){
-  int rc;                     /* Subroutine return code */
+  int rc = 0;                     /* Subroutine return code */
   proxyLockingContext *pCtx;  /* The locking context for the proxy lock */
   unixFile *conchFile;        /* Name of the conch file */
 

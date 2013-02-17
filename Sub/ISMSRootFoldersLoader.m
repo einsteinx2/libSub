@@ -180,4 +180,21 @@
 	return !hadError;
 }
 
+- (BOOL)addRootFolderToMainCache:(NSString*)folderId name:(NSString*)name
+{
+	__block BOOL hadError = NO;
+	// Add the shortcut to the DB
+	if (folderId != nil && name != nil)
+	{
+		[self.dbQueue inDatabase:^(FMDatabase *db)
+		 {
+			 NSString *query = [NSString stringWithFormat:@"INSERT INTO rootFolderNameCache%@ VALUES (?, ?)", self.tableModifier];
+			 [db executeUpdate:query, folderId, name];
+			 hadError = [db hadError];
+		 }];
+	}
+    
+	return !hadError;
+}
+
 @end

@@ -58,6 +58,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	if (i.ctype==BASS_CTYPE_STREAM_MP2) return @"MP2";
 	if (i.ctype==BASS_CTYPE_STREAM_MP3) return @"MP3";
 	if (i.ctype==BASS_CTYPE_STREAM_AIFF) return @"AIFF";
+    if (i.ctype==BASS_CTYPE_STREAM_OPUS) return @"Opus";
 	if (i.ctype==BASS_CTYPE_STREAM_WAV_PCM) return @"PCM WAV";
 	if (i.ctype==BASS_CTYPE_STREAM_WAV_FLOAT) return @"Float WAV";
 	if (i.ctype&BASS_CTYPE_STREAM_WAV) return @"WAV";
