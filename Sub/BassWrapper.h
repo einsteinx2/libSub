@@ -18,6 +18,11 @@
 
 @interface BassWrapper : NSObject
 
++ (NSUInteger)bassOutputBufferLengthMillis;
+
++ (void)bassInit:(NSUInteger)sampleRate;
++ (void)bassInit;
+
 + (void)logError;
 + (void)printChannelInfo:(HSTREAM)channel;
 + (NSString *)formatForChannel:(HCHANNEL)channel;

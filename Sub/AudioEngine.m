@@ -95,13 +95,11 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 
 - (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds
 {
-	// Dispose of the old player
+	// Stop the player
 	[self.player stop];
-	self.player = nil;
-	
-	// Create a new player
-	self.player = [[BassGaplessPlayer alloc] initWithDelegate:self.delegate];
-	[self.player startSong:aSong atIndex:index withOffsetInBytes:byteOffset orSeconds:seconds];
+    
+    // Start the new song
+    [self.player startSong:aSong atIndex:index withOffsetInBytes:byteOffset orSeconds:seconds];
     
     // Load the EQ
     BassEffectDAO *effectDAO = [[BassEffectDAO alloc] initWithType:BassEffectType_ParametricEQ];
@@ -110,12 +108,14 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 
 - (void)startEmptyPlayer
 {    
-    // Dispose of the old player
+    // Stop the player if it exists
 	[self.player stop];
-	self.player = nil;
     
-    // Create a new player and just initialize BASS, but don't play anything
-    self.player = [[BassGaplessPlayer alloc] initWithDelegate:self.delegate];
+    // Create a new player if needed
+    if (!self.player)
+    {
+        self.player = [[BassGaplessPlayer alloc] initWithDelegate:self.delegate];
+    }
 }
 
 - (BassEqualizer *)equalizer
@@ -152,7 +152,10 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     
     _delegate = [[iSubBassGaplessPlayerDelegate alloc] init];
     
-    [self startEmptyPlayer];
+    // Run async to prevent potential deadlock from dispatch_once
+    [EX2Dispatch runInMainThread:^{
+        [self startEmptyPlayer];
+    }];
 }
 
 + (id)sharedInstance
