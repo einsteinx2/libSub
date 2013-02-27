@@ -463,6 +463,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     
     // Create and start a new thread to fill the buffer
     self.ringBufferFillThread = [[NSThread alloc] initWithTarget:self selector:@selector(keepRingBufferFilledInternal) object:nil];
+    self.ringBufferFillThread.name = @"BASS Ring buffer fill thread";
 	[self.ringBufferFillThread start];
 }
 
@@ -677,6 +678,8 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassFreed];		
 	}
+    
+    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassInitialized];
 }
 
 - (BOOL)testStreamForSong:(ISMSSong *)aSong
@@ -841,7 +844,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 				 }
 				 
 				 // Start filling the ring buffer
-				 [self keepRingBufferFilled];
+                 [self keepRingBufferFilled];
 				 
 				 // Start playback
 				 BASS_ChannelPlay(self.outStream, FALSE);
@@ -1014,7 +1017,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
             ISMSSong *currentSong = [self.delegate bassSongForIndex:self.currentPlaylistIndex player:self];
             if (currentSong)
             {
-//                ALog(@"startByteOffset: %d, startSecondsOffset: %d", audioEngineS.startByteOffset, audioEngineS.startSecondsOffset);
+                // ALog(@"startByteOffset: %d, startSecondsOffset: %d", audioEngineS.startByteOffset, audioEngineS.startSecondsOffset);
                 [self.delegate bassRetrySongAtOffsetInBytes:audioEngineS.startByteOffset andSeconds:audioEngineS.startSecondsOffset player:self];
             }
             else
@@ -1053,10 +1056,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     }
     
     userInfo.isEnded = NO;
-    [self cleanup];
-    [self startSong:self.currentStream.song atIndex:self.currentPlaylistIndex withOffsetInBytes:@(bytes) orSeconds:nil];
+    //[self cleanup];
+    //[self startSong:self.currentStream.song atIndex:self.currentPlaylistIndex withOffsetInBytes:@(bytes) orSeconds:nil];
 	
-	/*if (userInfo.isEnded)
+	if (userInfo.isEnded)
 	{
 		userInfo.isEnded = NO;
 		[self cleanup];
@@ -1090,7 +1093,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		{
 			[BassWrapper logError];
 		}
-	}*/
+	}
 }
 
 - (void)seekToPositionInSeconds:(double)seconds fadeVolume:(BOOL)fadeVolume
