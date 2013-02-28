@@ -499,7 +499,7 @@
 {
 	@synchronized(self)
 	{
-		return _uuid;
+		return _lastQueryId;
 	}
 }
 

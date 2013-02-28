@@ -17,7 +17,7 @@
     
     if ([self.modifier isEqualToString:@"random"])
     {
-        query = @"SELECT folder.*, art_item.art_id FROM folder LEFT JOIN art_item ON folder.folder_id = art_item.item_id JOIN song ON song_folder_id = folder_id GROUP BY folder_id ORDER BY random()";
+        query = @"SELECT folder.*, art_item.art_id FROM folder LEFT JOIN art_item ON folder.folder_id = art_item.item_id JOIN song ON song_folder_id = folder_id GROUP BY folder_id ORDER BY random() LIMIT 20";
     }
     else if ([self.modifier isEqualToString:@"frequent"])
     {
@@ -25,10 +25,15 @@
     }
     else if ([self.modifier isEqualToString:@"newest"])
     {
-        query = @"SELECT folder.*, art_item.art_id FROM folder LEFT JOIN art_item ON folder.folder_id = art_item.item_id LEFT JOIN item ON folder.folder_id = item.item_id JOIN song ON song_folder_id = folder_id GROUP BY folder_id ORDER BY item.time_stamp DESC";
+        query = @"SELECT folder.*, art_item.art_id FROM folder LEFT JOIN art_item ON folder.folder_id = art_item.item_id LEFT JOIN item ON folder.folder_id = item.item_id JOIN song ON song_folder_id = folder_id GROUP BY folder_id ORDER BY item.time_stamp DESC LIMIT 20";
     }
     else if ([self.modifier isEqualToString:@"recent"])
     {
+    }
+    
+    if (self.offset > 0)
+    {
+        query = [query stringByAppendingFormat:@" OFFSET %lu", (unsigned long)self.offset];
     }
     
     if (query != nil)

@@ -32,6 +32,11 @@ LOG_LEVEL_ISUB_DEFAULT
     NSString *dbFolderPath = [databaseS.databaseFolderPath stringByAppendingPathComponent:@"mediadbs"];
     NSString *dbPath = [dbFolderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", self.uuid]];
     
+    NSString *lqid = [(NSHTTPURLResponse *)self.response allHeaderFields][@"WaveBox-LastQueryId"];
+    settingsS.lastQueryId = lqid;
+
+    ALog(@"%@", [[(NSHTTPURLResponse *)self.response allHeaderFields][@"WaveBox-LastQueryId"] class]);
+    ALog(@"%@", settingsS.lastQueryId);
     ALog(@"%@", dbPath);
     ALog(@"%@", err);
 

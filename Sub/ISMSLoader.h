@@ -22,6 +22,7 @@ typedef void (^LoaderCallback)(BOOL success, NSError *error, ISMSLoader *loader)
 
 @property (strong) NSURLConnection *connection;
 @property (strong) NSURLRequest *request;
+@property (strong) NSURLResponse *response;
 @property (strong) NSMutableData *receivedData;
 @property (readonly) ISMSLoaderType type;
 
