@@ -217,6 +217,13 @@ LOG_LEVEL_ISUB_DEFAULT
     path = [[settingsS.currentCacheRoot stringByAppendingPathComponent:@"database"] stringByAppendingPathComponent:@"songCache.db"];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
 #ifdef IOS
+    if ([defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
+    {
+        // Set the no backup flag since the file already exists
+        [[NSURL fileURLWithPath:path] addSkipBackupAttribute];
+    }
+#endif
+#ifdef IOS
     if (![defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
 #else
     if (![defaultManager fileExistsAtPath:path])
@@ -321,6 +328,13 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	// Handle moving the song cache database if necessary
 	path = [NSString stringWithFormat:@"%@/database/%@cacheQueue.db", settingsS.currentCacheRoot, settingsS.urlString.md5];
+#ifdef IOS
+    if ([defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
+    {
+        // Set the no backup flag since the file already exists
+        [[NSURL fileURLWithPath:path] addSkipBackupAttribute];
+    }
+#endif
 #ifdef IOS
     if (![defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
 #else

@@ -39,8 +39,15 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 }
 
 - (void)start:(BOOL)resume
-{
-	[self terminateDownload];
+{    
+    if (!self.filePath)
+    {
+        DDLogError(@"[ISMSCFNetworkStreamHandler] start: called but filePath is nil, so bailing");
+        return;
+    }
+    
+    if (_readStreamRef)
+        [self terminateDownload];
 	
     if (!self.selfRef)
         self.selfRef = self;
@@ -258,6 +265,11 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 
 - (void)cancel
 {
+    ALog(@"CFNet cancel called");
+    
+    if (self.isCanceled)
+        return;
+    
 	DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler request canceled for %@", self.mySong);
 
 	[self terminateDownload];
@@ -269,7 +281,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	[self.fileHandle closeFile];
 	self.fileHandle = nil;
 	
-	self.selfRef = nil;
+    self.selfRef = nil;
 }
 
 - (void)connectionTimedOut
@@ -281,7 +293,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 
 - (void)terminateDownload
 {
-	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	[NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(continueDownload) object:nil];
 	
 	[EX2Dispatch runInMainThreadAndWaitUntilDone:YES block:^
 	 {
@@ -337,7 +349,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 {	
 	if (self.isCanceled)
 		return;
-	
+    	
 	if (type == kCFStreamEventOpenCompleted)
 	{
         // Reset the time out timer since the connection responded

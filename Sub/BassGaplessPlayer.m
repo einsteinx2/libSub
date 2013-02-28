@@ -169,16 +169,16 @@ QWORD CALLBACK MyFileLenProc(void *user)
 		{
 			return 0;
 		}
-		else //if (theSong.isFullyCached || userInfo.isTempCached)
+		else if (theSong.isFullyCached || userInfo.isTempCached)
 		{
 			// Return actual file size on disk
 			length = theSong.localFileSize;
 		}
-		/*else
+		else
 		{
 			// Return server reported file size
 			length = [theSong.size longLongValue];
-		}*/
+		}
 		
 		DDLogCVerbose(@"[BassGaplessPlayer] checking %@ length: %llu", theSong.title, length);
 		return length;

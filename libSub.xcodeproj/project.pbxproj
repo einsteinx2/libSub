@@ -59,7 +59,6 @@
 		3B53B7D716C5C96D003B6147 /* WBScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */; };
 		3B53B7D816C5C96D003B6147 /* WBScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */; };
 		3B53B7D916C5C96D003B6147 /* WBScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */; };
-		5304A021168FB35F009B2732 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		5304A029168FB35F009B2732 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5304A027168FB35F009B2732 /* InfoPlist.strings */; };
 		5304A02B168FB35F009B2732 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A02A168FB35F009B2732 /* main.m */; };
 		5304A031168FB35F009B2732 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5304A030168FB35F009B2732 /* Default.png */; };
@@ -150,8 +149,6 @@
 		5304A09E168FD105009B2732 /* libbassmix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FF16619B25005A73C6 /* libbassmix.a */; };
 		5304A09F168FD108009B2732 /* libbassopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C980016619B25005A73C6 /* libbassopus.a */; };
 		5304A0A0168FD10A009B2732 /* libbasswv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C980116619B25005A73C6 /* libbasswv.a */; };
-		5304A0A1168FD16F009B2732 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A022168FB35F009B2732 /* CoreGraphics.framework */; };
-		5304A0A2168FD173009B2732 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A01F168FB35F009B2732 /* UIKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5304A0AC168FD1CE009B2732 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; };
 		5304A0AD168FD1D5009B2732 /* NSError+ISMSError.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C993C16619F39005A73C6 /* NSError+ISMSError.m */; };
 		5304A0AE168FD1E4009B2732 /* MGTwitterEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C985316619BAF005A73C6 /* MGTwitterEngine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -389,7 +386,6 @@
 		53067E991694F11C00600396 /* FMDatabaseQueueAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C97C916619AE3005A73C6 /* FMDatabaseQueueAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E9A1694F11C00600396 /* FMResultSet.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C97CC16619AE3005A73C6 /* FMResultSet.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5344F454166C03E50013B929 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5344F453166C03E50013B929 /* libSubImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		536C947E16618FA4005A73C6 /* LibSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C947D16618FA4005A73C6 /* LibSub.m */; };
 		536C959E166193AE005A73C6 /* ISMSDataModelObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958816619360005A73C6 /* ISMSDataModelObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C959F166193AE005A73C6 /* ISMSIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958916619360005A73C6 /* ISMSIndex.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -645,8 +641,6 @@
 		536F54F2169A6DBE000F71E6 /* HTTPFileResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5816990CFE00DCFC9C /* HTTPFileResponse.m */; };
 		536F54F3169A6DBE000F71E6 /* HTTPRedirectResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5A16990CFE00DCFC9C /* HTTPRedirectResponse.m */; };
 		536F54F4169A6DBE000F71E6 /* WebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD5C16990CFE00DCFC9C /* WebSocket.m */; };
-		536F54F7169A7149000F71E6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536F54F5169A713D000F71E6 /* Security.framework */; };
-		536F54FA169A715C000F71E6 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536F54F8169A7154000F71E6 /* Cocoa.framework */; };
 		5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2541661C4CC00529EF3 /* libSubDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BB1661C73D00529EF3 /* MKStoreManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C21661C73D00529EF3 /* MKStoreManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BC1661C73D00529EF3 /* MKStoreManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -975,8 +969,6 @@
 		3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBScrobbleLoader.h; sourceTree = "<group>"; };
 		3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBScrobbleLoader.m; sourceTree = "<group>"; };
 		5304A01D168FB35F009B2732 /* libSubTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = libSubTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		5304A01F168FB35F009B2732 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		5304A022168FB35F009B2732 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5304A026168FB35F009B2732 /* libSubTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "libSubTests-Info.plist"; sourceTree = "<group>"; };
 		5304A028168FB35F009B2732 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5304A02A168FB35F009B2732 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1023,7 +1015,6 @@
 		5304A2E1169020EA009B2732 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		5344F453166C03E50013B929 /* libSubImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubImports.h; sourceTree = "<group>"; };
 		536C947316618FA4005A73C6 /* libSub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSub.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		536C947616618FA4005A73C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		536C947A16618FA4005A73C6 /* libSub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libSub-Prefix.pch"; sourceTree = "<group>"; };
 		536C947B16618FA4005A73C6 /* LibSub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibSub.h; sourceTree = "<group>"; };
 		536C947D16618FA4005A73C6 /* LibSub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibSub.m; sourceTree = "<group>"; };
@@ -1266,8 +1257,6 @@
 		536C9AA31661AA45005A73C6 /* JukeboxXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JukeboxXMLParser.m; sourceTree = "<group>"; };
 		536C9AB01661AA61005A73C6 /* SearchXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchXMLParser.h; sourceTree = "<group>"; };
 		536C9AB11661AA61005A73C6 /* SearchXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchXMLParser.m; sourceTree = "<group>"; };
-		536F54F5169A713D000F71E6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		536F54F8169A7154000F71E6 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		5374F2541661C4CC00529EF3 /* libSubDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubDefines.h; sourceTree = "<group>"; };
 		5374F2BB1661C73D00529EF3 /* MKStoreManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MKStoreManager.h; path = Frameworks/MKStoreManager/MKStoreManager.h; sourceTree = "<group>"; };
 		5374F2BC1661C73D00529EF3 /* MKStoreManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKStoreManager.m; path = Frameworks/MKStoreManager/MKStoreManager.m; sourceTree = "<group>"; };
@@ -1347,15 +1336,12 @@
 				5304A094168FD0BF009B2732 /* libxml2.dylib in Frameworks */,
 				5304A093168FD0B8009B2732 /* libEX2Kit.a in Frameworks */,
 				5304A0F6168FD51E009B2732 /* StoreKit.framework in Frameworks */,
-				5304A0A2168FD173009B2732 /* UIKit.framework in Frameworks */,
-				5304A0A1168FD16F009B2732 /* CoreGraphics.framework in Frameworks */,
 				5304A046168FB39A009B2732 /* GHUnitIOS.framework in Frameworks */,
 				5304A0EB168FD47E009B2732 /* CoreFoundation.framework in Frameworks */,
 				5304A0EC168FD47E009B2732 /* OpenGLES.framework in Frameworks */,
 				5304A0ED168FD47E009B2732 /* MessageUI.framework in Frameworks */,
 				5304A0DD168FD3F2009B2732 /* CoreText.framework in Frameworks */,
 				5304A0C8168FD2A6009B2732 /* Accelerate.framework in Frameworks */,
-				5304A021168FB35F009B2732 /* Foundation.framework in Frameworks */,
 				5304A0CB168FD353009B2732 /* AudioToolbox.framework in Frameworks */,
 				5304A0D1168FD3B6009B2732 /* Security.framework in Frameworks */,
 				5304A0D2168FD3B6009B2732 /* AVFoundation.framework in Frameworks */,
@@ -1372,8 +1358,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				536F54FA169A715C000F71E6 /* Cocoa.framework in Frameworks */,
-				536F54F7169A7149000F71E6 /* Security.framework in Frameworks */,
 				53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */,
 				5304A2E2169020EA009B2732 /* StoreKit.framework in Frameworks */,
 				5304A2DB16901F1C009B2732 /* EX2KitOSX.framework in Frameworks */,
@@ -1401,7 +1385,6 @@
 				536C98B916619BD8005A73C6 /* libtouchzipkit.a in Frameworks */,
 				536C983B16619B96005A73C6 /* libTBXML-iOS.a in Frameworks */,
 				536C982616619B7B005A73C6 /* libsbjson-ios.a in Frameworks */,
-				536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */,
 				536C97AC166199BB005A73C6 /* libFlurryAnalytics.a in Frameworks */,
 				536C980A16619B25005A73C6 /* libbass.a in Frameworks */,
 				536C980B16619B25005A73C6 /* libbass_ape.a in Frameworks */,
@@ -1619,11 +1602,6 @@
 				536C97A8166199BB005A73C6 /* FlurryAnalytics */,
 				536C9A2D1661A503005A73C6 /* MKStoreManager */,
 				53B3BD3716990CFE00DCFC9C /* CocoaHTTPServer */,
-				536C947616618FA4005A73C6 /* Foundation.framework */,
-				5304A01F168FB35F009B2732 /* UIKit.framework */,
-				5304A022168FB35F009B2732 /* CoreGraphics.framework */,
-				536F54F5169A713D000F71E6 /* Security.framework */,
-				536F54F8169A7154000F71E6 /* Cocoa.framework */,
 				5304A19C1690173B009B2732 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -3440,6 +3418,7 @@
 					"\"$(SRCROOT)/Frameworks/ZipKit\"",
 					"\"$(SRCROOT)/Frameworks/TBXML\"/**",
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
+					"\"$(SRCROOT)/Frameworks/ShareKit\"/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
@@ -3477,6 +3456,7 @@
 					"\"$(SRCROOT)/Frameworks/ZipKit\"",
 					"\"$(SRCROOT)/Frameworks/TBXML\"/**",
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
+					"\"$(SRCROOT)/Frameworks/ShareKit\"/**",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (

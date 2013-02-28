@@ -70,10 +70,13 @@ LOG_LEVEL_ISUB_DEFAULT
 		i++;
 	}
 	
-	for (BassParamEqValue *value in self.eqValues)
-	{
-		value.handle = 0;
-	}
+    @synchronized(self.eqValues)
+    {
+        for (BassParamEqValue *value in self.eqValues)
+        {
+            value.handle = 0;
+        }
+    }
 	
 	//DLog(@"removed %i effect channels", i);
 	[self.eqHandles removeAllObjects];
@@ -92,7 +95,14 @@ LOG_LEVEL_ISUB_DEFAULT
 	else if ([values count] == 0)
 		return;
 	
-	for (BassParamEqValue *value in self.eqValues)
+    // Do this to prevent crash if array is mutated (not doing the whole for loop inside the sync block in case the BASS function deadlocks)
+    NSArray *eqValuesTemp;
+    @synchronized(self.eqValues)
+    {
+        eqValuesTemp = [NSArray arrayWithArray:self.eqValues];
+    }
+	
+    for (BassParamEqValue *value in eqValuesTemp)
 	{
 		HFX handle = BASS_ChannelSetFX(self.channel, BASS_FX_DX8_PARAMEQ, 0);
 		BASS_DX8_PARAMEQ p = value.parameters;
@@ -107,7 +117,10 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)updateEqParameter:(BassParamEqValue *)value
 {
-	[self.eqValues replaceObjectAtIndex:value.arrayIndex withObject:value]; 
+    @synchronized(self.eqValues)
+    {
+        [self.eqValues replaceObjectAtIndex:value.arrayIndex withObject:value];
+    }
 	
 	if (self.isEqActive)
 	{
@@ -119,9 +132,17 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (BassParamEqValue *)addEqualizerValue:(BASS_DX8_PARAMEQ)value
 {
-	NSUInteger index = [self.eqValues count];
+	NSUInteger index;
+    @synchronized(self.eqValues)
+    {
+        index = [self.eqValues count];
+    }
 	BassParamEqValue *eqValue = [BassParamEqValue valueWithParams:value arrayIndex:index];
-	[self.eqValues addObject:eqValue];
+    
+    @synchronized(self.eqValues)
+    {
+        [self.eqValues addObject:eqValue];
+    }
 	
 	if (self.isEqActive)
 	{
@@ -147,11 +168,21 @@ LOG_LEVEL_ISUB_DEFAULT
 	[self.eqHandles removeObject:@(value.handle)];
 	
 	// Remove the value
-	[self.eqValues removeObject:value];
-	for (NSInteger i = value.arrayIndex; i < [self.eqValues count]; i++)
+    NSUInteger count = 0;
+    @synchronized(self.eqValues)
+    {
+        [self.eqValues removeObject:value];
+        count = self.eqValues.count;
+    }
+    
+	for (NSInteger i = value.arrayIndex; i < count; i++)
 	{
 		// Adjust the arrayIndex values for the other objects
-		BassParamEqValue *aValue = [self.eqValues objectAtIndexSafe:i];
+		BassParamEqValue *aValue;
+        @synchronized(self.eqValues)
+        {
+            aValue = [self.eqValues objectAtIndexSafe:i];
+        }
 		aValue.arrayIndex = i;
 	}
 	
@@ -162,7 +193,10 @@ LOG_LEVEL_ISUB_DEFAULT
 {
 	[self clearEqualizerValues];
 	
-	[self.eqValues removeAllObjects];
+    @synchronized(self.eqValues)
+    {
+        [self.eqValues removeAllObjects];
+    }
 	
 	_isEqActive = NO;
 }
@@ -179,7 +213,12 @@ LOG_LEVEL_ISUB_DEFAULT
 	}
 	else
 	{
-		[self applyEqualizerValues:self.eqValues];
+        NSArray *eqValuesTemp;
+        @synchronized(self.eqValues)
+        {
+            eqValuesTemp = [NSArray arrayWithArray:self.eqValues];
+        }
+		[self applyEqualizerValues:eqValuesTemp];
 		self.gain = settingsS.gainMultiplier;
 		return YES;
 	}
@@ -187,7 +226,10 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (NSArray *)equalizerValues
 {
-	return [NSArray arrayWithArray:self.eqValues];
+    @synchronized(self.eqValues)
+    {
+        return [NSArray arrayWithArray:self.eqValues];
+    }
 }
 
 - (void)createVolumeFx
