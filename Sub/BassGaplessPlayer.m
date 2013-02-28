@@ -169,16 +169,16 @@ QWORD CALLBACK MyFileLenProc(void *user)
 		{
 			return 0;
 		}
-		else if (theSong.isFullyCached || userInfo.isTempCached)
+		else //if (theSong.isFullyCached || userInfo.isTempCached)
 		{
 			// Return actual file size on disk
 			length = theSong.localFileSize;
 		}
-		else
+		/*else
 		{
 			// Return server reported file size
 			length = [theSong.size longLongValue];
-		}
+		}*/
 		
 		DDLogCVerbose(@"[BassGaplessPlayer] checking %@ length: %llu", theSong.title, length);
 		return length;
@@ -197,13 +197,13 @@ DWORD CALLBACK MyFileReadProc(void *buffer, DWORD length, void *user)
 			return 0;
 		
 		// Read from the file
-		
 		NSData *readData;
 		@try 
 		{
 			readData = [userInfo.fileHandle readDataOfLength:length];
 		}
-		@catch (NSException *exception) {
+		@catch (NSException *exception)
+        {
 			readData = nil;
 		}
 		
@@ -237,14 +237,22 @@ BOOL CALLBACK MyFileSeekProc(QWORD offset, void *user)
 		if (!userInfo.fileHandle)
 			return NO;
 		
-		BOOL success = YES;
+		BOOL success = NO;
 		
-		@try {
-			[userInfo.fileHandle seekToFileOffset:offset];
-		}
-		@catch (NSException *exception) {
-			success = NO;
-		}
+        // First check the file size to make sure we don't try and skip past the end of the file
+        if (userInfo.song.localFileSize >= offset)
+        {
+            // File size is valid, so assume success unless the seek operation throws an exception
+            success = YES;
+            @try
+            {
+                [userInfo.fileHandle seekToFileOffset:offset];
+            }
+            @catch (NSException *exception)
+            {
+                success = NO;
+            }
+        }
 		
 		DDLogCVerbose(@"[BassGaplessPlayer] seeking to %llu  success: %@", offset, NSStringFromBOOL(success));
 		
@@ -301,7 +309,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		
 		DDLogVerbose(@"[BassGaplessPlayer] Stream not active, freeing BASS");
         [EX2Dispatch runInMainThread:^{
-            [self bassFree];
+            [self cleanup];
         }];
 		
 		// Start the next song if for some reason this one isn't ready
@@ -321,7 +329,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 	}
 	else
 	{
-		[self bassFree];
+		[self cleanup];
 	}
 }
 
@@ -396,11 +404,6 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 	}
 }
 
-- (void)keepRingBufferFilled
-{
-	[self performSelectorInBackground:@selector(keepRingBufferFilledInternal) withObject:nil];
-}
-
 + (NSUInteger)bytesToBufferForKiloBitrate:(NSUInteger)rate speedInBytesPerSec:(NSUInteger)speedInBytesPerSec
 {
     // If start date is nil somehow, or total bytes transferred is 0 somehow, return the default of 10 seconds worth of audio
@@ -453,18 +456,34 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     return numberOfBytesToBuffer;
 }
 
+- (void)keepRingBufferFilled
+{
+    // Cancel the existing thread if needed
+    [self.ringBufferFillThread cancel];
+    
+    // Create and start a new thread to fill the buffer
+    self.ringBufferFillThread = [[NSThread alloc] initWithTarget:self selector:@selector(keepRingBufferFilledInternal) object:nil];
+    self.ringBufferFillThread.name = @"BASS Ring buffer fill thread";
+	[self.ringBufferFillThread start];
+}
+
 - (void)keepRingBufferFilledInternal
 {
     // Make sure we're using the right device
     BASS_SetDevice(ISMS_BassDeviceNumber);
     
+    // Grab the mixerStream and ringBuffer as local references, so that if cleanup is run, and we're still inside this loop
+    // it won't start filling the new buffer
+    EX2RingBuffer *localRingBuffer = self.ringBuffer;
+    HSTREAM localMixerStream = self.mixerStream;
+    
 	@autoreleasepool
 	{
 		NSUInteger readSize = BytesFromKiB(64);
-		while (!self.stopFillingRingBuffer)
+		while (![[NSThread currentThread] isCancelled])
 		{						
 			// Fill the buffer if there is empty space
-			if (self.ringBuffer.freeSpaceLength > readSize)
+			if (localRingBuffer.freeSpaceLength > readSize)
 			{
 				@autoreleasepool 
 				{
@@ -477,12 +496,12 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 						BassStream *userInfo = self.currentStream;
 						
 						void *tempBuffer = malloc(sizeof(char) * readSize);
-						DWORD tempLength = BASS_ChannelGetData(self.mixerStream, tempBuffer, (DWORD)readSize);
+						DWORD tempLength = BASS_ChannelGetData(localMixerStream, tempBuffer, (DWORD)readSize);
 						if (tempLength) 
 						{
 							userInfo.isSongStarted = YES;
 							
-							[self.ringBuffer fillWithBytes:tempBuffer length:tempLength];
+							[localRingBuffer fillWithBytes:tempBuffer length:tempLength];
 						}
 						free(tempBuffer);
 						
@@ -506,6 +525,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 							ISMSSong *theSong = userInfo.song;
 							if (!theSong.isFullyCached)
 							{
+                                // Bail if the thread was canceled
+                                if ([[NSThread currentThread] isCancelled])
+                                    break;
+                                
 								if (settingsS.isOfflineMode)
 								{
 									// This is offline mode and the song can not continue to play
@@ -541,11 +564,19 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 									QWORD totalSleepTime = 0;
 									while (YES)
 									{
+                                        // Bail if the thread was canceled
+                                        if ([[NSThread currentThread] isCancelled])
+                                            break;
+                                        
 										// Check if we should break every 100th of a second
 										usleep(sleepTime);
 										totalSleepTime += sleepTime;
 										if (userInfo.shouldBreakWaitLoop || userInfo.shouldBreakWaitLoopForever)
 											break;
+                                        
+                                        // Bail if the thread was canceled
+                                        if ([[NSThread currentThread] isCancelled])
+                                            break;
 										
 										// Only check the file size every second
 										if (totalSleepTime >= fileSizeCheckWait)
@@ -566,6 +597,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 												// If we're not in offline mode, stop waiting and try next song
 												else if (settingsS.isOfflineMode)
 												{
+                                                    // Bail if the thread was canceled
+                                                    if ([[NSThread currentThread] isCancelled])
+                                                        break;
+                                                    
 													[self moveToNextSong];
 													break;
 												}
@@ -576,6 +611,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 								}
 							}
 							
+                            // Bail if the thread was canceled
+                            if ([[NSThread currentThread] isCancelled])
+                                break;
+                            
 							userInfo.isWaiting = NO;
 							userInfo.shouldBreakWaitLoop = NO;
 							self.waitLoopStream = nil;
@@ -583,6 +622,10 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 					}
 				}
 			}
+            
+            // Bail if the thread was canceled
+            if ([[NSThread currentThread] isCancelled])
+                break;
 			
 			// Sleep for 1/4th of a second to prevent a tight loop
 			usleep(150000);
@@ -592,61 +635,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 
 #pragma mark - BASS methods
 
-extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOPUSplugin;
-
-- (void)bassInit:(NSUInteger)sampleRate
-{
-    // Make sure we're using the right device
-    BASS_SetDevice(ISMS_BassDeviceNumber);
-    
-	sampleRate = ISMS_defaultSampleRate;
-	
-	// Destroy any existing BASS instance
-	[self bassFree];
-	
-	// Initialize BASS
-	BASS_SetConfig(BASS_CONFIG_IOS_MIXAUDIO, 0); // Disable mixing.	To be called before BASS_Init.
-	BASS_SetConfig(BASS_CONFIG_BUFFER, BASS_GetConfig(BASS_CONFIG_UPDATEPERIOD) + ISMS_BASSBufferSize); // set the buffer length to the minimum amount + 200ms
-	BASS_SetConfig(BASS_CONFIG_FLOATDSP, true); // set DSP effects to use floating point math to avoid clipping within the effects chain
-	if (BASS_Init(1, (DWORD)sampleRate, 0, NULL, NULL)) 	// Initialize default device.
-	{
-        self.bassOutputBufferLengthMillis = BASS_GetConfig(BASS_CONFIG_BUFFER);
-        
-#ifdef IOS
-        BASS_PluginLoad(&BASSFLACplugin, 0); // load the Flac plugin
-        BASS_PluginLoad(&BASSWVplugin, 0); // load the WavePack plugin
-        BASS_PluginLoad(&BASS_APEplugin, 0); // load the Monkey's Audio plugin
-        BASS_PluginLoad(&BASS_MPCplugin, 0); // load the MusePack plugin
-        BASS_PluginLoad(&BASSOPUSplugin, 0); // load the OPUS plugin
-#else
-        BASS_PluginLoad("libbassflac.dylib", 0); // load the Flac plugin
-        BASS_PluginLoad("libbasswv.dylib", 0); // load the WavePack plugin
-        BASS_PluginLoad("libbass_ape.dylib", 0); // load the Monkey's Audio plugin
-        BASS_PluginLoad("libbass_mpc.dylib", 0); // load the MusePack plugin
-        BASS_PluginLoad("libbassopus.dylib", 0); // load the OPUS plugin
-#endif
-	}
-    else
-    {
-        self.bassOutputBufferLengthMillis = 0;
-        DDLogError(@"[BassGaplessPlayer] Can't initialize device");
-    }
-	
-	self.stopFillingRingBuffer = NO;
-	
-	self.equalizer = [[BassEqualizer alloc] init];
-	self.visualizer = [[BassVisualizer alloc] init];
-    
-	[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassInitialized];
-}
-
-- (void)bassInit
-{
-	// Default to 44.1 KHz
-    [self bassInit:ISMS_defaultSampleRate];
-}
-
-- (BOOL)bassFree
+- (void)cleanup
 {
     // Make sure we're using the right device
     BASS_SetDevice(ISMS_BassDeviceNumber);
@@ -656,20 +645,23 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 		[EX2Dispatch cancelTimerBlockWithName:startSongRetryTimer];
 		[EX2Dispatch cancelTimerBlockWithName:nextSongRetryTimer];
 		
-		self.stopFillingRingBuffer = YES;
+		[self.ringBufferFillThread cancel];
 		
         @synchronized(self.streamQueue)
         {
             for (BassStream *userInfo in self.streamQueue)
             {
                 userInfo.shouldBreakWaitLoopForever = YES;
+                BASS_StreamFree(userInfo.stream);
             }
         }
+        
+        BASS_StreamFree(self.mixerStream);
+        BASS_StreamFree(self.outStream);
 		
-		self.equalizer = nil;
-		self.visualizer = nil;
+		self.equalizer = [[BassEqualizer alloc] init];
+        self.visualizer = [[BassVisualizer alloc] init];
 		
-		BOOL success = BASS_Free();
 		self.isPlaying = NO;
 		
 		[self.ringBuffer reset];
@@ -684,10 +676,10 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
             [self.streamQueue removeAllObjects];
         }
 		
-		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassFreed];
-		
-		return success;
+		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassFreed];		
 	}
+    
+    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassInitialized];
 }
 
 - (BOOL)testStreamForSong:(ISMSSong *)aSong
@@ -738,7 +730,25 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 		
 		// Create the stream
 		HSTREAM fileStream = BASS_StreamCreateFileUser(STREAMFILE_NOBUFFER, BASS_STREAM_DECODE|BASS_SAMPLE_FLOAT, &fileProcs, (__bridge void*)userInfo);
-		if(!fileStream) fileStream = BASS_StreamCreateFileUser(STREAMFILE_NOBUFFER, BASS_STREAM_DECODE|BASS_SAMPLE_SOFTWARE|BASS_SAMPLE_FLOAT, &fileProcs, (__bridge void *)userInfo);
+        
+        // First check if the stream failed because of a BASS_Init error
+        if (!fileStream && BASS_ErrorGetCode() == BASS_ERROR_INIT)
+        {
+            // Retry the regular hardware sampling stream
+            DDLogError(@"[BassGaplessPlayer] Failed to create stream for %@ with hardware sampling because BASS is not initialized, initializing BASS and trying again with hardware sampling", aSong.title);
+            
+            [BassWrapper bassInit];
+            fileStream = BASS_StreamCreateFileUser(STREAMFILE_NOBUFFER, BASS_STREAM_DECODE|BASS_SAMPLE_FLOAT, &fileProcs, (__bridge void*)userInfo);
+        }
+        
+		if (!fileStream)
+        {
+            DDLogError(@"[BassGaplessPlayer] Failed to create stream for %@ with hardware sampling, trying again with software sampling", aSong.title);
+            [BassWrapper logError];
+            
+            fileStream = BASS_StreamCreateFileUser(STREAMFILE_NOBUFFER, BASS_STREAM_DECODE|BASS_SAMPLE_SOFTWARE|BASS_SAMPLE_FLOAT, &fileProcs, (__bridge void *)userInfo);
+        }
+        
 		if (fileStream)
 		{
 			// Add the stream free callback
@@ -749,13 +759,16 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 			userInfo.player = self;
 			return userInfo;
 		}
+        
+        // Failed to create the stream
+        DDLogError(@"[BassGaplessPlayer] failed to create stream for song: %@  filename: %@", aSong.title, aSong.currentPath);
+        [BassWrapper logError];
 		
-		// Failed to create the stream
-		DDLogError(@"[BassGaplessPlayer] failed to create stream for song: %@  filename: %@", aSong.title, aSong.currentPath);
 		return nil;
 	}
 	
 	// File doesn't exist
+    DDLogError(@"[BassGaplessPlayer] failed to create stream because file doesn't exist for song: %@  filename: %@", aSong.title, aSong.currentPath);
 	return nil;
 }
 
@@ -774,7 +787,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 		 self.startByteOffset = 0;
 		 self.startSecondsOffset = 0;
 		 
-		 [self bassInit];
+		 [self cleanup];
 		 
 		 if (aSong.fileExists)
 		 {
@@ -831,7 +844,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
 				 }
 				 
 				 // Start filling the ring buffer
-				 [self keepRingBufferFilled];
+                 [self keepRingBufferFilled];
 				 
 				 // Start playback
 				 BASS_ChannelPlay(self.outStream, FALSE);
@@ -976,7 +989,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
         [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_SongPlaybackEnded];
 	}
     
-    [self bassFree];
+    [self cleanup];
 }
 
 - (void)pause
@@ -1004,7 +1017,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
             ISMSSong *currentSong = [self.delegate bassSongForIndex:self.currentPlaylistIndex player:self];
             if (currentSong)
             {
-//                ALog(@"startByteOffset: %d, startSecondsOffset: %d", audioEngineS.startByteOffset, audioEngineS.startSecondsOffset);
+                // ALog(@"startByteOffset: %d, startSecondsOffset: %d", audioEngineS.startByteOffset, audioEngineS.startSecondsOffset);
                 [self.delegate bassRetrySongAtOffsetInBytes:audioEngineS.startByteOffset andSeconds:audioEngineS.startSecondsOffset player:self];
             }
             else
@@ -1041,11 +1054,15 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
     {
         [self.delegate bassSeekToPositionStarted:self];
     }
+    
+    userInfo.isEnded = NO;
+    //[self cleanup];
+    //[self startSong:self.currentStream.song atIndex:self.currentPlaylistIndex withOffsetInBytes:@(bytes) orSeconds:nil];
 	
 	if (userInfo.isEnded)
 	{
 		userInfo.isEnded = NO;
-		[self bassFree];
+		[self cleanup];
 		[self startSong:self.currentStream.song atIndex:self.currentPlaylistIndex withOffsetInBytes:@(bytes) orSeconds:nil];
 	}
 	else
@@ -1064,7 +1081,7 @@ extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOP
             
             if (fadeVolume)
             {
-                BASS_ChannelSlideAttribute(self.outStream, BASS_ATTRIB_VOL, 0, (DWORD)self.bassOutputBufferLengthMillis);
+                BASS_ChannelSlideAttribute(self.outStream, BASS_ATTRIB_VOL, 0, (DWORD)[BassWrapper bassOutputBufferLengthMillis]);
             }
             
             if ([self.delegate respondsToSelector:@selector(bassSeekToPositionSuccess:)])

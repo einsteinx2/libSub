@@ -722,6 +722,10 @@
 		53B3BDE61699137500DCFC9C /* HLSProxyResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BDE31699137500DCFC9C /* HLSProxyResponse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53B3BDE71699137500DCFC9C /* HLSProxyResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDE41699137500DCFC9C /* HLSProxyResponse.m */; };
 		53B3BDE81699137500DCFC9C /* HLSProxyResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDE41699137500DCFC9C /* HLSProxyResponse.m */; };
+		53B42A3516DEBDC00043698B /* NSString+cleanCredentialsForLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B42A3316DEBDC00043698B /* NSString+cleanCredentialsForLog.h */; };
+		53B42A3616DEBDC00043698B /* NSString+cleanCredentialsForLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B42A3316DEBDC00043698B /* NSString+cleanCredentialsForLog.h */; };
+		53B42A3716DEBDC00043698B /* NSString+cleanCredentialsForLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B42A3416DEBDC00043698B /* NSString+cleanCredentialsForLog.m */; };
+		53B42A3816DEBDC00043698B /* NSString+cleanCredentialsForLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B42A3416DEBDC00043698B /* NSString+cleanCredentialsForLog.m */; };
 		53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */ = {isa = PBXBuildFile; fileRef = 53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53C7F4401661BC3100C5F61E /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */; };
 		53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
@@ -1318,6 +1322,8 @@
 		53B3BDB316990DF100DCFC9C /* HLSProxyConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSProxyConnection.m; sourceTree = "<group>"; };
 		53B3BDE31699137500DCFC9C /* HLSProxyResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HLSProxyResponse.h; sourceTree = "<group>"; };
 		53B3BDE41699137500DCFC9C /* HLSProxyResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HLSProxyResponse.m; sourceTree = "<group>"; };
+		53B42A3316DEBDC00043698B /* NSString+cleanCredentialsForLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+cleanCredentialsForLog.h"; sourceTree = "<group>"; };
+		53B42A3416DEBDC00043698B /* NSString+cleanCredentialsForLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+cleanCredentialsForLog.m"; sourceTree = "<group>"; };
 		53C7F43D1661BC3100C5F61E /* FMDatabasePool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
 		53C7F43E1661BC3100C5F61E /* FMDatabasePool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
 		53E3E70B1690387800F195C5 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.8.sdk/usr/lib/libz.dylib; sourceTree = DEVELOPER_DIR; };
@@ -1719,6 +1725,8 @@
 		536C96B5166196A3005A73C6 /* Server Loading */ = {
 			isa = PBXGroup;
 			children = (
+				53B42A3316DEBDC00043698B /* NSString+cleanCredentialsForLog.h */,
+				53B42A3416DEBDC00043698B /* NSString+cleanCredentialsForLog.m */,
 				536C96B6166196AC005A73C6 /* NSMutableURLRequest+SUS.h */,
 				536C96B7166196AC005A73C6 /* NSMutableURLRequest+SUS.m */,
 				536C96B8166196AC005A73C6 /* NSMutableURLRequest+PMS.h */,
@@ -2410,6 +2418,7 @@
 				3B53B7D116C5C952003B6147 /* SUSScrobbleLoader.h in Headers */,
 				3B53B7D716C5C96D003B6147 /* WBScrobbleLoader.h in Headers */,
 				3B551CC816DEF510009FC032 /* WBDatabaseUpdateLoader.h in Headers */,
+				53B42A3616DEBDC00043698B /* NSString+cleanCredentialsForLog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2589,6 +2598,7 @@
 				3B53B7D016C5C952003B6147 /* SUSScrobbleLoader.h in Headers */,
 				3B53B7D616C5C96D003B6147 /* WBScrobbleLoader.h in Headers */,
 				3B551CC716DEF510009FC032 /* WBDatabaseUpdateLoader.h in Headers */,
+				53B42A3516DEBDC00043698B /* NSString+cleanCredentialsForLog.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3051,6 +3061,7 @@
 				3B53B7D316C5C952003B6147 /* SUSScrobbleLoader.m in Sources */,
 				3B53B7D916C5C96D003B6147 /* WBScrobbleLoader.m in Sources */,
 				3B551CCB16DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */,
+				53B42A3816DEBDC00043698B /* NSString+cleanCredentialsForLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3185,6 +3196,7 @@
 				3B53B7D216C5C952003B6147 /* SUSScrobbleLoader.m in Sources */,
 				3B53B7D816C5C96D003B6147 /* WBScrobbleLoader.m in Sources */,
 				3B551CC916DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */,
+				53B42A3716DEBDC00043698B /* NSString+cleanCredentialsForLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

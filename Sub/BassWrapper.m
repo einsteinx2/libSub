@@ -10,14 +10,69 @@
 
 LOG_LEVEL_ISUB_DEFAULT
 
+#define ISMS_BASSBufferSize 800
+#define ISMS_defaultSampleRate 44100
+
 @implementation BassWrapper
+
+extern void BASSFLACplugin, BASSWVplugin, BASS_APEplugin, BASS_MPCplugin, BASSOPUSplugin;
+
+static NSUInteger _bassOutputBufferLengthMillis = 0;
+
++ (NSUInteger)bassOutputBufferLengthMillis
+{
+    return _bassOutputBufferLengthMillis;
+}
+
++ (void)bassInit:(NSUInteger)sampleRate
+{
+    // Free BASS just in case we use this after launch
+    BASS_Free();
+    
+	// Initialize BASS
+	BASS_SetConfig(BASS_CONFIG_IOS_MIXAUDIO, 0); // Disable mixing.	To be called before BASS_Init.
+	BASS_SetConfig(BASS_CONFIG_BUFFER, BASS_GetConfig(BASS_CONFIG_UPDATEPERIOD) + ISMS_BASSBufferSize); // set the buffer length to the minimum amount + 200ms
+	BASS_SetConfig(BASS_CONFIG_FLOATDSP, true); // set DSP effects to use floating point math to avoid clipping within the effects chain
+	if (BASS_Init(1, (DWORD)sampleRate, 0, NULL, NULL)) 	// Initialize default device.
+	{
+        _bassOutputBufferLengthMillis = BASS_GetConfig(BASS_CONFIG_BUFFER);
+        
+#ifdef IOS
+        BASS_PluginLoad(&BASSFLACplugin, 0); // load the Flac plugin
+        BASS_PluginLoad(&BASSWVplugin, 0); // load the WavePack plugin
+        BASS_PluginLoad(&BASS_APEplugin, 0); // load the Monkey's Audio plugin
+        BASS_PluginLoad(&BASS_MPCplugin, 0); // load the MusePack plugin
+        BASS_PluginLoad(&BASSOPUSplugin, 0); // load the OPUS plugin
+#else
+        BASS_PluginLoad("libbassflac.dylib", 0); // load the Flac plugin
+        BASS_PluginLoad("libbasswv.dylib", 0); // load the WavePack plugin
+        BASS_PluginLoad("libbass_ape.dylib", 0); // load the Monkey's Audio plugin
+        BASS_PluginLoad("libbass_mpc.dylib", 0); // load the MusePack plugin
+        BASS_PluginLoad("libbassopus.dylib", 0); // load the OPUS plugin
+#endif
+	}
+    else
+    {
+        _bassOutputBufferLengthMillis = 0;
+        DDLogError(@"[BassGaplessPlayer] Can't initialize device");
+        [BassWrapper logError];
+    }
+	
+	//[audioEngineS startEmptyPlayer];
+    
+	//[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_BassInitialized];
+}
+
++ (void)bassInit
+{
+	// Default to 44.1 KHz
+    [self bassInit:ISMS_defaultSampleRate];
+}
 
 + (void)logError
 {
-#ifdef DEBUG
 	int errorCode = BASS_ErrorGetCode();
 	DDLogError(@"[BassWrapper] BASS error: %i - %@", errorCode, [BassWrapper stringFromErrorCode:errorCode]);
-#endif
 }
 
 + (void)printChannelInfo:(HSTREAM)channel

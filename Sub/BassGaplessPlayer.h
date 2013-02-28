@@ -25,7 +25,7 @@
 
 // Ring Buffer
 @property (strong) EX2RingBuffer *ringBuffer;
-@property BOOL stopFillingRingBuffer;
+@property (strong) NSThread *ringBufferFillThread;
 
 // BASS streams
 @property (strong) NSMutableArray *streamQueue;
@@ -33,7 +33,6 @@
 @property (copy) ISMSSong *previousSongForProgress;
 @property (nonatomic) HSTREAM outStream;
 @property (nonatomic) HSTREAM mixerStream;
-@property (nonatomic) NSUInteger bassOutputBufferLengthMillis;
 
 @property BOOL isPlaying;
 @property (readonly) BOOL isStarted;
@@ -68,8 +67,6 @@
 - (void)playPause;
 - (void)seekToPositionInBytes:(QWORD)bytes fadeVolume:(BOOL)fadeVolume;
 - (void)seekToPositionInSeconds:(double)seconds fadeVolume:(BOOL)fadeVolume;
-
-- (void)bassInit;
 
 - (BOOL)testStreamForSong:(ISMSSong *)aSong;
 - (BassStream *)prepareStreamForSong:(ISMSSong *)aSong;

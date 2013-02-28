@@ -185,7 +185,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
         }
     }
 	
-	DDLogInfo(@"[ISMSCFNetworkStreamHandler] url: %@\nheaders: %@\nbody: %@", request.URL.absoluteString, request.allHTTPHeaderFields, [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
+	//DDLogInfo(@"[ISMSCFNetworkStreamHandler] url: %@\nheaders: %@\nbody: %@", request.URL.absoluteString, request.allHTTPHeaderFields, [[NSString alloc] initWithData:request.HTTPBody encoding:NSUTF8StringEncoding]);
 	
 	// Create the stream for the request.
 	_readStreamRef = CFReadStreamCreateForHTTPRequest(kCFAllocatorDefault, messageRef);
