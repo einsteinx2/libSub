@@ -217,6 +217,7 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
+    self.response = response;
 	[self.receivedData setLength:0];
 }
 

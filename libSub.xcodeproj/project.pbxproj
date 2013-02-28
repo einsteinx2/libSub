@@ -59,6 +59,11 @@
 		3B53B7D716C5C96D003B6147 /* WBScrobbleLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */; };
 		3B53B7D816C5C96D003B6147 /* WBScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */; };
 		3B53B7D916C5C96D003B6147 /* WBScrobbleLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */; };
+		3B551CC716DEF510009FC032 /* WBDatabaseUpdateLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B551CC516DEF510009FC032 /* WBDatabaseUpdateLoader.h */; };
+		3B551CC816DEF510009FC032 /* WBDatabaseUpdateLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B551CC516DEF510009FC032 /* WBDatabaseUpdateLoader.h */; };
+		3B551CC916DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B551CC616DEF510009FC032 /* WBDatabaseUpdateLoader.m */; };
+		3B551CCA16DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B551CC616DEF510009FC032 /* WBDatabaseUpdateLoader.m */; };
+		3B551CCB16DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B551CC616DEF510009FC032 /* WBDatabaseUpdateLoader.m */; };
 		5304A021168FB35F009B2732 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		5304A029168FB35F009B2732 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5304A027168FB35F009B2732 /* InfoPlist.strings */; };
 		5304A02B168FB35F009B2732 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5304A02A168FB35F009B2732 /* main.m */; };
@@ -970,6 +975,8 @@
 		3B53B7CF16C5C952003B6147 /* SUSScrobbleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSScrobbleLoader.m; sourceTree = "<group>"; };
 		3B53B7D416C5C96D003B6147 /* WBScrobbleLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBScrobbleLoader.h; sourceTree = "<group>"; };
 		3B53B7D516C5C96D003B6147 /* WBScrobbleLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBScrobbleLoader.m; sourceTree = "<group>"; };
+		3B551CC516DEF510009FC032 /* WBDatabaseUpdateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDatabaseUpdateLoader.h; sourceTree = "<group>"; };
+		3B551CC616DEF510009FC032 /* WBDatabaseUpdateLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBDatabaseUpdateLoader.m; sourceTree = "<group>"; };
 		5304A01D168FB35F009B2732 /* libSubTests.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = libSubTests.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5304A01F168FB35F009B2732 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		5304A022168FB35F009B2732 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -1781,6 +1788,8 @@
 				536C96F9166196E5005A73C6 /* PMSLoginLoader.m */,
 				D0E6BDDF16B43DA800312877 /* WBDatabaseLoader.h */,
 				D0E6BDE016B43DA800312877 /* WBDatabaseLoader.m */,
+				3B551CC516DEF510009FC032 /* WBDatabaseUpdateLoader.h */,
+				3B551CC616DEF510009FC032 /* WBDatabaseUpdateLoader.m */,
 			);
 			name = "PMS Specific";
 			sourceTree = "<group>";
@@ -2400,6 +2409,7 @@
 				3B53B7CB16C5C940003B6147 /* ISMSScrobbleLoader.h in Headers */,
 				3B53B7D116C5C952003B6147 /* SUSScrobbleLoader.h in Headers */,
 				3B53B7D716C5C96D003B6147 /* WBScrobbleLoader.h in Headers */,
+				3B551CC816DEF510009FC032 /* WBDatabaseUpdateLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2578,6 +2588,7 @@
 				3B53B7CA16C5C940003B6147 /* ISMSScrobbleLoader.h in Headers */,
 				3B53B7D016C5C952003B6147 /* SUSScrobbleLoader.h in Headers */,
 				3B53B7D616C5C96D003B6147 /* WBScrobbleLoader.h in Headers */,
+				3B551CC716DEF510009FC032 /* WBDatabaseUpdateLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2665,6 +2676,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				de,
 			);
 			mainGroup = 536C946816618FA4005A73C6;
 			productRefGroup = 536C947416618FA4005A73C6 /* Products */;
@@ -2922,6 +2934,7 @@
 				5304A02B168FB35F009B2732 /* main.m in Sources */,
 				5304A049168FB54F009B2732 /* ISMSStreamHandler_Test.m in Sources */,
 				5304A0FA168FE14A009B2732 /* BassGaplessPlayer_Test.m in Sources */,
+				3B551CCA16DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3037,6 +3050,7 @@
 				3B53B7CD16C5C940003B6147 /* ISMSScrobbleLoader.m in Sources */,
 				3B53B7D316C5C952003B6147 /* SUSScrobbleLoader.m in Sources */,
 				3B53B7D916C5C96D003B6147 /* WBScrobbleLoader.m in Sources */,
+				3B551CCB16DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3170,6 +3184,7 @@
 				3B53B7CC16C5C940003B6147 /* ISMSScrobbleLoader.m in Sources */,
 				3B53B7D216C5C952003B6147 /* SUSScrobbleLoader.m in Sources */,
 				3B53B7D816C5C96D003B6147 /* WBScrobbleLoader.m in Sources */,
+				3B551CC916DEF510009FC032 /* WBDatabaseUpdateLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

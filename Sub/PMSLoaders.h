@@ -11,5 +11,6 @@
 
 #import "PMSLoginLoader.h"
 #import "WBDatabaseLoader.h"
+#import "WBDatabaseUpdateLoader.h"
 
 #endif
