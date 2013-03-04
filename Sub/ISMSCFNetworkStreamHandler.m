@@ -128,27 +128,27 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	{
         NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObject:self.mySong.songId forKey:@"id"];
         
-        if (self.maxBitrateSetting < 192)
+        if (self.bitrate < self.maxBitrateSetting || self.maxBitrateSetting == 0)
         {
-            [parameters setObject:@"MP3" forKey:@"transType"];
-            
+            request = [NSMutableURLRequest requestWithPMSAction:@"stream" parameters:parameters byteOffset:self.byteOffset];
+        }
+        
+        else
+        {
+            [parameters setObject:@"OPUS" forKey:@"transType"];
+
             NSString *transQuality;
             switch (self.maxBitrateSetting)
             {
                 case 64: transQuality = @"Low"; break;
                 case 96: transQuality = @"Medium"; break;
                 case 128: transQuality = @"High"; break;
-                case 160:
-                default: transQuality = @"Extreme"; break;
+                default: transQuality = [NSString stringWithFormat:@"%d", self.maxBitrateSetting];
             }
             [parameters setObject:transQuality forKey:@"transQuality"];
-            [parameters setObject:@"OPUS" forKey:@"transType"];
             [parameters setObject:@"true" forKey:@"estimateContentLength"];
+            
             request = [NSMutableURLRequest requestWithPMSAction:@"transcode" parameters:parameters byteOffset:self.byteOffset];
-        }
-        else
-        {
-            request = [NSMutableURLRequest requestWithPMSAction:@"stream" parameters:parameters byteOffset:self.byteOffset];
         }
 	}
     

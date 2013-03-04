@@ -59,6 +59,8 @@
 	
 	_shufflePlaylistIndex = [_userDefaults integerForKey:@"shufflePlaylistIndex"];
 	playlistS.shuffleIndex = _shufflePlaylistIndex;
+    
+    _currentTwitterAccount = [_userDefaults objectForKey:@"currentTwitterAccount"];
 	
 	_repeatMode = [_userDefaults integerForKey:@"repeatMode"];
 	playlistS.repeatMode = _repeatMode;
@@ -529,6 +531,26 @@
         
         NSString *key = [NSString stringWithFormat:@"sessionId%@", self.urlString.md5];
 		[_userDefaults setObject:_sessionId forKey:key];
+		[_userDefaults synchronize];
+	}
+}
+
+- (NSString *)currentTwitterAccount
+{
+	@synchronized(self)
+	{
+		return _currentTwitterAccount;
+	}
+}
+
+- (void)setCurrentTwitterAccount:(NSString *)identifier
+{
+	@synchronized(self)
+	{
+		_currentTwitterAccount = [identifier copy];
+        
+        NSString *key = @"currentTwitterAccount";
+		[_userDefaults setObject:_currentTwitterAccount forKey:key];
 		[_userDefaults synchronize];
 	}
 }

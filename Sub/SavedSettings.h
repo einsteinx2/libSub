@@ -10,6 +10,8 @@
 #define iSub_SavedSettings_h
 
 #import "BassEffectDAO.h"
+#import <Accounts/Accounts.h>
+#import <Social/Social.h>
 
 #define settingsS ((SavedSettings *)[SavedSettings sharedInstance])
 
@@ -58,6 +60,7 @@ typedef enum
 	double _secondsOffset;
 	BOOL _isRecover;
 	NSInteger _recoverSetting;
+    NSString *_currentTwitterAccount;
 }
 
 @property BOOL isCancelLoading;
@@ -139,6 +142,7 @@ typedef enum
 @property NSUInteger oneTimeRunIncrementor;
 
 @property BOOL isDisableUsageOver3G;
+@property (strong) NSString *currentTwitterAccount;
 
 // State Saving
 @property BOOL isRecover;

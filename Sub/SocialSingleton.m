@@ -209,16 +209,40 @@ LOG_LEVEL_ISUB_DEFAULT
 	
     //DLog(@"Asked to tweet %@", currentSong.title);
 	
-	if (self.twitterEngine.isAuthorized && settingsS.isTwitterEnabled && !settingsS.isOfflineMode)
+	if (settingsS.currentTwitterAccount && settingsS.isTwitterEnabled && !settingsS.isOfflineMode)
 	{
 		if (currentSong.artist && currentSong.title)
 		{
 			//DLog(@"------------- tweeting song --------------");
 			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@", currentSong.title, currentSong.artist];
-			if ([tweet length] <= 140)
-				[self.twitterEngine sendUpdate:tweet];
-			else
-				[self.twitterEngine sendUpdate:[tweet substringToIndex:140]];
+            NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json"];
+
+            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:url parameters:@{@"status": tweet}];
+            
+            ACAccountStore *store = [[ACAccountStore alloc] init];
+            
+            ACAccount *account = [store accountWithIdentifier: settingsS.currentTwitterAccount];
+            
+            if (account)
+            {
+                request.account = account;
+                [request performRequestWithHandler:^(NSData *responseData, NSHTTPURLResponse *urlResponse, NSError *error)
+                {
+                    if (error)
+                    {
+                        ALog(@"Twitter error: %@", error);
+                    }
+                    else
+                    {
+                        ALog(@"Successfully tweeted: %@", tweet);
+                    }
+                }];
+            }
+            
+//			if ([tweet length] <= 140)
+//				[self.twitterEngine sendUpdate:tweet];
+//			else
+//				[self.twitterEngine sendUpdate:[tweet substringToIndex:140]];
 			
             //DLog(@"Tweeted: %@", tweet);
 		}
