@@ -28,6 +28,7 @@
 @property BOOL isFileUnderrun;
 @property BOOL wasFileJustUnderrun;
 @property NSInteger channelCount;
+@property NSInteger sampleRate;
 
 @property BOOL isEnded;
 @property BOOL isEndedCalled;

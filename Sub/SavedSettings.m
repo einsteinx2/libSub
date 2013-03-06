@@ -71,6 +71,7 @@
 	_isRecover = self.isRecover;
 	_recoverSetting = self.recoverSetting;
     _sessionId = self.sessionId;
+    _sessionId = [_userDefaults objectForKey:@"lastQueryId"];
 	
 	audioEngineS.startByteOffset = _byteOffset;
 	audioEngineS.startSecondsOffset = _secondsOffset;

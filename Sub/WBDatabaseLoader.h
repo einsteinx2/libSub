@@ -10,6 +10,7 @@
 
 @interface WBDatabaseLoader : ISMSLoader
 
+@property (strong) NSString *lastQueryId;
 @property (strong) NSString *uuid;
 @property (strong) NSString *error;
 @property (strong) NSString *version;

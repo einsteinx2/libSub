@@ -33,7 +33,7 @@ LOG_LEVEL_ISUB_DEFAULT
     NSString *dbPath = [dbFolderPath stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.db", self.uuid]];
     
     NSString *lqid = [(NSHTTPURLResponse *)self.response allHeaderFields][@"WaveBox-LastQueryId"];
-    settingsS.lastQueryId = lqid;
+    self.lastQueryId = lqid;
 
     ALog(@"%@", [[(NSHTTPURLResponse *)self.response allHeaderFields][@"WaveBox-LastQueryId"] class]);
     ALog(@"%@", settingsS.lastQueryId);

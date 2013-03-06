@@ -342,6 +342,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 	@autoreleasepool
 	{
         self.previousSongForProgress = userInfo.song;
+        self.ringBuffer.totalBytesDrained = 0;
         
 		userInfo.isEndedCalled = YES;
         
@@ -758,6 +759,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
             BASS_CHANNELINFO info;
             BASS_ChannelGetInfo(fileStream, &info);
             userInfo.channelCount = info.chans;
+            userInfo.sampleRate = info.freq;
 			
 			// Stream successfully created
 			userInfo.stream = fileStream;
@@ -803,6 +805,8 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 				 BASS_Mixer_StreamAddChannel(self.mixerStream, userInfo.stream, BASS_MIXER_NORAMPIN);
 				 self.outStream = BASS_StreamCreate(ISMS_defaultSampleRate, 2, 0, &MyStreamProc, (__bridge void*)self);
                  
+                 self.ringBuffer.totalBytesDrained = 0;
+                 
                  BASS_Start();
                  
                  // Add the slide callback to handle fades
@@ -830,6 +834,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 				 if (byteOffset)
 				 {
 					 self.startByteOffset = byteOffset.unsignedLongLongValue;
+                     self.ringBuffer.totalBytesDrained = byteOffset.unsignedLongLongValue;
 					 
 					 if (seconds)
 					 {
@@ -948,11 +953,16 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     double denom = (2 * (1 / (double)chanCount));
     long long realPosition = pcmBytePosition - (long long)(self.ringBuffer.filledSpaceLength / denom);
     
-    ALog(@"adjustedPosition: %lli, pcmBytePosition: %lli, self.ringBuffer.filledSpaceLength: %i", realPosition, pcmBytePosition, self.ringBuffer.filledSpaceLength);
-	pcmBytePosition = realPosition;
+    //ALog(@"adjustedPosition: %lli, pcmBytePosition: %lli, self.ringBuffer.filledSpaceLength: %i", realPosition, pcmBytePosition, self.ringBuffer.filledSpaceLength);
+    
+    double sampleRateRatio = self.currentStream.sampleRate / (double)ISMS_defaultSampleRate;
+	
+    ALog(@"total bytes drained: %lli, seconds: %f, sampleRate: %li, ratio: %f", self.ringBuffer.totalBytesDrained, BASS_ChannelBytes2Seconds(self.currentStream.stream, self.ringBuffer.totalBytesDrained * sampleRateRatio * chanCount), (long)self.currentStream.sampleRate, sampleRateRatio);
+    pcmBytePosition = realPosition;
 	pcmBytePosition = pcmBytePosition < 0 ? 0 : pcmBytePosition; 
-	double seconds = BASS_ChannelBytes2Seconds(self.currentStream.stream, pcmBytePosition);
-    ALog(@"seconds: %f", seconds);
+	//double seconds = BASS_ChannelBytes2Seconds(self.currentStream.stream, pcmBytePosition);
+    double seconds = BASS_ChannelBytes2Seconds(self.currentStream.stream, self.ringBuffer.totalBytesDrained * sampleRateRatio * chanCount);
+    //ALog(@"seconds: %f", seconds);
     //DDLogVerbose(@"progress seconds: %f", seconds);
 	if (seconds < 0)
     {
@@ -967,7 +977,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     
     //ALog(@"bytepos: %lld, secs: %f", pcmBytePosition, seconds);
 	
-	return seconds + self.startSecondsOffset;
+	return seconds;// + self.startSecondsOffset;
 }
 
 - (BassStream *)currentStream
@@ -1096,6 +1106,8 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
             {
                 BASS_ChannelSlideAttribute(self.outStream, BASS_ATTRIB_VOL, 0, (DWORD)[BassWrapper bassOutputBufferLengthMillis]);
             }
+            
+            self.ringBuffer.totalBytesDrained = bytes / self.currentStream.channelCount / (self.currentStream.sampleRate / (double)ISMS_defaultSampleRate);
             
             if ([self.delegate respondsToSelector:@selector(bassSeekToPositionSuccess:)])
             {
