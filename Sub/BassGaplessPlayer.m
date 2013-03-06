@@ -753,6 +753,11 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		{
 			// Add the stream free callback
 			BASS_ChannelSetSync(fileStream, BASS_SYNC_END|BASS_SYNC_MIXTIME, 0, MyStreamEndCallback, (__bridge void*)userInfo);
+            
+            // Ask BASS how many channels are on this stream
+            BASS_CHANNELINFO info;
+            BASS_ChannelGetInfo(fileStream, &info);
+            userInfo.channelCount = info.chans;
 			
 			// Stream successfully created
 			userInfo.stream = fileStream;
@@ -938,10 +943,16 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		return 0;
 	
     long long pcmBytePosition = BASS_Mixer_ChannelGetPosition(self.currentStream.stream, BASS_POS_BYTE);
-    //DLog(@"pcmBytePosition: %i  self.ringBuffer.filledSpaceLength: %i", pcmBytePosition, self.ringBuffer.filledSpaceLength);
-	pcmBytePosition -= (self.ringBuffer.filledSpaceLength * 2); // Not sure why but this has to be multiplied by 2 for accurate reading
+    
+    NSInteger chanCount = self.currentStream.channelCount;
+    double denom = (2 * (1 / (double)chanCount));
+    long long realPosition = pcmBytePosition - (long long)(self.ringBuffer.filledSpaceLength / denom);
+    
+    ALog(@"adjustedPosition: %lli, pcmBytePosition: %lli, self.ringBuffer.filledSpaceLength: %i", realPosition, pcmBytePosition, self.ringBuffer.filledSpaceLength);
+	pcmBytePosition = realPosition;
 	pcmBytePosition = pcmBytePosition < 0 ? 0 : pcmBytePosition; 
 	double seconds = BASS_ChannelBytes2Seconds(self.currentStream.stream, pcmBytePosition);
+    ALog(@"seconds: %f", seconds);
     //DDLogVerbose(@"progress seconds: %f", seconds);
 	if (seconds < 0)
     {
@@ -953,6 +964,8 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
         
         return self.previousSongForProgress.duration.doubleValue + seconds;
     }
+    
+    //ALog(@"bytepos: %lld, secs: %f", pcmBytePosition, seconds);
 	
 	return seconds + self.startSecondsOffset;
 }

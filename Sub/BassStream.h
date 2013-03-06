@@ -27,6 +27,7 @@
 @property BOOL isSongStarted;
 @property BOOL isFileUnderrun;
 @property BOOL wasFileJustUnderrun;
+@property NSInteger channelCount;
 
 @property BOOL isEnded;
 @property BOOL isEndedCalled;

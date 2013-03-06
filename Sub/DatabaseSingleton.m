@@ -293,7 +293,7 @@ LOG_LEVEL_ISUB_DEFAULT
         ALog(@"checking if sizes table exists");
         if (![db tableExists:@"sizesSongs"])
         {
-            [db executeUpdate:@"CREATE TABLE sizesSongs(song_id TEXT UNIQUE, size INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE sizesSongs(md5 TEXT UNIQUE, size INTEGER)"];
             
             FMResultSet *result = [db executeQuery:@"SELECT * FROM cachedSongs"];
             
