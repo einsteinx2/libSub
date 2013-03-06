@@ -957,7 +957,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     
     double sampleRateRatio = self.currentStream.sampleRate / (double)ISMS_defaultSampleRate;
 	
-    ALog(@"total bytes drained: %lli, seconds: %f, sampleRate: %li, ratio: %f", self.ringBuffer.totalBytesDrained, BASS_ChannelBytes2Seconds(self.currentStream.stream, self.ringBuffer.totalBytesDrained * sampleRateRatio * chanCount), (long)self.currentStream.sampleRate, sampleRateRatio);
+    //ALog(@"total bytes drained: %lli, seconds: %f, sampleRate: %li, ratio: %f", self.ringBuffer.totalBytesDrained, BASS_ChannelBytes2Seconds(self.currentStream.stream, self.ringBuffer.totalBytesDrained * sampleRateRatio * chanCount), (long)self.currentStream.sampleRate, sampleRateRatio);
     pcmBytePosition = realPosition;
 	pcmBytePosition = pcmBytePosition < 0 ? 0 : pcmBytePosition; 
 	//double seconds = BASS_ChannelBytes2Seconds(self.currentStream.stream, pcmBytePosition);
