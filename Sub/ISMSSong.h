@@ -25,6 +25,7 @@
 @property (copy) NSNumber *track;
 @property (copy) NSNumber *year;
 @property (copy) NSNumber *size;
+@property (copy) NSNumber *discNumber;
 @property BOOL isVideo;
 
 - (NSString *)localSuffix;

@@ -34,6 +34,7 @@
 		_track = N2n([[dictionary objectForKey:@"trackNumber"] copy]);
 		_year = N2n([[dictionary objectForKey:@"year"] copy]);
 		_size = N2n([[dictionary objectForKey:@"fileSize"] copy]);
+        _discNumber = N2n([[dictionary objectForKey:@"discNumber"] copy]);
 		 
 		// Generate "path" from artist, album and song name
 		NSString *artistName = _artist ? _artist : @"Unknown";
@@ -72,6 +73,9 @@
         
         NSString *sizeString = [TBXML valueOfAttributeNamed:@"size" forElement:element];
         if (sizeString) _size = @(sizeString.longLongValue);
+        
+        NSString *discNumberString = [TBXML valueOfAttributeNamed:@"discNumber" forElement:element];
+        if (discNumberString) _discNumber = @(discNumberString.longLongValue);
         
         _isVideo = [[TBXML valueOfAttributeNamed:@"isVideo" forElement:element] boolValue];
 	}
@@ -134,6 +138,7 @@
 	[encoder encodeObject:self.year forKey:@"year"];
 	[encoder encodeObject:self.size forKey:@"size"];
     [encoder encodeBool:self.isVideo forKey:@"isVideo"];
+    [encoder encodeObject:self.discNumber forKey:@"discNumber"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -159,6 +164,7 @@
 			_year = [[decoder decodeObjectForKey:@"year"] copy];
 			_size = [[decoder decodeObjectForKey:@"size"] copy];
             _isVideo = [decoder decodeBoolForKey:@"isVideo"];
+            _discNumber = [decoder decodeObjectForKey:@"discNumber"];
 		}
 		else
 		{
@@ -203,6 +209,7 @@
 	newSong.year = self.year;
 	newSong.size = self.size;
     newSong.isVideo = self.isVideo;
+    newSong.discNumber = self.discNumber;
 	
 	return newSong;
 }
