@@ -21,6 +21,8 @@
 @property (readonly) NSUInteger numberOfCachedSongs;
 
 + (id)sharedInstance;
++ (void)setAllCachedSongsToBackup;
++ (void)setAllCachedSongsToNotBackup;
 
 //- (void)startCacheCheckTimer;
 - (void)startCacheCheckTimerWithInterval:(NSTimeInterval)interval;

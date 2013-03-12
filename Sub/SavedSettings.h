@@ -97,6 +97,7 @@ typedef enum
 @property (readonly) NSArray *currentVideoBitrates;
 @property BOOL isSongCachingEnabled;
 @property BOOL isNextSongCacheEnabled;
+@property BOOL isBackupCacheEnabled;
 @property BOOL isManualCachingOnWWANEnabled;
 @property NSInteger cachingType;
 @property unsigned long long maxCacheSize;

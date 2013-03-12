@@ -158,6 +158,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (NSArray *)removeEqualizerValue:(BassParamEqValue *)value
 {
+     NSLog(@"removeEqualizerValue");
 	if (self.isEqActive)
 	{
 		// Disable the effect channel
@@ -191,6 +192,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)removeAllEqualizerValues
 {
+    NSLog(@"removeAllEqualizerValues");
 	[self clearEqualizerValues];
 	
     @synchronized(self.eqValues)
@@ -203,6 +205,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (BOOL)toggleEqualizer
 {
+    NSLog(@"toggleEqualizer");
     settingsS.isEqualizerOn = !self.isEqActive;
     
 	if (self.isEqActive)

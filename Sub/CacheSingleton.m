@@ -274,11 +274,14 @@ LOG_LEVEL_ISUB_DEFAULT
                 
 #ifdef IOS
                 // Now set all of the files to not be backed up
-                NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
-                for (NSString *songName in cachedSongNames)
+                if (!settingsS.isBackupCacheEnabled)
                 {
-                    NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
-                    [fileUrl addSkipBackupAttribute];
+                    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
+                    for (NSString *songName in cachedSongNames)
+                    {
+                        NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
+                        [fileUrl addSkipBackupAttribute];
+                    }
                 }
 #endif
             }
@@ -341,5 +344,33 @@ LOG_LEVEL_ISUB_DEFAULT
 	});
     return sharedInstance;
 }
+
++ (void) setAllCachedSongsToBackup
+{
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    
+    // Now set all of the files to be backed up
+    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
+    for (NSString *songName in cachedSongNames)
+    {
+        NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
+        [fileUrl removeSkipBackupAttribute];
+    }
+}
+
++ (void) setAllCachedSongsToNotBackup
+{
+    NSFileManager *defaultManager = [NSFileManager defaultManager];
+    
+    // Now set all of the files to be backed up
+    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
+    for (NSString *songName in cachedSongNames)
+    {
+        NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
+        
+        [fileUrl addSkipBackupAttribute];
+    }
+}
+
 
 @end

@@ -881,6 +881,42 @@
 	}
 }
 
+- (BOOL)isBackupCacheEnabled
+{
+	@synchronized(self)
+	{
+		return [_userDefaults boolForKey:@"isBackupCacheEnabled"];
+	}
+}
+
+- (void)setIsBackupCacheEnabled:(BOOL)isBackupCacheEnabled
+{
+	@synchronized(self)
+	{
+		[_userDefaults setBool:isBackupCacheEnabled forKey:@"isBackupCacheEnabled"];
+		[_userDefaults synchronize];
+	}
+    
+    if (isBackupCacheEnabled)
+    {
+       //Set all cached songs to removeSkipBackup
+        [CacheSingleton setAllCachedSongsToBackup];
+        
+        // Set database to removeskipBackup
+        [DatabaseSingleton setAllSongsToBackup];
+ 
+    }
+    else
+    {
+        //Set all cached songs to removeSkipBackup
+        [CacheSingleton setAllCachedSongsToNotBackup];
+        
+        // Set database to removeskipBackup
+        [DatabaseSingleton setAllSongsToNotBackup];
+    }
+}
+
+
 - (BOOL)isManualCachingOnWWANEnabled
 {
 	@synchronized(self)
