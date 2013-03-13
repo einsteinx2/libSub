@@ -11,28 +11,15 @@
 
 #define socialS ((SocialSingleton *)[SocialSingleton sharedInstance])
 
-#ifdef IOS
-#import "SA_OAuthTwitterController.h"
-#import "SA_OAuthTwitterEngine.h"
-@class SA_OAuthTwitterEngine;
-#endif
-
 @class Song;
 
 @interface SocialSingleton : NSObject
-
-#ifdef IOS
-@property (strong) SA_OAuthTwitterEngine *twitterEngine;
-#endif
 
 @property (readonly) NSTimeInterval scrobbleDelay;
 @property (readonly) NSTimeInterval subsonicDelay;
 @property (readonly) NSTimeInterval tweetDelay;
 
 + (id)sharedInstance;
-
-- (void)createTwitterEngine;
-- (void)destroyTwitterEngine;
 
 - (void)scrobbleSongAsPlaying;
 - (void)scrobbleSongAsSubmission;

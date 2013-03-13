@@ -91,11 +91,18 @@ LOG_LEVEL_ISUB_DEFAULT
                 [db executeUpdate:@"CREATE TABLE albumsCache (folderId TEXT, title TEXT, albumId TEXT, coverArtId TEXT, artistName TEXT, artistId TEXT)"];
                 [db executeUpdate:@"CREATE INDEX albumsFolderId ON albumsCache (folderId)"];
             }
+            
             if (![db tableExists:@"songsCache"]) 
             {
                 [db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE songsCache (folderId TEXT, %@)", [ISMSSong standardSongColumnSchema]]];
                 [db executeUpdate:@"CREATE INDEX songsFolderId ON songsCache (folderId)"];
             }
+            else if(![db columnExists:@"discNumber" inTableWithName:@"songsCache"])
+            {
+                BOOL success = [db executeUpdate:@"ALTER TABLE songsCache ADD COLUMN discNumber INTEGER"];
+                ALog(@"songsCache has no discNumber and add worked: %d", success);
+            }
+            
             if (![db tableExists:@"albumsCacheCount"])
             {
                 [db executeUpdate:@"CREATE TABLE albumsCacheCount (folderId TEXT, count INTEGER)"];
@@ -267,6 +274,12 @@ LOG_LEVEL_ISUB_DEFAULT
 			[db executeUpdate:@"CREATE INDEX cachedDate ON cachedSongs (cachedDate DESC)"];
 			[db executeUpdate:@"CREATE INDEX playedDate ON cachedSongs (playedDate DESC)"];
 		}
+        else if(![db columnExists:@"discNumber" inTableWithName:@"cachedSongs"])
+        {
+            ALog(@"Added column discNumber on table cachedSongs");
+            [db executeUpdate:@"ALTER TABLE cachedSongs ADD COLUMN discNumber INTEGER"];
+        }
+        
 		[db executeUpdate:@"CREATE INDEX md5 IF NOT EXISTS ON cachedSongs (md5)"];
 		if (![db tableExists:@"cachedSongsLayout"]) 
 		{
@@ -293,6 +306,10 @@ LOG_LEVEL_ISUB_DEFAULT
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE genresSongs (md5 TEXT UNIQUE, %@)", [ISMSSong standardSongColumnSchema]]];
 			[db executeUpdate:@"CREATE INDEX songGenre ON genresSongs (genre)"];
 		}
+        else if(![db columnExists:@"discNumber" inTableWithName:@"genresSongs"])
+        {
+            [db executeUpdate:@"ALTER TABLE genresSongs ADD COLUMN discNumber INTEGER"];
+        }
         ALog(@"checking if sizes table exists");
         if (![db tableExists:@"sizesSongs"])
         {
@@ -378,6 +395,11 @@ LOG_LEVEL_ISUB_DEFAULT
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE cacheQueue (md5 TEXT UNIQUE, finished TEXT, cachedDate INTEGER, playedDate INTEGER, %@)", [ISMSSong standardSongColumnSchema]]];
 			//[cacheQueueDb executeUpdate:@"CREATE INDEX queueDate ON cacheQueue (cachedDate DESC)"];
 		}
+        else if(![db columnExists:@"discNumber" inTableWithName:@"cacheQueue"])
+        {
+            [db executeUpdate:@"ALTER TABLE cacheQueue ADD COLUMN discNumber INTEGER"];
+        }
+        
 	}];
 		
 	// Setup the lyrics database
@@ -420,6 +442,11 @@ LOG_LEVEL_ISUB_DEFAULT
                 [db executeUpdate:@"DROP TABLE bookmarks"];
                 [db executeUpdate:@"ALTER TABLE bookmarksTemp RENAME TO bookmarks"];
                 [db executeUpdate:@"CREATE INDEX songId ON bookmarks (songId)"];
+            }
+            
+            if(![db columnExists:@"discNumber" inTableWithName:@"bookmarks"])
+            {
+                [db executeUpdate:@"ALTER TABLE bookmarks ADD COLUMN discNumber INTEGER"];
             }
         }
         else
@@ -534,6 +561,11 @@ LOG_LEVEL_ISUB_DEFAULT
 			[db executeUpdate:@"ALTER TABLE bookmarksTemp RENAME TO bookmarks"];	
 			[db executeUpdate:@"CREATE INDEX songId ON bookmarks (songId)"];
 		}
+        
+        if(![db columnExists:@"discNumber" inTableWithName:@"bookmarkId"])
+        {
+            [db executeUpdate:@"ALTER TABLE bookmarkId ADD COLUMN discNumber INTEGER"];
+        }
 	}];
 	
 	[self.songCacheDbQueue inDatabase:^(FMDatabase *db)

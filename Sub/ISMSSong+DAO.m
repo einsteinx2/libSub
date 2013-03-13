@@ -99,7 +99,7 @@
 			}];
 			
 			// Insert the song object into the appropriate genresSongs table
-			[self insertIntoGenreTableDbQueue:@"genresSongs"];
+			[self insertIntoGenreTable:@"genresSongs" inDatabaseQueue:self.dbQueue];
 		}
 		
 		[self removeFromCacheQueueDbQueue];
@@ -129,6 +129,8 @@
 		aSong.size = @([result intForColumn:@"size"]);
         if ([result stringForColumn:@"isVideo"] != nil)
             aSong.isVideo = [[result stringForColumn:@"isVideo"] boolValue];
+        if ([result stringForColumn:@"discNumber"] != nil)
+            aSong.discNumber = [NSNumber numberWithInteger:[result intForColumn:@"discNumber"]];
 	}
 	
 	return aSong;
@@ -234,7 +236,7 @@
 
 - (BOOL)insertIntoTable:(NSString *)table inDatabase:(FMDatabase *)db
 {
-	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
+	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo), self.discNumber];
 	
 	if ([db hadError]) 
 	{
@@ -255,7 +257,10 @@
 	__block BOOL hadError;
 	[databaseS.albumListCacheDbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO songsCache (folderId, %@) VALUES (?, %@)", [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [folderId md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
+		[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO songsCache (folderId, %@) VALUES (?, %@)", [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [folderId md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo), self.discNumber];
+        
+        ALog(@"Added to songsCache with folderCache: %@", self.discNumber);
+
 		
 		hadError = [db hadError];
 		if (hadError)
@@ -266,19 +271,27 @@
 	return !hadError;
 }
 
-- (BOOL)insertIntoGenreTableDbQueue:(NSString *)table
+- (BOOL)insertIntoGenreTable:(NSString *)table inDatabaseQueue:(FMDatabaseQueue *)dbQueue
 {	
 	__block BOOL hadError;
-	[self.dbQueue inDatabase:^(FMDatabase *db)
+	[dbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (md5, %@) VALUES (?, %@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
-		
-		hadError = [db hadError];
-		if (hadError) 
-		{
-		//DLog(@"Err inserting song into genre table %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-		}
+		hadError = [self insertIntoGenreTable:table inDatabase:db];
 	}];
+	
+	return !hadError;
+}
+
+- (BOOL)insertIntoGenreTable:(NSString *)table inDatabase:(FMDatabase *)db
+{
+	BOOL hadError;
+	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (md5, %@) VALUES (?, %@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
+    
+    hadError = [db hadError];
+    if (hadError)
+    {
+        ALog(@"Err inserting song into genre table %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
 	
 	return !hadError;
 }
@@ -288,7 +301,9 @@
 	__block BOOL hadError;
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:[NSString stringWithFormat:@"REPLACE INTO cachedSongs (md5, finished, cachedDate, playedDate, %@) VALUES (?, 'NO', ?, 0, %@)",  [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], @((unsigned long long)[[NSDate date] timeIntervalSince1970]), self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
+		BOOL success = [db executeUpdate:[NSString stringWithFormat:@"REPLACE INTO cachedSongs (md5, finished, cachedDate, playedDate, %@) VALUES (?, 'NO', ?, 0, %@)",  [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], @((unsigned long long)[[NSDate date] timeIntervalSince1970]), self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo), self.discNumber];
+        
+        ALog(@"Inserted into cachedSongs with discNumber: %@ and insert was successful? %d", self.discNumber, success);
 		
 		hadError = [db hadError];
 		if (hadError) 
@@ -349,7 +364,9 @@
 	{
 		[databaseS.cacheQueueDbQueue inDatabase:^(FMDatabase *db)
 		{
-			[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO cacheQueue (md5, finished, cachedDate, playedDate, %@) VALUES (?, ?, ?, ?, %@)", [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], @"NO", @((unsigned long long)[[NSDate date] timeIntervalSince1970]), @0, self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
+			BOOL success = [db executeUpdate:[NSString stringWithFormat:@"INSERT INTO cacheQueue (md5, finished, cachedDate, playedDate, %@) VALUES (?, ?, ?, ?, %@)", [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], @"NO", @((unsigned long long)[[NSDate date] timeIntervalSince1970]), @0, self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo), self.discNumber];
+            
+            ALog(@"Added to cacheQueue with discNumber: %@ and insert was successful? %d", self.discNumber, success);
 			
 			hadError = [db hadError];
 			if (hadError)
@@ -593,17 +610,17 @@
 
 + (NSString *)standardSongColumnSchema
 {
-	return @"title TEXT, songId TEXT, artist TEXT, album TEXT, genre TEXT, coverArtId TEXT, path TEXT, suffix TEXT, transcodedSuffix TEXT, duration INTEGER, bitRate INTEGER, track INTEGER, year INTEGER, size INTEGER, parentId TEXT, isVideo TEXT";
+	return @"title TEXT, songId TEXT, artist TEXT, album TEXT, genre TEXT, coverArtId TEXT, path TEXT, suffix TEXT, transcodedSuffix TEXT, duration INTEGER, bitRate INTEGER, track INTEGER, year INTEGER, size INTEGER, parentId TEXT, isVideo TEXT, discNumber INTEGER";
 }
 
 + (NSString *)standardSongColumnNames
 {
-	return @"title, songId, artist, album, genre, coverArtId, path, suffix, transcodedSuffix, duration, bitRate, track, year, size, parentId, isVideo";
+	return @"title, songId, artist, album, genre, coverArtId, path, suffix, transcodedSuffix, duration, bitRate, track, year, size, parentId, isVideo, discNumber";
 }
 
 + (NSString *)standardSongColumnQMarks
 {
-	return @"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
+	return @"?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?";
 }
 
 - (BOOL)isCurrentPlayingSong

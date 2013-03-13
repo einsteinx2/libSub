@@ -10,6 +10,7 @@
 #import "BassGaplessPlayer.h"
 #import "PlaylistSingleton.h"
 #import "ISMSStreamManager.h"
+#import <Twitter/Twitter.h>
 
 // Twitter secret keys
 #define kOAuthConsumerKey				@"nYKAEcLstFYnI9EEnv6g"
@@ -214,13 +215,15 @@ LOG_LEVEL_ISUB_DEFAULT
 		if (currentSong.artist && currentSong.title)
 		{
 			//DLog(@"------------- tweeting song --------------");
-			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@", currentSong.title, currentSong.artist];
+			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@ #isubapp", currentSong.title, currentSong.artist];
+            if (tweet.length > 140)
+                tweet = [tweet substringToIndex:140];
+            
             NSURL *url = [NSURL URLWithString:@"https://api.twitter.com/1.1/statuses/update.json"];
 
-            SLRequest *request = [SLRequest requestForServiceType:SLServiceTypeTwitter requestMethod:SLRequestMethodPOST URL:url parameters:@{@"status": tweet}];
-            
+            TWRequest *request = [[TWRequest alloc] initWithURL:url parameters:@{@"status": tweet} requestMethod:TWRequestMethodPOST];
+                        
             ACAccountStore *store = [[ACAccountStore alloc] init];
-            
             ACAccount *account = [store accountWithIdentifier: settingsS.currentTwitterAccount];
             
             if (account)
@@ -238,13 +241,6 @@ LOG_LEVEL_ISUB_DEFAULT
                     }
                 }];
             }
-            
-//			if ([tweet length] <= 140)
-//				[self.twitterEngine sendUpdate:tweet];
-//			else
-//				[self.twitterEngine sendUpdate:[tweet substringToIndex:140]];
-			
-            //DLog(@"Tweeted: %@", tweet);
 		}
 		else 
 		{
@@ -258,88 +254,6 @@ LOG_LEVEL_ISUB_DEFAULT
 #endif
 }
 
-- (void)createTwitterEngine
-{
-#ifdef IOS
-	if (self.twitterEngine)
-		return;
-	
-	self.twitterEngine = [[SA_OAuthTwitterEngine alloc] initOAuthWithDelegate: self];
-	self.twitterEngine.consumerKey = kOAuthConsumerKey;
-	self.twitterEngine.consumerSecret = kOAuthConsumerSecret;
-	
-	// Needed to load saved twitter auth info
-	[self.twitterEngine isAuthorized];
-#endif
-}
-
-//=============================================================================================================================
-
-- (void)destroyTwitterEngine
-{
-#ifdef IOS
-	[self.twitterEngine endUserSession];
-	self.twitterEngine = nil;
-	
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	[defaults removeObjectForKey:@"twitterAuthData"];
-	[defaults synchronize];
-#endif
-}
-
-// SA_OAuthTwitterEngineDelegate
-- (void)storeCachedTwitterOAuthData:(NSString *)data forUsername:(NSString *)username 
-{
-	//DLog(@"storeCachedTwitterOAuthData: %@ for %@", data, username);
-	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-	
-	[defaults setObject:data forKey:@"twitterAuthData"];
-	[defaults synchronize];
-}
-
-- (NSString *) cachedTwitterOAuthDataForUsername:(NSString *)username 
-{
-	//DLog(@"cachedTwitterOAuthDataForUsername for %@", username);
-	return [[NSUserDefaults standardUserDefaults] objectForKey:@"twitterAuthData"];
-}
-
-#ifdef IOS
-//=============================================================================================================================
-// SA_OAuthTwitterControllerDelegate
-- (void)OAuthTwitterController:(SA_OAuthTwitterController *)controller authenticatedWithUsername:(NSString *)username 
-{
-	//DLog(@"Authenicated for %@", username);
-	[NSNotificationCenter postNotificationToMainThreadWithName:@"twitterAuthenticated"];
-}
-
-- (void)OAuthTwitterControllerFailed:(SA_OAuthTwitterController *)controller 
-{
-	//DLog(@"Authentication Failed!");
-	self.twitterEngine = nil;
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Twitter Error" message:@"Failed to authenticate user. Try logging in again." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-	[alert performSelectorOnMainThread:@selector(show) withObject:nil waitUntilDone:NO];
-}
-
-- (void)OAuthTwitterControllerCanceled:(SA_OAuthTwitterController *)controller 
-{
-	//DLog(@"Authentication Canceled.");
-	self.twitterEngine = nil;
-}
-
-//=============================================================================================================================
-// TwitterEngineDelegate
-- (void)requestSucceeded:(NSString *)requestIdentifier 
-{
-	//DLog(@"Request %@ succeeded", requestIdentifier);
-}
-
-- (void)requestFailed:(NSString *)requestIdentifier withError:(NSError *) error 
-{
-	//DLog(@"Request %@ failed with error: %@", requestIdentifier, error);
-}
-
-#endif
-
 #pragma mark - Memory management
 
 - (void)didReceiveMemoryWarning
@@ -351,8 +265,6 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)setup
 {
-	[self createTwitterEngine];
-	
 #ifdef IOS
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 #endif

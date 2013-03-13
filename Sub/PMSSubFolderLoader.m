@@ -98,7 +98,8 @@ LOG_LEVEL_ISUB_DEFAULT
                      @"bitrate" : [result stringForColumn:@"song_bitrate"] ? [result stringForColumn:@"song_bitrate"] : [NSNull null],
                      @"trackNumber" : [result stringForColumn:@"song_track_num"] ? [result stringForColumn:@"song_track_num"] : [NSNull null],
                      @"year" : [result stringForColumn:@"song_release_year"] ? [result stringForColumn:@"song_release_year"] : [NSNull null],
-                     @"fileSize" : [result stringForColumn:@"song_file_size"] ? [result stringForColumn:@"song_file_size"] : [NSNull null]
+                     @"fileSize" : [result stringForColumn:@"song_file_size"] ? [result stringForColumn:@"song_file_size"] : [NSNull null],
+                     @"discNumber" : [result stringForColumn:@"song_disc_num"] ? [result stringForColumn:@"song_disc_num"] : [NSNull null]
                  };
                  
                  ISMSSong *s = [[ISMSSong alloc] initWithPMSDictionary:dict];
