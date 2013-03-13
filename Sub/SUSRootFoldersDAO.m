@@ -229,7 +229,7 @@
 {
 	[databaseS.albumListCacheDbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:@"DROP TABLE IF EXISTS rootFolderDropdownCache (id INTEGER, name TEXT)"];
+		[db executeUpdate:@"DROP TABLE IF EXISTS rootFolderDropdownCache"];
 		[db executeUpdate:@"CREATE TABLE rootFolderDropdownCache (id INTEGER, name TEXT)"];
 		
 		for (NSNumber *folderId in [folders allKeys])
