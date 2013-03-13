@@ -54,7 +54,10 @@ static NSInteger order (id a, id b, void* context)
 
 - (void)cancelLoad
 {
-	settingsS.isCancelLoading = YES;
+    if ([SUSAllSongsLoader isLoading])
+    {
+        settingsS.isCancelLoading = YES;
+    }
 }
 
 - (void)startLoad
@@ -172,6 +175,9 @@ static NSInteger order (id a, id b, void* context)
 		
 		[db executeUpdate:@"DROP TABLE IF EXISTS genresLayoutTemp"];
 		[db executeUpdate:@"CREATE TEMPORARY TABLE genresLayoutTemp (md5 TEXT, genre TEXT, segs INTEGER, seg1 TEXT, seg2 TEXT, seg3 TEXT, seg4 TEXT, seg5 TEXT, seg6 TEXT, seg7 TEXT, seg8 TEXT, seg9 TEXT)"];
+        
+        [db executeUpdate:@"DROP TABLE IF EXISTS genresSongsTemp"];
+        [db executeUpdate:[NSString stringWithFormat:@"CREATE TEMPORARY TABLE genresSongsTemp (md5 TEXT, %@)", [ISMSSong standardSongColumnSchema]]];
 	}];
 }
 
@@ -245,6 +251,8 @@ static NSInteger order (id a, id b, void* context)
 			 [databaseS.genresDb executeUpdate:@"CREATE INDEX seg7 ON genresLayout (seg7)"];
 			 [databaseS.genresDb executeUpdate:@"CREATE INDEX seg8 ON genresLayout (seg8)"];
 			 [databaseS.genresDb executeUpdate:@"CREATE INDEX seg9 ON genresLayout (seg9)"];*/
+            
+            [db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE genresSongs (md5 TEXT, %@)", [ISMSSong standardSongColumnSchema]]];
 		}];
 	}
 }
@@ -490,6 +498,7 @@ static NSInteger order (id a, id b, void* context)
 		}];
       		
 		[SUSAllSongsLoader setIsLoading:NO];
+        settingsS.isCancelLoading = NO;
 		[[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@isAllAlbumsLoading", settingsS.urlString]];
 		[[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:[NSString stringWithFormat:@"%@isAllSongsLoading", settingsS.urlString]];
 		[[NSUserDefaults standardUserDefaults] synchronize];
@@ -735,6 +744,9 @@ static NSString *kName_Error = @"error";
 												 [db executeUpdate:@"CREATE TEMPORARY TABLE genresTemp (genre TEXT)"];
 												 self.tempGenresCount = 0;
 											 }
+                                             
+                                             // Insert the song to the genresSongs table
+                                             [aSong insertIntoGenreTable:@"genresSongsTemp" inDatabase:db];
 											 
 											 // Insert the song into the genresLayout table
 											 NSArray *splitPath = [aSong.path componentsSeparatedByString:@"/"];
@@ -745,13 +757,18 @@ static NSString *kName_Error = @"error";
 												 {
 													 [segments addObject:@""];
 												 }
-												 
+                                                 
 												 NSString *query = @"INSERT INTO genresLayoutTemp (md5, genre, segs, seg1, seg2, seg3, seg4, seg5, seg6, seg7, seg8, seg9) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 												 [db executeUpdate:query, [aSong.path md5], aSong.genre, @([splitPath count]), [segments objectAtIndexSafe:0], [segments objectAtIndexSafe:1], [segments objectAtIndexSafe:2], [segments objectAtIndexSafe:3], [segments objectAtIndexSafe:4], [segments objectAtIndexSafe:5], [segments objectAtIndexSafe:6], [segments objectAtIndexSafe:7], [segments objectAtIndexSafe:8]];
 												 self.tempGenresLayoutCount++;
 												 
 												 if (self.tempGenresLayoutCount == WRITE_BUFFER_AMOUNT)
 												 {
+                                                     // Flush songs
+                                                     [db executeUpdate:@"INSERT OR IGNORE INTO genresSongs SELECT * FROM genresSongsTemp"];
+                                                     [db executeUpdate:@"DROP TABLE IF EXISTS genresSongsTemp"];
+                                                     [db executeUpdate:[NSString stringWithFormat:@"CREATE TEMPORARY TABLE genresSongsTemp (md5 TEXT, %@)", [ISMSSong standardSongColumnSchema]]];
+                                                     
 													 // Flush the records to disk
 													 [db executeUpdate:@"INSERT OR IGNORE INTO genresLayout SELECT * FROM genresLayoutTemp"];
 													 //[databaseS.genresDb executeUpdate:@"DELETE * FROM genresLayoutTemp"];
@@ -827,6 +844,11 @@ static NSString *kName_Error = @"error";
 					[db executeUpdate:@"DROP TABLE IF EXISTS genresTemp"];
 					[db executeUpdate:@"CREATE TEMPORARY TABLE genresTemp (genre TEXT)"];
 					self.tempGenresCount = 0;
+                    
+                    // Flush songs
+                    [db executeUpdate:@"INSERT OR IGNORE INTO genresSongs SELECT * FROM genresSongsTemp"];
+                    [db executeUpdate:@"DROP TABLE IF EXISTS genresSongsTemp"];
+                    [db executeUpdate:[NSString stringWithFormat:@"CREATE TEMPORARY TABLE genresSongsTemp (md5 TEXT, %@)", [ISMSSong standardSongColumnSchema]]];
 					
 					// Flush the records to disk
 					[db executeUpdate:@"INSERT OR IGNORE INTO genresLayout SELECT * FROM genresLayoutTemp"];
@@ -901,6 +923,10 @@ static NSString *kName_Error = @"error";
 					[db executeUpdate:@"INSERT OR IGNORE INTO genresUnsorted SELECT * FROM genresTemp"];
 					[db executeUpdate:@"DROP TABLE IF EXISTS genresTemp"];
 					[db executeUpdate:@"CREATE TEMPORARY TABLE genresTemp (genre TEXT)"];
+                    
+                    [db executeUpdate:@"INSERT OR IGNORE INTO genresSongs SELECT * FROM genresSongsTemp"];
+                    [db executeUpdate:@"DROP TABLE IF EXISTS genresSongsTemp"];
+                    [db executeUpdate:[NSString stringWithFormat:@"CREATE TEMPORARY TABLE genresSongsTemp (md5 TEXT, %@)", [ISMSSong standardSongColumnSchema]]];
 					
 					[db executeUpdate:@"INSERT INTO genresLayout SELECT * FROM genresLayoutTemp"];
 					[db executeUpdate:@"DROP TABLE IF EXISTS genresLayoutTemp"];

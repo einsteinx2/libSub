@@ -30,7 +30,8 @@
 - (BOOL)insertIntoTable:(NSString *)table inDatabaseQueue:(FMDatabaseQueue *)dbQueue;
 - (BOOL)insertIntoServerPlaylistWithPlaylistId:(NSString *)md5;
 - (BOOL)insertIntoFolderCacheForFolderId:(NSString *)folderId;
-- (BOOL)insertIntoGenreTableDbQueue:(NSString *)table;
+- (BOOL)insertIntoGenreTable:(NSString *)table inDatabaseQueue:(FMDatabaseQueue *)dbQueue;
+- (BOOL)insertIntoGenreTable:(NSString *)table inDatabase:(FMDatabase *)db;
 - (BOOL)insertIntoCachedSongsTableDbQueue;
 
 - (BOOL)addToCacheQueueDbQueue;

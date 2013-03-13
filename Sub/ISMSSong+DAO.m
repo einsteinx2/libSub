@@ -99,7 +99,7 @@
 			}];
 			
 			// Insert the song object into the appropriate genresSongs table
-			[self insertIntoGenreTableDbQueue:@"genresSongs"];
+			[self insertIntoGenreTable:@"genresSongs" inDatabaseQueue:self.dbQueue];
 		}
 		
 		[self removeFromCacheQueueDbQueue];
@@ -266,19 +266,27 @@
 	return !hadError;
 }
 
-- (BOOL)insertIntoGenreTableDbQueue:(NSString *)table
+- (BOOL)insertIntoGenreTable:(NSString *)table inDatabaseQueue:(FMDatabaseQueue *)dbQueue
 {	
 	__block BOOL hadError;
-	[self.dbQueue inDatabase:^(FMDatabase *db)
+	[dbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (md5, %@) VALUES (?, %@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
-		
-		hadError = [db hadError];
-		if (hadError) 
-		{
-		//DLog(@"Err inserting song into genre table %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-		}
+		hadError = [self insertIntoGenreTable:table inDatabase:db];
 	}];
+	
+	return !hadError;
+}
+
+- (BOOL)insertIntoGenreTable:(NSString *)table inDatabase:(FMDatabase *)db
+{
+	BOOL hadError;
+	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (md5, %@) VALUES (?, %@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
+    
+    hadError = [db hadError];
+    if (hadError)
+    {
+        ALog(@"Err inserting song into genre table %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+    }
 	
 	return !hadError;
 }
