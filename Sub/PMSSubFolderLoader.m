@@ -148,6 +148,7 @@ LOG_LEVEL_ISUB_DEFAULT
                                         };
                  
                  ISMSSong *s = [[ISMSSong alloc] initWithPMSDictionary:dict];
+                 s.isVideo = YES;
                  self.folderLength += s.duration.intValue;
                  self.songsCount++;
                  [self insertSongIntoFolderCache:s];
