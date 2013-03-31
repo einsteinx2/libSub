@@ -90,9 +90,9 @@
 			[self.dbQueue inDatabase:^(FMDatabase *db)
 			{
 				NSString *genre = [db stringForQuery:@"SELECT genre FROM genres WHERE genre = ?", self.genre];
-				if (!genre)
+				if (genre)
 				{							
-					[db executeUpdate:@"INSERT INTO genres (genre) VALUES (?)", self.genre];
+					[db executeUpdate:@"INSERT OR IGNORE INTO genres (genre) VALUES (?)", self.genre];
 					if ([db hadError])
 						DLog(@"Err adding the genre %d: %@", [db lastErrorCode], [db lastErrorMessage]); 
 				}
