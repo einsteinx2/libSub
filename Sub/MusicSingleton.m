@@ -51,10 +51,6 @@ double startSongSeconds = 0.0;
 - (void)startSongAtOffsetInSeconds2
 {
     [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_RemoveMoviePlayer];
-    
-	//DLog(@"startSongAtOffsetInSeconds2");	
-	// Always clear the temp cache
-	[cacheS clearTempCache];
 	
 	ISMSSong *currentSong = playlistS.currentSong;
     NSUInteger currentIndex = playlistS.currentIndex;

@@ -977,7 +977,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     
     //ALog(@"bytepos: %lld, secs: %f", pcmBytePosition, seconds);
 	
-	return seconds;// + self.startSecondsOffset;
+	return seconds + self.startSecondsOffset;
 }
 
 - (BassStream *)currentStream

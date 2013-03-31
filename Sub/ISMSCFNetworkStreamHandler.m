@@ -88,6 +88,12 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
     
     if (!resume)
 	{
+        // Clear temp cache if this is a temp file
+		if (self.isTempCache)
+		{
+			[cacheS clearTempCache];
+		}
+        
 		// Create the file
 		self.totalBytesTransferred = 0;
 		[[NSFileManager defaultManager] createFileAtPath:self.filePath contents:[NSData data] attributes:nil];

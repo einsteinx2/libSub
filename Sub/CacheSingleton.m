@@ -318,10 +318,8 @@ LOG_LEVEL_ISUB_DEFAULT
         }
     }
     
-	// Clear the temp cache directory
-	dispatch_async(dispatch_get_main_queue(), ^{
-		[self clearTempCache];
-	});
+    // Clear the temp cache
+    [self clearTempCache];
 
 	// Setup the cache check interval
 	_cacheCheckInterval = 60.0;
