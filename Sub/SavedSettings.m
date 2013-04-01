@@ -933,7 +933,7 @@
 		[_userDefaults synchronize];
         
 #ifdef IOS
-        if ([LibSub isWifi])
+        if (![LibSub isWifi])
 #else
         if (YES)
 #endif

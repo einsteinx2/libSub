@@ -285,7 +285,7 @@
 - (BOOL)insertIntoGenreTable:(NSString *)table inDatabase:(FMDatabase *)db
 {
 	BOOL hadError;
-	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (md5, %@) VALUES (?, %@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo)];
+	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (md5, %@) VALUES (?, %@)", table, [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], [self.path md5], self.title, self.songId, self.artist, self.album, self.genre, self.coverArtId, self.path, self.suffix, self.transcodedSuffix, self.duration, self.bitRate, self.track, self.year, self.size, self.parentId, NSStringFromBOOL(self.isVideo), self.discNumber];
     
     hadError = [db hadError];
     if (hadError)
