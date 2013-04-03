@@ -127,7 +127,6 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)findCacheSize
 {
-    
     [databaseS.songCacheDbQueue inDatabase:^(FMDatabase *db)
     {
         NSInteger size = [db intForQuery:@"SELECT sum(size) AS s FROM sizesSongs"];

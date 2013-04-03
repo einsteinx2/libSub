@@ -566,6 +566,8 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 
 - (void)downloadDone
 {
+    NSDate *start = [NSDate date];
+    
 	// Get the response header
 	if (_readStreamRef != NULL)
 	{
@@ -600,9 +602,12 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 	
 	self.isDownloading = NO;
     
-    // Close the file handle
-	[self.fileHandle closeFile];
-	self.fileHandle = nil;
+    // Close the file handle in a background thread to prevent blocking the main thread
+    [EX2Dispatch runInBackground:^{
+        __strong NSFileHandle *handle = self.fileHandle;
+        [handle closeFile];
+        handle = nil;
+    }];
     	
 	if (self.contentLength != ULLONG_MAX && self.mySong.localFileSize < self.contentLength && self.numberOfContentLengthFailures < ISMSMaxContentLengthFailures)
 	{
@@ -621,6 +626,8 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 		if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerConnectionFinished:)])
 			[self.delegate ISMSStreamHandlerConnectionFinished:self];
 	}
+    
+    ALog(@"Download done took %f seconds", [[NSDate date] timeIntervalSinceDate:start]);
     
     self.selfRef = nil;
 }

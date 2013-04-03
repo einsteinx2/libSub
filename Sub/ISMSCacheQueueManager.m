@@ -255,6 +255,8 @@ LOG_LEVEL_ISUB_DEBUG
 //static BOOL isAlertDisplayed = NO;
 - (void)ISMSStreamHandlerConnectionFinished:(ISMSStreamHandler *)handler
 {
+    NSDate *start = [NSDate date];
+    
 	BOOL isSuccess = YES;
 	
 	if (handler.totalBytesTransferred == 0)
@@ -305,9 +307,9 @@ LOG_LEVEL_ISUB_DEBUG
 	if (isSuccess)
 	{		
 		// Mark song as cached
-		self.currentQueuedSong.isFullyCached = YES;
+        self.currentQueuedSong.isFullyCached = YES;
 		
-		// Mark song as cached
+		// Remove the song from the cache queue
 		[self.currentQueuedSong removeFromCacheQueueDbQueue];
 		self.currentQueuedSong = nil;
         		
@@ -325,6 +327,8 @@ LOG_LEVEL_ISUB_DEBUG
 	{
 		[self stopDownloadQueue];
 	}
+    
+    ALog(@"finished download took %f seconds", [[NSDate date] timeIntervalSinceDate:start]);
 }
 
 #pragma mark - Memory management
