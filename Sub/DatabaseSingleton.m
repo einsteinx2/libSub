@@ -185,18 +185,41 @@ LOG_LEVEL_ISUB_DEFAULT
 		{
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE currentPlaylist (%@)", [ISMSSong standardSongColumnSchema]]];
 		}
-		if (![db tableExists:@"shufflePlaylist"]) 
+        else if(![db columnExists:@"discNumber" inTableWithName:@"currentPlaylist"])
+        {
+            BOOL success = [db executeUpdate:@"ALTER TABLE currentPlaylist ADD COLUMN discNumber INTEGER"];
+            ALog(@"currentPlaylist has no discNumber and add worked: %d", success);
+        }
+        
+		if (![db tableExists:@"shufflePlaylist"])
 		{
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE shufflePlaylist (%@)", [ISMSSong standardSongColumnSchema]]];
 		}
+        else if(![db columnExists:@"discNumber" inTableWithName:@"shufflePlaylist"])
+        {
+            BOOL success = [db executeUpdate:@"ALTER TABLE shufflePlaylist ADD COLUMN discNumber INTEGER"];
+            ALog(@"shufflePlaylist has no discNumber and add worked: %d", success);
+        }
+        
 		if (![db tableExists:@"jukeboxCurrentPlaylist"])
 		{
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE jukeboxCurrentPlaylist (%@)", [ISMSSong standardSongColumnSchema]]];
 		}
+        else if(![db columnExists:@"discNumber" inTableWithName:@"jukeboxCurrentPlaylist"])
+        {
+            BOOL success = [db executeUpdate:@"ALTER TABLE jukeboxCurrentPlaylist ADD COLUMN discNumber INTEGER"];
+            ALog(@"jukeboxCurrentPlaylist has no discNumber and add worked: %d", success);
+        }
+        
 		if (![db tableExists:@"jukeboxShufflePlaylist"]) 
 		{
 			[db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE jukeboxShufflePlaylist (%@)", [ISMSSong standardSongColumnSchema]]];
 		}
+        else if(![db columnExists:@"discNumber" inTableWithName:@"jukeboxShufflePlaylist"])
+        {
+            BOOL success = [db executeUpdate:@"ALTER TABLE jukeboxShufflePlaylist ADD COLUMN discNumber INTEGER"];
+            ALog(@"jukeboxShufflePlaylist has no discNumber and add worked: %d", success);
+        }
 	}];	
 	
 	// Setup the local playlists database
@@ -310,41 +333,53 @@ LOG_LEVEL_ISUB_DEFAULT
         {
             [db executeUpdate:@"ALTER TABLE genresSongs ADD COLUMN discNumber INTEGER"];
         }
-        ALog(@"checking if sizes table exists");
         if (![db tableExists:@"sizesSongs"])
         {
             [db executeUpdate:@"CREATE TABLE sizesSongs(md5 TEXT UNIQUE, size INTEGER)"];
-            
-            FMResultSet *result = [db executeQuery:@"SELECT * FROM cachedSongs"];
-            
-            while ([result next])
-            {
-                NSString *songId = [result stringForColumn:@"songId"];
-                NSString *path = [result stringForColumn:@"path"];
-                NSString *filePath = [settingsS.songCachePath stringByAppendingPathComponent:path.md5];
-                
-                NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
-                                
-                if (attr)
-                {
-                    //ALog(@"%@", attr);
-                    NSNumber *fileSize = [NSNumber numberWithInt:[attr[@"NSFileSize"] intValue]];
-                    [db executeUpdate:@"INSERT INTO sizesSongs VALUES(?, ?)", songId, fileSize];
-                    ALog(@"Added %@ to the size table (%@)", [result stringForColumn:@"title"], attr[@"NSFileSize"]);
-                }
-                else
-                {
-                    ALog(@"path: %@", path);
-                }
-                
-            }
-        }
-        else
-        {
-            //ALog(@"Dropping sizesSongs");
-            //[db executeUpdate:@"DROP TABLE sizesSongs"];
         }
 	}];
+    
+    if (!settingsS.isCacheSizeTableFinished)
+    {
+        // Do this in the background to prevent locking up the main thread for large caches
+        [EX2Dispatch runInBackground:^
+         {
+             NSMutableArray *cachedSongs = [NSMutableArray arrayWithCapacity:0];
+             
+             [self.songCacheDbQueue inDatabase:^(FMDatabase *db)
+              {
+                  FMResultSet *result = [db executeQuery:@"SELECT * FROM cachedSongs WHERE finished = 'YES'"];
+                  ISMSSong *aSong;
+                  do
+                  {
+                      aSong = [ISMSSong songFromDbResult:result];
+                      if (aSong) [cachedSongs addObject:aSong];
+                  }
+                  while (aSong);
+              }];
+             
+             for (ISMSSong *aSong in cachedSongs)
+             {
+                 @autoreleasepool
+                 {
+                     NSString *filePath = [settingsS.songCachePath stringByAppendingPathComponent:aSong.path.md5];
+                     NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:filePath error:nil];
+                     
+                     if (attr)
+                     {
+                         // Do this in individual blocks to prevent locking up the database which could also lock up the UI
+                         [self.songCacheDbQueue inDatabase:^(FMDatabase *db)
+                          {
+                              [db executeUpdate:@"INSERT OR IGNORE INTO sizesSongs VALUES(?, ?)", aSong.songId, attr[NSFileSize]];
+                          }];
+                         ALog(@"Added %@ to the size table (%llu)", aSong.title, [attr fileSize]);
+                     }
+                 }
+             }
+             
+             settingsS.isCacheSizeTableFinished = YES;
+         }];
+    }
 	
 	// Handle moving the song cache database if necessary
 	path = [NSString stringWithFormat:@"%@/database/%@cacheQueue.db", settingsS.currentCacheRoot, settingsS.urlString.md5];

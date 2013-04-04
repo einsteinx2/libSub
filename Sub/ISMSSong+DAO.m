@@ -76,7 +76,7 @@
             
             // get the attributes dictionary
             NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
-            [db executeUpdate:@"REPLACE INTO sizesSongs VALUES (?, ?)", self.path.md5, [NSNumber numberWithInt:[attr[@"NSFileSize"] intValue]]];
+            [db executeUpdate:@"REPLACE INTO sizesSongs VALUES (?, ?)", self.path.md5, attr[NSFileSize]];
             ALog(@"Size for song \"%@\" successfully added to database on cache completion", self.title);
 		}];
 		

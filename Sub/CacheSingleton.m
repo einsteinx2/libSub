@@ -129,7 +129,7 @@ LOG_LEVEL_ISUB_DEFAULT
 {
     [databaseS.songCacheDbQueue inDatabase:^(FMDatabase *db)
     {
-        NSInteger size = [db intForQuery:@"SELECT sum(size) AS s FROM sizesSongs"];
+        unsigned long long size = [[db stringForQuery:@"SELECT sum(size) FROM sizesSongs"] longLongValue];
         
         FMResultSet *result = [db executeQuery:@"SELECT md5 FROM cachedSongs WHERE finished = 'NO'"];
         
@@ -137,11 +137,11 @@ LOG_LEVEL_ISUB_DEFAULT
         {
             NSString *path = [settingsS.songCachePath stringByAppendingPathComponent:[result stringForColumn:@"md5"]];
             NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
-            size += [attr[@"NSFileSize"] intValue];
-            ALog(@"Added %d to size for partially downloaded song", [attr[@"NSFileSize"] intValue]);
+            size += [attr fileSize];
+            ALog(@"Added %llu to size for partially downloaded song", [attr fileSize]);
         }
         
-        ALog(@"Total cache size was found to be: %ld", (long)size);
+        ALog(@"Total cache size was found to be: %llu", size);
         _cacheSize = size;
         
     }];

@@ -145,6 +145,8 @@ typedef enum
 @property BOOL isDisableUsageOver3G;
 @property (strong) NSString *currentTwitterAccount;
 
+@property BOOL isCacheSizeTableFinished;
+
 // State Saving
 @property BOOL isRecover;
 @property double seekTime;
