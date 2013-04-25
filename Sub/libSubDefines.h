@@ -21,7 +21,7 @@ typedef enum
     ISMSBassVisualType_maxValue  = 5
 } ISMSBassVisualType;
 
-#define ISMSLoadingTimeout 10.0
+#define ISMSLoadingTimeout 240.0
 #define ISMSJukeboxTimeout 60.0
 #define ISMSServerCheckTimeout 15.0
 
