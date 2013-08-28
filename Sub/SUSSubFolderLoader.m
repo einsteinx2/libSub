@@ -73,9 +73,13 @@
 							ISMSSong *aSong = [[ISMSSong alloc] initWithTBXMLElement:child];
                             if (aSong.path && (settingsS.isVideoSupported || !aSong.isVideo))
                             {
-                                [self insertSongIntoFolderCache:aSong];
-                                self.songsCount++;
-                                self.folderLength += [aSong.duration intValue];
+                                // Fix for pdfs showing in directory listing
+                                if (![aSong.suffix.lowercaseString isEqualToString:@"pdf"])
+                                {
+                                    [self insertSongIntoFolderCache:aSong];
+                                    self.songsCount++;
+                                    self.folderLength += [aSong.duration intValue];
+                                }
                             }
 						}
 						
