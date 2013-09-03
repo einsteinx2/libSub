@@ -147,6 +147,9 @@ typedef enum
 
 @property BOOL isCacheSizeTableFinished;
 
+@property BOOL isStopCheckingWaveboxRelease;
+@property BOOL isWaveBoxAlertShowing;
+
 // State Saving
 @property BOOL isRecover;
 @property double seekTime;
