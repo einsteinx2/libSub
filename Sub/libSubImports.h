@@ -27,7 +27,7 @@
 #import "FMDatabaseQueueAdditions.h"
 
 #if IOS
-#import "FlurryAnalytics.h"
+#import "Flurry.h"
 #endif
 
 // Singletons
