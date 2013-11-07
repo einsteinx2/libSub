@@ -280,8 +280,6 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
         return;
     
 	DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler request canceled for %@", self.mySong);
-
-	[self terminateDownload];
 	
 	self.isDownloading = NO;
 	self.isCanceled = YES;
@@ -290,7 +288,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	[self.fileHandle closeFile];
 	self.fileHandle = nil;
 	
-    self.selfRef = nil;
+    [self terminateDownload];
 }
 
 - (void)connectionTimedOut
@@ -332,6 +330,8 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		 CFRelease(_readStreamRef);
 		 
 		 _readStreamRef = NULL;
+         
+         self.selfRef = nil;
 	 }];
 }
 
@@ -552,8 +552,6 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 
 - (void)downloadFailed
 {
-	[self terminateDownload];
-	
 	self.isDownloading = NO;
 	
 	// Close the file handle
@@ -563,7 +561,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 	if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerConnectionFailed:withError:)])
 		[self.delegate ISMSStreamHandlerConnectionFailed:self withError:nil];
 	
-	self.selfRef = nil;
+	[self terminateDownload];
 }
 
 - (void)downloadDone
@@ -599,8 +597,6 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
             CFRelease(myResponse);
         }
 	}
-	
-	[self terminateDownload];
     			  
 	DDLogCInfo(@"[ISMSCFNetworkStreamHandler] Connection Finished for %@  file size: %llu   contentLength: %llu", self.mySong.title, self.mySong.localFileSize, self.contentLength);
 	
@@ -633,7 +629,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
     
     ALog(@"Download done took %f seconds", [[NSDate date] timeIntervalSinceDate:start]);
     
-    self.selfRef = nil;
+    [self terminateDownload];
 }
 
 - (void)setPartialPrecacheSleep:(BOOL)partialPrecacheSleep

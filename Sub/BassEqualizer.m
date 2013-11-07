@@ -119,7 +119,10 @@ LOG_LEVEL_ISUB_DEFAULT
 {
     @synchronized(self.eqValues)
     {
-        [self.eqValues replaceObjectAtIndex:value.arrayIndex withObject:value];
+        if (self.eqValues.count > value.arrayIndex)
+        {
+            [self.eqValues replaceObjectAtIndex:value.arrayIndex withObject:value];
+        }
     }
 	
 	if (self.isEqActive)
