@@ -276,6 +276,7 @@ double startSongSeconds = 0.0;
 		NSNumber *progress = @(audioEngineS.player.progress);
 		if (progress)
 			[trackInfo setObject:progress forKey:MPNowPlayingInfoPropertyElapsedPlaybackTime];
+        [trackInfo setObject:@(1.0) forKey:MPNowPlayingInfoPropertyPlaybackRate];
 		
 		if (settingsS.isLockScreenArtEnabled)
 		{
