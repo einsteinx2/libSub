@@ -308,7 +308,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_SongPlaybackEnded];
 		
 		DDLogVerbose(@"[BassGaplessPlayer] Stream not active, freeing BASS");
-        [EX2Dispatch runInMainThread:^{
+        [EX2Dispatch runInMainThreadAsync:^{
             [self cleanup];
         }];
 		
@@ -396,7 +396,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
         {
             if ([self.delegate respondsToSelector:@selector(bassFailedToCreateNextStreamForIndex:player:)])
             {
-                [EX2Dispatch runInMainThread:^
+                [EX2Dispatch runInMainThreadAsync:^
                  {
                      [self.delegate bassFailedToCreateNextStreamForIndex:self.currentPlaylistIndex player:self];
                  }];

@@ -83,7 +83,7 @@
 
 - (void)bassRetrySongAtIndex:(NSUInteger)index player:(BassGaplessPlayer*)player;
 {
-    [EX2Dispatch runInMainThread:^
+    [EX2Dispatch runInMainThreadAsync:^
      {
          [musicS playSongAtPosition:index];
      }];
@@ -107,7 +107,7 @@
     if (!handler.isDownloading || handler.isDelegateNotifiedToStartPlayback)
     {
         // If the song isn't downloading, or it is and it already informed the player to play (i.e. the playlist will stop if we don't force a retry), then retry
-        [EX2Dispatch runInMainThread:^
+        [EX2Dispatch runInMainThreadAsync:^
          {
              [musicS playSongAtPosition:index];
          }];
