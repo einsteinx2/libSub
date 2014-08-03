@@ -153,7 +153,7 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     _delegate = [[iSubBassGaplessPlayerDelegate alloc] init];
     
     // Run async to prevent potential deadlock from dispatch_once
-    [EX2Dispatch runInMainThread:^{
+    [EX2Dispatch runInMainThreadAsync:^{
         [self startEmptyPlayer];
     }];
 }

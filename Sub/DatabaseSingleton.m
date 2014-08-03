@@ -342,7 +342,7 @@ LOG_LEVEL_ISUB_DEFAULT
     if (!settingsS.isCacheSizeTableFinished)
     {
         // Do this in the background to prevent locking up the main thread for large caches
-        [EX2Dispatch runInBackground:^
+        [EX2Dispatch runInBackgroundAsync:^
          {
              NSMutableArray *cachedSongs = [NSMutableArray arrayWithCapacity:0];
              

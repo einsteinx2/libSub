@@ -603,7 +603,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 	self.isDownloading = NO;
     
     // Close the file handle in a background thread to prevent blocking the main thread
-    [EX2Dispatch runInBackground:^{
+    [EX2Dispatch runInBackgroundAsync:^{
         __strong NSFileHandle *handle = self.fileHandle;
         [handle closeFile];
         handle = nil;

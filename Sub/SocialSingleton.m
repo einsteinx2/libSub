@@ -37,7 +37,7 @@ LOG_LEVEL_ISUB_DEFAULT
     {
         if ([settingsS.serverType isEqualToString:SUBSONIC])
         {
-            [EX2Dispatch runInMainThread:^{
+            [EX2Dispatch runInMainThreadAsync:^{
                 [self notifySubsonic];
             }];
         }
@@ -49,7 +49,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		self.playerHasTweeted = YES;
 		
-		[EX2Dispatch runInMainThread:^{
+		[EX2Dispatch runInMainThreadAsync:^{
 			[self tweetSong];
 		}];
 	}
@@ -57,7 +57,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	if (!self.playerHasScrobbled && audioEngineS.player.progress >= socialS.scrobbleDelay)
 	{
 		self.playerHasScrobbled = YES;
-		[EX2Dispatch runInMainThread:^{
+		[EX2Dispatch runInMainThreadAsync:^{
 			[self scrobbleSongAsSubmission];
 		}];
 	}
@@ -65,7 +65,7 @@ LOG_LEVEL_ISUB_DEFAULT
     if (!self.playerHasSubmittedNowPlaying)
     {
         self.playerHasSubmittedNowPlaying = YES;
-        [EX2Dispatch runInMainThread:^{
+        [EX2Dispatch runInMainThreadAsync:^{
 			[self scrobbleSongAsPlaying];
 		}];
     }
