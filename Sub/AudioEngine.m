@@ -53,7 +53,7 @@ static AudioEngine *sharedInstance = nil;
 
 void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID inPropertyID, UInt32 inPropertyValueSize, const void *inPropertyValue) 
 {			
-	DDLogCInfo(@"[AudioEngine] audioRouteChangeListenerCallback called, propertyId: %lu  isMainThread: %@", inPropertyID, NSStringFromBOOL([NSThread isMainThread]));
+	DDLogCInfo(@"[AudioEngine] audioRouteChangeListenerCallback called, propertyId: %lu  isMainThread: %@", (unsigned long)inPropertyID, NSStringFromBOOL([NSThread isMainThread]));
 	
     // ensure that this callback was invoked for a route change
     if (inPropertyID != kAudioSessionProperty_AudioRouteChange) 
@@ -68,7 +68,7 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 		SInt32 routeChangeReason;
 		CFNumberGetValue (routeChangeReasonRef, kCFNumberSInt32Type, &routeChangeReason);
 		
-		DDLogCInfo(@"[AudioEngine] route change reason: %li", routeChangeReason);
+		DDLogCInfo(@"[AudioEngine] route change reason: %li", (long)routeChangeReason);
 		
         // "Old device unavailable" indicates that a headset was unplugged, or that the
         // device was removed from a dock connector that supports audio output. This is

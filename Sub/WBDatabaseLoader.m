@@ -8,7 +8,6 @@
 
 
 #import "WBDatabaseLoader.h"
-LOG_LEVEL_ISUB_DEFAULT
 
 @implementation WBDatabaseLoader
 

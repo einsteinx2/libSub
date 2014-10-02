@@ -141,7 +141,7 @@ static MKStoreManager* _sharedStoreManager;
     return self;	
 }
 
-- (unsigned)retainCount
+- (NSUInteger)retainCount
 {
     return UINT_MAX;  //denotes an object that cannot be released
 }
@@ -488,7 +488,7 @@ static MKStoreManager* _sharedStoreManager;
 	NSString *postData = [NSString stringWithFormat:@"receiptdata=%@", receiptDataString];
 	[receiptDataString release];
 	
-	NSString *length = [NSString stringWithFormat:@"%d", [postData length]];	
+	NSString *length = [NSString stringWithFormat:@"%li", (long)[postData length]];
 	[theRequest setValue:length forHTTPHeaderField:@"Content-Length"];	
 	
 	[theRequest setHTTPBody:[postData dataUsingEncoding:NSASCIIStringEncoding]];
