@@ -933,8 +933,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
         NSArray *articles = [NSString indefiniteArticles];
         
-        NSString *section = [sectionTitles objectAtIndexSafe:i];
-        NSMutableString *query = [NSMutableString stringWithFormat:@"SELECT ROWID FROM %@ WHERE %@ LIKE '%@%%'", table, column, section];
+        NSMutableString *query = [NSMutableString stringWithFormat:@"SELECT ROWID FROM %@ WHERE %@ LIKE '%@%%'", table, column, title];
         for (NSString *article in articles)
         {
             [query appendFormat:@"AND %@ NOT LIKE '%@ %%' ", column, article];

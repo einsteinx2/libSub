@@ -63,7 +63,7 @@
     _currentTwitterAccount = [_userDefaults objectForKey:@"currentTwitterAccount"];
 	
 	_repeatMode = [_userDefaults integerForKey:@"repeatMode"];
-	playlistS.repeatMode = _repeatMode;
+	playlistS.repeatMode = (ISMSRepeatMode)_repeatMode;
 	
 	_bitRate = [_userDefaults integerForKey:@"bitRate"];
 	_byteOffset = self.byteOffset;

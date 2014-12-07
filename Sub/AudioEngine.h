@@ -13,6 +13,7 @@
 #import "bass_fx.h"
 #import "bassmix.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import <AVFoundation/AVAudioSession.h>
 #import "BassWrapper.h"
 #import "BassStream.h"
 #import "BassEqualizer.h"
@@ -23,7 +24,7 @@
 #define audioEngineS ((AudioEngine *)[AudioEngine sharedInstance])
 
 @class ISMSSong, BassParamEqValue, BassStream, SUSRegisterActionLoader, EX2RingBuffer;
-@interface AudioEngine : NSObject
+@interface AudioEngine : NSObject <AVAudioSessionDelegate>
 
 + (id)sharedInstance;
 

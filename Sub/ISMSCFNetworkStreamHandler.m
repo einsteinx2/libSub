@@ -152,7 +152,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
                 case 64: transQuality = @"Low"; break;
                 case 96: transQuality = @"Medium"; break;
                 case 128: transQuality = @"High"; break;
-                default: transQuality = [NSString stringWithFormat:@"%d", self.maxBitrateSetting];
+                default: transQuality = [NSString stringWithFormat:@"%li", (long)self.maxBitrateSetting];
             }
             [parameters setObject:transQuality forKey:@"transQuality"];
             [parameters setObject:@"true" forKey:@"estimateContentLength"];
@@ -220,9 +220,6 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		NSDictionary *sslSettings =
 		[NSDictionary dictionaryWithObjectsAndKeys:
 		 (NSString *)kCFStreamSocketSecurityLevelNegotiatedSSL, kCFStreamSSLLevel,
-		 @YES, kCFStreamSSLAllowsExpiredCertificates,
-		 @YES, kCFStreamSSLAllowsExpiredRoots,
-		 @YES, kCFStreamSSLAllowsAnyRoot,
 		 @NO, kCFStreamSSLValidatesCertificateChain,
 		 [NSNull null], kCFStreamSSLPeerName,
 		 nil];

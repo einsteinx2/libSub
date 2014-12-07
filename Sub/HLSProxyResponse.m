@@ -190,9 +190,6 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		NSDictionary *sslSettings =
 		[NSDictionary dictionaryWithObjectsAndKeys:
 		 (NSString *)kCFStreamSocketSecurityLevelNegotiatedSSL, kCFStreamSSLLevel,
-		 @YES, kCFStreamSSLAllowsExpiredCertificates,
-		 @YES, kCFStreamSSLAllowsExpiredRoots,
-		 @YES, kCFStreamSSLAllowsAnyRoot,
 		 @NO, kCFStreamSSLValidatesCertificateChain,
 		 [NSNull null], kCFStreamSSLPeerName,
 		 nil];

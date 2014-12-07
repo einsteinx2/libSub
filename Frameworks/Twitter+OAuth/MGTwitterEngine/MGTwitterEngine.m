@@ -313,7 +313,7 @@
 
 - (int)numberOfConnections
 {
-    return [_connections count];
+    return (int)[_connections count];
 }
 
 
@@ -793,7 +793,7 @@
     
     // Get response code.
     NSHTTPURLResponse *resp = (NSHTTPURLResponse *)response;
-    int statusCode = [resp statusCode];
+    int statusCode = (int)[resp statusCode];
     
     if (statusCode >= 400) {
         // Assume failure, and report to delegate.

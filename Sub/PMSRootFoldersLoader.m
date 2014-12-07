@@ -7,7 +7,6 @@
 //
 
 #import "PMSRootFoldersLoader.h"
-LOG_LEVEL_ISUB_DEFAULT
 
 @implementation PMSRootFoldersLoader
 
