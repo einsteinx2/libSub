@@ -311,9 +311,9 @@
 #pragma mark Connection methods
 
 
-- (int)numberOfConnections
+- (NSUInteger)numberOfConnections
 {
-    return (int)[_connections count];
+    return [_connections count];
 }
 
 

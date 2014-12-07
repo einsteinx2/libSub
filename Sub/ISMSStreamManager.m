@@ -126,7 +126,7 @@ LOG_LEVEL_ISUB_DEBUG
 	}
 	
 	// Create the handler array with the one object
-	NSArray *handlersToSkip = [NSArray arrayWithObject:[self handlerForSong:aSong]];
+	NSArray *handlersToSkip = @[[self handlerForSong:aSong]];
 	
 	// Cancel the other handlers
 	[self cancelAllStreamsExcept:handlersToSkip];
@@ -253,7 +253,7 @@ LOG_LEVEL_ISUB_DEBUG
 	}
 	
 	// Get the handler to skip
-	NSArray *handlersToSkip = [NSArray arrayWithObject:[self handlerForSong:aSong]];
+	NSArray *handlersToSkip = @[[self handlerForSong:aSong]];
 	
 	// Remove the other handlers
 	[self removeAllStreamsExcept:handlersToSkip];

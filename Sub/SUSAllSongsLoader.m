@@ -532,7 +532,7 @@ static NSInteger order (id a, id b, void* context)
 				
 				if (name && index)
 				{
-					[sections addObject:[NSArray arrayWithObjects:name, index, nil]];
+					[sections addObject:@[name, index]];
 				}
 			}
 		}

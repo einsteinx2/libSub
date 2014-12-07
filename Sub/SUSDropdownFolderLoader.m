@@ -30,11 +30,11 @@
 	{
 		self.updatedfolders = [[NSMutableDictionary alloc] init];
 		
-		[self.updatedfolders setObject:@"All Folders" forKey:[NSNumber numberWithInt:-1]];
+		[self.updatedfolders setObject:@"All Folders" forKey:@-1];
 	}
 	else if ([elementName isEqualToString:@"musicFolder"])
 	{
-		NSNumber *folderId = [NSNumber numberWithInt:[[attributeDict objectForKey:@"id"] intValue]];
+		NSNumber *folderId = @([[attributeDict objectForKey:@"id"] intValue]);
 		NSString *folderName = [attributeDict objectForKey:@"name"];
 		
 		[self.updatedfolders setObject:folderName forKey:folderId];

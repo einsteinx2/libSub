@@ -925,14 +925,15 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (NSArray *)sectionInfoFromTable:(NSString *)table inDatabase:(FMDatabase *)database withColumn:(NSString *)column
 {	
-	NSArray *sectionTitles = [[NSArray alloc] initWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
+	NSArray *sectionTitles = @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z"];
 	NSMutableArray *sections = [[NSMutableArray alloc] init];
 	
     for (int i = 0; i < sectionTitles.count; i++)
 	{
         NSArray *articles = [NSString indefiniteArticles];
         
-        NSMutableString *query = [NSMutableString stringWithFormat:@"SELECT ROWID FROM %@ WHERE %@ LIKE '%@%%'", table, column, title];
+        NSString *section = [sectionTitles objectAtIndexSafe:i];
+        NSMutableString *query = [NSMutableString stringWithFormat:@"SELECT ROWID FROM %@ WHERE %@ LIKE '%@%%'", table, column, section];
         for (NSString *article in articles)
         {
             [query appendFormat:@"AND %@ NOT LIKE '%@ %%' ", column, article];
@@ -942,7 +943,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		NSString *row = [database stringForQuery:query];
 		if (row != nil)
 		{
-			[sections addObject:[NSArray arrayWithObjects:[sectionTitles objectAtIndexSafe:i], @([row intValue] - 1), nil]];
+			[sections addObject:@[[sectionTitles objectAtIndexSafe:i], @([row intValue] - 1)]];
 		}
 	}
 	
@@ -950,7 +951,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		if ([[[sections objectAtIndexSafe:0] objectAtIndexSafe:1] intValue] > 0)
 		{
-			[sections insertObject:[NSArray arrayWithObjects:@"#", @0, nil] atIndex:0];
+			[sections insertObject:@[@"#", @0] atIndex:0];
 		}
 	}
 	else
@@ -959,7 +960,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		NSString *row = [database stringForQuery:[NSString stringWithFormat:@"SELECT ROWID FROM %@ LIMIT 1", table]];
 		if (row)
 		{
-			[sections insertObject:[NSArray arrayWithObjects:@"#", @0, nil] atIndex:0];
+			[sections insertObject:@[@"#", @0] atIndex:0];
 		}
 	}
 	

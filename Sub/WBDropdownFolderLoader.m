@@ -19,13 +19,13 @@
         FMResultSet *result = [db executeQuery:query];
         
         self.updatedfolders = [[NSMutableDictionary alloc] init];
-        [self.updatedfolders setObject:@"All Folders" forKey:[NSNumber numberWithInt:-1]];
+        [self.updatedfolders setObject:@"All Folders" forKey:@-1];
         
         while ([result next])
         {
             // add each one to the updatedfolders list
             NSString *folderName = [result stringForColumn:@"folder_name"];
-            NSNumber *folderId = [NSNumber numberWithInt:[result intForColumn:@"folder_id"]];
+            NSNumber *folderId = @([result intForColumn:@"folder_id"]);
             
             [self.updatedfolders setObject:folderName forKey:folderId];
         }

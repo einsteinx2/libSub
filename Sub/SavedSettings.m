@@ -62,8 +62,8 @@
     
     _currentTwitterAccount = [_userDefaults objectForKey:@"currentTwitterAccount"];
 	
-	_repeatMode = [_userDefaults integerForKey:@"repeatMode"];
-	playlistS.repeatMode = (ISMSRepeatMode)_repeatMode;
+	_repeatMode = (ISMSRepeatMode)[_userDefaults integerForKey:@"repeatMode"];
+	playlistS.repeatMode = _repeatMode;
 	
 	_bitRate = [_userDefaults integerForKey:@"bitRate"];
 	_byteOffset = self.byteOffset;
@@ -220,10 +220,10 @@
 	NSDictionary *settingsDictionary = [_userDefaults objectForKey:@"settingsDictionary"];
 	if (settingsDictionary != nil)
 	{
-		NSArray *boolKeys = [NSArray arrayWithObjects:@"manualOfflineModeSetting" , @"enableSongCachingSetting" , @"enableNextSongCacheSetting", @"autoDeleteCacheSetting", @"twitterEnabledSetting", @"lyricsEnabledSetting", @"enableSongsTabSetting", @"autoPlayerInfoSetting", @"autoReloadArtistsSetting", @"enableScrobblingSetting", @"lockRotationSetting", @"checkUpdatesSetting", nil];
-		NSArray *intKeys = [NSArray arrayWithObjects:@"recoverSetting", @"maxBitrateWifiSetting", @"maxBitrate3GSetting", @"cachingTypeSetting", @"autoDeleteCacheTypeSetting", @"cacheSongCellColorSetting", nil];
-		NSArray *objKeys = [NSArray arrayWithObjects:@"maxCacheSize", @"minFreeSpace", nil];
-		NSArray *floatKeys = [NSArray arrayWithObject:@"scrobblePercentSetting"];
+		NSArray *boolKeys = @[@"manualOfflineModeSetting" , @"enableSongCachingSetting" , @"enableNextSongCacheSetting", @"autoDeleteCacheSetting", @"twitterEnabledSetting", @"lyricsEnabledSetting", @"enableSongsTabSetting", @"autoPlayerInfoSetting", @"autoReloadArtistsSetting", @"enableScrobblingSetting", @"lockRotationSetting", @"checkUpdatesSetting"];
+		NSArray *intKeys = @[@"recoverSetting", @"maxBitrateWifiSetting", @"maxBitrate3GSetting", @"cachingTypeSetting", @"autoDeleteCacheTypeSetting", @"cacheSongCellColorSetting"];
+		NSArray *objKeys = @[@"maxCacheSize", @"minFreeSpace"];
+		NSArray *floatKeys = @[@"scrobblePercentSetting"];
 		
 		// Process BOOL keys
 		for (NSString *key in boolKeys)

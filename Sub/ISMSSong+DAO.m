@@ -129,7 +129,7 @@
         if ([result stringForColumn:@"isVideo"] != nil)
             aSong.isVideo = [[result stringForColumn:@"isVideo"] boolValue];
         if ([result stringForColumn:@"discNumber"] != nil)
-            aSong.discNumber = [NSNumber numberWithInteger:[result intForColumn:@"discNumber"]];
+            aSong.discNumber = @([result intForColumn:@"discNumber"]);
 	}
 	
 	return aSong;
