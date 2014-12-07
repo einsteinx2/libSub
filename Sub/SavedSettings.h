@@ -12,6 +12,7 @@
 #import "BassEffectDAO.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
+#import "PlaylistSingleton.h"
 
 #define settingsS ((SavedSettings *)[SavedSettings sharedInstance])
 
@@ -54,7 +55,7 @@ typedef enum
 	BOOL _isShuffle;
 	NSInteger _normalPlaylistIndex;
 	NSInteger _shufflePlaylistIndex;
-	NSInteger _repeatMode;
+	ISMSRepeatMode _repeatMode;
 	NSInteger _bitRate;
 	unsigned long long _byteOffset;
 	double _secondsOffset;

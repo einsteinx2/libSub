@@ -928,8 +928,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	NSArray *sectionTitles = [[NSArray alloc] initWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", nil];
 	NSMutableArray *sections = [[NSMutableArray alloc] init];
 	
-	int i = 0;
-	for (NSString *title in sectionTitles)
+    for (int i = 0; i < sectionTitles.count; i++)
 	{
         NSArray *articles = [NSString indefiniteArticles];
         
@@ -945,8 +944,6 @@ LOG_LEVEL_ISUB_DEFAULT
 		{
 			[sections addObject:[NSArray arrayWithObjects:[sectionTitles objectAtIndexSafe:i], @([row intValue] - 1), nil]];
 		}
-		
-		i++;
 	}
 	
 	if ([sections count] > 0)

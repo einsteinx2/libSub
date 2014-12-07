@@ -20,6 +20,7 @@
 #import "BassVisualizer.h"
 #import "BassGaplessPlayer.h"
 #import "iSubBassGaplessPlayerDelegate.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define audioEngineS ((AudioEngine *)[AudioEngine sharedInstance])
 
