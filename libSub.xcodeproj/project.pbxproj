@@ -3433,6 +3433,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -3455,9 +3456,7 @@
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -3473,6 +3472,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = armv7;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -3492,9 +3492,7 @@
 					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
-				LIBRARY_SEARCH_PATHS = (
-					"\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"",
-				);
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks/Twitter+OAuth/Libraries & Headers\"";
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-all_load",
