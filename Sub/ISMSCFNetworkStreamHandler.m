@@ -35,7 +35,6 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 - (void)dealloc
 {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	[self terminateDownload];
 }
 
 - (void)start:(BOOL)resume
@@ -270,16 +269,18 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 }
 
 - (void)cancel
-{
-    ALog(@"CFNet cancel called");
-    
+{    
     if (self.isCanceled)
         return;
     
 	DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler request canceled for %@", self.mySong);
 	
+    self.isCanceled = YES;
+    
+    if (!self.isDownloading)
+        return;
+    
 	self.isDownloading = NO;
-	self.isCanceled = YES;
 	
 	// Close the file handle
 	[self.fileHandle closeFile];
@@ -354,8 +355,8 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 }
 
 - (void)readStreamClientCallBack:(CFReadStreamRef)stream type:(CFStreamEventType)type
-{	
-	if (self.isCanceled)
+{
+	if (!self.isDownloading)
 		return;
     	
 	if (type == kCFStreamEventOpenCompleted)
