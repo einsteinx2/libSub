@@ -3223,6 +3223,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/Sub.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3250,6 +3251,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"ARCHS[sdk=iphonesimulator*]" = i386;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = NO;
 				DSTROOT = /tmp/Sub.dst;
