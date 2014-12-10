@@ -3237,7 +3237,7 @@
 					"\"$(SRCROOT)/Frameworks/libBASS\"/**",
 					"\"$(SRCROOT)/Frameworks/Flurry\"",
 				);
-				ONLY_ACTIVE_ARCH = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = Sub;
 				PUBLIC_HEADERS_FOLDER_PATH = include/LibSub;
 				SEPARATE_STRIP = NO;
