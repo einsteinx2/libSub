@@ -589,6 +589,7 @@
 		5374F2C41661C73D00529EF3 /* MKStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2BE1661C73D00529EF3 /* MKStoreObserver.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		5374F2C51661C73D00529EF3 /* SFHFKeychainUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5374F2BF1661C73D00529EF3 /* SFHFKeychainUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5374F2C61661C73D00529EF3 /* SFHFKeychainUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		5393DF6D1A3CD32E00C8514F /* ISMSNotificationNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 5393DF6C1A3CD32E00C8514F /* ISMSNotificationNames.m */; };
 		53B3BD5D16990CFE00DCFC9C /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3916990CFE00DCFC9C /* DDData.h */; };
 		53B3BD5E16990CFE00DCFC9C /* DDData.h in Headers */ = {isa = PBXBuildFile; fileRef = 53B3BD3916990CFE00DCFC9C /* DDData.h */; settings = {ATTRIBUTES = (); }; };
 		53B3BD5F16990CFE00DCFC9C /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3A16990CFE00DCFC9C /* DDData.m */; };
@@ -1159,6 +1160,7 @@
 		5374F2BE1661C73D00529EF3 /* MKStoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MKStoreObserver.m; path = Frameworks/MKStoreManager/MKStoreObserver.m; sourceTree = "<group>"; };
 		5374F2BF1661C73D00529EF3 /* SFHFKeychainUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SFHFKeychainUtils.h; path = Frameworks/MKStoreManager/SFHFKeychainUtils.h; sourceTree = "<group>"; };
 		5374F2C01661C73D00529EF3 /* SFHFKeychainUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SFHFKeychainUtils.m; path = Frameworks/MKStoreManager/SFHFKeychainUtils.m; sourceTree = "<group>"; };
+		5393DF6C1A3CD32E00C8514F /* ISMSNotificationNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSNotificationNames.m; sourceTree = "<group>"; };
 		53B3BD3916990CFE00DCFC9C /* DDData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDData.h; sourceTree = "<group>"; };
 		53B3BD3A16990CFE00DCFC9C /* DDData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDData.m; sourceTree = "<group>"; };
 		53B3BD3B16990CFE00DCFC9C /* DDNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDNumber.h; sourceTree = "<group>"; };
@@ -1533,6 +1535,7 @@
 				536C947A16618FA4005A73C6 /* libSub-Prefix.pch */,
 				536C993816619F39005A73C6 /* ISMSErrorDomain.h */,
 				536C993916619F39005A73C6 /* ISMSNotificationNames.h */,
+				5393DF6C1A3CD32E00C8514F /* ISMSNotificationNames.m */,
 				536C993A16619F39005A73C6 /* SUSErrorDomain.h */,
 				536C993B16619F39005A73C6 /* NSError+ISMSError.h */,
 				536C993C16619F39005A73C6 /* NSError+ISMSError.m */,
@@ -2814,6 +2817,7 @@
 				536C9699166195CF005A73C6 /* ISMSStreamManager.m in Sources */,
 				536C969B166195CF005A73C6 /* ISMSCacheQueueManager.m in Sources */,
 				536C969D166195CF005A73C6 /* ISMSStreamHandler.m in Sources */,
+				5393DF6D1A3CD32E00C8514F /* ISMSNotificationNames.m in Sources */,
 				536C969F166195CF005A73C6 /* ISMSURLConnectionStreamHandler.m in Sources */,
 				536C96A2166195CF005A73C6 /* ISMSCFNetworkStreamHandler.m in Sources */,
 				536C96B016619673005A73C6 /* JukeboxConnectionDelegate.m in Sources */,
