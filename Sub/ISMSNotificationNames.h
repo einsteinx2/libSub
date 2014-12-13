@@ -79,4 +79,7 @@
 #define ISMSNotification_ShowLoadingScreenOnMainWindow @"ISMS show loading screen on main window"
 #define ISMSNotification_HideLoadingScreen @"ISMS hide loading screen"
 
+#define ISMSNotification_ShowDeleteButton @"ISMSNotification_ShowDeleteButton"
+#define ISMSNotification_HideDeleteButton @"ISMSNotification_HideDeleteButton"
+
 #endif
