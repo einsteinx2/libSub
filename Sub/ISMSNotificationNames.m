@@ -78,3 +78,5 @@ NSString * const ISMSNotification_HideLoadingScreen = @"ISMSNotification_HideLoa
 
 NSString * const ISMSNotification_ShowDeleteButton = @"ISMSNotification_ShowDeleteButton";
 NSString * const ISMSNotification_HideDeleteButton = @"ISMSNotification_HideDeleteButton";
+
+NSString * const ISMSNotification_CachedSongDeleted = @"ISMSNotification_CachedSongDeleted";
