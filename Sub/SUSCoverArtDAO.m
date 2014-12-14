@@ -61,9 +61,9 @@
 - (UIImage *)defaultCoverArtImage
 {	
 	if (self.isLarge)
-		return IS_IPAD() ? [UIImage imageNamed:@"default-album-art-ipad.png"] : [UIImage imageNamed:@"default-album-art.png"];
+		return IS_IPAD() ? [UIImage imageNamed:@"default-album-art-ipad"] : [UIImage imageNamed:@"default-album-art"];
 	else
-		return [UIImage imageNamed:@"default-album-art-small.png"];
+		return [UIImage imageNamed:@"default-album-art-small"];
 }
 
 #else
@@ -77,9 +77,9 @@
 - (NSImage *)defaultCoverArtImage
 {
 	if (self.isLarge)
-		return IS_IPAD() ? [NSImage imageNamed:@"default-album-art-ipad.png"] : [NSImage imageNamed:@"default-album-art.png"];
+		return IS_IPAD() ? [NSImage imageNamed:@"default-album-art-ipad"] : [NSImage imageNamed:@"default-album-art"];
 	else
-		return [NSImage imageNamed:@"default-album-art-small.png"];
+		return [NSImage imageNamed:@"default-album-art-small"];
 }
 
 #endif
