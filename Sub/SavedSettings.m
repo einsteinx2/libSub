@@ -1741,7 +1741,7 @@
 //DLog(@"urlString: %@", urlString);
 }
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static SavedSettings *sharedInstance = nil;
     static dispatch_once_t once = 0;

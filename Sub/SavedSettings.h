@@ -176,7 +176,7 @@ typedef enum
 - (void)loadState;
 - (void)saveState;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 @end
 

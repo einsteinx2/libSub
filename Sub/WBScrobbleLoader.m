@@ -7,6 +7,8 @@
 //
 
 #import "WBScrobbleLoader.h"
+#import "NSMutableURLRequest+SUS.h"
+#import "NSMutableURLRequest+PMS.h"
 
 @implementation WBScrobbleLoader
 

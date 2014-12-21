@@ -8,6 +8,8 @@
 
 #import "ISMSCFNetworkStreamHandler.h"
 #import "BassGaplessPlayer.h"
+#import "NSMutableURLRequest+SUS.h"
+#import "NSMutableURLRequest+PMS.h"
 
 @interface ISMSCFNetworkStreamHandler ()
 {

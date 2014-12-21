@@ -7,6 +7,8 @@
 //
 
 #import "SUSAllSongsLoader.h"
+#import "NSMutableURLRequest+SUS.h"
+#import "NSMutableURLRequest+PMS.h"
 
 @interface SUSAllSongsLoader (Private)
 

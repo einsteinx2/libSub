@@ -7,10 +7,6 @@
 //
 
 #import "ISMSLoaderDelegate.h"
-#import "ISMSLoaderManager.h"
-#import "NSError+ISMSError.h"
-#import "NSMutableURLRequest+SUS.h"
-#import "NSMutableURLRequest+PMS.h"
 
 // Loader callback block, make sure to always check success bool, not error, as error can be nil when success is NO
 typedef void (^LoaderCallback)(BOOL success, NSError *error, ISMSLoader *loader);

@@ -34,7 +34,7 @@
 
 @property (strong) ISMSQueueAllLoader *queueAll;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 + (void) setAllSongsToBackup;
 + (void) setAllSongsToNotBackup;
 

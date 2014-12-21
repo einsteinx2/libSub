@@ -7,7 +7,8 @@
 //
 
 #import "SUSLyricsLoader.h"
-
+#import "NSMutableURLRequest+SUS.h"
+#import "NSMutableURLRequest+PMS.h"
 
 @implementation SUSLyricsLoader
 

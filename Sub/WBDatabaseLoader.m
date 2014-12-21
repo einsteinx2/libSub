@@ -8,6 +8,8 @@
 
 
 #import "WBDatabaseLoader.h"
+#import "NSMutableURLRequest+SUS.h"
+#import "NSMutableURLRequest+PMS.h"
 
 @implementation WBDatabaseLoader
 

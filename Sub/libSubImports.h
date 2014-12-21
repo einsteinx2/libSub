@@ -16,8 +16,8 @@
 #import "SBJson.h"
 #import "EX2Kit.h"
 #else
-#import <SBJson/SBJson.h>
-#import <EX2KitOSX/EX2Kit.h>
+//#import <SBJson/SBJson.h>
+//#import <EX2KitOSX/EX2Kit.h>
 #endif
 
 #import "ZipKit.h"

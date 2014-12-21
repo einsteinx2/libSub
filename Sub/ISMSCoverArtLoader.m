@@ -7,6 +7,8 @@
 //
 
 #import "ISMSCoverArtLoader.h"
+#import "NSMutableURLRequest+SUS.h"
+#import "NSMutableURLRequest+PMS.h"
 
 @interface ISMSCoverArtLoader()
 // Keep strong reference to self so we don't die until done downloading when used standalone
