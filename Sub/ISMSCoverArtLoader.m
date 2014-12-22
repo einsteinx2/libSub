@@ -273,21 +273,12 @@ static void initialize_navigationBarImages()
 		}];
 		
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CoverArtFinishedInternal object:[self.coverArtId copy]];
-		
-		/*if (isLarge)
-			[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_AlbumArtLargeDownloaded];
-        
-		// Notify the delegate that the loading is finished
-		[self informDelegateLoadingFinished];*/
 	}
     else
     {
         DLog(@"art loading failed for: %@", self.coverArtId);
 		
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CoverArtFinishedInternal object:[self.coverArtId copy]];
-		
-       /* // Inform the delegate that loading failed
-		[self informDelegateLoadingFailed:nil];*/
     }
 
 	self.receivedData = nil;

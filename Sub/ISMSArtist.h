@@ -19,5 +19,6 @@
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict;
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
+- (id)initWithRXMLElement:(RXMLElement *)element;
 
 @end

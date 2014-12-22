@@ -32,57 +32,47 @@
 
 - (void)process
 {
-	NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (error)
-	{
-		[self informDelegateLoadingFailed:error];
-	}
-	else
+    // Parse the data
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
     {
-		TBXMLElement *error = [TBXML childElementNamed:@"error" parentElement:tbxml.rootXMLElement];
-		if (error)
-		{
-			NSString *code = [TBXML valueOfAttributeNamed:@"code" forElement:error];
-			NSString *message = [TBXML valueOfAttributeNamed:@"message" forElement:error];
-			[self subsonicErrorCode:code.intValue message:message];
-		}
-		else 
-		{
-			TBXMLElement *directory = [TBXML childElementNamed:@"directory" parentElement:tbxml.rootXMLElement];
-			if (directory)
-			{
-				TBXMLElement *child = [TBXML childElementNamed:@"child" parentElement:directory];
-				while (child != nil)
-				{
-					BOOL isDir = [[TBXML valueOfAttributeNamed:@"isDir" forElement:child] boolValue];
-					if (isDir)
-					{
-						ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithTBXMLElement:child artistId:self.myArtist.artistId artistName:self.myArtist.name];
-						
-						//Add album object to lookup dictionary and list array
-						if (![anAlbum.title isEqualToString:@".AppleDouble"])
-						{
-							[self.listOfAlbums addObject:anAlbum];
-						}
-					}
-					else
-					{
-						BOOL isVideo = [[TBXML valueOfAttributeNamed:@"isVideo" forElement:child] boolValue];
-						if (!isVideo)
-						{
-							ISMSSong *aSong = [[ISMSSong alloc] initWithTBXMLElement:child];
-							if (aSong.path)
-							{
-								[self.listOfSongs addObject:aSong];
-							}
-						}
-					}
-					
-					// Get the next child
-					child = [TBXML nextSiblingNamed:@"child" searchFromElement:child];
-				}
-			}
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+    }
+    else
+    {
+        RXMLElement *error = [root child:@"error"];
+        if ([error isValid])
+        {
+            NSString *code = [error attribute:@"code"];
+            NSString *message = [error attribute:@"message"];
+            [self subsonicErrorCode:[code intValue] message:message];
+        }
+        else
+        {
+            [root iterate:@"directory.child" usingBlock: ^(RXMLElement *e) {
+                if ([[e attribute:@"isDir"] boolValue])
+                {
+                    ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithRXMLElement:e artistId:self.myArtist.artistId artistName:self.myArtist.name];
+                    if (![anAlbum.title isEqualToString:@".AppleDouble"])
+                    {
+                        [self.listOfAlbums addObject:anAlbum];
+                    }
+                }
+                else
+                {
+                    ISMSSong *aSong = [[ISMSSong alloc] initWithRXMLElement:e];
+                    if (aSong.path && (settingsS.isVideoSupported || !aSong.isVideo))
+                    {
+                        // Fix for pdfs showing in directory listing
+                        if (![aSong.suffix.lowercaseString isEqualToString:@"pdf"])
+                        {
+                            [self.listOfSongs addObject:aSong];
+                        }
+                    }
+                }
+            }];
 		}
 	}	
 }

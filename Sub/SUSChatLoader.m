@@ -28,53 +28,37 @@
 
 - (void)processResponse 
 {	
-	// Parse the data
-	//
-	NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (error)
-	{
-		[self informDelegateLoadingFailed:error];
-	}
-	else
-	{
-		TBXMLElement *root = tbxml.rootXMLElement;
-
-		TBXMLElement *error = [TBXML childElementNamed:@"error" parentElement:root];
-		if (error)
-		{
-			NSString *code = [TBXML valueOfAttributeNamed:@"code" forElement:error];
-			NSString *message = [TBXML valueOfAttributeNamed:@"message" forElement:error];
-			[self subsonicErrorCode:[code intValue] message:message];
-		}
-		else
-		{
+    // Parse the data
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
+    {
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+    }
+    else
+    {
+        RXMLElement *error = [root child:@"error"];
+        if ([error isValid])
+        {
+            NSString *code = [error attribute:@"code"];
+            NSString *message = [error attribute:@"message"];
+            [self subsonicErrorCode:[code intValue] message:message];
+        }
+        else
+        {
             self.chatMessages = [NSMutableArray arrayWithCapacity:0];
             
-			TBXMLElement *chatMessagesElement = [TBXML childElementNamed:@"chatMessages" parentElement:root];
-			if (chatMessagesElement)
-			{
-				// Loop through the chat messages
-				TBXMLElement *chatMessage = [TBXML childElementNamed:@"chatMessage" parentElement:chatMessagesElement];
-				while (chatMessage != nil)
-				{
-					@autoreleasepool
-					{
-						// Create the chat message object and add it to the array
-						[self.chatMessages addObjectSafe:[[ISMSChatMessage alloc] initWithTBXMLElement:chatMessage]];
-						
-						// Get the next message
-						chatMessage = [TBXML nextSiblingNamed:@"chatMessage" searchFromElement:chatMessage];
-					}
-				}
-			}
+            [root iterate:@"chatMessages.chatMessage" usingBlock:^(RXMLElement *e) {
+                // Create the chat message object and add it to the array
+                ISMSChatMessage *chatMessage = [[ISMSChatMessage alloc] initWithRXMLElement:e];
+                [self.chatMessages addObject:chatMessage];
+            }];
+            
+            // Notify the delegate that the loading is finished
+            [self informDelegateLoadingFinished];
 		}
-		// Notify the delegate that the loading is finished
-		[self informDelegateLoadingFinished];
 	}
-
-	self.receivedData = nil;
-	self.connection = nil;
 }
 
 @end

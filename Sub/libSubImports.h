@@ -21,6 +21,7 @@
 #endif
 
 #import "ZipKit.h"
+#import "RXMLElement.h"
 #import "TBXML-Headers/TBXML.h"
 #import "TBXML-Headers/TBXML+Compression.h"
 #import "TBXML-Headers/TBXML+HTTP.h"

@@ -87,58 +87,37 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)theConnection
 {
     // Parse the data
-	//
-	NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (error)
-	{
-		[self informDelegateLoadingFailed:error];
-	}
-	else
-	{
-		TBXMLElement *root = tbxml.rootXMLElement;
-		
-		TBXMLElement *error = [TBXML childElementNamed:@"error" parentElement:root];
-		if (error)
-		{
-			NSString *code = [TBXML valueOfAttributeNamed:@"code" forElement:error];
-			NSString *message = [TBXML valueOfAttributeNamed:@"message" forElement:error];
-			[self subsonicErrorCode:[code intValue] message:message];
-			
-			// Inform the delegate that loading failed
-			[self informDelegateLoadingFailed:nil];
-		}
-		else
-		{
-			TBXMLElement *playlists = [TBXML childElementNamed:@"playlists" parentElement:root];
-			if (playlists)
-			{
-                NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:0];
-                
-				TBXMLElement *playlist = [TBXML childElementNamed:@"playlist" parentElement:playlists];
-				while (playlist != nil)
-				{
-					@autoreleasepool 
-					{
-						SUSServerPlaylist *serverPlaylist = [[SUSServerPlaylist alloc] initWithTBXMLElement:playlist];
-						[tempArray addObject:serverPlaylist];
-						
-						// Get the next message
-						playlist = [TBXML nextSiblingNamed:@"playlist" searchFromElement:playlist];
-					}
-				}
-                
-                // Sort the array
-                self.serverPlaylists = [tempArray sortedArrayUsingSelector:@selector(compare:)];
-			}
-            
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
+    {
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+    }
+    else
+    {
+        RXMLElement *error = [root child:@"error"];
+        if ([error isValid])
+        {
+            NSString *code = [error attribute:@"code"];
+            NSString *message = [error attribute:@"message"];
+            [self subsonicErrorCode:[code intValue] message:message];
+        }
+        else
+        {
+            NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:0];
+            [root iterate:@"playlists.playlist" usingBlock:^(RXMLElement *e) {
+                SUSServerPlaylist *serverPlaylist = [[SUSServerPlaylist alloc] initWithRXMLElement:e];
+                [tempArray addObject:serverPlaylist];
+            }];
+        
+            // Sort the array
+            self.serverPlaylists = [tempArray sortedArrayUsingSelector:@selector(compare:)];
+			            
             // Notify the delegate that the loading is finished
 			[self informDelegateLoadingFinished];
 		}
 	}
-	
-	self.receivedData = nil;
-	self.connection = nil;
 }
 
 @end

@@ -23,102 +23,77 @@
 - (void)processResponse
 {	            
     DLog(@"%@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
-	
+    
     // Parse the data
-	//
-	NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (error)
-	{
-		[self informDelegateLoadingFailed:error];
-	}
-	else
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
     {
-		TBXMLElement *root = tbxml.rootXMLElement;
-		
-		TBXMLElement *error = [TBXML childElementNamed:@"error" parentElement:root];
-		if (error)
-		{
-			NSString *code = [TBXML valueOfAttributeNamed:@"code" forElement:error];
-			NSString *message = [TBXML valueOfAttributeNamed:@"message" forElement:error];
-			[self subsonicErrorCode:[code intValue] message:message];
-		}
-		else
-		{
-			TBXMLElement *directory = [TBXML childElementNamed:@"directory" parentElement:root];
-			if (directory)
-			{
-                [self resetDb];
-                self.albumsCount = 0;
-                self.songsCount = 0;
-                self.folderLength = 0;
-                
-                NSMutableArray *albums = [[NSMutableArray alloc] initWithCapacity:0];
-                
-				TBXMLElement *child = [TBXML childElementNamed:@"child" parentElement:directory];
-				while (child != nil)
-				{
-					@autoreleasepool 
-					{
-						if ([[TBXML valueOfAttributeNamed:@"isDir" forElement:child] boolValue])
-						{
-							ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithTBXMLElement:child artistId:self.myArtist.artistId artistName:self.myArtist.name];
-							if (![anAlbum.title isEqualToString:@".AppleDouble"])
-							{
-								/*[self insertAlbumIntoFolderCache:anAlbum];
-								self.albumsCount++;*/
-                                [albums addObject:anAlbum];
-							}
-						}
-						else
-						{
-							ISMSSong *aSong = [[ISMSSong alloc] initWithTBXMLElement:child];
-                            if (aSong.path && (settingsS.isVideoSupported || !aSong.isVideo))
-                            {
-                                // Fix for pdfs showing in directory listing
-                                if (![aSong.suffix.lowercaseString isEqualToString:@"pdf"])
-                                {
-                                    [self insertSongIntoFolderCache:aSong];
-                                    self.songsCount++;
-                                    self.folderLength += [aSong.duration intValue];
-                                }
-                            }
-						}
-						
-						// Get the next message
-						child = [TBXML nextSiblingNamed:@"child" searchFromElement:child];
-					}
-				}
-                
-                // Hack for Subsonic 4.7 breaking alphabetical order
-                [albums sortUsingComparator:^NSComparisonResult(ISMSAlbum *obj1, ISMSAlbum *obj2) {
-                    return [obj1.title caseInsensitiveCompareWithoutIndefiniteArticles:obj2.title];
-                }];
-                for (ISMSAlbum *anAlbum in albums)
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+    }
+    else
+    {
+        RXMLElement *error = [root child:@"error"];
+        if ([error isValid])
+        {
+            NSString *code = [error attribute:@"code"];
+            NSString *message = [error attribute:@"message"];
+            [self subsonicErrorCode:[code intValue] message:message];
+        }
+        else
+        {
+            [self resetDb];
+            self.albumsCount = 0;
+            self.songsCount = 0;
+            self.folderLength = 0;
+            
+            NSMutableArray *albums = [[NSMutableArray alloc] initWithCapacity:0];
+            
+            [root iterate:@"directory.child" usingBlock: ^(RXMLElement *e) {
+                if ([[e attribute:@"isDir"] boolValue])
                 {
-                    [self insertAlbumIntoFolderCache:anAlbum];
+                    ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithRXMLElement:e artistId:self.myArtist.artistId artistName:self.myArtist.name];
+                    if (![anAlbum.title isEqualToString:@".AppleDouble"])
+                    {
+                        [albums addObject:anAlbum];
+                    }
                 }
-                self.albumsCount = albums.count;
-                //
-                
-                [self insertAlbumsCount];
-                [self insertSongsCount];
-                [self insertFolderLength];
-			}
-            else
+                else
+                {
+                    ISMSSong *aSong = [[ISMSSong alloc] initWithRXMLElement:e];
+                    if (aSong.path && (settingsS.isVideoSupported || !aSong.isVideo))
+                    {
+                        // Fix for pdfs showing in directory listing
+                        if (![aSong.suffix.lowercaseString isEqualToString:@"pdf"])
+                        {
+                            [self insertSongIntoFolderCache:aSong];
+                            self.songsCount++;
+                            self.folderLength += [aSong.duration intValue];
+                        }
+                    }
+                }
+            }];
+            
+            // Hack for Subsonic 4.7 breaking alphabetical order
+            [albums sortUsingComparator:^NSComparisonResult(ISMSAlbum *obj1, ISMSAlbum *obj2) {
+                return [obj1.title caseInsensitiveCompareWithoutIndefiniteArticles:obj2.title];
+            }];
+            for (ISMSAlbum *anAlbum in albums)
             {
-                // TODO create error
-                //NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NoLyricsElement];
-                [self informDelegateLoadingFailed:nil];
+                [self insertAlbumIntoFolderCache:anAlbum];
             }
-		}
-	}
-	
-	self.receivedData = nil;
-	self.connection = nil;
-	
-	// Notify the delegate that the loading is finished
-	[self informDelegateLoadingFinished];
+            self.albumsCount = albums.count;
+            //
+            
+            [self insertAlbumsCount];
+            [self insertSongsCount];
+            [self insertFolderLength];
+            
+            // Notify the delegate that the loading is finished
+            [self informDelegateLoadingFinished];
+        }
+    }
 }
 
 

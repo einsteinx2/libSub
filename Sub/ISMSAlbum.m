@@ -35,16 +35,10 @@
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element
 {
-	if ((self = [super init]))
-	{
-		_title = [[TBXML valueOfAttributeNamed:@"title" forElement:element] cleanString];
-		_albumId = [[TBXML valueOfAttributeNamed:@"id" forElement:element] cleanString];
-		_coverArtId = [[TBXML valueOfAttributeNamed:@"coverArt" forElement:element] cleanString];
-		_artistId = [[TBXML valueOfAttributeNamed:@"parent" forElement:element] cleanString];
-		_artistName = [[TBXML valueOfAttributeNamed:@"artist" forElement:element] cleanString];
-	}
-	
-	return self;
+    NSString *artistId = [[TBXML valueOfAttributeNamed:@"parent" forElement:element] cleanString];
+    NSString *artistName = [[TBXML valueOfAttributeNamed:@"artist" forElement:element] cleanString];
+    
+	return [self initWithTBXMLElement:element artistId:artistId artistName:artistName];
 }
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet
@@ -59,6 +53,28 @@
 	}
 	
 	return self;
+}
+
+- (id)initWithRXMLElement:(RXMLElement *)element
+{
+    NSString *artistId = [[element attribute:@"parent"] cleanString];
+    NSString *artistName = [[element attribute:@"artist"] cleanString];
+    
+    return [self initWithRXMLElement:element artistId:artistId artistName:artistName];
+}
+
+- (id)initWithRXMLElement:(RXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet
+{
+    if ((self = [super init]))
+    {
+        _title = [[element attribute:@"title"] cleanString];
+        _albumId = [[element attribute:@"id"] cleanString];
+        _coverArtId = [[element attribute:@"coverArt"] cleanString];
+        _artistId = [artistIdToSet cleanString];
+        _artistName = [artistNameToSet cleanString];
+    }
+    
+    return self;
 }
 
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict

@@ -27,4 +27,6 @@
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict artist:(ISMSArtist *)myArtist;
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
 - (id)initWithTBXMLElement:(TBXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet;
+- (id)initWithRXMLElement:(RXMLElement *)element;
+- (id)initWithRXMLElement:(RXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet;
 @end

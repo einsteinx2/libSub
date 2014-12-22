@@ -27,6 +27,23 @@
 	return self;
 }
 
+- (id)initWithRXMLElement:(RXMLElement *)element
+{
+    if ((self = [super init]))
+    {
+        _timestamp = NSIntegerMin;
+        
+        NSString *time = [element attribute:@"time"];
+        if (time)
+            self.timestamp = [[time substringToIndex:10] intValue];
+        
+        self.user = [[element attribute:@"username"] cleanString];
+        self.message = [[element attribute:@"message"] cleanString];
+    }
+    
+    return self;
+}
+
 - (id)copyWithZone:(NSZone *)zone
 {
 	ISMSChatMessage *newChatMessage = [[ISMSChatMessage alloc] init];

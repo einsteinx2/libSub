@@ -21,6 +21,17 @@
 	return self;
 }
 
+- (id)initWithRXMLElement:(RXMLElement *)element
+{
+    if ((self = [super init]))
+    {
+        _playlistId = [element attribute:@"id"];
+        _playlistName = [[element attribute:@"name"] cleanString];
+    }
+    
+    return self;
+}
+
 -(id)copyWithZone: (NSZone *) zone
 {
     SUSServerPlaylist *playlist = [[SUSServerPlaylist alloc] init];

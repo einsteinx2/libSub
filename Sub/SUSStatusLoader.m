@@ -24,21 +24,20 @@
 {
     DLog(@"SUSStatusLoader: %@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
     
-    NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (error)
-	{
-		// This is not XML, so fail
+    // Parse the data
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
+    {
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
         [self informDelegateLoadingFailed:error];
-		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckFailed];
-	}
-	else
-	{
-		TBXMLElement *root = tbxml.rootXMLElement;
-		
-        if ([[TBXML elementName:root] isEqualToString:@"subsonic-response"])
+        [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckFailed];
+    }
+    else
+    {
+        if ([[root tag] isEqualToString:@"subsonic-response"])
         {
-			self.versionString = [TBXML valueOfAttributeNamed:@"version" forElement:root];
+			self.versionString = [root attribute:@"version"];
 			if (self.versionString)
 			{
 				NSArray *splitVersion = [self.versionString componentsSeparatedByString:@"."];
@@ -62,32 +61,31 @@
 					}
 				}
 			}
-			
-			//DLog(@"versionString: %@   majorVersion: %i  minorVersion: %i", self.versionString, self.majorVersion, self.minorVersion);
-			
-			TBXMLElement *error = [TBXML childElementNamed:@"error" parentElement:root];
-			if (error)
-			{
-				if ([[TBXML valueOfAttributeNamed:@"code" forElement:error] isEqualToString:@"40"])
-				{
-					// Incorrect credentials, so fail
-					NSError *anError = [NSError errorWithISMSCode:ISMSErrorCode_IncorrectCredentials];
+            
+            RXMLElement *error = [root child:@"error"];
+            if ([error isValid])
+            {
+                NSString *code = [error attribute:@"code"];
+                if ([code integerValue] == 40)
+                {
+                    // Incorrect credentials, so fail
+                    NSError *anError = [NSError errorWithISMSCode:ISMSErrorCode_IncorrectCredentials];
                     [self informDelegateLoadingFailed:anError];
-					[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckFailed];
-				}
-				else
-				{
-					// This is a Subsonic server, so pass
+                    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckFailed];
+                }
+                else
+                {
+                    // This is a Subsonic server, so pass
                     [self informDelegateLoadingFinished];
-					[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckPassed];
-				}
-			}
-			else
-			{
-				// This is a Subsonic server, so pass
+                    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckPassed];
+                }
+            }
+            else
+            {
+                // This is a Subsonic server, so pass
                 [self informDelegateLoadingFinished];
-				[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckPassed];
-			}
+                [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckPassed];
+            }
         }
         else
         {

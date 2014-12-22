@@ -41,6 +41,17 @@
 	return self;
 }
 
+- (id)initWithRXMLElement:(RXMLElement *)element
+{
+    if ((self = [super init]))
+    {
+        _name = [[element attribute:@"name"] cleanString];
+        _artistId = [[element attribute:@"id"] cleanString];
+    }
+    
+    return self;
+}
+
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
 	[encoder encodeObject:self.name];

@@ -110,85 +110,74 @@
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)theConnection 
-{		
-	// TODO: test this
-	BOOL showAlert = NO;
-	DLog(@"update checker: %@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
-	NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (!error)
-	{
-		TBXMLElement *root = tbxml.rootXMLElement;
-
-		if ([[TBXML elementName:root] isEqualToString:@"update"])
-		{
-			NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
-			self.theNewVersion = [TBXML valueOfAttributeNamed:@"version" forElement:root];
-			self.message = [TBXML valueOfAttributeNamed:@"message" forElement:root];
-			//DLog(@"currentVersion = %@", currentVersion);
-			//DLog(@"theNewVersion = %@", theNewVersion);
-			//DLog(@"message = %@", message);
-			
-			NSArray *currentVersionSplit = [currentVersion componentsSeparatedByString:@"."];
-			NSArray *newVersionSplit = [self.theNewVersion componentsSeparatedByString:@"."];
-			
-			NSMutableArray *currentVersionPadded = [NSMutableArray arrayWithArray:currentVersionSplit];
-			NSMutableArray *newVersionPadded = [NSMutableArray arrayWithArray:newVersionSplit];
-			
-			if ([currentVersionPadded count] < 3)
-			{
-				for (NSInteger i = [currentVersionPadded count]; i < 3; i++)
-				{
-					[currentVersionPadded addObject:@"0"];
-				}
-			}
-			
-			if ([newVersionPadded count] < 3)
-			{
-				for (NSInteger i = [newVersionPadded count]; i < 3; i++)
-				{
-					[newVersionPadded addObject:@"0"];
-				}
-			}
-			
-			DLog(@"currentVersionSplit: %@", currentVersionSplit);
-			DLog(@"newVersionSplit: %@", newVersionSplit);
-			DLog(@"currentVersionPadded: %@", currentVersionPadded);
-			DLog(@"newVersionPadded: %@", newVersionPadded);
-			
-			@try 
-			{
-				if (currentVersionSplit == nil || newVersionSplit == nil || [currentVersionSplit count] == 0 || [newVersionSplit count] == 0)
-					return;
-				
-				if ([[newVersionPadded objectAtIndexSafe:0] intValue] > [[currentVersionPadded objectAtIndexSafe:0] intValue])
-				{
-					// Major version number is bigger, update is available
-					showAlert = YES;
-				}
-				else if ([[newVersionPadded objectAtIndexSafe:0] intValue] == [[currentVersionPadded objectAtIndexSafe:0] intValue])
-				{
-					if ([[newVersionPadded objectAtIndexSafe:1] intValue] > [[currentVersionPadded objectAtIndexSafe:1] intValue])
-					{
-						// Update is available
-						showAlert = YES;
-					}
-					else if ([[newVersionPadded objectAtIndexSafe:1] intValue] == [[currentVersionPadded objectAtIndexSafe:1] intValue])
-					{
-						if ([[newVersionPadded objectAtIndexSafe:2] intValue] > [[currentVersionPadded objectAtIndexSafe:2] intValue])
-						{
-							// Update is available
-							showAlert = YES;
-						}				
-					}
-				}
-			}
-			@catch (NSException *exception) 
-			{
-			//DLog(@"Range exception checking update version - %@: %@", [exception name], [exception reason]);
-			}
-		}
-	}
+{
+    BOOL showAlert = NO;
+    
+    // Parse the data
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if ([root isValid])
+    {
+        if ([[root tag] isEqualToString:@"update"])
+        {
+            NSString *currentVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString*)kCFBundleVersionKey];
+            self.theNewVersion = [root attribute:@"version"];
+            self.message = [root attribute:@"message"];
+            
+            NSArray *currentVersionSplit = [currentVersion componentsSeparatedByString:@"."];
+            NSArray *newVersionSplit = [self.theNewVersion componentsSeparatedByString:@"."];
+            
+            NSMutableArray *currentVersionPadded = [NSMutableArray arrayWithArray:currentVersionSplit];
+            NSMutableArray *newVersionPadded = [NSMutableArray arrayWithArray:newVersionSplit];
+            
+            if ([currentVersionPadded count] < 3)
+            {
+                for (NSInteger i = [currentVersionPadded count]; i < 3; i++)
+                {
+                    [currentVersionPadded addObject:@"0"];
+                }
+            }
+            
+            if ([newVersionPadded count] < 3)
+            {
+                for (NSInteger i = [newVersionPadded count]; i < 3; i++)
+                {
+                    [newVersionPadded addObject:@"0"];
+                }
+            }
+            
+            @try
+            {
+                if (currentVersionSplit == nil || newVersionSplit == nil || [currentVersionSplit count] == 0 || [newVersionSplit count] == 0)
+                    return;
+                
+                if ([[newVersionPadded objectAtIndexSafe:0] intValue] > [[currentVersionPadded objectAtIndexSafe:0] intValue])
+                {
+                    // Major version number is bigger, update is available
+                    showAlert = YES;
+                }
+                else if ([[newVersionPadded objectAtIndexSafe:0] intValue] == [[currentVersionPadded objectAtIndexSafe:0] intValue])
+                {
+                    if ([[newVersionPadded objectAtIndexSafe:1] intValue] > [[currentVersionPadded objectAtIndexSafe:1] intValue])
+                    {
+                        // Update is available
+                        showAlert = YES;
+                    }
+                    else if ([[newVersionPadded objectAtIndexSafe:1] intValue] == [[currentVersionPadded objectAtIndexSafe:1] intValue])
+                    {
+                        if ([[newVersionPadded objectAtIndexSafe:2] intValue] > [[currentVersionPadded objectAtIndexSafe:2] intValue])
+                        {
+                            // Update is available
+                            showAlert = YES;
+                        }				
+                    }
+                }
+            }
+            @catch (NSException *exception) 
+            {
+            }
+        }
+    }
     
 	self.connection = nil;
     self.receivedData = nil;

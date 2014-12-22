@@ -29,66 +29,43 @@
 - (void)processResponse
 {
     // Parse the data
-	//
-	NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (error)
-	{
-		[self informDelegateLoadingFailed:error];
-	}
-	else
-	{
-		TBXMLElement *root = tbxml.rootXMLElement;
-		
-		TBXMLElement *error = [TBXML childElementNamed:@"error" parentElement:root];
-		if (error)
-		{
-			NSString *code = [TBXML valueOfAttributeNamed:@"code" forElement:error];
-			NSString *message = [TBXML valueOfAttributeNamed:@"message" forElement:error];
-			[self subsonicErrorCode:[code intValue] message:message];
-		}
-		else
-		{
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
+    {
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+    }
+    else
+    {
+        RXMLElement *error = [root child:@"error"];
+        if ([error isValid])
+        {
+            NSString *code = [error attribute:@"code"];
+            NSString *message = [error attribute:@"message"];
+            [self subsonicErrorCode:[code intValue] message:message];
+        }
+        else
+        {
             self.nowPlayingSongDicts = [[NSMutableArray alloc] initWithCapacity:0];
             
-			TBXMLElement *nowPlaying = [TBXML childElementNamed:@"nowPlaying" parentElement:root];
-			if (nowPlaying)
-			{
-				// Loop through the songs
-				TBXMLElement *entry = [TBXML childElementNamed:@"entry" parentElement:nowPlaying];
-				while (entry != nil)
-				{
-					@autoreleasepool 
-					{
-						NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
-						
-						[dict setObjectSafe:[[ISMSSong alloc] initWithTBXMLElement:entry] forKey:@"song"];
-						[dict setObjectSafe:[TBXML valueOfAttributeNamed:@"username" forElement:entry] forKey:@"username"];
-						[dict setObjectSafe:[TBXML valueOfAttributeNamed:@"minutesAgo" forElement:entry] forKey:@"minutesAgo"];
-						[dict setObjectSafe:[TBXML valueOfAttributeNamed:@"playerId" forElement:entry] forKey:@"playerId"];
-						[dict setObjectSafe:[TBXML valueOfAttributeNamed:@"playerName" forElement:entry] forKey:@"playerName"];
-						
-						[self.nowPlayingSongDicts addObject:dict];
-						
-						// Get the next message
-						entry = [TBXML nextSiblingNamed:@"entry" searchFromElement:entry];
-					}
-				}
-			}
-			else
-			{
-				// TODO create error
-				//NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NoLyricsElement];
-				[self informDelegateLoadingFailed:nil];
-			}
+            // TODO: Stop using a dictionary for this
+            [root iterate:@"nowPlaying.entry" usingBlock:^(RXMLElement *e) {
+                NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
+                
+                [dict setObjectSafe:[[ISMSSong alloc] initWithRXMLElement:e] forKey:@"song"];
+                [dict setObjectSafe:[e attribute:@"username"] forKey:@"username"];
+                [dict setObjectSafe:[e attribute:@"minutesAgo"] forKey:@"minutesAgo"];
+                [dict setObjectSafe:[e attribute:@"playerId"] forKey:@"playerId"];
+                [dict setObjectSafe:[e attribute:@"playerName"] forKey:@"playerName"];
+                
+                [self.nowPlayingSongDicts addObject:dict];
+            }];
+            
+            // Notify the delegate that the loading is finished
+            [self informDelegateLoadingFinished];
 		}
 	}
-	
-	self.receivedData = nil;
-	self.connection = nil;
-	
-	// Notify the delegate that the loading is finished
-	[self informDelegateLoadingFinished];
 }
 
 @end

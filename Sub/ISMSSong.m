@@ -83,6 +83,45 @@
 	return self;
 }
 
+- (id)initWithRXMLElement:(RXMLElement *)element
+{
+    if ((self = [super init]))
+    {
+        _title = [[element attribute:@"title"] cleanString];
+        _songId = [[element attribute:@"id"] cleanString];
+        _parentId = [[element attribute:@"parent"] cleanString];
+        _artist = [[element attribute:@"artist"] cleanString];
+        _album = [[element attribute:@"album"] cleanString];
+        _genre = [[element attribute:@"genre"] cleanString];
+        _coverArtId = [[element attribute:@"coverArt"] cleanString];
+        _path = [[element attribute:@"path"] cleanString];
+        _suffix = [[element attribute:@"suffix"] cleanString];
+        _transcodedSuffix = [[element attribute:@"transcodedSuffix"] cleanString];
+        
+        NSString *durationString = [element attribute:@"duration"];
+        if(durationString) _duration = @(durationString.intValue);
+        
+        NSString *bitRateString = [element attribute:@"bitRate"];
+        if(bitRateString) _bitRate = @(bitRateString.intValue);
+        
+        NSString *trackString = [element attribute:@"track"];
+        if(trackString) _track = @(trackString.intValue);
+        
+        NSString *yearString = [element attribute:@"year"];
+        if(yearString) _year = @(yearString.intValue);
+        
+        NSString *sizeString = [element attribute:@"size"];
+        if (sizeString) _size = @(sizeString.longLongValue);
+        
+        NSString *discNumberString = [element attribute:@"discNumber"];
+        if (discNumberString) _discNumber = @(discNumberString.longLongValue);
+        
+        _isVideo = [[element attribute:@"isVideo"] boolValue];
+    }
+    
+    return self;
+}
+
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict
 {
 	if ((self = [super init]))

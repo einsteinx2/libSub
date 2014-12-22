@@ -16,3 +16,6 @@
 [submodule "Frameworks/CocoaHTTPServer"]
 	path = Frameworks/CocoaHTTPServer
 	url = git@github.com:einsteinx2/CocoaHTTPServer.git
+[submodule "Frameworks/RaptureXML"]
+	path = Frameworks/RaptureXML
+	url = git@github.com:einsteinx2/RaptureXML.git

@@ -14,6 +14,7 @@
 @property (copy) NSString *message;
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
+- (id)initWithRXMLElement:(RXMLElement *)element;
 - (id)copyWithZone:(NSZone *)zone;
 
 @end

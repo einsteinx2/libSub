@@ -43,6 +43,7 @@
 
 - (id)initWithPMSDictionary:(NSDictionary *)dictionary;
 - (id)initWithTBXMLElement:(TBXMLElement *)element;
+- (id)initWithRXMLElement:(RXMLElement *)element;
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict;
 
 - (BOOL)isEqualToSong:(ISMSSong	*)otherSong;

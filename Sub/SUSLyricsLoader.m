@@ -36,67 +36,58 @@
 }	
 
 - (void)processResponse
-{	    
+{
     // Parse the data
-	//
-	NSError *error;
-    TBXML *tbxml = [[TBXML alloc] initWithXMLData:self.receivedData error:&error];
-	if (error)
-	{
-		NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NoLyricsElement];
-		[self informDelegateLoadingFailed:error];
-		
-		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsFailed];
-	}
-	else
-	{
-		TBXMLElement *root = tbxml.rootXMLElement;
-
-		TBXMLElement *error = [TBXML childElementNamed:@"error" parentElement:root];
-		if (error)
-		{
-			NSString *code = [TBXML valueOfAttributeNamed:@"code" forElement:error];
-			NSString *message = [TBXML valueOfAttributeNamed:@"message" forElement:error];
-			[self subsonicErrorCode:[code intValue] message:message];
-			
-			[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsFailed];
-		}
-		else
-		{
-			TBXMLElement *lyrics = [TBXML childElementNamed:@"lyrics" parentElement:root];
-			if (lyrics)
-			{
-				self.loadedLyrics = [TBXML textForElement:lyrics];
-				if ([self.loadedLyrics isEqualToString:@""])
-				{
-                    //DLog(@"lyrics tag found, but it's empty");
-					self.loadedLyrics = nil;
-					NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NoLyricsFound];
-					[self informDelegateLoadingFailed:error];
-				}
-				else
-				{
-                    //DLog(@"lyrics tag found, and it's got lyrics! \\o/");
-					[self insertLyricsIntoDb];
-					[self informDelegateLoadingFinished];
-					
-					[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsDownloaded];
-				}
-			}
-			else
-			{
-                //DLog(@"no lyrics tag found");
-				self.loadedLyrics = nil;
-				NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NoLyricsElement];
-				[self informDelegateLoadingFailed:error];
-				
-				[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsFailed];
-			}
-		}
-	}
-	
-	self.receivedData = nil;
-	self.connection = nil;
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
+    {
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+        
+        [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsFailed];
+    }
+    else
+    {
+        RXMLElement *error = [root child:@"error"];
+        if ([error isValid])
+        {
+            NSString *code = [error attribute:@"code"];
+            NSString *message = [error attribute:@"message"];
+            [self subsonicErrorCode:[code intValue] message:message];
+            
+            [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsFailed];
+        }
+        else
+        {
+            RXMLElement *lyrics = [root child:@"lyrics"];
+            if ([lyrics isValid])
+            {
+                self.loadedLyrics = [lyrics text];
+                if ([self.loadedLyrics hasValue])
+                {
+                    self.loadedLyrics = nil;
+                    NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NoLyricsFound];
+                    [self informDelegateLoadingFailed:error];
+                }
+                else
+                {
+                    [self insertLyricsIntoDb];
+                    [self informDelegateLoadingFinished];
+                    
+                    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsDownloaded];
+                }
+            }
+            else
+            {
+                self.loadedLyrics = nil;
+                NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NoLyricsElement];
+                [self informDelegateLoadingFailed:error];
+                
+                [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_LyricsFailed];
+            }
+        }
+    }
 }
 
 - (void)insertLyricsIntoDb
