@@ -138,10 +138,10 @@ LOG_LEVEL_ISUB_DEFAULT
             NSString *path = [settingsS.songCachePath stringByAppendingPathComponent:[result stringForColumn:@"md5"]];
             NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
             size += [attr fileSize];
-            ALog(@"Added %llu to size for partially downloaded song", [attr fileSize]);
+            DLog(@"Added %llu to size for partially downloaded song", [attr fileSize]);
         }
         
-        ALog(@"Total cache size was found to be: %llu", size);
+        DLog(@"Total cache size was found to be: %llu", size);
         _cacheSize = size;
         
     }];

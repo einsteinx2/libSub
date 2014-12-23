@@ -64,7 +64,7 @@
 		
 		hadError = [db hadError];
 		if (hadError)
-			DLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+			ALog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
 	}];
     
 	return !hadError;
@@ -79,7 +79,7 @@
 		
 		hadError = [db hadError];
 		if (hadError)
-			DLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+			ALog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
 	}];
 	
 	return !hadError;
@@ -91,12 +91,10 @@
 	[self.dbQueue inDatabase:^(FMDatabase *db)
 	{
 		[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO songsCache (folderId, %@) VALUES (?, %@)", [ISMSSong standardSongColumnNames], [ISMSSong standardSongColumnQMarks]], self.myId.md5, aSong.title, aSong.songId, aSong.artist, aSong.album, aSong.genre, aSong.coverArtId, aSong.path, aSong.suffix, aSong.transcodedSuffix, aSong.duration, aSong.bitRate, aSong.track, aSong.year, aSong.size, aSong.parentId, NSStringFromBOOL(aSong.isVideo), aSong.discNumber];
-        
-        ALog(@"Added to folderCache with discNumber: %@", aSong.discNumber);
-		
+        		
 		hadError = [db hadError];
 		if (hadError)
-			DLog(@"Err inserting song %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+			ALog(@"Err inserting song %d: %@", [db lastErrorCode], [db lastErrorMessage]);
 	}];
 	
 	return !hadError;
@@ -111,7 +109,7 @@
 		
 		hadError = [db hadError];
 		if ([db hadError])
-			DLog(@"Err inserting album count %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+			ALog(@"Err inserting album count %d: %@", [db lastErrorCode], [db lastErrorMessage]);
 	}];
     
 	return !hadError;
@@ -126,7 +124,7 @@
 		
 		hadError = [db hadError];
 		if (hadError)
-			DLog(@"Err inserting song count %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+			ALog(@"Err inserting song count %d: %@", [db lastErrorCode], [db lastErrorMessage]);
 	}];
     	
 	return !hadError;
@@ -141,7 +139,7 @@
 		
 		hadError = [db hadError];
 		if ([db hadError])
-			DLog(@"Err inserting folder length %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+			ALog(@"Err inserting folder length %d: %@", [db lastErrorCode], [db lastErrorMessage]);
 	}];
    
 	return !hadError;

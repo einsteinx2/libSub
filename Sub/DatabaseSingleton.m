@@ -81,7 +81,6 @@ LOG_LEVEL_ISUB_DEFAULT
         // Otherwise, we should create these tables if they don't already exist.
         else
         {
-            ALog(@"This is not a WaveBox server.  Checking for folder cache tables and creating as necessary...");
             if (![db tableExists:@"albumListCache"])
             {
                 [db executeUpdate:@"CREATE TABLE albumListCache (id TEXT PRIMARY KEY, data BLOB)"];
@@ -504,11 +503,14 @@ LOG_LEVEL_ISUB_DEFAULT
     self.metadataDbQueue = nil;
     
     NSString *path = [NSString stringWithFormat:@"%@/mediadbs/%@.db", self.databaseFolderPath, settingsS.uuid];
-    self.metadataDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
-    [self.metadataDbQueue inDatabase:^(FMDatabase *db)
+    if ([[NSFileManager defaultManager] fileExistsAtPath:path])
     {
-        [db executeUpdate:@"PRAGMA cache_size = 1"];
-    }];
+        self.metadataDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
+        [self.metadataDbQueue inDatabase:^(FMDatabase *db)
+         {
+             [db executeUpdate:@"PRAGMA cache_size = 1"];
+         }];
+    }
 }
 
 - (void)updateTableDefinitions
