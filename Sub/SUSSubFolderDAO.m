@@ -11,11 +11,11 @@
 #import "MusicSingleton.h"
 
 @interface SUSSubFolderDAO (Private) 
-- (NSUInteger)findFirstAlbumRow;
-- (NSUInteger)findFirstSongRow;
-- (NSUInteger)findAlbumsCount;
-- (NSUInteger)findSongsCount;
-- (NSUInteger)findFolderLength;
+- (NSInteger)findFirstAlbumRow;
+- (NSInteger)findFirstSongRow;
+- (NSInteger)findAlbumsCount;
+- (NSInteger)findSongsCount;
+- (NSInteger)findFolderLength;
 @end
 
 @implementation SUSSubFolderDAO
@@ -77,32 +77,32 @@
 
 #pragma mark - Private DB Methods
 
-- (NSUInteger)findFirstAlbumRow
+- (NSInteger)findFirstAlbumRow
 {
     return [self.dbQueue intForQuery:@"SELECT rowid FROM albumsCache WHERE folderId = ? LIMIT 1", [self.myId md5]];
 }
 
-- (NSUInteger)findFirstSongRow
+- (NSInteger)findFirstSongRow
 {
     return [self.dbQueue intForQuery:@"SELECT rowid FROM songsCache WHERE folderId = ? LIMIT 1", [self.myId md5]];
 }
 
-- (NSUInteger)findAlbumsCount
+- (NSInteger)findAlbumsCount
 {
     return [self.dbQueue intForQuery:@"SELECT count FROM albumsCacheCount WHERE folderId = ?", [self.myId md5]];
 }
 
-- (NSUInteger)findSongsCount
+- (NSInteger)findSongsCount
 {
     return [self.dbQueue intForQuery:@"SELECT count FROM songsCacheCount WHERE folderId = ?", [self.myId md5]];
 }
 
-- (NSUInteger)findFolderLength
+- (NSInteger)findFolderLength
 {
     return [self.dbQueue intForQuery:@"SELECT length FROM folderLength WHERE folderId = ?", [self.myId md5]];
 }
 
-- (ISMSAlbum *)findAlbumForDbRow:(NSUInteger)row
+- (ISMSAlbum *)findAlbumForDbRow:(NSInteger)row
 {
     __block ISMSAlbum *anAlbum = nil;
 	
@@ -129,12 +129,12 @@
 	return anAlbum;
 }
 
-- (ISMSSong *)findSongForDbRow:(NSUInteger)row
+- (ISMSSong *)findSongForDbRow:(NSInteger)row
 { 
 	return [ISMSSong songFromDbRow:row-1 inTable:@"songsCache" inDatabaseQueue:self.dbQueue];
 }
 
-- (ISMSSong *)playSongAtDbRow:(NSUInteger)row
+- (ISMSSong *)playSongAtDbRow:(NSInteger)row
 {
 	// Clear the current playlist
 	if (settingsS.isJukeboxEnabled)
@@ -178,28 +178,28 @@
     return NO;
 }
 
-- (NSUInteger)totalCount
+- (NSInteger)totalCount
 {
     return self.albumsCount + self.songsCount;
 }
 
-- (ISMSAlbum *)albumForTableViewRow:(NSUInteger)row
+- (ISMSAlbum *)albumForTableViewRow:(NSInteger)row
 {
-    NSUInteger dbRow = self.albumStartRow + row;
+    NSInteger dbRow = self.albumStartRow + row;
     
     return [self findAlbumForDbRow:dbRow];
 }
 
-- (ISMSSong *)songForTableViewRow:(NSUInteger)row
+- (ISMSSong *)songForTableViewRow:(NSInteger)row
 {
-    NSUInteger dbRow = self.songStartRow + (row - self.albumsCount);
+    NSInteger dbRow = self.songStartRow + (row - self.albumsCount);
     
     return [self findSongForDbRow:dbRow];
 }
 
-- (ISMSSong *)playSongAtTableViewRow:(NSUInteger)row
+- (ISMSSong *)playSongAtTableViewRow:(NSInteger)row
 {
-	NSUInteger dbRow = self.songStartRow + (row - self.albumsCount);
+	NSInteger dbRow = self.songStartRow + (row - self.albumsCount);
 	return [self playSongAtDbRow:dbRow];
 }
 

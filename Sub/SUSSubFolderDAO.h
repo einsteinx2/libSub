@@ -12,10 +12,10 @@
 
 @interface SUSSubFolderDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
-@property NSUInteger albumStartRow;
-@property NSUInteger songStartRow;
-@property NSUInteger albumsCount;
-@property NSUInteger songsCount;
+@property NSInteger albumStartRow;
+@property NSInteger songStartRow;
+@property NSInteger albumsCount;
+@property NSInteger songsCount;
 
 @property (weak) id<ISMSLoaderDelegate> delegate;
 @property (strong) ISMSSubFolderLoader *loader;
@@ -23,18 +23,18 @@
 @property (copy) NSString *myId;
 @property (copy) ISMSArtist *myArtist;
 
-@property (readonly) NSUInteger totalCount;
+@property (readonly) NSInteger totalCount;
 @property (readonly) BOOL hasLoaded;
-@property (readonly) NSUInteger folderLength;
+@property (readonly) NSInteger folderLength;
 
 - (NSArray *)sectionInfo;
 
 - (id)initWithDelegate:(id <ISMSLoaderDelegate>)theDelegate;
 - (id)initWithDelegate:(id<ISMSLoaderDelegate>)theDelegate andId:(NSString *)folderId andArtist:(ISMSArtist *)anArtist;
 
-- (ISMSAlbum *)albumForTableViewRow:(NSUInteger)row;
-- (ISMSSong *)songForTableViewRow:(NSUInteger)row;
+- (ISMSAlbum *)albumForTableViewRow:(NSInteger)row;
+- (ISMSSong *)songForTableViewRow:(NSInteger)row;
 
-- (ISMSSong *)playSongAtTableViewRow:(NSUInteger)row;
+- (ISMSSong *)playSongAtTableViewRow:(NSInteger)row;
 
 @end
