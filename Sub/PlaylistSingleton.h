@@ -26,7 +26,7 @@ typedef enum
 	ISMSRepeatMode repeatMode;
 }
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 - (ISMSSong *)songForIndex:(NSUInteger)index;
 - (NSInteger)decrementIndex;

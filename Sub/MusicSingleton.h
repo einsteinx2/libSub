@@ -18,7 +18,7 @@
 @property BOOL isAutoNextNotificationOn;
 @property (readonly) BOOL showPlayerIcon;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 - (void)startSongAtOffsetInBytes:(unsigned long long)bytes andSeconds:(double)seconds;
 - (void)startSong;

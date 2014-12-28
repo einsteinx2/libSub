@@ -19,7 +19,7 @@
 @property float jukeboxGain;
 @property (strong) EX2SimpleConnectionQueue *connectionQueue;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 // Jukebox control methods
 - (void)jukeboxPlaySongAtPosition:(NSNumber *)position;

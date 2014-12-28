@@ -316,7 +316,7 @@ double startSongSeconds = 0.0;
 #endif
 }
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static MusicSingleton *sharedInstance = nil;
     static dispatch_once_t once = 0;

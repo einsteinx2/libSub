@@ -541,7 +541,7 @@
 #endif
 }
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static PlaylistSingleton *sharedInstance = nil;
     static dispatch_once_t once = 0;
