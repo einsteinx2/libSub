@@ -21,7 +21,7 @@
 
 @property (weak) id<BassGaplessPlayerDelegate> delegate;
 
-@property dispatch_queue_t streamGcdQueue;
+@property (retain) dispatch_queue_t streamGcdQueue;
 
 // Ring Buffer
 @property (strong) EX2RingBuffer *ringBuffer;

@@ -205,6 +205,8 @@ LOG_LEVEL_ISUB_DEFAULT
 
 #pragma mark - Twitter -
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void)tweetSong
 {
 #ifdef IOS
@@ -214,10 +216,10 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	if (settingsS.currentTwitterAccount && settingsS.isTwitterEnabled && !settingsS.isOfflineMode)
 	{
-		if (currentSong.artist && currentSong.title)
+		if (currentSong.artistName && currentSong.title)
 		{
 			//DLog(@"------------- tweeting song --------------");
-			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@ #isubapp", currentSong.title, currentSong.artist];
+			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@ #isubapp", currentSong.title, currentSong.artistName];
             if (tweet.length > 140)
                 tweet = [tweet substringToIndex:140];
             
@@ -255,6 +257,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	}
 #endif
 }
+#pragma clang diagnostic pop
 
 #pragma mark - Memory management
 

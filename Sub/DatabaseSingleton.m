@@ -58,9 +58,57 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		[self setupAllSongsDb];
 	}
+    
+    // Setup the new data model
+    NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db", self.databaseFolderPath, urlStringMd5];
+    NSLog(@"new model db: %@", path);
+    self.songModelDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [self.songModelDbQueue inDatabase:^(FMDatabase *db)
+    {
+        if (![db tableExists:@"songs"])
+        {
+            [db executeUpdate:@"CREATE TABLE songs (songId INTEGER PRIMARY KEY, folderId INTEGER, artistId INTEGER, albumId INTEGER, title TEXT, genre TEXT, coverArtId TEXT, path TEXT, suffix TEXT, transcodedSuffix TEXT, duration INTEGER, bitRate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, isVideo INTEGER)"];
+            [db executeUpdate:@"CREATE INDEX songs_folderId ON songs (folderId)"];
+            [db executeUpdate:@"CREATE INDEX songs_artistId ON songs (artistId)"];
+            [db executeUpdate:@"CREATE INDEX songs_albumId ON songs (albumId)"];
+        }
+        
+        if (![db tableExists:@"mediaFolders"])
+        {
+            [db executeUpdate:@"CREATE TABLE mediaFolders (mediaFolderId INTEGER PRIMARY KEY, name TEXT)"];
+        }
+        
+        if (![db tableExists:@"ignoredArticles"])
+        {
+            [db executeUpdate:@"CREATE TABLE ignoredArticles (articleId INTEGER PRIMARY KEY, name TEXT)"];
+        }
+        
+        if (![db tableExists:@"folders"])
+        {
+            [db executeUpdate:@"CREATE TABLE folders (folderId INTEGER PRIMARY KEY, parentFolderId INTEGER, mediaFolderId INTEGER, coverArtId INTEGER, name TEXT)"];
+            [db executeUpdate:@"CREATE INDEX folders_parentFolderId ON folders (parentFolderId)"];
+            [db executeUpdate:@"CREATE INDEX folders_mediaFolderId ON folders (mediaFolderId)"];
+        }
+        
+        if (![db tableExists:@"artists"])
+        {
+            [db executeUpdate:@"CREATE TABLE artists (artistId INTEGER PRIMARY KEY, name TEXT, albumCount INTEGER)"];
+        }
+        
+        if (![db tableExists:@"albums"])
+        {
+            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, artistId INTEGER, name TEXT, songCount INTEGER, duration INTEGER, createdDate INTEGER, year INTEGER, genre TEXT)"];
+        }
+        
+        if (![db tableExists:@"genres"])
+        {
+            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY AUTOINCREMENT, name INTEGER, songCount INTEGER, albumCount INTEGER)"];
+            [db executeUpdate:@"CREATE INDEX genres_name ON genres (name)"];
+        }
+    }];
 	
 	// Setup the album list cache database
-	NSString *path = [NSString stringWithFormat:@"%@/%@albumListCache.db", self.databaseFolderPath, urlStringMd5];
+	path = [NSString stringWithFormat:@"%@/%@albumListCache.db", self.databaseFolderPath, urlStringMd5];
 	self.albumListCacheDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
 	[self.albumListCacheDbQueue inDatabase:^(FMDatabase *db) 
 	{

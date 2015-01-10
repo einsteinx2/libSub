@@ -9,7 +9,6 @@
 #ifndef iSub_ISMSDataAccessObjects_h
 #define iSub_ISMSDataAccessObjects_h
 
-#import "SUSRootFoldersDAO.h"
 #import "SUSSubFolderDAO.h"
 #import "SUSAllAlbumsDAO.h"
 #import "SUSAllSongsDAO.h"

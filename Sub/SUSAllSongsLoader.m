@@ -78,7 +78,7 @@ static NSInteger order (id a, id b, void* context)
 	[[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:[NSString stringWithFormat:@"%@isAllSongsLoading", settingsS.urlString]];
 	[[NSUserDefaults standardUserDefaults] synchronize];
 	
-	self.rootFolders = [[SUSRootFoldersDAO alloc] init];
+	//self.rootFolders = [[SUSRootFoldersDAO alloc] init];
 	
 	// Check to see if we need to create the tables
 	if ((![databaseS.allAlbumsDbQueue tableExists:@"resumeLoad"] && ![databaseS.allSongsDbQueue tableExists:@"resumeLoad"]) ||
@@ -275,7 +275,7 @@ static NSInteger order (id a, id b, void* context)
 	
 	if (self.iteration == -1)
 	{
-		self.currentArtist = [self.rootFolders artistForPosition:self.currentRow];
+		//self.currentArtist = [self.rootFolders artistForPosition:self.currentRow];
 	//DLog(@"current artist: %@", self.currentArtist.name);
 		
 		[self sendArtistNotification:self.currentArtist.name];

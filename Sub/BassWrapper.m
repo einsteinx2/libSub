@@ -293,6 +293,8 @@ static NSUInteger _bassOutputBufferLengthMillis = 0;
 }
 
 #ifdef IOS
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (NSInteger)audioSessionSampleRate
 {
 	Float64 sampleRate;
@@ -309,7 +311,7 @@ static NSUInteger _bassOutputBufferLengthMillis = 0;
 							sizeof(sampleRateFloat), 
 							&sampleRateFloat);
 }
-
+#pragma clang diagnostic pop
 #endif
 
 @end

@@ -259,10 +259,10 @@ double startSongSeconds = 0.0;
 		ISMSSong *currentSong = playlistS.currentSong;
 		if (currentSong.title)
 			[trackInfo setObject:currentSong.title forKey:MPMediaItemPropertyTitle];
-		if (currentSong.album)
-			[trackInfo setObject:currentSong.album forKey:MPMediaItemPropertyAlbumTitle];
-		if (currentSong.artist)
-			[trackInfo setObject:currentSong.artist forKey:MPMediaItemPropertyArtist];
+		if (currentSong.albumName)
+			[trackInfo setObject:currentSong.albumName forKey:MPMediaItemPropertyAlbumTitle];
+		if (currentSong.artistName)
+			[trackInfo setObject:currentSong.artistName forKey:MPMediaItemPropertyArtist];
 		if (currentSong.genre)
 			[trackInfo setObject:currentSong.genre forKey:MPMediaItemPropertyGenre];
 		if (currentSong.duration)

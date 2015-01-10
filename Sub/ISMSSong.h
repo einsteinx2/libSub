@@ -1,20 +1,22 @@
 //
-//  Song.h
+//  ISMSSong.h
 //  iSub
 //
 //  Created by Ben Baron on 2/28/10.
-//  Copyright 2010 Ben Baron. All rights reserved.
+//  Copyright 2015 Ben Baron. All rights reserved.
 //
 
-#import "ISMSMediaItem.h"
+#import "ISMSPersistedModel.h"
 
-@interface ISMSSong : NSObject <NSCoding, NSCopying, ISMSMediaItem>
+@class ISMSFolder, ISMSArtist, ISMSAlbum;
+
+@interface ISMSSong : NSObject <NSCoding, NSCopying, ISMSPersistedModel>
 
 @property (copy) NSString *title;
 @property (copy) NSString *songId;
 @property (copy) NSString *parentId;
-@property (copy) NSString *artist;
-@property (copy) NSString *album;
+@property (copy) NSString *artistName;
+@property (copy) NSString *albumName;
 @property (copy) NSString *genre;
 @property (copy) NSString *coverArtId;
 @property (copy) NSString *path;
@@ -47,6 +49,20 @@
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict;
 
 - (BOOL)isEqualToSong:(ISMSSong	*)otherSong;
+
+/*
+ New Model
+ */
+
+// Returns an instance if it exists in the db, otherwise nil
+- (instancetype)initWithSongId:(NSInteger)songId;
+
+- (ISMSFolder *)folder;
+- (ISMSArtist *)artist;
+- (ISMSAlbum *)album;
+
++ (NSArray *)songsInFolderWithId:(NSInteger)folderId;
++ (NSArray *)songsInAlbumWithId:(NSInteger)albumId;
 
 @end
 

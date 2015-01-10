@@ -9,12 +9,12 @@
 #ifndef iSub_ISMSDataModelObjects_h
 #define iSub_ISMSDataModelObjects_h
 
+#import "ISMSMediaFolder.h"
+#import "ISMSFolder.h"
 #import "ISMSArtist.h"
 #import "ISMSAlbum.h"
-#import "ISMSMediaItem.h"
 #import "ISMSSong.h"
 #import "ISMSSong+DAO.h"
-#import "ISMSVideo.h"
 #import "ISMSIndex.h"
 #import "ISMSChatMessage.h"
 #import "ISMSServer.h"

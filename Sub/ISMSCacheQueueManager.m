@@ -141,11 +141,11 @@ LOG_LEVEL_ISUB_DEBUG
 	self.isQueueDownloading = YES;
 	
 	// Grab the lyrics
-	if (self.currentQueuedSong.artist && self.currentQueuedSong.title && settingsS.isLyricsEnabled)
+	if (self.currentQueuedSong.artistName && self.currentQueuedSong.title && settingsS.isLyricsEnabled)
 	{
         SUSLyricsLoader *lyricsLoader = [[SUSLyricsLoader alloc] initWithDelegate:self];
 		//DLog(@"lyricsLoader: %@", lyricsLoader);
-        lyricsLoader.artist = self.currentQueuedSong.artist;
+        lyricsLoader.artist = self.currentQueuedSong.artistName;
         lyricsLoader.title = self.currentQueuedSong.title;
         [lyricsLoader startLoad];        
 	}

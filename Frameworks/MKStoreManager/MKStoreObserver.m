@@ -67,6 +67,8 @@
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];	
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void) completeTransaction: (SKPaymentTransaction *)transaction
 {		
 	
@@ -83,5 +85,5 @@
 	
     [[SKPaymentQueue defaultQueue] finishTransaction: transaction];	
 }
-
+#pragma clang diagnostic pop
 @end

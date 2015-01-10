@@ -114,8 +114,8 @@
 		aSong.title = [result stringForColumn:@"title"];
 		aSong.songId = [result stringForColumn:@"songId"];
 		aSong.parentId = [result stringForColumn:@"parentId"];
-		aSong.artist = [result stringForColumn:@"artist"];
-		aSong.album = [result stringForColumn:@"album"];
+		aSong.artistName = [result stringForColumn:@"artist"];
+		aSong.albumName = [result stringForColumn:@"album"];
 		aSong.genre = [result stringForColumn:@"genre"];
 		aSong.coverArtId = [result stringForColumn:@"coverArtId"];
 		aSong.path = [result stringForColumn:@"path"];

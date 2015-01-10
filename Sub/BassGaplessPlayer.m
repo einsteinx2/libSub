@@ -61,7 +61,6 @@ LOG_LEVEL_ISUB_DEBUG
 
 - (void)dealloc
 {
-    dispatch_release(_streamGcdQueue);
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

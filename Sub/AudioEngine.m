@@ -24,6 +24,8 @@ LOG_LEVEL_ISUB_DEFAULT
 static AudioEngine *sharedInstance = nil;
 
 #ifdef IOS
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 - (void)beginInterruption
 {
@@ -91,6 +93,7 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     }
 }
 
+#pragma clang diagnostic pop
 #endif
 
 - (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds
@@ -140,6 +143,8 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 - (void)setup
 {
 #ifdef IOS
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMemoryWarning) name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
 	
 	AudioSessionInitialize(NULL, NULL, NULL, NULL);
@@ -148,6 +153,7 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 	
 	// Add the callbacks for headphone removal and other audio takeover
 	AudioSessionAddPropertyListener(kAudioSessionProperty_AudioRouteChange, audioRouteChangeListenerCallback, NULL);
+#pragma clang diagnostic pop
 #endif
     
     _delegate = [[iSubBassGaplessPlayerDelegate alloc] init];

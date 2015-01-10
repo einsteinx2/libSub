@@ -365,7 +365,7 @@ LOG_LEVEL_ISUB_DEBUG
 	else
 	{
 		[handler start:resume];
-		[self.lyricsDAO loadLyricsForArtist:handler.mySong.artist andTitle:handler.mySong.title];
+		[self.lyricsDAO loadLyricsForArtist:handler.mySong.artistName andTitle:handler.mySong.title];
 	}
 }
 

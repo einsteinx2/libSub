@@ -26947,26 +26947,53 @@ SQLITE_API int sqlite3_hostid_num = 0;
 /* get the host ID via gethostuuid(), pHostID must point to PROXY_HOSTIDLEN 
 ** bytes of writable memory.
 */
+//static int proxyGetHostID(unsigned char *pHostID, int *pError){
+//  struct timespec timeout = {1, 0}; /* 1 sec timeout */
+//  
+//  assert(PROXY_HOSTIDLEN == sizeof(uuid_t));
+//  memset(pHostID, 0, PROXY_HOSTIDLEN);
+//  if( gethostuuid(pHostID, &timeout) ){
+//    int err = errno;
+//    if( pError ){
+//      *pError = err;
+//    }
+//    return SQLITE_IOERR;
+//  }
+//#ifdef SQLITE_TEST
+//  /* simulate multiple hosts by creating unique hostid file paths */
+//  if( sqlite3_hostid_num != 0){
+//    pHostID[0] = (char)(pHostID[0] + (char)(sqlite3_hostid_num & 0xFF));
+//  }
+//#endif
+//  
+//  return SQLITE_OK;
+//}
 static int proxyGetHostID(unsigned char *pHostID, int *pError){
-  struct timespec timeout = {1, 0}; /* 1 sec timeout */
-  
-  assert(PROXY_HOSTIDLEN == sizeof(uuid_t));
-  memset(pHostID, 0, PROXY_HOSTIDLEN);
-  if( gethostuuid(pHostID, &timeout) ){
-    int err = errno;
-    if( pError ){
-      *pError = err;
+    assert(PROXY_HOSTIDLEN == sizeof(uuid_t));
+    memset(pHostID, 0, PROXY_HOSTIDLEN);
+    
+#if defined(__MAX_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED<1050
+    {
+        static const struct timespec timeout = {1, 0}; /* 1 sec timeout */
+        if( gethostuuid(pHostID, &timeout) ){
+            int err = errno;
+            if( pError ){
+                *pError = err;
+            }
+            return SQLITE_IOERR;
+        }
     }
-    return SQLITE_IOERR;
-  }
-#ifdef SQLITE_TEST
-  /* simulate multiple hosts by creating unique hostid file paths */
-  if( sqlite3_hostid_num != 0){
-    pHostID[0] = (char)(pHostID[0] + (char)(sqlite3_hostid_num & 0xFF));
-  }
+#else
+    UNUSED_PARAMETER(pError);
 #endif
-  
-  return SQLITE_OK;
+    
+#ifdef SQLITE_TEST
+    /* simulate multiple hosts by creating unique hostid file paths */
+    if( sqlite3_hostid_num != 0){
+        pHostID[0] = (char)(pHostID[0] + (char)(sqlite3_hostid_num & 0xFF));
+    }
+#endif
+    return SQLITE_OK;
 }
 
 /* The conch file contains the header, host id and lock file path

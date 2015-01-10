@@ -17,6 +17,8 @@
 
 @property (strong) NSString *databaseFolderPath;
 
+@property (strong) FMDatabaseQueue *songModelDbQueue;
+
 @property (strong) FMDatabaseQueue *allAlbumsDbQueue;
 @property (strong) FMDatabaseQueue *allSongsDbQueue;
 @property (strong) FMDatabaseQueue *coverArtCacheDb540Queue;
