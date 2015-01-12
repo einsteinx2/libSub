@@ -12,6 +12,7 @@
 @interface ISMSFolderLoader()
 {
     ISMSFolder *_associatedObject;
+    NSTimeInterval _songsDuration;
 }
 @end
 
@@ -29,9 +30,9 @@
 }
 
 - (void)processResponse
-{    
-    // Parse the data
-    //
+{
+    __block NSTimeInterval songsDuration = 0;
+    
     RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
     if (![root isValid])
     {
@@ -71,6 +72,7 @@
                     ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e];
                     if (![song.suffix.lowercaseString isEqualToString:@"pdf"])
                     {
+                        songsDuration += song.duration.doubleValue;
                         [songs addObject:song];
                     }
                 }
@@ -83,6 +85,7 @@
             
             _folders = folders;
             _songs = songs;
+            _songsDuration = songsDuration;
 
             // Notify the delegate that the loading is finished
             [self informDelegateLoadingFinished];
@@ -104,6 +107,13 @@
     _folders = folder.subfolders;
     _songs = folder.songs;
     
+    NSTimeInterval songsDuration = 0;
+    for (ISMSSong *song in _songs)
+    {
+        songsDuration += song.duration.doubleValue;
+    }
+    _songsDuration = songsDuration;
+    
     return (_folders.count > 0 || _songs.count > 0);
 }
 
@@ -118,6 +128,11 @@
         
         return _associatedObject;
     }
+}
+
+- (NSTimeInterval)songsDuration
+{
+    return _songsDuration;
 }
 
 #pragma mark - Unused ISMSItemLoader Properties -

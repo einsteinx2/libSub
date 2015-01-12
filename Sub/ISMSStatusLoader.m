@@ -7,6 +7,7 @@
 //
 
 #import "ISMSStatusLoader.h"
+#import "NSMutableURLRequest+SUS.h"
 
 @implementation ISMSStatusLoader
 
@@ -15,30 +16,89 @@
     return ISMSLoaderType_Status;
 }
 
-+ (id)loaderWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
+- (NSURLRequest *)createRequest
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
-	{
-		return [[SUSStatusLoader alloc] initWithDelegate:theDelegate];
-	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
-	{
-		return [[PMSStatusLoader alloc] initWithDelegate:theDelegate];
-	}
-	return nil;
+    if (!self.urlString || !self.username || !self.password)
+        return nil;
+    
+    return [NSMutableURLRequest requestWithSUSAction:@"ping" urlString:self.urlString username:self.username password:self.password parameters:nil];
 }
 
-+ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
+- (void)processResponse
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
-	{
-		return [[SUSStatusLoader alloc] initWithCallbackBlock:theBlock];
-	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
-	{
-		return [[PMSStatusLoader alloc] initWithCallbackBlock:theBlock];
-	}
-	return nil;
+    DLog(@"SUSStatusLoader: %@", [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
+    
+    // Parse the data
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
+    {
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+        [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckFailed];
+    }
+    else
+    {
+        if ([[root tag] isEqualToString:@"subsonic-response"])
+        {
+			self.versionString = [root attribute:@"version"];
+			if (self.versionString)
+			{
+				NSArray *splitVersion = [self.versionString componentsSeparatedByString:@"."];
+				if ([splitVersion count] > 0)
+				{
+					self.majorVersion = [[splitVersion objectAtIndexSafe:0] intValue];
+					if (self.majorVersion >= 2)
+                    {
+						self.isNewSearchAPI = YES;
+                        self.isVideoSupported = YES;
+                    }
+					
+					if ([splitVersion count] > 1)
+					{
+						self.minorVersion = [[splitVersion objectAtIndexSafe:1] intValue];
+						if (self.majorVersion >= 1 && self.minorVersion >= 4)
+							self.isNewSearchAPI = YES;
+                        
+                        if (self.majorVersion >= 1 && self.minorVersion >= 7)
+                            self.isVideoSupported = YES;
+					}
+				}
+			}
+            
+            RXMLElement *error = [root child:@"error"];
+            if ([error isValid])
+            {
+                NSString *code = [error attribute:@"code"];
+                if ([code integerValue] == 40)
+                {
+                    // Incorrect credentials, so fail
+                    NSError *anError = [NSError errorWithISMSCode:ISMSErrorCode_IncorrectCredentials];
+                    [self informDelegateLoadingFailed:anError];
+                    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckFailed];
+                }
+                else
+                {
+                    // This is a Subsonic server, so pass
+                    [self informDelegateLoadingFinished];
+                    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckPassed];
+                }
+            }
+            else
+            {
+                // This is a Subsonic server, so pass
+                [self informDelegateLoadingFinished];
+                [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckPassed];
+            }
+        }
+        else
+        {
+            // This is not a Subsonic server, so fail
+            NSError *anError = [NSError errorWithISMSCode:ISMSErrorCode_NotASubsonicServer];
+			[self informDelegateLoadingFailed:anError];
+			[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_ServerCheckFailed];
+        }
+    }
 }
 
 @end

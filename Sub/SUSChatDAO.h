@@ -8,10 +8,9 @@
 
 #import "ISMSLoaderManager.h"
 
-@class SUSChatLoader;
 @interface SUSChatDAO : NSObject <ISMSLoaderManager, ISMSLoaderDelegate>
 
-@property (strong) SUSChatLoader *loader;
+@property (strong) ISMSChatLoader *loader;
 @property (weak) NSObject <ISMSLoaderDelegate> *delegate;
 
 @property (strong) NSArray *chatMessages;

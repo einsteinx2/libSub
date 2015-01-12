@@ -11,20 +11,22 @@
 
 #import "ISMSItemLoader.h"
 
+#import "ISMSScrobbleLoader.h"
 #import "ISMSStatusLoader.h"
-#import "SUSServerPlaylistsLoader.h"
+#import "ISMSServerPlaylistsLoader.h"
 #import "ISMSCoverArtLoader.h"
 #import "ISMSSubFolderLoader.h"
 #import "ISMSQueueAllLoader.h"
 #import "ISMSServerShuffleLoader.h"
-#import "ISMSDropdownFolderLoader.h"
 #import "ISMSScrobbleLoader.h"
-
-#import "SUSLoaders.h"
-#import "PMSLoaders.h"
+#import "ISMSLyricsLoader.h"
+#import "ISMSChatLoader.h"
+#import "ISMSNowPlayingLoader.h"
+#import "ISMSQuickAlbumsLoader.h"
 
 #import "ISMSMediaFoldersLoader.h"
 #import "ISMSNewRootFoldersLoader.h"
 #import "ISMSFolderLoader.h"
+#import "ISMSRootArtistsLoader.h"
 
 #endif

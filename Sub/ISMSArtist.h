@@ -1,24 +1,24 @@
 //
-//  Artist.h
+//  ISMSArtist.h
 //  iSub
 //
 //  Created by Ben Baron on 2/27/10.
-//  Copyright 2010 Ben Baron. All rights reserved.
+//  Copyright 2015 Ben Baron. All rights reserved.
 //
 
-@interface ISMSArtist : NSObject <NSCoding, NSCopying>
+#import "ISMSPersistedModel.h"
 
+@interface ISMSArtist : NSObject <NSCoding, NSCopying, ISMSPersistedModel>
+
+@property (strong) NSNumber *artistId;
 @property (copy) NSString *name;
-@property (copy) NSString *artistId;
+@property (strong) NSNumber *albumCount;
 
-+ (ISMSArtist *) artistWithName:(NSString *)theName andArtistId:(NSString *)theId;
++ (ISMSArtist *) artistWithName:(NSString *)theName andArtistId:(NSNumber *)theId;
 
-- (void)encodeWithCoder:(NSCoder *)encoder;
-- (id)initWithCoder:(NSCoder *)decoder;
++ (NSArray *)allArtists;
++ (BOOL)deleteAllArtists;
 
-- (id)initWithAttributeDict:(NSDictionary *)attributeDict;
-
-- (id)initWithTBXMLElement:(TBXMLElement *)element;
-- (id)initWithRXMLElement:(RXMLElement *)element;
+- (instancetype)initWithArtistId:(NSInteger)artistId;
 
 @end

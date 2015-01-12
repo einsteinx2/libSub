@@ -64,7 +64,6 @@ typedef enum
     NSString *_currentTwitterAccount;
 }
 
-@property BOOL isCancelLoading;
 @property BOOL isOfflineMode;
 
 // Server Login Settings

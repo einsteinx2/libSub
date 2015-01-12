@@ -391,6 +391,11 @@
  New Model
  */
 
+- (instancetype)initWithItemId:(NSInteger)itemId
+{
+    return [self initWithSongId:itemId];
+}
+
 - (instancetype)initWithSongId:(NSInteger)songId
 {
     if (self = [super init])
@@ -562,10 +567,10 @@
     
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name\
-        FROM songs AS s\
-        LEFT JOIN albums AS al ON s.albumId = al.albumId\
-        LEFT JOIN artists AS ar ON s.artistId = ar.artistId\
-        WHERE s.albumId = ?";
+                            FROM songs AS s\
+                            LEFT JOIN albums AS al ON s.albumId = al.albumId\
+                            LEFT JOIN artists AS ar ON s.artistId = ar.artistId\
+                            WHERE s.albumId = ?";
         
         FMResultSet *result = [db executeQuery:query, @(albumId)];
         while ([result next])

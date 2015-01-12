@@ -9,7 +9,6 @@
 #import "ISMSCacheQueueManager.h"
 #import "ISMSLoader.h"
 #import "DatabaseSingleton.h"
-#import "SUSLyricsLoader.h"
 #import "ISMSCoverArtLoader.h"
 #import "ISMSStreamManager.h"
 #import "ISMSStreamHandler.h"
@@ -143,7 +142,7 @@ LOG_LEVEL_ISUB_DEBUG
 	// Grab the lyrics
 	if (self.currentQueuedSong.artistName && self.currentQueuedSong.title && settingsS.isLyricsEnabled)
 	{
-        SUSLyricsLoader *lyricsLoader = [[SUSLyricsLoader alloc] initWithDelegate:self];
+        ISMSLyricsLoader *lyricsLoader = [[ISMSLyricsLoader alloc] initWithDelegate:self];
 		//DLog(@"lyricsLoader: %@", lyricsLoader);
         lyricsLoader.artist = self.currentQueuedSong.artistName;
         lyricsLoader.title = self.currentQueuedSong.title;

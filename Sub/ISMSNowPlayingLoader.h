@@ -1,5 +1,5 @@
 //
-//  SUSNowPlayingLoader.h
+//  ISMSNowPlayingLoader.h
 //  iSub
 //
 //  Created by Ben Baron on 1/24/12.
@@ -8,7 +8,7 @@
 
 #import "ISMSLoader.h"
 
-@interface SUSNowPlayingLoader : ISMSLoader
+@interface ISMSNowPlayingLoader : ISMSLoader
 
 @property (strong) NSMutableArray *nowPlayingSongDicts;
 

@@ -1,5 +1,5 @@
 //
-//  SUSLyricsLoader.h
+//  ISMSLyricsLoader.h
 //  iSub
 //
 //  Created by Benjamin Baron on 10/30/11.
@@ -9,7 +9,7 @@
 #import "ISMSLoader.h"
 
 @class FMDatabase;
-@interface SUSLyricsLoader : ISMSLoader
+@interface ISMSLyricsLoader : ISMSLoader
 
 @property (copy) NSString *artist;
 @property (copy) NSString *title;

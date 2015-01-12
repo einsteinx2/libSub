@@ -76,6 +76,9 @@
 
 - (void)updateTableDefinitions;
 
+- (NSArray *)ignoredArticles;
+- (NSString *)name:(NSString *)name ignoringArticles:(NSArray *)articles;
+
 @end
 
 #endif

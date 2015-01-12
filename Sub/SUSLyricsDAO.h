@@ -8,11 +8,10 @@
 
 #import "ISMSLoaderManager.h"
 
-@class SUSLyricsLoader, FMDatabase;
 @interface SUSLyricsDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
 @property (weak) NSObject <ISMSLoaderDelegate> *delegate;
-@property (strong) SUSLyricsLoader *loader;
+@property (strong) ISMSLyricsLoader *loader;
 
 - (id)initWithDelegate:(NSObject <ISMSLoaderDelegate> *)theDelegate;
 - (NSString *)loadLyricsForArtist:(NSString *)artist andTitle:(NSString *)title;

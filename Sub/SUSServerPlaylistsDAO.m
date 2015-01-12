@@ -7,7 +7,6 @@
 //
 
 #import "SUSServerPlaylistsDAO.h"
-#import "SUSServerPlaylistsLoader.h"
 
 @implementation SUSServerPlaylistsDAO
 
@@ -41,7 +40,7 @@
 
 - (void)startLoad
 {	
-    self.loader = [[SUSServerPlaylistsLoader alloc] initWithDelegate:self];
+    self.loader = [[ISMSServerPlaylistsLoader alloc] initWithDelegate:self];
     [self.loader startLoad];
 }
 

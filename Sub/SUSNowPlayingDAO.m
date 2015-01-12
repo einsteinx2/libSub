@@ -7,7 +7,6 @@
 //
 
 #import "SUSNowPlayingDAO.h"
-#import "SUSNowPlayingLoader.h"
 
 @implementation SUSNowPlayingDAO
 
@@ -120,7 +119,7 @@
 
 - (void)startLoad
 {	
-    self.loader = [[SUSNowPlayingLoader alloc] initWithDelegate:self];
+    self.loader = [[ISMSNowPlayingLoader alloc] initWithDelegate:self];
     [self.loader startLoad];
 }
 

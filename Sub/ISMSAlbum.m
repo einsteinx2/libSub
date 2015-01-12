@@ -10,27 +10,44 @@
 
 @implementation ISMSAlbum
 
-- (id)initWithPMSDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithAlbumId:(NSInteger)albumId
 {
-	if ((self = [super init]))
-	{
-		// NOTE: IDs are apparantly stored as NSNumbers when deserialized because
-        // they are integer strings
+    if (self = [super init])
+    {
+        __block BOOL foundRecord = NO;
+        [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT al.albumId, al.artistId, al.coverArtId, al.name, al.songCount, al.duration, al.createdDate, al.year, al.genre, ar.name\
+                                FROM albums AS al\
+                                LEFT JOIN artists AS ar ON a.artistId = ar.artistId\
+                                WHERE a.albumId = ?";
+            
+            FMResultSet *r = [db executeQuery:query, @(albumId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
-		_title = N2n([dictionary objectForKey:@"folderName"]);
-		
-        id albumId = N2n([dictionary objectForKey:@"folderId"]);
-        _albumId = albumId ? [NSString stringWithFormat:@"%@", albumId] : nil;
-		
-        id coverArtId = N2n([dictionary objectForKey:@"artId"]);
-        _coverArtId = coverArtId ? [NSString stringWithFormat:@"%@", coverArtId] : nil;
-		
-        _artistName = N2n([dictionary objectForKey:@"artistName"]);
-		
-        id artistId = N2n([dictionary objectForKey:@"artistId"]);
-        _artistId = artistId ? [NSString stringWithFormat:@"%@", artistId] : nil;
-	}
-	return self;
+        return foundRecord ? self : nil;
+    }
+    
+    return nil;
+}
+
+- (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
+{
+    _albumId = N2n([resultSet objectForColumnIndex:0]);
+    _artistId = N2n([resultSet objectForColumnIndex:1]);
+    _coverArtId = N2n([resultSet objectForColumnIndex:2]);
+    _name = N2n([resultSet objectForColumnIndex:3]);
+    _songCount = N2n([resultSet objectForColumnIndex:4]);
+    _duration = N2n([resultSet objectForColumnIndex:5]);
+    _createdDate = N2n([resultSet objectForColumnIndex:6]);
+    _year = N2n([resultSet objectForColumnIndex:7]);
+    _genre = N2n([resultSet objectForColumnIndex:8]);
+    _artistName = N2n([resultSet objectForColumnIndex:9]);
 }
 
 - (id)initWithTBXMLElement:(TBXMLElement *)element
@@ -45,10 +62,10 @@
 {
 	if ((self = [super init]))
 	{
-		_title = [[TBXML valueOfAttributeNamed:@"title" forElement:element] cleanString];
-		_albumId = [[TBXML valueOfAttributeNamed:@"id" forElement:element] cleanString];
+		_name = [[TBXML valueOfAttributeNamed:@"title" forElement:element] cleanString];
+		_albumId = @([[TBXML valueOfAttributeNamed:@"id" forElement:element] integerValue]);
 		_coverArtId = [[TBXML valueOfAttributeNamed:@"coverArt" forElement:element] cleanString];
-		_artistId = [artistIdToSet cleanString];
+		_artistId = @([artistIdToSet integerValue]);
 		_artistName = [artistNameToSet cleanString];
 	}
 	
@@ -67,10 +84,10 @@
 {
     if ((self = [super init]))
     {
-        _title = [[element attribute:@"title"] cleanString];
-        _albumId = [[element attribute:@"id"] cleanString];
+        _name = [[element attribute:@"title"] cleanString];
+        _albumId = @([[element attribute:@"id"] integerValue]);
         _coverArtId = [[element attribute:@"coverArt"] cleanString];
-        _artistId = [artistIdToSet cleanString];
+        _artistId = @([artistIdToSet integerValue]);
         _artistName = [artistNameToSet cleanString];
     }
     
@@ -81,11 +98,11 @@
 {
 	if ((self = [super init]))
 	{
-		_title = [[attributeDict objectForKey:@"title"] cleanString];
-		_albumId = [[attributeDict objectForKey:@"id"] cleanString];
+		_name = [[attributeDict objectForKey:@"title"] cleanString];
+		_albumId = @([[attributeDict objectForKey:@"id"] integerValue]);
 		_coverArtId = [[attributeDict objectForKey:@"coverArt"] cleanString];
 		_artistName = [[attributeDict objectForKey:@"artist"] cleanString];
-		_artistId = [[attributeDict objectForKey:@"parent"] cleanString];
+		_artistId = @([[attributeDict objectForKey:@"parent"] integerValue]);
 	}
 	
 	return self;
@@ -96,8 +113,8 @@
 {
 	if ((self = [super init]))
 	{
-		_title = [[attributeDict objectForKey:@"title"] cleanString];
-		_albumId = [[attributeDict objectForKey:@"id"] cleanString];
+		_name = [[attributeDict objectForKey:@"title"] cleanString];
+		_albumId = @([[attributeDict objectForKey:@"id"] integerValue]);
 		_coverArtId = [[attributeDict objectForKey:@"coverArt"] cleanString];
 		
 		if (myArtist)
@@ -112,11 +129,17 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.title];
-	[encoder encodeObject:self.albumId];
-	[encoder encodeObject:self.coverArtId];
-	[encoder encodeObject:self.artistName];
-	[encoder encodeObject:self.artistId];
+    [encoder encodeObject:self.albumId forKey:@"albumId"];
+	[encoder encodeObject:self.name forKey:@"name"];
+	[encoder encodeObject:self.coverArtId forKey:@"coverArtId"];
+	[encoder encodeObject:self.artistName forKey:@"artistName"];
+    [encoder encodeObject:self.artistId forKey:@"artistId"];
+    
+    [encoder encodeObject:self.songCount forKey:@"songCount"];
+    [encoder encodeObject:self.duration forKey:@"duration"];
+    [encoder encodeObject:self.createdDate forKey:@"createdDate"];
+    [encoder encodeObject:self.year forKey:@"year"];
+    [encoder encodeObject:self.genre forKey:@"genre"];
 }
 
 
@@ -124,11 +147,17 @@
 {
 	if ((self = [super init]))
 	{
-		_title = [[decoder decodeObject] copy];
-		_albumId = [[decoder decodeObject] copy];
-		_coverArtId = [[decoder decodeObject] copy];
-		_artistName = [[decoder decodeObject] copy];
-		_artistId = [[decoder decodeObject] copy];
+        _albumId = [decoder decodeObjectForKey:@"albumId"];
+        _name = [decoder decodeObjectForKey:@"name"];
+        _coverArtId = [decoder decodeObjectForKey:@"coverArtId"];
+		_artistName = [decoder decodeObjectForKey:@"artistName"];
+		_artistId = [decoder decodeObjectForKey:@"artistId"];
+        
+        _songCount = [decoder decodeObjectForKey:@"songCount"];
+        _duration = [decoder decodeObjectForKey:@"duration"];
+        _createdDate = [decoder decodeObjectForKey:@"createdDate"];
+        _year = [decoder decodeObjectForKey:@"year"];
+        _genre = [decoder decodeObjectForKey:@"genre"];
 	}
 	
 	return self;
@@ -139,20 +168,47 @@
 {
 	ISMSAlbum *anAlbum = [[ISMSAlbum alloc] init];
 	
-	anAlbum.title = [self.title copy];
-	anAlbum.albumId = [self.albumId copy];
+    anAlbum.albumId = [self.albumId copy];
+	anAlbum.name = [self.name copy];
 	anAlbum.coverArtId = [self.coverArtId copy];
 	anAlbum.artistName = [self.artistName copy];
 	anAlbum.artistId = [self.artistId copy];
+    
+    anAlbum.songCount = [self.songCount copy];
+    anAlbum.duration = [self.duration copy];
+    anAlbum.createdDate = [self.createdDate copy];
+    anAlbum.year = [self.year copy];
+    anAlbum.genre = [self.genre copy];
 	
 	return anAlbum;
 }
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@: title: %@, albumId: %@, coverArtId: %@, artistName: %@, artistId: %@", [super description], self.title, self.self.albumId, self.coverArtId, self.artistName, self.artistId];
+	return [NSString stringWithFormat:@"%@: name: %@, albumId: %@, coverArtId: %@, artistName: %@, artistId: %@", [super description], self.name, self.self.albumId, self.coverArtId, self.artistName, self.artistId];
 }
 
-
++ (NSArray *)albumsInArtistWithId:(NSInteger)artistId
+{
+    NSMutableArray *albums = [[NSMutableArray alloc] init];
+    
+    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT al.albumId, al.artistId, al.coverArtId, al.name, al.songCount, al.duration, al.createdDate, al.year, al.genre, ar.name \
+                            FROM albums AS al\
+                            LEFT JOIN artists AS ar ON a.artistId = ar.artistId\
+                            WHERE a.artistId = ?";
+        
+        FMResultSet *r = [db executeQuery:query, @(artistId)];
+        while ([r next])
+        {
+            ISMSAlbum *album = [[ISMSAlbum alloc] init];
+            [album _assignPropertiesFromResultSet:r];
+            [albums addObject:album];
+        }
+        [r close];
+    }];
+    
+    return albums;
+}
 
 @end

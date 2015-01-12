@@ -7,7 +7,6 @@
 //
 
 #import "SUSChatDAO.h"
-#import "SUSChatLoader.h"
 #import "NSError+ISMSError.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"
@@ -105,7 +104,7 @@
 
 - (void)startLoad
 {	
-    self.loader = [[SUSChatLoader alloc] initWithDelegate:self];
+    self.loader = [[ISMSChatLoader alloc] initWithDelegate:self];
     [self.loader startLoad];
 }
 

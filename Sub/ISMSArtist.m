@@ -8,62 +8,74 @@
 
 #import "ISMSArtist.h"
 
+@interface ISMSArtist()
+{
+    NSArray *_albums;
+}
+@end
+
 @implementation ISMSArtist
 
-+ (ISMSArtist *)artistWithName:(NSString *)theName andArtistId:(NSString *)theId
++ (ISMSArtist *)artistWithName:(NSString *)theName andArtistId:(NSNumber *)theId
 {
 	ISMSArtist *anArtist = [[ISMSArtist alloc] init];
+    anArtist.artistId = theId;
 	anArtist.name = theName;
-	anArtist.artistId = theId;
 	
 	return anArtist;
 }
 
-- (id)initWithAttributeDict:(NSDictionary *)attributeDict
+- (instancetype)initWithItemId:(NSInteger)itemId
 {
-	if ((self = [super init]))
-	{
-		_name = [[attributeDict objectForKey:@"name"] cleanString];
-		_artistId = [[attributeDict objectForKey:@"id"] cleanString];
-	}
-	
-	return self;
+    return [self initWithArtistId:itemId];
 }
 
-- (id)initWithTBXMLElement:(TBXMLElement *)element
+- (instancetype)initWithArtistId:(NSInteger)artistId
 {
-	if ((self = [super init]))
-	{
-		_name = [[TBXML valueOfAttributeNamed:@"name" forElement:element] cleanString];
-		_artistId = [[TBXML valueOfAttributeNamed:@"id" forElement:element] cleanString];
-	}
-	
-	return self;
-}
-
-- (id)initWithRXMLElement:(RXMLElement *)element
-{
-    if ((self = [super init]))
+    if (self = [super init])
     {
-        _name = [[element attribute:@"name"] cleanString];
-        _artistId = [[element attribute:@"id"] cleanString];
+        __block BOOL foundRecord = NO;
+        [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount\
+                                FROM artists AS ar\
+                                WHERE ar.artistId = ?";
+            
+            FMResultSet *r = [db executeQuery:query, @(artistId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
+        
+        return foundRecord ? self : nil;
     }
     
-    return self;
+    return nil;
+}
+
+- (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
+{
+    _artistId = N2n([resultSet objectForColumnIndex:0]);
+    _name = N2n([resultSet objectForColumnIndex:1]);
+    _albumCount = N2n([resultSet objectForColumnIndex:2]);
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-	[encoder encodeObject:self.name];
-	[encoder encodeObject:self.artistId];
+    [encoder encodeObject:self.artistId forKey:@"artistId"];
+	[encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeInteger:self.albumCount forKey:@"albumCount"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
 	if ((self = [super init]))
 	{
-		_name = [[decoder decodeObject] copy];
-		_artistId = [[decoder decodeObject] copy];
+        _artistId = [decoder decodeObjectForKey:@"artistId"];
+		_name = [decoder decodeObjectForKey:@"name"];
+        _albumCount = [decoder decodeObjectForKey:@"albumCount"];
 	}
 	
 	return self;
@@ -73,16 +85,131 @@
 {
 	ISMSArtist *anArtist = [[ISMSArtist alloc] init];
 	
-	anArtist.name = self.name;
-	anArtist.artistId = self.artistId;
+    anArtist.artistId = [self.artistId copy];
+	anArtist.name = [self.name copy];
+    anArtist.albumCount = self.albumCount;
 	
 	return anArtist;
 }
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@: name: %@, artistId: %@", [super description], self.name, self.artistId];
+	return [NSString stringWithFormat:@"%@: name: %@, artistId: %@, albumCount: %li", [super description], self.name, self.artistId, (long)self.albumCount];
 }
 
+- (BOOL)_insertModel:(BOOL)replace
+{
+    __block BOOL success = NO;
+    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+     {
+         NSString *insertType = replace ? @"REPLACE" : @"INSERT";
+         NSString *query = [insertType stringByAppendingString:@" INTO artists (artistId, name, albumCount) VALUES (?, ?, ?)"];
+         
+         success = [db executeUpdate:query, self.artistId, self.name, self.albumCount];
+     }];
+    return success;
+}
+
+- (BOOL)insertModel
+{
+    return [self _insertModel:NO];
+}
+
+- (BOOL)replaceModel
+{
+    return [self _insertModel:YES];
+}
+
+- (BOOL)deleteModel
+{
+    __block BOOL success = NO;
+    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+     {
+         NSString *query = @"DELETE FROM artists WHERE artistId = ?";
+         success = [db executeUpdate:query, self.artistId];
+     }];
+    return success;
+}
+
+- (void)reloadSubmodels
+{
+    @synchronized(self)
+    {
+        NSInteger artistId = self.artistId.integerValue;
+        _albums = [ISMSAlbum albumsInArtistWithId:artistId];
+    }
+}
+
+- (NSArray *)albums
+{
+    @synchronized(self)
+    {
+        if (!_albums)
+        {
+            [self reloadSubmodels];
+        }
+        
+        return _albums;
+    }
+}
+
++ (NSArray *)allArtists
+{
+    NSMutableArray *artists = [[NSMutableArray alloc] init];
+    NSMutableArray *artistsNumbers = [[NSMutableArray alloc] init];
+    
+    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount\
+                            FROM artists AS ar";
+        
+        FMResultSet *r = [db executeQuery:query];
+        while ([r next])
+        {
+            ISMSArtist *artist = [[ISMSArtist alloc] init];
+            [artist _assignPropertiesFromResultSet:r];
+            
+            if (artist.name.length > 0 && isnumber([artist.name characterAtIndex:0]))
+                [artistsNumbers addObject:artist];
+            else
+                [artists addObject:artist];
+        }
+        [r close];
+    }];
+    
+    NSArray *ignoredArticles = databaseS.ignoredArticles;
+    
+    // Sort objects without indefinite articles
+    [artists sortUsingComparator:^NSComparisonResult(ISMSArtist *obj1, ISMSArtist *obj2) {
+        NSString *name1 = [databaseS name:obj1.name ignoringArticles:ignoredArticles];
+        NSString *name2 = [databaseS name:obj2.name ignoringArticles:ignoredArticles];
+        return [name1 caseInsensitiveCompare:name2];
+    }];
+    
+    [artists addObjectsFromArray:artistsNumbers];
+    return artists;
+}
+
++ (BOOL)deleteAllArtists
+{
+    __block BOOL success = NO;
+    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+     {
+         NSString *query = @"DELETE FROM artists";
+         success = [db executeUpdate:query];
+     }];
+    return success;
+}
+
+#pragma mark - ISMSItem -
+
+- (NSNumber *)itemId
+{
+    return _artistId;
+}
+
+- (NSString *)itemName
+{
+    return [_name copy];
+}
 
 @end

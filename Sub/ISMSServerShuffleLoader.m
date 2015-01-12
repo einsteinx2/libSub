@@ -3,37 +3,77 @@
 //  libSub
 //
 //  Created by Justin Hill on 2/6/13.
-//  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
+//  Copyright (c) 2015 Einstein Times Two Software. All rights reserved.
 //
 
 #import "ISMSServerShuffleLoader.h"
+#import "SearchXMLParser.h"
+#import "NSMutableURLRequest+SUS.h"
 
 @implementation ISMSServerShuffleLoader
 
-+ (id)loaderWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
+- (void)startLoad
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
+    // Start the 100 record open search to create shuffle list
+	NSDictionary *parameters = nil;
+	if (self.notification == nil)
 	{
-		return [[SUSServerShuffleLoader alloc] initWithDelegate:theDelegate];
+        parameters = [NSDictionary dictionaryWithObject:@"100" forKey:@"size"];
 	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
+	else
 	{
-		return [[WBServerShuffleLoader alloc] initWithDelegate:theDelegate];
+		NSDictionary *userInfo = [self.notification userInfo];
+		NSString *folderId = [NSString stringWithFormat:@"%i", [[userInfo objectForKey:@"folderId"] intValue]];
+        //DLog(@"folderId: %@    %i", folderId, [[userInfo objectForKey:@"folderId"] intValue]);
+		
+		if ([folderId intValue] < 0)
+            parameters = [NSDictionary dictionaryWithObject:@"100" forKey:@"size"];
+		else
+            parameters = [NSDictionary dictionaryWithObjectsAndKeys:@"100", @"size", n2N(folderId), @"musicFolderId", nil];
 	}
-	return nil;
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithSUSAction:@"getRandomSongs" parameters:parameters];
+    
+	self.connection = [NSURLConnection connectionWithRequest:request delegate:self];
+	if (self.connection)
+	{
+		self.receivedData = [NSMutableData data];
+	}
+	else
+	{
+        [self informDelegateLoadingFailed:nil];
+		// Inform the user that the connection failed.
+
+	}
 }
 
-+ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
+- (void)processResponse
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
-	{
-		return [[SUSServerShuffleLoader alloc] initWithCallbackBlock:theBlock];
-	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
-	{
-		return [[WBServerShuffleLoader alloc] initWithCallbackBlock:theBlock];
-	}
-	return nil;
+    // TODO: Refactor this with RaptureXML
+    NSXMLParser *xmlParser = [[NSXMLParser alloc] initWithData:self.receivedData];
+    SearchXMLParser *parser = (SearchXMLParser*)[[SearchXMLParser alloc] initXMLParser];
+    [xmlParser setDelegate:parser];
+    [xmlParser parse];
+    
+    if (settingsS.isJukeboxEnabled)
+    {
+        [databaseS resetJukeboxPlaylist];
+        [jukeboxS jukeboxClearRemotePlaylist];
+    }
+    else
+    {
+        [databaseS resetCurrentPlaylistDb];
+    }
+    
+    for(ISMSSong *aSong in parser.listOfSongs)
+    {
+        [aSong addToCurrentPlaylistDbQueue];
+    }
+    
+    playlistS.isShuffle = NO;    
+    
+    [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CurrentPlaylistSongsQueued];
+    [self informDelegateLoadingFinished];
 }
 
 @end

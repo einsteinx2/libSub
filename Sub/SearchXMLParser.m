@@ -57,7 +57,9 @@
 	}
 	else if ([elementName isEqualToString:@"artist"])
 	{
-		ISMSArtist *anArtist = [[ISMSArtist alloc] initWithAttributeDict:attributeDict];
+		ISMSArtist *anArtist = [[ISMSArtist alloc] init];
+        anArtist.artistId = @([[attributeDict objectForKey:@"artistId"] integerValue]);
+        anArtist.name = [[attributeDict objectForKey:@"name"] cleanString];
 		
 		[self.listOfArtists addObject:anArtist];
 	}

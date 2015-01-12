@@ -19,6 +19,7 @@
 @property (readonly) NSArray *artists;
 @property (readonly) NSArray *albums;
 @property (readonly) NSArray *songs;
+@property (readonly) NSTimeInterval songsDuration;
 
 - (void)persistModels;
 - (BOOL)loadModelsFromCache;

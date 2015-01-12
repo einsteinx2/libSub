@@ -1,16 +1,15 @@
 //
-//  SUSNowPlayingLoader.m
+//  ISMSNowPlayingLoader.m
 //  iSub
 //
 //  Created by Ben Baron on 1/24/12.
 //  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
-#import "SUSNowPlayingLoader.h"
+#import "ISMSNowPlayingLoader.h"
 #import "NSMutableURLRequest+SUS.h"
-#import "NSMutableURLRequest+PMS.h"
 
-@implementation SUSNowPlayingLoader
+@implementation ISMSNowPlayingLoader
 
 #pragma mark - Lifecycle
 

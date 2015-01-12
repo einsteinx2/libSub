@@ -95,9 +95,10 @@ LOG_LEVEL_ISUB_DEFAULT
             [db executeUpdate:@"CREATE TABLE artists (artistId INTEGER PRIMARY KEY, name TEXT, albumCount INTEGER)"];
         }
         
+        [db executeUpdate:@"DROP TABLE albums"];
         if (![db tableExists:@"albums"])
         {
-            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, artistId INTEGER, name TEXT, songCount INTEGER, duration INTEGER, createdDate INTEGER, year INTEGER, genre TEXT)"];
+            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, artistId INTEGER, coverArtId INTEGER, name TEXT, songCount INTEGER, duration INTEGER, createdDate INTEGER, year INTEGER, genre TEXT)"];
         }
         
         if (![db tableExists:@"genres"])
@@ -890,7 +891,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM %@ WHERE ROWID = %lu", table, (unsigned long)row]];
 	if ([db hadError]) 
 	{
-	//DLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        //DLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
 	}
 	else
 	{
@@ -898,16 +899,11 @@ LOG_LEVEL_ISUB_DEFAULT
 		{
 			anAlbum = [[ISMSAlbum alloc] init];
 
-			if ([result stringForColumn:@"title"] != nil)
-				anAlbum.title = [NSString stringWithString:[result stringForColumn:@"title"]];
-			if ([result stringForColumn:@"albumId"] != nil)
-				anAlbum.albumId = [NSString stringWithString:[result stringForColumn:@"albumId"]];
-			if ([result stringForColumn:@"coverArtId"] != nil)
-				anAlbum.coverArtId = [NSString stringWithString:[result stringForColumn:@"coverArtId"]];
-			if ([result stringForColumn:@"artistName"] != nil)
-				anAlbum.artistName = [NSString stringWithString:[result stringForColumn:@"artistName"]];
-			if ([result stringForColumn:@"artistId"] != nil)
-				anAlbum.artistId = [NSString stringWithString:[result stringForColumn:@"artistId"]];
+			anAlbum.name = [result objectForColumnName:@"title"];
+			anAlbum.albumId = [result objectForColumnName:@"albumId"];
+			anAlbum.coverArtId = [result objectForColumnName:@"coverArtId"];
+			anAlbum.artistName = [result objectForColumnName:@"artistName"];
+			anAlbum.artistId = [result objectForColumnName:@"artistId"];
 		}
 	}
 	[result close];
@@ -927,7 +923,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	[self.albumListCacheDbQueue inDatabase:^(FMDatabase *db)
 	{
-		[db executeUpdate:@"INSERT INTO albumsCache (folderId, title, albumId, coverArtId, artistName, artistId) VALUES (?, ?, ?, ?, ?, ?)", [folderId md5], anAlbum.title, anAlbum.albumId, anAlbum.coverArtId, anAlbum.artistName, anAlbum.artistId];
+		[db executeUpdate:@"INSERT INTO albumsCache (folderId, title, albumId, coverArtId, artistName, artistId) VALUES (?, ?, ?, ?, ?, ?)", [folderId md5], anAlbum.name, anAlbum.albumId, anAlbum.coverArtId, anAlbum.artistName, anAlbum.artistId];
 		
 		hadError = [db hadError];
 		
@@ -952,7 +948,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (BOOL)insertAlbum:(ISMSAlbum *)anAlbum intoTable:(NSString *)table inDatabase:(FMDatabase *)db
 {
-	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (title, albumId, coverArtId, artistName, artistId) VALUES (?, ?, ?, ?, ?)", table], anAlbum.title, anAlbum.albumId, anAlbum.coverArtId, anAlbum.artistName, anAlbum.artistId];
+	[db executeUpdate:[NSString stringWithFormat:@"INSERT INTO %@ (title, albumId, coverArtId, artistName, artistId) VALUES (?, ?, ?, ?, ?)", table], anAlbum.name, anAlbum.albumId, anAlbum.coverArtId, anAlbum.artistName, anAlbum.artistId];
 	
 	if ([db hadError]) {
 	//DLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
@@ -1124,6 +1120,39 @@ LOG_LEVEL_ISUB_DEFAULT
 
 // New Model Stuff
 
+- (NSArray *)ignoredArticles
+{
+    NSMutableArray *ignoredArticles = [[NSMutableArray alloc] init];
+    
+    [self.songModelDbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *r = [db executeQuery:@"SELECT name FROM ignoredArticles"];
+        while ([r next])
+        {
+            [ignoredArticles addObject:[r stringForColumnIndex:0]];
+        }
+        [r close];
+    }];
+    
+    return ignoredArticles;
+}
+
+- (NSString *)name:(NSString *)name ignoringArticles:(NSArray *)articles
+{
+    if (articles.count > 0)
+    {
+        for (NSString *article in articles)
+        {
+            NSString *articlePlusSpace = [article stringByAppendingString:@" "];
+            if ([name hasPrefix:articlePlusSpace])
+            {
+                return [name substringFromIndex:articlePlusSpace.length];
+            }
+        }
+    }
+    
+    return [name stringWithoutIndefiniteArticle];
+}
+
 
 #pragma mark - Memory management
 
@@ -1138,7 +1167,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)setup 
 {
-	_queueAll = [ISMSQueueAllLoader loader];
+	_queueAll = [[ISMSQueueAllLoader alloc] init];
 	
     _databaseFolderPath = [settingsS.documentsPath stringByAppendingPathComponent:@"database"];
 	

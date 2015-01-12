@@ -3,37 +3,27 @@
 //  libSub
 //
 //  Created by Justin Hill on 2/8/13.
-//  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
+//  Copyright (c) 2015 Einstein Times Two Software. All rights reserved.
 //
 
 #import "ISMSScrobbleLoader.h"
+#import "NSMutableURLRequest+SUS.h"
+#import "NSMutableURLRequest+PMS.h"
 
 @implementation ISMSScrobbleLoader
 
-+ (id)loaderWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
+- (NSURLRequest *)createRequest
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
-	{
-		return [[SUSScrobbleLoader alloc] initWithDelegate:theDelegate];
-	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
-	{
-		return [[WBScrobbleLoader alloc] initWithDelegate:theDelegate];
-	}
-	return nil;
+    NSString *isSubmissionString = [NSString stringWithFormat:@"%i", self.isSubmission];
+    NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:n2N(self.aSong.songId), @"id", n2N(isSubmissionString), @"submission", nil];
+    NSURLRequest *request = [NSMutableURLRequest requestWithSUSAction:@"scrobble" parameters:parameters];
+    ALog(@"%@", parameters);
+    return request;
 }
 
-+ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
+- (void)processResponse
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
-	{
-		return [[SUSScrobbleLoader alloc] initWithCallbackBlock:theBlock];
-	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
-	{
-		return [[WBScrobbleLoader alloc] initWithCallbackBlock:theBlock];
-	}
-	return nil;
+    [self informDelegateLoadingFinished];
 }
 
 @end

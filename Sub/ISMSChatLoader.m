@@ -1,16 +1,15 @@
 //
-//  SUSChatLoader.m
+//  ISMSChatLoader.m
 //  iSub
 //
 //  Created by Benjamin Baron on 10/29/11.
-//  Copyright (c) 2011 Ben Baron. All rights reserved.
+//  Copyright (c) 2015 Ben Baron. All rights reserved.
 //
 
-#import "SUSChatLoader.h"
+#import "ISMSChatLoader.h"
 #import "NSMutableURLRequest+SUS.h"
-#import "NSMutableURLRequest+PMS.h"
 
-@implementation SUSChatLoader
+@implementation ISMSChatLoader
 
 #pragma mark - Lifecycle
 

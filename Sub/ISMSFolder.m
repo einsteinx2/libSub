@@ -19,6 +19,11 @@ static NSArray *_ignoredArticles = nil;
 
 @implementation ISMSFolder
 
+- (instancetype)initWithItemId:(NSInteger)itemId
+{
+    return [self initWithFolderId:itemId];
+}
+
 - (instancetype)initWithFolderId:(NSInteger)folderId
 {
     if (self = [super init])
@@ -66,34 +71,6 @@ static NSArray *_ignoredArticles = nil;
     }];
     
     _ignoredArticles = ignoredArticles;
-}
-
-- (NSString *)nameIgnoringArticles
-{
-    NSString *name = self.name;
-    
-    if (!_ignoredArticles)
-    {
-        [self.class loadIgnoredArticles];
-    }
-    
-    if (_ignoredArticles.count > 0)
-    {
-        for (NSString *article in _ignoredArticles)
-        {
-            NSString *articlePlusSpace = [article stringByAppendingString:@" "];
-            if ([name hasPrefix:articlePlusSpace])
-            {
-                return [name substringFromIndex:articlePlusSpace.length];
-            }
-        }
-    }
-    else
-    {
-        return [name stringWithoutIndefiniteArticle];
-    }
-    
-    return name;
 }
 
 - (BOOL)_insertModel:(BOOL)replace

@@ -21,8 +21,6 @@
 
 + (void)loadIgnoredArticles;
 
-- (NSString *)nameIgnoringArticles;
-
 // Returns an instance if it exists in the db, otherwise nil
 - (instancetype)initWithFolderId:(NSInteger)folderId;
 

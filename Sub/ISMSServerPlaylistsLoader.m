@@ -1,17 +1,16 @@
 //
-//  SUSServerPlaylistLoader.m
+//  ISMSServerPlaylistLoader.m
 //  iSub
 //
 //  Created by Benjamin Baron on 11/6/11.
 //  Copyright (c) 2011 Ben Baron. All rights reserved.
 //
 
-#import "SUSServerPlaylistsLoader.h"
+#import "ISMSServerPlaylistsLoader.h"
 #import "SUSServerPlaylist.h"
 #import "NSMutableURLRequest+SUS.h"
-#import "NSMutableURLRequest+PMS.h"
 
-@implementation SUSServerPlaylistsLoader
+@implementation ISMSServerPlaylistsLoader
 
 #pragma mark - Lifecycle
 

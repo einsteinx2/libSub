@@ -10,6 +10,11 @@
 
 @implementation ISMSMediaFolder
 
+- (instancetype)initWithItemId:(NSInteger)itemId
+{
+    return [self initWithMediaFolderId:itemId];
+}
+
 - (instancetype)initWithMediaFolderId:(NSInteger)mediaFolderId
 {
     if (self = [super init])
@@ -121,12 +126,13 @@
 {
     NSMutableArray *rootFolders = [[NSMutableArray alloc] init];
     NSMutableArray *rootFoldersNumbers = [[NSMutableArray alloc] init];
+    
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.name\
                              FROM folders AS f\
-                             WHERE f.parentFolderId IS NULL\
-                             ORDER BY f.name COLLATE NOCASE ASC";
+                             WHERE f.parentFolderId IS NULL";
+         
          FMResultSet *r = [db executeQuery:query];
          while ([r next])
          {
@@ -143,6 +149,15 @@
          }
          [r close];
      }];
+    
+    NSArray *ignoredArticles = databaseS.ignoredArticles;
+    
+    // Sort objects without indefinite articles
+    [rootFolders sortUsingComparator:^NSComparisonResult(ISMSFolder *obj1, ISMSFolder *obj2) {
+        NSString *name1 = [databaseS name:obj1.name ignoringArticles:ignoredArticles];
+        NSString *name2 = [databaseS name:obj2.name ignoringArticles:ignoredArticles];
+        return [name1 caseInsensitiveCompare:name2];
+    }];
     
     [rootFolders addObjectsFromArray:rootFoldersNumbers];
     return rootFolders;

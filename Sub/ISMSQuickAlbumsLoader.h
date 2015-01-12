@@ -1,9 +1,9 @@
 //
 //  ISMSQuickAlbumsLoader.h
-//  libSub
+//  iSub
 //
-//  Created by Justin Hill on 1/31/13.
-//  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
+//  Created by Ben Baron on 9/15/12.
+//  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
 #import "ISMSLoader.h"
@@ -15,6 +15,3 @@
 @property NSUInteger offset;
 
 @end
-
-#import "SUSQuickAlbumsLoader.h"
-#import "WBQuickAlbumsLoader.h"

@@ -1,44 +1,67 @@
 //
 //  ISMSQuickAlbumsLoader.m
-//  libSub
+//  iSub
 //
-//  Created by Justin Hill on 1/31/13.
-//  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
+//  Created by Ben Baron on 9/15/12.
+//  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
 #import "ISMSQuickAlbumsLoader.h"
+#import "NSMutableURLRequest+SUS.h"
 
 @implementation ISMSQuickAlbumsLoader
+
+#pragma mark - Lifecycle
 
 - (ISMSLoaderType)type
 {
     return ISMSLoaderType_QuickAlbums;
 }
 
-+ (id)loaderWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
+#pragma mark - Loader Methods
+
+- (NSURLRequest *)createRequest
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
-	{
-		return [[SUSQuickAlbumsLoader alloc] initWithDelegate:theDelegate];
-	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
-	{
-		return [[WBQuickAlbumsLoader alloc] initWithDelegate:theDelegate];
-	}
-	return nil;
+	NSDictionary *parameters = @{@"size":@"20", @"type":n2N(self.modifier), @"offset":[NSString stringWithFormat:@"%lu", (unsigned long)self.offset]};
+    return [NSMutableURLRequest requestWithSUSAction:@"getAlbumList" parameters:parameters];
 }
 
-+ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
+- (void)processResponse
 {
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
-	{
-		return [[SUSQuickAlbumsLoader alloc] initWithCallbackBlock:theBlock];
+    // Parse the data
+    //
+    RXMLElement *root = [[RXMLElement alloc] initFromXMLData:self.receivedData];
+    if (![root isValid])
+    {
+        NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_NotXML];
+        [self informDelegateLoadingFailed:error];
+    }
+    else
+    {
+        RXMLElement *error = [root child:@"error"];
+        if ([error isValid])
+        {
+            NSString *code = [error attribute:@"code"];
+            NSString *message = [error attribute:@"message"];
+            [self subsonicErrorCode:[code intValue] message:message];
+        }
+        else
+        {
+            self.listOfAlbums = [NSMutableArray arrayWithCapacity:0];
+            [root iterate:@"albumList.album" usingBlock:^(RXMLElement *e) {
+                ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithRXMLElement:e];
+                
+                //Add album object to lookup dictionary and list array
+                if (![anAlbum.name isEqualToString:@".AppleDouble"])
+                {
+                    [self.listOfAlbums addObject:anAlbum];
+                }
+            }];
+            
+            // Notify the delegate that the loading is finished
+            [self informDelegateLoadingFinished];
+		}
 	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
-	{
-		return [[WBQuickAlbumsLoader alloc] initWithCallbackBlock:theBlock];
-	}
-	return nil;
 }
 
 @end

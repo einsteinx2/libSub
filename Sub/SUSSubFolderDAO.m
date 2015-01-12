@@ -117,11 +117,11 @@
 		else
 		{
 			anAlbum = [[ISMSAlbum alloc] init];
-			anAlbum.title = [result stringForColumn:@"title"];
-			anAlbum.albumId = [result stringForColumn:@"albumId"];
-			anAlbum.coverArtId = [result stringForColumn:@"coverArtId"];
-			anAlbum.artistName = [result stringForColumn:@"artistName"];
-			anAlbum.artistId = [result stringForColumn:@"artistId"];
+			anAlbum.name = [result objectForColumnName:@"title"];
+			anAlbum.albumId = [result objectForColumnName:@"albumId"];
+			anAlbum.coverArtId = [result objectForColumnName:@"coverArtId"];
+			anAlbum.artistName = [result objectForColumnName:@"artistName"];
+			anAlbum.artistId = [result objectForColumnName:@"artistId"];
 		}
 		[result close];
 	}];
@@ -236,7 +236,7 @@
 
 - (void)startLoad
 {	
-    self.loader = [ISMSSubFolderLoader loaderWithDelegate:self];
+    self.loader = [[ISMSSubFolderLoader alloc] initWithDelegate:self];
     self.loader.myId = self.myId;
     self.loader.myArtist = self.myArtist;
     [self.loader startLoad];

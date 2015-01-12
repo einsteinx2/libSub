@@ -10,18 +10,22 @@
 
 @interface ISMSAlbum : NSObject <NSCoding, NSCopying> 
 
-@property (copy) NSString *title;
-@property (copy) NSString *albumId;
+@property (strong) NSNumber *albumId;
+@property (copy) NSString *name;
 @property (copy) NSString *coverArtId;
 @property (copy) NSString *artistName;
-@property (copy) NSString *artistId;
+@property (strong) NSNumber *artistId;
+
+@property (strong) NSNumber *songCount;
+@property (strong) NSNumber *duration;
+@property (strong) NSNumber *createdDate;
+@property (strong) NSNumber *year;
+@property (copy) NSString *genre;
 
 - (void)encodeWithCoder:(NSCoder *)encoder;
 - (id)initWithCoder:(NSCoder *)decoder;
 
 - (id)copyWithZone:(NSZone *)zone;
-
-- (id)initWithPMSDictionary:(NSDictionary *)dictionary;
 
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict;
 - (id)initWithAttributeDict:(NSDictionary *)attributeDict artist:(ISMSArtist *)myArtist;
@@ -29,4 +33,7 @@
 - (id)initWithTBXMLElement:(TBXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet;
 - (id)initWithRXMLElement:(RXMLElement *)element;
 - (id)initWithRXMLElement:(RXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet;
+
++ (NSArray *)albumsInArtistWithId:(NSInteger)artistId;
+
 @end

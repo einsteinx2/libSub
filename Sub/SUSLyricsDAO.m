@@ -7,8 +7,6 @@
 //
 
 #import "SUSLyricsDAO.h"
-
-#import "SUSLyricsLoader.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation SUSLyricsDAO
@@ -51,7 +49,7 @@
 	}
     else if (settingsS.isLyricsEnabled) 
     {
-		self.loader = [[SUSLyricsLoader alloc] initWithDelegate:self];
+		self.loader = [[ISMSLyricsLoader alloc] initWithDelegate:self];
         self.loader.artist = artist;
         self.loader.title = title;
         [self.loader startLoad];

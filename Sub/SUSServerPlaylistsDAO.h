@@ -12,7 +12,7 @@
 @interface SUSServerPlaylistsDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
 @property (weak) NSObject <ISMSLoaderDelegate> *delegate;
-@property (strong) SUSServerPlaylistsLoader *loader;
+@property (strong) ISMSServerPlaylistsLoader *loader;
 
 #pragma mark - Public DAO Methods
 

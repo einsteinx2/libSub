@@ -127,6 +127,11 @@
     return nil;
 }
 
+- (NSTimeInterval)songsDuration
+{
+    return 0;
+}
+
 - (id)associatedObject
 {
     return nil;

@@ -12,7 +12,7 @@
 @interface SUSNowPlayingDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
 @property (weak) id<ISMSLoaderDelegate> delegate;
-@property (strong) SUSNowPlayingLoader *loader;
+@property (strong) ISMSNowPlayingLoader *loader;
 
 @property (strong) NSArray *nowPlayingSongDicts;
 
