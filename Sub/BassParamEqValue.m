@@ -99,7 +99,7 @@ BASS_DX8_PARAMEQ BASS_DX8_PARAMEQFromPoint(float percentX, float percentY, float
 
 - (NSUInteger)hash
 {
-	return abs(self.parameters.fCenter) + abs(self.parameters.fGain) + abs(self.parameters.fBandwidth) + abs(self.handle);
+	return fabsf(self.parameters.fCenter) + fabsf(self.parameters.fGain) + fabsf(self.parameters.fBandwidth) + self.handle;
 }
 
 - (BOOL)isEqualToBassParamEqValue:(BassParamEqValue *)otherValue
