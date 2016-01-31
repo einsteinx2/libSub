@@ -20,7 +20,7 @@
 //#import <EX2KitOSX/EX2Kit.h>
 #endif
 
-#import "ZipKit.h"
+#import <ZipKit/ZipKit.h>
 #import "RXMLElement.h"
 #import "TBXML-Headers/TBXML.h"
 #import "TBXML-Headers/TBXML+Compression.h"

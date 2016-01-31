@@ -8,20 +8,21 @@
 
 #import "ISMSPersistedModel.h"
 
+@class ISMSFolder;
 @interface ISMSMediaFolder : NSObject <ISMSPersistedModel>
 
-@property (strong) NSNumber *mediaFolderId;
-@property (copy) NSString *name;
+@property (nullable, strong) NSNumber *mediaFolderId;
+@property (nullable, copy) NSString *name;
 
-- (instancetype)initWithMediaFolderId:(NSInteger)mediaFolderId;
+- (nullable instancetype)initWithMediaFolderId:(NSInteger)mediaFolderId;
 
-- (NSArray *)rootFolders;
+- (nonnull NSArray<ISMSFolder*> *)rootFolders;
 - (BOOL)deleteRootFolders;
 
 + (BOOL)deleteAllMediaFolders;
 
-+ (NSArray *)allRootFolders; // Sorted alphabetically
-+ (NSArray *)allMediaFolders; // Sorted alphabetically
-+ (NSArray *)allMediaFoldersIncludingAllFolders; // Has all folders option (id = -1) as first element
++ (nonnull NSArray<ISMSFolder*> *)allRootFolders; // Sorted alphabetically
++ (nonnull NSArray<ISMSMediaFolder*> *)allMediaFolders; // Sorted alphabetically
++ (nonnull NSArray<ISMSMediaFolder*> *)allMediaFoldersIncludingAllFolders; // Has all folders option (id = -1) as first element
 
 @end

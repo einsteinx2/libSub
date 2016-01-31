@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
 //
 
-static const int ddLogLevel = LOG_LEVEL_ERROR;
+static const int ddLogLevel = DDLogLevelError;
 
 #import "HLSProxyResponse.h"
 #import "HTTPConnection.h"
@@ -293,27 +293,27 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
             }
             
             [self.proxyBuffer fillWithBytes:_buffer length:_bytesRead];
-            DDLogCVerbose(@"HLSProxyResponse (%@) filling buffer with data of length %lu", self, _bytesRead);
+            DDLogVerbose(@"HLSProxyResponse (%@) filling buffer with data of length %lu", self, _bytesRead);
 		}
 		else if (_bytesRead < 0)		// Less than zero is an error
 		{
-			DDLogCError(@"[HLSProxyResponse] Stream handler: An occured in the download bytesRead < 0");
+			DDLogError(@"[HLSProxyResponse] Stream handler: An occured in the download bytesRead < 0");
 			[self downloadFailed];
 		}
 		else	//	0 assume we are done with the stream
 		{
-			DDLogCVerbose(@"[HLSProxyResponse] Stream handler: bytesRead == 0 occured in the download, so we're assuming we're finished");
+			DDLogVerbose(@"[HLSProxyResponse] Stream handler: bytesRead == 0 occured in the download, so we're assuming we're finished");
 			[self downloadDone];
 		}
 	}
 	else if (type == kCFStreamEventEndEncountered)
 	{
-		DDLogCVerbose(@"[HLSProxyResponse] Stream handler: An kCFStreamEventEndEncountered occured in the download, download is done");
+		DDLogVerbose(@"[HLSProxyResponse] Stream handler: An kCFStreamEventEndEncountered occured in the download, download is done");
 		[self downloadDone];
 	}
 	else if (type == kCFStreamEventErrorOccurred)
 	{
-		DDLogCError(@"[HLSProxyResponse] Stream handler: An kCFStreamEventErrorOccurred occured in the download");
+		DDLogError(@"[HLSProxyResponse] Stream handler: An kCFStreamEventErrorOccurred occured in the download");
 		[self downloadFailed];
 	}
 }

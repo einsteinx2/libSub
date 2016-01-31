@@ -27,18 +27,18 @@ typedef enum
 
 #ifdef BETA
     #ifdef SILENT
-        #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+        #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = DDLogLevelVerbose;
     #else
-        #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+        #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = DDLogLevelVerbose;
     #endif
 #else
-    #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #define LOG_LEVEL_ISUB_DEFAULT static const int ddLogLevel = DDLogLevelVerbose;
 #endif
 
 #ifdef BETA
-    #define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = DDLogLevelVerbose;
 #else
-    #define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+    #define LOG_LEVEL_ISUB_DEBUG static const int ddLogLevel = DDLogLevelVerbose;
 #endif
 
 #endif

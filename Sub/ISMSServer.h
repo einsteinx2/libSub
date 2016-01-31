@@ -19,11 +19,11 @@
 
 @interface ISMSServer : NSObject <NSCoding>
 
-@property (copy) NSString *url;
-@property (copy) NSString *username;
-@property (copy) NSString *password;
-@property (copy) NSString *type;
-@property (copy) NSString *lastQueryId;
-@property (copy) NSString *uuid;
+@property (nullable, copy) NSString *url;
+@property (nullable, copy) NSString *username;
+@property (nullable, copy) NSString *password;
+@property (nullable, copy) NSString *type;
+@property (nullable, copy) NSString *lastQueryId;
+@property (nullable, copy) NSString *uuid;
 
 @end

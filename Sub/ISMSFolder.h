@@ -10,20 +10,20 @@
 
 @interface ISMSFolder : NSObject <ISMSPersistedModel>
 
-@property (strong) NSNumber *folderId;
-@property (strong) NSNumber *parentFolderId;
-@property (strong) NSNumber *mediaFolderId;
-@property (strong) NSNumber *coverArtId;
-@property (copy) NSString *name;
+@property (nullable, strong) NSNumber *folderId;
+@property (nullable, strong) NSNumber *parentFolderId;
+@property (nullable, strong) NSNumber *mediaFolderId;
+@property (nullable, strong) NSNumber *coverArtId;
+@property (nullable, copy) NSString *name;
 
-@property (strong, readonly) NSArray *subfolders;
-@property (strong, readonly) NSArray *songs;
+@property (nonnull, strong, readonly) NSArray<ISMSFolder*> *subfolders;
+@property (nonnull, strong, readonly) NSArray<ISMSSong*> *songs;
 
 + (void)loadIgnoredArticles;
 
 // Returns an instance if it exists in the db, otherwise nil
-- (instancetype)initWithFolderId:(NSInteger)folderId;
+- (nullable instancetype)initWithFolderId:(NSInteger)folderId;
 
-+ (NSArray *)foldersInFolderWithId:(NSInteger)folderId;
++ (nonnull NSArray<ISMSFolder*> *)foldersInFolderWithId:(NSInteger)folderId;
 
 @end

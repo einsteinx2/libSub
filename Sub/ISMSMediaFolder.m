@@ -75,9 +75,9 @@
     return success;
 }
 
-- (NSArray *)rootFolders
+- (NSArray<ISMSFolder*> *)rootFolders
 {
-    NSMutableArray *rootFolders = [[NSMutableArray alloc] init];
+    NSMutableArray<ISMSFolder*> *rootFolders = [[NSMutableArray alloc] init];
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *query = @"SELECT f.folderId, f.parentFolderId, f.name\
@@ -122,9 +122,9 @@
     return success;
 }
 
-+ (NSArray *)allRootFolders
++ (NSArray<ISMSFolder*> *)allRootFolders
 {
-    NSMutableArray *rootFolders = [[NSMutableArray alloc] init];
+    NSMutableArray<ISMSFolder*> *rootFolders = [[NSMutableArray alloc] init];
     NSMutableArray *rootFoldersNumbers = [[NSMutableArray alloc] init];
     
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
@@ -163,9 +163,9 @@
     return rootFolders;
 }
 
-+ (NSArray *)allMediaFolders
++ (NSArray<ISMSMediaFolder*> *)allMediaFolders
 {
-    NSMutableArray *mediaFolders = [[NSMutableArray alloc] init];
+    NSMutableArray<ISMSMediaFolder*> *mediaFolders = [[NSMutableArray alloc] init];
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT m.mediaFolderId, m.name\
                             FROM mediaFolders AS m\
@@ -185,9 +185,9 @@
     return mediaFolders;
 }
 
-+ (NSArray *)allMediaFoldersIncludingAllFolders
++ (NSArray<ISMSMediaFolder*> *)allMediaFoldersIncludingAllFolders
 {
-    NSMutableArray *mediaFolders = [[self allMediaFolders] mutableCopy];
+    NSMutableArray<ISMSMediaFolder*> *mediaFolders = [[self allMediaFolders] mutableCopy];
     
     ISMSMediaFolder *allFolders = [[ISMSMediaFolder alloc] init];
     allFolders.mediaFolderId = @(-1);

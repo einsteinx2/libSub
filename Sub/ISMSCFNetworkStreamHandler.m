@@ -369,7 +369,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
         self.startDate = [NSDate date];
         self.speedLoggingDate = nil;
         
-		DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler: kCFStreamEventOpenCompleted occured for %@", self.mySong);
+		DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler: kCFStreamEventOpenCompleted occured for %@", self.mySong);
 		if (!self.isTempCache)
 			self.mySong.isPartiallyCached = YES;
 		
@@ -400,7 +400,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                 }
                 @catch (NSException *exception)
                 {
-                    DDLogCError(@"[ISMSCFNetworkStreamHandler] Failed to write to file %@, %@ - %@", self.mySong, exception.name, exception.description);
+                    DDLogError(@"[ISMSCFNetworkStreamHandler] Failed to write to file %@, %@ - %@", self.mySong, exception.name, exception.description);
 					
 					if (cacheS.freeSpace <= BytesFromMiB(25))
 					{
@@ -426,7 +426,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                 NSUInteger bytesPerSec = self.totalBytesTransferred / [[NSDate date] timeIntervalSinceDate:self.startDate];
 				if (!self.isDelegateNotifiedToStartPlayback && self.totalBytesTransferred >= [self.class minBytesToStartPlaybackForKiloBitrate:self.bitrate speedInBytesPerSec:bytesPerSec])
 				{
-					DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %lu, total bytes: %llu, bitrate: %lu, bytesPerSec: %lu  song: %@", (unsigned long)ISMSMinBytesToStartPlayback(self.bitrate), self.totalBytesTransferred, (unsigned long)self.bitrate, (unsigned long)bytesPerSec, self.mySong);
+					DDLogVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %lu, total bytes: %llu, bitrate: %lu, bytesPerSec: %lu  song: %@", (unsigned long)ISMSMinBytesToStartPlayback(self.bitrate), self.totalBytesTransferred, (unsigned long)self.bitrate, (unsigned long)bytesPerSec, self.mySong);
 					self.isDelegateNotifiedToStartPlayback = YES;
 					
 					if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerStartPlayback:)])
@@ -458,7 +458,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                             delay = (speedDifferenceFactor * intervalSinceLastThrottle) - intervalSinceLastThrottle;
                             
                             if (isThrottleLoggingEnabled)
-                                DDLogCInfo(@"[ISMSCFNetworkStreamHandler] Pausing for %f  interval: %f  bytesTransferred: %llu maxBytes: %f  song: %@", delay, intervalSinceLastThrottle, self.bytesTransferred, maxBytesPerTotalInterval, self.mySong);
+                                DDLogInfo(@"[ISMSCFNetworkStreamHandler] Pausing for %f  interval: %f  bytesTransferred: %llu maxBytes: %f  song: %@", delay, intervalSinceLastThrottle, self.bytesTransferred, maxBytesPerTotalInterval, self.mySong);
                             
                             self.bytesTransferred = 0;
                         }
@@ -523,29 +523,29 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 			}
 			else
 			{
-				DDLogCError(@"[ISMSCFNetworkStreamHandler] Stream handler: An error occured in the download for %@", self.mySong);
+				DDLogError(@"[ISMSCFNetworkStreamHandler] Stream handler: An error occured in the download for %@", self.mySong);
 				[self downloadFailed];
 			}
 		}
 		else if (_bytesRead < 0)		// Less than zero is an error
 		{
-			DDLogCError(@"[ISMSCFNetworkStreamHandler] Stream handler: An occured in the download bytesRead < 0 for %@", self.mySong);
+			DDLogError(@"[ISMSCFNetworkStreamHandler] Stream handler: An occured in the download bytesRead < 0 for %@", self.mySong);
 			[self downloadFailed];
 		}
 		else	//	0 assume we are done with the stream
 		{
-			DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler: bytesRead == 0 occured in the download, but we're continuing for %@", self.mySong);
+			DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler: bytesRead == 0 occured in the download, but we're continuing for %@", self.mySong);
 			//[self downloadDone];
 		}
 	}
 	else if (type == kCFStreamEventEndEncountered)
 	{
-		DDLogCVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler: An kCFStreamEventEndEncountered occured in the download, download is done for %@", self.mySong);
+		DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler: An kCFStreamEventEndEncountered occured in the download, download is done for %@", self.mySong);
 		[self downloadDone];
 	}
 	else if (type == kCFStreamEventErrorOccurred)
 	{
-		DDLogCError(@"[ISMSCFNetworkStreamHandler] Stream handler: An kCFStreamEventErrorOccurred occured in the download for %@", self.mySong);
+		DDLogError(@"[ISMSCFNetworkStreamHandler] Stream handler: An kCFStreamEventErrorOccurred occured in the download for %@", self.mySong);
 		[self downloadFailed];
 	}
 }
@@ -598,7 +598,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
         }
 	}
     			  
-	DDLogCInfo(@"[ISMSCFNetworkStreamHandler] Connection Finished for %@  file size: %llu   contentLength: %llu", self.mySong.title, self.mySong.localFileSize, self.contentLength);
+	DDLogInfo(@"[ISMSCFNetworkStreamHandler] Connection Finished for %@  file size: %llu   contentLength: %llu", self.mySong.title, self.mySong.localFileSize, self.contentLength);
 	
 	self.isDownloading = NO;
     
@@ -611,7 +611,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
     	
 	if (self.contentLength != ULLONG_MAX && self.mySong.localFileSize < self.contentLength && self.numberOfContentLengthFailures < ISMSMaxContentLengthFailures)
 	{
-		DDLogCInfo(@"[ISMSCFNetworkStreamHandler] Connection Failed because not enough bytes were downloaed for %@", self.mySong.title);
+		DDLogInfo(@"[ISMSCFNetworkStreamHandler] Connection Failed because not enough bytes were downloaed for %@", self.mySong.title);
 
 		// This is a failed download, it didn't download enough
 		self.numberOfContentLengthFailures++;
@@ -621,7 +621,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
 	}
 	else
 	{
-		DDLogCInfo(@"[ISMSCFNetworkStreamHandler] Connection was successful because the file size matches the content length header for %@", self.mySong.title);
+		DDLogInfo(@"[ISMSCFNetworkStreamHandler] Connection was successful because the file size matches the content length header for %@", self.mySong.title);
 
 		if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerConnectionFinished:)])
 			[self.delegate ISMSStreamHandlerConnectionFinished:self];

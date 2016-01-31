@@ -8,17 +8,17 @@
 
 #import "ISMSPersistedModel.h"
 
-@interface ISMSArtist : NSObject <NSCoding, NSCopying, ISMSPersistedModel>
+@interface ISMSArtist : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
-@property (strong) NSNumber *artistId;
-@property (copy) NSString *name;
-@property (strong) NSNumber *albumCount;
+@property (nullable, strong) NSNumber *artistId;
+@property (nullable, copy) NSString *name;
+@property (nullable, strong) NSNumber *albumCount;
 
-+ (ISMSArtist *) artistWithName:(NSString *)theName andArtistId:(NSNumber *)theId;
++ (nullable ISMSArtist *) artistWithName:(nonnull NSString *)theName andArtistId:(nonnull NSNumber *)theId;
 
-+ (NSArray *)allArtists;
++ (nonnull NSArray<ISMSArtist*> *)allArtists;
 + (BOOL)deleteAllArtists;
 
-- (instancetype)initWithArtistId:(NSInteger)artistId;
+- (nullable instancetype)initWithArtistId:(NSInteger)artistId;
 
 @end

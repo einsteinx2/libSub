@@ -16,7 +16,7 @@
 
 @implementation ISMSArtist
 
-+ (ISMSArtist *)artistWithName:(NSString *)theName andArtistId:(NSNumber *)theId
++ (nullable ISMSArtist *) artistWithName:(nonnull NSString *)theName andArtistId:(nonnull NSNumber *)theId;
 {
 	ISMSArtist *anArtist = [[ISMSArtist alloc] init];
     anArtist.artistId = theId;

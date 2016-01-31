@@ -251,7 +251,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		{
 			// This is a failure, cancel the connection and call the didFail delegate method
 			[self.connection cancel];
-			[self connection:self.connection didFailWithError:nil];
+			[self connection:self.connection didFailWithError:[NSError new]];
 		}
 		else
 		{
@@ -390,7 +390,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		{
 			// There is no file handle for some reason, cancel the connection
 			[self.connection cancel];
-			[self connection:self.connection didFailWithError:nil];
+			[self connection:self.connection didFailWithError:[NSError new]];
 		}
 	}
 	
@@ -509,7 +509,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		self.numberOfContentLengthFailures++;
 		// This is a failed connection that didn't call didFailInternal for some reason, so call didFailWithError
-		[self connection:theConnection didFailWithError:nil];
+		[self connection:theConnection didFailWithError:[NSError new]];
 	}
 	else 
 	{

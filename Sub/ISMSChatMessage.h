@@ -10,11 +10,10 @@
 @interface ISMSChatMessage : NSObject <NSCopying>
 
 @property NSInteger timestamp;
-@property (copy) NSString *user;
-@property (copy) NSString *message;
+@property (nullable, copy) NSString *user;
+@property (nullable, copy) NSString *message;
 
-- (id)initWithTBXMLElement:(TBXMLElement *)element;
-- (id)initWithRXMLElement:(RXMLElement *)element;
-- (id)copyWithZone:(NSZone *)zone;
+- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element;
+- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
 
 @end

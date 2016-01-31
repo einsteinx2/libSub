@@ -9,10 +9,10 @@
 
 @interface SUSServerPlaylist : NSObject <NSCopying>
 
-@property (copy) NSString *playlistId;
-@property (copy) NSString *playlistName;
+@property (nullable, copy) NSString *playlistId;
+@property (nullable, copy) NSString *playlistName;
 
-- (id)initWithTBXMLElement:(TBXMLElement *)element;
-- (id)initWithRXMLElement:(RXMLElement *)element;
+- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element;
+- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
 
 @end

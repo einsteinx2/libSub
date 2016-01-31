@@ -12,8 +12,8 @@ static NSArray *_ignoredArticles = nil;
 
 @interface ISMSFolder()
 {
-    NSArray *_subfolders;
-    NSArray *_songs;
+    NSArray<ISMSFolder*> *_subfolders;
+    NSArray<ISMSSong*> *_songs;
 }
 @end
 
@@ -117,7 +117,7 @@ static NSArray *_ignoredArticles = nil;
     }
 }
 
-- (NSArray *)subfolders
+- (NSArray<ISMSFolder*> *)subfolders
 {
     @synchronized(self)
     {
@@ -130,7 +130,7 @@ static NSArray *_ignoredArticles = nil;
     }
 }
 
-- (NSArray *)songs
+- (NSArray<ISMSSong*> *)songs
 {
     @synchronized(self)
     {
@@ -143,9 +143,9 @@ static NSArray *_ignoredArticles = nil;
     }
 }
 
-+ (NSArray *)foldersInFolderWithId:(NSInteger)folderId
++ (NSArray<ISMSFolder*> *)foldersInFolderWithId:(NSInteger)folderId
 {
-    NSMutableArray *folders = [[NSMutableArray alloc] init];
+    NSMutableArray<ISMSFolder*> *folders = [[NSMutableArray alloc] init];
     
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name\

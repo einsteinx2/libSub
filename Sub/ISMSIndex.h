@@ -8,7 +8,7 @@
 
 @interface ISMSIndex : NSObject
 
-@property (copy) NSString *name;
+@property (nullable, copy) NSString *name;
 @property NSUInteger position;
 @property NSUInteger count;
 

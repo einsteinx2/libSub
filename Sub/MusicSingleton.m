@@ -14,7 +14,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #endif
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
+static const int ddLogLevel = DDLogLevelVerbose;
 
 @implementation MusicSingleton
 

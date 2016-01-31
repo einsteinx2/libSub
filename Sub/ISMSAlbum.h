@@ -10,30 +10,25 @@
 
 @interface ISMSAlbum : NSObject <NSCoding, NSCopying> 
 
-@property (strong) NSNumber *albumId;
-@property (copy) NSString *name;
-@property (copy) NSString *coverArtId;
-@property (copy) NSString *artistName;
-@property (strong) NSNumber *artistId;
+@property (nullable, strong) NSNumber *albumId;
+@property (nullable, copy) NSString *name;
+@property (nullable, copy) NSString *coverArtId;
+@property (nullable, copy) NSString *artistName;
+@property (nullable, strong) NSNumber *artistId;
 
-@property (strong) NSNumber *songCount;
-@property (strong) NSNumber *duration;
-@property (strong) NSNumber *createdDate;
-@property (strong) NSNumber *year;
-@property (copy) NSString *genre;
+@property (nullable, strong) NSNumber *songCount;
+@property (nullable, strong) NSNumber *duration;
+@property (nullable, strong) NSNumber *createdDate;
+@property (nullable, strong) NSNumber *year;
+@property (nullable, copy) NSString *genre;
 
-- (void)encodeWithCoder:(NSCoder *)encoder;
-- (id)initWithCoder:(NSCoder *)decoder;
+- (nullable instancetype)initWithAttributeDict:(nonnull NSDictionary *)attributeDict;
+- (nullable instancetype)initWithAttributeDict:(nonnull NSDictionary *)attributeDict artist:(nullable ISMSArtist *)myArtist;
+- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element;
+- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element artistId:(nullable NSString *)artistIdToSet artistName:(nullable NSString *)artistNameToSet;
+- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
+- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element artistId:(nullable NSString *)artistIdToSet artistName:(nullable NSString *)artistNameToSet;
 
-- (id)copyWithZone:(NSZone *)zone;
-
-- (id)initWithAttributeDict:(NSDictionary *)attributeDict;
-- (id)initWithAttributeDict:(NSDictionary *)attributeDict artist:(ISMSArtist *)myArtist;
-- (id)initWithTBXMLElement:(TBXMLElement *)element;
-- (id)initWithTBXMLElement:(TBXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet;
-- (id)initWithRXMLElement:(RXMLElement *)element;
-- (id)initWithRXMLElement:(RXMLElement *)element artistId:(NSString *)artistIdToSet artistName:(NSString *)artistNameToSet;
-
-+ (NSArray *)albumsInArtistWithId:(NSInteger)artistId;
++ (nonnull NSArray<ISMSAlbum*> *)albumsInArtistWithId:(NSInteger)artistId;
 
 @end

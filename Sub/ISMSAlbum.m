@@ -188,9 +188,9 @@
 	return [NSString stringWithFormat:@"%@: name: %@, albumId: %@, coverArtId: %@, artistName: %@, artistId: %@", [super description], self.name, self.self.albumId, self.coverArtId, self.artistName, self.artistId];
 }
 
-+ (NSArray *)albumsInArtistWithId:(NSInteger)artistId
++ (NSArray<ISMSAlbum*> *)albumsInArtistWithId:(NSInteger)artistId
 {
-    NSMutableArray *albums = [[NSMutableArray alloc] init];
+    NSMutableArray<ISMSAlbum*> *albums = [[NSMutableArray alloc] init];
     
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT al.albumId, al.artistId, al.coverArtId, al.name, al.songCount, al.duration, al.createdDate, al.year, al.genre, ar.name \

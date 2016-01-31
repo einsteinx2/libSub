@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
 //
 
-static const int ddLogLevel = LOG_LEVEL_ERROR;
+static const int ddLogLevel = DDLogLevelError;
 
 #import "HLSProxyConnection.h"
 #import "HLSProxyResponse.h"

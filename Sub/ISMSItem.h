@@ -8,7 +8,7 @@
 
 @protocol ISMSItem <NSObject>
 
-@property (strong, readonly) NSNumber *itemId;
-@property (copy, readonly) NSString *itemName;
+@property (nullable, strong, readonly) NSNumber *itemId;
+@property (nullable, copy, readonly) NSString *itemName;
 
 @end

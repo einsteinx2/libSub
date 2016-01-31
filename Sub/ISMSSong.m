@@ -26,7 +26,7 @@
 
 @implementation ISMSSong
 
-- (id)initWithPMSDictionary:(NSDictionary *)dictionary
+- (instancetype)initWithPMSDictionary:(NSDictionary *)dictionary
 {
 	if ((self = [super init]))
 	{
@@ -55,7 +55,7 @@
 	return self;
 }
 
-- (id)initWithTBXMLElement:(TBXMLElement *)element
+- (instancetype)initWithTBXMLElement:(TBXMLElement *)element
 {
 	if ((self = [super init]))
 	{
@@ -94,7 +94,7 @@
 	return self;
 }
 
-- (id)initWithRXMLElement:(RXMLElement *)element
+- (instancetype)initWithRXMLElement:(RXMLElement *)element
 {
     if ((self = [super init]))
     {
@@ -133,7 +133,7 @@
     return self;
 }
 
-- (id)initWithAttributeDict:(NSDictionary *)attributeDict
+- (instancetype)initWithAttributeDict:(NSDictionary *)attributeDict
 {
 	if ((self = [super init]))
 	{
@@ -538,9 +538,9 @@
     }
 }
 
-+ (NSArray *)songsInFolderWithId:(NSInteger)folderId
++ (NSArray<ISMSSong*> *)songsInFolderWithId:(NSInteger)folderId
 {
-    NSMutableArray *songs = [[NSMutableArray alloc] init];
+    NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name\
                             FROM songs AS s\
@@ -561,9 +561,9 @@
     return songs;
 }
 
-+ (NSArray *)songsInAlbumWithId:(NSInteger)albumId
++ (NSArray<ISMSSong*> *)songsInAlbumWithId:(NSInteger)albumId
 {
-    NSMutableArray *songs = [[NSMutableArray alloc] init];
+    NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
     [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name\

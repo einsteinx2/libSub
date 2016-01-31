@@ -12,7 +12,7 @@
 	url = git@github.com:einsteinx2/TBXML.git
 [submodule "Frameworks/ZipKit"]
 	path = Frameworks/ZipKit
-	url = git@github.com:einsteinx2/ZipKit.git
+	url = git@github.com:kolpanic/ZipKit.git
 [submodule "Frameworks/CocoaHTTPServer"]
 	path = Frameworks/CocoaHTTPServer
 	url = git@github.com:einsteinx2/CocoaHTTPServer.git
