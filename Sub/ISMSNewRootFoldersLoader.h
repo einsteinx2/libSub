@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Einstein Times Two Software. All rights reserved.
 //
 
-#import "ISMSLoader.h"
+#import "ISMSAbstractItemLoader.h"
 
-@interface ISMSNewRootFoldersLoader : ISMSLoader <ISMSItemLoader>
+@interface ISMSNewRootFoldersLoader : ISMSAbstractItemLoader
 
 @property (copy) NSNumber *mediaFolderId;
 

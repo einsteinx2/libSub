@@ -9,7 +9,12 @@
 #import "ISMSRootArtistsLoader.h"
 #import "NSMutableURLRequest+SUS.h"
 
+@interface ISMSRootArtistsLoader()
+@property (nonatomic, readwrite) NSArray *artists;
+@end
+
 @implementation ISMSRootArtistsLoader
+@synthesize artists=_artists;
 
 #pragma mark - Data loading -
 
@@ -92,33 +97,6 @@
     }
     
     return NO;
-}
-
-#pragma mark - Unused ISMSItemLoader Properties -
-
-- (NSArray *)folders
-{
-    return nil;
-}
-
-- (NSArray *)albums
-{
-    return nil;
-}
-
-- (NSArray *)songs
-{
-    return nil;
-}
-
-- (NSTimeInterval)songsDuration
-{
-    return 0;
-}
-
-- (id)associatedObject
-{
-    return nil;
 }
 
 @end

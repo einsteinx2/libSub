@@ -6,14 +6,11 @@
 //  Copyright (c) 2015 Einstein Times Two Software. All rights reserved.
 //
 
-#import "ISMSLoader.h"
+#import "ISMSAbstractItemLoader.h"
 
-@interface ISMSRootArtistsLoader : ISMSLoader <ISMSItemLoader>
+@interface ISMSRootArtistsLoader : ISMSAbstractItemLoader
 
 @property (readonly) NSArray *ignoredArticles;
 @property (readonly) NSArray *artists;
-
-- (void)persistModels;
-- (BOOL)loadModelsFromCache;
 
 @end

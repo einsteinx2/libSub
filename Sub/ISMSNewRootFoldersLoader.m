@@ -9,7 +9,14 @@
 #import "ISMSNewRootFoldersLoader.h"
 #import "NSMutableURLRequest+SUS.h"
 
+@interface ISMSNewRootFoldersLoader()
+@property (nonatomic, readwrite) NSArray *ignoredArticles;
+@property (nonatomic, readwrite) NSArray *folders;
+@property (nonatomic, readwrite) NSArray *songs;
+@end
+
 @implementation ISMSNewRootFoldersLoader
+@synthesize ignoredArticles=_ignoredArticles, folders=_folders, songs=_songs;
 
 #pragma mark - Data loading -
 
@@ -117,24 +124,5 @@
 
 #pragma mark - Unused ISMSItemLoader Properties -
 
-- (NSArray *)artists
-{
-    return nil;
-}
-
-- (NSArray *)albums
-{
-    return nil;
-}
-
-- (NSTimeInterval)songsDuration
-{
-    return 0;
-}
-
-- (id)associatedObject
-{
-    return nil;
-}
 
 @end

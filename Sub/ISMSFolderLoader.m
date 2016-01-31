@@ -10,13 +10,16 @@
 #import "NSMutableURLRequest+SUS.h"
 
 @interface ISMSFolderLoader()
+@property (nonatomic, readwrite) NSArray *folders;
+@property (nonatomic, readwrite) NSArray *songs;
+@end
+
+@implementation ISMSFolderLoader
 {
     ISMSFolder *_associatedObject;
     NSTimeInterval _songsDuration;
 }
-@end
-
-@implementation ISMSFolderLoader
+@synthesize folders=_folders, songs=_songs;
 
 #pragma mark - Loader Methods -
 
@@ -133,18 +136,6 @@
 - (NSTimeInterval)songsDuration
 {
     return _songsDuration;
-}
-
-#pragma mark - Unused ISMSItemLoader Properties -
-
-- (NSArray *)artists
-{
-    return nil;
-}
-
-- (NSArray *)albums
-{
-    return nil;
 }
 
 @end

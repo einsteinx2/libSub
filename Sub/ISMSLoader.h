@@ -9,35 +9,35 @@
 #import "ISMSLoaderDelegate.h"
 
 // Loader callback block, make sure to always check success bool, not error, as error can be nil when success is NO
-typedef void (^LoaderCallback)(BOOL success, NSError *error, ISMSLoader *loader);
+typedef void (^LoaderCallback)(BOOL success,  NSError * _Nullable error, ISMSLoader * _Nonnull loader);
 
 @interface ISMSLoader : NSObject <NSURLConnectionDelegate>
 
-@property (weak) NSObject<ISMSLoaderDelegate> *delegate;
-@property (copy) LoaderCallback callbackBlock;
+@property (nullable, weak) NSObject<ISMSLoaderDelegate> *delegate;
+@property (nullable, copy) LoaderCallback callbackBlock;
 
-@property (strong) NSURLConnection *connection;
-@property (strong) NSURLRequest *request;
-@property (strong) NSURLResponse *response;
-@property (strong) NSMutableData *receivedData;
+@property (nullable, strong) NSURLConnection *connection;
+@property (nullable, strong) NSURLRequest *request;
+@property (nullable, strong) NSURLResponse *response;
+@property (nullable, strong) NSMutableData *receivedData;
 @property (readonly) ISMSLoaderType type;
 
-+ (id)loader;
-+ (id)loaderWithDelegate:(id <ISMSLoaderDelegate>)theDelegate;
-+ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock;
++ (nullable instancetype)loader;
++ (nullable instancetype)loaderWithDelegate:(nullable id <ISMSLoaderDelegate>)theDelegate;
++ (nullable instancetype)loaderWithCallbackBlock:(nullable LoaderCallback)theBlock;
 
 - (void)setup; // Override this
-- (id)initWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate;
-- (id)initWithCallbackBlock:(LoaderCallback)theBlock;
+- (nullable instancetype)initWithDelegate:(nullable NSObject<ISMSLoaderDelegate> *)theDelegate;
+- (nullable instancetype)initWithCallbackBlock:(nullable LoaderCallback)theBlock;
 
 - (void)startLoad;
 - (void)cancelLoad;
-- (NSURLRequest *)createRequest; // Override this
+- (nullable NSURLRequest *)createRequest; // Override this
 - (void)processResponse; // Override this
 
-- (void)subsonicErrorCode:(NSInteger)errorCode message:(NSString *)message;
+- (void)subsonicErrorCode:(NSInteger)errorCode message:(nullable NSString *)message;
 
-- (void)informDelegateLoadingFailed:(NSError *)error;
+- (void)informDelegateLoadingFailed:(nullable NSError *)error;
 - (void)informDelegateLoadingFinished;
 
 @end

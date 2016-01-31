@@ -10,15 +10,15 @@
 
 @protocol ISMSItemLoader <NSObject>
 
-@property (weak) NSObject<ISMSLoaderDelegate> *delegate;
-@property (copy) LoaderCallback callbackBlock;
+@property (nullable, weak) NSObject<ISMSLoaderDelegate> *delegate;
+@property (nullable, copy) LoaderCallback callbackBlock;
 
-@property (readonly) id associatedObject;
+@property (nullable, readonly) id associatedObject;
 
-@property (readonly) NSArray *folders;
-@property (readonly) NSArray *artists;
-@property (readonly) NSArray *albums;
-@property (readonly) NSArray *songs;
+@property (nullable, readonly) NSArray *folders;
+@property (nullable, readonly) NSArray *artists;
+@property (nullable, readonly) NSArray *albums;
+@property (nullable, readonly) NSArray *songs;
 @property (readonly) NSTimeInterval songsDuration;
 
 - (void)persistModels;
