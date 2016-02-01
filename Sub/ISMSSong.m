@@ -401,21 +401,19 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name\
-                                FROM songs AS s\
-                                LEFT JOIN albums AS al ON s.albumId = al.albumId\
-                                LEFT JOIN artists AS ar ON s.artistId = ar.artistId\
-                                WHERE s.songId = ?";
-            
-            FMResultSet *result = [db executeQuery:query, @(songId)];
-            if ([result next])
-            {
-                foundRecord = YES;
-                [self _assignPropertiesFromResultSet:result];
-            }
-            [result close];
-        }];
+        NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name "
+                          @"FROM songs AS s "
+                          @"LEFT JOIN albums AS al ON s.albumId = al.albumId "
+                          @"LEFT JOIN artists AS ar ON s.artistId = ar.artistId "
+                          @"WHERE s.songId = ?";
+        
+        FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(songId)];
+        if ([result next])
+        {
+            foundRecord = YES;
+            [self _assignPropertiesFromResultSet:result];
+        }
+        [result close];
         
         return foundRecord ? self : nil;
     }
@@ -446,7 +444,7 @@
 - (BOOL)_insertModel:(BOOL)replace
 {
     __block BOOL success = NO;
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
          NSString *query = [insertType stringByAppendingString:@" INTO songs (songId, title, genre, coverArtId, path, suffix, transcodedSuffix, duration, bitRate, trackNumber, discNumber, year, size, isVideo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"];
@@ -469,7 +467,7 @@
 - (BOOL)deleteModel
 {
     __block BOOL success = NO;
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *query = @"DELETE FROM songs WHERE songId = ?";
          success = [db executeUpdate:query, self.songId];
@@ -488,19 +486,19 @@
     {
         if (!_folder)
         {
-            [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+            FMResultSet *r = [databaseS.songModelReadDb executeQuery:@"SELECT f.folderId, f.parentFolderId, f.name "
+                                                                     @"FROM folders AS f "
+                                                                     @"JOIN songs AS s ON f.folderId = s.folderId "
+                                                                     @"WHERE songId = ?", _songId];
+            if ([r next])
             {
-                FMResultSet *r = [db executeQuery:@"SELECT f.folderId, f.parentFolderId, f.name FROM folders AS f JOIN songs AS s ON f.folderId = s.folderId WHERE songId = ?", _songId];
-                if ([r next])
-                {
-                    ISMSFolder *folder = [[ISMSFolder alloc] init];
-                    folder.folderId = [r objectForColumnIndex:0];
-                    folder.parentFolderId = [r objectForColumnIndex:1];
-                    folder.name = [r stringForColumnIndex:2];
-                    _folder = folder;
-                }
-                [r close];
-            }];
+                ISMSFolder *folder = [[ISMSFolder alloc] init];
+                folder.folderId = [r objectForColumnIndex:0];
+                folder.parentFolderId = [r objectForColumnIndex:1];
+                folder.name = [r stringForColumnIndex:2];
+                _folder = folder;
+            }
+            [r close];
         }
         
         return _folder;
@@ -541,22 +539,21 @@
 + (NSArray<ISMSSong*> *)songsInFolderWithId:(NSInteger)folderId
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name\
-                            FROM songs AS s\
-                            LEFT JOIN albums AS al ON s.albumId = al.albumId\
-                            LEFT JOIN artists AS ar ON s.artistId = ar.artistId\
-                            WHERE s.folderId = ?";
-        
-        FMResultSet *result = [db executeQuery:query, @(folderId)];
-        while ([result next])
-        {
-            ISMSSong *song = [[ISMSSong alloc] init];
-            [song _assignPropertiesFromResultSet:result];
-            [songs addObject:song];
-        }
-        [result close];
-    }];
+    
+    NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name "
+                      @"FROM songs AS s "
+                      @"LEFT JOIN albums AS al ON s.albumId = al.albumId "
+                      @"LEFT JOIN artists AS ar ON s.artistId = ar.artistId "
+                      @"WHERE s.folderId = ?";
+    
+    FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(folderId)];
+    while ([result next])
+    {
+        ISMSSong *song = [[ISMSSong alloc] init];
+        [song _assignPropertiesFromResultSet:result];
+        [songs addObject:song];
+    }
+    [result close];
     
     return songs;
 }
@@ -565,22 +562,20 @@
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name\
-                            FROM songs AS s\
-                            LEFT JOIN albums AS al ON s.albumId = al.albumId\
-                            LEFT JOIN artists AS ar ON s.artistId = ar.artistId\
-                            WHERE s.albumId = ?";
-        
-        FMResultSet *result = [db executeQuery:query, @(albumId)];
-        while ([result next])
-        {
-            ISMSSong *song = [[ISMSSong alloc] init];
-            [song _assignPropertiesFromResultSet:result];
-            [songs addObject:song];
-        }
-        [result close];
-    }];
+    NSString *query = @"SELECT s.songId, s.title, s.genre, s.coverArtId, s.path, s.suffix, s.transcodedSuffix, s.duration, s.bitRate, s.trackNumber, s.discNumber, s.year, s.size, s.isVideo, al.name, ar.name "
+                      @"FROM songs AS s "
+                      @"LEFT JOIN albums AS al ON s.albumId = al.albumId "
+                      @"LEFT JOIN artists AS ar ON s.artistId = ar.artistId "
+                      @"WHERE s.albumId = ?";
+    
+    FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(albumId)];
+    while ([result next])
+    {
+        ISMSSong *song = [[ISMSSong alloc] init];
+        [song _assignPropertiesFromResultSet:result];
+        [songs addObject:song];
+    }
+    [result close];
     
     return songs;
 }

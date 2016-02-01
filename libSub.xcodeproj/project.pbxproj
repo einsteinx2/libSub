@@ -312,6 +312,8 @@
 		533555A41C5EC5B500624F30 /* ISMSAbstractItemLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 533555A11C5EC5B500624F30 /* ISMSAbstractItemLoader.m */; };
 		533555A51C5EC5B500624F30 /* ISMSAbstractItemLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 533555A11C5EC5B500624F30 /* ISMSAbstractItemLoader.m */; };
 		5344F454166C03E50013B929 /* libSubImports.h in Headers */ = {isa = PBXBuildFile; fileRef = 5344F453166C03E50013B929 /* libSubImports.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53563EB81C5ED30D00F663C4 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 53563EB71C5ED30D00F663C4 /* FMDB.h */; };
+		53563EB91C5ED30D00F663C4 /* FMDB.h in Headers */ = {isa = PBXBuildFile; fileRef = 53563EB71C5ED30D00F663C4 /* FMDB.h */; };
 		536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		536C947E16618FA4005A73C6 /* LibSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C947D16618FA4005A73C6 /* LibSub.m */; };
 		536C959E166193AE005A73C6 /* ISMSDataModelObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958816619360005A73C6 /* ISMSDataModelObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -862,6 +864,7 @@
 		533555A01C5EC5B500624F30 /* ISMSAbstractItemLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSAbstractItemLoader.h; sourceTree = "<group>"; };
 		533555A11C5EC5B500624F30 /* ISMSAbstractItemLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSAbstractItemLoader.m; sourceTree = "<group>"; };
 		5344F453166C03E50013B929 /* libSubImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubImports.h; sourceTree = "<group>"; };
+		53563EB71C5ED30D00F663C4 /* FMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDB.h; sourceTree = "<group>"; };
 		536C947316618FA4005A73C6 /* libSub.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSub.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		536C947616618FA4005A73C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		536C947A16618FA4005A73C6 /* libSub-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "libSub-Prefix.pch"; sourceTree = "<group>"; };
@@ -1609,6 +1612,7 @@
 		536C97C016619AE3005A73C6 /* FMDB */ = {
 			isa = PBXGroup;
 			children = (
+				53563EB71C5ED30D00F663C4 /* FMDB.h */,
 				536C97C116619AE3005A73C6 /* FMDatabase.h */,
 				536C97C216619AE3005A73C6 /* FMDatabase.m */,
 				536C97C316619AE3005A73C6 /* FMDatabaseAdditions.h */,
@@ -1867,6 +1871,7 @@
 				53067E5C1694F11C00600396 /* SUSChatDAO.h in Headers */,
 				53067E5D1694F11C00600396 /* SUSLyricsDAO.h in Headers */,
 				53067E5E1694F11C00600396 /* SUSServerPlaylistsDAO.h in Headers */,
+				53563EB91C5ED30D00F663C4 /* FMDB.h in Headers */,
 				530ABE2B1A522158005ACE6B /* ISMSNewRootFoldersLoader.h in Headers */,
 				53067E5F1694F11C00600396 /* ISMSSong+DAO.h in Headers */,
 				53067E601694F11C00600396 /* SUSCoverArtDAO.h in Headers */,
@@ -2056,6 +2061,7 @@
 				53B3BD8116990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */,
 				53B3BD8516990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */,
 				53B3BD8916990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */,
+				53563EB81C5ED30D00F663C4 /* FMDB.h in Headers */,
 				53B3BD8D16990CFE00DCFC9C /* HTTPDataResponse.h in Headers */,
 				53B3BD9116990CFE00DCFC9C /* HTTPDynamicFileResponse.h in Headers */,
 				53A375B41A57320500318F78 /* ISMSItemLoader.h in Headers */,

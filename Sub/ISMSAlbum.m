@@ -15,20 +15,19 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT al.albumId, al.artistId, al.coverArtId, al.name, al.songCount, al.duration, al.createdDate, al.year, al.genre, ar.name\
-                                FROM albums AS al\
-                                LEFT JOIN artists AS ar ON a.artistId = ar.artistId\
-                                WHERE a.albumId = ?";
-            
-            FMResultSet *r = [db executeQuery:query, @(albumId)];
-            if ([r next])
-            {
-                foundRecord = YES;
-                [self _assignPropertiesFromResultSet:r];
-            }
-            [r close];
-        }];
+        
+        NSString *query = @"SELECT al.albumId, al.artistId, al.coverArtId, al.name, al.songCount, al.duration, al.createdDate, al.year, al.genre, ar.name "
+                          @"FROM albums AS al "
+                          @"LEFT JOIN artists AS ar ON a.artistId = ar.artistId"
+                          @"WHERE a.albumId = ?";
+        
+        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(albumId)];
+        if ([r next])
+        {
+            foundRecord = YES;
+            [self _assignPropertiesFromResultSet:r];
+        }
+        [r close];
         
         return foundRecord ? self : nil;
     }
@@ -192,21 +191,19 @@
 {
     NSMutableArray<ISMSAlbum*> *albums = [[NSMutableArray alloc] init];
     
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT al.albumId, al.artistId, al.coverArtId, al.name, al.songCount, al.duration, al.createdDate, al.year, al.genre, ar.name \
-                            FROM albums AS al\
-                            LEFT JOIN artists AS ar ON a.artistId = ar.artistId\
-                            WHERE a.artistId = ?";
-        
-        FMResultSet *r = [db executeQuery:query, @(artistId)];
-        while ([r next])
-        {
-            ISMSAlbum *album = [[ISMSAlbum alloc] init];
-            [album _assignPropertiesFromResultSet:r];
-            [albums addObject:album];
-        }
-        [r close];
-    }];
+    NSString *query = @"SELECT al.albumId, al.artistId, al.coverArtId, al.name, al.songCount, al.duration, al.createdDate, al.year, al.genre, ar.name "
+                      @"FROM albums AS al "
+                      @"LEFT JOIN artists AS ar ON a.artistId = ar.artistId "
+                      @"WHERE a.artistId = ?";
+    
+    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(artistId)];
+    while ([r next])
+    {
+        ISMSAlbum *album = [[ISMSAlbum alloc] init];
+        [album _assignPropertiesFromResultSet:r];
+        [albums addObject:album];
+    }
+    [r close];
     
     return albums;
 }

@@ -17,7 +17,12 @@
 
 @property (strong) NSString *databaseFolderPath;
 
-@property (strong) FMDatabaseQueue *songModelDbQueue;
+// Uses WAL for reading concurrently with writes
+//
+// Write using the FMDatabaseQueue so that all writes are sequential
+@property (strong) FMDatabaseQueue *songModelWritesDbQueue;
+// Read from the FMDatabase concurrently on any thread.
+@property (strong) FMDatabase *songModelReadDb;
 
 @property (strong) FMDatabaseQueue *allAlbumsDbQueue;
 @property (strong) FMDatabaseQueue *allSongsDbQueue;

@@ -59,12 +59,13 @@ LOG_LEVEL_ISUB_DEFAULT
 		[self setupAllSongsDb];
 	}
     
-    // Setup the new data model
-    NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db", self.databaseFolderPath, urlStringMd5];
+    // Setup the new data model (WAL enabled)
+    NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db;PRAGMA journal_mode=WAL;", self.databaseFolderPath, urlStringMd5];
     NSLog(@"new model db: %@", path);
-    self.songModelDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
-    [self.songModelDbQueue inDatabase:^(FMDatabase *db)
-    {
+    self.songModelReadDb = [FMDatabase databaseWithPath:path];
+    self.songModelWritesDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
+    [self.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
+    {        
         if (![db tableExists:@"songs"])
         {
             [db executeUpdate:@"CREATE TABLE songs (songId INTEGER PRIMARY KEY, folderId INTEGER, artistId INTEGER, albumId INTEGER, title TEXT, genre TEXT, coverArtId TEXT, path TEXT, suffix TEXT, transcodedSuffix TEXT, duration INTEGER, bitRate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, isVideo INTEGER)"];
@@ -1124,14 +1125,12 @@ LOG_LEVEL_ISUB_DEFAULT
 {
     NSMutableArray *ignoredArticles = [[NSMutableArray alloc] init];
     
-    [self.songModelDbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *r = [db executeQuery:@"SELECT name FROM ignoredArticles"];
-        while ([r next])
-        {
-            [ignoredArticles addObject:[r stringForColumnIndex:0]];
-        }
-        [r close];
-    }];
+    FMResultSet *r = [databaseS.songModelReadDb executeQuery:@"SELECT name FROM ignoredArticles"];
+    while ([r next])
+    {
+        [ignoredArticles addObject:[r stringForColumnIndex:0]];
+    }
+    [r close];
     
     return ignoredArticles;
 }

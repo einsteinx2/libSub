@@ -35,19 +35,17 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount\
-                                FROM artists AS ar\
-                                WHERE ar.artistId = ?";
-            
-            FMResultSet *r = [db executeQuery:query, @(artistId)];
-            if ([r next])
-            {
-                foundRecord = YES;
-                [self _assignPropertiesFromResultSet:r];
-            }
-            [r close];
-        }];
+        NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount "
+                          @"FROM artists AS ar "
+                          @"WHERE ar.artistId = ?";
+        
+        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(artistId)];
+        if ([r next])
+        {
+            foundRecord = YES;
+            [self _assignPropertiesFromResultSet:r];
+        }
+        [r close];
         
         return foundRecord ? self : nil;
     }
@@ -100,7 +98,7 @@
 - (BOOL)_insertModel:(BOOL)replace
 {
     __block BOOL success = NO;
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
          NSString *query = [insertType stringByAppendingString:@" INTO artists (artistId, name, albumCount) VALUES (?, ?, ?)"];
@@ -123,7 +121,7 @@
 - (BOOL)deleteModel
 {
     __block BOOL success = NO;
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *query = @"DELETE FROM artists WHERE artistId = ?";
          success = [db executeUpdate:query, self.artistId];
@@ -158,23 +156,21 @@
     NSMutableArray *artists = [[NSMutableArray alloc] init];
     NSMutableArray *artistsNumbers = [[NSMutableArray alloc] init];
     
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount\
-                            FROM artists AS ar";
+    NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount "
+                      @"FROM artists AS ar";
+    
+    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query];
+    while ([r next])
+    {
+        ISMSArtist *artist = [[ISMSArtist alloc] init];
+        [artist _assignPropertiesFromResultSet:r];
         
-        FMResultSet *r = [db executeQuery:query];
-        while ([r next])
-        {
-            ISMSArtist *artist = [[ISMSArtist alloc] init];
-            [artist _assignPropertiesFromResultSet:r];
-            
-            if (artist.name.length > 0 && isnumber([artist.name characterAtIndex:0]))
-                [artistsNumbers addObject:artist];
-            else
-                [artists addObject:artist];
-        }
-        [r close];
-    }];
+        if (artist.name.length > 0 && isnumber([artist.name characterAtIndex:0]))
+            [artistsNumbers addObject:artist];
+        else
+            [artists addObject:artist];
+    }
+    [r close];
     
     NSArray *ignoredArticles = databaseS.ignoredArticles;
     
@@ -192,7 +188,7 @@
 + (BOOL)deleteAllArtists
 {
     __block BOOL success = NO;
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *query = @"DELETE FROM artists";
          success = [db executeUpdate:query];

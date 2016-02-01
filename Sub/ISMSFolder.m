@@ -29,19 +29,17 @@ static NSArray *_ignoredArticles = nil;
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name\
-                                FROM folders AS f\
-                                WHERE f.folderId = ?";
-            
-            FMResultSet *r = [db executeQuery:query, @(folderId)];
-            if ([r next])
-            {
-                foundRecord = YES;
-                [self _assignPropertiesFromResultSet:r];
-            }
-            [r close];
-        }];
+        NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
+                          @"FROM folders AS f "
+                          @"WHERE f.folderId = ?";
+        
+        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(folderId)];
+        if ([r next])
+        {
+            foundRecord = YES;
+            [self _assignPropertiesFromResultSet:r];
+        }
+        [r close];
         
         return foundRecord ? self : nil;
     }
@@ -62,13 +60,11 @@ static NSArray *_ignoredArticles = nil;
 {
     NSMutableArray *ignoredArticles = [[NSMutableArray alloc] init];
     
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *r = [db executeQuery:@"SELECT name FROM ignoredArticles"];
-        while ([r next])
-        {
-            [ignoredArticles addObject:[r stringForColumnIndex:0]];
-        }
-    }];
+    FMResultSet *r = [databaseS.songModelReadDb executeQuery:@"SELECT name FROM ignoredArticles"];
+    while ([r next])
+    {
+        [ignoredArticles addObject:[r stringForColumnIndex:0]];
+    }
     
     _ignoredArticles = ignoredArticles;
 }
@@ -76,7 +72,7 @@ static NSArray *_ignoredArticles = nil;
 - (BOOL)_insertModel:(BOOL)replace
 {
     __block BOOL success = NO;
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
          NSString *query = [insertType stringByAppendingString:@" INTO folders (folderId, parentFolderId, mediaFolderId, coverArtId, name) VALUES (?, ?, ?, ?, ?)"];
@@ -99,7 +95,7 @@ static NSArray *_ignoredArticles = nil;
 - (BOOL)deleteModel
 {
     __block BOOL success = NO;
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db)
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
     {
         NSString *query = @"DELETE FROM folders WHERE folderId = ?";
         success = [db executeUpdate:query, self.folderId];
@@ -147,20 +143,19 @@ static NSArray *_ignoredArticles = nil;
 {
     NSMutableArray<ISMSFolder*> *folders = [[NSMutableArray alloc] init];
     
-    [databaseS.songModelDbQueue inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name\
-                            FROM folders AS f\
-                            WHERE f.parentFolderId = ?";
-        
-        FMResultSet *r = [db executeQuery:query, @(folderId)];
-        while ([r next])
-        {
-            ISMSFolder *folder = [[ISMSFolder alloc] init];
-            [folder _assignPropertiesFromResultSet:r];
-            [folders addObject:folder];
-        }
-        [r close];
-    }];
+    NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
+                      @"FROM folders AS f "
+                      @"WHERE f.parentFolderId = ?";
+    
+    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(folderId)];
+    while ([r next])
+    {
+        ISMSFolder *folder = [[ISMSFolder alloc] init];
+        [folder _assignPropertiesFromResultSet:r];
+        [folders addObject:folder];
+    }
+    [r close];
+
     
     return folders;
 }
