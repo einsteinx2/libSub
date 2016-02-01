@@ -61,12 +61,16 @@ LOG_LEVEL_ISUB_DEFAULT
 	}
     
     // Setup the new data model (WAL enabled)
-    NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db;PRAGMA journal_mode=WAL;", self.databaseFolderPath, urlStringMd5];
+    NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db", self.databaseFolderPath, urlStringMd5];
     NSLog(@"new model db: %@", path);
     self.songModelReadDb = [FMDatabase databaseWithPath:path];
+    [self.songModelReadDb open];
+    [self.songModelReadDb executeUpdate:@"PRAGMA journal_mode=WAL"];
     self.songModelWritesDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
     [self.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
-    {        
+    {
+        [db executeUpdate:@"PRAGMA journal_mode=WAL"];
+        
         if (![db tableExists:@"songs"])
         {
             [db executeUpdate:@"CREATE TABLE songs (songId INTEGER PRIMARY KEY, folderId INTEGER, artistId INTEGER, albumId INTEGER, title TEXT, genre TEXT, coverArtId TEXT, path TEXT, suffix TEXT, transcodedSuffix TEXT, duration INTEGER, bitRate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, isVideo INTEGER)"];
@@ -353,7 +357,7 @@ LOG_LEVEL_ISUB_DEFAULT
             [db executeUpdate:@"ALTER TABLE cachedSongs ADD COLUMN discNumber INTEGER"];
         }
         
-		[db executeUpdate:@"CREATE INDEX md5 IF NOT EXISTS ON cachedSongs (md5)"];
+		[db executeUpdate:@"CREATE INDEX IF NOT EXISTS md5 ON cachedSongs (md5)"];
 		if (![db tableExists:@"cachedSongsLayout"]) 
 		{
 			[db executeUpdate:@"CREATE TABLE cachedSongsLayout (md5 TEXT UNIQUE, genre TEXT, segs INTEGER, seg1 TEXT, seg2 TEXT, seg3 TEXT, seg4 TEXT, seg5 TEXT, seg6 TEXT, seg7 TEXT, seg8 TEXT, seg9 TEXT)"];
