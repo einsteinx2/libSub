@@ -6,6 +6,9 @@
 //  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
+#import "NSMutableURLRequest+PMS.h"
+#import "libSubImports.h"
+
 @implementation NSMutableURLRequest (PMS)
 
 + (NSMutableURLRequest *)requestWithPMSAction:(NSString *)action urlString:(NSString *)url parameters:(NSDictionary *)parameters byteOffset:(NSUInteger)offset

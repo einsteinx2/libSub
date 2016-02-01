@@ -13,6 +13,7 @@
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
 #import "PlaylistSingleton.h"
+#import "libSubDefines.h"
 
 #define settingsS ((SavedSettings *)[SavedSettings sharedInstance])
 
@@ -24,63 +25,24 @@ typedef enum
 
 @class AudioEngine;
 @interface SavedSettings : NSObject 
-{    
-	__strong NSUserDefaults *_userDefaults;
-	
-	__strong NSMutableArray *_serverList;
-	__strong NSString *_serverType;
-	__strong NSString *_urlString;
-	__strong NSString *_username;
-	__strong NSString *_password;
-    __strong NSString *_uuid;
-    __strong NSString *_lastQueryId;
-    __strong NSString *_sessionId;
-	
-	BOOL _isPopupsEnabled;
-	BOOL _isJukeboxEnabled;
-	BOOL _isScreenSleepEnabled;
-	float _gainMultiplier;
-	BOOL _isPartialCacheNextSong;
-	BOOL _isExtraPlayerControlsShowing;
-	BOOL _isPlayerPlaylistShowing;
-	NSUInteger _quickSkipNumberOfSeconds;
-	NSUInteger _audioEngineStartNumberOfSeconds;
-	NSUInteger _audioEngineBufferNumberOfSeconds;
-	BOOL _isShowLargeSongInfoInPlayer;
-	BOOL _isLockScreenArtEnabled;
-	BOOL _isEqualizerOn;
-	
-	// State Saving
-	BOOL _isPlaying;
-	BOOL _isShuffle;
-	NSInteger _normalPlaylistIndex;
-	NSInteger _shufflePlaylistIndex;
-	ISMSRepeatMode _repeatMode;
-	NSInteger _bitRate;
-	unsigned long long _byteOffset;
-	double _secondsOffset;
-	BOOL _isRecover;
-	NSInteger _recoverSetting;
-    NSString *_currentTwitterAccount;
-}
 
 @property BOOL isOfflineMode;
 
 // Server Login Settings
-@property (strong) NSMutableArray *serverList;
-@property (copy) NSString *serverType;
-@property (copy) NSString *urlString;
-@property (copy) NSString *username;
-@property (copy) NSString *password;
-@property (copy) NSString *uuid;
-@property (copy) NSString *lastQueryId;
-@property (copy) NSString *sessionId;
+@property (nullable, strong) NSMutableArray *serverList;
+@property (nullable, copy) NSString *serverType;
+@property (nullable, copy) NSString *urlString;
+@property (nullable, copy) NSString *username;
+@property (nullable, copy) NSString *password;
+@property (nullable, copy) NSString *uuid;
+@property (nullable, copy) NSString *lastQueryId;
+@property (nullable, copy) NSString *sessionId;
 
-@property (copy) NSString *redirectUrlString;
+@property (nullable, copy) NSString *redirectUrlString;
 
 // Root Folders Settings
-@property (strong) NSDate *rootFoldersReloadTime;
-@property (strong) NSNumber *rootFoldersSelectedFolderId;
+@property (nullable, strong) NSDate *rootFoldersReloadTime;
+@property (nullable, strong) NSNumber *rootFoldersSelectedFolderId;
 
 // Lite Version Properties
 @property (readonly) BOOL isPlaylistUnlocked;
@@ -94,7 +56,7 @@ typedef enum
 @property (readonly) NSInteger currentMaxBitrate;
 @property NSInteger maxVideoBitrateWifi;
 @property NSInteger maxVideoBitrate3G;
-@property (readonly) NSArray *currentVideoBitrates;
+@property (nullable, readonly) NSArray *currentVideoBitrates;
 @property BOOL isSongCachingEnabled;
 @property BOOL isNextSongCacheEnabled;
 @property BOOL isBackupCacheEnabled;
@@ -143,7 +105,7 @@ typedef enum
 @property NSUInteger oneTimeRunIncrementor;
 
 @property BOOL isDisableUsageOver3G;
-@property (strong) NSString *currentTwitterAccount;
+@property (nullable, strong) NSString *currentTwitterAccount;
 
 @property BOOL isCacheSizeTableFinished;
 
@@ -158,24 +120,18 @@ typedef enum
 
 // Document Paths
 
-- (NSString *)documentsPath;
-- (NSString *)databasePath;
-- (NSString *)cachesPath;
-- (NSString *)currentCacheRoot;
-- (NSString *)songCachePath;
-- (NSString *)tempCachePath;
-
-/*- (BOOL)isSelectedIndexForBassEffectADefault:(BassEffectType)type;
-- (NSUInteger)selectedIndexForBassEffect:(BassEffectType)type;
-- (void)selectedIndexForBassEffect:(BassEffectType)type index:(NSUInteger)index isDefault:(BOOL)isDefault;*/
-
-//- (NSString *)formatFileSize:(unsigned long long int)size;
+- (nonnull NSString *)documentsPath;
+- (nonnull NSString *)databasePath;
+- (nonnull NSString *)cachesPath;
+- (nonnull NSString *)currentCacheRoot;
+- (nonnull NSString *)songCachePath;
+- (nonnull NSString *)tempCachePath;
 
 - (void)setupSaveState;
 - (void)loadState;
 - (void)saveState;
 
-+ (instancetype)sharedInstance;
++ (nonnull instancetype)sharedInstance;
 
 @end
 

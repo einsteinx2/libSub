@@ -50,6 +50,7 @@
 
 #import "SFHFKeychainUtils.h"
 #import "MKStoreManager.h"
+#import "NSArray+Additions.h"
 
 @interface MKStoreManager (PrivateMethods)
 

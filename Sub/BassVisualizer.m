@@ -7,6 +7,7 @@
 //
 
 #import "BassVisualizer.h"
+#import "libSubImports.h"
 
 @interface BassVisualizer()
 {

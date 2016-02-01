@@ -20,7 +20,8 @@
 @property (readonly) unsigned long long freeSpace;
 @property (readonly) NSUInteger numberOfCachedSongs;
 
-+ (id)sharedInstance;
++ (nonnull instancetype)sharedInstance;
+
 + (void)setAllCachedSongsToBackup;
 + (void)setAllCachedSongsToNotBackup;
 

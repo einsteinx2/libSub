@@ -6,6 +6,7 @@
 //  Copyright 2011 Ben Baron. All rights reserved.
 //
 
+@protocol ISMSLoaderDelegate;
 @protocol ISMSLoaderManager <NSObject>
 
 @required

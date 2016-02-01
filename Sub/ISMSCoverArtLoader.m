@@ -7,6 +7,7 @@
 //
 
 #import "ISMSCoverArtLoader.h"
+#import "libSubImports.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"
 

@@ -7,6 +7,7 @@
 //
 
 #import "SUSSubFolderDAO.h"
+#import "libSubImports.h"
 #import "ISMSSubFolderLoader.h"
 #import "MusicSingleton.h"
 

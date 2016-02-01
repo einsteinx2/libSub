@@ -7,6 +7,7 @@
 //
 
 #import "BassEffectDAO.h"
+#import <CoreGraphics/CGBase.h>
 
 @interface BassEffectValue : NSObject
 

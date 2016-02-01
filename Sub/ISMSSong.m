@@ -7,6 +7,7 @@
 //
 
 #import "ISMSSong.h"
+#import "libSubImports.h"
 #import "ISMSFolder.h"
 #import "ISMSArtist.h"
 #import "ISMSAlbum.h"

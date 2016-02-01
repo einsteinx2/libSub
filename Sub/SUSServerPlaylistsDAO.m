@@ -7,6 +7,7 @@
 //
 
 #import "SUSServerPlaylistsDAO.h"
+#import "libSubImports.h"
 
 @implementation SUSServerPlaylistsDAO
 

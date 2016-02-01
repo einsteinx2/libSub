@@ -6,6 +6,8 @@
 //  Copyright 2010 Ben Baron. All rights reserved.
 //
 
+#import "MusicSingleton.h"
+#import "libSubImports.h"
 #import "JukeboxXMLParser.h"
 #import "JukeboxConnectionDelegate.h"
 #import "ISMSStreamHandler.h"

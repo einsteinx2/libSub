@@ -7,6 +7,7 @@
 //
 
 #import "ISMSLyricsLoader.h"
+#import "libSubImports.h"
 #import "NSMutableURLRequest+SUS.h"
 
 @implementation ISMSLyricsLoader

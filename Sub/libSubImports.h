@@ -9,8 +9,6 @@
 #ifndef libSub_libSubImports_h
 #define libSub_libSubImports_h
 
-#import "libSubDefines.h"
-
 // Frameworks
 #ifdef IOS
 #import "SBJson.h"
@@ -19,6 +17,8 @@
 //#import <SBJson/SBJson.h>
 //#import <EX2KitOSX/EX2Kit.h>
 #endif
+
+#import "libSubDefines.h"
 
 #import <ZipKit/ZipKit.h>
 #import "RXMLElement.h"
@@ -46,6 +46,7 @@
 // Data Model
 #import "ISMSDataModelObjects.h"
 #import "ISMSLoader.h"
+#import "ISMSLoaders.h"
 #import "ISMSDataAccessObjects.h"
 #import "ISMSErrorDomain.h"
 #import "SUSErrorDomain.h"

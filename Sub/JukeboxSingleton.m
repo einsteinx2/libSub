@@ -7,6 +7,7 @@
 //
 
 #import "JukeboxSingleton.h"
+#import "libSubImports.h"
 #import "JukeboxConnectionDelegate.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"

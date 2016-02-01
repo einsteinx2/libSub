@@ -7,8 +7,9 @@
 //
 
 #import "ISMSLoaderManager.h"
+#import "ISMSLoaderDelegate.h"
 
-@class FMDatabase, ISMSCoverArtLoader;
+@class FMDatabase, ISMSCoverArtLoader, UIImage;
 @interface SUSCoverArtDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
 @property (weak) NSObject<ISMSLoaderDelegate> *delegate;

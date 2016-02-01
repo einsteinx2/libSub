@@ -7,6 +7,7 @@
 //
 
 #import "ISMSChatMessage.h"
+#import "libSubImports.h"
 
 @implementation ISMSChatMessage
 

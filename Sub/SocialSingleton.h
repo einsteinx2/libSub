@@ -11,7 +11,7 @@
 
 #define socialS ((SocialSingleton *)[SocialSingleton sharedInstance])
 
-@class Song;
+@class ISMSSong;
 
 @interface SocialSingleton : NSObject
 

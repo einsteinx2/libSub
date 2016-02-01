@@ -7,6 +7,7 @@
 //
 
 #import "iSubBassGaplessPlayerDelegate.h"
+#import "libSubImports.h"
 #import "BassGaplessPlayer.h"
 #import "ISMSStreamHandler.h"
 

@@ -7,6 +7,7 @@
 //
 
 #import "ISMSStreamHandlerDelegate.h"
+#import "libSubImports.h"
 
 #define ISMSNumSecondsToPartialPreCacheDefault 45
 #define ISMSNumBytesToPartialPreCache(bitrate) (BytesForSecondsAtBitrate(self.secondsToPartialPrecache, bitrate))

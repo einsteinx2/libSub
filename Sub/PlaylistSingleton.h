@@ -26,9 +26,9 @@ typedef enum
 	ISMSRepeatMode repeatMode;
 }
 
-+ (instancetype)sharedInstance;
++ (nonnull instancetype)sharedInstance;
 
-- (ISMSSong *)songForIndex:(NSUInteger)index;
+- (nullable ISMSSong *)songForIndex:(NSUInteger)index;
 - (NSInteger)decrementIndex;
 - (NSInteger)incrementIndex;
 
@@ -36,10 +36,10 @@ typedef enum
 - (NSUInteger)indexForOffsetFromCurrentIndex:(NSInteger)offset;
 
 // Convenience properties
-- (ISMSSong *)prevSong;
-- (ISMSSong *)currentDisplaySong;
-- (ISMSSong *)currentSong;
-- (ISMSSong *)nextSong;
+- (nullable ISMSSong *)prevSong;
+- (nullable ISMSSong *)currentDisplaySong;
+- (nullable ISMSSong *)currentSong;
+- (nullable ISMSSong *)nextSong;
 
 @property NSInteger shuffleIndex;
 @property NSInteger normalIndex;
@@ -53,7 +53,7 @@ typedef enum
 
 @property BOOL isShuffle;
 
-- (void)deleteSongs:(NSArray *)indexes;
+- (void)deleteSongs:(nonnull NSArray *)indexes;
 - (void)shuffleToggle;
 
 @end

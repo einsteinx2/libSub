@@ -8,6 +8,7 @@
 
 #import "ISMSPersistedModel.h"
 
+@class ISMSSong;
 @interface ISMSFolder : NSObject <ISMSPersistedModel>
 
 @property (nullable, strong) NSNumber *folderId;

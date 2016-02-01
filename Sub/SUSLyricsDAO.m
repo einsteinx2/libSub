@@ -7,6 +7,7 @@
 //
 
 #import "SUSLyricsDAO.h"
+#import "libSubImports.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation SUSLyricsDAO

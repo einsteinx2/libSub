@@ -7,6 +7,7 @@
 //
 
 #import "ISMSArtist.h"
+#import "libSubImports.h"
 
 @interface ISMSArtist()
 {

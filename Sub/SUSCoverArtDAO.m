@@ -7,6 +7,7 @@
 //
 
 #import "SUSCoverArtDAO.h"
+#import "libSubImports.h"
 
 #import "ISMSCoverArtLoader.h"
 

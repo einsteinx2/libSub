@@ -8,6 +8,7 @@
 
 #import "ISMSLoader.h"
 
+@class ISMSSong;
 @interface ISMSScrobbleLoader : ISMSLoader
 
 @property (nonatomic, strong) ISMSSong *aSong;

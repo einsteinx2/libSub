@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
-#import "ISMSStatusLoader.h"
+#import "ISMSLoader.h"
 
 @interface ISMSStatusLoader : ISMSLoader
 

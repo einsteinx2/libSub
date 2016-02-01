@@ -6,6 +6,9 @@
 //  Copyright (c) 2011 Ben Baron. All rights reserved.
 //
 
+#import "NSMutableURLRequest+SUS.h"
+#import "libSubImports.h"
+
 @implementation NSMutableURLRequest (SUS)
 
 static NSArray *ver1_0_0 = nil;

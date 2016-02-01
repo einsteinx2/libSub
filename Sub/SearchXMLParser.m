@@ -7,6 +7,7 @@
 //
 
 #import "SearchXMLParser.h"
+#import "libSubImports.h"
 
 @implementation SearchXMLParser
 

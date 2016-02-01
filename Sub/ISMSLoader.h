@@ -41,5 +41,3 @@ typedef void (^LoaderCallback)(BOOL success,  NSError * _Nullable error, ISMSLoa
 - (void)informDelegateLoadingFinished;
 
 @end
-
-#import "ISMSLoaders.h"

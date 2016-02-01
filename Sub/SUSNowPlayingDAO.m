@@ -7,6 +7,7 @@
 //
 
 #import "SUSNowPlayingDAO.h"
+#import "libSubImports.h"
 
 @implementation SUSNowPlayingDAO
 

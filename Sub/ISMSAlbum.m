@@ -7,6 +7,7 @@
 //
 
 #import "ISMSAlbum.h"
+#import "libSubImports.h"
 
 @implementation ISMSAlbum
 

@@ -7,6 +7,7 @@
 //
 
 #import "BassEffectValue.h"
+#import "libSubImports.h"
 
 @implementation BassEffectValue
 

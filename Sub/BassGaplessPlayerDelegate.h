@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
-@class Song, BassGaplessPlayer;
+@class ISMSSong, BassGaplessPlayer;
 @protocol BassGaplessPlayerDelegate <NSObject>
 
 @optional

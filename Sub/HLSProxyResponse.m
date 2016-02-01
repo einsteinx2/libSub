@@ -6,10 +6,11 @@
 //  Copyright (c) 2013 Einstein Times Two Software. All rights reserved.
 //
 
-static const int ddLogLevel = DDLogLevelError;
-
 #import "HLSProxyResponse.h"
+#import "libSubImports.h"
 #import "HTTPConnection.h"
+
+static const int ddLogLevel = DDLogLevelError;
 
 @interface HLSProxyResponse ()
 {

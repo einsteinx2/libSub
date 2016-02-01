@@ -7,8 +7,9 @@
 //
 
 #import "ISMSLoaderManager.h"
+#import "ISMSLoaderDelegate.h"
 
-@class SUSServerPlaylistsLoader, FMDatabase;
+@class ISMSServerPlaylistsLoader, FMDatabase;
 @interface SUSServerPlaylistsDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
 @property (weak) NSObject <ISMSLoaderDelegate> *delegate;

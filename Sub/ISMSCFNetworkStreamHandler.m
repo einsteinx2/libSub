@@ -7,6 +7,7 @@
 //
 
 #import "ISMSCFNetworkStreamHandler.h"
+#import "LibSub.h"
 #import "BassGaplessPlayer.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"

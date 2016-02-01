@@ -7,6 +7,7 @@
 //
 
 #import "SUSServerPlaylist.h"
+#import "libSubImports.h"
 
 @implementation SUSServerPlaylist
 

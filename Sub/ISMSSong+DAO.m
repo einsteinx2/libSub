@@ -7,6 +7,7 @@
 //
 
 #import "ISMSSong+DAO.h"
+#import "libSubImports.h"
 #import "FMDatabaseQueue.h"
 
 #import "PlaylistSingleton.h"

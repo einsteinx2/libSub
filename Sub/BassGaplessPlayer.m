@@ -7,6 +7,7 @@
 //
 
 #import "BassGaplessPlayer.h"
+#import "libSubImports.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface BassGaplessPlayer ()

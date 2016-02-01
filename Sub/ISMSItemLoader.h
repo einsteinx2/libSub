@@ -6,8 +6,6 @@
 //  Copyright (c) 2015 Einstein Times Two Software. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @protocol ISMSItemLoader <NSObject>
 
 @property (nullable, weak) NSObject<ISMSLoaderDelegate> *delegate;

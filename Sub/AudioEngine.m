@@ -7,6 +7,7 @@
 //
 
 #import "AudioEngine.h"
+#import "libSubImports.h"
 #import "BassParamEqValue.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "MusicSingleton.h"

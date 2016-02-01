@@ -7,6 +7,7 @@
 //
 
 #import "ISMSMediaFolder.h"
+#import "libSubImports.h"
 
 @implementation ISMSMediaFolder
 

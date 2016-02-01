@@ -7,6 +7,7 @@
 //
 
 #import "SavedSettings.h"
+#import "LibSub.h"
 #import "PlaylistSingleton.h"
 #import "BassGaplessPlayer.h"
 
@@ -19,6 +20,48 @@
 #define DEFAULT_URL @"http://isubapp.com:9001"
 #define DEFAULT_USER_NAME @"isub-guest"
 #define DEFAULT_PASSWORD @"1sub1snumb3r0n3"
+
+@interface SavedSettings ()
+{
+    __strong NSUserDefaults *_userDefaults;
+    
+    __strong NSMutableArray *_serverList;
+    __strong NSString *_serverType;
+    __strong NSString *_urlString;
+    __strong NSString *_username;
+    __strong NSString *_password;
+    __strong NSString *_uuid;
+    __strong NSString *_lastQueryId;
+    __strong NSString *_sessionId;
+    
+    BOOL _isPopupsEnabled;
+    BOOL _isJukeboxEnabled;
+    BOOL _isScreenSleepEnabled;
+    float _gainMultiplier;
+    BOOL _isPartialCacheNextSong;
+    BOOL _isExtraPlayerControlsShowing;
+    BOOL _isPlayerPlaylistShowing;
+    NSUInteger _quickSkipNumberOfSeconds;
+    NSUInteger _audioEngineStartNumberOfSeconds;
+    NSUInteger _audioEngineBufferNumberOfSeconds;
+    BOOL _isShowLargeSongInfoInPlayer;
+    BOOL _isLockScreenArtEnabled;
+    BOOL _isEqualizerOn;
+    
+    // State Saving
+    BOOL _isPlaying;
+    BOOL _isShuffle;
+    NSInteger _normalPlaylistIndex;
+    NSInteger _shufflePlaylistIndex;
+    ISMSRepeatMode _repeatMode;
+    NSInteger _bitRate;
+    unsigned long long _byteOffset;
+    double _secondsOffset;
+    BOOL _isRecover;
+    NSInteger _recoverSetting;
+    NSString *_currentTwitterAccount;
+}
+@end
 
 @implementation SavedSettings
 
@@ -561,7 +604,7 @@
 - (NSString *)documentsPath
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-	return [paths objectAtIndexSafe: 0];
+	return paths[0];
 }
 
 - (NSString *)databasePath
@@ -572,7 +615,7 @@
 - (NSString *)cachesPath
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-	return [paths objectAtIndexSafe:0];
+	return paths[0];
 }
 
 // As of 5.0.1, it's possible to mark files in the Documents folder to not be backed up. Therefore

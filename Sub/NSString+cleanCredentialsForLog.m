@@ -7,6 +7,7 @@
 //
 
 #import "NSString+cleanCredentialsForLog.h"
+#import "libSubImports.h"
 
 @implementation NSString (cleanCredentialsForLog)
 

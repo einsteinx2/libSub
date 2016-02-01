@@ -7,6 +7,7 @@
 //
 
 #import "ISMSLoaderManager.h"
+#import "ISMSLoaderDelegate.h"
 
 @class FMDatabase, ISMSArtist, ISMSAlbum, ISMSSong, ISMSSubFolderLoader;
 

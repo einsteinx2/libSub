@@ -13,6 +13,7 @@
 
 #define jukeboxS ((JukeboxSingleton *)[JukeboxSingleton sharedInstance])
 
+@class EX2SimpleConnectionQueue;
 @interface JukeboxSingleton : NSObject
 
 @property BOOL jukeboxIsPlaying;

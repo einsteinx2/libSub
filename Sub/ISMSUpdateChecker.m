@@ -7,6 +7,7 @@
 //
 
 #import "ISMSUpdateChecker.h"
+#import "libSubImports.h"
 
 @interface ISMSUpdateChecker ()
 @property (strong) ISMSUpdateChecker *selfRef;

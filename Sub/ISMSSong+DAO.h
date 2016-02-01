@@ -7,6 +7,7 @@
 //
 
 #import "ISMSSong.h"
+#import <CoreGraphics/CGBase.h>
 
 @class FMDatabase, FMDatabaseQueue, FMResultSet;
 @interface ISMSSong (DAO)

@@ -7,6 +7,7 @@
 //
 
 #import "DatabaseSingleton.h"
+#import "libSubImports.h"
 #import "ISMSQueueAllLoader.h"
 #import "PlaylistSingleton.h"
 #import "ISMSStreamManager.h"
@@ -672,18 +673,18 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)closeAllDatabases
 {
-	[self.allAlbumsDbQueue close]; self.allAlbumsDbQueue = nil;
-	[self.allSongsDbQueue close]; self.allSongsDbQueue = nil;
-	[self.genresDbQueue close]; self.genresDbQueue = nil;
-	[self.albumListCacheDbQueue close]; self.albumListCacheDbQueue = nil;
-	[self.coverArtCacheDb540Queue close]; self.coverArtCacheDb540Queue = nil;
-	[self.coverArtCacheDb320Queue close]; self.coverArtCacheDb320Queue = nil;
-	[self.coverArtCacheDb60Queue close]; self.coverArtCacheDb60Queue = nil;
-	[self.currentPlaylistDbQueue close]; self.currentPlaylistDbQueue = nil;
-	[self.localPlaylistsDbQueue close]; self.localPlaylistsDbQueue = nil;
-	[self.songCacheDbQueue close]; self.songCacheDbQueue = nil;
-	[self.cacheQueueDbQueue close]; self.cacheQueueDbQueue = nil;
-	[self.bookmarksDbQueue close]; self.bookmarksDbQueue = nil;	
+	[self.allAlbumsDbQueue close]; //self.allAlbumsDbQueue = nil;
+	[self.allSongsDbQueue close]; //self.allSongsDbQueue = nil;
+	[self.genresDbQueue close]; //self.genresDbQueue = nil;
+	[self.albumListCacheDbQueue close]; //self.albumListCacheDbQueue = nil;
+	[self.coverArtCacheDb540Queue close]; //self.coverArtCacheDb540Queue = nil;
+	[self.coverArtCacheDb320Queue close]; //self.coverArtCacheDb320Queue = nil;
+	[self.coverArtCacheDb60Queue close]; //self.coverArtCacheDb60Queue = nil;
+	[self.currentPlaylistDbQueue close]; //self.currentPlaylistDbQueue = nil;
+	[self.localPlaylistsDbQueue close]; //self.localPlaylistsDbQueue = nil;
+	[self.songCacheDbQueue close]; //self.songCacheDbQueue = nil;
+	[self.cacheQueueDbQueue close]; //self.cacheQueueDbQueue = nil;
+	[self.bookmarksDbQueue close]; //self.bookmarksDbQueue = nil;
 }
 
 - (void)resetCoverArtCache

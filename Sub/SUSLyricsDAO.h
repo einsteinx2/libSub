@@ -7,7 +7,9 @@
 //
 
 #import "ISMSLoaderManager.h"
+#import "ISMSLoaderDelegate.h"
 
+@class ISMSLyricsLoader;
 @interface SUSLyricsDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
 @property (weak) NSObject <ISMSLoaderDelegate> *delegate;

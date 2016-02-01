@@ -7,6 +7,7 @@
 //
 
 #import "SocialSingleton.h"
+#import "libSubImports.h"
 #import "BassGaplessPlayer.h"
 #import "PlaylistSingleton.h"
 #import "ISMSStreamManager.h"

@@ -15,33 +15,33 @@
 
 @interface DatabaseSingleton : NSObject 
 
-@property (strong) NSString *databaseFolderPath;
+@property (nonnull, strong) NSString *databaseFolderPath;
 
 // Uses WAL for reading concurrently with writes
 //
 // Write using the FMDatabaseQueue so that all writes are sequential
-@property (strong) FMDatabaseQueue *songModelWritesDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *songModelWritesDbQueue;
 // Read from the FMDatabase concurrently on any thread.
-@property (strong) FMDatabase *songModelReadDb;
+@property (nonnull, strong) FMDatabase *songModelReadDb;
 
-@property (strong) FMDatabaseQueue *allAlbumsDbQueue;
-@property (strong) FMDatabaseQueue *allSongsDbQueue;
-@property (strong) FMDatabaseQueue *coverArtCacheDb540Queue;
-@property (strong) FMDatabaseQueue *coverArtCacheDb320Queue;
-@property (strong) FMDatabaseQueue *coverArtCacheDb60Queue;
-@property (strong) FMDatabaseQueue *albumListCacheDbQueue;
-@property (strong) FMDatabaseQueue *genresDbQueue;
-@property (strong) FMDatabaseQueue *currentPlaylistDbQueue;
-@property (strong) FMDatabaseQueue *localPlaylistsDbQueue;
-@property (strong) FMDatabaseQueue *songCacheDbQueue;
-@property (strong) FMDatabaseQueue *cacheQueueDbQueue;
-@property (strong) FMDatabaseQueue *lyricsDbQueue;
-@property (strong) FMDatabaseQueue *bookmarksDbQueue;
-@property (strong) FMDatabaseQueue *metadataDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *allAlbumsDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *allSongsDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *coverArtCacheDb540Queue;
+@property (nonnull, strong) FMDatabaseQueue *coverArtCacheDb320Queue;
+@property (nonnull, strong) FMDatabaseQueue *coverArtCacheDb60Queue;
+@property (nonnull, strong) FMDatabaseQueue *albumListCacheDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *genresDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *currentPlaylistDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *localPlaylistsDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *songCacheDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *cacheQueueDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *lyricsDbQueue;
+@property (nonnull, strong) FMDatabaseQueue *bookmarksDbQueue;
+@property (nullable, strong) FMDatabaseQueue *metadataDbQueue;
 
-@property (strong) ISMSQueueAllLoader *queueAll;
+@property (nonnull, strong) ISMSQueueAllLoader *queueAll;
 
-+ (instancetype)sharedInstance;
++ (nonnull instancetype)sharedInstance;
 + (void) setAllSongsToBackup;
 + (void) setAllSongsToNotBackup;
 
@@ -58,31 +58,31 @@
 
 - (void)setupAllSongsDb;
 
-- (void)createServerPlaylistTable:(NSString *)md5;
-- (void)removeServerPlaylistTable:(NSString *)md5;
+- (void)createServerPlaylistTable:(nonnull NSString *)md5;
+- (void)removeServerPlaylistTable:(nonnull NSString *)md5;
 
-- (ISMSAlbum *)albumFromDbRow:(NSUInteger)row inTable:(NSString *)table inDatabaseQueue:(FMDatabaseQueue *)dbQueue;
-- (ISMSAlbum *)albumFromDbRow:(NSUInteger)row inTable:(NSString *)table inDatabase:(FMDatabase *)db;
-- (BOOL)insertAlbumIntoFolderCache:(ISMSAlbum *)anAlbum forId:(NSString *)folderId;
-- (BOOL)insertAlbum:(ISMSAlbum *)anAlbum intoTable:(NSString *)table inDatabaseQueue:(FMDatabaseQueue *)dbQueue;
-- (BOOL)insertAlbum:(ISMSAlbum *)anAlbum intoTable:(NSString *)table inDatabase:(FMDatabase *)db;
+- (nullable ISMSAlbum *)albumFromDbRow:(NSUInteger)row inTable:(nonnull NSString *)table inDatabaseQueue:(nonnull FMDatabaseQueue *)dbQueue;
+- (nullable ISMSAlbum *)albumFromDbRow:(NSUInteger)row inTable:(nonnull NSString *)table inDatabase:(nonnull FMDatabase *)db;
+- (BOOL)insertAlbumIntoFolderCache:(nonnull ISMSAlbum *)anAlbum forId:(nonnull NSString *)folderId;
+- (BOOL)insertAlbum:(nonnull ISMSAlbum *)anAlbum intoTable:(nonnull NSString *)table inDatabaseQueue:(nonnull FMDatabaseQueue *)dbQueue;
+- (BOOL)insertAlbum:(nonnull ISMSAlbum *)anAlbum intoTable:(nonnull NSString *)table inDatabase:(nonnull FMDatabase *)db;
 
-- (NSUInteger)serverPlaylistCount:(NSString *)md5;
+- (NSUInteger)serverPlaylistCount:(nonnull NSString *)md5;
 
-- (NSArray *)sectionInfoFromTable:(NSString *)table inDatabaseQueue:(FMDatabaseQueue *)dbQueue withColumn:(NSString *)column;
-- (NSArray *)sectionInfoFromTable:(NSString *)table inDatabase:(FMDatabase *)database withColumn:(NSString *)column;
+- (nullable NSArray *)sectionInfoFromTable:(nonnull NSString *)table inDatabaseQueue:(nonnull FMDatabaseQueue *)dbQueue withColumn:(nonnull NSString *)column;
+- (nullable NSArray *)sectionInfoFromTable:(nonnull NSString *)table inDatabase:(nonnull FMDatabase *)database withColumn:(nonnull NSString *)column;
 
 //- (void)queueSong:(ISMSSong *)aSong;
-- (void)queueAllSongs:(NSString *)folderId artist:(ISMSArtist *)theArtist;
-- (void)downloadAllSongs:(NSString *)folderId artist:(ISMSArtist *)theArtist;
-- (void)playAllSongs:(NSString *)folderId artist:(ISMSArtist *)theArtist;
-- (void)shuffleAllSongs:(NSString *)folderId artist:(ISMSArtist *)theArtist;
+- (void)queueAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
+- (void)downloadAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
+- (void)playAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
+- (void)shuffleAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
 - (void)shufflePlaylist;
 
 - (void)updateTableDefinitions;
 
-- (NSArray *)ignoredArticles;
-- (NSString *)name:(NSString *)name ignoringArticles:(NSArray *)articles;
+- (nonnull NSArray *)ignoredArticles;
+- (nonnull NSString *)name:(nonnull NSString *)name ignoringArticles:(nullable NSArray *)articles;
 
 @end
 

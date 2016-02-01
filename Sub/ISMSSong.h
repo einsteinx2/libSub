@@ -7,8 +7,9 @@
 //
 
 #import "ISMSPersistedModel.h"
+#import "TBXML.h"
 
-@class ISMSFolder, ISMSArtist, ISMSAlbum;
+@class ISMSFolder, ISMSArtist, ISMSAlbum, RXMLElement;
 
 @interface ISMSSong : NSObject <NSCoding, NSCopying, ISMSPersistedModel>
 
