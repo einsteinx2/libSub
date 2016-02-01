@@ -11,9 +11,9 @@
 #import "NSMutableURLRequest+SUS.h"
 
 @interface ISMSNewRootFoldersLoader()
-@property (nonatomic, readwrite) NSArray *ignoredArticles;
-@property (nonatomic, readwrite) NSArray *folders;
-@property (nonatomic, readwrite) NSArray *songs;
+@property (nonatomic, readwrite) NSArray<NSString*> *ignoredArticles;
+@property (nonatomic, readwrite) NSArray<ISMSFolder*> *folders;
+@property (nonatomic, readwrite) NSArray<ISMSSong*> *songs;
 @end
 
 @implementation ISMSNewRootFoldersLoader
@@ -122,8 +122,5 @@
     
     return NO;
 }
-
-#pragma mark - Unused ISMSItemLoader Properties -
-
 
 @end

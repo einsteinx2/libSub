@@ -47,15 +47,9 @@
 // use this only to "enable/disable your UI or hide your activity indicator view etc.,
 @end
 
-@interface MKStoreManager : NSObject<SKProductsRequestDelegate> {
+@interface MKStoreManager : NSObject
 
-	NSMutableArray *_purchasableObjects;
-	MKStoreObserver *_storeObserver;
-	
-	BOOL isProductsAvailable;	
-}
-
-@property (nonatomic, retain) NSMutableArray *purchasableObjects;
+@property (nonatomic, retain) NSArray<SKProduct*> *purchasableObjects;
 @property (nonatomic, retain) MKStoreObserver *storeObserver;
 
 // These are the methods you will be using in your app

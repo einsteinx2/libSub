@@ -18,7 +18,7 @@
 
 - (id)initWithDelegate:(id <ISMSLoaderDelegate>)theDelegate
 {
-    if ((self = [super init])) 
+    if (self = [super init]) 
 	{
 		_delegate = theDelegate;
     }    
@@ -131,7 +131,7 @@
 
 - (void)loadingFinished:(ISMSLoader*)theLoader
 {
-	self.chatMessages = [NSArray arrayWithArray:self.loader.chatMessages];
+	self.chatMessages = self.loader.chatMessages;
 	
 	self.loader.delegate = nil;
 	self.loader = nil;

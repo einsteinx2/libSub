@@ -8,8 +8,9 @@
 
 #import "ISMSLoader.h"
 
+@class ISMSChatMessage;
 @interface ISMSChatLoader : ISMSLoader
 
-@property (strong) NSMutableArray *chatMessages;
+@property (strong) NSArray<ISMSChatMessage*> *chatMessages;
 
 @end

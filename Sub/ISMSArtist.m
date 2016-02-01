@@ -11,13 +11,13 @@
 
 @interface ISMSArtist()
 {
-    NSArray *_albums;
+    NSArray<ISMSAlbum*> *_albums;
 }
 @end
 
 @implementation ISMSArtist
 
-+ (nullable ISMSArtist *) artistWithName:(nonnull NSString *)theName andArtistId:(nonnull NSNumber *)theId;
++ (ISMSArtist *) artistWithName:(NSString *)theName andArtistId:(NSNumber *)theId;
 {
 	ISMSArtist *anArtist = [[ISMSArtist alloc] init];
     anArtist.artistId = theId;
@@ -139,7 +139,7 @@
     }
 }
 
-- (NSArray *)albums
+- (NSArray<ISMSAlbum*> *)albums
 {
     @synchronized(self)
     {
@@ -152,7 +152,7 @@
     }
 }
 
-+ (NSArray *)allArtists
++ (NSArray<ISMSArtist*> *)allArtists
 {
     NSMutableArray *artists = [[NSMutableArray alloc] init];
     NSMutableArray *artistsNumbers = [[NSMutableArray alloc] init];

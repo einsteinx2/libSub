@@ -8,13 +8,14 @@
 
 #import "ISMSAbstractItemLoader.h"
 
+@class ISMSFolder, ISMSSong;
 @interface ISMSNewRootFoldersLoader : ISMSAbstractItemLoader
 
 @property (copy) NSNumber *mediaFolderId;
 
-@property (readonly) NSArray *ignoredArticles;
-@property (readonly) NSArray *folders;
-@property (readonly) NSArray *songs;
+@property (readonly) NSArray<NSString*> *ignoredArticles;
+@property (readonly) NSArray<ISMSFolder*> *folders;
+@property (readonly) NSArray<ISMSSong*> *songs;
 
 - (void)persistModels;
 - (BOOL)loadModelsFromCache;

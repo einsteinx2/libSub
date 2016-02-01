@@ -14,7 +14,7 @@
 @property (nullable, copy) NSString *name;
 @property (nullable, strong) NSNumber *albumCount;
 
-+ (nullable ISMSArtist *) artistWithName:(nonnull NSString *)theName andArtistId:(nonnull NSNumber *)theId;
++ (nullable ISMSArtist *) artistWithName:(nullable NSString *)theName andArtistId:(nullable NSNumber *)theId;
 
 + (nonnull NSArray<ISMSArtist*> *)allArtists;
 + (BOOL)deleteAllArtists;

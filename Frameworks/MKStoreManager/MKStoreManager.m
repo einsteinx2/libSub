@@ -52,7 +52,7 @@
 #import "MKStoreManager.h"
 #import "NSArray+Additions.h"
 
-@interface MKStoreManager (PrivateMethods)
+@interface MKStoreManager (PrivateMethods) <SKProductsRequestDelegate>
 
 - (void) requestProductData;
 - (BOOL) canCurrentDeviceUseFeature: (NSString*) featureID;
@@ -61,7 +61,14 @@
 
 @end
 
-@implementation MKStoreManager
+@implementation MKStoreManager {
+    
+    NSMutableArray *_purchasableObjects;
+    MKStoreObserver *_storeObserver;
+    
+    BOOL isProductsAvailable;
+}
+
 
 @synthesize purchasableObjects = _purchasableObjects;
 @synthesize storeObserver = _storeObserver;
@@ -174,7 +181,7 @@ static MKStoreManager* _sharedStoreManager;
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-	[self.purchasableObjects addObjectsFromArray:response.products];
+	[_purchasableObjects addObjectsFromArray:response.products];
 	
 #ifdef DEBUG
 	for(int i=0;i<[self.purchasableObjects count];i++)

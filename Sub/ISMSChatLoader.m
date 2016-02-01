@@ -47,13 +47,15 @@
         }
         else
         {
-            self.chatMessages = [NSMutableArray arrayWithCapacity:0];
+            NSMutableArray<ISMSChatMessage*> *chatMessages = [NSMutableArray arrayWithCapacity:0];
             
             [root iterate:@"chatMessages.chatMessage" usingBlock:^(RXMLElement *e) {
                 // Create the chat message object and add it to the array
                 ISMSChatMessage *chatMessage = [[ISMSChatMessage alloc] initWithRXMLElement:e];
-                [self.chatMessages addObject:chatMessage];
+                [chatMessages addObject:chatMessage];
             }];
+            
+            _chatMessages = chatMessages;
             
             // Notify the delegate that the loading is finished
             [self informDelegateLoadingFinished];

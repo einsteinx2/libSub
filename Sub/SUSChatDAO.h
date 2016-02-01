@@ -9,19 +9,19 @@
 #import "ISMSLoaderManager.h"
 #import "ISMSLoaderDelegate.h"
 
-@class ISMSChatLoader;
+@class ISMSChatLoader, ISMSChatMessage;
 @interface SUSChatDAO : NSObject <ISMSLoaderManager, ISMSLoaderDelegate>
 
-@property (strong) ISMSChatLoader *loader;
-@property (weak) NSObject <ISMSLoaderDelegate> *delegate;
+@property (nullable, strong) ISMSChatLoader *loader;
+@property (nullable, weak) NSObject <ISMSLoaderDelegate> *delegate;
 
-@property (strong) NSArray *chatMessages;
+@property (nullable, strong) NSArray<ISMSChatMessage*> *chatMessages;
 
-@property (strong) NSURLConnection *connection;
-@property (strong) NSMutableData *receivedData;
+@property (nullable, strong) NSURLConnection *connection;
+@property (nullable, strong) NSMutableData *receivedData;
 
-- (void)sendChatMessage:(NSString *)message;
+- (void)sendChatMessage:(nonnull NSString *)message;
 
-- (id)initWithDelegate:(id <ISMSLoaderDelegate>)theDelegate;
+- (nonnull instancetype)initWithDelegate:(nullable id <ISMSLoaderDelegate>)theDelegate;
 
 @end

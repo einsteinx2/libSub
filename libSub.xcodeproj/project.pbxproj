@@ -573,366 +573,366 @@
 		53E28E2F17D6A50200259985 /* Flurry.h in Headers */ = {isa = PBXBuildFile; fileRef = 53E28E2D17D6A50200259985 /* Flurry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53E3E70A1690362D00F195C5 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = 536C97A116619820005A73C6 /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w"; }; };
 		53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E3E70B1690387800F195C5 /* libz.dylib */; };
-		53EECA931C5F1B2500DABB8E /* EX2Categories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9CF1C5F1B2500DABB8E /* EX2Categories.h */; };
+		53EECA931C5F1B2500DABB8E /* EX2Categories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9CF1C5F1B2500DABB8E /* EX2Categories.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECA941C5F1B2500DABB8E /* EX2Categories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9CF1C5F1B2500DABB8E /* EX2Categories.h */; };
-		53EECA951C5F1B2500DABB8E /* EX2FoundationCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D11C5F1B2500DABB8E /* EX2FoundationCategories.h */; };
+		53EECA951C5F1B2500DABB8E /* EX2FoundationCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D11C5F1B2500DABB8E /* EX2FoundationCategories.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECA961C5F1B2500DABB8E /* EX2FoundationCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D11C5F1B2500DABB8E /* EX2FoundationCategories.h */; };
-		53EECA971C5F1B2500DABB8E /* NSArray+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D31C5F1B2500DABB8E /* NSArray+Additions.h */; };
+		53EECA971C5F1B2500DABB8E /* NSArray+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D31C5F1B2500DABB8E /* NSArray+Additions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECA981C5F1B2500DABB8E /* NSArray+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D31C5F1B2500DABB8E /* NSArray+Additions.h */; };
-		53EECA991C5F1B2500DABB8E /* NSArray+FilterBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D41C5F1B2500DABB8E /* NSArray+FilterBlock.h */; };
+		53EECA991C5F1B2500DABB8E /* NSArray+FilterBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D41C5F1B2500DABB8E /* NSArray+FilterBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECA9A1C5F1B2500DABB8E /* NSArray+FilterBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D41C5F1B2500DABB8E /* NSArray+FilterBlock.h */; };
 		53EECA9B1C5F1B2500DABB8E /* NSArray+FilterBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9D51C5F1B2500DABB8E /* NSArray+FilterBlock.m */; };
 		53EECA9C1C5F1B2500DABB8E /* NSArray+FilterBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9D51C5F1B2500DABB8E /* NSArray+FilterBlock.m */; };
-		53EECA9D1C5F1B2500DABB8E /* NSArray+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D61C5F1B2500DABB8E /* NSArray+FirstObject.h */; };
+		53EECA9D1C5F1B2500DABB8E /* NSArray+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D61C5F1B2500DABB8E /* NSArray+FirstObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECA9E1C5F1B2500DABB8E /* NSArray+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D61C5F1B2500DABB8E /* NSArray+FirstObject.h */; };
 		53EECA9F1C5F1B2500DABB8E /* NSArray+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9D71C5F1B2500DABB8E /* NSArray+FirstObject.m */; };
 		53EECAA01C5F1B2500DABB8E /* NSArray+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9D71C5F1B2500DABB8E /* NSArray+FirstObject.m */; };
-		53EECAA11C5F1B2500DABB8E /* NSArray+Plist.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D81C5F1B2500DABB8E /* NSArray+Plist.h */; };
+		53EECAA11C5F1B2500DABB8E /* NSArray+Plist.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D81C5F1B2500DABB8E /* NSArray+Plist.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAA21C5F1B2500DABB8E /* NSArray+Plist.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9D81C5F1B2500DABB8E /* NSArray+Plist.h */; };
 		53EECAA31C5F1B2500DABB8E /* NSArray+Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9D91C5F1B2500DABB8E /* NSArray+Plist.m */; };
 		53EECAA41C5F1B2500DABB8E /* NSArray+Plist.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9D91C5F1B2500DABB8E /* NSArray+Plist.m */; };
-		53EECAA51C5F1B2500DABB8E /* NSArray+Reverse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DA1C5F1B2500DABB8E /* NSArray+Reverse.h */; };
+		53EECAA51C5F1B2500DABB8E /* NSArray+Reverse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DA1C5F1B2500DABB8E /* NSArray+Reverse.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAA61C5F1B2500DABB8E /* NSArray+Reverse.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DA1C5F1B2500DABB8E /* NSArray+Reverse.h */; };
 		53EECAA71C5F1B2500DABB8E /* NSArray+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9DB1C5F1B2500DABB8E /* NSArray+Reverse.m */; };
 		53EECAA81C5F1B2500DABB8E /* NSArray+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9DB1C5F1B2500DABB8E /* NSArray+Reverse.m */; };
-		53EECAA91C5F1B2500DABB8E /* NSArray+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DC1C5F1B2500DABB8E /* NSArray+Safe.h */; };
+		53EECAA91C5F1B2500DABB8E /* NSArray+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DC1C5F1B2500DABB8E /* NSArray+Safe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAAA1C5F1B2500DABB8E /* NSArray+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DC1C5F1B2500DABB8E /* NSArray+Safe.h */; };
 		53EECAAB1C5F1B2500DABB8E /* NSArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9DD1C5F1B2500DABB8E /* NSArray+Safe.m */; };
 		53EECAAC1C5F1B2500DABB8E /* NSArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9DD1C5F1B2500DABB8E /* NSArray+Safe.m */; };
-		53EECAAD1C5F1B2500DABB8E /* NSMutableArray+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DE1C5F1B2500DABB8E /* NSMutableArray+Safe.h */; };
+		53EECAAD1C5F1B2500DABB8E /* NSMutableArray+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DE1C5F1B2500DABB8E /* NSMutableArray+Safe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAAE1C5F1B2500DABB8E /* NSMutableArray+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9DE1C5F1B2500DABB8E /* NSMutableArray+Safe.h */; };
 		53EECAAF1C5F1B2500DABB8E /* NSMutableArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9DF1C5F1B2500DABB8E /* NSMutableArray+Safe.m */; };
 		53EECAB01C5F1B2500DABB8E /* NSMutableArray+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9DF1C5F1B2500DABB8E /* NSMutableArray+Safe.m */; };
-		53EECAB11C5F1B2500DABB8E /* NSData+AES128.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E01C5F1B2500DABB8E /* NSData+AES128.h */; };
+		53EECAB11C5F1B2500DABB8E /* NSData+AES128.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E01C5F1B2500DABB8E /* NSData+AES128.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAB21C5F1B2500DABB8E /* NSData+AES128.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E01C5F1B2500DABB8E /* NSData+AES128.h */; };
 		53EECAB31C5F1B2500DABB8E /* NSData+AES128.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E11C5F1B2500DABB8E /* NSData+AES128.m */; };
 		53EECAB41C5F1B2500DABB8E /* NSData+AES128.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E11C5F1B2500DABB8E /* NSData+AES128.m */; };
-		53EECAB51C5F1B2500DABB8E /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E21C5F1B2500DABB8E /* NSData+Base64.h */; };
+		53EECAB51C5F1B2500DABB8E /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E21C5F1B2500DABB8E /* NSData+Base64.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAB61C5F1B2500DABB8E /* NSData+Base64.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E21C5F1B2500DABB8E /* NSData+Base64.h */; };
 		53EECAB71C5F1B2500DABB8E /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E31C5F1B2500DABB8E /* NSData+Base64.m */; };
 		53EECAB81C5F1B2500DABB8E /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E31C5F1B2500DABB8E /* NSData+Base64.m */; };
-		53EECAB91C5F1B2500DABB8E /* NSData+Gzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E41C5F1B2500DABB8E /* NSData+Gzip.h */; };
+		53EECAB91C5F1B2500DABB8E /* NSData+Gzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E41C5F1B2500DABB8E /* NSData+Gzip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECABA1C5F1B2500DABB8E /* NSData+Gzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E41C5F1B2500DABB8E /* NSData+Gzip.h */; };
 		53EECABB1C5F1B2500DABB8E /* NSData+Gzip.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E51C5F1B2500DABB8E /* NSData+Gzip.m */; };
 		53EECABC1C5F1B2500DABB8E /* NSData+Gzip.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E51C5F1B2500DABB8E /* NSData+Gzip.m */; };
-		53EECABD1C5F1B2500DABB8E /* NSData+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E61C5F1B2500DABB8E /* NSData+Hash.h */; };
+		53EECABD1C5F1B2500DABB8E /* NSData+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E61C5F1B2500DABB8E /* NSData+Hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECABE1C5F1B2500DABB8E /* NSData+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E61C5F1B2500DABB8E /* NSData+Hash.h */; };
 		53EECABF1C5F1B2500DABB8E /* NSData+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E71C5F1B2500DABB8E /* NSData+Hash.m */; };
 		53EECAC01C5F1B2500DABB8E /* NSData+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E71C5F1B2500DABB8E /* NSData+Hash.m */; };
-		53EECAC11C5F1B2500DABB8E /* NSDate+UTC.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E81C5F1B2500DABB8E /* NSDate+UTC.h */; };
+		53EECAC11C5F1B2500DABB8E /* NSDate+UTC.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E81C5F1B2500DABB8E /* NSDate+UTC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAC21C5F1B2500DABB8E /* NSDate+UTC.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9E81C5F1B2500DABB8E /* NSDate+UTC.h */; };
 		53EECAC31C5F1B2500DABB8E /* NSDate+UTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E91C5F1B2500DABB8E /* NSDate+UTC.m */; };
 		53EECAC41C5F1B2500DABB8E /* NSDate+UTC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9E91C5F1B2500DABB8E /* NSDate+UTC.m */; };
-		53EECAC51C5F1B2500DABB8E /* NSFileHandle+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EA1C5F1B2500DABB8E /* NSFileHandle+Hash.h */; };
+		53EECAC51C5F1B2500DABB8E /* NSFileHandle+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EA1C5F1B2500DABB8E /* NSFileHandle+Hash.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAC61C5F1B2500DABB8E /* NSFileHandle+Hash.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EA1C5F1B2500DABB8E /* NSFileHandle+Hash.h */; };
 		53EECAC71C5F1B2500DABB8E /* NSFileHandle+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9EB1C5F1B2500DABB8E /* NSFileHandle+Hash.m */; };
 		53EECAC81C5F1B2500DABB8E /* NSFileHandle+Hash.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9EB1C5F1B2500DABB8E /* NSFileHandle+Hash.m */; };
-		53EECAC91C5F1B2500DABB8E /* NSMutableDictionary+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EC1C5F1B2500DABB8E /* NSMutableDictionary+Safe.h */; };
+		53EECAC91C5F1B2500DABB8E /* NSMutableDictionary+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EC1C5F1B2500DABB8E /* NSMutableDictionary+Safe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECACA1C5F1B2500DABB8E /* NSMutableDictionary+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EC1C5F1B2500DABB8E /* NSMutableDictionary+Safe.h */; };
 		53EECACB1C5F1B2500DABB8E /* NSMutableDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9ED1C5F1B2500DABB8E /* NSMutableDictionary+Safe.m */; };
 		53EECACC1C5F1B2500DABB8E /* NSMutableDictionary+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9ED1C5F1B2500DABB8E /* NSMutableDictionary+Safe.m */; };
-		53EECACD1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EE1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h */; };
+		53EECACD1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EE1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECACE1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9EE1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h */; };
 		53EECACF1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9EF1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.m */; };
 		53EECAD01C5F1B2500DABB8E /* NSNotificationCenter+MainThread.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9EF1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.m */; };
-		53EECAD11C5F1B2500DABB8E /* NSNull+CleanString.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F01C5F1B2500DABB8E /* NSNull+CleanString.h */; };
+		53EECAD11C5F1B2500DABB8E /* NSNull+CleanString.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F01C5F1B2500DABB8E /* NSNull+CleanString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAD21C5F1B2500DABB8E /* NSNull+CleanString.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F01C5F1B2500DABB8E /* NSNull+CleanString.h */; };
 		53EECAD31C5F1B2500DABB8E /* NSNull+CleanString.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F11C5F1B2500DABB8E /* NSNull+CleanString.m */; };
 		53EECAD41C5F1B2500DABB8E /* NSNull+CleanString.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F11C5F1B2500DABB8E /* NSNull+CleanString.m */; };
-		53EECAD51C5F1B2500DABB8E /* NSNumber+CleanString.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F21C5F1B2500DABB8E /* NSNumber+CleanString.h */; };
+		53EECAD51C5F1B2500DABB8E /* NSNumber+CleanString.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F21C5F1B2500DABB8E /* NSNumber+CleanString.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAD61C5F1B2500DABB8E /* NSNumber+CleanString.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F21C5F1B2500DABB8E /* NSNumber+CleanString.h */; };
 		53EECAD71C5F1B2500DABB8E /* NSNumber+CleanString.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F31C5F1B2500DABB8E /* NSNumber+CleanString.m */; };
 		53EECAD81C5F1B2500DABB8E /* NSNumber+CleanString.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F31C5F1B2500DABB8E /* NSNumber+CleanString.m */; };
-		53EECAD91C5F1B2500DABB8E /* NSObject+ListMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F41C5F1B2500DABB8E /* NSObject+ListMethods.h */; };
+		53EECAD91C5F1B2500DABB8E /* NSObject+ListMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F41C5F1B2500DABB8E /* NSObject+ListMethods.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECADA1C5F1B2500DABB8E /* NSObject+ListMethods.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F41C5F1B2500DABB8E /* NSObject+ListMethods.h */; };
 		53EECADB1C5F1B2500DABB8E /* NSObject+ListMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F51C5F1B2500DABB8E /* NSObject+ListMethods.m */; };
 		53EECADC1C5F1B2500DABB8E /* NSObject+ListMethods.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F51C5F1B2500DABB8E /* NSObject+ListMethods.m */; };
-		53EECADD1C5F1B2500DABB8E /* NSObject+UserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F61C5F1B2500DABB8E /* NSObject+UserInfo.h */; };
+		53EECADD1C5F1B2500DABB8E /* NSObject+UserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F61C5F1B2500DABB8E /* NSObject+UserInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECADE1C5F1B2500DABB8E /* NSObject+UserInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F61C5F1B2500DABB8E /* NSObject+UserInfo.h */; };
 		53EECADF1C5F1B2500DABB8E /* NSObject+UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F71C5F1B2500DABB8E /* NSObject+UserInfo.m */; };
 		53EECAE01C5F1B2500DABB8E /* NSObject+UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F71C5F1B2500DABB8E /* NSObject+UserInfo.m */; };
-		53EECAE11C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F81C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h */; };
+		53EECAE11C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F81C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAE21C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9F81C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h */; };
 		53EECAE31C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F91C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.m */; };
 		53EECAE41C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9F91C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.m */; };
-		53EECAE51C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FA1C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h */; };
+		53EECAE51C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FA1C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAE61C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FA1C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h */; };
 		53EECAE71C5F1B2500DABB8E /* NSOrderedSet+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9FB1C5F1B2500DABB8E /* NSOrderedSet+FirstObject.m */; };
 		53EECAE81C5F1B2500DABB8E /* NSOrderedSet+FirstObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9FB1C5F1B2500DABB8E /* NSOrderedSet+FirstObject.m */; };
-		53EECAE91C5F1B2500DABB8E /* NSOrderedSet+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FC1C5F1B2500DABB8E /* NSOrderedSet+Safe.h */; };
+		53EECAE91C5F1B2500DABB8E /* NSOrderedSet+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FC1C5F1B2500DABB8E /* NSOrderedSet+Safe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAEA1C5F1B2500DABB8E /* NSOrderedSet+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FC1C5F1B2500DABB8E /* NSOrderedSet+Safe.h */; };
 		53EECAEB1C5F1B2500DABB8E /* NSOrderedSet+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9FD1C5F1B2500DABB8E /* NSOrderedSet+Safe.m */; };
 		53EECAEC1C5F1B2500DABB8E /* NSOrderedSet+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EEC9FD1C5F1B2500DABB8E /* NSOrderedSet+Safe.m */; };
-		53EECAED1C5F1B2500DABB8E /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FF1C5F1B2500DABB8E /* GTMDefines.h */; };
+		53EECAED1C5F1B2500DABB8E /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FF1C5F1B2500DABB8E /* GTMDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAEE1C5F1B2500DABB8E /* GTMDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EEC9FF1C5F1B2500DABB8E /* GTMDefines.h */; };
-		53EECAEF1C5F1B2500DABB8E /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA001C5F1B2500DABB8E /* GTMNSString+HTML.h */; };
+		53EECAEF1C5F1B2500DABB8E /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA001C5F1B2500DABB8E /* GTMNSString+HTML.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAF01C5F1B2500DABB8E /* GTMNSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA001C5F1B2500DABB8E /* GTMNSString+HTML.h */; };
 		53EECAF11C5F1B2500DABB8E /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA011C5F1B2500DABB8E /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		53EECAF21C5F1B2500DABB8E /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA011C5F1B2500DABB8E /* GTMNSString+HTML.m */; };
-		53EECAF31C5F1B2500DABB8E /* NSString+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA021C5F1B2500DABB8E /* NSString+Additions.h */; };
+		53EECAF31C5F1B2500DABB8E /* NSString+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA021C5F1B2500DABB8E /* NSString+Additions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAF41C5F1B2500DABB8E /* NSString+Additions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA021C5F1B2500DABB8E /* NSString+Additions.h */; };
-		53EECAF51C5F1B2500DABB8E /* NSString+Clean.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA031C5F1B2500DABB8E /* NSString+Clean.h */; };
+		53EECAF51C5F1B2500DABB8E /* NSString+Clean.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA031C5F1B2500DABB8E /* NSString+Clean.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAF61C5F1B2500DABB8E /* NSString+Clean.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA031C5F1B2500DABB8E /* NSString+Clean.h */; };
 		53EECAF71C5F1B2500DABB8E /* NSString+Clean.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA041C5F1B2500DABB8E /* NSString+Clean.m */; };
 		53EECAF81C5F1B2500DABB8E /* NSString+Clean.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA041C5F1B2500DABB8E /* NSString+Clean.m */; };
-		53EECAF91C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA051C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h */; };
+		53EECAF91C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA051C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAFA1C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA051C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h */; };
 		53EECAFB1C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA061C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.m */; };
 		53EECAFC1C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA061C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.m */; };
-		53EECAFD1C5F1B2500DABB8E /* NSString+cStringUTF8.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA071C5F1B2500DABB8E /* NSString+cStringUTF8.h */; };
+		53EECAFD1C5F1B2500DABB8E /* NSString+cStringUTF8.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA071C5F1B2500DABB8E /* NSString+cStringUTF8.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECAFE1C5F1B2600DABB8E /* NSString+cStringUTF8.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA071C5F1B2500DABB8E /* NSString+cStringUTF8.h */; };
 		53EECAFF1C5F1B2600DABB8E /* NSString+cStringUTF8.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA081C5F1B2500DABB8E /* NSString+cStringUTF8.m */; };
 		53EECB001C5F1B2600DABB8E /* NSString+cStringUTF8.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA081C5F1B2500DABB8E /* NSString+cStringUTF8.m */; };
-		53EECB011C5F1B2600DABB8E /* NSString+FileSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA091C5F1B2500DABB8E /* NSString+FileSize.h */; };
+		53EECB011C5F1B2600DABB8E /* NSString+FileSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA091C5F1B2500DABB8E /* NSString+FileSize.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB021C5F1B2600DABB8E /* NSString+FileSize.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA091C5F1B2500DABB8E /* NSString+FileSize.h */; };
 		53EECB031C5F1B2600DABB8E /* NSString+FileSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA0A1C5F1B2500DABB8E /* NSString+FileSize.m */; };
 		53EECB041C5F1B2600DABB8E /* NSString+FileSize.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA0A1C5F1B2500DABB8E /* NSString+FileSize.m */; };
-		53EECB051C5F1B2600DABB8E /* NSString+Gzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0B1C5F1B2500DABB8E /* NSString+Gzip.h */; };
+		53EECB051C5F1B2600DABB8E /* NSString+Gzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0B1C5F1B2500DABB8E /* NSString+Gzip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB061C5F1B2600DABB8E /* NSString+Gzip.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0B1C5F1B2500DABB8E /* NSString+Gzip.h */; };
 		53EECB071C5F1B2600DABB8E /* NSString+Gzip.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA0C1C5F1B2500DABB8E /* NSString+Gzip.m */; };
 		53EECB081C5F1B2600DABB8E /* NSString+Gzip.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA0C1C5F1B2500DABB8E /* NSString+Gzip.m */; };
-		53EECB091C5F1B2600DABB8E /* NSString+HasValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0D1C5F1B2500DABB8E /* NSString+HasValue.h */; };
+		53EECB091C5F1B2600DABB8E /* NSString+HasValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0D1C5F1B2500DABB8E /* NSString+HasValue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB0A1C5F1B2600DABB8E /* NSString+HasValue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0D1C5F1B2500DABB8E /* NSString+HasValue.h */; };
 		53EECB0B1C5F1B2600DABB8E /* NSString+HasValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA0E1C5F1B2500DABB8E /* NSString+HasValue.m */; };
 		53EECB0C1C5F1B2600DABB8E /* NSString+HasValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA0E1C5F1B2500DABB8E /* NSString+HasValue.m */; };
-		53EECB0D1C5F1B2600DABB8E /* NSString+hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0F1C5F1B2500DABB8E /* NSString+hex.h */; };
+		53EECB0D1C5F1B2600DABB8E /* NSString+hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0F1C5F1B2500DABB8E /* NSString+hex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB0E1C5F1B2600DABB8E /* NSString+hex.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA0F1C5F1B2500DABB8E /* NSString+hex.h */; };
 		53EECB0F1C5F1B2600DABB8E /* NSString+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA101C5F1B2500DABB8E /* NSString+hex.m */; };
 		53EECB101C5F1B2600DABB8E /* NSString+hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA101C5F1B2500DABB8E /* NSString+hex.m */; };
-		53EECB111C5F1B2600DABB8E /* NSString+md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA111C5F1B2500DABB8E /* NSString+md5.h */; };
+		53EECB111C5F1B2600DABB8E /* NSString+md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA111C5F1B2500DABB8E /* NSString+md5.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB121C5F1B2600DABB8E /* NSString+md5.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA111C5F1B2500DABB8E /* NSString+md5.h */; };
 		53EECB131C5F1B2600DABB8E /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA121C5F1B2500DABB8E /* NSString+md5.m */; };
 		53EECB141C5F1B2600DABB8E /* NSString+md5.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA121C5F1B2500DABB8E /* NSString+md5.m */; };
-		53EECB151C5F1B2600DABB8E /* NSString+rfcEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA131C5F1B2500DABB8E /* NSString+rfcEncode.h */; };
+		53EECB151C5F1B2600DABB8E /* NSString+rfcEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA131C5F1B2500DABB8E /* NSString+rfcEncode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB161C5F1B2600DABB8E /* NSString+rfcEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA131C5F1B2500DABB8E /* NSString+rfcEncode.h */; };
 		53EECB171C5F1B2600DABB8E /* NSString+rfcEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA141C5F1B2500DABB8E /* NSString+rfcEncode.m */; };
 		53EECB181C5F1B2600DABB8E /* NSString+rfcEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA141C5F1B2500DABB8E /* NSString+rfcEncode.m */; };
-		53EECB191C5F1B2600DABB8E /* NSString+SHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA151C5F1B2500DABB8E /* NSString+SHA1.h */; };
+		53EECB191C5F1B2600DABB8E /* NSString+SHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA151C5F1B2500DABB8E /* NSString+SHA1.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB1A1C5F1B2600DABB8E /* NSString+SHA1.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA151C5F1B2500DABB8E /* NSString+SHA1.h */; };
 		53EECB1B1C5F1B2600DABB8E /* NSString+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA161C5F1B2500DABB8E /* NSString+SHA1.m */; };
 		53EECB1C1C5F1B2600DABB8E /* NSString+SHA1.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA161C5F1B2500DABB8E /* NSString+SHA1.m */; };
-		53EECB1D1C5F1B2600DABB8E /* NSString+time.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA171C5F1B2500DABB8E /* NSString+time.h */; };
+		53EECB1D1C5F1B2600DABB8E /* NSString+time.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA171C5F1B2500DABB8E /* NSString+time.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB1E1C5F1B2600DABB8E /* NSString+time.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA171C5F1B2500DABB8E /* NSString+time.h */; };
 		53EECB1F1C5F1B2600DABB8E /* NSString+time.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA181C5F1B2500DABB8E /* NSString+time.m */; };
 		53EECB201C5F1B2600DABB8E /* NSString+time.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA181C5F1B2500DABB8E /* NSString+time.m */; };
-		53EECB211C5F1B2600DABB8E /* NSString+TrimmingAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA191C5F1B2500DABB8E /* NSString+TrimmingAdditions.h */; };
+		53EECB211C5F1B2600DABB8E /* NSString+TrimmingAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA191C5F1B2500DABB8E /* NSString+TrimmingAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB221C5F1B2600DABB8E /* NSString+TrimmingAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA191C5F1B2500DABB8E /* NSString+TrimmingAdditions.h */; };
 		53EECB231C5F1B2600DABB8E /* NSString+TrimmingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA1A1C5F1B2500DABB8E /* NSString+TrimmingAdditions.m */; };
 		53EECB241C5F1B2600DABB8E /* NSString+TrimmingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA1A1C5F1B2500DABB8E /* NSString+TrimmingAdditions.m */; };
-		53EECB251C5F1B2600DABB8E /* NSString+URLEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1B1C5F1B2500DABB8E /* NSString+URLEncode.h */; };
+		53EECB251C5F1B2600DABB8E /* NSString+URLEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1B1C5F1B2500DABB8E /* NSString+URLEncode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB261C5F1B2600DABB8E /* NSString+URLEncode.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1B1C5F1B2500DABB8E /* NSString+URLEncode.h */; };
 		53EECB271C5F1B2600DABB8E /* NSString+URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA1C1C5F1B2500DABB8E /* NSString+URLEncode.m */; };
 		53EECB281C5F1B2600DABB8E /* NSString+URLEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA1C1C5F1B2500DABB8E /* NSString+URLEncode.m */; };
-		53EECB291C5F1B2600DABB8E /* NSString+Validation.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1D1C5F1B2500DABB8E /* NSString+Validation.h */; };
+		53EECB291C5F1B2600DABB8E /* NSString+Validation.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1D1C5F1B2500DABB8E /* NSString+Validation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB2A1C5F1B2600DABB8E /* NSString+Validation.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1D1C5F1B2500DABB8E /* NSString+Validation.h */; };
 		53EECB2B1C5F1B2600DABB8E /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA1E1C5F1B2500DABB8E /* NSString+Validation.m */; };
 		53EECB2C1C5F1B2600DABB8E /* NSString+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA1E1C5F1B2500DABB8E /* NSString+Validation.m */; };
-		53EECB2D1C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1F1C5F1B2500DABB8E /* NSURL+QueryParameterDictionary.h */; };
+		53EECB2D1C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1F1C5F1B2500DABB8E /* NSURL+QueryParameterDictionary.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB2E1C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA1F1C5F1B2500DABB8E /* NSURL+QueryParameterDictionary.h */; };
 		53EECB2F1C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA201C5F1B2500DABB8E /* NSURL+QueryParameterDictionary.m */; };
 		53EECB301C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA201C5F1B2500DABB8E /* NSURL+QueryParameterDictionary.m */; };
-		53EECB311C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA211C5F1B2500DABB8E /* NSURL+SkipBackupAttribute.h */; };
+		53EECB311C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA211C5F1B2500DABB8E /* NSURL+SkipBackupAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB321C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA211C5F1B2500DABB8E /* NSURL+SkipBackupAttribute.h */; };
 		53EECB331C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA221C5F1B2500DABB8E /* NSURL+SkipBackupAttribute.m */; };
 		53EECB341C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA221C5F1B2500DABB8E /* NSURL+SkipBackupAttribute.m */; };
-		53EECB351C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA231C5F1B2500DABB8E /* NSMutableOrderedSet+Safe.h */; };
+		53EECB351C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA231C5F1B2500DABB8E /* NSMutableOrderedSet+Safe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB361C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA231C5F1B2500DABB8E /* NSMutableOrderedSet+Safe.h */; };
 		53EECB371C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA241C5F1B2500DABB8E /* NSMutableOrderedSet+Safe.m */; };
 		53EECB381C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA241C5F1B2500DABB8E /* NSMutableOrderedSet+Safe.m */; };
-		53EECB391C5F1B2600DABB8E /* CALayer+ImageFromLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA261C5F1B2500DABB8E /* CALayer+ImageFromLayer.h */; };
+		53EECB391C5F1B2600DABB8E /* CALayer+ImageFromLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA261C5F1B2500DABB8E /* CALayer+ImageFromLayer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB3A1C5F1B2600DABB8E /* CALayer+ImageFromLayer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA261C5F1B2500DABB8E /* CALayer+ImageFromLayer.h */; };
 		53EECB3B1C5F1B2600DABB8E /* CALayer+ImageFromLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA271C5F1B2500DABB8E /* CALayer+ImageFromLayer.m */; };
 		53EECB3C1C5F1B2600DABB8E /* CALayer+ImageFromLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA271C5F1B2500DABB8E /* CALayer+ImageFromLayer.m */; };
-		53EECB3D1C5F1B2600DABB8E /* CALayer+SublayerWithName.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA281C5F1B2500DABB8E /* CALayer+SublayerWithName.h */; };
+		53EECB3D1C5F1B2600DABB8E /* CALayer+SublayerWithName.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA281C5F1B2500DABB8E /* CALayer+SublayerWithName.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB3E1C5F1B2600DABB8E /* CALayer+SublayerWithName.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA281C5F1B2500DABB8E /* CALayer+SublayerWithName.h */; };
 		53EECB3F1C5F1B2600DABB8E /* CALayer+SublayerWithName.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA291C5F1B2500DABB8E /* CALayer+SublayerWithName.m */; };
 		53EECB401C5F1B2600DABB8E /* CALayer+SublayerWithName.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA291C5F1B2500DABB8E /* CALayer+SublayerWithName.m */; };
-		53EECB411C5F1B2600DABB8E /* EX2QuartzCoreCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2A1C5F1B2500DABB8E /* EX2QuartzCoreCategories.h */; };
+		53EECB411C5F1B2600DABB8E /* EX2QuartzCoreCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2A1C5F1B2500DABB8E /* EX2QuartzCoreCategories.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB421C5F1B2700DABB8E /* EX2QuartzCoreCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2A1C5F1B2500DABB8E /* EX2QuartzCoreCategories.h */; };
-		53EECB431C5F1B2700DABB8E /* EX2UIKitCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2C1C5F1B2500DABB8E /* EX2UIKitCategories.h */; };
+		53EECB431C5F1B2700DABB8E /* EX2UIKitCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2C1C5F1B2500DABB8E /* EX2UIKitCategories.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB441C5F1B2700DABB8E /* EX2UIKitCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2C1C5F1B2500DABB8E /* EX2UIKitCategories.h */; };
-		53EECB451C5F1B2700DABB8E /* UIBezierPath+Smoothing.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2D1C5F1B2500DABB8E /* UIBezierPath+Smoothing.h */; };
+		53EECB451C5F1B2700DABB8E /* UIBezierPath+Smoothing.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2D1C5F1B2500DABB8E /* UIBezierPath+Smoothing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB461C5F1B2700DABB8E /* UIBezierPath+Smoothing.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2D1C5F1B2500DABB8E /* UIBezierPath+Smoothing.h */; };
 		53EECB471C5F1B2700DABB8E /* UIBezierPath+Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA2E1C5F1B2500DABB8E /* UIBezierPath+Smoothing.m */; };
 		53EECB481C5F1B2700DABB8E /* UIBezierPath+Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA2E1C5F1B2500DABB8E /* UIBezierPath+Smoothing.m */; };
-		53EECB491C5F1B2700DABB8E /* UIButton+Colors.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2F1C5F1B2500DABB8E /* UIButton+Colors.h */; };
+		53EECB491C5F1B2700DABB8E /* UIButton+Colors.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2F1C5F1B2500DABB8E /* UIButton+Colors.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB4A1C5F1B2700DABB8E /* UIButton+Colors.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA2F1C5F1B2500DABB8E /* UIButton+Colors.h */; };
 		53EECB4B1C5F1B2700DABB8E /* UIButton+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA301C5F1B2500DABB8E /* UIButton+Colors.m */; };
 		53EECB4C1C5F1B2700DABB8E /* UIButton+Colors.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA301C5F1B2500DABB8E /* UIButton+Colors.m */; };
-		53EECB4D1C5F1B2700DABB8E /* UIButton+StretchBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA311C5F1B2500DABB8E /* UIButton+StretchBackground.h */; };
+		53EECB4D1C5F1B2700DABB8E /* UIButton+StretchBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA311C5F1B2500DABB8E /* UIButton+StretchBackground.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB4E1C5F1B2700DABB8E /* UIButton+StretchBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA311C5F1B2500DABB8E /* UIButton+StretchBackground.h */; };
 		53EECB4F1C5F1B2700DABB8E /* UIButton+StretchBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA321C5F1B2500DABB8E /* UIButton+StretchBackground.m */; };
 		53EECB501C5F1B2700DABB8E /* UIButton+StretchBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA321C5F1B2500DABB8E /* UIButton+StretchBackground.m */; };
-		53EECB511C5F1B2700DABB8E /* UIColor+ColorWithHex.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA331C5F1B2500DABB8E /* UIColor+ColorWithHex.h */; };
+		53EECB511C5F1B2700DABB8E /* UIColor+ColorWithHex.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA331C5F1B2500DABB8E /* UIColor+ColorWithHex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB521C5F1B2700DABB8E /* UIColor+ColorWithHex.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA331C5F1B2500DABB8E /* UIColor+ColorWithHex.h */; };
 		53EECB531C5F1B2700DABB8E /* UIColor+ColorWithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA341C5F1B2500DABB8E /* UIColor+ColorWithHex.m */; };
 		53EECB541C5F1B2700DABB8E /* UIColor+ColorWithHex.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA341C5F1B2500DABB8E /* UIColor+ColorWithHex.m */; };
-		53EECB551C5F1B2700DABB8E /* UIColor+ColorWithInt.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA351C5F1B2500DABB8E /* UIColor+ColorWithInt.h */; };
+		53EECB551C5F1B2700DABB8E /* UIColor+ColorWithInt.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA351C5F1B2500DABB8E /* UIColor+ColorWithInt.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB561C5F1B2700DABB8E /* UIColor+ColorWithInt.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA351C5F1B2500DABB8E /* UIColor+ColorWithInt.h */; };
 		53EECB571C5F1B2700DABB8E /* UIColor+ColorWithInt.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA361C5F1B2500DABB8E /* UIColor+ColorWithInt.m */; };
 		53EECB581C5F1B2700DABB8E /* UIColor+ColorWithInt.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA361C5F1B2500DABB8E /* UIColor+ColorWithInt.m */; };
-		53EECB591C5F1B2700DABB8E /* UIDevice+Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA371C5F1B2500DABB8E /* UIDevice+Hardware.h */; };
+		53EECB591C5F1B2700DABB8E /* UIDevice+Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA371C5F1B2500DABB8E /* UIDevice+Hardware.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB5A1C5F1B2700DABB8E /* UIDevice+Hardware.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA371C5F1B2500DABB8E /* UIDevice+Hardware.h */; };
 		53EECB5B1C5F1B2700DABB8E /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA381C5F1B2500DABB8E /* UIDevice+Hardware.m */; };
 		53EECB5C1C5F1B2700DABB8E /* UIDevice+Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA381C5F1B2500DABB8E /* UIDevice+Hardware.m */; };
-		53EECB5D1C5F1B2700DABB8E /* UIDevice+Software.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA391C5F1B2500DABB8E /* UIDevice+Software.h */; };
+		53EECB5D1C5F1B2700DABB8E /* UIDevice+Software.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA391C5F1B2500DABB8E /* UIDevice+Software.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB5E1C5F1B2700DABB8E /* UIDevice+Software.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA391C5F1B2500DABB8E /* UIDevice+Software.h */; };
 		53EECB5F1C5F1B2700DABB8E /* UIDevice+Software.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA3A1C5F1B2500DABB8E /* UIDevice+Software.m */; };
 		53EECB601C5F1B2700DABB8E /* UIDevice+Software.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA3A1C5F1B2500DABB8E /* UIDevice+Software.m */; };
-		53EECB611C5F1B2700DABB8E /* UIImage+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3B1C5F1B2500DABB8E /* UIImage+Color.h */; };
+		53EECB611C5F1B2700DABB8E /* UIImage+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3B1C5F1B2500DABB8E /* UIImage+Color.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB621C5F1B2700DABB8E /* UIImage+Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3B1C5F1B2500DABB8E /* UIImage+Color.h */; };
 		53EECB631C5F1B2700DABB8E /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA3C1C5F1B2500DABB8E /* UIImage+Color.m */; };
 		53EECB641C5F1B2700DABB8E /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA3C1C5F1B2500DABB8E /* UIImage+Color.m */; };
-		53EECB651C5F1B2700DABB8E /* UIImage+Cropping.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3D1C5F1B2500DABB8E /* UIImage+Cropping.h */; };
+		53EECB651C5F1B2700DABB8E /* UIImage+Cropping.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3D1C5F1B2500DABB8E /* UIImage+Cropping.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB661C5F1B2700DABB8E /* UIImage+Cropping.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3D1C5F1B2500DABB8E /* UIImage+Cropping.h */; };
 		53EECB671C5F1B2700DABB8E /* UIImage+Cropping.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA3E1C5F1B2500DABB8E /* UIImage+Cropping.m */; };
 		53EECB681C5F1B2800DABB8E /* UIImage+Cropping.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA3E1C5F1B2500DABB8E /* UIImage+Cropping.m */; };
-		53EECB691C5F1B2800DABB8E /* UIImage+CustomStretch.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3F1C5F1B2500DABB8E /* UIImage+CustomStretch.h */; };
+		53EECB691C5F1B2800DABB8E /* UIImage+CustomStretch.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3F1C5F1B2500DABB8E /* UIImage+CustomStretch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB6A1C5F1B2800DABB8E /* UIImage+CustomStretch.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA3F1C5F1B2500DABB8E /* UIImage+CustomStretch.h */; };
 		53EECB6B1C5F1B2800DABB8E /* UIImage+CustomStretch.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA401C5F1B2500DABB8E /* UIImage+CustomStretch.m */; };
 		53EECB6C1C5F1B2800DABB8E /* UIImage+CustomStretch.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA401C5F1B2500DABB8E /* UIImage+CustomStretch.m */; };
-		53EECB6D1C5F1B2800DABB8E /* UIImage+Reflection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA411C5F1B2500DABB8E /* UIImage+Reflection.h */; };
+		53EECB6D1C5F1B2800DABB8E /* UIImage+Reflection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA411C5F1B2500DABB8E /* UIImage+Reflection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB6E1C5F1B2800DABB8E /* UIImage+Reflection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA411C5F1B2500DABB8E /* UIImage+Reflection.h */; };
 		53EECB6F1C5F1B2800DABB8E /* UIImage+Reflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA421C5F1B2500DABB8E /* UIImage+Reflection.m */; };
 		53EECB701C5F1B2800DABB8E /* UIImage+Reflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA421C5F1B2500DABB8E /* UIImage+Reflection.m */; };
-		53EECB711C5F1B2800DABB8E /* UIImage+RoundedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA431C5F1B2500DABB8E /* UIImage+RoundedImage.h */; };
+		53EECB711C5F1B2800DABB8E /* UIImage+RoundedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA431C5F1B2500DABB8E /* UIImage+RoundedImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB721C5F1B2800DABB8E /* UIImage+RoundedImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA431C5F1B2500DABB8E /* UIImage+RoundedImage.h */; };
 		53EECB731C5F1B2800DABB8E /* UIImage+RoundedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA441C5F1B2500DABB8E /* UIImage+RoundedImage.m */; };
 		53EECB741C5F1B2800DABB8E /* UIImage+RoundedImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA441C5F1B2500DABB8E /* UIImage+RoundedImage.m */; };
-		53EECB751C5F1B2800DABB8E /* UIImage+Tint.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA451C5F1B2500DABB8E /* UIImage+Tint.h */; };
+		53EECB751C5F1B2800DABB8E /* UIImage+Tint.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA451C5F1B2500DABB8E /* UIImage+Tint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB761C5F1B2800DABB8E /* UIImage+Tint.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA451C5F1B2500DABB8E /* UIImage+Tint.h */; };
 		53EECB771C5F1B2800DABB8E /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA461C5F1B2500DABB8E /* UIImage+Tint.m */; };
 		53EECB781C5F1B2800DABB8E /* UIImage+Tint.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA461C5F1B2500DABB8E /* UIImage+Tint.m */; };
-		53EECB791C5F1B2800DABB8E /* UIImageView+ImageAnimated.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA471C5F1B2500DABB8E /* UIImageView+ImageAnimated.h */; };
+		53EECB791C5F1B2800DABB8E /* UIImageView+ImageAnimated.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA471C5F1B2500DABB8E /* UIImageView+ImageAnimated.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB7A1C5F1B2800DABB8E /* UIImageView+ImageAnimated.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA471C5F1B2500DABB8E /* UIImageView+ImageAnimated.h */; };
 		53EECB7B1C5F1B2800DABB8E /* UIImageView+ImageAnimated.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA481C5F1B2500DABB8E /* UIImageView+ImageAnimated.m */; };
 		53EECB7C1C5F1B2800DABB8E /* UIImageView+ImageAnimated.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA481C5F1B2500DABB8E /* UIImageView+ImageAnimated.m */; };
-		53EECB7D1C5F1B2800DABB8E /* UIImageView+Reflection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA491C5F1B2500DABB8E /* UIImageView+Reflection.h */; };
+		53EECB7D1C5F1B2800DABB8E /* UIImageView+Reflection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA491C5F1B2500DABB8E /* UIImageView+Reflection.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB7E1C5F1B2800DABB8E /* UIImageView+Reflection.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA491C5F1B2500DABB8E /* UIImageView+Reflection.h */; };
 		53EECB7F1C5F1B2800DABB8E /* UIImageView+Reflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA4A1C5F1B2500DABB8E /* UIImageView+Reflection.m */; };
 		53EECB801C5F1B2800DABB8E /* UIImageView+Reflection.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA4A1C5F1B2500DABB8E /* UIImageView+Reflection.m */; };
-		53EECB811C5F1B2800DABB8E /* UITableView+Shadows.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4B1C5F1B2500DABB8E /* UITableView+Shadows.h */; };
+		53EECB811C5F1B2800DABB8E /* UITableView+Shadows.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4B1C5F1B2500DABB8E /* UITableView+Shadows.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB821C5F1B2800DABB8E /* UITableView+Shadows.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4B1C5F1B2500DABB8E /* UITableView+Shadows.h */; };
 		53EECB831C5F1B2800DABB8E /* UITableView+Shadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA4C1C5F1B2500DABB8E /* UITableView+Shadows.m */; };
 		53EECB841C5F1B2800DABB8E /* UITableView+Shadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA4C1C5F1B2500DABB8E /* UITableView+Shadows.m */; };
-		53EECB851C5F1B2800DABB8E /* UITableViewCell+TableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4D1C5F1B2500DABB8E /* UITableViewCell+TableView.h */; };
+		53EECB851C5F1B2800DABB8E /* UITableViewCell+TableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4D1C5F1B2500DABB8E /* UITableViewCell+TableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB861C5F1B2900DABB8E /* UITableViewCell+TableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4D1C5F1B2500DABB8E /* UITableViewCell+TableView.h */; };
 		53EECB871C5F1B2900DABB8E /* UITableViewCell+TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA4E1C5F1B2500DABB8E /* UITableViewCell+TableView.m */; };
 		53EECB881C5F1B2900DABB8E /* UITableViewCell+TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA4E1C5F1B2500DABB8E /* UITableViewCell+TableView.m */; };
-		53EECB891C5F1B2900DABB8E /* UIView+Glow.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4F1C5F1B2500DABB8E /* UIView+Glow.h */; };
+		53EECB891C5F1B2900DABB8E /* UIView+Glow.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4F1C5F1B2500DABB8E /* UIView+Glow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB8A1C5F1B2900DABB8E /* UIView+Glow.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA4F1C5F1B2500DABB8E /* UIView+Glow.h */; };
 		53EECB8B1C5F1B2900DABB8E /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA501C5F1B2500DABB8E /* UIView+Glow.m */; };
 		53EECB8C1C5F1B2900DABB8E /* UIView+Glow.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA501C5F1B2500DABB8E /* UIView+Glow.m */; };
-		53EECB8D1C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA511C5F1B2500DABB8E /* UIView+SetNeedsLayoutSafe.h */; };
+		53EECB8D1C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA511C5F1B2500DABB8E /* UIView+SetNeedsLayoutSafe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB8E1C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA511C5F1B2500DABB8E /* UIView+SetNeedsLayoutSafe.h */; };
 		53EECB8F1C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA521C5F1B2500DABB8E /* UIView+SetNeedsLayoutSafe.m */; };
 		53EECB901C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA521C5F1B2500DABB8E /* UIView+SetNeedsLayoutSafe.m */; };
-		53EECB911C5F1B2900DABB8E /* UIView+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA531C5F1B2500DABB8E /* UIView+Tools.h */; };
+		53EECB911C5F1B2900DABB8E /* UIView+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA531C5F1B2500DABB8E /* UIView+Tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB921C5F1B2900DABB8E /* UIView+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA531C5F1B2500DABB8E /* UIView+Tools.h */; };
 		53EECB931C5F1B2900DABB8E /* UIView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA541C5F1B2500DABB8E /* UIView+Tools.m */; };
 		53EECB941C5F1B2900DABB8E /* UIView+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA541C5F1B2500DABB8E /* UIView+Tools.m */; };
-		53EECB951C5F1B2900DABB8E /* UIViewController+IsVisible.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA551C5F1B2500DABB8E /* UIViewController+IsVisible.h */; };
+		53EECB951C5F1B2900DABB8E /* UIViewController+IsVisible.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA551C5F1B2500DABB8E /* UIViewController+IsVisible.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB961C5F1B2900DABB8E /* UIViewController+IsVisible.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA551C5F1B2500DABB8E /* UIViewController+IsVisible.h */; };
 		53EECB971C5F1B2900DABB8E /* UIViewController+IsVisible.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA561C5F1B2500DABB8E /* UIViewController+IsVisible.m */; };
 		53EECB981C5F1B2900DABB8E /* UIViewController+IsVisible.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA561C5F1B2500DABB8E /* UIViewController+IsVisible.m */; };
-		53EECB991C5F1B2900DABB8E /* UIViewController+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA571C5F1B2500DABB8E /* UIViewController+Tools.h */; };
+		53EECB991C5F1B2900DABB8E /* UIViewController+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA571C5F1B2500DABB8E /* UIViewController+Tools.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB9A1C5F1B2900DABB8E /* UIViewController+Tools.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA571C5F1B2500DABB8E /* UIViewController+Tools.h */; };
 		53EECB9B1C5F1B2900DABB8E /* UIViewController+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA581C5F1B2500DABB8E /* UIViewController+Tools.m */; };
 		53EECB9C1C5F1B2A00DABB8E /* UIViewController+Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA581C5F1B2500DABB8E /* UIViewController+Tools.m */; };
-		53EECB9D1C5F1B2A00DABB8E /* UIWebView+HideShadows.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA591C5F1B2500DABB8E /* UIWebView+HideShadows.h */; };
+		53EECB9D1C5F1B2A00DABB8E /* UIWebView+HideShadows.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA591C5F1B2500DABB8E /* UIWebView+HideShadows.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECB9E1C5F1B2A00DABB8E /* UIWebView+HideShadows.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA591C5F1B2500DABB8E /* UIWebView+HideShadows.h */; };
 		53EECB9F1C5F1B2A00DABB8E /* UIWebView+HideShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA5A1C5F1B2500DABB8E /* UIWebView+HideShadows.m */; };
 		53EECBA01C5F1B2A00DABB8E /* UIWebView+HideShadows.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA5A1C5F1B2500DABB8E /* UIWebView+HideShadows.m */; };
-		53EECBA11C5F1B2A00DABB8E /* EX2Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5C1C5F1B2500DABB8E /* EX2Action.h */; };
+		53EECBA11C5F1B2A00DABB8E /* EX2Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5C1C5F1B2500DABB8E /* EX2Action.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBA21C5F1B2A00DABB8E /* EX2Action.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5C1C5F1B2500DABB8E /* EX2Action.h */; };
-		53EECBA31C5F1B2A00DABB8E /* EX2ActionBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5D1C5F1B2500DABB8E /* EX2ActionBlock.h */; };
+		53EECBA31C5F1B2A00DABB8E /* EX2ActionBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5D1C5F1B2500DABB8E /* EX2ActionBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBA41C5F1B2A00DABB8E /* EX2ActionBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5D1C5F1B2500DABB8E /* EX2ActionBlock.h */; };
 		53EECBA51C5F1B2A00DABB8E /* EX2ActionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA5E1C5F1B2500DABB8E /* EX2ActionBlock.m */; };
 		53EECBA61C5F1B2A00DABB8E /* EX2ActionBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA5E1C5F1B2500DABB8E /* EX2ActionBlock.m */; };
-		53EECBA71C5F1B2A00DABB8E /* EX2ActionQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5F1C5F1B2500DABB8E /* EX2ActionQueue.h */; };
+		53EECBA71C5F1B2A00DABB8E /* EX2ActionQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5F1C5F1B2500DABB8E /* EX2ActionQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBA81C5F1B2A00DABB8E /* EX2ActionQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA5F1C5F1B2500DABB8E /* EX2ActionQueue.h */; };
 		53EECBA91C5F1B2A00DABB8E /* EX2ActionQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA601C5F1B2500DABB8E /* EX2ActionQueue.m */; };
 		53EECBAA1C5F1B2A00DABB8E /* EX2ActionQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA601C5F1B2500DABB8E /* EX2ActionQueue.m */; };
-		53EECBAB1C5F1B2A00DABB8E /* EX2Components.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA611C5F1B2500DABB8E /* EX2Components.h */; };
+		53EECBAB1C5F1B2A00DABB8E /* EX2Components.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA611C5F1B2500DABB8E /* EX2Components.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBAC1C5F1B2A00DABB8E /* EX2Components.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA611C5F1B2500DABB8E /* EX2Components.h */; };
-		53EECBAD1C5F1B2A00DABB8E /* EX2FileDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA621C5F1B2500DABB8E /* EX2FileDecryptor.h */; };
+		53EECBAD1C5F1B2A00DABB8E /* EX2FileDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA621C5F1B2500DABB8E /* EX2FileDecryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBAE1C5F1B2B00DABB8E /* EX2FileDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA621C5F1B2500DABB8E /* EX2FileDecryptor.h */; };
 		53EECBAF1C5F1B2B00DABB8E /* EX2FileDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA631C5F1B2500DABB8E /* EX2FileDecryptor.m */; };
 		53EECBB01C5F1B2B00DABB8E /* EX2FileDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA631C5F1B2500DABB8E /* EX2FileDecryptor.m */; };
-		53EECBB11C5F1B2B00DABB8E /* EX2FileEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA641C5F1B2500DABB8E /* EX2FileEncryptor.h */; };
+		53EECBB11C5F1B2B00DABB8E /* EX2FileEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA641C5F1B2500DABB8E /* EX2FileEncryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBB21C5F1B2B00DABB8E /* EX2FileEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA641C5F1B2500DABB8E /* EX2FileEncryptor.h */; };
 		53EECBB31C5F1B2B00DABB8E /* EX2FileEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA651C5F1B2500DABB8E /* EX2FileEncryptor.m */; };
 		53EECBB41C5F1B2B00DABB8E /* EX2FileEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA651C5F1B2500DABB8E /* EX2FileEncryptor.m */; };
-		53EECBB51C5F1B2B00DABB8E /* EX2Language.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA661C5F1B2500DABB8E /* EX2Language.h */; };
+		53EECBB51C5F1B2B00DABB8E /* EX2Language.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA661C5F1B2500DABB8E /* EX2Language.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBB61C5F1B2B00DABB8E /* EX2Language.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA661C5F1B2500DABB8E /* EX2Language.h */; };
 		53EECBB71C5F1B2B00DABB8E /* EX2Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA671C5F1B2500DABB8E /* EX2Language.m */; };
 		53EECBB81C5F1B2B00DABB8E /* EX2Language.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA671C5F1B2500DABB8E /* EX2Language.m */; };
-		53EECBB91C5F1B2B00DABB8E /* EX2NetworkIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA681C5F1B2500DABB8E /* EX2NetworkIndicator.h */; };
+		53EECBB91C5F1B2B00DABB8E /* EX2NetworkIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA681C5F1B2500DABB8E /* EX2NetworkIndicator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBBA1C5F1B2B00DABB8E /* EX2NetworkIndicator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA681C5F1B2500DABB8E /* EX2NetworkIndicator.h */; };
 		53EECBBB1C5F1B2B00DABB8E /* EX2NetworkIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA691C5F1B2500DABB8E /* EX2NetworkIndicator.m */; };
 		53EECBBC1C5F1B2B00DABB8E /* EX2NetworkIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA691C5F1B2500DABB8E /* EX2NetworkIndicator.m */; };
-		53EECBBD1C5F1B2B00DABB8E /* EX2Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6A1C5F1B2500DABB8E /* EX2Reachability.h */; };
+		53EECBBD1C5F1B2B00DABB8E /* EX2Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6A1C5F1B2500DABB8E /* EX2Reachability.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBBE1C5F1B2B00DABB8E /* EX2Reachability.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6A1C5F1B2500DABB8E /* EX2Reachability.h */; };
 		53EECBBF1C5F1B2B00DABB8E /* EX2Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA6B1C5F1B2500DABB8E /* EX2Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		53EECBC01C5F1B2B00DABB8E /* EX2Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA6B1C5F1B2500DABB8E /* EX2Reachability.m */; };
-		53EECBC11C5F1B2B00DABB8E /* EX2RingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6C1C5F1B2500DABB8E /* EX2RingBuffer.h */; };
+		53EECBC11C5F1B2B00DABB8E /* EX2RingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6C1C5F1B2500DABB8E /* EX2RingBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBC21C5F1B2C00DABB8E /* EX2RingBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6C1C5F1B2500DABB8E /* EX2RingBuffer.h */; };
 		53EECBC31C5F1B2C00DABB8E /* EX2RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA6D1C5F1B2500DABB8E /* EX2RingBuffer.m */; };
 		53EECBC41C5F1B2C00DABB8E /* EX2RingBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA6D1C5F1B2500DABB8E /* EX2RingBuffer.m */; };
-		53EECBC51C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6E1C5F1B2500DABB8E /* EX2SimpleConnectionQueue.h */; };
+		53EECBC51C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6E1C5F1B2500DABB8E /* EX2SimpleConnectionQueue.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBC61C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA6E1C5F1B2500DABB8E /* EX2SimpleConnectionQueue.h */; };
 		53EECBC71C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA6F1C5F1B2500DABB8E /* EX2SimpleConnectionQueue.m */; };
 		53EECBC81C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA6F1C5F1B2500DABB8E /* EX2SimpleConnectionQueue.m */; };
-		53EECBC91C5F1B2C00DABB8E /* EX2Kit.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA701C5F1B2500DABB8E /* EX2Kit.h */; };
+		53EECBC91C5F1B2C00DABB8E /* EX2Kit.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA701C5F1B2500DABB8E /* EX2Kit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBCA1C5F1B2C00DABB8E /* EX2Kit.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA701C5F1B2500DABB8E /* EX2Kit.h */; };
 		53EECBCB1C5F1B2C00DABB8E /* EX2Kit.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA711C5F1B2500DABB8E /* EX2Kit.m */; };
 		53EECBCC1C5F1B2C00DABB8E /* EX2Kit.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA711C5F1B2500DABB8E /* EX2Kit.m */; };
-		53EECBCD1C5F1B2C00DABB8E /* EX2Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA731C5F1B2500DABB8E /* EX2Macros.h */; };
+		53EECBCD1C5F1B2C00DABB8E /* EX2Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA731C5F1B2500DABB8E /* EX2Macros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBCE1C5F1B2C00DABB8E /* EX2Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA731C5F1B2500DABB8E /* EX2Macros.h */; };
-		53EECBCF1C5F1B2C00DABB8E /* EX2Dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA751C5F1B2500DABB8E /* EX2Dispatch.h */; };
+		53EECBCF1C5F1B2C00DABB8E /* EX2Dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA751C5F1B2500DABB8E /* EX2Dispatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBD01C5F1B2D00DABB8E /* EX2Dispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA751C5F1B2500DABB8E /* EX2Dispatch.h */; };
 		53EECBD11C5F1B2D00DABB8E /* EX2Dispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA761C5F1B2500DABB8E /* EX2Dispatch.m */; };
 		53EECBD21C5F1B2D00DABB8E /* EX2Dispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA761C5F1B2500DABB8E /* EX2Dispatch.m */; };
-		53EECBD31C5F1B2D00DABB8E /* EX2Static.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA771C5F1B2500DABB8E /* EX2Static.h */; };
+		53EECBD31C5F1B2D00DABB8E /* EX2Static.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA771C5F1B2500DABB8E /* EX2Static.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBD41C5F1B2D00DABB8E /* EX2Static.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA771C5F1B2500DABB8E /* EX2Static.h */; };
-		53EECBD51C5F1B2D00DABB8E /* EX2FlatSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA791C5F1B2500DABB8E /* EX2FlatSegmentedControl.h */; };
+		53EECBD51C5F1B2D00DABB8E /* EX2FlatSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA791C5F1B2500DABB8E /* EX2FlatSegmentedControl.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBD61C5F1B2D00DABB8E /* EX2FlatSegmentedControl.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA791C5F1B2500DABB8E /* EX2FlatSegmentedControl.h */; };
 		53EECBD71C5F1B2D00DABB8E /* EX2FlatSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA7A1C5F1B2500DABB8E /* EX2FlatSegmentedControl.m */; };
 		53EECBD81C5F1B2D00DABB8E /* EX2FlatSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA7A1C5F1B2500DABB8E /* EX2FlatSegmentedControl.m */; };
-		53EECBD91C5F1B2D00DABB8E /* EX2GlowButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7B1C5F1B2500DABB8E /* EX2GlowButton.h */; };
+		53EECBD91C5F1B2D00DABB8E /* EX2GlowButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7B1C5F1B2500DABB8E /* EX2GlowButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBDA1C5F1B2D00DABB8E /* EX2GlowButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7B1C5F1B2500DABB8E /* EX2GlowButton.h */; };
 		53EECBDB1C5F1B2D00DABB8E /* EX2GlowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA7C1C5F1B2500DABB8E /* EX2GlowButton.m */; };
 		53EECBDC1C5F1B2D00DABB8E /* EX2GlowButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA7C1C5F1B2500DABB8E /* EX2GlowButton.m */; };
-		53EECBDD1C5F1B2D00DABB8E /* EX2InfinitePagingScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7D1C5F1B2500DABB8E /* EX2InfinitePagingScrollView.h */; };
+		53EECBDD1C5F1B2D00DABB8E /* EX2InfinitePagingScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7D1C5F1B2500DABB8E /* EX2InfinitePagingScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBDE1C5F1B2E00DABB8E /* EX2InfinitePagingScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7D1C5F1B2500DABB8E /* EX2InfinitePagingScrollView.h */; };
 		53EECBDF1C5F1B2E00DABB8E /* EX2InfinitePagingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA7E1C5F1B2500DABB8E /* EX2InfinitePagingScrollView.m */; };
 		53EECBE01C5F1B2E00DABB8E /* EX2InfinitePagingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA7E1C5F1B2500DABB8E /* EX2InfinitePagingScrollView.m */; };
-		53EECBE11C5F1B2E00DABB8E /* EX2LargerTouchScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7F1C5F1B2500DABB8E /* EX2LargerTouchScrollView.h */; };
+		53EECBE11C5F1B2E00DABB8E /* EX2LargerTouchScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7F1C5F1B2500DABB8E /* EX2LargerTouchScrollView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBE21C5F1B2E00DABB8E /* EX2LargerTouchScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA7F1C5F1B2500DABB8E /* EX2LargerTouchScrollView.h */; };
 		53EECBE31C5F1B2E00DABB8E /* EX2LargerTouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA801C5F1B2500DABB8E /* EX2LargerTouchScrollView.m */; };
 		53EECBE41C5F1B2E00DABB8E /* EX2LargerTouchScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA801C5F1B2500DABB8E /* EX2LargerTouchScrollView.m */; };
-		53EECBE51C5F1B2E00DABB8E /* EX2NavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA811C5F1B2500DABB8E /* EX2NavigationController.h */; };
+		53EECBE51C5F1B2E00DABB8E /* EX2NavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA811C5F1B2500DABB8E /* EX2NavigationController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBE61C5F1B2E00DABB8E /* EX2NavigationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA811C5F1B2500DABB8E /* EX2NavigationController.h */; };
 		53EECBE71C5F1B2E00DABB8E /* EX2NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA821C5F1B2500DABB8E /* EX2NavigationController.m */; };
 		53EECBE81C5F1B2E00DABB8E /* EX2NavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA821C5F1B2500DABB8E /* EX2NavigationController.m */; };
-		53EECBE91C5F1B2E00DABB8E /* EX2NotificationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA831C5F1B2500DABB8E /* EX2NotificationBar.h */; };
+		53EECBE91C5F1B2E00DABB8E /* EX2NotificationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA831C5F1B2500DABB8E /* EX2NotificationBar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBEA1C5F1B2F00DABB8E /* EX2NotificationBar.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA831C5F1B2500DABB8E /* EX2NotificationBar.h */; };
 		53EECBEB1C5F1B2F00DABB8E /* EX2NotificationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA841C5F1B2500DABB8E /* EX2NotificationBar.m */; };
 		53EECBEC1C5F1B2F00DABB8E /* EX2NotificationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA841C5F1B2500DABB8E /* EX2NotificationBar.m */; };
 		53EECBED1C5F1B2F00DABB8E /* EX2NotificationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53EECA851C5F1B2500DABB8E /* EX2NotificationBar.xib */; };
-		53EECBEE1C5F1B2F00DABB8E /* EX2SlidingNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA861C5F1B2500DABB8E /* EX2SlidingNotification.h */; };
+		53EECBEE1C5F1B2F00DABB8E /* EX2SlidingNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA861C5F1B2500DABB8E /* EX2SlidingNotification.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBEF1C5F1B2F00DABB8E /* EX2SlidingNotification.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA861C5F1B2500DABB8E /* EX2SlidingNotification.h */; };
 		53EECBF01C5F1B2F00DABB8E /* EX2SlidingNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA871C5F1B2500DABB8E /* EX2SlidingNotification.m */; };
 		53EECBF11C5F1B2F00DABB8E /* EX2SlidingNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA871C5F1B2500DABB8E /* EX2SlidingNotification.m */; };
 		53EECBF21C5F1B2F00DABB8E /* EX2SlidingNotification.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53EECA881C5F1B2500DABB8E /* EX2SlidingNotification.xib */; };
-		53EECBF31C5F1B2F00DABB8E /* EX2TabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA891C5F1B2500DABB8E /* EX2TabBarController.h */; };
+		53EECBF31C5F1B2F00DABB8E /* EX2TabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA891C5F1B2500DABB8E /* EX2TabBarController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBF41C5F1B2F00DABB8E /* EX2TabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA891C5F1B2500DABB8E /* EX2TabBarController.h */; };
 		53EECBF51C5F1B2F00DABB8E /* EX2TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA8A1C5F1B2500DABB8E /* EX2TabBarController.m */; };
 		53EECBF61C5F1B2F00DABB8E /* EX2TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA8A1C5F1B2500DABB8E /* EX2TabBarController.m */; };
 		53EECBF71C5F1B2F00DABB8E /* EX2TabBarController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53EECA8B1C5F1B2500DABB8E /* EX2TabBarController.xib */; };
-		53EECBF81C5F1B2F00DABB8E /* EX2UIComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA8C1C5F1B2500DABB8E /* EX2UIComponents.h */; };
+		53EECBF81C5F1B2F00DABB8E /* EX2UIComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA8C1C5F1B2500DABB8E /* EX2UIComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBF91C5F1B3000DABB8E /* EX2UIComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA8C1C5F1B2500DABB8E /* EX2UIComponents.h */; };
-		53EECBFA1C5F1B3000DABB8E /* SnappySlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA8D1C5F1B2500DABB8E /* SnappySlider.h */; };
+		53EECBFA1C5F1B3000DABB8E /* SnappySlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA8D1C5F1B2500DABB8E /* SnappySlider.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECBFB1C5F1B3000DABB8E /* SnappySlider.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECA8D1C5F1B2500DABB8E /* SnappySlider.h */; };
 		53EECBFC1C5F1B3000DABB8E /* SnappySlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA8E1C5F1B2500DABB8E /* SnappySlider.m */; };
 		53EECBFD1C5F1B3000DABB8E /* SnappySlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECA8E1C5F1B2500DABB8E /* SnappySlider.m */; };
@@ -940,69 +940,69 @@
 		53EECBFF1C5F1B3000DABB8E /* table-fade-bottom@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53EECA901C5F1B2500DABB8E /* table-fade-bottom@2x.png */; };
 		53EECC001C5F1B3000DABB8E /* table-fade-top.png in Resources */ = {isa = PBXBuildFile; fileRef = 53EECA911C5F1B2500DABB8E /* table-fade-top.png */; };
 		53EECC011C5F1B3000DABB8E /* table-fade-top@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53EECA921C5F1B2500DABB8E /* table-fade-top@2x.png */; };
-		53EECC161C5F1B6000DABB8E /* RNCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC051C5F1B6000DABB8E /* RNCryptor.h */; };
+		53EECC161C5F1B6000DABB8E /* RNCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC051C5F1B6000DABB8E /* RNCryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC171C5F1B6000DABB8E /* RNCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC051C5F1B6000DABB8E /* RNCryptor.h */; };
 		53EECC181C5F1B6000DABB8E /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC061C5F1B6000DABB8E /* RNCryptor.m */; };
 		53EECC191C5F1B6000DABB8E /* RNCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC061C5F1B6000DABB8E /* RNCryptor.m */; };
-		53EECC1A1C5F1B6000DABB8E /* RNCryptor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC071C5F1B6000DABB8E /* RNCryptor+Private.h */; };
+		53EECC1A1C5F1B6000DABB8E /* RNCryptor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC071C5F1B6000DABB8E /* RNCryptor+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC1B1C5F1B6000DABB8E /* RNCryptor+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC071C5F1B6000DABB8E /* RNCryptor+Private.h */; };
-		53EECC1C1C5F1B6000DABB8E /* RNCryptorEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC081C5F1B6000DABB8E /* RNCryptorEngine.h */; };
+		53EECC1C1C5F1B6000DABB8E /* RNCryptorEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC081C5F1B6000DABB8E /* RNCryptorEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC1D1C5F1B6000DABB8E /* RNCryptorEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC081C5F1B6000DABB8E /* RNCryptorEngine.h */; };
 		53EECC1E1C5F1B6000DABB8E /* RNCryptorEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC091C5F1B6000DABB8E /* RNCryptorEngine.m */; };
 		53EECC1F1C5F1B6000DABB8E /* RNCryptorEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC091C5F1B6000DABB8E /* RNCryptorEngine.m */; };
-		53EECC201C5F1B6000DABB8E /* RNCryptorOld.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0A1C5F1B6000DABB8E /* RNCryptorOld.h */; };
+		53EECC201C5F1B6000DABB8E /* RNCryptorOld.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0A1C5F1B6000DABB8E /* RNCryptorOld.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC211C5F1B6000DABB8E /* RNCryptorOld.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0A1C5F1B6000DABB8E /* RNCryptorOld.h */; };
 		53EECC221C5F1B6000DABB8E /* RNCryptorOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC0B1C5F1B6000DABB8E /* RNCryptorOld.m */; };
 		53EECC231C5F1B6000DABB8E /* RNCryptorOld.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC0B1C5F1B6000DABB8E /* RNCryptorOld.m */; };
-		53EECC241C5F1B6000DABB8E /* RNDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0C1C5F1B6000DABB8E /* RNDecryptor.h */; };
+		53EECC241C5F1B6000DABB8E /* RNDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0C1C5F1B6000DABB8E /* RNDecryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC251C5F1B6000DABB8E /* RNDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0C1C5F1B6000DABB8E /* RNDecryptor.h */; };
 		53EECC261C5F1B6000DABB8E /* RNDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC0D1C5F1B6000DABB8E /* RNDecryptor.m */; };
 		53EECC271C5F1B6000DABB8E /* RNDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC0D1C5F1B6000DABB8E /* RNDecryptor.m */; };
-		53EECC281C5F1B6000DABB8E /* RNEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0E1C5F1B6000DABB8E /* RNEncryptor.h */; };
+		53EECC281C5F1B6000DABB8E /* RNEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0E1C5F1B6000DABB8E /* RNEncryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC291C5F1B6000DABB8E /* RNEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC0E1C5F1B6000DABB8E /* RNEncryptor.h */; };
 		53EECC2A1C5F1B6000DABB8E /* RNEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC0F1C5F1B6000DABB8E /* RNEncryptor.m */; };
 		53EECC2B1C5F1B6000DABB8E /* RNEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC0F1C5F1B6000DABB8E /* RNEncryptor.m */; };
-		53EECC2C1C5F1B6000DABB8E /* RNOpenSSLCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC101C5F1B6000DABB8E /* RNOpenSSLCryptor.h */; };
+		53EECC2C1C5F1B6000DABB8E /* RNOpenSSLCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC101C5F1B6000DABB8E /* RNOpenSSLCryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC2D1C5F1B6000DABB8E /* RNOpenSSLCryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC101C5F1B6000DABB8E /* RNOpenSSLCryptor.h */; };
 		53EECC2E1C5F1B6000DABB8E /* RNOpenSSLCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC111C5F1B6000DABB8E /* RNOpenSSLCryptor.m */; };
 		53EECC2F1C5F1B6000DABB8E /* RNOpenSSLCryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC111C5F1B6000DABB8E /* RNOpenSSLCryptor.m */; };
-		53EECC301C5F1B6000DABB8E /* RNOpenSSLDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC121C5F1B6000DABB8E /* RNOpenSSLDecryptor.h */; };
+		53EECC301C5F1B6000DABB8E /* RNOpenSSLDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC121C5F1B6000DABB8E /* RNOpenSSLDecryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC311C5F1B6000DABB8E /* RNOpenSSLDecryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC121C5F1B6000DABB8E /* RNOpenSSLDecryptor.h */; };
 		53EECC321C5F1B6000DABB8E /* RNOpenSSLDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC131C5F1B6000DABB8E /* RNOpenSSLDecryptor.m */; };
 		53EECC331C5F1B6000DABB8E /* RNOpenSSLDecryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC131C5F1B6000DABB8E /* RNOpenSSLDecryptor.m */; };
-		53EECC341C5F1B6000DABB8E /* RNOpenSSLEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC141C5F1B6000DABB8E /* RNOpenSSLEncryptor.h */; };
+		53EECC341C5F1B6000DABB8E /* RNOpenSSLEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC141C5F1B6000DABB8E /* RNOpenSSLEncryptor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC351C5F1B6000DABB8E /* RNOpenSSLEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC141C5F1B6000DABB8E /* RNOpenSSLEncryptor.h */; };
 		53EECC361C5F1B6000DABB8E /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC151C5F1B6000DABB8E /* RNOpenSSLEncryptor.m */; };
 		53EECC371C5F1B6000DABB8E /* RNOpenSSLEncryptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC151C5F1B6000DABB8E /* RNOpenSSLEncryptor.m */; };
-		53EECC481C5F1B7700DABB8E /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC381C5F1B7700DABB8E /* CocoaLumberjack.h */; };
-		53EECC491C5F1B7700DABB8E /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC381C5F1B7700DABB8E /* CocoaLumberjack.h */; };
-		53EECC4A1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC391C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h */; };
+		53EECC481C5F1B7700DABB8E /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC381C5F1B7700DABB8E /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53EECC491C5F1B7700DABB8E /* CocoaLumberjack.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC381C5F1B7700DABB8E /* CocoaLumberjack.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53EECC4A1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC391C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC4B1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC391C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h */; };
 		53EECC4C1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC3A1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.m */; };
 		53EECC4D1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC3A1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.m */; };
-		53EECC4E1C5F1B7700DABB8E /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3B1C5F1B7700DABB8E /* DDASLLogCapture.h */; };
+		53EECC4E1C5F1B7700DABB8E /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3B1C5F1B7700DABB8E /* DDASLLogCapture.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC4F1C5F1B7700DABB8E /* DDASLLogCapture.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3B1C5F1B7700DABB8E /* DDASLLogCapture.h */; };
 		53EECC501C5F1B7700DABB8E /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC3C1C5F1B7700DABB8E /* DDASLLogCapture.m */; };
 		53EECC511C5F1B7700DABB8E /* DDASLLogCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC3C1C5F1B7700DABB8E /* DDASLLogCapture.m */; };
-		53EECC521C5F1B7700DABB8E /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3D1C5F1B7700DABB8E /* DDASLLogger.h */; };
+		53EECC521C5F1B7700DABB8E /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3D1C5F1B7700DABB8E /* DDASLLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC531C5F1B7700DABB8E /* DDASLLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3D1C5F1B7700DABB8E /* DDASLLogger.h */; };
 		53EECC541C5F1B7700DABB8E /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC3E1C5F1B7700DABB8E /* DDASLLogger.m */; };
 		53EECC551C5F1B7700DABB8E /* DDASLLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC3E1C5F1B7700DABB8E /* DDASLLogger.m */; };
-		53EECC561C5F1B7700DABB8E /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3F1C5F1B7700DABB8E /* DDAssertMacros.h */; };
+		53EECC561C5F1B7700DABB8E /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3F1C5F1B7700DABB8E /* DDAssertMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC571C5F1B7700DABB8E /* DDAssertMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC3F1C5F1B7700DABB8E /* DDAssertMacros.h */; };
-		53EECC581C5F1B7700DABB8E /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC401C5F1B7700DABB8E /* DDFileLogger.h */; };
+		53EECC581C5F1B7700DABB8E /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC401C5F1B7700DABB8E /* DDFileLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC591C5F1B7700DABB8E /* DDFileLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC401C5F1B7700DABB8E /* DDFileLogger.h */; };
 		53EECC5A1C5F1B7700DABB8E /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC411C5F1B7700DABB8E /* DDFileLogger.m */; };
 		53EECC5B1C5F1B7700DABB8E /* DDFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC411C5F1B7700DABB8E /* DDFileLogger.m */; };
-		53EECC5C1C5F1B7700DABB8E /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC421C5F1B7700DABB8E /* DDLog.h */; };
+		53EECC5C1C5F1B7700DABB8E /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC421C5F1B7700DABB8E /* DDLog.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC5D1C5F1B7700DABB8E /* DDLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC421C5F1B7700DABB8E /* DDLog.h */; };
 		53EECC5E1C5F1B7700DABB8E /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC431C5F1B7700DABB8E /* DDLog.m */; };
 		53EECC5F1C5F1B7700DABB8E /* DDLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC431C5F1B7700DABB8E /* DDLog.m */; };
-		53EECC601C5F1B7700DABB8E /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC441C5F1B7700DABB8E /* DDLog+LOGV.h */; };
+		53EECC601C5F1B7700DABB8E /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC441C5F1B7700DABB8E /* DDLog+LOGV.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC611C5F1B7700DABB8E /* DDLog+LOGV.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC441C5F1B7700DABB8E /* DDLog+LOGV.h */; };
-		53EECC621C5F1B7700DABB8E /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC451C5F1B7700DABB8E /* DDLogMacros.h */; };
+		53EECC621C5F1B7700DABB8E /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC451C5F1B7700DABB8E /* DDLogMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC631C5F1B7700DABB8E /* DDLogMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC451C5F1B7700DABB8E /* DDLogMacros.h */; };
-		53EECC641C5F1B7700DABB8E /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC461C5F1B7700DABB8E /* DDTTYLogger.h */; };
+		53EECC641C5F1B7700DABB8E /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC461C5F1B7700DABB8E /* DDTTYLogger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53EECC651C5F1B7700DABB8E /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC461C5F1B7700DABB8E /* DDTTYLogger.h */; };
 		53EECC661C5F1B7700DABB8E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC471C5F1B7700DABB8E /* DDTTYLogger.m */; };
 		53EECC671C5F1B7700DABB8E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC471C5F1B7700DABB8E /* DDTTYLogger.m */; };
@@ -3002,25 +3002,13 @@
 				5344F454166C03E50013B929 /* libSubImports.h in Headers */,
 				536C95A9166193AE005A73C6 /* LibSub.h in Headers */,
 				536C959E166193AE005A73C6 /* ISMSDataModelObjects.h in Headers */,
-				53EECAA11C5F1B2500DABB8E /* NSArray+Plist.h in Headers */,
-				53EECBCD1C5F1B2C00DABB8E /* EX2Macros.h in Headers */,
-				53EECA951C5F1B2500DABB8E /* EX2FoundationCategories.h in Headers */,
-				53EECBC91C5F1B2C00DABB8E /* EX2Kit.h in Headers */,
 				536C959F166193AE005A73C6 /* ISMSIndex.h in Headers */,
-				53EECBEE1C5F1B2F00DABB8E /* EX2SlidingNotification.h in Headers */,
 				536C95A0166193AE005A73C6 /* ISMSArtist.h in Headers */,
 				536C95A1166193AE005A73C6 /* ISMSAlbum.h in Headers */,
 				536C95A2166193AE005A73C6 /* ISMSItem.h in Headers */,
 				536C95A3166193AE005A73C6 /* ISMSSong.h in Headers */,
-				53EECBE91C5F1B2E00DABB8E /* EX2NotificationBar.h in Headers */,
-				53EECAC91C5F1B2500DABB8E /* NSMutableDictionary+Safe.h in Headers */,
-				53EECA9D1C5F1B2500DABB8E /* NSArray+FirstObject.h in Headers */,
-				53EECB4D1C5F1B2700DABB8E /* UIButton+StretchBackground.h in Headers */,
 				536C95A5166193AE005A73C6 /* ISMSServer.h in Headers */,
 				536C95A6166193AE005A73C6 /* ISMSChatMessage.h in Headers */,
-				53EECAAD1C5F1B2500DABB8E /* NSMutableArray+Safe.h in Headers */,
-				53EECB011C5F1B2600DABB8E /* NSString+FileSize.h in Headers */,
-				53EECBB91C5F1B2B00DABB8E /* EX2NetworkIndicator.h in Headers */,
 				53EECC481C5F1B7700DABB8E /* CocoaLumberjack.h in Headers */,
 				536C95A7166193AE005A73C6 /* SUSServerPlaylist.h in Headers */,
 				536C9698166195CF005A73C6 /* ISMSStreamManager.h in Headers */,
@@ -3030,53 +3018,84 @@
 				536C96A0166195CF005A73C6 /* ISMSStreamHandlerDelegate.h in Headers */,
 				536C96A1166195CF005A73C6 /* ISMSCFNetworkStreamHandler.h in Headers */,
 				536C96AF16619673005A73C6 /* JukeboxConnectionDelegate.h in Headers */,
-				53EECB991C5F1B2900DABB8E /* UIViewController+Tools.h in Headers */,
 				536C96B316619695005A73C6 /* iSubBassGaplessPlayerDelegate.h in Headers */,
-				53EECB951C5F1B2900DABB8E /* UIViewController+IsVisible.h in Headers */,
 				536C96BC166196AC005A73C6 /* NSMutableURLRequest+SUS.h in Headers */,
-				53EECB611C5F1B2700DABB8E /* UIImage+Color.h in Headers */,
 				536C96BE166196AC005A73C6 /* NSMutableURLRequest+PMS.h in Headers */,
 				536C96C0166196AC005A73C6 /* ISMSUpdateChecker.h in Headers */,
 				536C96D8166196C0005A73C6 /* ISMSDataAccessObjects.h in Headers */,
+				536C96DB166196C0005A73C6 /* SUSSubFolderDAO.h in Headers */,
+				536C96E1166196C0005A73C6 /* SUSChatDAO.h in Headers */,
+				536C96E3166196C0005A73C6 /* SUSLyricsDAO.h in Headers */,
+				536C96E5166196C0005A73C6 /* SUSServerPlaylistsDAO.h in Headers */,
+				536C96E7166196C0005A73C6 /* ISMSSong+DAO.h in Headers */,
+				536C96E9166196C0005A73C6 /* SUSCoverArtDAO.h in Headers */,
+				536C96EB166196C0005A73C6 /* SUSNowPlayingDAO.h in Headers */,
+				536C96F2166196D4005A73C6 /* ISMSLoaderManager.h in Headers */,
+				536C96F3166196D4005A73C6 /* ISMSLoaderDelegate.h in Headers */,
+				536C96F4166196D4005A73C6 /* ISMSLoader.h in Headers */,
+				536C970C166196F3005A73C6 /* ISMSChatLoader.h in Headers */,
+				536C970E166196F3005A73C6 /* ISMSLyricsLoader.h in Headers */,
+				536C9710166196F3005A73C6 /* ISMSNowPlayingLoader.h in Headers */,
+				536C9712166196F3005A73C6 /* ISMSQuickAlbumsLoader.h in Headers */,
+				536C97161661971E005A73C6 /* ISMSLoaders.h in Headers */,
+				536C971E16619734005A73C6 /* ISMSQueueAllLoader.h in Headers */,
+				536C972F1661975C005A73C6 /* ISMSSubFolderLoader.h in Headers */,
+				536C974316619769005A73C6 /* ISMSCoverArtLoader.h in Headers */,
+				536C974716619770005A73C6 /* ISMSServerPlaylistsLoader.h in Headers */,
+				536C975116619776005A73C6 /* ISMSStatusLoader.h in Headers */,
+				536C9766166197B8005A73C6 /* SavedSettings.h in Headers */,
+				536C9768166197B8005A73C6 /* PlaylistSingleton.h in Headers */,
+				536C976A166197B8005A73C6 /* CacheSingleton.h in Headers */,
+				536C976C166197B8005A73C6 /* DatabaseSingleton.h in Headers */,
+				536C976E166197B8005A73C6 /* MusicSingleton.h in Headers */,
+				536C9770166197B8005A73C6 /* SocialSingleton.h in Headers */,
+				536C9774166197B8005A73C6 /* JukeboxSingleton.h in Headers */,
+				536C977C166197E7005A73C6 /* BassVisualizer.h in Headers */,
+				536C9786166197EC005A73C6 /* BassEqualizer.h in Headers */,
+				536C9788166197EC005A73C6 /* BassParamEqValue.h in Headers */,
+				536C978A166197EC005A73C6 /* BassEffectDAO.h in Headers */,
+				536C978C166197EC005A73C6 /* BassEffectValue.h in Headers */,
+				536C9795166197F3005A73C6 /* BassWrapper.h in Headers */,
+				536C9797166197F3005A73C6 /* BassStream.h in Headers */,
+				536C9799166197F3005A73C6 /* BassGaplessPlayer.h in Headers */,
+				536C979B166197F3005A73C6 /* BassGaplessPlayerDelegate.h in Headers */,
+				536C979E166197FB005A73C6 /* AudioEngine.h in Headers */,
+				536C97A216619820005A73C6 /* sqlite3.h in Headers */,
+				53EECAA11C5F1B2500DABB8E /* NSArray+Plist.h in Headers */,
+				53EECBCD1C5F1B2C00DABB8E /* EX2Macros.h in Headers */,
+				53EECA951C5F1B2500DABB8E /* EX2FoundationCategories.h in Headers */,
+				53EECBC91C5F1B2C00DABB8E /* EX2Kit.h in Headers */,
+				53EECBEE1C5F1B2F00DABB8E /* EX2SlidingNotification.h in Headers */,
+				53EECBE91C5F1B2E00DABB8E /* EX2NotificationBar.h in Headers */,
+				53EECAC91C5F1B2500DABB8E /* NSMutableDictionary+Safe.h in Headers */,
+				53EECA9D1C5F1B2500DABB8E /* NSArray+FirstObject.h in Headers */,
+				53EECB4D1C5F1B2700DABB8E /* UIButton+StretchBackground.h in Headers */,
+				53EECAAD1C5F1B2500DABB8E /* NSMutableArray+Safe.h in Headers */,
+				53EECB011C5F1B2600DABB8E /* NSString+FileSize.h in Headers */,
+				53EECBB91C5F1B2B00DABB8E /* EX2NetworkIndicator.h in Headers */,
+				53EECB991C5F1B2900DABB8E /* UIViewController+Tools.h in Headers */,
+				53EECB951C5F1B2900DABB8E /* UIViewController+IsVisible.h in Headers */,
+				53EECB611C5F1B2700DABB8E /* UIImage+Color.h in Headers */,
 				53EECB111C5F1B2600DABB8E /* NSString+md5.h in Headers */,
 				53EECC561C5F1B7700DABB8E /* DDAssertMacros.h in Headers */,
 				53EECAE51C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h in Headers */,
 				53EECBE51C5F1B2E00DABB8E /* EX2NavigationController.h in Headers */,
 				53EECB791C5F1B2800DABB8E /* UIImageView+ImageAnimated.h in Headers */,
-				536C96DB166196C0005A73C6 /* SUSSubFolderDAO.h in Headers */,
-				536C96E1166196C0005A73C6 /* SUSChatDAO.h in Headers */,
 				53EECBAB1C5F1B2A00DABB8E /* EX2Components.h in Headers */,
 				53EECBC11C5F1B2B00DABB8E /* EX2RingBuffer.h in Headers */,
 				53EECC301C5F1B6000DABB8E /* RNOpenSSLDecryptor.h in Headers */,
 				53EECBB51C5F1B2B00DABB8E /* EX2Language.h in Headers */,
-				536C96E3166196C0005A73C6 /* SUSLyricsDAO.h in Headers */,
 				53EECC1C1C5F1B6000DABB8E /* RNCryptorEngine.h in Headers */,
 				53EECBE11C5F1B2E00DABB8E /* EX2LargerTouchScrollView.h in Headers */,
-				536C96E5166196C0005A73C6 /* SUSServerPlaylistsDAO.h in Headers */,
 				53EECAE11C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h in Headers */,
-				536C96E7166196C0005A73C6 /* ISMSSong+DAO.h in Headers */,
-				536C96E9166196C0005A73C6 /* SUSCoverArtDAO.h in Headers */,
-				536C96EB166196C0005A73C6 /* SUSNowPlayingDAO.h in Headers */,
-				536C96F2166196D4005A73C6 /* ISMSLoaderManager.h in Headers */,
 				53EECAD11C5F1B2500DABB8E /* NSNull+CleanString.h in Headers */,
-				536C96F3166196D4005A73C6 /* ISMSLoaderDelegate.h in Headers */,
-				536C96F4166196D4005A73C6 /* ISMSLoader.h in Headers */,
-				536C970C166196F3005A73C6 /* ISMSChatLoader.h in Headers */,
 				53EECA971C5F1B2500DABB8E /* NSArray+Additions.h in Headers */,
-				536C970E166196F3005A73C6 /* ISMSLyricsLoader.h in Headers */,
 				53EECC201C5F1B6000DABB8E /* RNCryptorOld.h in Headers */,
-				536C9710166196F3005A73C6 /* ISMSNowPlayingLoader.h in Headers */,
-				536C9712166196F3005A73C6 /* ISMSQuickAlbumsLoader.h in Headers */,
-				536C97161661971E005A73C6 /* ISMSLoaders.h in Headers */,
-				536C971E16619734005A73C6 /* ISMSQueueAllLoader.h in Headers */,
 				53EECC281C5F1B6000DABB8E /* RNEncryptor.h in Headers */,
-				536C972F1661975C005A73C6 /* ISMSSubFolderLoader.h in Headers */,
 				53EECAC51C5F1B2500DABB8E /* NSFileHandle+Hash.h in Headers */,
 				53EECB411C5F1B2600DABB8E /* EX2QuartzCoreCategories.h in Headers */,
 				53EECAE91C5F1B2500DABB8E /* NSOrderedSet+Safe.h in Headers */,
 				53EECB591C5F1B2700DABB8E /* UIDevice+Hardware.h in Headers */,
-				536C974316619769005A73C6 /* ISMSCoverArtLoader.h in Headers */,
-				536C974716619770005A73C6 /* ISMSServerPlaylistsLoader.h in Headers */,
 				53EECAC11C5F1B2500DABB8E /* NSDate+UTC.h in Headers */,
 				53EECADD1C5F1B2500DABB8E /* NSObject+UserInfo.h in Headers */,
 				53EECB291C5F1B2600DABB8E /* NSString+Validation.h in Headers */,
@@ -3084,147 +3103,70 @@
 				53EECB9D1C5F1B2A00DABB8E /* UIWebView+HideShadows.h in Headers */,
 				53EECB851C5F1B2800DABB8E /* UITableViewCell+TableView.h in Headers */,
 				53EECB151C5F1B2600DABB8E /* NSString+rfcEncode.h in Headers */,
-				536C975116619776005A73C6 /* ISMSStatusLoader.h in Headers */,
 				53EECB211C5F1B2600DABB8E /* NSString+TrimmingAdditions.h in Headers */,
-				536C9766166197B8005A73C6 /* SavedSettings.h in Headers */,
 				53EECBC51C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.h in Headers */,
 				53EECB751C5F1B2800DABB8E /* UIImage+Tint.h in Headers */,
-				536C9768166197B8005A73C6 /* PlaylistSingleton.h in Headers */,
 				53EECBD31C5F1B2D00DABB8E /* EX2Static.h in Headers */,
 				53EECB251C5F1B2600DABB8E /* NSString+URLEncode.h in Headers */,
-				536C976A166197B8005A73C6 /* CacheSingleton.h in Headers */,
 				53EECB311C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.h in Headers */,
-				536C976C166197B8005A73C6 /* DatabaseSingleton.h in Headers */,
 				53EECB431C5F1B2700DABB8E /* EX2UIKitCategories.h in Headers */,
 				53EECBF31C5F1B2F00DABB8E /* EX2TabBarController.h in Headers */,
-				536C976E166197B8005A73C6 /* MusicSingleton.h in Headers */,
-				536C9770166197B8005A73C6 /* SocialSingleton.h in Headers */,
 				53EECC641C5F1B7700DABB8E /* DDTTYLogger.h in Headers */,
-				536C9774166197B8005A73C6 /* JukeboxSingleton.h in Headers */,
 				53EECBB11C5F1B2B00DABB8E /* EX2FileEncryptor.h in Headers */,
 				53EECB551C5F1B2700DABB8E /* UIColor+ColorWithInt.h in Headers */,
-				536C977C166197E7005A73C6 /* BassVisualizer.h in Headers */,
-				536C9786166197EC005A73C6 /* BassEqualizer.h in Headers */,
-				536C9788166197EC005A73C6 /* BassParamEqValue.h in Headers */,
 				53EECBBD1C5F1B2B00DABB8E /* EX2Reachability.h in Headers */,
-				536C978A166197EC005A73C6 /* BassEffectDAO.h in Headers */,
 				53EECAD51C5F1B2500DABB8E /* NSNumber+CleanString.h in Headers */,
-				536C978C166197EC005A73C6 /* BassEffectValue.h in Headers */,
-				536C9795166197F3005A73C6 /* BassWrapper.h in Headers */,
 				53EECB3D1C5F1B2600DABB8E /* CALayer+SublayerWithName.h in Headers */,
-				536C9797166197F3005A73C6 /* BassStream.h in Headers */,
 				53EECB351C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.h in Headers */,
-				536C9799166197F3005A73C6 /* BassGaplessPlayer.h in Headers */,
-				536C979B166197F3005A73C6 /* BassGaplessPlayerDelegate.h in Headers */,
-				536C979E166197FB005A73C6 /* AudioEngine.h in Headers */,
 				53EECA931C5F1B2500DABB8E /* EX2Categories.h in Headers */,
 				53EECB811C5F1B2800DABB8E /* UITableView+Shadows.h in Headers */,
-				536C97A216619820005A73C6 /* sqlite3.h in Headers */,
 				53EECC521C5F1B7700DABB8E /* DDASLLogger.h in Headers */,
 				53EECB191C5F1B2600DABB8E /* NSString+SHA1.h in Headers */,
 				53EECB6D1C5F1B2800DABB8E /* UIImage+Reflection.h in Headers */,
-				536C993D16619F39005A73C6 /* ISMSErrorDomain.h in Headers */,
 				53EECAF91C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h in Headers */,
-				536C993E16619F39005A73C6 /* ISMSNotificationNames.h in Headers */,
-				536C993F16619F39005A73C6 /* SUSErrorDomain.h in Headers */,
-				536C994016619F39005A73C6 /* NSError+ISMSError.h in Headers */,
-				536C97CE16619AE3005A73C6 /* FMDatabase.h in Headers */,
-				536C97D016619AE3005A73C6 /* FMDatabaseAdditions.h in Headers */,
 				53EECBA11C5F1B2A00DABB8E /* EX2Action.h in Headers */,
 				53EECC2C1C5F1B6000DABB8E /* RNOpenSSLCryptor.h in Headers */,
-				536C97D416619AE4005A73C6 /* FMDatabaseQueue.h in Headers */,
-				536C97D616619AE4005A73C6 /* FMDatabaseQueueAdditions.h in Headers */,
-				536C97D916619AE4005A73C6 /* FMResultSet.h in Headers */,
 				53EECB0D1C5F1B2600DABB8E /* NSString+hex.h in Headers */,
-				536C980216619B25005A73C6 /* bass.h in Headers */,
 				53EECAA91C5F1B2500DABB8E /* NSArray+Safe.h in Headers */,
-				536C980316619B25005A73C6 /* bass_ape.h in Headers */,
-				536C980416619B25005A73C6 /* bass_fx.h in Headers */,
 				53EECAB51C5F1B2500DABB8E /* NSData+Base64.h in Headers */,
 				53EECAA51C5F1B2500DABB8E /* NSArray+Reverse.h in Headers */,
 				53EECB5D1C5F1B2700DABB8E /* UIDevice+Software.h in Headers */,
 				53EECB091C5F1B2600DABB8E /* NSString+HasValue.h in Headers */,
 				53EECC161C5F1B6000DABB8E /* RNCryptor.h in Headers */,
-				536C980516619B25005A73C6 /* bass_mpc.h in Headers */,
-				536C980616619B25005A73C6 /* bassflac.h in Headers */,
-				536C980716619B25005A73C6 /* bassmix.h in Headers */,
 				53EECBDD1C5F1B2D00DABB8E /* EX2InfinitePagingScrollView.h in Headers */,
-				536C980816619B25005A73C6 /* bassopus.h in Headers */,
-				536C980916619B25005A73C6 /* basswv.h in Headers */,
-				536C9AA41661AA45005A73C6 /* JukeboxXMLParser.h in Headers */,
-				530ABE1C1A521553005ACE6B /* ISMSFolder.h in Headers */,
-				536C9AB21661AA61005A73C6 /* SearchXMLParser.h in Headers */,
-				53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */,
 				53EECBF81C5F1B2F00DABB8E /* EX2UIComponents.h in Headers */,
-				530ABE341A5226BE005ACE6B /* ISMSMediaFoldersLoader.h in Headers */,
 				53EECB491C5F1B2700DABB8E /* UIButton+Colors.h in Headers */,
-				533555A21C5EC5B500624F30 /* ISMSAbstractItemLoader.h in Headers */,
-				530ABE301A5221E9005ACE6B /* ISMSPersistedModel.h in Headers */,
-				53146D431A630FCD007D4163 /* ISMSRootArtistsLoader.h in Headers */,
 				53EECC601C5F1B7700DABB8E /* DDLog+LOGV.h in Headers */,
 				53EECACD1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h in Headers */,
 				53EECB891C5F1B2900DABB8E /* UIView+Glow.h in Headers */,
-				53AB8DEA1A54947800E99688 /* ISMSFolderLoader.h in Headers */,
 				53EECB2D1C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.h in Headers */,
-				5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */,
-				5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */,
-				5374F2C31661C73D00529EF3 /* MKStoreObserver.h in Headers */,
 				53EECC621C5F1B7700DABB8E /* DDLogMacros.h in Headers */,
 				53EECAB11C5F1B2500DABB8E /* NSData+AES128.h in Headers */,
-				53B3BD5D16990CFE00DCFC9C /* DDData.h in Headers */,
-				53B3BD6116990CFE00DCFC9C /* DDNumber.h in Headers */,
-				53B3BD6516990CFE00DCFC9C /* DDRange.h in Headers */,
 				53EECA991C5F1B2500DABB8E /* NSArray+FilterBlock.h in Headers */,
 				53EECAD91C5F1B2500DABB8E /* NSObject+ListMethods.h in Headers */,
 				53EECAEF1C5F1B2500DABB8E /* GTMNSString+HTML.h in Headers */,
 				53EECAB91C5F1B2500DABB8E /* NSData+Gzip.h in Headers */,
 				53EECB651C5F1B2700DABB8E /* UIImage+Cropping.h in Headers */,
-				53B3BD6916990CFE00DCFC9C /* HTTPAuthenticationRequest.h in Headers */,
-				53B3BD6D16990CFE00DCFC9C /* HTTPConnection.h in Headers */,
 				53EECAF51C5F1B2500DABB8E /* NSString+Clean.h in Headers */,
-				53D2B6C61A47D58100B029A3 /* RXMLElement.h in Headers */,
 				53EECC341C5F1B6000DABB8E /* RNOpenSSLEncryptor.h in Headers */,
-				53B3BD7116990CFE00DCFC9C /* HTTPLogging.h in Headers */,
-				53B3BD7316990CFE00DCFC9C /* HTTPMessage.h in Headers */,
 				53EECB1D1C5F1B2600DABB8E /* NSString+time.h in Headers */,
-				53B3BD7716990CFE00DCFC9C /* HTTPResponse.h in Headers */,
 				53EECAED1C5F1B2500DABB8E /* GTMDefines.h in Headers */,
-				53B3BD7916990CFE00DCFC9C /* HTTPServer.h in Headers */,
-				53B3BD7D16990CFE00DCFC9C /* MultipartFormDataParser.h in Headers */,
-				53B3BD8116990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */,
 				53EECB051C5F1B2600DABB8E /* NSString+Gzip.h in Headers */,
-				53B3BD8516990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */,
 				53EECBD91C5F1B2D00DABB8E /* EX2GlowButton.h in Headers */,
-				53B3BD8916990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */,
-				53563EB81C5ED30D00F663C4 /* FMDB.h in Headers */,
-				53B3BD8D16990CFE00DCFC9C /* HTTPDataResponse.h in Headers */,
-				53B3BD9116990CFE00DCFC9C /* HTTPDynamicFileResponse.h in Headers */,
 				53EECC1A1C5F1B6000DABB8E /* RNCryptor+Private.h in Headers */,
-				53A375B41A57320500318F78 /* ISMSItemLoader.h in Headers */,
-				53B3BD9516990CFE00DCFC9C /* HTTPFileResponse.h in Headers */,
 				53EECC241C5F1B6000DABB8E /* RNDecryptor.h in Headers */,
 				53EECBFA1C5F1B3000DABB8E /* SnappySlider.h in Headers */,
-				53B3BD9916990CFE00DCFC9C /* HTTPRedirectResponse.h in Headers */,
-				53B3BD9D16990CFE00DCFC9C /* WebSocket.h in Headers */,
-				53B3BDAE16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */,
 				53EECBA71C5F1B2A00DABB8E /* EX2ActionQueue.h in Headers */,
 				53EECAFD1C5F1B2500DABB8E /* NSString+cStringUTF8.h in Headers */,
 				53EECC4A1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h in Headers */,
 				53EECB7D1C5F1B2800DABB8E /* UIImageView+Reflection.h in Headers */,
-				53B3BDB416990DF100DCFC9C /* HLSProxyConnection.h in Headers */,
-				53B3BDE51699137500DCFC9C /* HLSProxyResponse.h in Headers */,
 				53EECB451C5F1B2700DABB8E /* UIBezierPath+Smoothing.h in Headers */,
-				3B16AFDD16C2B53B00787BD8 /* ISMSServerShuffleLoader.h in Headers */,
 				53EECBA31C5F1B2A00DABB8E /* EX2ActionBlock.h in Headers */,
-				530ABE3A1A5226DB005ACE6B /* ISMSMediaFolder.h in Headers */,
 				53EECB8D1C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.h in Headers */,
 				53EECBD51C5F1B2D00DABB8E /* EX2FlatSegmentedControl.h in Headers */,
-				3B53B7D016C5C952003B6147 /* ISMSScrobbleLoader.h in Headers */,
-				53B42A3516DEBDC00043698B /* NSString+cleanCredentialsForLog.h in Headers */,
 				53EECBAD1C5F1B2A00DABB8E /* EX2FileDecryptor.h in Headers */,
 				53EECC4E1C5F1B7700DABB8E /* DDASLLogCapture.h in Headers */,
 				53EECB391C5F1B2600DABB8E /* CALayer+ImageFromLayer.h in Headers */,
-				530ABE2A1A522158005ACE6B /* ISMSNewRootFoldersLoader.h in Headers */,
 				53EECB711C5F1B2800DABB8E /* UIImage+RoundedImage.h in Headers */,
 				53EECB911C5F1B2900DABB8E /* UIView+Tools.h in Headers */,
 				53EECAF31C5F1B2500DABB8E /* NSString+Additions.h in Headers */,
@@ -3233,6 +3175,64 @@
 				53EECC581C5F1B7700DABB8E /* DDFileLogger.h in Headers */,
 				53EECC5C1C5F1B7700DABB8E /* DDLog.h in Headers */,
 				53EECABD1C5F1B2500DABB8E /* NSData+Hash.h in Headers */,
+				536C993D16619F39005A73C6 /* ISMSErrorDomain.h in Headers */,
+				536C993E16619F39005A73C6 /* ISMSNotificationNames.h in Headers */,
+				536C993F16619F39005A73C6 /* SUSErrorDomain.h in Headers */,
+				536C994016619F39005A73C6 /* NSError+ISMSError.h in Headers */,
+				536C97CE16619AE3005A73C6 /* FMDatabase.h in Headers */,
+				536C97D016619AE3005A73C6 /* FMDatabaseAdditions.h in Headers */,
+				536C97D416619AE4005A73C6 /* FMDatabaseQueue.h in Headers */,
+				536C97D616619AE4005A73C6 /* FMDatabaseQueueAdditions.h in Headers */,
+				536C97D916619AE4005A73C6 /* FMResultSet.h in Headers */,
+				536C980216619B25005A73C6 /* bass.h in Headers */,
+				536C980316619B25005A73C6 /* bass_ape.h in Headers */,
+				536C980416619B25005A73C6 /* bass_fx.h in Headers */,
+				536C980516619B25005A73C6 /* bass_mpc.h in Headers */,
+				536C980616619B25005A73C6 /* bassflac.h in Headers */,
+				536C980716619B25005A73C6 /* bassmix.h in Headers */,
+				536C980816619B25005A73C6 /* bassopus.h in Headers */,
+				536C980916619B25005A73C6 /* basswv.h in Headers */,
+				536C9AA41661AA45005A73C6 /* JukeboxXMLParser.h in Headers */,
+				530ABE1C1A521553005ACE6B /* ISMSFolder.h in Headers */,
+				536C9AB21661AA61005A73C6 /* SearchXMLParser.h in Headers */,
+				53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */,
+				530ABE341A5226BE005ACE6B /* ISMSMediaFoldersLoader.h in Headers */,
+				533555A21C5EC5B500624F30 /* ISMSAbstractItemLoader.h in Headers */,
+				530ABE301A5221E9005ACE6B /* ISMSPersistedModel.h in Headers */,
+				53146D431A630FCD007D4163 /* ISMSRootArtistsLoader.h in Headers */,
+				53AB8DEA1A54947800E99688 /* ISMSFolderLoader.h in Headers */,
+				5374F2561661C4CC00529EF3 /* libSubDefines.h in Headers */,
+				5374F2C11661C73D00529EF3 /* MKStoreManager.h in Headers */,
+				5374F2C31661C73D00529EF3 /* MKStoreObserver.h in Headers */,
+				53B3BD5D16990CFE00DCFC9C /* DDData.h in Headers */,
+				53B3BD6116990CFE00DCFC9C /* DDNumber.h in Headers */,
+				53B3BD6516990CFE00DCFC9C /* DDRange.h in Headers */,
+				53B3BD6916990CFE00DCFC9C /* HTTPAuthenticationRequest.h in Headers */,
+				53B3BD6D16990CFE00DCFC9C /* HTTPConnection.h in Headers */,
+				53D2B6C61A47D58100B029A3 /* RXMLElement.h in Headers */,
+				53B3BD7116990CFE00DCFC9C /* HTTPLogging.h in Headers */,
+				53B3BD7316990CFE00DCFC9C /* HTTPMessage.h in Headers */,
+				53B3BD7716990CFE00DCFC9C /* HTTPResponse.h in Headers */,
+				53B3BD7916990CFE00DCFC9C /* HTTPServer.h in Headers */,
+				53B3BD7D16990CFE00DCFC9C /* MultipartFormDataParser.h in Headers */,
+				53B3BD8116990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */,
+				53B3BD8516990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */,
+				53B3BD8916990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */,
+				53563EB81C5ED30D00F663C4 /* FMDB.h in Headers */,
+				53B3BD8D16990CFE00DCFC9C /* HTTPDataResponse.h in Headers */,
+				53B3BD9116990CFE00DCFC9C /* HTTPDynamicFileResponse.h in Headers */,
+				53A375B41A57320500318F78 /* ISMSItemLoader.h in Headers */,
+				53B3BD9516990CFE00DCFC9C /* HTTPFileResponse.h in Headers */,
+				53B3BD9916990CFE00DCFC9C /* HTTPRedirectResponse.h in Headers */,
+				53B3BD9D16990CFE00DCFC9C /* WebSocket.h in Headers */,
+				53B3BDAE16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */,
+				53B3BDB416990DF100DCFC9C /* HLSProxyConnection.h in Headers */,
+				53B3BDE51699137500DCFC9C /* HLSProxyResponse.h in Headers */,
+				3B16AFDD16C2B53B00787BD8 /* ISMSServerShuffleLoader.h in Headers */,
+				530ABE3A1A5226DB005ACE6B /* ISMSMediaFolder.h in Headers */,
+				3B53B7D016C5C952003B6147 /* ISMSScrobbleLoader.h in Headers */,
+				53B42A3516DEBDC00043698B /* NSString+cleanCredentialsForLog.h in Headers */,
+				530ABE2A1A522158005ACE6B /* ISMSNewRootFoldersLoader.h in Headers */,
 				53E28E2F17D6A50200259985 /* Flurry.h in Headers */,
 				5374F2C51661C73D00529EF3 /* SFHFKeychainUtils.h in Headers */,
 			);

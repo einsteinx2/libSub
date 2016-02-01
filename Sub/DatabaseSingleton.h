@@ -73,10 +73,10 @@
 - (nullable NSArray *)sectionInfoFromTable:(nonnull NSString *)table inDatabase:(nonnull FMDatabase *)database withColumn:(nonnull NSString *)column;
 
 //- (void)queueSong:(ISMSSong *)aSong;
-- (void)queueAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
-- (void)downloadAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
-- (void)playAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
-- (void)shuffleAllSongs:(nonnull NSString *)folderId artist:(nonnull ISMSArtist *)theArtist;
+- (void)queueAllSongs:(nullable NSString *)folderId artist:(nullable ISMSArtist *)theArtist;
+- (void)downloadAllSongs:(nullable NSString *)folderId artist:(nullable ISMSArtist *)theArtist;
+- (void)playAllSongs:(nullable NSString *)folderId artist:(nullable ISMSArtist *)theArtist;
+- (void)shuffleAllSongs:(nullable NSString *)folderId artist:(nullable ISMSArtist *)theArtist;
 - (void)shufflePlaylist;
 
 - (void)updateTableDefinitions;
