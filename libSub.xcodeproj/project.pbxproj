@@ -85,9 +85,6 @@
 		5304A091168FB5CE009B2732 /* JukeboxXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AA31661AA45005A73C6 /* JukeboxXMLParser.m */; };
 		5304A092168FB5CE009B2732 /* SearchXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AB11661AA61005A73C6 /* SearchXMLParser.m */; };
 		5304A094168FD0BF009B2732 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C99A71661A025005A73C6 /* libxml2.dylib */; };
-		5304A095168FD0C9009B2732 /* libTBXML-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C983616619B87005A73C6 /* libTBXML-iOS.a */; };
-		5304A096168FD0C9009B2732 /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C98B616619BC4005A73C6 /* libtouchzipkit.a */; };
-		5304A097168FD0D1009B2732 /* libsbjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C982116619B44005A73C6 /* libsbjson-ios.a */; };
 		5304A099168FD0EE009B2732 /* libbass.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FA16619B25005A73C6 /* libbass.a */; };
 		5304A09A168FD0F0009B2732 /* libbass_ape.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FB16619B25005A73C6 /* libbass_ape.a */; };
 		5304A09B168FD0FE009B2732 /* libbass_fx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FC16619B25005A73C6 /* libbass_fx.a */; };
@@ -197,9 +194,6 @@
 		5304A2D816901EE4009B2732 /* libbassopus.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2D016901EE4009B2732 /* libbassopus.dylib */; };
 		5304A2D916901EE4009B2732 /* libbasswv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2D116901EE4009B2732 /* libbasswv.dylib */; };
 		5304A2DA16901EFB009B2732 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C99A71661A025005A73C6 /* libxml2.dylib */; };
-		5304A2DC16901F1C009B2732 /* libTBXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C983216619B87005A73C6 /* libTBXML.a */; };
-		5304A2DD16901F1C009B2732 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C981D16619B44005A73C6 /* SBJson.framework */; };
-		5304A2DE16901F1C009B2732 /* ZipKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C98B216619BC4005A73C6 /* ZipKit.framework */; };
 		5304A2E2169020EA009B2732 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5304A2E1169020EA009B2732 /* StoreKit.framework */; };
 		53067E371694F11C00600396 /* AudioEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C979C166197FB005A73C6 /* AudioEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E381694F11C00600396 /* MusicSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C975E166197B8005A73C6 /* MusicSingleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -444,9 +438,6 @@
 		536C980F16619B25005A73C6 /* libbassmix.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C97FF16619B25005A73C6 /* libbassmix.a */; };
 		536C981016619B25005A73C6 /* libbassopus.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C980016619B25005A73C6 /* libbassopus.a */; };
 		536C981116619B25005A73C6 /* libbasswv.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C980116619B25005A73C6 /* libbasswv.a */; };
-		536C982616619B7B005A73C6 /* libsbjson-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C982116619B44005A73C6 /* libsbjson-ios.a */; };
-		536C983B16619B96005A73C6 /* libTBXML-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C983616619B87005A73C6 /* libTBXML-iOS.a */; };
-		536C98B916619BD8005A73C6 /* libtouchzipkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C98B616619BC4005A73C6 /* libtouchzipkit.a */; };
 		536C993D16619F39005A73C6 /* ISMSErrorDomain.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C993816619F39005A73C6 /* ISMSErrorDomain.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C993E16619F39005A73C6 /* ISMSNotificationNames.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C993916619F39005A73C6 /* ISMSNotificationNames.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C993F16619F39005A73C6 /* SUSErrorDomain.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C993A16619F39005A73C6 /* SUSErrorDomain.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -1006,152 +997,144 @@
 		53EECC651C5F1B7700DABB8E /* DDTTYLogger.h in Headers */ = {isa = PBXBuildFile; fileRef = 53EECC461C5F1B7700DABB8E /* DDTTYLogger.h */; };
 		53EECC661C5F1B7700DABB8E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC471C5F1B7700DABB8E /* DDTTYLogger.m */; };
 		53EECC671C5F1B7700DABB8E /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EECC471C5F1B7700DABB8E /* DDTTYLogger.m */; };
-		D0CC42A51695DA9100331944 /* ZipKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 536C98B216619BC4005A73C6 /* ZipKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		D0CC42A61695DA9100331944 /* SBJson.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 536C981D16619B44005A73C6 /* SBJson.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		53F6378B1C5F591A00864346 /* GMAppleDouble+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637621C5F591A00864346 /* GMAppleDouble+ZKAdditions.h */; };
+		53F6378C1C5F591A00864346 /* GMAppleDouble+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637621C5F591A00864346 /* GMAppleDouble+ZKAdditions.h */; };
+		53F6378D1C5F591A00864346 /* GMAppleDouble+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637631C5F591A00864346 /* GMAppleDouble+ZKAdditions.m */; };
+		53F6378E1C5F591A00864346 /* GMAppleDouble+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637631C5F591A00864346 /* GMAppleDouble+ZKAdditions.m */; };
+		53F6378F1C5F591A00864346 /* COPYING.TXT in Resources */ = {isa = PBXBuildFile; fileRef = 53F637651C5F591A00864346 /* COPYING.TXT */; };
+		53F637901C5F591A00864346 /* GMAppleDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637661C5F591A00864346 /* GMAppleDouble.h */; };
+		53F637911C5F591A00864346 /* GMAppleDouble.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637661C5F591A00864346 /* GMAppleDouble.h */; };
+		53F637921C5F591A00864346 /* GMAppleDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637671C5F591A00864346 /* GMAppleDouble.m */; };
+		53F637931C5F591A00864346 /* GMAppleDouble.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637671C5F591A00864346 /* GMAppleDouble.m */; };
+		53F637941C5F591A00864346 /* NSData+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637681C5F591A00864346 /* NSData+ZKAdditions.h */; };
+		53F637951C5F591A00864346 /* NSData+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637681C5F591A00864346 /* NSData+ZKAdditions.h */; };
+		53F637961C5F591A00864346 /* NSData+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637691C5F591A00864346 /* NSData+ZKAdditions.m */; };
+		53F637971C5F591A00864346 /* NSData+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637691C5F591A00864346 /* NSData+ZKAdditions.m */; };
+		53F637981C5F591A00864346 /* NSDate+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6376A1C5F591A00864346 /* NSDate+ZKAdditions.h */; };
+		53F637991C5F591A00864346 /* NSDate+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6376A1C5F591A00864346 /* NSDate+ZKAdditions.h */; };
+		53F6379A1C5F591A00864346 /* NSDate+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6376B1C5F591A00864346 /* NSDate+ZKAdditions.m */; };
+		53F6379B1C5F591A00864346 /* NSDate+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6376B1C5F591A00864346 /* NSDate+ZKAdditions.m */; };
+		53F6379C1C5F591A00864346 /* NSDictionary+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6376C1C5F591A00864346 /* NSDictionary+ZKAdditions.h */; };
+		53F6379D1C5F591A00864346 /* NSDictionary+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6376C1C5F591A00864346 /* NSDictionary+ZKAdditions.h */; };
+		53F6379E1C5F591A00864346 /* NSDictionary+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6376D1C5F591A00864346 /* NSDictionary+ZKAdditions.m */; };
+		53F6379F1C5F591A00864346 /* NSDictionary+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6376D1C5F591A00864346 /* NSDictionary+ZKAdditions.m */; };
+		53F637A01C5F591A00864346 /* NSFileHandle+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6376E1C5F591A00864346 /* NSFileHandle+ZKAdditions.h */; };
+		53F637A11C5F591A00864346 /* NSFileHandle+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6376E1C5F591A00864346 /* NSFileHandle+ZKAdditions.h */; };
+		53F637A21C5F591A00864346 /* NSFileHandle+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6376F1C5F591A00864346 /* NSFileHandle+ZKAdditions.m */; };
+		53F637A31C5F591A00864346 /* NSFileHandle+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6376F1C5F591A00864346 /* NSFileHandle+ZKAdditions.m */; };
+		53F637A41C5F591A00864346 /* NSFileManager+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637701C5F591A00864346 /* NSFileManager+ZKAdditions.h */; };
+		53F637A51C5F591A00864346 /* NSFileManager+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637701C5F591A00864346 /* NSFileManager+ZKAdditions.h */; };
+		53F637A61C5F591A00864346 /* NSFileManager+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637711C5F591A00864346 /* NSFileManager+ZKAdditions.m */; };
+		53F637A71C5F591A00864346 /* NSFileManager+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637711C5F591A00864346 /* NSFileManager+ZKAdditions.m */; };
+		53F637A81C5F591A00864346 /* NSString+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637721C5F591A00864346 /* NSString+ZKAdditions.h */; };
+		53F637A91C5F591A00864346 /* NSString+ZKAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637721C5F591A00864346 /* NSString+ZKAdditions.h */; };
+		53F637AA1C5F591A00864346 /* NSString+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637731C5F591A00864346 /* NSString+ZKAdditions.m */; };
+		53F637AB1C5F591A00864346 /* NSString+ZKAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637731C5F591A00864346 /* NSString+ZKAdditions.m */; };
+		53F637AF1C5F591A00864346 /* ZipKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637761C5F591A00864346 /* ZipKit.h */; };
+		53F637B01C5F591A00864346 /* ZipKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637761C5F591A00864346 /* ZipKit.h */; };
+		53F637B11C5F591A00864346 /* ZKArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637771C5F591A00864346 /* ZKArchive.h */; };
+		53F637B21C5F591A00864346 /* ZKArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637771C5F591A00864346 /* ZKArchive.h */; };
+		53F637B31C5F591A00864346 /* ZKArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637781C5F591A00864346 /* ZKArchive.m */; };
+		53F637B41C5F591A00864346 /* ZKArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637781C5F591A00864346 /* ZKArchive.m */; };
+		53F637B51C5F591A00864346 /* ZKCDHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637791C5F591A00864346 /* ZKCDHeader.h */; };
+		53F637B61C5F591A00864346 /* ZKCDHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637791C5F591A00864346 /* ZKCDHeader.h */; };
+		53F637B71C5F591A00864346 /* ZKCDHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6377A1C5F591A00864346 /* ZKCDHeader.m */; };
+		53F637B81C5F591A00864346 /* ZKCDHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6377A1C5F591A00864346 /* ZKCDHeader.m */; };
+		53F637B91C5F591A00864346 /* ZKCDTrailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6377B1C5F591A00864346 /* ZKCDTrailer.h */; };
+		53F637BA1C5F591A00864346 /* ZKCDTrailer.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6377B1C5F591A00864346 /* ZKCDTrailer.h */; };
+		53F637BB1C5F591A00864346 /* ZKCDTrailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6377C1C5F591A00864346 /* ZKCDTrailer.m */; };
+		53F637BC1C5F591A00864346 /* ZKCDTrailer.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6377C1C5F591A00864346 /* ZKCDTrailer.m */; };
+		53F637BD1C5F591A00864346 /* ZKCDTrailer64.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6377D1C5F591A00864346 /* ZKCDTrailer64.h */; };
+		53F637BE1C5F591A00864346 /* ZKCDTrailer64.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6377D1C5F591A00864346 /* ZKCDTrailer64.h */; };
+		53F637BF1C5F591A00864346 /* ZKCDTrailer64.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6377E1C5F591A00864346 /* ZKCDTrailer64.m */; };
+		53F637C01C5F591A00864346 /* ZKCDTrailer64.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6377E1C5F591A00864346 /* ZKCDTrailer64.m */; };
+		53F637C11C5F591A00864346 /* ZKCDTrailer64Locator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6377F1C5F591A00864346 /* ZKCDTrailer64Locator.h */; };
+		53F637C21C5F591A00864346 /* ZKCDTrailer64Locator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6377F1C5F591A00864346 /* ZKCDTrailer64Locator.h */; };
+		53F637C31C5F591A00864346 /* ZKCDTrailer64Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637801C5F591A00864346 /* ZKCDTrailer64Locator.m */; };
+		53F637C41C5F591A00864346 /* ZKCDTrailer64Locator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637801C5F591A00864346 /* ZKCDTrailer64Locator.m */; };
+		53F637C51C5F591A00864346 /* ZKDataArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637811C5F591A00864346 /* ZKDataArchive.h */; };
+		53F637C61C5F591A00864346 /* ZKDataArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637811C5F591A00864346 /* ZKDataArchive.h */; };
+		53F637C71C5F591A00864346 /* ZKDataArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637821C5F591A00864346 /* ZKDataArchive.m */; };
+		53F637C81C5F591A00864346 /* ZKDataArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637821C5F591A00864346 /* ZKDataArchive.m */; };
+		53F637C91C5F591A00864346 /* ZKDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637831C5F591A00864346 /* ZKDefs.h */; };
+		53F637CA1C5F591A00864346 /* ZKDefs.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637831C5F591A00864346 /* ZKDefs.h */; };
+		53F637CB1C5F591A00864346 /* ZKDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637841C5F591A00864346 /* ZKDefs.m */; };
+		53F637CC1C5F591A00864346 /* ZKDefs.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637841C5F591A00864346 /* ZKDefs.m */; };
+		53F637CD1C5F591A00864346 /* ZKFileArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637851C5F591A00864346 /* ZKFileArchive.h */; };
+		53F637CE1C5F591A00864346 /* ZKFileArchive.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637851C5F591A00864346 /* ZKFileArchive.h */; };
+		53F637CF1C5F591A00864346 /* ZKFileArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637861C5F591A00864346 /* ZKFileArchive.m */; };
+		53F637D01C5F591A00864346 /* ZKFileArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637861C5F591A00864346 /* ZKFileArchive.m */; };
+		53F637D11C5F591A00864346 /* ZKLFHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637871C5F591A00864346 /* ZKLFHeader.h */; };
+		53F637D21C5F591A00864346 /* ZKLFHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637871C5F591A00864346 /* ZKLFHeader.h */; };
+		53F637D31C5F591A00864346 /* ZKLFHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637881C5F591A00864346 /* ZKLFHeader.m */; };
+		53F637D41C5F591A00864346 /* ZKLFHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637881C5F591A00864346 /* ZKLFHeader.m */; };
+		53F637D51C5F591A00864346 /* ZKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637891C5F591A00864346 /* ZKLog.h */; };
+		53F637D61C5F591A00864346 /* ZKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637891C5F591A00864346 /* ZKLog.h */; };
+		53F637D71C5F591A00864346 /* ZKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6378A1C5F591A00864346 /* ZKLog.m */; };
+		53F637D81C5F591A00864346 /* ZKLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F6378A1C5F591A00864346 /* ZKLog.m */; };
+		53F637F31C5F59A000864346 /* NSObject+SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DA1C5F59A000864346 /* NSObject+SBJson.h */; };
+		53F637F41C5F59A000864346 /* NSObject+SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DA1C5F59A000864346 /* NSObject+SBJson.h */; };
+		53F637F51C5F59A000864346 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637DB1C5F59A000864346 /* NSObject+SBJson.m */; };
+		53F637F61C5F59A000864346 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637DB1C5F59A000864346 /* NSObject+SBJson.m */; };
+		53F637F71C5F59A000864346 /* SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DC1C5F59A000864346 /* SBJson.h */; };
+		53F637F81C5F59A000864346 /* SBJson.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DC1C5F59A000864346 /* SBJson.h */; };
+		53F637F91C5F59A000864346 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DD1C5F59A000864346 /* SBJsonParser.h */; };
+		53F637FA1C5F59A000864346 /* SBJsonParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DD1C5F59A000864346 /* SBJsonParser.h */; };
+		53F637FB1C5F59A000864346 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637DE1C5F59A000864346 /* SBJsonParser.m */; };
+		53F637FC1C5F59A000864346 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637DE1C5F59A000864346 /* SBJsonParser.m */; };
+		53F637FD1C5F59A000864346 /* SBJsonStreamParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DF1C5F59A000864346 /* SBJsonStreamParser.h */; };
+		53F637FE1C5F59A000864346 /* SBJsonStreamParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637DF1C5F59A000864346 /* SBJsonStreamParser.h */; };
+		53F637FF1C5F59A000864346 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E01C5F59A000864346 /* SBJsonStreamParser.m */; };
+		53F638001C5F59A000864346 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E01C5F59A000864346 /* SBJsonStreamParser.m */; };
+		53F638011C5F59A000864346 /* SBJsonStreamParserAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E11C5F59A000864346 /* SBJsonStreamParserAccumulator.h */; };
+		53F638021C5F59A000864346 /* SBJsonStreamParserAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E11C5F59A000864346 /* SBJsonStreamParserAccumulator.h */; };
+		53F638031C5F59A000864346 /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E21C5F59A000864346 /* SBJsonStreamParserAccumulator.m */; };
+		53F638041C5F59A000864346 /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E21C5F59A000864346 /* SBJsonStreamParserAccumulator.m */; };
+		53F638051C5F59A000864346 /* SBJsonStreamParserAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E31C5F59A000864346 /* SBJsonStreamParserAdapter.h */; };
+		53F638061C5F59A000864346 /* SBJsonStreamParserAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E31C5F59A000864346 /* SBJsonStreamParserAdapter.h */; };
+		53F638071C5F59A000864346 /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E41C5F59A000864346 /* SBJsonStreamParserAdapter.m */; };
+		53F638081C5F59A000864346 /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E41C5F59A000864346 /* SBJsonStreamParserAdapter.m */; };
+		53F638091C5F59A000864346 /* SBJsonStreamParserState.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E51C5F59A000864346 /* SBJsonStreamParserState.h */; };
+		53F6380A1C5F59A000864346 /* SBJsonStreamParserState.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E51C5F59A000864346 /* SBJsonStreamParserState.h */; };
+		53F6380B1C5F59A000864346 /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E61C5F59A000864346 /* SBJsonStreamParserState.m */; };
+		53F6380C1C5F59A000864346 /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E61C5F59A000864346 /* SBJsonStreamParserState.m */; };
+		53F6380D1C5F59A000864346 /* SBJsonStreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E71C5F59A000864346 /* SBJsonStreamWriter.h */; };
+		53F6380E1C5F59A000864346 /* SBJsonStreamWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E71C5F59A000864346 /* SBJsonStreamWriter.h */; };
+		53F6380F1C5F59A000864346 /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E81C5F59A000864346 /* SBJsonStreamWriter.m */; };
+		53F638101C5F59A000864346 /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637E81C5F59A000864346 /* SBJsonStreamWriter.m */; };
+		53F638111C5F59A000864346 /* SBJsonStreamWriterAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E91C5F59A000864346 /* SBJsonStreamWriterAccumulator.h */; };
+		53F638121C5F59A000864346 /* SBJsonStreamWriterAccumulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637E91C5F59A000864346 /* SBJsonStreamWriterAccumulator.h */; };
+		53F638131C5F59A000864346 /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637EA1C5F59A000864346 /* SBJsonStreamWriterAccumulator.m */; };
+		53F638141C5F59A000864346 /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637EA1C5F59A000864346 /* SBJsonStreamWriterAccumulator.m */; };
+		53F638151C5F59A000864346 /* SBJsonStreamWriterState.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637EB1C5F59A000864346 /* SBJsonStreamWriterState.h */; };
+		53F638161C5F59A000864346 /* SBJsonStreamWriterState.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637EB1C5F59A000864346 /* SBJsonStreamWriterState.h */; };
+		53F638171C5F59A000864346 /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637EC1C5F59A000864346 /* SBJsonStreamWriterState.m */; };
+		53F638181C5F59A000864346 /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637EC1C5F59A000864346 /* SBJsonStreamWriterState.m */; };
+		53F638191C5F59A000864346 /* SBJsonTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637ED1C5F59A000864346 /* SBJsonTokeniser.h */; };
+		53F6381A1C5F59A000864346 /* SBJsonTokeniser.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637ED1C5F59A000864346 /* SBJsonTokeniser.h */; };
+		53F6381B1C5F59A000864346 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637EE1C5F59A000864346 /* SBJsonTokeniser.m */; };
+		53F6381C1C5F59A000864346 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637EE1C5F59A000864346 /* SBJsonTokeniser.m */; };
+		53F6381D1C5F59A000864346 /* SBJsonUTF8Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637EF1C5F59A000864346 /* SBJsonUTF8Stream.h */; };
+		53F6381E1C5F59A000864346 /* SBJsonUTF8Stream.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637EF1C5F59A000864346 /* SBJsonUTF8Stream.h */; };
+		53F6381F1C5F59A000864346 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637F01C5F59A000864346 /* SBJsonUTF8Stream.m */; };
+		53F638201C5F59A000864346 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637F01C5F59A000864346 /* SBJsonUTF8Stream.m */; };
+		53F638211C5F59A000864346 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637F11C5F59A000864346 /* SBJsonWriter.h */; };
+		53F638221C5F59A000864346 /* SBJsonWriter.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F637F11C5F59A000864346 /* SBJsonWriter.h */; };
+		53F638231C5F59A000864346 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637F21C5F59A000864346 /* SBJsonWriter.m */; };
+		53F638241C5F59A000864346 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F637F21C5F59A000864346 /* SBJsonWriter.m */; };
+		53F638291C5F59CB00864346 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F638261C5F59CB00864346 /* TBXML.m */; };
+		53F6382A1C5F59CB00864346 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F638261C5F59CB00864346 /* TBXML.m */; };
+		53F6382B1C5F59CB00864346 /* TBXML+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F638271C5F59CB00864346 /* TBXML+Compression.m */; };
+		53F6382C1C5F59CB00864346 /* TBXML+Compression.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F638271C5F59CB00864346 /* TBXML+Compression.m */; };
+		53F6382D1C5F59CB00864346 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F638281C5F59CB00864346 /* TBXML+HTTP.m */; };
+		53F6382E1C5F59CB00864346 /* TBXML+HTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 53F638281C5F59CB00864346 /* TBXML+HTTP.m */; };
+		53F638321C5F59D200864346 /* TBXML.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6382F1C5F59D200864346 /* TBXML.h */; };
+		53F638331C5F59D200864346 /* TBXML.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F6382F1C5F59D200864346 /* TBXML.h */; };
+		53F638341C5F59D200864346 /* TBXML+Compression.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F638301C5F59D200864346 /* TBXML+Compression.h */; };
+		53F638351C5F59D200864346 /* TBXML+Compression.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F638301C5F59D200864346 /* TBXML+Compression.h */; };
+		53F638361C5F59D200864346 /* TBXML+HTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F638311C5F59D200864346 /* TBXML+HTTP.h */; };
+		53F638371C5F59D200864346 /* TBXML+HTTP.h in Headers */ = {isa = PBXBuildFile; fileRef = 53F638311C5F59D200864346 /* TBXML+HTTP.h */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		5304A0A5168FD190009B2732 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CB6F0A9717484BDE00F91524;
-			remoteInfo = touchzipkit;
-		};
-		5304A0A7168FD190009B2732 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BCC2626813920FC7003D9994;
-			remoteInfo = "sbjson-ios";
-		};
-		5304A0A9168FD190009B2732 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8290352414D9F5B200ACF7E4;
-			remoteInfo = "TBXML-iOS";
-		};
-		5304A2C216901D8A009B2732 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 829FA09B14D5B52A00D18697;
-			remoteInfo = TBXML;
-		};
-		5304A2C416901D8A009B2732 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BC12323C1391D5CC00131607;
-			remoteInfo = SBJson;
-		};
-		5304A2C616901D8A009B2732 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CB6F09CD174838FC00F91524;
-			remoteInfo = ZipKit;
-		};
-		536C981C16619B44005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BC12323D1391D5CC00131607;
-			remoteInfo = SBJson;
-		};
-		536C981E16619B44005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BC1232521391D5CC00131607;
-			remoteInfo = SBJsonTests;
-		};
-		536C982016619B44005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BCC2626913920FC7003D9994;
-			remoteInfo = "sbjson-ios";
-		};
-		536C982216619B44005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BCC2627313920FC7003D9994;
-			remoteInfo = "sbjson-iosTests";
-		};
-		536C982416619B6D005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BCC2626813920FC7003D9994;
-			remoteInfo = "sbjson-ios";
-		};
-		536C983116619B87005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 829FA09C14D5B52A00D18697;
-			remoteInfo = TBXML;
-		};
-		536C983316619B87005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 829FA0B014D5B52A00D18697;
-			remoteInfo = TBXMLTests;
-		};
-		536C983516619B87005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8290352514D9F5B200ACF7E4;
-			remoteInfo = "TBXML-iOS";
-		};
-		536C983716619B87005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8290353314D9F5B200ACF7E4;
-			remoteInfo = "TBXML-iOSTests";
-		};
-		536C983916619B92005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8290352414D9F5B200ACF7E4;
-			remoteInfo = "TBXML-iOS";
-		};
-		536C98B116619BC4005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = ZipKit;
-		};
-		536C98B316619BC4005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CB9B9CB6109F665C003E3F8B;
-			remoteInfo = zipkit;
-		};
-		536C98B516619BC4005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = CB9B9CEE109F6769003E3F8B;
-			remoteInfo = touchzipkit;
-		};
-		536C98B716619BD1005A73C6 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = CB6F0A9717484BDE00F91524;
-			remoteInfo = touchzipkit;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		3B2FC300169502E300136926 /* CopyFiles */ = {
@@ -1177,8 +1160,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				D0CC42A51695DA9100331944 /* ZipKit.framework in CopyFiles */,
-				D0CC42A61695DA9100331944 /* SBJson.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1392,9 +1373,6 @@
 		536C97FF16619B25005A73C6 /* libbassmix.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbassmix.a; sourceTree = "<group>"; };
 		536C980016619B25005A73C6 /* libbassopus.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbassopus.a; sourceTree = "<group>"; };
 		536C980116619B25005A73C6 /* libbasswv.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbasswv.a; sourceTree = "<group>"; };
-		536C981216619B44005A73C6 /* SBJson.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SBJson.xcodeproj; path = Frameworks/SBJson/SBJson.xcodeproj; sourceTree = "<group>"; };
-		536C982716619B87005A73C6 /* TBXML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TBXML.xcodeproj; path = Frameworks/TBXML/TBXML.xcodeproj; sourceTree = "<group>"; };
-		536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ZipKit.xcodeproj; path = Frameworks/ZipKit/ZipKit.xcodeproj; sourceTree = "<group>"; };
 		536C993816619F39005A73C6 /* ISMSErrorDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSErrorDomain.h; sourceTree = "<group>"; };
 		536C993916619F39005A73C6 /* ISMSNotificationNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSNotificationNames.h; sourceTree = "<group>"; };
 		536C993A16619F39005A73C6 /* SUSErrorDomain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSErrorDomain.h; sourceTree = "<group>"; };
@@ -1687,6 +1665,75 @@
 		53EECC451C5F1B7700DABB8E /* DDLogMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDLogMacros.h; path = Frameworks/EX2Kit/EX2Kit/Dependencies/CocoaLumberjack/Classes/DDLogMacros.h; sourceTree = "<group>"; };
 		53EECC461C5F1B7700DABB8E /* DDTTYLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DDTTYLogger.h; path = Frameworks/EX2Kit/EX2Kit/Dependencies/CocoaLumberjack/Classes/DDTTYLogger.h; sourceTree = "<group>"; };
 		53EECC471C5F1B7700DABB8E /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = Frameworks/EX2Kit/EX2Kit/Dependencies/CocoaLumberjack/Classes/DDTTYLogger.m; sourceTree = "<group>"; };
+		53F637621C5F591A00864346 /* GMAppleDouble+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GMAppleDouble+ZKAdditions.h"; sourceTree = "<group>"; };
+		53F637631C5F591A00864346 /* GMAppleDouble+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GMAppleDouble+ZKAdditions.m"; sourceTree = "<group>"; };
+		53F637651C5F591A00864346 /* COPYING.TXT */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COPYING.TXT; sourceTree = "<group>"; };
+		53F637661C5F591A00864346 /* GMAppleDouble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMAppleDouble.h; sourceTree = "<group>"; };
+		53F637671C5F591A00864346 /* GMAppleDouble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMAppleDouble.m; sourceTree = "<group>"; };
+		53F637681C5F591A00864346 /* NSData+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ZKAdditions.h"; sourceTree = "<group>"; };
+		53F637691C5F591A00864346 /* NSData+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ZKAdditions.m"; sourceTree = "<group>"; };
+		53F6376A1C5F591A00864346 /* NSDate+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ZKAdditions.h"; sourceTree = "<group>"; };
+		53F6376B1C5F591A00864346 /* NSDate+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ZKAdditions.m"; sourceTree = "<group>"; };
+		53F6376C1C5F591A00864346 /* NSDictionary+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+ZKAdditions.h"; sourceTree = "<group>"; };
+		53F6376D1C5F591A00864346 /* NSDictionary+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+ZKAdditions.m"; sourceTree = "<group>"; };
+		53F6376E1C5F591A00864346 /* NSFileHandle+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileHandle+ZKAdditions.h"; sourceTree = "<group>"; };
+		53F6376F1C5F591A00864346 /* NSFileHandle+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileHandle+ZKAdditions.m"; sourceTree = "<group>"; };
+		53F637701C5F591A00864346 /* NSFileManager+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+ZKAdditions.h"; sourceTree = "<group>"; };
+		53F637711C5F591A00864346 /* NSFileManager+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+ZKAdditions.m"; sourceTree = "<group>"; };
+		53F637721C5F591A00864346 /* NSString+ZKAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ZKAdditions.h"; sourceTree = "<group>"; };
+		53F637731C5F591A00864346 /* NSString+ZKAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ZKAdditions.m"; sourceTree = "<group>"; };
+		53F637761C5F591A00864346 /* ZipKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZipKit.h; sourceTree = "<group>"; };
+		53F637771C5F591A00864346 /* ZKArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKArchive.h; sourceTree = "<group>"; };
+		53F637781C5F591A00864346 /* ZKArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKArchive.m; sourceTree = "<group>"; };
+		53F637791C5F591A00864346 /* ZKCDHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDHeader.h; sourceTree = "<group>"; };
+		53F6377A1C5F591A00864346 /* ZKCDHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDHeader.m; sourceTree = "<group>"; };
+		53F6377B1C5F591A00864346 /* ZKCDTrailer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDTrailer.h; sourceTree = "<group>"; };
+		53F6377C1C5F591A00864346 /* ZKCDTrailer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDTrailer.m; sourceTree = "<group>"; };
+		53F6377D1C5F591A00864346 /* ZKCDTrailer64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDTrailer64.h; sourceTree = "<group>"; };
+		53F6377E1C5F591A00864346 /* ZKCDTrailer64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDTrailer64.m; sourceTree = "<group>"; };
+		53F6377F1C5F591A00864346 /* ZKCDTrailer64Locator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKCDTrailer64Locator.h; sourceTree = "<group>"; };
+		53F637801C5F591A00864346 /* ZKCDTrailer64Locator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKCDTrailer64Locator.m; sourceTree = "<group>"; };
+		53F637811C5F591A00864346 /* ZKDataArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKDataArchive.h; sourceTree = "<group>"; };
+		53F637821C5F591A00864346 /* ZKDataArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKDataArchive.m; sourceTree = "<group>"; };
+		53F637831C5F591A00864346 /* ZKDefs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKDefs.h; sourceTree = "<group>"; };
+		53F637841C5F591A00864346 /* ZKDefs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKDefs.m; sourceTree = "<group>"; };
+		53F637851C5F591A00864346 /* ZKFileArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKFileArchive.h; sourceTree = "<group>"; };
+		53F637861C5F591A00864346 /* ZKFileArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKFileArchive.m; sourceTree = "<group>"; };
+		53F637871C5F591A00864346 /* ZKLFHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLFHeader.h; sourceTree = "<group>"; };
+		53F637881C5F591A00864346 /* ZKLFHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLFHeader.m; sourceTree = "<group>"; };
+		53F637891C5F591A00864346 /* ZKLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKLog.h; sourceTree = "<group>"; };
+		53F6378A1C5F591A00864346 /* ZKLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKLog.m; sourceTree = "<group>"; };
+		53F637DA1C5F59A000864346 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
+		53F637DB1C5F59A000864346 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
+		53F637DC1C5F59A000864346 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
+		53F637DD1C5F59A000864346 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		53F637DE1C5F59A000864346 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		53F637DF1C5F59A000864346 /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
+		53F637E01C5F59A000864346 /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
+		53F637E11C5F59A000864346 /* SBJsonStreamParserAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAccumulator.h; sourceTree = "<group>"; };
+		53F637E21C5F59A000864346 /* SBJsonStreamParserAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAccumulator.m; sourceTree = "<group>"; };
+		53F637E31C5F59A000864346 /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
+		53F637E41C5F59A000864346 /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
+		53F637E51C5F59A000864346 /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
+		53F637E61C5F59A000864346 /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
+		53F637E71C5F59A000864346 /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
+		53F637E81C5F59A000864346 /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
+		53F637E91C5F59A000864346 /* SBJsonStreamWriterAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterAccumulator.h; sourceTree = "<group>"; };
+		53F637EA1C5F59A000864346 /* SBJsonStreamWriterAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterAccumulator.m; sourceTree = "<group>"; };
+		53F637EB1C5F59A000864346 /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
+		53F637EC1C5F59A000864346 /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
+		53F637ED1C5F59A000864346 /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
+		53F637EE1C5F59A000864346 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
+		53F637EF1C5F59A000864346 /* SBJsonUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonUTF8Stream.h; sourceTree = "<group>"; };
+		53F637F01C5F59A000864346 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
+		53F637F11C5F59A000864346 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		53F637F21C5F59A000864346 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		53F638261C5F59CB00864346 /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TBXML.m; path = "Frameworks/TBXML/TBXML-Code/TBXML.m"; sourceTree = "<group>"; };
+		53F638271C5F59CB00864346 /* TBXML+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TBXML+Compression.m"; path = "Frameworks/TBXML/TBXML-Code/TBXML+Compression.m"; sourceTree = "<group>"; };
+		53F638281C5F59CB00864346 /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "TBXML+HTTP.m"; path = "Frameworks/TBXML/TBXML-Code/TBXML+HTTP.m"; sourceTree = "<group>"; };
+		53F6382F1C5F59D200864346 /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TBXML.h; path = "Frameworks/TBXML/TBXML-Headers/TBXML.h"; sourceTree = "<group>"; };
+		53F638301C5F59D200864346 /* TBXML+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TBXML+Compression.h"; path = "Frameworks/TBXML/TBXML-Headers/TBXML+Compression.h"; sourceTree = "<group>"; };
+		53F638311C5F59D200864346 /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "TBXML+HTTP.h"; path = "Frameworks/TBXML/TBXML-Headers/TBXML+HTTP.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1704,9 +1751,6 @@
 				5304A09E168FD105009B2732 /* libbassmix.a in Frameworks */,
 				5304A09F168FD108009B2732 /* libbassopus.a in Frameworks */,
 				5304A0A0168FD10A009B2732 /* libbasswv.a in Frameworks */,
-				5304A097168FD0D1009B2732 /* libsbjson-ios.a in Frameworks */,
-				5304A095168FD0C9009B2732 /* libTBXML-iOS.a in Frameworks */,
-				5304A096168FD0C9009B2732 /* libtouchzipkit.a in Frameworks */,
 				5304A094168FD0BF009B2732 /* libxml2.dylib in Frameworks */,
 				5304A0F6168FD51E009B2732 /* StoreKit.framework in Frameworks */,
 				5304A0A2168FD173009B2732 /* UIKit.framework in Frameworks */,
@@ -1738,9 +1782,6 @@
 				536F54F7169A7149000F71E6 /* Security.framework in Frameworks */,
 				53E3E70C1690387900F195C5 /* libz.dylib in Frameworks */,
 				5304A2E2169020EA009B2732 /* StoreKit.framework in Frameworks */,
-				5304A2DC16901F1C009B2732 /* libTBXML.a in Frameworks */,
-				5304A2DD16901F1C009B2732 /* SBJson.framework in Frameworks */,
-				5304A2DE16901F1C009B2732 /* ZipKit.framework in Frameworks */,
 				5304A2D216901EE4009B2732 /* libbass_ape.dylib in Frameworks */,
 				5304A2D316901EE4009B2732 /* libbass_fx.dylib in Frameworks */,
 				5304A2D416901EE4009B2732 /* libbass_mpc.dylib in Frameworks */,
@@ -1757,9 +1798,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				536C98B916619BD8005A73C6 /* libtouchzipkit.a in Frameworks */,
-				536C983B16619B96005A73C6 /* libTBXML-iOS.a in Frameworks */,
-				536C982616619B7B005A73C6 /* libsbjson-ios.a in Frameworks */,
 				53DD12831A380DDE0051F861 /* libFlurry_5.4.0.a in Frameworks */,
 				536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */,
 				536C980A16619B25005A73C6 /* libbass.a in Frameworks */,
@@ -1977,10 +2015,10 @@
 			isa = PBXGroup;
 			children = (
 				536C99A71661A025005A73C6 /* libxml2.dylib */,
-				536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */,
-				536C982716619B87005A73C6 /* TBXML.xcodeproj */,
-				536C981216619B44005A73C6 /* SBJson.xcodeproj */,
 				53EEC9C81C5F1B1600DABB8E /* EX2Kit */,
+				53F638251C5F59BC00864346 /* TBXML */,
+				53F637D91C5F59A000864346 /* SBJson */,
+				53F637611C5F591A00864346 /* ZipKit */,
 				53D2B6C31A47D58100B029A3 /* RaptureXML */,
 				536C97F116619B25005A73C6 /* libBASS */,
 				536C97C016619AE3005A73C6 /* FMDB */,
@@ -2254,38 +2292,6 @@
 			);
 			name = libBASS;
 			path = Frameworks/libBASS;
-			sourceTree = "<group>";
-		};
-		536C981316619B44005A73C6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				536C981D16619B44005A73C6 /* SBJson.framework */,
-				536C981F16619B44005A73C6 /* SBJsonTests.octest */,
-				536C982116619B44005A73C6 /* libsbjson-ios.a */,
-				536C982316619B44005A73C6 /* sbjson-iosTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		536C982816619B87005A73C6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				536C983216619B87005A73C6 /* libTBXML.a */,
-				536C983416619B87005A73C6 /* TBXMLTests.octest */,
-				536C983616619B87005A73C6 /* libTBXML-iOS.a */,
-				536C983816619B87005A73C6 /* TBXML-iOSTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		536C98A916619BC4005A73C6 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				536C98B216619BC4005A73C6 /* ZipKit.framework */,
-				536C98B416619BC4005A73C6 /* libzipkit.a */,
-				536C98B616619BC4005A73C6 /* libtouchzipkit.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		536C9A2D1661A503005A73C6 /* MKStoreManager */ = {
@@ -2753,6 +2759,106 @@
 			name = RNCryptor;
 			sourceTree = "<group>";
 		};
+		53F637611C5F591A00864346 /* ZipKit */ = {
+			isa = PBXGroup;
+			children = (
+				53F637761C5F591A00864346 /* ZipKit.h */,
+				53F637621C5F591A00864346 /* GMAppleDouble+ZKAdditions.h */,
+				53F637631C5F591A00864346 /* GMAppleDouble+ZKAdditions.m */,
+				53F637641C5F591A00864346 /* MacFUSE */,
+				53F637681C5F591A00864346 /* NSData+ZKAdditions.h */,
+				53F637691C5F591A00864346 /* NSData+ZKAdditions.m */,
+				53F6376A1C5F591A00864346 /* NSDate+ZKAdditions.h */,
+				53F6376B1C5F591A00864346 /* NSDate+ZKAdditions.m */,
+				53F6376C1C5F591A00864346 /* NSDictionary+ZKAdditions.h */,
+				53F6376D1C5F591A00864346 /* NSDictionary+ZKAdditions.m */,
+				53F6376E1C5F591A00864346 /* NSFileHandle+ZKAdditions.h */,
+				53F6376F1C5F591A00864346 /* NSFileHandle+ZKAdditions.m */,
+				53F637701C5F591A00864346 /* NSFileManager+ZKAdditions.h */,
+				53F637711C5F591A00864346 /* NSFileManager+ZKAdditions.m */,
+				53F637721C5F591A00864346 /* NSString+ZKAdditions.h */,
+				53F637731C5F591A00864346 /* NSString+ZKAdditions.m */,
+				53F637771C5F591A00864346 /* ZKArchive.h */,
+				53F637781C5F591A00864346 /* ZKArchive.m */,
+				53F637791C5F591A00864346 /* ZKCDHeader.h */,
+				53F6377A1C5F591A00864346 /* ZKCDHeader.m */,
+				53F6377B1C5F591A00864346 /* ZKCDTrailer.h */,
+				53F6377C1C5F591A00864346 /* ZKCDTrailer.m */,
+				53F6377D1C5F591A00864346 /* ZKCDTrailer64.h */,
+				53F6377E1C5F591A00864346 /* ZKCDTrailer64.m */,
+				53F6377F1C5F591A00864346 /* ZKCDTrailer64Locator.h */,
+				53F637801C5F591A00864346 /* ZKCDTrailer64Locator.m */,
+				53F637811C5F591A00864346 /* ZKDataArchive.h */,
+				53F637821C5F591A00864346 /* ZKDataArchive.m */,
+				53F637831C5F591A00864346 /* ZKDefs.h */,
+				53F637841C5F591A00864346 /* ZKDefs.m */,
+				53F637851C5F591A00864346 /* ZKFileArchive.h */,
+				53F637861C5F591A00864346 /* ZKFileArchive.m */,
+				53F637871C5F591A00864346 /* ZKLFHeader.h */,
+				53F637881C5F591A00864346 /* ZKLFHeader.m */,
+				53F637891C5F591A00864346 /* ZKLog.h */,
+				53F6378A1C5F591A00864346 /* ZKLog.m */,
+			);
+			name = ZipKit;
+			path = Frameworks/ZipKit/ZipKit;
+			sourceTree = "<group>";
+		};
+		53F637641C5F591A00864346 /* MacFUSE */ = {
+			isa = PBXGroup;
+			children = (
+				53F637651C5F591A00864346 /* COPYING.TXT */,
+				53F637661C5F591A00864346 /* GMAppleDouble.h */,
+				53F637671C5F591A00864346 /* GMAppleDouble.m */,
+			);
+			path = MacFUSE;
+			sourceTree = "<group>";
+		};
+		53F637D91C5F59A000864346 /* SBJson */ = {
+			isa = PBXGroup;
+			children = (
+				53F637DA1C5F59A000864346 /* NSObject+SBJson.h */,
+				53F637DB1C5F59A000864346 /* NSObject+SBJson.m */,
+				53F637DC1C5F59A000864346 /* SBJson.h */,
+				53F637DD1C5F59A000864346 /* SBJsonParser.h */,
+				53F637DE1C5F59A000864346 /* SBJsonParser.m */,
+				53F637DF1C5F59A000864346 /* SBJsonStreamParser.h */,
+				53F637E01C5F59A000864346 /* SBJsonStreamParser.m */,
+				53F637E11C5F59A000864346 /* SBJsonStreamParserAccumulator.h */,
+				53F637E21C5F59A000864346 /* SBJsonStreamParserAccumulator.m */,
+				53F637E31C5F59A000864346 /* SBJsonStreamParserAdapter.h */,
+				53F637E41C5F59A000864346 /* SBJsonStreamParserAdapter.m */,
+				53F637E51C5F59A000864346 /* SBJsonStreamParserState.h */,
+				53F637E61C5F59A000864346 /* SBJsonStreamParserState.m */,
+				53F637E71C5F59A000864346 /* SBJsonStreamWriter.h */,
+				53F637E81C5F59A000864346 /* SBJsonStreamWriter.m */,
+				53F637E91C5F59A000864346 /* SBJsonStreamWriterAccumulator.h */,
+				53F637EA1C5F59A000864346 /* SBJsonStreamWriterAccumulator.m */,
+				53F637EB1C5F59A000864346 /* SBJsonStreamWriterState.h */,
+				53F637EC1C5F59A000864346 /* SBJsonStreamWriterState.m */,
+				53F637ED1C5F59A000864346 /* SBJsonTokeniser.h */,
+				53F637EE1C5F59A000864346 /* SBJsonTokeniser.m */,
+				53F637EF1C5F59A000864346 /* SBJsonUTF8Stream.h */,
+				53F637F01C5F59A000864346 /* SBJsonUTF8Stream.m */,
+				53F637F11C5F59A000864346 /* SBJsonWriter.h */,
+				53F637F21C5F59A000864346 /* SBJsonWriter.m */,
+			);
+			name = SBJson;
+			path = Frameworks/SBJson/Classes;
+			sourceTree = "<group>";
+		};
+		53F638251C5F59BC00864346 /* TBXML */ = {
+			isa = PBXGroup;
+			children = (
+				53F6382F1C5F59D200864346 /* TBXML.h */,
+				53F638261C5F59CB00864346 /* TBXML.m */,
+				53F638301C5F59D200864346 /* TBXML+Compression.h */,
+				53F638271C5F59CB00864346 /* TBXML+Compression.m */,
+				53F638281C5F59CB00864346 /* TBXML+HTTP.m */,
+				53F638311C5F59D200864346 /* TBXML+HTTP.h */,
+			);
+			name = TBXML;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -2761,6 +2867,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				53EECACE1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.h in Headers */,
+				53F6378C1C5F591A00864346 /* GMAppleDouble+ZKAdditions.h in Headers */,
 				53067E371694F11C00600396 /* AudioEngine.h in Headers */,
 				53EECBE61C5F1B2E00DABB8E /* EX2NavigationController.h in Headers */,
 				53067E381694F11C00600396 /* MusicSingleton.h in Headers */,
@@ -2806,21 +2913,28 @@
 				53067E481694F11C00600396 /* JukeboxSingleton.h in Headers */,
 				53067E491694F11C00600396 /* ISMSDataModelObjects.h in Headers */,
 				53EECB6E1C5F1B2800DABB8E /* UIImage+Reflection.h in Headers */,
+				53F637CE1C5F591A00864346 /* ZKFileArchive.h in Headers */,
 				53EECB021C5F1B2600DABB8E /* NSString+FileSize.h in Headers */,
+				53F6380E1C5F59A000864346 /* SBJsonStreamWriter.h in Headers */,
+				53F6381A1C5F59A000864346 /* SBJsonTokeniser.h in Headers */,
 				53EECB421C5F1B2700DABB8E /* EX2QuartzCoreCategories.h in Headers */,
 				53EECBCE1C5F1B2C00DABB8E /* EX2Macros.h in Headers */,
 				53EECAA21C5F1B2500DABB8E /* NSArray+Plist.h in Headers */,
 				53EECAD21C5F1B2500DABB8E /* NSNull+CleanString.h in Headers */,
+				53F638061C5F59A000864346 /* SBJsonStreamParserAdapter.h in Headers */,
 				53EECC571C5F1B7700DABB8E /* DDAssertMacros.h in Headers */,
 				53EECA9A1C5F1B2500DABB8E /* NSArray+FilterBlock.h in Headers */,
 				53067E4A1694F11C00600396 /* ISMSIndex.h in Headers */,
 				53067E4B1694F11C00600396 /* ISMSArtist.h in Headers */,
 				53EECAC21C5F1B2500DABB8E /* NSDate+UTC.h in Headers */,
 				53067E4C1694F11C00600396 /* ISMSAlbum.h in Headers */,
+				53F637FE1C5F59A000864346 /* SBJsonStreamParser.h in Headers */,
 				53067E4D1694F11C00600396 /* ISMSItem.h in Headers */,
+				53F638021C5F59A000864346 /* SBJsonStreamParserAccumulator.h in Headers */,
 				53EECABA1C5F1B2500DABB8E /* NSData+Gzip.h in Headers */,
 				53EECAB21C5F1B2500DABB8E /* NSData+AES128.h in Headers */,
 				53EECC2D1C5F1B6000DABB8E /* RNOpenSSLCryptor.h in Headers */,
+				53F6380A1C5F59A000864346 /* SBJsonStreamParserState.h in Headers */,
 				53EECAAA1C5F1B2500DABB8E /* NSArray+Safe.h in Headers */,
 				53067E4E1694F11C00600396 /* ISMSSong.h in Headers */,
 				53067E501694F11C00600396 /* ISMSServer.h in Headers */,
@@ -2829,12 +2943,15 @@
 				53EECB561C5F1B2700DABB8E /* UIColor+ColorWithInt.h in Headers */,
 				53EECC171C5F1B6000DABB8E /* RNCryptor.h in Headers */,
 				53067E541694F11C00600396 /* NSMutableURLRequest+SUS.h in Headers */,
+				53F637D61C5F591A00864346 /* ZKLog.h in Headers */,
 				53EECABE1C5F1B2500DABB8E /* NSData+Hash.h in Headers */,
 				53067E551694F11C00600396 /* NSMutableURLRequest+PMS.h in Headers */,
 				53EECBEA1C5F1B2F00DABB8E /* EX2NotificationBar.h in Headers */,
 				53067E561694F11C00600396 /* ISMSUpdateChecker.h in Headers */,
 				53EECAEA1C5F1B2500DABB8E /* NSOrderedSet+Safe.h in Headers */,
 				53EECB261C5F1B2600DABB8E /* NSString+URLEncode.h in Headers */,
+				53F637B21C5F591A00864346 /* ZKArchive.h in Headers */,
+				53F637911C5F591A00864346 /* GMAppleDouble.h in Headers */,
 				53EECBA41C5F1B2A00DABB8E /* EX2ActionBlock.h in Headers */,
 				53EECC651C5F1B7700DABB8E /* DDTTYLogger.h in Headers */,
 				53067E571694F11C00600396 /* ISMSDataAccessObjects.h in Headers */,
@@ -2842,6 +2959,7 @@
 				53EECBFB1C5F1B3000DABB8E /* SnappySlider.h in Headers */,
 				53146D441A630FCD007D4163 /* ISMSRootArtistsLoader.h in Headers */,
 				53067E5C1694F11C00600396 /* SUSChatDAO.h in Headers */,
+				53F637A11C5F591A00864346 /* NSFileHandle+ZKAdditions.h in Headers */,
 				53EECB121C5F1B2600DABB8E /* NSString+md5.h in Headers */,
 				53067E5D1694F11C00600396 /* SUSLyricsDAO.h in Headers */,
 				53EECBBE1C5F1B2B00DABB8E /* EX2Reachability.h in Headers */,
@@ -2856,9 +2974,12 @@
 				53067E611694F11C00600396 /* SUSNowPlayingDAO.h in Headers */,
 				53067E621694F11C00600396 /* ISMSLoaderManager.h in Headers */,
 				53067E631694F11C00600396 /* ISMSLoaderDelegate.h in Headers */,
+				53F637D21C5F591A00864346 /* ZKLFHeader.h in Headers */,
+				53F637F81C5F59A000864346 /* SBJson.h in Headers */,
 				53067E641694F11C00600396 /* ISMSLoader.h in Headers */,
 				53067E651694F11C00600396 /* ISMSLoaders.h in Headers */,
 				53067E671694F11C00600396 /* ISMSStatusLoader.h in Headers */,
+				53F6381E1C5F59A000864346 /* SBJsonUTF8Stream.h in Headers */,
 				53EECB8E1C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.h in Headers */,
 				530ABE351A5226BE005ACE6B /* ISMSMediaFoldersLoader.h in Headers */,
 				53EECB161C5F1B2600DABB8E /* NSString+rfcEncode.h in Headers */,
@@ -2867,17 +2988,21 @@
 				53EECC611C5F1B7700DABB8E /* DDLog+LOGV.h in Headers */,
 				53EECB221C5F1B2600DABB8E /* NSString+TrimmingAdditions.h in Headers */,
 				53067E6A1694F11C00600396 /* ISMSCoverArtLoader.h in Headers */,
+				53F637B01C5F591A00864346 /* ZipKit.h in Headers */,
 				53EECAEE1C5F1B2500DABB8E /* GTMDefines.h in Headers */,
 				53067E6E1694F11C00600396 /* ISMSSubFolderLoader.h in Headers */,
 				53067E711694F11C00600396 /* ISMSQueueAllLoader.h in Headers */,
 				53EECBAC1C5F1B2A00DABB8E /* EX2Components.h in Headers */,
 				53EECBB61C5F1B2B00DABB8E /* EX2Language.h in Headers */,
 				53067E761694F11C00600396 /* ISMSChatLoader.h in Headers */,
+				53F637F41C5F59A000864346 /* NSObject+SBJson.h in Headers */,
 				53067E771694F11C00600396 /* ISMSLyricsLoader.h in Headers */,
+				53F638351C5F59D200864346 /* TBXML+Compression.h in Headers */,
 				53EECBB21C5F1B2B00DABB8E /* EX2FileEncryptor.h in Headers */,
 				53EECB621C5F1B2700DABB8E /* UIImage+Color.h in Headers */,
 				53067E781694F11C00600396 /* ISMSNowPlayingLoader.h in Headers */,
 				53067E791694F11C00600396 /* ISMSQuickAlbumsLoader.h in Headers */,
+				53F637BE1C5F591A00864346 /* ZKCDTrailer64.h in Headers */,
 				53067E7C1694F11C00600396 /* ISMSStreamManager.h in Headers */,
 				53067E7D1694F11C00600396 /* ISMSCacheQueueManager.h in Headers */,
 				53EECBA81C5F1B2A00DABB8E /* EX2ActionQueue.h in Headers */,
@@ -2910,8 +3035,12 @@
 				53EECB721C5F1B2800DABB8E /* UIImage+RoundedImage.h in Headers */,
 				53067E8C1694F11C00600396 /* libSubOSX.h in Headers */,
 				53067E8D1694F11C00600396 /* bass.h in Headers */,
+				53F637A51C5F591A00864346 /* NSFileManager+ZKAdditions.h in Headers */,
 				53EECC5D1C5F1B7700DABB8E /* DDLog.h in Headers */,
 				53EECAE61C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h in Headers */,
+				53F637C21C5F591A00864346 /* ZKCDTrailer64Locator.h in Headers */,
+				53F637B61C5F591A00864346 /* ZKCDHeader.h in Headers */,
+				53F637CA1C5F591A00864346 /* ZKDefs.h in Headers */,
 				53EECB761C5F1B2800DABB8E /* UIImage+Tint.h in Headers */,
 				53EECC1D1C5F1B6000DABB8E /* RNCryptorEngine.h in Headers */,
 				53EECBD01C5F1B2D00DABB8E /* EX2Dispatch.h in Headers */,
@@ -2924,11 +3053,13 @@
 				53EECB7A1C5F1B2800DABB8E /* UIImageView+ImageAnimated.h in Headers */,
 				53067E911694F11C00600396 /* bassflac.h in Headers */,
 				53067E921694F11C00600396 /* bassmix.h in Headers */,
+				53F637BA1C5F591A00864346 /* ZKCDTrailer.h in Headers */,
 				53067E931694F11C00600396 /* bassopus.h in Headers */,
 				53EECC4B1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.h in Headers */,
 				53EECB5A1C5F1B2700DABB8E /* UIDevice+Hardware.h in Headers */,
 				53EECB321C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.h in Headers */,
 				53067E941694F11C00600396 /* basswv.h in Headers */,
+				53F638221C5F59A000864346 /* SBJsonWriter.h in Headers */,
 				53EECB821C5F1B2800DABB8E /* UITableView+Shadows.h in Headers */,
 				53067E951694F11C00600396 /* FMDatabase.h in Headers */,
 				53067E961694F11C00600396 /* FMDatabaseAdditions.h in Headers */,
@@ -2944,12 +3075,15 @@
 				53EECB1E1C5F1B2600DABB8E /* NSString+time.h in Headers */,
 				53067E9A1694F11C00600396 /* FMResultSet.h in Headers */,
 				53EECAAE1C5F1B2500DABB8E /* NSMutableArray+Safe.h in Headers */,
+				53F638331C5F59D200864346 /* TBXML.h in Headers */,
+				53F6379D1C5F591A00864346 /* NSDictionary+ZKAdditions.h in Headers */,
 				53B3BD6A16990CFE00DCFC9C /* HTTPAuthenticationRequest.h in Headers */,
 				53B3BD6E16990CFE00DCFC9C /* HTTPConnection.h in Headers */,
 				53B3BD7216990CFE00DCFC9C /* HTTPLogging.h in Headers */,
 				53B3BD7416990CFE00DCFC9C /* HTTPMessage.h in Headers */,
 				53B3BD7816990CFE00DCFC9C /* HTTPResponse.h in Headers */,
 				53EECA941C5F1B2500DABB8E /* EX2Categories.h in Headers */,
+				53F637A91C5F591A00864346 /* NSString+ZKAdditions.h in Headers */,
 				53EECB441C5F1B2700DABB8E /* EX2UIKitCategories.h in Headers */,
 				53B3BD7A16990CFE00DCFC9C /* HTTPServer.h in Headers */,
 				53EECAF01C5F1B2500DABB8E /* GTMNSString+HTML.h in Headers */,
@@ -2958,19 +3092,24 @@
 				53EECA961C5F1B2500DABB8E /* EX2FoundationCategories.h in Headers */,
 				53B3BD8216990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */,
 				53B3BD8616990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */,
+				53F638121C5F59A000864346 /* SBJsonStreamWriterAccumulator.h in Headers */,
+				53F637FA1C5F59A000864346 /* SBJsonParser.h in Headers */,
 				53EECAD61C5F1B2500DABB8E /* NSNumber+CleanString.h in Headers */,
 				53B3BD8A16990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */,
 				53B3BD8E16990CFE00DCFC9C /* HTTPDataResponse.h in Headers */,
+				53F637C61C5F591A00864346 /* ZKDataArchive.h in Headers */,
 				53EECBAE1C5F1B2B00DABB8E /* EX2FileDecryptor.h in Headers */,
 				53EECB521C5F1B2700DABB8E /* UIColor+ColorWithHex.h in Headers */,
 				53EECC531C5F1B7700DABB8E /* DDASLLogger.h in Headers */,
 				53EECB661C5F1B2700DABB8E /* UIImage+Cropping.h in Headers */,
 				53B3BD9216990CFE00DCFC9C /* HTTPDynamicFileResponse.h in Headers */,
 				53EECBC61C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.h in Headers */,
+				53F638371C5F59D200864346 /* TBXML+HTTP.h in Headers */,
 				53D2B6C71A47D58100B029A3 /* RXMLElement.h in Headers */,
 				53B3BD9616990CFE00DCFC9C /* HTTPFileResponse.h in Headers */,
 				53EECAC61C5F1B2500DABB8E /* NSFileHandle+Hash.h in Headers */,
 				53B3BD9A16990CFE00DCFC9C /* HTTPRedirectResponse.h in Headers */,
+				53F637951C5F591A00864346 /* NSData+ZKAdditions.h in Headers */,
 				530ABE1D1A521553005ACE6B /* ISMSFolder.h in Headers */,
 				53EECB961C5F1B2900DABB8E /* UIViewController+IsVisible.h in Headers */,
 				53A375B51A57320500318F78 /* ISMSItemLoader.h in Headers */,
@@ -2979,12 +3118,14 @@
 				53B3BDAF16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */,
 				53B3BDB516990DF100DCFC9C /* HLSProxyConnection.h in Headers */,
 				53EECC631C5F1B7700DABB8E /* DDLogMacros.h in Headers */,
+				53F638161C5F59A000864346 /* SBJsonStreamWriterState.h in Headers */,
 				53B3BDE61699137500DCFC9C /* HLSProxyResponse.h in Headers */,
 				53EECC591C5F1B7700DABB8E /* DDFileLogger.h in Headers */,
 				53B3BD5E16990CFE00DCFC9C /* DDData.h in Headers */,
 				53EECC1B1C5F1B6000DABB8E /* RNCryptor+Private.h in Headers */,
 				53B3BD6216990CFE00DCFC9C /* DDNumber.h in Headers */,
 				53EECAE21C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h in Headers */,
+				53F637991C5F591A00864346 /* NSDate+ZKAdditions.h in Headers */,
 				53B3BD6616990CFE00DCFC9C /* DDRange.h in Headers */,
 				3B16AFDE16C2B53B00787BD8 /* ISMSServerShuffleLoader.h in Headers */,
 				530ABE3B1A5226DB005ACE6B /* ISMSMediaFolder.h in Headers */,
@@ -3016,18 +3157,22 @@
 				536C969C166195CF005A73C6 /* ISMSStreamHandler.h in Headers */,
 				536C969E166195CF005A73C6 /* ISMSURLConnectionStreamHandler.h in Headers */,
 				536C96A0166195CF005A73C6 /* ISMSStreamHandlerDelegate.h in Headers */,
+				53F637AF1C5F591A00864346 /* ZipKit.h in Headers */,
 				536C96A1166195CF005A73C6 /* ISMSCFNetworkStreamHandler.h in Headers */,
 				536C96AF16619673005A73C6 /* JukeboxConnectionDelegate.h in Headers */,
 				536C96B316619695005A73C6 /* iSubBassGaplessPlayerDelegate.h in Headers */,
 				536C96BC166196AC005A73C6 /* NSMutableURLRequest+SUS.h in Headers */,
 				536C96BE166196AC005A73C6 /* NSMutableURLRequest+PMS.h in Headers */,
+				53F638321C5F59D200864346 /* TBXML.h in Headers */,
 				536C96C0166196AC005A73C6 /* ISMSUpdateChecker.h in Headers */,
+				53F638341C5F59D200864346 /* TBXML+Compression.h in Headers */,
 				536C96D8166196C0005A73C6 /* ISMSDataAccessObjects.h in Headers */,
 				536C96DB166196C0005A73C6 /* SUSSubFolderDAO.h in Headers */,
 				536C96E1166196C0005A73C6 /* SUSChatDAO.h in Headers */,
 				536C96E3166196C0005A73C6 /* SUSLyricsDAO.h in Headers */,
 				536C96E5166196C0005A73C6 /* SUSServerPlaylistsDAO.h in Headers */,
 				536C96E7166196C0005A73C6 /* ISMSSong+DAO.h in Headers */,
+				53F637C51C5F591A00864346 /* ZKDataArchive.h in Headers */,
 				536C96E9166196C0005A73C6 /* SUSCoverArtDAO.h in Headers */,
 				536C96EB166196C0005A73C6 /* SUSNowPlayingDAO.h in Headers */,
 				536C96F2166196D4005A73C6 /* ISMSLoaderManager.h in Headers */,
@@ -3047,6 +3192,7 @@
 				536C9768166197B8005A73C6 /* PlaylistSingleton.h in Headers */,
 				536C976A166197B8005A73C6 /* CacheSingleton.h in Headers */,
 				536C976C166197B8005A73C6 /* DatabaseSingleton.h in Headers */,
+				53F637F91C5F59A000864346 /* SBJsonParser.h in Headers */,
 				536C976E166197B8005A73C6 /* MusicSingleton.h in Headers */,
 				536C9770166197B8005A73C6 /* SocialSingleton.h in Headers */,
 				536C9774166197B8005A73C6 /* JukeboxSingleton.h in Headers */,
@@ -3057,7 +3203,10 @@
 				536C978C166197EC005A73C6 /* BassEffectValue.h in Headers */,
 				536C9795166197F3005A73C6 /* BassWrapper.h in Headers */,
 				536C9797166197F3005A73C6 /* BassStream.h in Headers */,
+				53F6381D1C5F59A000864346 /* SBJsonUTF8Stream.h in Headers */,
 				536C9799166197F3005A73C6 /* BassGaplessPlayer.h in Headers */,
+				53F638051C5F59A000864346 /* SBJsonStreamParserAdapter.h in Headers */,
+				53F637B11C5F591A00864346 /* ZKArchive.h in Headers */,
 				536C979B166197F3005A73C6 /* BassGaplessPlayerDelegate.h in Headers */,
 				536C979E166197FB005A73C6 /* AudioEngine.h in Headers */,
 				536C97A216619820005A73C6 /* sqlite3.h in Headers */,
@@ -3068,6 +3217,8 @@
 				53EECBEE1C5F1B2F00DABB8E /* EX2SlidingNotification.h in Headers */,
 				53EECBE91C5F1B2E00DABB8E /* EX2NotificationBar.h in Headers */,
 				53EECAC91C5F1B2500DABB8E /* NSMutableDictionary+Safe.h in Headers */,
+				53F637B51C5F591A00864346 /* ZKCDHeader.h in Headers */,
+				53F6379C1C5F591A00864346 /* NSDictionary+ZKAdditions.h in Headers */,
 				53EECA9D1C5F1B2500DABB8E /* NSArray+FirstObject.h in Headers */,
 				53EECB4D1C5F1B2700DABB8E /* UIButton+StretchBackground.h in Headers */,
 				53EECAAD1C5F1B2500DABB8E /* NSMutableArray+Safe.h in Headers */,
@@ -3076,6 +3227,7 @@
 				53EECB991C5F1B2900DABB8E /* UIViewController+Tools.h in Headers */,
 				53EECB951C5F1B2900DABB8E /* UIViewController+IsVisible.h in Headers */,
 				53EECB611C5F1B2700DABB8E /* UIImage+Color.h in Headers */,
+				53F638151C5F59A000864346 /* SBJsonStreamWriterState.h in Headers */,
 				53EECB111C5F1B2600DABB8E /* NSString+md5.h in Headers */,
 				53EECC561C5F1B7700DABB8E /* DDAssertMacros.h in Headers */,
 				53EECAE51C5F1B2500DABB8E /* NSOrderedSet+FirstObject.h in Headers */,
@@ -3084,34 +3236,43 @@
 				53EECBAB1C5F1B2A00DABB8E /* EX2Components.h in Headers */,
 				53EECBC11C5F1B2B00DABB8E /* EX2RingBuffer.h in Headers */,
 				53EECC301C5F1B6000DABB8E /* RNOpenSSLDecryptor.h in Headers */,
+				53F637FD1C5F59A000864346 /* SBJsonStreamParser.h in Headers */,
 				53EECBB51C5F1B2B00DABB8E /* EX2Language.h in Headers */,
 				53EECC1C1C5F1B6000DABB8E /* RNCryptorEngine.h in Headers */,
 				53EECBE11C5F1B2E00DABB8E /* EX2LargerTouchScrollView.h in Headers */,
 				53EECAE11C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.h in Headers */,
+				53F637C91C5F591A00864346 /* ZKDefs.h in Headers */,
 				53EECAD11C5F1B2500DABB8E /* NSNull+CleanString.h in Headers */,
 				53EECA971C5F1B2500DABB8E /* NSArray+Additions.h in Headers */,
 				53EECC201C5F1B6000DABB8E /* RNCryptorOld.h in Headers */,
 				53EECC281C5F1B6000DABB8E /* RNEncryptor.h in Headers */,
 				53EECAC51C5F1B2500DABB8E /* NSFileHandle+Hash.h in Headers */,
+				53F637D51C5F591A00864346 /* ZKLog.h in Headers */,
 				53EECB411C5F1B2600DABB8E /* EX2QuartzCoreCategories.h in Headers */,
 				53EECAE91C5F1B2500DABB8E /* NSOrderedSet+Safe.h in Headers */,
 				53EECB591C5F1B2700DABB8E /* UIDevice+Hardware.h in Headers */,
 				53EECAC11C5F1B2500DABB8E /* NSDate+UTC.h in Headers */,
+				53F637BD1C5F591A00864346 /* ZKCDTrailer64.h in Headers */,
 				53EECADD1C5F1B2500DABB8E /* NSObject+UserInfo.h in Headers */,
 				53EECB291C5F1B2600DABB8E /* NSString+Validation.h in Headers */,
+				53F637C11C5F591A00864346 /* ZKCDTrailer64Locator.h in Headers */,
 				53EECB511C5F1B2700DABB8E /* UIColor+ColorWithHex.h in Headers */,
 				53EECB9D1C5F1B2A00DABB8E /* UIWebView+HideShadows.h in Headers */,
 				53EECB851C5F1B2800DABB8E /* UITableViewCell+TableView.h in Headers */,
 				53EECB151C5F1B2600DABB8E /* NSString+rfcEncode.h in Headers */,
+				53F637901C5F591A00864346 /* GMAppleDouble.h in Headers */,
 				53EECB211C5F1B2600DABB8E /* NSString+TrimmingAdditions.h in Headers */,
 				53EECBC51C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.h in Headers */,
 				53EECB751C5F1B2800DABB8E /* UIImage+Tint.h in Headers */,
 				53EECBD31C5F1B2D00DABB8E /* EX2Static.h in Headers */,
+				53F6380D1C5F59A000864346 /* SBJsonStreamWriter.h in Headers */,
 				53EECB251C5F1B2600DABB8E /* NSString+URLEncode.h in Headers */,
 				53EECB311C5F1B2600DABB8E /* NSURL+SkipBackupAttribute.h in Headers */,
 				53EECB431C5F1B2700DABB8E /* EX2UIKitCategories.h in Headers */,
+				53F638111C5F59A000864346 /* SBJsonStreamWriterAccumulator.h in Headers */,
 				53EECBF31C5F1B2F00DABB8E /* EX2TabBarController.h in Headers */,
 				53EECC641C5F1B7700DABB8E /* DDTTYLogger.h in Headers */,
+				53F638361C5F59D200864346 /* TBXML+HTTP.h in Headers */,
 				53EECBB11C5F1B2B00DABB8E /* EX2FileEncryptor.h in Headers */,
 				53EECB551C5F1B2700DABB8E /* UIColor+ColorWithInt.h in Headers */,
 				53EECBBD1C5F1B2B00DABB8E /* EX2Reachability.h in Headers */,
@@ -3120,19 +3281,23 @@
 				53EECB351C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.h in Headers */,
 				53EECA931C5F1B2500DABB8E /* EX2Categories.h in Headers */,
 				53EECB811C5F1B2800DABB8E /* UITableView+Shadows.h in Headers */,
+				53F638091C5F59A000864346 /* SBJsonStreamParserState.h in Headers */,
 				53EECC521C5F1B7700DABB8E /* DDASLLogger.h in Headers */,
 				53EECB191C5F1B2600DABB8E /* NSString+SHA1.h in Headers */,
 				53EECB6D1C5F1B2800DABB8E /* UIImage+Reflection.h in Headers */,
 				53EECAF91C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.h in Headers */,
 				53EECBA11C5F1B2A00DABB8E /* EX2Action.h in Headers */,
+				53F637941C5F591A00864346 /* NSData+ZKAdditions.h in Headers */,
 				53EECC2C1C5F1B6000DABB8E /* RNOpenSSLCryptor.h in Headers */,
 				53EECB0D1C5F1B2600DABB8E /* NSString+hex.h in Headers */,
 				53EECAA91C5F1B2500DABB8E /* NSArray+Safe.h in Headers */,
 				53EECAB51C5F1B2500DABB8E /* NSData+Base64.h in Headers */,
 				53EECAA51C5F1B2500DABB8E /* NSArray+Reverse.h in Headers */,
 				53EECB5D1C5F1B2700DABB8E /* UIDevice+Software.h in Headers */,
+				53F638011C5F59A000864346 /* SBJsonStreamParserAccumulator.h in Headers */,
 				53EECB091C5F1B2600DABB8E /* NSString+HasValue.h in Headers */,
 				53EECC161C5F1B6000DABB8E /* RNCryptor.h in Headers */,
+				53F637A41C5F591A00864346 /* NSFileManager+ZKAdditions.h in Headers */,
 				53EECBDD1C5F1B2D00DABB8E /* EX2InfinitePagingScrollView.h in Headers */,
 				53EECBF81C5F1B2F00DABB8E /* EX2UIComponents.h in Headers */,
 				53EECB491C5F1B2700DABB8E /* UIButton+Colors.h in Headers */,
@@ -3153,6 +3318,7 @@
 				53EECAED1C5F1B2500DABB8E /* GTMDefines.h in Headers */,
 				53EECB051C5F1B2600DABB8E /* NSString+Gzip.h in Headers */,
 				53EECBD91C5F1B2D00DABB8E /* EX2GlowButton.h in Headers */,
+				53F637D11C5F591A00864346 /* ZKLFHeader.h in Headers */,
 				53EECC1A1C5F1B6000DABB8E /* RNCryptor+Private.h in Headers */,
 				53EECC241C5F1B6000DABB8E /* RNDecryptor.h in Headers */,
 				53EECBFA1C5F1B3000DABB8E /* SnappySlider.h in Headers */,
@@ -3164,6 +3330,7 @@
 				53EECBA31C5F1B2A00DABB8E /* EX2ActionBlock.h in Headers */,
 				53EECB8D1C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.h in Headers */,
 				53EECBD51C5F1B2D00DABB8E /* EX2FlatSegmentedControl.h in Headers */,
+				53F6378B1C5F591A00864346 /* GMAppleDouble+ZKAdditions.h in Headers */,
 				53EECBAD1C5F1B2A00DABB8E /* EX2FileDecryptor.h in Headers */,
 				53EECC4E1C5F1B7700DABB8E /* DDASLLogCapture.h in Headers */,
 				53EECB391C5F1B2600DABB8E /* CALayer+ImageFromLayer.h in Headers */,
@@ -3173,6 +3340,7 @@
 				53EECB691C5F1B2800DABB8E /* UIImage+CustomStretch.h in Headers */,
 				53EECBCF1C5F1B2C00DABB8E /* EX2Dispatch.h in Headers */,
 				53EECC581C5F1B7700DABB8E /* DDFileLogger.h in Headers */,
+				53F637A81C5F591A00864346 /* NSString+ZKAdditions.h in Headers */,
 				53EECC5C1C5F1B7700DABB8E /* DDLog.h in Headers */,
 				53EECABD1C5F1B2500DABB8E /* NSData+Hash.h in Headers */,
 				536C993D16619F39005A73C6 /* ISMSErrorDomain.h in Headers */,
@@ -3196,6 +3364,9 @@
 				530ABE1C1A521553005ACE6B /* ISMSFolder.h in Headers */,
 				536C9AB21661AA61005A73C6 /* SearchXMLParser.h in Headers */,
 				53C7F43F1661BC3100C5F61E /* FMDatabasePool.h in Headers */,
+				53F637981C5F591A00864346 /* NSDate+ZKAdditions.h in Headers */,
+				53F637A01C5F591A00864346 /* NSFileHandle+ZKAdditions.h in Headers */,
+				53F638191C5F59A000864346 /* SBJsonTokeniser.h in Headers */,
 				530ABE341A5226BE005ACE6B /* ISMSMediaFoldersLoader.h in Headers */,
 				533555A21C5EC5B500624F30 /* ISMSAbstractItemLoader.h in Headers */,
 				530ABE301A5221E9005ACE6B /* ISMSPersistedModel.h in Headers */,
@@ -3215,6 +3386,7 @@
 				53B3BD7716990CFE00DCFC9C /* HTTPResponse.h in Headers */,
 				53B3BD7916990CFE00DCFC9C /* HTTPServer.h in Headers */,
 				53B3BD7D16990CFE00DCFC9C /* MultipartFormDataParser.h in Headers */,
+				53F637B91C5F591A00864346 /* ZKCDTrailer.h in Headers */,
 				53B3BD8116990CFE00DCFC9C /* MultipartMessageHeader.h in Headers */,
 				53B3BD8516990CFE00DCFC9C /* MultipartMessageHeaderField.h in Headers */,
 				53B3BD8916990CFE00DCFC9C /* HTTPAsyncFileResponse.h in Headers */,
@@ -3228,13 +3400,17 @@
 				53B3BDAE16990D1F00DCFC9C /* GCDAsyncSocket.h in Headers */,
 				53B3BDB416990DF100DCFC9C /* HLSProxyConnection.h in Headers */,
 				53B3BDE51699137500DCFC9C /* HLSProxyResponse.h in Headers */,
+				53F637CD1C5F591A00864346 /* ZKFileArchive.h in Headers */,
 				3B16AFDD16C2B53B00787BD8 /* ISMSServerShuffleLoader.h in Headers */,
+				53F637F31C5F59A000864346 /* NSObject+SBJson.h in Headers */,
+				53F638211C5F59A000864346 /* SBJsonWriter.h in Headers */,
 				530ABE3A1A5226DB005ACE6B /* ISMSMediaFolder.h in Headers */,
 				3B53B7D016C5C952003B6147 /* ISMSScrobbleLoader.h in Headers */,
 				53B42A3516DEBDC00043698B /* NSString+cleanCredentialsForLog.h in Headers */,
 				530ABE2A1A522158005ACE6B /* ISMSNewRootFoldersLoader.h in Headers */,
 				53E28E2F17D6A50200259985 /* Flurry.h in Headers */,
 				5374F2C51661C73D00529EF3 /* SFHFKeychainUtils.h in Headers */,
+				53F637F71C5F59A000864346 /* SBJson.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3252,9 +3428,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5304A0A6168FD190009B2732 /* PBXTargetDependency */,
-				5304A0A8168FD190009B2732 /* PBXTargetDependency */,
-				5304A0AA168FD190009B2732 /* PBXTargetDependency */,
 			);
 			name = libSubTests;
 			productName = libSubTests;
@@ -3275,9 +3448,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				5304A2C316901D8A009B2732 /* PBXTargetDependency */,
-				5304A2C516901D8A009B2732 /* PBXTargetDependency */,
-				5304A2C716901D8A009B2732 /* PBXTargetDependency */,
 			);
 			name = libSubOSX;
 			productName = libSubOSX;
@@ -3296,9 +3466,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				536C98B816619BD1005A73C6 /* PBXTargetDependency */,
-				536C983A16619B92005A73C6 /* PBXTargetDependency */,
-				536C982516619B6D005A73C6 /* PBXTargetDependency */,
 			);
 			name = libSub;
 			productName = Sub;
@@ -3325,20 +3492,6 @@
 			mainGroup = 536C946816618FA4005A73C6;
 			productRefGroup = 536C947416618FA4005A73C6 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 536C981316619B44005A73C6 /* Products */;
-					ProjectRef = 536C981216619B44005A73C6 /* SBJson.xcodeproj */;
-				},
-				{
-					ProductGroup = 536C982816619B87005A73C6 /* Products */;
-					ProjectRef = 536C982716619B87005A73C6 /* TBXML.xcodeproj */;
-				},
-				{
-					ProductGroup = 536C98A916619BC4005A73C6 /* Products */;
-					ProjectRef = 536C98A816619BC4005A73C6 /* ZipKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				536C947216618FA4005A73C6 /* libSub */,
@@ -3347,86 +3500,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		536C981D16619B44005A73C6 /* SBJson.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SBJson.framework;
-			remoteRef = 536C981C16619B44005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C981F16619B44005A73C6 /* SBJsonTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SBJsonTests.octest;
-			remoteRef = 536C981E16619B44005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C982116619B44005A73C6 /* libsbjson-ios.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libsbjson-ios.a";
-			remoteRef = 536C982016619B44005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C982316619B44005A73C6 /* sbjson-iosTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "sbjson-iosTests.octest";
-			remoteRef = 536C982216619B44005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C983216619B87005A73C6 /* libTBXML.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTBXML.a;
-			remoteRef = 536C983116619B87005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C983416619B87005A73C6 /* TBXMLTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = TBXMLTests.octest;
-			remoteRef = 536C983316619B87005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C983616619B87005A73C6 /* libTBXML-iOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libTBXML-iOS.a";
-			remoteRef = 536C983516619B87005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C983816619B87005A73C6 /* TBXML-iOSTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "TBXML-iOSTests.octest";
-			remoteRef = 536C983716619B87005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C98B216619BC4005A73C6 /* ZipKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ZipKit.framework;
-			remoteRef = 536C98B116619BC4005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C98B416619BC4005A73C6 /* libzipkit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libzipkit.a;
-			remoteRef = 536C98B316619BC4005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		536C98B616619BC4005A73C6 /* libtouchzipkit.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libtouchzipkit.a;
-			remoteRef = 536C98B516619BC4005A73C6 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5304A01B168FB35F009B2732 /* Resources */ = {
@@ -3444,6 +3517,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				53F6378F1C5F591A00864346 /* COPYING.TXT in Resources */,
 				53EECBFE1C5F1B3000DABB8E /* table-fade-bottom.png in Resources */,
 				53EECBED1C5F1B2F00DABB8E /* EX2NotificationBar.xib in Resources */,
 				5304A1A51690173B009B2732 /* InfoPlist.strings in Resources */,
@@ -3554,6 +3628,7 @@
 			files = (
 				536F54F0169A6DBE000F71E6 /* HTTPDataResponse.m in Sources */,
 				53EECBF11C5F1B2F00DABB8E /* EX2SlidingNotification.m in Sources */,
+				53F637B81C5F591A00864346 /* ZKCDHeader.m in Sources */,
 				53EECB7C1C5F1B2800DABB8E /* UIImageView+ImageAnimated.m in Sources */,
 				530ABE371A5226BE005ACE6B /* ISMSMediaFoldersLoader.m in Sources */,
 				53EECAB41C5F1B2500DABB8E /* NSData+AES128.m in Sources */,
@@ -3569,30 +3644,40 @@
 				53EECC231C5F1B6000DABB8E /* RNCryptorOld.m in Sources */,
 				53EECBAA1C5F1B2A00DABB8E /* EX2ActionQueue.m in Sources */,
 				536F54F3169A6DBE000F71E6 /* HTTPRedirectResponse.m in Sources */,
+				53F637B41C5F591A00864346 /* ZKArchive.m in Sources */,
 				536F54F4169A6DBE000F71E6 /* WebSocket.m in Sources */,
 				536F54DD169A6DB2000F71E6 /* GCDAsyncSocket.m in Sources */,
 				536F54DE169A6DB2000F71E6 /* DDData.m in Sources */,
 				53EECB001C5F1B2600DABB8E /* NSString+cStringUTF8.m in Sources */,
+				53F637AB1C5F591A00864346 /* NSString+ZKAdditions.m in Sources */,
 				53EECB881C5F1B2900DABB8E /* UITableViewCell+TableView.m in Sources */,
 				53EECB301C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.m in Sources */,
+				53F637FC1C5F59A000864346 /* SBJsonParser.m in Sources */,
 				53EECAF81C5F1B2500DABB8E /* NSString+Clean.m in Sources */,
 				53EECB741C5F1B2800DABB8E /* UIImage+RoundedImage.m in Sources */,
 				536F54DF169A6DB2000F71E6 /* DDNumber.m in Sources */,
 				536F54E0169A6DB2000F71E6 /* DDRange.m in Sources */,
+				53F638201C5F59A000864346 /* SBJsonUTF8Stream.m in Sources */,
 				53EECB841C5F1B2800DABB8E /* UITableView+Shadows.m in Sources */,
+				53F6382A1C5F59CB00864346 /* TBXML.m in Sources */,
 				53EECB101C5F1B2600DABB8E /* NSString+hex.m in Sources */,
 				536F54E1169A6DB2000F71E6 /* HTTPAuthenticationRequest.m in Sources */,
 				53EECAFC1C5F1B2500DABB8E /* NSString+compareWithoutIndefiniteArticles.m in Sources */,
 				53EECC4D1C5F1B7700DABB8E /* DDAbstractDatabaseLogger.m in Sources */,
 				536F54E2169A6DB2000F71E6 /* HTTPConnection.m in Sources */,
+				53F637C41C5F591A00864346 /* ZKCDTrailer64Locator.m in Sources */,
 				53EECB501C5F1B2700DABB8E /* UIButton+StretchBackground.m in Sources */,
+				53F638001C5F59A000864346 /* SBJsonStreamParser.m in Sources */,
 				536F54E3169A6DB2000F71E6 /* HTTPMessage.m in Sources */,
 				53EECBB41C5F1B2B00DABB8E /* EX2FileEncryptor.m in Sources */,
 				536F54E4169A6DB2000F71E6 /* HTTPServer.m in Sources */,
 				536F54E5169A6DB2000F71E6 /* MultipartFormDataParser.m in Sources */,
+				53F637931C5F591A00864346 /* GMAppleDouble.m in Sources */,
+				53F6382E1C5F59CB00864346 /* TBXML+HTTP.m in Sources */,
 				53EECB3C1C5F1B2600DABB8E /* CALayer+ImageFromLayer.m in Sources */,
 				53EECB4C1C5F1B2700DABB8E /* UIButton+Colors.m in Sources */,
 				536F54E6169A6DB2000F71E6 /* MultipartMessageHeader.m in Sources */,
+				53F637CC1C5F591A00864346 /* ZKDefs.m in Sources */,
 				53EECB1C1C5F1B2600DABB8E /* NSString+SHA1.m in Sources */,
 				530ABE1F1A521553005ACE6B /* ISMSFolder.m in Sources */,
 				536F54E7169A6DB2000F71E6 /* MultipartMessageHeaderField.m in Sources */,
@@ -3600,6 +3685,7 @@
 				53EECB5C1C5F1B2700DABB8E /* UIDevice+Hardware.m in Sources */,
 				53EECC5B1C5F1B7700DABB8E /* DDFileLogger.m in Sources */,
 				53EECBBC1C5F1B2B00DABB8E /* EX2NetworkIndicator.m in Sources */,
+				53F638141C5F59A000864346 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				53EECABC1C5F1B2500DABB8E /* NSData+Gzip.m in Sources */,
 				53EECBD81C5F1B2D00DABB8E /* EX2FlatSegmentedControl.m in Sources */,
 				536F54E8169A6DB2000F71E6 /* HTTPAsyncFileResponse.m in Sources */,
@@ -3619,6 +3705,7 @@
 				53EECB6C1C5F1B2800DABB8E /* UIImage+CustomStretch.m in Sources */,
 				53EECB181C5F1B2600DABB8E /* NSString+rfcEncode.m in Sources */,
 				5304A1E91690180C009B2732 /* ISMSStreamManager.m in Sources */,
+				53F6380C1C5F59A000864346 /* SBJsonStreamParserState.m in Sources */,
 				5304A1EA1690180C009B2732 /* ISMSCacheQueueManager.m in Sources */,
 				5304A1EB1690180C009B2732 /* ISMSStreamHandler.m in Sources */,
 				5304A1EC1690180C009B2732 /* ISMSURLConnectionStreamHandler.m in Sources */,
@@ -3629,13 +3716,16 @@
 				5304A1F01690180C009B2732 /* SearchXMLParser.m in Sources */,
 				53EECBD21C5F1B2D00DABB8E /* EX2Dispatch.m in Sources */,
 				5304A1CE169017E4009B2732 /* SUSChatDAO.m in Sources */,
+				53F637D41C5F591A00864346 /* ZKLFHeader.m in Sources */,
 				5304A1CF169017E4009B2732 /* SUSLyricsDAO.m in Sources */,
 				5304A1D0169017E4009B2732 /* SUSServerPlaylistsDAO.m in Sources */,
 				53EECB2C1C5F1B2600DABB8E /* NSString+Validation.m in Sources */,
+				53F638041C5F59A000864346 /* SBJsonStreamParserAccumulator.m in Sources */,
 				5304A1D1169017E4009B2732 /* ISMSSong+DAO.m in Sources */,
 				53EECA9C1C5F1B2500DABB8E /* NSArray+FilterBlock.m in Sources */,
 				5304A1D2169017E4009B2732 /* SUSCoverArtDAO.m in Sources */,
 				53EECC2F1C5F1B6000DABB8E /* RNOpenSSLCryptor.m in Sources */,
+				53F637C81C5F591A00864346 /* ZKDataArchive.m in Sources */,
 				53EECBC41C5F1B2C00DABB8E /* EX2RingBuffer.m in Sources */,
 				5304A1D3169017E4009B2732 /* SUSNowPlayingDAO.m in Sources */,
 				53AB8DED1A54947800E99688 /* ISMSFolderLoader.m in Sources */,
@@ -3649,6 +3739,7 @@
 				5304A1D8169017E4009B2732 /* ISMSServerPlaylistsLoader.m in Sources */,
 				5304A1D9169017E4009B2732 /* ISMSCoverArtLoader.m in Sources */,
 				5304A1DD169017E4009B2732 /* ISMSSubFolderLoader.m in Sources */,
+				53F637D81C5F591A00864346 /* ZKLog.m in Sources */,
 				5304A1E0169017E4009B2732 /* ISMSQueueAllLoader.m in Sources */,
 				5304A1E4169017E4009B2732 /* ISMSChatLoader.m in Sources */,
 				5304A1E5169017E4009B2732 /* ISMSLyricsLoader.m in Sources */,
@@ -3673,6 +3764,7 @@
 				53EECB781C5F1B2800DABB8E /* UIImage+Tint.m in Sources */,
 				5304A1B5169017C4009B2732 /* BassEffectDAO.m in Sources */,
 				53EECAD81C5F1B2500DABB8E /* NSNumber+CleanString.m in Sources */,
+				53F638241C5F59A000864346 /* SBJsonWriter.m in Sources */,
 				53EECAE41C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.m in Sources */,
 				53EECAA01C5F1B2500DABB8E /* NSArray+FirstObject.m in Sources */,
 				5304A1B6169017C4009B2732 /* BassEffectValue.m in Sources */,
@@ -3684,6 +3776,7 @@
 				53EECBA61C5F1B2A00DABB8E /* EX2ActionBlock.m in Sources */,
 				53EECAC01C5F1B2500DABB8E /* NSData+Hash.m in Sources */,
 				53EECAB01C5F1B2500DABB8E /* NSMutableArray+Safe.m in Sources */,
+				53F637A31C5F591A00864346 /* NSFileHandle+ZKAdditions.m in Sources */,
 				5304A1BA169017C4009B2732 /* CacheSingleton.m in Sources */,
 				53EECB801C5F1B2800DABB8E /* UIImageView+Reflection.m in Sources */,
 				53EECAA41C5F1B2500DABB8E /* NSArray+Plist.m in Sources */,
@@ -3691,6 +3784,7 @@
 				53EECC331C5F1B6000DABB8E /* RNOpenSSLDecryptor.m in Sources */,
 				53EECB401C5F1B2600DABB8E /* CALayer+SublayerWithName.m in Sources */,
 				5304A1BB169017C4009B2732 /* DatabaseSingleton.m in Sources */,
+				53F638101C5F59A000864346 /* SBJsonStreamWriter.m in Sources */,
 				53EECB901C5F1B2900DABB8E /* UIView+SetNeedsLayoutSafe.m in Sources */,
 				5304A1BC169017C4009B2732 /* SocialSingleton.m in Sources */,
 				53EECAE01C5F1B2500DABB8E /* NSObject+UserInfo.m in Sources */,
@@ -3698,20 +3792,28 @@
 				53EECB201C5F1B2600DABB8E /* NSString+time.m in Sources */,
 				53EECB581C5F1B2700DABB8E /* UIColor+ColorWithInt.m in Sources */,
 				5304A1BE169017C4009B2732 /* ISMSIndex.m in Sources */,
+				53F638081C5F59A000864346 /* SBJsonStreamParserAdapter.m in Sources */,
+				53F6378E1C5F591A00864346 /* GMAppleDouble+ZKAdditions.m in Sources */,
 				5304A1BF169017C4009B2732 /* ISMSArtist.m in Sources */,
 				53EECBCC1C5F1B2C00DABB8E /* EX2Kit.m in Sources */,
+				53F637C01C5F591A00864346 /* ZKCDTrailer64.m in Sources */,
 				53EECB381C5F1B2600DABB8E /* NSMutableOrderedSet+Safe.m in Sources */,
 				53EECC371C5F1B6000DABB8E /* RNOpenSSLEncryptor.m in Sources */,
 				5304A1C0169017C4009B2732 /* ISMSAlbum.m in Sources */,
+				53F6381C1C5F59A000864346 /* SBJsonTokeniser.m in Sources */,
 				53EECB9C1C5F1B2A00DABB8E /* UIViewController+Tools.m in Sources */,
 				5304A1C1169017C4009B2732 /* ISMSSong.m in Sources */,
 				53EECAB81C5F1B2500DABB8E /* NSData+Base64.m in Sources */,
+				53F637A71C5F591A00864346 /* NSFileManager+ZKAdditions.m in Sources */,
 				53EECB981C5F1B2900DABB8E /* UIViewController+IsVisible.m in Sources */,
 				53146D461A630FCD007D4163 /* ISMSRootArtistsLoader.m in Sources */,
+				53F6382C1C5F59CB00864346 /* TBXML+Compression.m in Sources */,
 				53EECBFD1C5F1B3000DABB8E /* SnappySlider.m in Sources */,
 				53EECB541C5F1B2700DABB8E /* UIColor+ColorWithHex.m in Sources */,
 				5304A1C3169017C4009B2732 /* ISMSServer.m in Sources */,
 				53EECB241C5F1B2600DABB8E /* NSString+TrimmingAdditions.m in Sources */,
+				53F637BC1C5F591A00864346 /* ZKCDTrailer.m in Sources */,
+				53F637F61C5F59A000864346 /* NSObject+SBJson.m in Sources */,
 				5304A1C4169017C4009B2732 /* ISMSChatMessage.m in Sources */,
 				53EECBB01C5F1B2B00DABB8E /* EX2FileDecryptor.m in Sources */,
 				5304A1C5169017C4009B2732 /* SUSServerPlaylist.m in Sources */,
@@ -3719,15 +3821,19 @@
 				53EECAAC1C5F1B2500DABB8E /* NSArray+Safe.m in Sources */,
 				5304A1C8169017C4009B2732 /* NSMutableURLRequest+PMS.m in Sources */,
 				53EECAE81C5F1B2500DABB8E /* NSOrderedSet+FirstObject.m in Sources */,
+				53F638181C5F59A000864346 /* SBJsonStreamWriterState.m in Sources */,
 				53EECC551C5F1B7700DABB8E /* DDASLLogger.m in Sources */,
 				5304A1C9169017C4009B2732 /* ISMSUpdateChecker.m in Sources */,
 				530ABE2D1A522158005ACE6B /* ISMSNewRootFoldersLoader.m in Sources */,
 				53EECC271C5F1B6000DABB8E /* RNDecryptor.m in Sources */,
+				53F637D01C5F591A00864346 /* ZKFileArchive.m in Sources */,
+				53F6379F1C5F591A00864346 /* NSDictionary+ZKAdditions.m in Sources */,
 				5304A1CB169017C4009B2732 /* SUSSubFolderDAO.m in Sources */,
 				5304A1A91690173B009B2732 /* libSubOSX.m in Sources */,
 				53B3BDB716990DF100DCFC9C /* HLSProxyConnection.m in Sources */,
 				53EECBC01C5F1B2B00DABB8E /* EX2Reachability.m in Sources */,
 				53B3BDE81699137500DCFC9C /* HLSProxyResponse.m in Sources */,
+				53F6379B1C5F591A00864346 /* NSDate+ZKAdditions.m in Sources */,
 				53D2B6C91A47D58100B029A3 /* RXMLElement.m in Sources */,
 				530ABE3D1A5226DB005ACE6B /* ISMSMediaFolder.m in Sources */,
 				53EECBDC1C5F1B2D00DABB8E /* EX2GlowButton.m in Sources */,
@@ -3735,6 +3841,7 @@
 				53EECAC41C5F1B2500DABB8E /* NSDate+UTC.m in Sources */,
 				53EECB081C5F1B2600DABB8E /* NSString+Gzip.m in Sources */,
 				3B53B7D316C5C952003B6147 /* ISMSScrobbleLoader.m in Sources */,
+				53F637971C5F591A00864346 /* NSData+ZKAdditions.m in Sources */,
 				53EECBC81C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.m in Sources */,
 				53EECB141C5F1B2600DABB8E /* NSString+md5.m in Sources */,
 				53EECB8C1C5F1B2900DABB8E /* UIView+Glow.m in Sources */,
@@ -3751,23 +3858,31 @@
 				536C9B311661B7D4005A73C6 /* ISMSIndex.m in Sources */,
 				536C9B321661B7D4005A73C6 /* ISMSArtist.m in Sources */,
 				536C9B331661B7D4005A73C6 /* ISMSAlbum.m in Sources */,
+				53F6380F1C5F59A000864346 /* SBJsonStreamWriter.m in Sources */,
+				53F637BB1C5F591A00864346 /* ZKCDTrailer.m in Sources */,
+				53F637C31C5F591A00864346 /* ZKCDTrailer64Locator.m in Sources */,
 				53EECBC71C5F1B2C00DABB8E /* EX2SimpleConnectionQueue.m in Sources */,
 				53EECC541C5F1B7700DABB8E /* DDASLLogger.m in Sources */,
 				53EECB171C5F1B2600DABB8E /* NSString+rfcEncode.m in Sources */,
 				53EECC321C5F1B6000DABB8E /* RNOpenSSLDecryptor.m in Sources */,
 				53EECAE31C5F1B2500DABB8E /* NSOrderedSet+FilterBlock.m in Sources */,
 				53146D451A630FCD007D4163 /* ISMSRootArtistsLoader.m in Sources */,
+				53F637CF1C5F591A00864346 /* ZKFileArchive.m in Sources */,
 				536C9B341661B7D4005A73C6 /* ISMSSong.m in Sources */,
 				536C9B361661B7D4005A73C6 /* ISMSServer.m in Sources */,
 				536C9B371661B7D4005A73C6 /* ISMSChatMessage.m in Sources */,
 				53EECC5E1C5F1B7700DABB8E /* DDLog.m in Sources */,
+				53F6382D1C5F59CB00864346 /* TBXML+HTTP.m in Sources */,
+				53F6381F1C5F59A000864346 /* SBJsonUTF8Stream.m in Sources */,
 				53EECB7B1C5F1B2800DABB8E /* UIImageView+ImageAnimated.m in Sources */,
+				53F637B71C5F591A00864346 /* ZKCDHeader.m in Sources */,
 				536C9B381661B7D4005A73C6 /* SUSServerPlaylist.m in Sources */,
 				536C947E16618FA4005A73C6 /* LibSub.m in Sources */,
 				536C9699166195CF005A73C6 /* ISMSStreamManager.m in Sources */,
 				53EECB5F1C5F1B2700DABB8E /* UIDevice+Software.m in Sources */,
 				53EECB571C5F1B2700DABB8E /* UIColor+ColorWithInt.m in Sources */,
 				53EECBE71C5F1B2E00DABB8E /* EX2NavigationController.m in Sources */,
+				53F637D71C5F591A00864346 /* ZKLog.m in Sources */,
 				536C969B166195CF005A73C6 /* ISMSCacheQueueManager.m in Sources */,
 				536C969D166195CF005A73C6 /* ISMSStreamHandler.m in Sources */,
 				53EECB471C5F1B2700DABB8E /* UIBezierPath+Smoothing.m in Sources */,
@@ -3779,13 +3894,16 @@
 				53EECB0F1C5F1B2600DABB8E /* NSString+hex.m in Sources */,
 				536C969F166195CF005A73C6 /* ISMSURLConnectionStreamHandler.m in Sources */,
 				53EECB871C5F1B2900DABB8E /* UITableViewCell+TableView.m in Sources */,
+				53F637AA1C5F591A00864346 /* NSString+ZKAdditions.m in Sources */,
 				53EECABB1C5F1B2500DABB8E /* NSData+Gzip.m in Sources */,
 				53EECC501C5F1B7700DABB8E /* DDASLLogCapture.m in Sources */,
+				53F638291C5F59CB00864346 /* TBXML.m in Sources */,
 				53EECBBB1C5F1B2B00DABB8E /* EX2NetworkIndicator.m in Sources */,
 				536C96A2166195CF005A73C6 /* ISMSCFNetworkStreamHandler.m in Sources */,
 				536C96B016619673005A73C6 /* JukeboxConnectionDelegate.m in Sources */,
 				53EECC661C5F1B7700DABB8E /* DDTTYLogger.m in Sources */,
 				536C96B416619695005A73C6 /* iSubBassGaplessPlayerDelegate.m in Sources */,
+				53F6380B1C5F59A000864346 /* SBJsonStreamParserState.m in Sources */,
 				53EECB231C5F1B2600DABB8E /* NSString+TrimmingAdditions.m in Sources */,
 				536C96BD166196AC005A73C6 /* NSMutableURLRequest+SUS.m in Sources */,
 				53EECAAF1C5F1B2500DABB8E /* NSMutableArray+Safe.m in Sources */,
@@ -3796,6 +3914,7 @@
 				53EECC261C5F1B6000DABB8E /* RNDecryptor.m in Sources */,
 				536C96C1166196AC005A73C6 /* ISMSUpdateChecker.m in Sources */,
 				53EECB1F1C5F1B2600DABB8E /* NSString+time.m in Sources */,
+				53F637F51C5F59A000864346 /* NSObject+SBJson.m in Sources */,
 				536C96DC166196C0005A73C6 /* SUSSubFolderDAO.m in Sources */,
 				530ABE1E1A521553005ACE6B /* ISMSFolder.m in Sources */,
 				536C96E2166196C0005A73C6 /* SUSChatDAO.m in Sources */,
@@ -3810,6 +3929,7 @@
 				53EECB831C5F1B2800DABB8E /* UITableView+Shadows.m in Sources */,
 				53EECB971C5F1B2900DABB8E /* UIViewController+IsVisible.m in Sources */,
 				53EECB031C5F1B2600DABB8E /* NSString+FileSize.m in Sources */,
+				53F638131C5F59A000864346 /* SBJsonStreamWriterAccumulator.m in Sources */,
 				533555A41C5EC5B500624F30 /* ISMSAbstractItemLoader.m in Sources */,
 				53EECAC31C5F1B2500DABB8E /* NSDate+UTC.m in Sources */,
 				53EECAAB1C5F1B2500DABB8E /* NSArray+Safe.m in Sources */,
@@ -3826,6 +3946,7 @@
 				536C96F5166196D4005A73C6 /* ISMSLoader.m in Sources */,
 				53EECC1E1C5F1B6000DABB8E /* RNCryptorEngine.m in Sources */,
 				53EECBDB1C5F1B2D00DABB8E /* EX2GlowButton.m in Sources */,
+				53F638031C5F59A000864346 /* SBJsonStreamParserAccumulator.m in Sources */,
 				536C970D166196F3005A73C6 /* ISMSChatLoader.m in Sources */,
 				53EECB071C5F1B2600DABB8E /* NSString+Gzip.m in Sources */,
 				53EECB531C5F1B2700DABB8E /* UIColor+ColorWithHex.m in Sources */,
@@ -3837,6 +3958,7 @@
 				53EECB0B1C5F1B2600DABB8E /* NSString+HasValue.m in Sources */,
 				536C9711166196F3005A73C6 /* ISMSNowPlayingLoader.m in Sources */,
 				53EECB8B1C5F1B2900DABB8E /* UIView+Glow.m in Sources */,
+				53F637BF1C5F591A00864346 /* ZKCDTrailer64.m in Sources */,
 				536C9713166196F3005A73C6 /* ISMSQuickAlbumsLoader.m in Sources */,
 				536C971F16619734005A73C6 /* ISMSQueueAllLoader.m in Sources */,
 				536C97301661975C005A73C6 /* ISMSSubFolderLoader.m in Sources */,
@@ -3851,9 +3973,12 @@
 				53EECC5A1C5F1B7700DABB8E /* DDFileLogger.m in Sources */,
 				536C9769166197B8005A73C6 /* PlaylistSingleton.m in Sources */,
 				536C976B166197B8005A73C6 /* CacheSingleton.m in Sources */,
+				53F637FF1C5F59A000864346 /* SBJsonStreamParser.m in Sources */,
 				536C976D166197B8005A73C6 /* DatabaseSingleton.m in Sources */,
 				536C976F166197B8005A73C6 /* MusicSingleton.m in Sources */,
 				536C9771166197B8005A73C6 /* SocialSingleton.m in Sources */,
+				53F6381B1C5F59A000864346 /* SBJsonTokeniser.m in Sources */,
+				53F637C71C5F591A00864346 /* ZKDataArchive.m in Sources */,
 				536C9775166197B8005A73C6 /* JukeboxSingleton.m in Sources */,
 				53EECB671C5F1B2700DABB8E /* UIImage+Cropping.m in Sources */,
 				536C977D166197E7005A73C6 /* BassVisualizer.m in Sources */,
@@ -3864,23 +3989,28 @@
 				536C9789166197EC005A73C6 /* BassParamEqValue.m in Sources */,
 				536C978B166197EC005A73C6 /* BassEffectDAO.m in Sources */,
 				53EECAF71C5F1B2500DABB8E /* NSString+Clean.m in Sources */,
+				53F6378D1C5F591A00864346 /* GMAppleDouble+ZKAdditions.m in Sources */,
 				53EECBAF1C5F1B2B00DABB8E /* EX2FileDecryptor.m in Sources */,
 				53EECAE71C5F1B2500DABB8E /* NSOrderedSet+FirstObject.m in Sources */,
 				53EECBEB1C5F1B2F00DABB8E /* EX2NotificationBar.m in Sources */,
 				536C978D166197EC005A73C6 /* BassEffectValue.m in Sources */,
+				53F637921C5F591A00864346 /* GMAppleDouble.m in Sources */,
 				53EECBDF1C5F1B2E00DABB8E /* EX2InfinitePagingScrollView.m in Sources */,
 				53EECBBF1C5F1B2B00DABB8E /* EX2Reachability.m in Sources */,
 				53EECB731C5F1B2800DABB8E /* UIImage+RoundedImage.m in Sources */,
 				530ABE361A5226BE005ACE6B /* ISMSMediaFoldersLoader.m in Sources */,
 				536C9796166197F3005A73C6 /* BassWrapper.m in Sources */,
+				53F6379E1C5F591A00864346 /* NSDictionary+ZKAdditions.m in Sources */,
 				53EECB2F1C5F1B2600DABB8E /* NSURL+QueryParameterDictionary.m in Sources */,
 				536C9798166197F3005A73C6 /* BassStream.m in Sources */,
 				536C979A166197F3005A73C6 /* BassGaplessPlayer.m in Sources */,
 				536C979F166197FB005A73C6 /* AudioEngine.m in Sources */,
+				53F638071C5F59A000864346 /* SBJsonStreamParserAdapter.m in Sources */,
 				53AB8DEC1A54947800E99688 /* ISMSFolderLoader.m in Sources */,
 				536C97A316619820005A73C6 /* sqlite3.c in Sources */,
 				53EECB9B1C5F1B2900DABB8E /* UIViewController+Tools.m in Sources */,
 				53EECADB1C5F1B2500DABB8E /* NSObject+ListMethods.m in Sources */,
+				53F637B31C5F591A00864346 /* ZKArchive.m in Sources */,
 				53EECA9F1C5F1B2500DABB8E /* NSArray+FirstObject.m in Sources */,
 				536C97CF16619AE3005A73C6 /* FMDatabase.m in Sources */,
 				53EECB131C5F1B2600DABB8E /* NSString+md5.m in Sources */,
@@ -3894,23 +4024,29 @@
 				53EECACF1C5F1B2500DABB8E /* NSNotificationCenter+MainThread.m in Sources */,
 				536C9AA51661AA45005A73C6 /* JukeboxXMLParser.m in Sources */,
 				536C9AB31661AA61005A73C6 /* SearchXMLParser.m in Sources */,
+				53F637FB1C5F59A000864346 /* SBJsonParser.m in Sources */,
 				53EECBF01C5F1B2F00DABB8E /* EX2SlidingNotification.m in Sources */,
 				53C7F4401661BC3100C5F61E /* FMDatabasePool.m in Sources */,
 				53EECC221C5F1B6000DABB8E /* RNCryptorOld.m in Sources */,
+				53F638171C5F59A000864346 /* SBJsonStreamWriterState.m in Sources */,
 				5374F2C21661C73D00529EF3 /* MKStoreManager.m in Sources */,
+				53F637A61C5F591A00864346 /* NSFileManager+ZKAdditions.m in Sources */,
 				53EECAA71C5F1B2500DABB8E /* NSArray+Reverse.m in Sources */,
 				5374F2C41661C73D00529EF3 /* MKStoreObserver.m in Sources */,
 				53EECAD31C5F1B2500DABB8E /* NSNull+CleanString.m in Sources */,
 				5374F2C61661C73D00529EF3 /* SFHFKeychainUtils.m in Sources */,
 				53EECABF1C5F1B2500DABB8E /* NSData+Hash.m in Sources */,
+				53F637961C5F591A00864346 /* NSData+ZKAdditions.m in Sources */,
 				53B3BD5F16990CFE00DCFC9C /* DDData.m in Sources */,
 				53B3BD6316990CFE00DCFC9C /* DDNumber.m in Sources */,
 				53B3BD6716990CFE00DCFC9C /* DDRange.m in Sources */,
+				53F637CB1C5F591A00864346 /* ZKDefs.m in Sources */,
 				53EECC361C5F1B6000DABB8E /* RNOpenSSLEncryptor.m in Sources */,
 				530ABE3C1A5226DB005ACE6B /* ISMSMediaFolder.m in Sources */,
 				53EECB931C5F1B2900DABB8E /* UIView+Tools.m in Sources */,
 				53EECC181C5F1B6000DABB8E /* RNCryptor.m in Sources */,
 				53B3BD6B16990CFE00DCFC9C /* HTTPAuthenticationRequest.m in Sources */,
+				53F638231C5F59A000864346 /* SBJsonWriter.m in Sources */,
 				53B3BD6F16990CFE00DCFC9C /* HTTPConnection.m in Sources */,
 				53EECB271C5F1B2600DABB8E /* NSString+URLEncode.m in Sources */,
 				53B3BD7516990CFE00DCFC9C /* HTTPMessage.m in Sources */,
@@ -3921,12 +4057,14 @@
 				53B3BD8716990CFE00DCFC9C /* MultipartMessageHeaderField.m in Sources */,
 				53EECBCB1C5F1B2C00DABB8E /* EX2Kit.m in Sources */,
 				53EECAB71C5F1B2500DABB8E /* NSData+Base64.m in Sources */,
+				53F6379A1C5F591A00864346 /* NSDate+ZKAdditions.m in Sources */,
 				53EECB4F1C5F1B2700DABB8E /* UIButton+StretchBackground.m in Sources */,
 				53B3BD8B16990CFE00DCFC9C /* HTTPAsyncFileResponse.m in Sources */,
 				53EECBB31C5F1B2B00DABB8E /* EX2FileEncryptor.m in Sources */,
 				53EECB5B1C5F1B2700DABB8E /* UIDevice+Hardware.m in Sources */,
 				53EECBD71C5F1B2D00DABB8E /* EX2FlatSegmentedControl.m in Sources */,
 				53B3BD8F16990CFE00DCFC9C /* HTTPDataResponse.m in Sources */,
+				53F637A21C5F591A00864346 /* NSFileHandle+ZKAdditions.m in Sources */,
 				53EECAA31C5F1B2500DABB8E /* NSArray+Plist.m in Sources */,
 				53B3BD9316990CFE00DCFC9C /* HTTPDynamicFileResponse.m in Sources */,
 				53B3BD9716990CFE00DCFC9C /* HTTPFileResponse.m in Sources */,
@@ -3937,6 +4075,8 @@
 				53B3BD9F16990CFE00DCFC9C /* WebSocket.m in Sources */,
 				53B3BDB016990D1F00DCFC9C /* GCDAsyncSocket.m in Sources */,
 				53B3BDB616990DF100DCFC9C /* HLSProxyConnection.m in Sources */,
+				53F637D31C5F591A00864346 /* ZKLFHeader.m in Sources */,
+				53F6382B1C5F59CB00864346 /* TBXML+Compression.m in Sources */,
 				53B3BDE71699137500DCFC9C /* HLSProxyResponse.m in Sources */,
 				3B16AFDF16C2B53B00787BD8 /* ISMSServerShuffleLoader.m in Sources */,
 				3B53B7D216C5C952003B6147 /* ISMSScrobbleLoader.m in Sources */,
@@ -3945,54 +4085,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		5304A0A6168FD190009B2732 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = touchzipkit;
-			targetProxy = 5304A0A5168FD190009B2732 /* PBXContainerItemProxy */;
-		};
-		5304A0A8168FD190009B2732 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "sbjson-ios";
-			targetProxy = 5304A0A7168FD190009B2732 /* PBXContainerItemProxy */;
-		};
-		5304A0AA168FD190009B2732 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "TBXML-iOS";
-			targetProxy = 5304A0A9168FD190009B2732 /* PBXContainerItemProxy */;
-		};
-		5304A2C316901D8A009B2732 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TBXML;
-			targetProxy = 5304A2C216901D8A009B2732 /* PBXContainerItemProxy */;
-		};
-		5304A2C516901D8A009B2732 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SBJson;
-			targetProxy = 5304A2C416901D8A009B2732 /* PBXContainerItemProxy */;
-		};
-		5304A2C716901D8A009B2732 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ZipKit;
-			targetProxy = 5304A2C616901D8A009B2732 /* PBXContainerItemProxy */;
-		};
-		536C982516619B6D005A73C6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "sbjson-ios";
-			targetProxy = 536C982416619B6D005A73C6 /* PBXContainerItemProxy */;
-		};
-		536C983A16619B92005A73C6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "TBXML-iOS";
-			targetProxy = 536C983916619B92005A73C6 /* PBXContainerItemProxy */;
-		};
-		536C98B816619BD1005A73C6 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = touchzipkit;
-			targetProxy = 536C98B716619BD1005A73C6 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		5304A027168FB35F009B2732 /* InfoPlist.strings */ = {
@@ -4105,13 +4197,7 @@
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				HEADER_SEARCH_PATHS = (
-					/usr/include/libxml2,
-					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
-					"\"$(SRCROOT)/Frameworks/ZipKit\"",
-					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
-					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
-				);
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "libSubOSX/libSubOSX-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -4148,13 +4234,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "OSX=1";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				HEADER_SEARCH_PATHS = (
-					/usr/include/libxml2,
-					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
-					"\"$(SRCROOT)/Frameworks/ZipKit\"",
-					"\"$(SRCROOT)/Frameworks/TBXML/TBXML-Headers\"",
-					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
-				);
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "libSubOSX/libSubOSX-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
@@ -4188,13 +4268,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SDK_DIR)\"/usr/include/libxml2",
-					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
-					"\"$(SRCROOT)/Frameworks/ZipKit\"",
-					"\"$(SRCROOT)/Frameworks/TBXML\"/**",
-					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
-				);
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				ONLY_ACTIVE_ARCH = YES;
@@ -4204,7 +4278,7 @@
 				);
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks/TBXML\"";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -4223,13 +4297,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = (
-					"\"$(SDK_DIR)\"/usr/include/libxml2",
-					"\"$(SRCROOT)/Frameworks/EX2Kit/EX2Kit\"/**",
-					"\"$(SRCROOT)/Frameworks/ZipKit\"",
-					"\"$(SRCROOT)/Frameworks/TBXML\"/**",
-					"\"$(SRCROOT)/Frameworks/SBJson/Classes\"",
-				);
+				HEADER_SEARCH_PATHS = "\"$(SDK_DIR)\"/usr/include/libxml2";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "";
 				OTHER_LDFLAGS = (
@@ -4238,7 +4306,7 @@
 				);
 				SDKROOT = iphoneos;
 				STRIP_INSTALLED_PRODUCT = NO;
-				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/Frameworks/TBXML\"";
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

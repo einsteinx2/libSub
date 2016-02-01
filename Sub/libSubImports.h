@@ -6,8 +6,8 @@
 //  Copyright (c) 2012 Einstein Times Two Software. All rights reserved.
 //
 
-#ifndef libSub_libSubImports_h
-#define libSub_libSubImports_h
+//#ifndef libSub_libSubImports_h
+//#define libSub_libSubImports_h
 
 // Frameworks
 #ifdef IOS
@@ -20,11 +20,11 @@
 
 #import "libSubDefines.h"
 
-#import <ZipKit/ZipKit.h>
+#import "ZipKit.h"
 #import "RXMLElement.h"
-#import "TBXML-Headers/TBXML.h"
-#import "TBXML-Headers/TBXML+Compression.h"
-#import "TBXML-Headers/TBXML+HTTP.h"
+#import "TBXML.h"
+#import "TBXML+Compression.h"
+#import "TBXML+HTTP.h"
 #import "FMDatabaseQueueAdditions.h"
 
 #if IOS
@@ -52,4 +52,4 @@
 #import "SUSErrorDomain.h"
 #import "NSError+ISMSError.h"
 
-#endif
+//#endif

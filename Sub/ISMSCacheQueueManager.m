@@ -16,7 +16,6 @@
 #import "ISMSURLConnectionStreamHandler.h"
 #import "ISMSCFNetworkStreamHandler.h"
 
-//LOG_LEVEL_ISUB_DEFAULT
 LOG_LEVEL_ISUB_DEBUG
 
 #define maxNumOfReconnects 5
