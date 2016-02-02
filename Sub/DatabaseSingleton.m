@@ -65,11 +65,11 @@ LOG_LEVEL_ISUB_DEFAULT
     NSLog(@"new model db: %@", path);
     self.songModelReadDb = [FMDatabase databaseWithPath:path];
     [self.songModelReadDb open];
-    [self.songModelReadDb executeUpdate:@"PRAGMA journal_mode=WAL"];
+    [self.songModelReadDb executeStatements:@"PRAGMA journal_mode=WAL"];
     self.songModelWritesDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
     [self.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
     {
-        [db executeUpdate:@"PRAGMA journal_mode=WAL"];
+        [db executeStatements:@"PRAGMA journal_mode=WAL"];
         
         if (![db tableExists:@"songs"])
         {
