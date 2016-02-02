@@ -101,7 +101,7 @@ LOG_LEVEL_ISUB_DEFAULT
             [db executeUpdate:@"CREATE TABLE artists (artistId INTEGER PRIMARY KEY, name TEXT, albumCount INTEGER)"];
         }
         
-        [db executeUpdate:@"DROP TABLE albums"];
+        //[db executeUpdate:@"DROP TABLE albums"];
         if (![db tableExists:@"albums"])
         {
             [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, artistId INTEGER, coverArtId INTEGER, name TEXT, songCount INTEGER, duration INTEGER, createdDate INTEGER, year INTEGER, genre TEXT)"];
@@ -109,8 +109,14 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"genres"])
         {
-            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY AUTOINCREMENT, name INTEGER, songCount INTEGER, albumCount INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, songCount INTEGER, albumCount INTEGER)"];
             [db executeUpdate:@"CREATE INDEX genres_name ON genres (name)"];
+        }
+        
+        if (![db tableExists:@"playlists"])
+        {
+            [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)"];
+            [db executeUpdate:@"CREATE INDEX playlists_name ON playlists (name)"];
         }
     }];
 	
