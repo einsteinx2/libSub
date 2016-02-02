@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Einstein Times Two Software. All rights reserved.
 //
 
+@protocol ISMSItem;
 @class ISMSFolder, ISMSArtist, ISMSAlbum, ISMSSong;
 @protocol ISMSItemLoader <NSObject>
 
@@ -13,6 +14,9 @@
 @property (nullable, copy) LoaderCallback callbackBlock;
 
 @property (nullable, readonly) id associatedObject;
+
+// Transition to using this single array
+@property (nullable, readonly) NSArray<id<ISMSItem>> *items;
 
 @property (nullable, readonly) NSArray<ISMSFolder*> *folders;
 @property (nullable, readonly) NSArray<ISMSArtist*> *artists;

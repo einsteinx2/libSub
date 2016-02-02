@@ -8,9 +8,10 @@
 
 #import "ISMSLoader.h"
 
+@class ISMSMediaFolder;
 @interface ISMSMediaFoldersLoader : ISMSLoader
 
-@property (strong) NSArray *mediaFolders;
+@property (nullable, strong) NSArray<ISMSMediaFolder*> *mediaFolders;
 
 - (void)persistModels;
 
