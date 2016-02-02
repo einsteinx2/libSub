@@ -55,20 +55,20 @@
 		5304A062168FB5A5009B2732 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
 		5304A064168FB5A5009B2732 /* ISMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959516619360005A73C6 /* ISMSServer.m */; };
 		5304A065168FB5A5009B2732 /* ISMSChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959716619360005A73C6 /* ISMSChatMessage.m */; };
-		5304A066168FB5A5009B2732 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
+		5304A066168FB5A5009B2732 /* ISMSPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* ISMSPlaylist.m */; };
 		5304A068168FB5A5009B2732 /* NSMutableURLRequest+SUS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B7166196AC005A73C6 /* NSMutableURLRequest+SUS.m */; };
 		5304A069168FB5A5009B2732 /* NSMutableURLRequest+PMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B9166196AC005A73C6 /* NSMutableURLRequest+PMS.m */; };
 		5304A06A168FB5A5009B2732 /* ISMSUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96BB166196AC005A73C6 /* ISMSUpdateChecker.m */; };
 		5304A06C168FB5A5009B2732 /* SUSSubFolderDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C7166196C0005A73C6 /* SUSSubFolderDAO.m */; };
 		5304A06F168FB5A5009B2732 /* SUSChatDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CD166196C0005A73C6 /* SUSChatDAO.m */; };
 		5304A070168FB5A5009B2732 /* SUSLyricsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CF166196C0005A73C6 /* SUSLyricsDAO.m */; };
-		5304A071168FB5A5009B2732 /* SUSServerPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* SUSServerPlaylistsDAO.m */; };
+		5304A071168FB5A5009B2732 /* ISMSPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* ISMSPlaylistsDAO.m */; };
 		5304A072168FB5A5009B2732 /* ISMSSong+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D3166196C0005A73C6 /* ISMSSong+DAO.m */; };
 		5304A073168FB5A5009B2732 /* SUSCoverArtDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D5166196C0005A73C6 /* SUSCoverArtDAO.m */; };
 		5304A074168FB5A5009B2732 /* SUSNowPlayingDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D7166196C0005A73C6 /* SUSNowPlayingDAO.m */; };
 		5304A076168FB5A5009B2732 /* ISMSLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96F1166196D4005A73C6 /* ISMSLoader.m */; };
 		5304A078168FB5CE009B2732 /* ISMSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974C16619776005A73C6 /* ISMSStatusLoader.m */; };
-		5304A07A168FB5CE009B2732 /* ISMSServerPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* ISMSServerPlaylistsLoader.m */; };
+		5304A07A168FB5CE009B2732 /* ISMSPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* ISMSPlaylistsLoader.m */; };
 		5304A07B168FB5CE009B2732 /* ISMSCoverArtLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974216619769005A73C6 /* ISMSCoverArtLoader.m */; };
 		5304A07F168FB5CE009B2732 /* ISMSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972A1661975C005A73C6 /* ISMSSubFolderLoader.m */; };
 		5304A082168FB5CE009B2732 /* ISMSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971916619734005A73C6 /* ISMSQueueAllLoader.m */; };
@@ -149,20 +149,20 @@
 		5304A1C1169017C4009B2732 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
 		5304A1C3169017C4009B2732 /* ISMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959516619360005A73C6 /* ISMSServer.m */; };
 		5304A1C4169017C4009B2732 /* ISMSChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959716619360005A73C6 /* ISMSChatMessage.m */; };
-		5304A1C5169017C4009B2732 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
+		5304A1C5169017C4009B2732 /* ISMSPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* ISMSPlaylist.m */; };
 		5304A1C7169017C4009B2732 /* NSMutableURLRequest+SUS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B7166196AC005A73C6 /* NSMutableURLRequest+SUS.m */; };
 		5304A1C8169017C4009B2732 /* NSMutableURLRequest+PMS.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96B9166196AC005A73C6 /* NSMutableURLRequest+PMS.m */; };
 		5304A1C9169017C4009B2732 /* ISMSUpdateChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96BB166196AC005A73C6 /* ISMSUpdateChecker.m */; };
 		5304A1CB169017C4009B2732 /* SUSSubFolderDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96C7166196C0005A73C6 /* SUSSubFolderDAO.m */; };
 		5304A1CE169017E4009B2732 /* SUSChatDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CD166196C0005A73C6 /* SUSChatDAO.m */; };
 		5304A1CF169017E4009B2732 /* SUSLyricsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CF166196C0005A73C6 /* SUSLyricsDAO.m */; };
-		5304A1D0169017E4009B2732 /* SUSServerPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* SUSServerPlaylistsDAO.m */; };
+		5304A1D0169017E4009B2732 /* ISMSPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* ISMSPlaylistsDAO.m */; };
 		5304A1D1169017E4009B2732 /* ISMSSong+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D3166196C0005A73C6 /* ISMSSong+DAO.m */; };
 		5304A1D2169017E4009B2732 /* SUSCoverArtDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D5166196C0005A73C6 /* SUSCoverArtDAO.m */; };
 		5304A1D3169017E4009B2732 /* SUSNowPlayingDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D7166196C0005A73C6 /* SUSNowPlayingDAO.m */; };
 		5304A1D4169017E4009B2732 /* ISMSLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96F1166196D4005A73C6 /* ISMSLoader.m */; };
 		5304A1D6169017E4009B2732 /* ISMSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974C16619776005A73C6 /* ISMSStatusLoader.m */; };
-		5304A1D8169017E4009B2732 /* ISMSServerPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* ISMSServerPlaylistsLoader.m */; };
+		5304A1D8169017E4009B2732 /* ISMSPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* ISMSPlaylistsLoader.m */; };
 		5304A1D9169017E4009B2732 /* ISMSCoverArtLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974216619769005A73C6 /* ISMSCoverArtLoader.m */; };
 		5304A1DD169017E4009B2732 /* ISMSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972A1661975C005A73C6 /* ISMSSubFolderLoader.m */; };
 		5304A1E0169017E4009B2732 /* ISMSQueueAllLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C971916619734005A73C6 /* ISMSQueueAllLoader.m */; };
@@ -221,7 +221,7 @@
 		53067E4E1694F11C00600396 /* ISMSSong.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959016619360005A73C6 /* ISMSSong.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E501694F11C00600396 /* ISMSServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959416619360005A73C6 /* ISMSServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E511694F11C00600396 /* ISMSChatMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959616619360005A73C6 /* ISMSChatMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		53067E521694F11C00600396 /* SUSServerPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959816619360005A73C6 /* SUSServerPlaylist.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53067E521694F11C00600396 /* ISMSPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959816619360005A73C6 /* ISMSPlaylist.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E541694F11C00600396 /* NSMutableURLRequest+SUS.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96B6166196AC005A73C6 /* NSMutableURLRequest+SUS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E551694F11C00600396 /* NSMutableURLRequest+PMS.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96B8166196AC005A73C6 /* NSMutableURLRequest+PMS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E561694F11C00600396 /* ISMSUpdateChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96BA166196AC005A73C6 /* ISMSUpdateChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -229,7 +229,7 @@
 		53067E591694F11C00600396 /* SUSSubFolderDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96C6166196C0005A73C6 /* SUSSubFolderDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E5C1694F11C00600396 /* SUSChatDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96CC166196C0005A73C6 /* SUSChatDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E5D1694F11C00600396 /* SUSLyricsDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96CE166196C0005A73C6 /* SUSLyricsDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		53067E5E1694F11C00600396 /* SUSServerPlaylistsDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D0166196C0005A73C6 /* SUSServerPlaylistsDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53067E5E1694F11C00600396 /* ISMSPlaylistsDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D0166196C0005A73C6 /* ISMSPlaylistsDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E5F1694F11C00600396 /* ISMSSong+DAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D2166196C0005A73C6 /* ISMSSong+DAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E601694F11C00600396 /* SUSCoverArtDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D4166196C0005A73C6 /* SUSCoverArtDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E611694F11C00600396 /* SUSNowPlayingDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D6166196C0005A73C6 /* SUSNowPlayingDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -238,7 +238,7 @@
 		53067E641694F11C00600396 /* ISMSLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96F0166196D4005A73C6 /* ISMSLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E651694F11C00600396 /* ISMSLoaders.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C97151661971E005A73C6 /* ISMSLoaders.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E671694F11C00600396 /* ISMSStatusLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974B16619776005A73C6 /* ISMSStatusLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		53067E691694F11C00600396 /* ISMSServerPlaylistsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974516619770005A73C6 /* ISMSServerPlaylistsLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		53067E691694F11C00600396 /* ISMSPlaylistsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974516619770005A73C6 /* ISMSPlaylistsLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E6A1694F11C00600396 /* ISMSCoverArtLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974116619769005A73C6 /* ISMSCoverArtLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E6E1694F11C00600396 /* ISMSSubFolderLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C97291661975C005A73C6 /* ISMSSubFolderLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E711694F11C00600396 /* ISMSQueueAllLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C971816619734005A73C6 /* ISMSQueueAllLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -316,7 +316,7 @@
 		536C95A3166193AE005A73C6 /* ISMSSong.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959016619360005A73C6 /* ISMSSong.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C95A5166193AE005A73C6 /* ISMSServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959416619360005A73C6 /* ISMSServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C95A6166193AE005A73C6 /* ISMSChatMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959616619360005A73C6 /* ISMSChatMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		536C95A7166193AE005A73C6 /* SUSServerPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959816619360005A73C6 /* SUSServerPlaylist.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		536C95A7166193AE005A73C6 /* ISMSPlaylist.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C959816619360005A73C6 /* ISMSPlaylist.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C95A9166193AE005A73C6 /* LibSub.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C947B16618FA4005A73C6 /* LibSub.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C9698166195CF005A73C6 /* ISMSStreamManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C968D166195CF005A73C6 /* ISMSStreamManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C9699166195CF005A73C6 /* ISMSStreamManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C968E166195CF005A73C6 /* ISMSStreamManager.m */; };
@@ -346,8 +346,8 @@
 		536C96E2166196C0005A73C6 /* SUSChatDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CD166196C0005A73C6 /* SUSChatDAO.m */; };
 		536C96E3166196C0005A73C6 /* SUSLyricsDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96CE166196C0005A73C6 /* SUSLyricsDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C96E4166196C0005A73C6 /* SUSLyricsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96CF166196C0005A73C6 /* SUSLyricsDAO.m */; };
-		536C96E5166196C0005A73C6 /* SUSServerPlaylistsDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D0166196C0005A73C6 /* SUSServerPlaylistsDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		536C96E6166196C0005A73C6 /* SUSServerPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* SUSServerPlaylistsDAO.m */; };
+		536C96E5166196C0005A73C6 /* ISMSPlaylistsDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D0166196C0005A73C6 /* ISMSPlaylistsDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		536C96E6166196C0005A73C6 /* ISMSPlaylistsDAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D1166196C0005A73C6 /* ISMSPlaylistsDAO.m */; };
 		536C96E7166196C0005A73C6 /* ISMSSong+DAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D2166196C0005A73C6 /* ISMSSong+DAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C96E8166196C0005A73C6 /* ISMSSong+DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C96D3166196C0005A73C6 /* ISMSSong+DAO.m */; };
 		536C96E9166196C0005A73C6 /* SUSCoverArtDAO.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C96D4166196C0005A73C6 /* SUSCoverArtDAO.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -373,8 +373,8 @@
 		536C97301661975C005A73C6 /* ISMSSubFolderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C972A1661975C005A73C6 /* ISMSSubFolderLoader.m */; };
 		536C974316619769005A73C6 /* ISMSCoverArtLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974116619769005A73C6 /* ISMSCoverArtLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C974416619769005A73C6 /* ISMSCoverArtLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974216619769005A73C6 /* ISMSCoverArtLoader.m */; };
-		536C974716619770005A73C6 /* ISMSServerPlaylistsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974516619770005A73C6 /* ISMSServerPlaylistsLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		536C974816619770005A73C6 /* ISMSServerPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* ISMSServerPlaylistsLoader.m */; };
+		536C974716619770005A73C6 /* ISMSPlaylistsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974516619770005A73C6 /* ISMSPlaylistsLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		536C974816619770005A73C6 /* ISMSPlaylistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974616619770005A73C6 /* ISMSPlaylistsLoader.m */; };
 		536C975116619776005A73C6 /* ISMSStatusLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C974B16619776005A73C6 /* ISMSStatusLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C975216619776005A73C6 /* ISMSStatusLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C974C16619776005A73C6 /* ISMSStatusLoader.m */; };
 		536C9766166197B8005A73C6 /* SavedSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C9756166197B8005A73C6 /* SavedSettings.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -453,7 +453,7 @@
 		536C9B341661B7D4005A73C6 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
 		536C9B361661B7D4005A73C6 /* ISMSServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959516619360005A73C6 /* ISMSServer.m */; };
 		536C9B371661B7D4005A73C6 /* ISMSChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959716619360005A73C6 /* ISMSChatMessage.m */; };
-		536C9B381661B7D4005A73C6 /* SUSServerPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* SUSServerPlaylist.m */; };
+		536C9B381661B7D4005A73C6 /* ISMSPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959916619360005A73C6 /* ISMSPlaylist.m */; };
 		536F54DD169A6DB2000F71E6 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BDAC16990D1F00DCFC9C /* GCDAsyncSocket.m */; };
 		536F54DE169A6DB2000F71E6 /* DDData.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3A16990CFE00DCFC9C /* DDData.m */; };
 		536F54DF169A6DB2000F71E6 /* DDNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B3BD3C16990CFE00DCFC9C /* DDNumber.m */; };
@@ -1251,8 +1251,8 @@
 		536C959516619360005A73C6 /* ISMSServer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISMSServer.m; sourceTree = "<group>"; };
 		536C959616619360005A73C6 /* ISMSChatMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISMSChatMessage.h; sourceTree = "<group>"; };
 		536C959716619360005A73C6 /* ISMSChatMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISMSChatMessage.m; sourceTree = "<group>"; };
-		536C959816619360005A73C6 /* SUSServerPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUSServerPlaylist.h; sourceTree = "<group>"; };
-		536C959916619360005A73C6 /* SUSServerPlaylist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUSServerPlaylist.m; sourceTree = "<group>"; };
+		536C959816619360005A73C6 /* ISMSPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISMSPlaylist.h; sourceTree = "<group>"; };
+		536C959916619360005A73C6 /* ISMSPlaylist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISMSPlaylist.m; sourceTree = "<group>"; };
 		536C968D166195CF005A73C6 /* ISMSStreamManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSStreamManager.h; sourceTree = "<group>"; };
 		536C968E166195CF005A73C6 /* ISMSStreamManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSStreamManager.m; sourceTree = "<group>"; };
 		536C968F166195CF005A73C6 /* ISMSCacheQueueManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSCacheQueueManager.h; sourceTree = "<group>"; };
@@ -1281,8 +1281,8 @@
 		536C96CD166196C0005A73C6 /* SUSChatDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSChatDAO.m; sourceTree = "<group>"; };
 		536C96CE166196C0005A73C6 /* SUSLyricsDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSLyricsDAO.h; sourceTree = "<group>"; };
 		536C96CF166196C0005A73C6 /* SUSLyricsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSLyricsDAO.m; sourceTree = "<group>"; };
-		536C96D0166196C0005A73C6 /* SUSServerPlaylistsDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSServerPlaylistsDAO.h; sourceTree = "<group>"; };
-		536C96D1166196C0005A73C6 /* SUSServerPlaylistsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUSServerPlaylistsDAO.m; sourceTree = "<group>"; };
+		536C96D0166196C0005A73C6 /* ISMSPlaylistsDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSPlaylistsDAO.h; sourceTree = "<group>"; };
+		536C96D1166196C0005A73C6 /* ISMSPlaylistsDAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSPlaylistsDAO.m; sourceTree = "<group>"; };
 		536C96D2166196C0005A73C6 /* ISMSSong+DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ISMSSong+DAO.h"; sourceTree = "<group>"; };
 		536C96D3166196C0005A73C6 /* ISMSSong+DAO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ISMSSong+DAO.m"; sourceTree = "<group>"; };
 		536C96D4166196C0005A73C6 /* SUSCoverArtDAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUSCoverArtDAO.h; sourceTree = "<group>"; };
@@ -1308,8 +1308,8 @@
 		536C972A1661975C005A73C6 /* ISMSSubFolderLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSSubFolderLoader.m; sourceTree = "<group>"; };
 		536C974116619769005A73C6 /* ISMSCoverArtLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSCoverArtLoader.h; sourceTree = "<group>"; };
 		536C974216619769005A73C6 /* ISMSCoverArtLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSCoverArtLoader.m; sourceTree = "<group>"; };
-		536C974516619770005A73C6 /* ISMSServerPlaylistsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSServerPlaylistsLoader.h; sourceTree = "<group>"; };
-		536C974616619770005A73C6 /* ISMSServerPlaylistsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSServerPlaylistsLoader.m; sourceTree = "<group>"; };
+		536C974516619770005A73C6 /* ISMSPlaylistsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSPlaylistsLoader.h; sourceTree = "<group>"; };
+		536C974616619770005A73C6 /* ISMSPlaylistsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSPlaylistsLoader.m; sourceTree = "<group>"; };
 		536C974B16619776005A73C6 /* ISMSStatusLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSStatusLoader.h; sourceTree = "<group>"; };
 		536C974C16619776005A73C6 /* ISMSStatusLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSStatusLoader.m; sourceTree = "<group>"; };
 		536C9756166197B8005A73C6 /* SavedSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SavedSettings.h; sourceTree = "<group>"; };
@@ -1942,6 +1942,8 @@
 				53AB8DE91A54947800E99688 /* ISMSFolderLoader.m */,
 				53146D411A630FCD007D4163 /* ISMSRootArtistsLoader.h */,
 				53146D421A630FCD007D4163 /* ISMSRootArtistsLoader.m */,
+				536C974516619770005A73C6 /* ISMSPlaylistsLoader.h */,
+				536C974616619770005A73C6 /* ISMSPlaylistsLoader.m */,
 			);
 			name = "New Model";
 			sourceTree = "<group>";
@@ -1957,6 +1959,8 @@
 				530ABE1B1A521553005ACE6B /* ISMSFolder.m */,
 				536C958B16619360005A73C6 /* ISMSArtist.h */,
 				536C958C16619360005A73C6 /* ISMSArtist.m */,
+				536C959816619360005A73C6 /* ISMSPlaylist.h */,
+				536C959916619360005A73C6 /* ISMSPlaylist.m */,
 			);
 			name = "New Model";
 			sourceTree = "<group>";
@@ -1972,8 +1976,6 @@
 				3B16AFDC16C2B53B00787BD8 /* ISMSServerShuffleLoader.m */,
 				536C974B16619776005A73C6 /* ISMSStatusLoader.h */,
 				536C974C16619776005A73C6 /* ISMSStatusLoader.m */,
-				536C974516619770005A73C6 /* ISMSServerPlaylistsLoader.h */,
-				536C974616619770005A73C6 /* ISMSServerPlaylistsLoader.m */,
 				536C974116619769005A73C6 /* ISMSCoverArtLoader.h */,
 				536C974216619769005A73C6 /* ISMSCoverArtLoader.m */,
 				536C97291661975C005A73C6 /* ISMSSubFolderLoader.h */,
@@ -2083,8 +2085,6 @@
 				536C959516619360005A73C6 /* ISMSServer.m */,
 				536C959616619360005A73C6 /* ISMSChatMessage.h */,
 				536C959716619360005A73C6 /* ISMSChatMessage.m */,
-				536C959816619360005A73C6 /* SUSServerPlaylist.h */,
-				536C959916619360005A73C6 /* SUSServerPlaylist.m */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -2150,8 +2150,8 @@
 				536C96CD166196C0005A73C6 /* SUSChatDAO.m */,
 				536C96CE166196C0005A73C6 /* SUSLyricsDAO.h */,
 				536C96CF166196C0005A73C6 /* SUSLyricsDAO.m */,
-				536C96D0166196C0005A73C6 /* SUSServerPlaylistsDAO.h */,
-				536C96D1166196C0005A73C6 /* SUSServerPlaylistsDAO.m */,
+				536C96D0166196C0005A73C6 /* ISMSPlaylistsDAO.h */,
+				536C96D1166196C0005A73C6 /* ISMSPlaylistsDAO.m */,
 				536C96D2166196C0005A73C6 /* ISMSSong+DAO.h */,
 				536C96D3166196C0005A73C6 /* ISMSSong+DAO.m */,
 				536C96D4166196C0005A73C6 /* SUSCoverArtDAO.h */,
@@ -2939,7 +2939,7 @@
 				53067E4E1694F11C00600396 /* ISMSSong.h in Headers */,
 				53067E501694F11C00600396 /* ISMSServer.h in Headers */,
 				53067E511694F11C00600396 /* ISMSChatMessage.h in Headers */,
-				53067E521694F11C00600396 /* SUSServerPlaylist.h in Headers */,
+				53067E521694F11C00600396 /* ISMSPlaylist.h in Headers */,
 				53EECB561C5F1B2700DABB8E /* UIColor+ColorWithInt.h in Headers */,
 				53EECC171C5F1B6000DABB8E /* RNCryptor.h in Headers */,
 				53067E541694F11C00600396 /* NSMutableURLRequest+SUS.h in Headers */,
@@ -2964,7 +2964,7 @@
 				53067E5D1694F11C00600396 /* SUSLyricsDAO.h in Headers */,
 				53EECBBE1C5F1B2B00DABB8E /* EX2Reachability.h in Headers */,
 				53EECACA1C5F1B2500DABB8E /* NSMutableDictionary+Safe.h in Headers */,
-				53067E5E1694F11C00600396 /* SUSServerPlaylistsDAO.h in Headers */,
+				53067E5E1694F11C00600396 /* ISMSPlaylistsDAO.h in Headers */,
 				53563EB91C5ED30D00F663C4 /* FMDB.h in Headers */,
 				530ABE2B1A522158005ACE6B /* ISMSNewRootFoldersLoader.h in Headers */,
 				53067E5F1694F11C00600396 /* ISMSSong+DAO.h in Headers */,
@@ -2984,7 +2984,7 @@
 				530ABE351A5226BE005ACE6B /* ISMSMediaFoldersLoader.h in Headers */,
 				53EECB161C5F1B2600DABB8E /* NSString+rfcEncode.h in Headers */,
 				53EECB061C5F1B2600DABB8E /* NSString+Gzip.h in Headers */,
-				53067E691694F11C00600396 /* ISMSServerPlaylistsLoader.h in Headers */,
+				53067E691694F11C00600396 /* ISMSPlaylistsLoader.h in Headers */,
 				53EECC611C5F1B7700DABB8E /* DDLog+LOGV.h in Headers */,
 				53EECB221C5F1B2600DABB8E /* NSString+TrimmingAdditions.h in Headers */,
 				53067E6A1694F11C00600396 /* ISMSCoverArtLoader.h in Headers */,
@@ -3151,7 +3151,7 @@
 				536C95A5166193AE005A73C6 /* ISMSServer.h in Headers */,
 				536C95A6166193AE005A73C6 /* ISMSChatMessage.h in Headers */,
 				53EECC481C5F1B7700DABB8E /* CocoaLumberjack.h in Headers */,
-				536C95A7166193AE005A73C6 /* SUSServerPlaylist.h in Headers */,
+				536C95A7166193AE005A73C6 /* ISMSPlaylist.h in Headers */,
 				536C9698166195CF005A73C6 /* ISMSStreamManager.h in Headers */,
 				536C969A166195CF005A73C6 /* ISMSCacheQueueManager.h in Headers */,
 				536C969C166195CF005A73C6 /* ISMSStreamHandler.h in Headers */,
@@ -3170,7 +3170,7 @@
 				536C96DB166196C0005A73C6 /* SUSSubFolderDAO.h in Headers */,
 				536C96E1166196C0005A73C6 /* SUSChatDAO.h in Headers */,
 				536C96E3166196C0005A73C6 /* SUSLyricsDAO.h in Headers */,
-				536C96E5166196C0005A73C6 /* SUSServerPlaylistsDAO.h in Headers */,
+				536C96E5166196C0005A73C6 /* ISMSPlaylistsDAO.h in Headers */,
 				536C96E7166196C0005A73C6 /* ISMSSong+DAO.h in Headers */,
 				53F637C51C5F591A00864346 /* ZKDataArchive.h in Headers */,
 				536C96E9166196C0005A73C6 /* SUSCoverArtDAO.h in Headers */,
@@ -3186,7 +3186,7 @@
 				536C971E16619734005A73C6 /* ISMSQueueAllLoader.h in Headers */,
 				536C972F1661975C005A73C6 /* ISMSSubFolderLoader.h in Headers */,
 				536C974316619769005A73C6 /* ISMSCoverArtLoader.h in Headers */,
-				536C974716619770005A73C6 /* ISMSServerPlaylistsLoader.h in Headers */,
+				536C974716619770005A73C6 /* ISMSPlaylistsLoader.h in Headers */,
 				536C975116619776005A73C6 /* ISMSStatusLoader.h in Headers */,
 				536C9766166197B8005A73C6 /* SavedSettings.h in Headers */,
 				536C9768166197B8005A73C6 /* PlaylistSingleton.h in Headers */,
@@ -3564,7 +3564,7 @@
 				5304A0AD168FD1D5009B2732 /* NSError+ISMSError.m in Sources */,
 				5304A0AC168FD1CE009B2732 /* sqlite3.c in Sources */,
 				5304A078168FB5CE009B2732 /* ISMSStatusLoader.m in Sources */,
-				5304A07A168FB5CE009B2732 /* ISMSServerPlaylistsLoader.m in Sources */,
+				5304A07A168FB5CE009B2732 /* ISMSPlaylistsLoader.m in Sources */,
 				5304A07B168FB5CE009B2732 /* ISMSCoverArtLoader.m in Sources */,
 				5304A07F168FB5CE009B2732 /* ISMSSubFolderLoader.m in Sources */,
 				5304A082168FB5CE009B2732 /* ISMSQueueAllLoader.m in Sources */,
@@ -3604,14 +3604,14 @@
 				5304A062168FB5A5009B2732 /* ISMSSong.m in Sources */,
 				5304A064168FB5A5009B2732 /* ISMSServer.m in Sources */,
 				5304A065168FB5A5009B2732 /* ISMSChatMessage.m in Sources */,
-				5304A066168FB5A5009B2732 /* SUSServerPlaylist.m in Sources */,
+				5304A066168FB5A5009B2732 /* ISMSPlaylist.m in Sources */,
 				5304A068168FB5A5009B2732 /* NSMutableURLRequest+SUS.m in Sources */,
 				5304A069168FB5A5009B2732 /* NSMutableURLRequest+PMS.m in Sources */,
 				5304A06A168FB5A5009B2732 /* ISMSUpdateChecker.m in Sources */,
 				5304A06C168FB5A5009B2732 /* SUSSubFolderDAO.m in Sources */,
 				5304A06F168FB5A5009B2732 /* SUSChatDAO.m in Sources */,
 				5304A070168FB5A5009B2732 /* SUSLyricsDAO.m in Sources */,
-				5304A071168FB5A5009B2732 /* SUSServerPlaylistsDAO.m in Sources */,
+				5304A071168FB5A5009B2732 /* ISMSPlaylistsDAO.m in Sources */,
 				5304A072168FB5A5009B2732 /* ISMSSong+DAO.m in Sources */,
 				5304A073168FB5A5009B2732 /* SUSCoverArtDAO.m in Sources */,
 				5304A074168FB5A5009B2732 /* SUSNowPlayingDAO.m in Sources */,
@@ -3718,7 +3718,7 @@
 				5304A1CE169017E4009B2732 /* SUSChatDAO.m in Sources */,
 				53F637D41C5F591A00864346 /* ZKLFHeader.m in Sources */,
 				5304A1CF169017E4009B2732 /* SUSLyricsDAO.m in Sources */,
-				5304A1D0169017E4009B2732 /* SUSServerPlaylistsDAO.m in Sources */,
+				5304A1D0169017E4009B2732 /* ISMSPlaylistsDAO.m in Sources */,
 				53EECB2C1C5F1B2600DABB8E /* NSString+Validation.m in Sources */,
 				53F638041C5F59A000864346 /* SBJsonStreamParserAccumulator.m in Sources */,
 				5304A1D1169017E4009B2732 /* ISMSSong+DAO.m in Sources */,
@@ -3736,7 +3736,7 @@
 				5304A1D4169017E4009B2732 /* ISMSLoader.m in Sources */,
 				53EECBE41C5F1B2E00DABB8E /* EX2LargerTouchScrollView.m in Sources */,
 				5304A1D6169017E4009B2732 /* ISMSStatusLoader.m in Sources */,
-				5304A1D8169017E4009B2732 /* ISMSServerPlaylistsLoader.m in Sources */,
+				5304A1D8169017E4009B2732 /* ISMSPlaylistsLoader.m in Sources */,
 				5304A1D9169017E4009B2732 /* ISMSCoverArtLoader.m in Sources */,
 				5304A1DD169017E4009B2732 /* ISMSSubFolderLoader.m in Sources */,
 				53F637D81C5F591A00864346 /* ZKLog.m in Sources */,
@@ -3816,7 +3816,7 @@
 				53F637F61C5F59A000864346 /* NSObject+SBJson.m in Sources */,
 				5304A1C4169017C4009B2732 /* ISMSChatMessage.m in Sources */,
 				53EECBB01C5F1B2B00DABB8E /* EX2FileDecryptor.m in Sources */,
-				5304A1C5169017C4009B2732 /* SUSServerPlaylist.m in Sources */,
+				5304A1C5169017C4009B2732 /* ISMSPlaylist.m in Sources */,
 				5304A1C7169017C4009B2732 /* NSMutableURLRequest+SUS.m in Sources */,
 				53EECAAC1C5F1B2500DABB8E /* NSArray+Safe.m in Sources */,
 				5304A1C8169017C4009B2732 /* NSMutableURLRequest+PMS.m in Sources */,
@@ -3876,7 +3876,7 @@
 				53F6381F1C5F59A000864346 /* SBJsonUTF8Stream.m in Sources */,
 				53EECB7B1C5F1B2800DABB8E /* UIImageView+ImageAnimated.m in Sources */,
 				53F637B71C5F591A00864346 /* ZKCDHeader.m in Sources */,
-				536C9B381661B7D4005A73C6 /* SUSServerPlaylist.m in Sources */,
+				536C9B381661B7D4005A73C6 /* ISMSPlaylist.m in Sources */,
 				536C947E16618FA4005A73C6 /* LibSub.m in Sources */,
 				536C9699166195CF005A73C6 /* ISMSStreamManager.m in Sources */,
 				53EECB5F1C5F1B2700DABB8E /* UIDevice+Software.m in Sources */,
@@ -3921,7 +3921,7 @@
 				536C96E4166196C0005A73C6 /* SUSLyricsDAO.m in Sources */,
 				53EECBA91C5F1B2A00DABB8E /* EX2ActionQueue.m in Sources */,
 				53EECBD11C5F1B2D00DABB8E /* EX2Dispatch.m in Sources */,
-				536C96E6166196C0005A73C6 /* SUSServerPlaylistsDAO.m in Sources */,
+				536C96E6166196C0005A73C6 /* ISMSPlaylistsDAO.m in Sources */,
 				53EECAC71C5F1B2500DABB8E /* NSFileHandle+Hash.m in Sources */,
 				536C96E8166196C0005A73C6 /* ISMSSong+DAO.m in Sources */,
 				536C96EA166196C0005A73C6 /* SUSCoverArtDAO.m in Sources */,
@@ -3966,7 +3966,7 @@
 				53EECB7F1C5F1B2800DABB8E /* UIImageView+Reflection.m in Sources */,
 				53D2B6C81A47D58100B029A3 /* RXMLElement.m in Sources */,
 				536C974416619769005A73C6 /* ISMSCoverArtLoader.m in Sources */,
-				536C974816619770005A73C6 /* ISMSServerPlaylistsLoader.m in Sources */,
+				536C974816619770005A73C6 /* ISMSPlaylistsLoader.m in Sources */,
 				536C975216619776005A73C6 /* ISMSStatusLoader.m in Sources */,
 				53EECB631C5F1B2700DABB8E /* UIImage+Color.m in Sources */,
 				536C9767166197B8005A73C6 /* SavedSettings.m in Sources */,

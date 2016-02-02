@@ -1,15 +1,15 @@
 //
-//  SUSServerPlaylistDAO.m
+//  ISMSPlaylistDAO.m
 //  iSub
 //
 //  Created by Benjamin Baron on 11/1/11.
 //  Copyright (c) 2011 Ben Baron. All rights reserved.
 //
 
-#import "SUSServerPlaylistsDAO.h"
+#import "ISMSPlaylistsDAO.h"
 #import "libSubImports.h"
 
-@implementation SUSServerPlaylistsDAO
+@implementation ISMSPlaylistsDAO
 
 - (id)initWithDelegate:(NSObject <ISMSLoaderDelegate> *)theDelegate
 {
@@ -41,7 +41,7 @@
 
 - (void)startLoad
 {	
-    self.loader = [[ISMSServerPlaylistsLoader alloc] initWithDelegate:self];
+    self.loader = [[ISMSPlaylistsLoader alloc] initWithDelegate:self];
     [self.loader startLoad];
 }
 

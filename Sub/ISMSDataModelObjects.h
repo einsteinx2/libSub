@@ -18,6 +18,6 @@
 #import "ISMSIndex.h"
 #import "ISMSChatMessage.h"
 #import "ISMSServer.h"
-#import "SUSServerPlaylist.h"
+#import "ISMSPlaylist.h"
 
 #endif

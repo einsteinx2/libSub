@@ -13,7 +13,7 @@
 
 #import "ISMSScrobbleLoader.h"
 #import "ISMSStatusLoader.h"
-#import "ISMSServerPlaylistsLoader.h"
+#import "ISMSPlaylistsLoader.h"
 #import "ISMSCoverArtLoader.h"
 #import "ISMSSubFolderLoader.h"
 #import "ISMSQueueAllLoader.h"

@@ -1,17 +1,22 @@
 //
-//  ISMSServerPlaylistLoader.m
+//  ISMSPlaylistLoader.m
 //  iSub
 //
 //  Created by Benjamin Baron on 11/6/11.
 //  Copyright (c) 2011 Ben Baron. All rights reserved.
 //
 
-#import "ISMSServerPlaylistsLoader.h"
+#import "ISMSPlaylistsLoader.h"
 #import "libSubImports.h"
-#import "SUSServerPlaylist.h"
+#import "ISMSPlaylist.h"
 #import "NSMutableURLRequest+SUS.h"
 
-@implementation ISMSServerPlaylistsLoader
+@interface ISMSFolderLoader()
+@property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;
+@end
+
+@implementation ISMSPlaylistsLoader
+@synthesize items=_items;
 
 #pragma mark - Lifecycle
 
@@ -107,7 +112,9 @@
         {
             NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:0];
             [root iterate:@"playlists.playlist" usingBlock:^(RXMLElement *e) {
-                SUSServerPlaylist *serverPlaylist = [[SUSServerPlaylist alloc] initWithRXMLElement:e];
+                ISMSPlaylist *serverPlaylist = [[ISMSPlaylist alloc] init];
+                serverPlaylist.playlistId = @([[e attribute:@"id"] integerValue]);
+                serverPlaylist.name = [e attribute:@"name"];
                 [tempArray addObject:serverPlaylist];
             }];
         

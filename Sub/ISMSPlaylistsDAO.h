@@ -1,5 +1,5 @@
 //
-//  SUSServerPlaylistsDAO.h
+//  ISMSPlaylistsDAO.h
 //  iSub
 //
 //  Created by Benjamin Baron on 11/1/11.
@@ -9,11 +9,11 @@
 #import "ISMSLoaderManager.h"
 #import "ISMSLoaderDelegate.h"
 
-@class ISMSServerPlaylistsLoader, FMDatabase;
-@interface SUSServerPlaylistsDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
+@class ISMSPlaylistsLoader, FMDatabase;
+@interface ISMSPlaylistsDAO : NSObject <ISMSLoaderDelegate, ISMSLoaderManager>
 
 @property (weak) NSObject <ISMSLoaderDelegate> *delegate;
-@property (strong) ISMSServerPlaylistsLoader *loader;
+@property (strong) ISMSPlaylistsLoader *loader;
 
 #pragma mark - Public DAO Methods
 

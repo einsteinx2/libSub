@@ -12,7 +12,7 @@
 #import "SUSSubFolderDAO.h"
 #import "SUSChatDAO.h"
 #import "SUSLyricsDAO.h"
-#import "SUSServerPlaylistsDAO.h"
+#import "ISMSPlaylistsDAO.h"
 #import "ISMSSong+DAO.h"
 #import "SUSCoverArtDAO.h"
 #import "SUSNowPlayingDAO.h"
