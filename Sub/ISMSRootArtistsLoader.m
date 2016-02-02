@@ -11,11 +11,12 @@
 #import "NSMutableURLRequest+SUS.h"
 
 @interface ISMSRootArtistsLoader()
-@property (nonatomic, readwrite) NSArray *artists;
+@property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;
+@property (nonatomic, readwrite) NSArray<ISMSArtist*> *artists;
 @end
 
 @implementation ISMSRootArtistsLoader
-@synthesize artists=_artists;
+@synthesize items=_items, artists=_artists;
 
 #pragma mark - Data loading -
 
@@ -68,6 +69,7 @@
                 }
                 
                 _artists = artists;
+                _items = _artists;
             }];
             
             // Notify the delegate that the loading is finished

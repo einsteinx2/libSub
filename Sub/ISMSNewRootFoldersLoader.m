@@ -12,12 +12,13 @@
 
 @interface ISMSNewRootFoldersLoader()
 @property (nonatomic, readwrite) NSArray<NSString*> *ignoredArticles;
+@property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;
 @property (nonatomic, readwrite) NSArray<ISMSFolder*> *folders;
 @property (nonatomic, readwrite) NSArray<ISMSSong*> *songs;
 @end
 
 @implementation ISMSNewRootFoldersLoader
-@synthesize ignoredArticles=_ignoredArticles, folders=_folders, songs=_songs;
+@synthesize ignoredArticles=_ignoredArticles, items=_items, folders=_folders, songs=_songs;
 
 #pragma mark - Data loading -
 
@@ -50,8 +51,8 @@
         }
         else
         {
-            NSMutableArray *folders = [[NSMutableArray alloc] init];
-            NSMutableArray *songs = [[NSMutableArray alloc] init];
+            NSMutableArray<ISMSFolder*> *folders = [[NSMutableArray alloc] init];
+            NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
             
             NSString *ignoredArticlesString = [[root child:@"indexes"] attribute:@"ignoredArticles"];
             _ignoredArticles = [ignoredArticlesString componentsSeparatedByString:@" "];
@@ -89,6 +90,7 @@
                 
                 _folders = folders;
                 _songs = songs;
+                _items = [(NSArray<id<ISMSItem>> *)folders arrayByAddingObjectsFromArray:(NSArray<id<ISMSItem>> *)songs];
             }];
             
             // Notify the delegate that the loading is finished

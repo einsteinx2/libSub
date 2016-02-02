@@ -11,8 +11,9 @@
 #import "NSMutableURLRequest+SUS.h"
 
 @interface ISMSFolderLoader()
-@property (nonatomic, readwrite) NSArray *folders;
-@property (nonatomic, readwrite) NSArray *songs;
+@property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;
+@property (nonatomic, readwrite) NSArray<ISMSFolder*> *folders;
+@property (nonatomic, readwrite) NSArray<ISMSSong*> *songs;
 @end
 
 @implementation ISMSFolderLoader
@@ -20,7 +21,7 @@
     ISMSFolder *_associatedObject;
     NSTimeInterval _songsDuration;
 }
-@synthesize folders=_folders, songs=_songs;
+@synthesize items=_items, folders=_folders, songs=_songs;
 
 #pragma mark - Loader Methods -
 
@@ -89,6 +90,7 @@
             
             _folders = folders;
             _songs = songs;
+            _items = [(NSArray<id<ISMSItem>> *)folders arrayByAddingObjectsFromArray:(NSArray<id<ISMSItem>> *)songs];
             _songsDuration = songsDuration;
 
             // Notify the delegate that the loading is finished
@@ -110,6 +112,7 @@
     ISMSFolder *folder = [self associatedObject];
     _folders = folder.subfolders;
     _songs = folder.songs;
+    _items = [(NSArray<id<ISMSItem>> *)_folders arrayByAddingObjectsFromArray:(NSArray<id<ISMSItem>> *)_songs];
     
     NSTimeInterval songsDuration = 0;
     for (ISMSSong *song in _songs)
@@ -118,7 +121,7 @@
     }
     _songsDuration = songsDuration;
     
-    return (_folders.count > 0 || _songs.count > 0);
+    return _items.count > 0;
 }
 
 - (id)associatedObject
