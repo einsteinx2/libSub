@@ -25,6 +25,11 @@ typedef NS_ENUM(NSInteger, ISMSBassVisualType)
 #define ISMSJukeboxTimeout 60.0
 #define ISMSServerCheckTimeout 15.0
 
+#define kFeaturePlaylistsId @"com.einsteinx2.isublite.playlistUnlock"
+#define kFeatureCacheId @"com.einsteinx2.isublite.cacheUnlock"
+#define kFeatureVideoId @"com.einsteinx2.isublite.videoUnlock"
+#define kFeatureAllId @"com.einsteinx2.isublite.allUnlock"
+
 #ifdef BETA
     #ifdef SILENT
         #define LOG_LEVEL_ISUB_DEFAULT static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
