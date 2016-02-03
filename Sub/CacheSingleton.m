@@ -44,7 +44,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (NSUInteger)numberOfCachedSongs
 {
-	return [databaseS.songCacheDbQueue intForQuery:@"SELECT COUNT(*) FROM cachedSongs WHERE finished = 'YES'"];
+    return [[ISMSPlaylist downloadedSongs] songCount];
 }
 
 //
@@ -69,10 +69,11 @@ LOG_LEVEL_ISUB_DEFAULT
 }
 
 - (void)removeOldestCachedSongs
-{		
-	NSString *songMD5 = nil;
-	
-	if (settingsS.cachingType == ISMSCachingType_minSpace)
+{
+    // TODO rewrite this with new data model
+	/*
+    NSString *songMD5 = nil;
+    if (settingsS.cachingType == ISMSCachingType_minSpace)
 	{
 		// Remove the oldest songs based on either oldest played or oldest cached until free space is more than minFreeSpace
 		while (self.freeSpace < settingsS.minFreeSpace)
@@ -118,7 +119,7 @@ LOG_LEVEL_ISUB_DEFAULT
 				size -= songSize;
 			}
 		}
-	}
+	}*/
 	
 	[self findCacheSize];
 	
@@ -128,6 +129,8 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)findCacheSize
 {
+    // TODO: Rewrite this with new data model
+    /*
     [databaseS.songCacheDbQueue inDatabase:^(FMDatabase *db)
     {
         unsigned long long size = [[db stringForQuery:@"SELECT sum(size) FROM sizesSongs"] longLongValue];
@@ -145,18 +148,7 @@ LOG_LEVEL_ISUB_DEFAULT
         DLog(@"Total cache size was found to be: %llu", size);
         _cacheSize = size;
         
-    }];
-//	unsigned long long size = 0;
-//	NSFileManager *fileManager = [NSFileManager defaultManager];
-//	NSArray *subpaths = [fileManager subpathsAtPath:settingsS.songCachePath];
-//	for (NSString *path in subpaths) 
-//	{
-//		NSString *fullPath = [settingsS.songCachePath stringByAppendingPathComponent:path];
-//		NSDictionary *attributes = [fileManager attributesOfItemAtPath:fullPath error:NULL];
-//		size += [attributes fileSize];
-//	}
-//	
-//	_cacheSize = size;
+    }];*/
 	
 	[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CacheSizeChecked];
 }

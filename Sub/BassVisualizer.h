@@ -8,12 +8,12 @@
 
 #import "bass.h"
 
-typedef enum
+typedef NS_ENUM(NSInteger, BassVisualizerType)
 {
 	BassVisualizerTypeNone = 0,
 	BassVisualizerTypeFFT,
 	BassVisualizerTypeLine
-} BassVisualizerType;
+};
 
 @interface BassVisualizer : NSObject
 

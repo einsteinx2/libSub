@@ -11,12 +11,12 @@
 
 #define playlistS ((PlaylistSingleton *)[PlaylistSingleton sharedInstance])
 
-typedef enum
+typedef NS_ENUM(NSInteger, ISMSRepeatMode)
 {
 	ISMSRepeatMode_Normal = 0,
 	ISMSRepeatMode_RepeatOne = 1,
 	ISMSRepeatMode_RepeatAll = 2
-} ISMSRepeatMode;
+};
 
 @class ISMSSong, FMDatabase;
 @interface PlaylistSingleton : NSObject

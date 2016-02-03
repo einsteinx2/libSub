@@ -6,7 +6,7 @@
 //  Copyright 2011 Ben Baron. All rights reserved.
 //
 
-typedef enum
+typedef NS_ENUM(NSInteger, ISMSLoaderType)
 {
     ISMSLoaderType_Generic = 0,
     ISMSLoaderType_RootFolders,
@@ -21,7 +21,7 @@ typedef enum
     ISMSLoaderType_Login,
     ISMSLoaderType_HLS,
     ISMSLoaderType_QuickAlbums
-} ISMSLoaderType;
+};
 
 @class ISMSLoader;
 @protocol ISMSLoaderDelegate <NSObject>

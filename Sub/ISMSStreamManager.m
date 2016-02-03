@@ -10,7 +10,6 @@
 #import "libSubImports.h"
 #import "ISMSStreamHandler.h"
 #import "ISMSCFNetworkStreamHandler.h"
-#import "PlaylistSingleton.h"
 #import "ISMSCoverArtLoader.h"
 #import "SUSLyricsDAO.h"
 #import "ISMSCacheQueueManager.h"
@@ -198,7 +197,7 @@ LOG_LEVEL_ISUB_DEBUG
             if (!handler.mySong.isFullyCached && !handler.mySong.isTempCached && !([cacheQueueManagerS.currentQueuedSong isEqualToSong:handler.mySong] && cacheQueueManagerS.isQueueDownloading))
             {
                 DLog(@"Removing song from cached songs table: %@", handler.mySong);
-                [handler.mySong removeFromCachedSongsTableDbQueue];
+                [[ISMSPlaylist downloadedSongs] removeSongId:handler.mySong.songId.integerValue];
             }
 			//[handler.mySong removeFromCachedSongsTableDbQueue];
 		}
@@ -278,7 +277,7 @@ LOG_LEVEL_ISUB_DEBUG
 		if (!handler.mySong.isFullyCached && !handler.mySong.isTempCached && !([cacheQueueManagerS.currentQueuedSong isEqualToSong:handler.mySong] && cacheQueueManagerS.isQueueDownloading))
         {
             DLog(@"Removing song from cached songs table: %@", handler.mySong);
-            [handler.mySong removeFromCachedSongsTableDbQueue];
+            [[ISMSPlaylist downloadedSongs] removeSongId:handler.mySong.songId.integerValue];
         }
         [self.handlerStack removeObjectAtIndexSafe:index];
 	}
@@ -366,7 +365,7 @@ LOG_LEVEL_ISUB_DEBUG
 	else
 	{
 		[handler start:resume];
-		[self.lyricsDAO loadLyricsForArtist:handler.mySong.artistName andTitle:handler.mySong.title];
+		[self.lyricsDAO loadLyricsForArtist:handler.mySong.artist.name andTitle:handler.mySong.title];
 	}
 }
 
@@ -437,12 +436,12 @@ LOG_LEVEL_ISUB_DEBUG
 		// Also download the album art
 		if (song.coverArtId)
 		{
-			ISMSCoverArtLoader *playerArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId isLarge:YES];
+			ISMSCoverArtLoader *playerArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId.stringValue isLarge:YES];
 			[playerArt downloadArtIfNotExists];
 			//if (![playerArt downloadArtIfNotExists])
 			//	;
 			
-			ISMSCoverArtLoader *tableArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId isLarge:NO];
+			ISMSCoverArtLoader *tableArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId.stringValue isLarge:NO];
 			[tableArt downloadArtIfNotExists];
 			//if (![tableArt downloadArtIfNotExists])
 			//	;
@@ -498,7 +497,7 @@ LOG_LEVEL_ISUB_DEBUG
 		for (int i = 0; i < numStreamsToQueue; i++)
 		{
 			ISMSSong *aSong = [playlistS songForIndex:[playlistS indexForOffsetFromCurrentIndex:i]];
-			if (aSong && !aSong.isVideo && ![self isSongInQueue:aSong] && ![self.lastTempCachedSong isEqualToSong:aSong] && !aSong.isFullyCached && !settingsS.isOfflineMode && ![cacheQueueManagerS.currentQueuedSong isEqualToSong:aSong])
+			if (aSong && aSong.contentType.basicType == ISMSBasicContentTypeAudio && ![self isSongInQueue:aSong] && ![self.lastTempCachedSong isEqualToSong:aSong] && !aSong.isFullyCached && !settingsS.isOfflineMode && ![cacheQueueManagerS.currentQueuedSong isEqualToSong:aSong])
 			{
 				// Queue the song for download
 				[self queueStreamForSong:aSong isTempCache:!settingsS.isSongCachingEnabled isStartDownload:isStartDownload];
@@ -662,7 +661,7 @@ LOG_LEVEL_ISUB_DEBUG
             if ([cacheQueueManagerS isSongInQueue:handler.mySong])
             {
                 //handler.mySong.isDownloaded = YES;
-                [handler.mySong removeFromCacheQueueDbQueue];
+                [[ISMSPlaylist downloadQueue] removeSongId:handler.mySong.songId.integerValue];
             }
             
             DLog(@"Marking isFullyCached = YES for %@", handler.mySong);

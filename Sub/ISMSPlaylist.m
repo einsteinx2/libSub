@@ -58,6 +58,78 @@
     return [self.name caseInsensitiveCompare:otherObject.name];
 }
 
+- (NSArray<ISMSSong*> *)songs
+{
+    // TODO: Fill this in
+    return nil;
+}
+
+- (BOOL)containsSongId:(NSInteger)songId
+{
+    // TODO: Fill this in
+    return NO;
+}
+
+- (NSUInteger)songCount
+{
+    // TODO: Fill this in
+    return 0;
+}
+
+- (NSInteger)indexOfSongId:(NSInteger)songId
+{
+    // TODO: Fill this in
+    return -1;
+}
+
+- (ISMSSong *)songAtIndex:(NSInteger)songId
+{
+    // TODO: Fill this in
+    return nil;
+}
+
+- (void)addSongId:(NSInteger)songId
+{
+    // TODO: Fill this in
+}
+
+- (void)insertSongId:(NSInteger)songId atIndex:(NSUInteger)index
+{
+    // TODO: Fill this in
+}
+
+- (void)removeSongId:(NSInteger)songId
+{
+    // TODO: Fill this in
+}
+
+- (void)removeSongAtIndex:(NSUInteger)index
+{
+    // TODO: Fill this in
+}
+
+- (void)removeAllSongs
+{
+    // TODO: Fill this in
+}
+
+#pragma mark - Special Playlists -
+
++ (nonnull ISMSPlaylist *)playQueue
+{
+    return [[ISMSPlaylist alloc] initWithPlaylistId:playQueuePlaylistId];
+}
+
++ (nonnull ISMSPlaylist *)downloadQueue
+{
+    return [[ISMSPlaylist alloc] initWithPlaylistId:downloadQueuePlaylistId];
+}
+
++ (nonnull ISMSPlaylist *)downloadedSongs
+{
+    return [[ISMSPlaylist alloc] initWithPlaylistId:downloadedSongsPlaylistId];
+}
+
 #pragma mark - ISMSItem -
 
 - (NSNumber *)itemId

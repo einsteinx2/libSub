@@ -1711,23 +1711,6 @@
 	}
 }
 
-- (BOOL)isCacheSizeTableFinished
-{
-	@synchronized(self)
-	{
-		return [_userDefaults boolForKey:@"isCacheSizeTableFinished"];
-	}
-}
-
-- (void)setIsCacheSizeTableFinished:(BOOL)isCacheSizeTableFinished
-{
-	@synchronized(self)
-	{
-		[_userDefaults setBool:isCacheSizeTableFinished forKey:@"isCacheSizeTableFinished"];
-		[_userDefaults synchronize];
-	}
-}
-
 - (BOOL)isStopCheckingWaveboxRelease
 {
 	@synchronized(self)

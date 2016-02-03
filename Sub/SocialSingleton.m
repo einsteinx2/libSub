@@ -147,9 +147,8 @@ LOG_LEVEL_ISUB_DEFAULT
 - (void)scrobbleSong:(ISMSSong*)aSong isSubmission:(BOOL)isSubmission
 {
 	if (settingsS.isScrobbleEnabled && !settingsS.isOfflineMode)
-	{
-
-		ISMSScrobbleLoader *loader = [ISMSScrobbleLoader loaderWithCallbackBlock:^(BOOL success, NSError *error, ISMSLoader *loader)
+    {
+		ISMSScrobbleLoader *loader = [[ISMSScrobbleLoader alloc] initWithCallbackBlock:^(BOOL success, NSError *error, ISMSLoader *loader)
         {
             ALog(@"Scrobble successfully completed for song: %@", aSong.title);
         }];
@@ -217,10 +216,10 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	if (settingsS.currentTwitterAccount && settingsS.isTwitterEnabled && !settingsS.isOfflineMode)
 	{
-		if (currentSong.artistName && currentSong.title)
+		if (currentSong.artist.name && currentSong.title)
 		{
 			//DLog(@"------------- tweeting song --------------");
-			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@ #isubapp", currentSong.title, currentSong.artistName];
+			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@ #isubapp", currentSong.title, currentSong.artist.name];
             if (tweet.length > 140)
                 tweet = [tweet substringToIndex:140];
             

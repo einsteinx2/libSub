@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Einstein Times Two Software. All rights reserved.
 //
 
+#import "ISMSLoader.h"
+
 @protocol ISMSItem;
 @class ISMSFolder, ISMSArtist, ISMSAlbum, ISMSSong;
 @protocol ISMSItemLoader <NSObject>
@@ -17,12 +19,6 @@
 
 // Transition to using this single array
 @property (nullable, readonly) NSArray<id<ISMSItem>> *items;
-
-@property (nullable, readonly) NSArray<ISMSFolder*> *folders;
-@property (nullable, readonly) NSArray<ISMSArtist*> *artists;
-@property (nullable, readonly) NSArray<ISMSAlbum*> *albums;
-@property (nullable, readonly) NSArray<ISMSSong*> *songs;
-@property (readonly) NSTimeInterval songsDuration;
 
 - (void)persistModels;
 - (BOOL)loadModelsFromCache;

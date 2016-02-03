@@ -7,6 +7,7 @@
 //
 
 #import "ISMSFolderLoader.h"
+#import "ISMSLoader_Subclassing.h"
 #import "libSubImports.h"
 #import "NSMutableURLRequest+SUS.h"
 
@@ -75,7 +76,7 @@
                 else
                 {
                     ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e];
-                    if (![song.suffix.lowercaseString isEqualToString:@"pdf"])
+                    if (song.contentType.extension)
                     {
                         songsDuration += song.duration.doubleValue;
                         [songs addObject:song];

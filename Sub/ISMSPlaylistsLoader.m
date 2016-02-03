@@ -7,6 +7,7 @@
 //
 
 #import "ISMSPlaylistsLoader.h"
+#import "ISMSLoader_Subclassing.h"
 #import "libSubImports.h"
 #import "ISMSPlaylist.h"
 #import "NSMutableURLRequest+SUS.h"
@@ -19,11 +20,6 @@
 @synthesize items=_items;
 
 #pragma mark - Lifecycle
-
-- (FMDatabaseQueue *)dbQueue
-{
-    return databaseS.localPlaylistsDbQueue;
-}
 
 - (ISMSLoaderType)type
 {
@@ -42,7 +38,7 @@
 	if (self.connection)
 	{
 		self.receivedData = [NSMutableData data];
-        self.serverPlaylists = nil;
+        self.playlists = nil;
 	} 
 	else 
 	{
@@ -112,14 +108,15 @@
         {
             NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:0];
             [root iterate:@"playlists.playlist" usingBlock:^(RXMLElement *e) {
-                ISMSPlaylist *serverPlaylist = [[ISMSPlaylist alloc] init];
-                serverPlaylist.playlistId = @([[e attribute:@"id"] integerValue]);
-                serverPlaylist.name = [e attribute:@"name"];
-                [tempArray addObject:serverPlaylist];
+                ISMSPlaylist *playlist = [[ISMSPlaylist alloc] init];
+                playlist.playlistId = @([[e attribute:@"id"] integerValue]);
+                playlist.name = [e attribute:@"name"];
+                // TODO: Persist data model
+                [tempArray addObject:playlist];
             }];
         
             // Sort the array
-            self.serverPlaylists = [tempArray sortedArrayUsingSelector:@selector(compare:)];
+            self.playlists = [tempArray sortedArrayUsingSelector:@selector(compare:)];
 			            
             // Notify the delegate that the loading is finished
 			[self informDelegateLoadingFinished];

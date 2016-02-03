@@ -13,6 +13,6 @@
 @interface ISMSPlaylistsLoader : ISMSAbstractItemLoader <ISMSItemLoader>
 
 @property (nullable, readonly) NSArray<id<ISMSItem>> *items;
-@property (nullable, strong) NSArray<ISMSPlaylist*> *serverPlaylists;
+@property (nullable, strong) NSArray<ISMSPlaylist*> *playlists;
 
 @end

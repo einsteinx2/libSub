@@ -384,7 +384,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 			[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_SongPlaybackStarted];
             
             // Mark the last played time in the database for cache cleanup
-			self.currentStream.song.playedDate = [NSDate date];
+			self.currentStream.song.lastPlayed = [NSDate date];
 		}
         /*else
         {
@@ -880,7 +880,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 				 // Notify listeners that playback has started
 				 [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_SongPlaybackStarted];
 				 
-				 aSong.playedDate = [NSDate date];
+				 aSong.lastPlayed = [NSDate date];
 			 }
 			 else if (!userInfo && !aSong.isFullyCached && aSong.localFileSize < ISMS_BassStreamMinFilesizeToFail)
 			 {
@@ -891,8 +891,8 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 				 else if (!aSong.fileExists)
 				 {
 					 DDLogError(@"[BassGaplessPlayer] Stream for song %@ failed, file is not on disk, so calling retrying the song", userInfo.song.title);
-					 // File was removed, most likely because the decryption failed, so start again normally
-					 [aSong removeFromCachedSongsTableDbQueue];
+					 // File was removed, so start again normally
+                     [[ISMSPlaylist downloadedSongs] removeSongId:aSong.songId.integerValue];
                      
                      [self.delegate bassRetrySongAtIndex:self.currentPlaylistIndex player:self];
 				 }
@@ -909,7 +909,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 			 }
 			 else
 			 {
-				 [aSong removeFromCachedSongsTableDbQueue];
+				 [[ISMSPlaylist downloadedSongs] removeSongId:aSong.songId.integerValue];
                  
                  [self.delegate bassRetrySongAtIndex:self.currentPlaylistIndex player:self];
 			 }
