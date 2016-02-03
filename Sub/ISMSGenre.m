@@ -137,7 +137,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.genreId forKey:@"genreId"];
-    [encoder encodeObject:self.name forKey:@"name"];
+    [encoder encodeObject:self.name    forKey:@"name"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -145,7 +145,7 @@
     if ((self = [super init]))
     {
         _genreId = [decoder decodeObjectForKey:@"genreId"];
-        _name = [decoder decodeObjectForKey:@"name"];
+        _name    = [decoder decodeObjectForKey:@"name"];
     }
     return self;
 }
@@ -155,8 +155,8 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     ISMSGenre *genre = [[ISMSGenre alloc] init];
-    genre.genreId = [self.genreId copy];
-    genre.name = [self.name copy];
+    genre.genreId    = [self.genreId copy];
+    genre.name       = [self.name copy];
     return genre;
 }
 

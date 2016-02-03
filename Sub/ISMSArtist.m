@@ -26,11 +26,6 @@
 	return anArtist;
 }
 
-- (instancetype)initWithItemId:(NSInteger)itemId
-{
-    return [self initWithArtistId:itemId];
-}
-
 - (instancetype)initWithArtistId:(NSInteger)artistId
 {
     if (self = [super init])
@@ -59,36 +54,6 @@
     _artistId = N2n([resultSet objectForColumnIndex:0]);
     _name = N2n([resultSet objectForColumnIndex:1]);
     _albumCount = N2n([resultSet objectForColumnIndex:2]);
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-    [encoder encodeObject:self.artistId forKey:@"artistId"];
-	[encoder encodeObject:self.name forKey:@"name"];
-    [encoder encodeInteger:self.albumCount forKey:@"albumCount"];
-}
-
-- (id)initWithCoder:(NSCoder *)decoder
-{
-	if ((self = [super init]))
-	{
-        _artistId = [decoder decodeObjectForKey:@"artistId"];
-		_name = [decoder decodeObjectForKey:@"name"];
-        _albumCount = [decoder decodeObjectForKey:@"albumCount"];
-	}
-	
-	return self;
-}
-
-- (id)copyWithZone:(NSZone *)zone
-{
-	ISMSArtist *anArtist = [[ISMSArtist alloc] init];
-	
-    anArtist.artistId = [self.artistId copy];
-	anArtist.name = [self.name copy];
-    anArtist.albumCount = self.albumCount;
-	
-	return anArtist;
 }
 
 - (NSString *)description
@@ -202,6 +167,11 @@
 
 #pragma mark - ISMSItem -
 
+- (instancetype)initWithItemId:(NSInteger)itemId
+{
+    return [self initWithArtistId:itemId];
+}
+
 - (NSNumber *)itemId
 {
     return self.artistId;
@@ -210,6 +180,39 @@
 - (NSString *)itemName
 {
     return [_name copy];
+}
+
+#pragma mark - NSCoding -
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.artistId    forKey:@"artistId"];
+    [encoder encodeObject:self.name        forKey:@"name"];
+    [encoder encodeInteger:self.albumCount forKey:@"albumCount"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init]))
+    {
+        _artistId   = [decoder decodeObjectForKey:@"artistId"];
+        _name       = [decoder decodeObjectForKey:@"name"];
+        _albumCount = [decoder decodeObjectForKey:@"albumCount"];
+    }
+    
+    return self;
+}
+
+#pragma mark - NSCopying -
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    ISMSArtist *anArtist = [[ISMSArtist alloc] init];
+    anArtist.artistId    = [self.artistId copy];
+    anArtist.name        = [self.name copy];
+    anArtist.albumCount  = self.albumCount;
+    
+    return anArtist;
 }
 
 @end

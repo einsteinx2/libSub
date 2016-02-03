@@ -9,7 +9,7 @@
 #import "ISMSPersistedModel.h"
 
 @class ISMSFolder;
-@interface ISMSMediaFolder : NSObject <ISMSPersistedModel>
+@interface ISMSMediaFolder : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *mediaFolderId;
 @property (nullable, copy) NSString *name;

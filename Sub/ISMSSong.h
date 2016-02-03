@@ -12,7 +12,7 @@
 
 @class ISMSFolder, ISMSArtist, ISMSAlbum, ISMSGenre, ISMSContentType, RXMLElement;
 
-@interface ISMSSong : NSObject <NSCoding, NSCopying, ISMSPersistedModel>
+@interface ISMSSong : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *songId;
 @property (nullable, strong) NSNumber *contentTypeId;

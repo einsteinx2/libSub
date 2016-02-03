@@ -6,16 +6,22 @@
 //  Copyright 2010 Ben Baron. All rights reserved.
 //
 
-#import <TBXML/TBXML.h>
+#import "ISMSPersistedModel.h"
 
 @class RXMLElement;
-@interface ISMSChatMessage : NSObject <NSCopying>
+@interface ISMSChatMessage : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
-@property NSInteger timestamp;
+@property (nullable, strong) NSNumber *chatMessageId;
 @property (nullable, copy) NSString *user;
 @property (nullable, copy) NSString *message;
+@property (nullable, strong) NSDate *timestamp;
 
-- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element;
 - (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
+
+// Returns an instance if it exists in the db, otherwise nil
+- (nullable instancetype)initWithChatMessageId:(NSInteger)chatMessageId;
+
+// In reverse chronological order
++ (nonnull NSArray<ISMSChatMessage*> *)allChatMessages;
 
 @end

@@ -45,14 +45,6 @@
     _name = N2n([resultSet objectForColumnIndex:4]);
 }
 
-- (instancetype)copyWithZone: (NSZone *) zone
-{
-    ISMSPlaylist *playlist = [[ISMSPlaylist alloc] init];
-    playlist.name = self.name;
-    playlist.playlistId = self.playlistId;
-    return playlist;
-}
-
 - (NSComparisonResult)compare:(ISMSPlaylist *)otherObject 
 {
     return [self.name caseInsensitiveCompare:otherObject.name];
@@ -140,6 +132,34 @@
 - (NSString *)itemName
 {
     return [self.name copy];
+}
+
+#pragma mark - NSCoding -
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.playlistId forKey:@"playlistId"];
+    [encoder encodeObject:self.name       forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init]))
+    {
+        _playlistId = [decoder decodeObjectForKey:@"playlistId"];
+        _name       = [decoder decodeObjectForKey:@"name"];
+    }
+    return self;
+}
+
+#pragma mark - NSCopying -
+
+- (instancetype)copyWithZone: (NSZone *) zone
+{
+    ISMSPlaylist *playlist = [[ISMSPlaylist alloc] init];
+    playlist.playlistId    = self.playlistId;
+    playlist.name          = self.name;
+    return playlist;
 }
 
 @end

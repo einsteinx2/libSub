@@ -6,10 +6,10 @@
 //  Copyright 2010 Ben Baron. All rights reserved.
 //
 
-#import "ISMSItem.h"
+#import "ISMSPersistedModel.h"
 
 @class ISMSArtist, ISMSGenre, RXMLElement;
-@interface ISMSAlbum : NSObject <ISMSItem, NSCoding, NSCopying>
+@interface ISMSAlbum : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *albumId;
 @property (nullable, strong) NSNumber *artistId;

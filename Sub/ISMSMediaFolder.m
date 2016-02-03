@@ -214,4 +214,32 @@
     return [self.name copy];
 }
 
+#pragma mark - NSCoding -
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.mediaFolderId forKey:@"mediaFolderId"];
+    [encoder encodeObject:self.name          forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init]))
+    {
+        _mediaFolderId = [decoder decodeObjectForKey:@"mediaFolderId"];
+        _name          = [decoder decodeObjectForKey:@"name"];
+    }
+    return self;
+}
+
+#pragma mark - NSCopying -
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] init];
+    mediaFolder.mediaFolderId    = self.mediaFolderId;
+    mediaFolder.name             = self.name;
+    return mediaFolder;
+}
+
 @end

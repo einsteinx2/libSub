@@ -49,7 +49,6 @@
 		5304A05C168FB5A5009B2732 /* MusicSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975F166197B8005A73C6 /* MusicSingleton.m */; };
 		5304A05D168FB5A5009B2732 /* SocialSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9761166197B8005A73C6 /* SocialSingleton.m */; };
 		5304A05E168FB5A5009B2732 /* JukeboxSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9765166197B8005A73C6 /* JukeboxSingleton.m */; };
-		5304A05F168FB5A5009B2732 /* ISMSIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958A16619360005A73C6 /* ISMSIndex.m */; };
 		5304A060168FB5A5009B2732 /* ISMSArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958C16619360005A73C6 /* ISMSArtist.m */; };
 		5304A061168FB5A5009B2732 /* ISMSAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958E16619360005A73C6 /* ISMSAlbum.m */; };
 		5304A062168FB5A5009B2732 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
@@ -129,7 +128,6 @@
 		5304A1BB169017C4009B2732 /* DatabaseSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C975D166197B8005A73C6 /* DatabaseSingleton.m */; };
 		5304A1BC169017C4009B2732 /* SocialSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9761166197B8005A73C6 /* SocialSingleton.m */; };
 		5304A1BD169017C4009B2732 /* JukeboxSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9765166197B8005A73C6 /* JukeboxSingleton.m */; };
-		5304A1BE169017C4009B2732 /* ISMSIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958A16619360005A73C6 /* ISMSIndex.m */; };
 		5304A1BF169017C4009B2732 /* ISMSArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958C16619360005A73C6 /* ISMSArtist.m */; };
 		5304A1C0169017C4009B2732 /* ISMSAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958E16619360005A73C6 /* ISMSAlbum.m */; };
 		5304A1C1169017C4009B2732 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
@@ -189,7 +187,6 @@
 		53067E471694F11C00600396 /* SocialSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C9760166197B8005A73C6 /* SocialSingleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E481694F11C00600396 /* JukeboxSingleton.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C9764166197B8005A73C6 /* JukeboxSingleton.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E491694F11C00600396 /* ISMSDataModelObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958816619360005A73C6 /* ISMSDataModelObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		53067E4A1694F11C00600396 /* ISMSIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958916619360005A73C6 /* ISMSIndex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E4B1694F11C00600396 /* ISMSArtist.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958B16619360005A73C6 /* ISMSArtist.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E4C1694F11C00600396 /* ISMSAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958D16619360005A73C6 /* ISMSAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53067E4D1694F11C00600396 /* ISMSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958F16619360005A73C6 /* ISMSItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -271,7 +268,6 @@
 		536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 536C947616618FA4005A73C6 /* Foundation.framework */; };
 		536C947E16618FA4005A73C6 /* LibSub.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C947D16618FA4005A73C6 /* LibSub.m */; };
 		536C959E166193AE005A73C6 /* ISMSDataModelObjects.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958816619360005A73C6 /* ISMSDataModelObjects.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		536C959F166193AE005A73C6 /* ISMSIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958916619360005A73C6 /* ISMSIndex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C95A0166193AE005A73C6 /* ISMSArtist.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958B16619360005A73C6 /* ISMSArtist.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C95A1166193AE005A73C6 /* ISMSAlbum.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958D16619360005A73C6 /* ISMSAlbum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C95A2166193AE005A73C6 /* ISMSItem.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C958F16619360005A73C6 /* ISMSItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -389,7 +385,6 @@
 		536C9AA51661AA45005A73C6 /* JukeboxXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AA31661AA45005A73C6 /* JukeboxXMLParser.m */; };
 		536C9AB21661AA61005A73C6 /* SearchXMLParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 536C9AB01661AA61005A73C6 /* SearchXMLParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		536C9AB31661AA61005A73C6 /* SearchXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C9AB11661AA61005A73C6 /* SearchXMLParser.m */; };
-		536C9B311661B7D4005A73C6 /* ISMSIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958A16619360005A73C6 /* ISMSIndex.m */; };
 		536C9B321661B7D4005A73C6 /* ISMSArtist.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958C16619360005A73C6 /* ISMSArtist.m */; };
 		536C9B331661B7D4005A73C6 /* ISMSAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C958E16619360005A73C6 /* ISMSAlbum.m */; };
 		536C9B341661B7D4005A73C6 /* ISMSSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 536C959116619360005A73C6 /* ISMSSong.m */; };
@@ -606,8 +601,6 @@
 		536C947B16618FA4005A73C6 /* LibSub.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LibSub.h; sourceTree = "<group>"; };
 		536C947D16618FA4005A73C6 /* LibSub.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LibSub.m; sourceTree = "<group>"; };
 		536C958816619360005A73C6 /* ISMSDataModelObjects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISMSDataModelObjects.h; sourceTree = "<group>"; };
-		536C958916619360005A73C6 /* ISMSIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISMSIndex.h; sourceTree = "<group>"; };
-		536C958A16619360005A73C6 /* ISMSIndex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISMSIndex.m; sourceTree = "<group>"; };
 		536C958B16619360005A73C6 /* ISMSArtist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISMSArtist.h; sourceTree = "<group>"; };
 		536C958C16619360005A73C6 /* ISMSArtist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ISMSArtist.m; sourceTree = "<group>"; };
 		536C958D16619360005A73C6 /* ISMSAlbum.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ISMSAlbum.h; sourceTree = "<group>"; };
@@ -1024,6 +1017,8 @@
 				53ABE1541C615C2E00E0E72B /* ISMSGenre.m */,
 				53ABE1591C615FD100E0E72B /* ISMSContentType.h */,
 				53ABE15A1C615FD100E0E72B /* ISMSContentType.m */,
+				536C959616619360005A73C6 /* ISMSChatMessage.h */,
+				536C959716619360005A73C6 /* ISMSChatMessage.m */,
 			);
 			name = "New Model";
 			sourceTree = "<group>";
@@ -1127,12 +1122,8 @@
 			children = (
 				536C958816619360005A73C6 /* ISMSDataModelObjects.h */,
 				530ABE2E1A5221B7005ACE6B /* New Model */,
-				536C958916619360005A73C6 /* ISMSIndex.h */,
-				536C958A16619360005A73C6 /* ISMSIndex.m */,
 				536C959416619360005A73C6 /* ISMSServer.h */,
 				536C959516619360005A73C6 /* ISMSServer.m */,
-				536C959616619360005A73C6 /* ISMSChatMessage.h */,
-				536C959716619360005A73C6 /* ISMSChatMessage.m */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -1354,7 +1345,18 @@
 				53067E471694F11C00600396 /* SocialSingleton.h in Headers */,
 				53067E481694F11C00600396 /* JukeboxSingleton.h in Headers */,
 				53067E491694F11C00600396 /* ISMSDataModelObjects.h in Headers */,
-				53067E4A1694F11C00600396 /* ISMSIndex.h in Headers */,
+				53EECB6E1C5F1B2800DABB8E /* UIImage+Reflection.h in Headers */,
+				53F637CE1C5F591A00864346 /* ZKFileArchive.h in Headers */,
+				53EECB021C5F1B2600DABB8E /* NSString+FileSize.h in Headers */,
+				53F6380E1C5F59A000864346 /* SBJsonStreamWriter.h in Headers */,
+				53F6381A1C5F59A000864346 /* SBJsonTokeniser.h in Headers */,
+				53EECB421C5F1B2700DABB8E /* EX2QuartzCoreCategories.h in Headers */,
+				53EECBCE1C5F1B2C00DABB8E /* EX2Macros.h in Headers */,
+				53EECAA21C5F1B2500DABB8E /* NSArray+Plist.h in Headers */,
+				53EECAD21C5F1B2500DABB8E /* NSNull+CleanString.h in Headers */,
+				53F638061C5F59A000864346 /* SBJsonStreamParserAdapter.h in Headers */,
+				53EECC571C5F1B7700DABB8E /* DDAssertMacros.h in Headers */,
+				53EECA9A1C5F1B2500DABB8E /* NSArray+FilterBlock.h in Headers */,
 				53067E4B1694F11C00600396 /* ISMSArtist.h in Headers */,
 				53067E4C1694F11C00600396 /* ISMSAlbum.h in Headers */,
 				53067E4D1694F11C00600396 /* ISMSItem.h in Headers */,
@@ -1456,7 +1458,6 @@
 				5344F454166C03E50013B929 /* libSubImports.h in Headers */,
 				536C95A9166193AE005A73C6 /* LibSub.h in Headers */,
 				536C959E166193AE005A73C6 /* ISMSDataModelObjects.h in Headers */,
-				536C959F166193AE005A73C6 /* ISMSIndex.h in Headers */,
 				536C95A0166193AE005A73C6 /* ISMSArtist.h in Headers */,
 				536C95A1166193AE005A73C6 /* ISMSAlbum.h in Headers */,
 				536C95A2166193AE005A73C6 /* ISMSItem.h in Headers */,
@@ -1712,7 +1713,6 @@
 				5304A05C168FB5A5009B2732 /* MusicSingleton.m in Sources */,
 				5304A05D168FB5A5009B2732 /* SocialSingleton.m in Sources */,
 				5304A05E168FB5A5009B2732 /* JukeboxSingleton.m in Sources */,
-				5304A05F168FB5A5009B2732 /* ISMSIndex.m in Sources */,
 				5304A060168FB5A5009B2732 /* ISMSArtist.m in Sources */,
 				5304A061168FB5A5009B2732 /* ISMSAlbum.m in Sources */,
 				5304A062168FB5A5009B2732 /* ISMSSong.m in Sources */,
@@ -1829,7 +1829,10 @@
 				5304A1BB169017C4009B2732 /* DatabaseSingleton.m in Sources */,
 				5304A1BC169017C4009B2732 /* SocialSingleton.m in Sources */,
 				5304A1BD169017C4009B2732 /* JukeboxSingleton.m in Sources */,
-				5304A1BE169017C4009B2732 /* ISMSIndex.m in Sources */,
+				53EECB201C5F1B2600DABB8E /* NSString+time.m in Sources */,
+				53EECB581C5F1B2700DABB8E /* UIColor+ColorWithInt.m in Sources */,
+				53F638081C5F59A000864346 /* SBJsonStreamParserAdapter.m in Sources */,
+				53F6378E1C5F591A00864346 /* GMAppleDouble+ZKAdditions.m in Sources */,
 				5304A1BF169017C4009B2732 /* ISMSArtist.m in Sources */,
 				5304A1C0169017C4009B2732 /* ISMSAlbum.m in Sources */,
 				5304A1C1169017C4009B2732 /* ISMSSong.m in Sources */,
@@ -1860,7 +1863,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				536C9B311661B7D4005A73C6 /* ISMSIndex.m in Sources */,
 				536C9B321661B7D4005A73C6 /* ISMSArtist.m in Sources */,
 				536C9B331661B7D4005A73C6 /* ISMSAlbum.m in Sources */,
 				53146D451A630FCD007D4163 /* ISMSRootArtistsLoader.m in Sources */,
