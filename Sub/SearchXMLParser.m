@@ -52,9 +52,10 @@
 	}
 	else if ([elementName isEqualToString:@"album"])
 	{
-		ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithAttributeDict:attributeDict];
-		
-		[self.listOfAlbums addObject:anAlbum];
+        // Rewrite using RXML parser
+//		ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithAttributeDict:attributeDict];
+//		
+//		[self.listOfAlbums addObject:anAlbum];
 		
 	}
 	else if ([elementName isEqualToString:@"artist"])

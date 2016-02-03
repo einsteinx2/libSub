@@ -109,7 +109,7 @@ LOG_LEVEL_ISUB_DEFAULT
         //[db executeUpdate:@"DROP TABLE albums"];
         if (![db tableExists:@"albums"])
         {
-            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, artistId INTEGER, coverArtId INTEGER, name TEXT, songCount INTEGER, duration INTEGER, createdDate INTEGER, year INTEGER, genre TEXT)"];
+            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, artistId INTEGER, genreId INTEGER, coverArtId TEXT, name TEXT, songCount INTEGER, duration INTEGER, year INTEGER)"];
         }
         
         if (![db tableExists:@"genres"])
