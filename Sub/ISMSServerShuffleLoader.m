@@ -7,6 +7,7 @@
 //
 
 #import "ISMSServerShuffleLoader.h"
+#import "ISMSLoader_Subclassing.h"
 #import "libSubImports.h"
 #import "SearchXMLParser.h"
 #import "NSMutableURLRequest+SUS.h"
@@ -56,19 +57,16 @@
     [xmlParser setDelegate:parser];
     [xmlParser parse];
     
+    ISMSPlaylist *playQueue = [ISMSPlaylist playQueue];
+    [playQueue removeAllSongs];
     if (settingsS.isJukeboxEnabled)
     {
-        [databaseS resetJukeboxPlaylist];
         [jukeboxS jukeboxClearRemotePlaylist];
     }
-    else
-    {
-        [databaseS resetCurrentPlaylistDb];
-    }
     
-    for(ISMSSong *aSong in parser.listOfSongs)
+    for (ISMSSong *aSong in parser.listOfSongs)
     {
-        [aSong addToCurrentPlaylistDbQueue];
+        [playQueue addSongId:aSong.songId.integerValue];
     }
     
     playlistS.isShuffle = NO;    

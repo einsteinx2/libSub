@@ -11,7 +11,7 @@
 
 #import "ISMSNotificationNames.h"
 
-typedef enum
+typedef NS_ENUM(NSInteger, ISMSBassVisualType)
 {
     ISMSBassVisualType_none      = 0,
     ISMSBassVisualType_line      = 1,
@@ -19,7 +19,7 @@ typedef enum
     ISMSBassVisualType_fatBar    = 3,
     ISMSBassVisualType_aphexFace = 4,
     ISMSBassVisualType_maxValue  = 5
-} ISMSBassVisualType;
+};
 
 #define ISMSLoadingTimeout 240.0
 #define ISMSJukeboxTimeout 60.0

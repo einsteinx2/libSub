@@ -40,29 +40,12 @@ LOG_LEVEL_ISUB_DEBUG
 
 - (BOOL)isSongInQueue:(ISMSSong *)aSong
 {
-	return [databaseS.cacheQueueDbQueue boolForQuery:@"SELECT COUNT(*) FROM cacheQueue WHERE songId = ? LIMIT 1", aSong.songId];
+    return [[ISMSPlaylist downloadQueue] containsSongId:aSong.songId.integerValue];
 }
 
 - (ISMSSong *)currentQueuedSongInDb
 {
-	__block ISMSSong *aSong = nil;
-	
-	[databaseS.cacheQueueDbQueue inDatabase:^(FMDatabase *db)
-	 {
-		 FMResultSet *result = [db executeQuery:@"SELECT * FROM cacheQueue WHERE finished = 'NO' LIMIT 1"];
-		 if ([db hadError]) 
-		 {
-			 //DLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
-		 }
-		 else
-		 {
-			 aSong = [ISMSSong songFromDbResult:result];
-		 }
-		 
-		 [result close]; 
-	 }];
-	
-	return aSong;
+    return [[[ISMSPlaylist downloadQueue] songs] firstObject];
 }
 
 // Start downloading the file specified in the text field.
@@ -104,10 +87,10 @@ LOG_LEVEL_ISUB_DEBUG
 	}
     
     // Check if this is a video
-    if (self.currentQueuedSong.isVideo)
+    if (self.currentQueuedSong.contentType.basicType == ISMSBasicContentTypeVideo)
     {
         // Remove from the queue
-        [self.currentQueuedSong removeFromCacheQueueDbQueue];
+        [[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
         
         // Continue the queue
 		[self startDownloadQueue];
@@ -124,7 +107,7 @@ LOG_LEVEL_ISUB_DEBUG
 		//self.currentQueuedSong.isDownloaded = YES;
 		
 		// The song is fully cached, so delete it from the cache queue database
-		[self.currentQueuedSong removeFromCacheQueueDbQueue];
+		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
 		
 		// Notify any tables
 		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:self.currentQueuedSong.songId forKey:@"songId"];
@@ -139,11 +122,11 @@ LOG_LEVEL_ISUB_DEBUG
 	self.isQueueDownloading = YES;
 	
 	// Grab the lyrics
-	if (self.currentQueuedSong.artistName && self.currentQueuedSong.title && settingsS.isLyricsEnabled)
+	if (self.currentQueuedSong.artist.name && self.currentQueuedSong.title && settingsS.isLyricsEnabled)
 	{
         ISMSLyricsLoader *lyricsLoader = [[ISMSLyricsLoader alloc] initWithDelegate:self];
 		//DLog(@"lyricsLoader: %@", lyricsLoader);
-        lyricsLoader.artist = self.currentQueuedSong.artistName;
+        lyricsLoader.artist = self.currentQueuedSong.artist.name;
         lyricsLoader.title = self.currentQueuedSong.title;
         [lyricsLoader startLoad];        
 	}
@@ -151,7 +134,7 @@ LOG_LEVEL_ISUB_DEBUG
 	// Download the art
 	if (self.currentQueuedSong.coverArtId)
 	{
-		NSString *coverArtId = self.currentQueuedSong.coverArtId;
+		NSString *coverArtId = self.currentQueuedSong.coverArtId.stringValue;
 		ISMSCoverArtLoader *playerArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self 
 																		coverArtId:coverArtId
 																		   isLarge:YES];
@@ -214,7 +197,7 @@ LOG_LEVEL_ISUB_DEBUG
 	if (self.isQueueDownloading)
 		[self stopDownloadQueue];
 	
-	[self.currentQueuedSong removeFromCacheQueueDbQueue];
+    [[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
 	
 	if (!self.isQueueDownloading)
 		[self startDownloadQueue];
@@ -250,7 +233,7 @@ LOG_LEVEL_ISUB_DEBUG
 		
 		// Tried max number of times so remove
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CacheQueueSongFailed];
-		[self.currentQueuedSong removeFromCacheQueueDbQueue];
+		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
 		self.currentStreamHandler = nil;
 		[self startDownloadQueue];
 	}
@@ -314,7 +297,7 @@ LOG_LEVEL_ISUB_DEBUG
         self.currentQueuedSong.isFullyCached = YES;
 		
 		// Remove the song from the cache queue
-		[self.currentQueuedSong removeFromCacheQueueDbQueue];
+		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
 		self.currentQueuedSong = nil;
         		
 		// Remove the stream handler

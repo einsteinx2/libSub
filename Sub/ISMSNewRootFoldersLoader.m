@@ -7,17 +7,19 @@
 //
 
 #import "ISMSNewRootFoldersLoader.h"
+#import "ISMSLoader_Subclassing.h"
 #import "libSubImports.h"
 #import "NSMutableURLRequest+SUS.h"
 
 @interface ISMSNewRootFoldersLoader()
 @property (nonatomic, readwrite) NSArray<NSString*> *ignoredArticles;
+@property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;
 @property (nonatomic, readwrite) NSArray<ISMSFolder*> *folders;
 @property (nonatomic, readwrite) NSArray<ISMSSong*> *songs;
 @end
 
 @implementation ISMSNewRootFoldersLoader
-@synthesize ignoredArticles=_ignoredArticles, folders=_folders, songs=_songs;
+@synthesize ignoredArticles=_ignoredArticles, items=_items, folders=_folders, songs=_songs;
 
 #pragma mark - Data loading -
 
@@ -50,8 +52,8 @@
         }
         else
         {
-            NSMutableArray *folders = [[NSMutableArray alloc] init];
-            NSMutableArray *songs = [[NSMutableArray alloc] init];
+            NSMutableArray<ISMSFolder*> *folders = [[NSMutableArray alloc] init];
+            NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
             
             NSString *ignoredArticlesString = [[root child:@"indexes"] attribute:@"ignoredArticles"];
             _ignoredArticles = [ignoredArticlesString componentsSeparatedByString:@" "];
@@ -75,20 +77,20 @@
                     }
                 }
                 
-//                for (RXMLElement *child in [e children:@"child"])
-//                {
-//                    //      <child id="1" isDir="false" title="Me Against The World" album="Me Against The World" artist="2Pac" track="3" year="1995" genre="Rap" size="14929021" contentType="audio/mpeg" suffix="mp3" duration="281" bitRate="217" path="03 - Me Against The World - 2Pac.mp3" isVideo="false" created="2012-12-06T05:55:48.000Z" albumId="0" artistId="0" type="music"/>
-//                    
-//                    ISMSSong *song = [[ISMSSong alloc] init];
-//                    song.songId = [child attribute:@"id"];
-//                    song.title = [child attribute:@"title"];
-//                    song.albumName = [child attribute:@"albumName"];
-//                }
-                
+                ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e];
+                if (song.contentType)
+                {
+                    //songsDuration += song.duration.doubleValue;
+                    [songs addObject:song];
+                }
+                                
                 NSLog(@"loaded media folder id: %@  folder count: %li", self.mediaFolderId, (unsigned long)folders.count);
                 
                 _folders = folders;
                 _songs = songs;
+                _items = [(NSArray<id<ISMSItem>> *)folders arrayByAddingObjectsFromArray:(NSArray<id<ISMSItem>> *)songs];
+                
+                [self persistModels];
             }];
             
             // Notify the delegate that the loading is finished
@@ -104,23 +106,31 @@
     // Remove existing root folders
     [[[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId] deleteRootFolders];
     
-    // Save the new folders //and songs
+    // Save the new folders
     [self.folders makeObjectsPerformSelector:@selector(replaceModel)];
-    //[self.songs makeObjectsPerformSelector:@selector(replaceModel)];
+    [self.songs makeObjectsPerformSelector:@selector(replaceModel)];
 }
 
 - (BOOL)loadModelsFromCache
 {
-    ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId];
-    NSArray *rootFolders = [mediaFolder rootFolders];
-    
-    if (rootFolders.count > 0)
+    NSArray *folders = nil;
+    NSArray *songs = nil;
+    if (self.mediaFolderId)
     {
-        _folders = rootFolders;
-        return YES;
+        ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId];
+        folders = [mediaFolder rootFolders];
+        songs = [ISMSSong rootSongsInMediaFolder:self.mediaFolderId.unsignedIntegerValue];
+    }
+    else
+    {
+        folders = [ISMSMediaFolder allRootFolders];
     }
     
-    return NO;
+    _folders = folders;
+    _songs = songs;
+    _items = [(NSArray<id<ISMSItem>> *)folders arrayByAddingObjectsFromArray:(NSArray<id<ISMSItem>> *)songs];
+    
+    return _items.count > 0;
 }
 
 @end

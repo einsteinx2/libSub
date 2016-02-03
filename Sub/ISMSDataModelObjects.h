@@ -14,10 +14,11 @@
 #import "ISMSArtist.h"
 #import "ISMSAlbum.h"
 #import "ISMSSong.h"
-#import "ISMSSong+DAO.h"
 #import "ISMSIndex.h"
 #import "ISMSChatMessage.h"
 #import "ISMSServer.h"
-#import "SUSServerPlaylist.h"
+#import "ISMSPlaylist.h"
+#import "ISMSGenre.h"
+#import "ISMSContentType.h"
 
 #endif

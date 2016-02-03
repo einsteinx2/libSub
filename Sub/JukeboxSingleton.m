@@ -99,31 +99,31 @@
 
 - (void)jukeboxPrevSong
 {
-	NSInteger index = playlistS.currentIndex - 1;
-	if (index >= 0)
-	{						
-		[self jukeboxPlaySongAtPosition:@(index)];
-		
-		self.jukeboxIsPlaying = YES;
-	}
+    NSInteger index = playlistS.currentIndex - 1;
+    if (index >= 0)
+    {
+        [self jukeboxPlaySongAtPosition:@(index)];
+        
+        self.jukeboxIsPlaying = YES;
+    }
 }
 
 - (void)jukeboxNextSong
 {
-	NSInteger index = playlistS.currentIndex + 1;
-	if (index <= ([databaseS.currentPlaylistDbQueue intForQuery:@"SELECT COUNT(*) FROM jukeboxCurrentPlaylist"] - 1))
-	{		
-		[self jukeboxPlaySongAtPosition:@(index)];
-		
-		self.jukeboxIsPlaying = YES;
-	}
-	else
-	{
-		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_SongPlaybackEnded];
-		[self jukeboxStop];
-		
-		self.jukeboxIsPlaying = NO;
-	}
+    NSInteger index = playlistS.currentIndex + 1;
+    if (index <= ([[ISMSPlaylist playQueue] songCount] - 1))
+    {
+        [self jukeboxPlaySongAtPosition:@(index)];
+        
+        self.jukeboxIsPlaying = YES;
+    }
+    else
+    {
+        [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_SongPlaybackEnded];
+        [self jukeboxStop];
+        
+        self.jukeboxIsPlaying = NO;
+    }
 }
 
 - (void)jukeboxSetVolume:(float)level
@@ -208,28 +208,14 @@
 - (void)jukeboxReplacePlaylistWithLocal
 {
 	[self jukeboxClearRemotePlaylist];
-	
-	__block NSMutableArray *songIds = [[NSMutableArray alloc] init];
-	
-	[databaseS.currentPlaylistDbQueue inDatabase:^(FMDatabase *db)
-	{
-		FMResultSet *result;
-		if (playlistS.isShuffle)
-			result = [db executeQuery:@"SELECT songId FROM jukeboxShufflePlaylist"];
-		else
-			result = [db executeQuery:@"SELECT songId FROM jukeboxCurrentPlaylist"];
-		
-		while ([result next])
-		{
-			@autoreleasepool 
-			{
-				NSString *songId = [result stringForColumnIndex:0];
-				if (songId) [songIds addObject:songId];
-			}
-		}
-		[result close];
-	}];
-	
+    
+    NSArray *localSongs = [[ISMSPlaylist playQueue] songs];
+    NSMutableArray *songIds = [[NSMutableArray alloc] initWithCapacity:localSongs.count];
+    for (ISMSSong *song in localSongs)
+    {
+        [songIds addObject:song.songId];
+    }
+
 	[self jukeboxAddSongs:songIds];
 }
 
@@ -268,8 +254,8 @@
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:connDelegate startImmediately:NO];
 	if (connection)
 	{
-		[databaseS resetJukeboxPlaylist];
-		
+        [[ISMSPlaylist playQueue] removeAllSongs];
+        
 		[self.connectionQueue registerConnection:connection];
 		[self.connectionQueue startQueue];
 	}
@@ -318,7 +304,7 @@
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:connDelegate startImmediately:NO];
 	if (connection)
 	{
-		[databaseS resetJukeboxPlaylist];
+		[[ISMSPlaylist playQueue] removeAllSongs];
 		
 		[self.connectionQueue registerConnection:connection];
 		[self.connectionQueue startQueue];
@@ -348,10 +334,7 @@
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:connDelegate startImmediately:NO];
 	if (connection)
 	{
-		if (playlistS.isShuffle)
-			[databaseS resetShufflePlaylist];
-		else
-			[databaseS resetJukeboxPlaylist];
+		[[ISMSPlaylist playQueue] removeAllSongs];
 		
 		[self.connectionQueue registerConnection:connection];
 		[self.connectionQueue startQueue];

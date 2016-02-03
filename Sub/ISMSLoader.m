@@ -7,6 +7,7 @@
 //
 
 #import "ISMSLoader.h"
+#import "ISMSLoader_Subclassing.h"
 #import "libSubImports.h"
 #import "ISMSLoaderDelegate.h"
 #import "ISMSLoaderManager.h"
@@ -19,30 +20,6 @@
 @end
 
 @implementation ISMSLoader
-
-+ (id)loader
-{
-	[NSException raise:NSInternalInconsistencyException 
-				format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
-	
-	return nil;
-}
-
-+ (id)loaderWithDelegate:(id <ISMSLoaderDelegate>)theDelegate
-{
-	[NSException raise:NSInternalInconsistencyException 
-				format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
-	
-	return nil;
-}
-
-+ (id)loaderWithCallbackBlock:(LoaderCallback)theBlock
-{
-	[NSException raise:NSInternalInconsistencyException
-				format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
-	
-	return nil;
-}
 
 - (void)setup
 {
@@ -169,7 +146,6 @@
 	if ([self.delegate respondsToSelector:@selector(loadingFinished:)])
 	{
 		[self.delegate loadingFinished:self];
-        
 	}
     
     if (self.callbackBlock)

@@ -11,22 +11,27 @@
 
 @implementation ISMSAbstractItemLoader
 
-- (NSArray *)folders
+- (NSArray<id<ISMSItem>> *)items
 {
     return nil;
 }
 
-- (NSArray *)artists
+- (NSArray<ISMSFolder*> *)folders
 {
     return nil;
 }
 
-- (NSArray *)albums
+- (NSArray<ISMSArtist*> *)artists
 {
     return nil;
 }
 
-- (NSArray *)songs
+- (NSArray<ISMSAlbum*> *)albums
+{
+    return nil;
+}
+
+- (NSArray<ISMSSong*> *)songs
 {
     return nil;
 }

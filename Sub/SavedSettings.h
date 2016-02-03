@@ -17,11 +17,11 @@
 
 #define settingsS ((SavedSettings *)[SavedSettings sharedInstance])
 
-typedef enum 
+typedef NS_ENUM(NSInteger, ISMSCachingType)
 {
 	ISMSCachingType_minSpace = 0,
 	ISMSCachingType_maxSize = 1
-} ISMSCachingType;
+};
 
 @class AudioEngine;
 @interface SavedSettings : NSObject 

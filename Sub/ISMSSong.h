@@ -8,28 +8,39 @@
 
 #import "ISMSPersistedModel.h"
 #import "TBXML.h"
+#import <CoreGraphics/CGBase.h>
 
-@class ISMSFolder, ISMSArtist, ISMSAlbum, RXMLElement;
+@class ISMSFolder, ISMSArtist, ISMSAlbum, ISMSGenre, ISMSContentType, RXMLElement;
 
 @interface ISMSSong : NSObject <NSCoding, NSCopying, ISMSPersistedModel>
 
+@property (nullable, strong) NSNumber *songId;
+@property (nullable, strong) NSNumber *contentTypeId;
+@property (nullable, strong) NSNumber *transcodedContentTypeId;
+@property (nullable, strong) NSNumber *mediaFolderId;
+@property (nullable, strong) NSNumber *folderId;
+@property (nullable, strong) NSNumber *artistId;
+@property (nullable, strong) NSNumber *albumId;
+@property (nullable, strong) NSNumber *genreId;
+@property (nullable, strong) NSNumber *coverArtId;
+
 @property (nullable, copy) NSString *title;
-@property (nullable, copy) NSString *songId;
-@property (nullable, copy) NSString *parentId;
-@property (nullable, copy) NSString *artistName;
-@property (nullable, copy) NSString *albumName;
-@property (nullable, copy) NSString *genre;
-@property (nullable, copy) NSString *coverArtId;
+@property (nullable, strong) NSNumber *duration;
+@property (nullable, strong) NSNumber *bitrate;
+@property (nullable, strong) NSNumber *trackNumber;
+@property (nullable, strong) NSNumber *discNumber;
+@property (nullable, strong) NSNumber *year;
+@property (nullable, strong) NSNumber *size;
 @property (nullable, copy) NSString *path;
-@property (nullable, copy) NSString *suffix;
-@property (nullable, copy) NSString *transcodedSuffix;
-@property (nullable, copy) NSNumber *duration;
-@property (nullable, copy) NSNumber *bitRate;
-@property (nullable, copy) NSNumber *track;
-@property (nullable, copy) NSNumber *year;
-@property (nullable, copy) NSNumber *size;
-@property (nullable, copy) NSNumber *discNumber;
-@property BOOL isVideo;
+
+@property (nullable, readonly) ISMSFolder *folder;
+@property (nullable, readonly) ISMSArtist *artist;
+@property (nullable, readonly) ISMSAlbum *album;
+@property (nullable, readonly) ISMSGenre *genre;
+@property (nullable, readonly) ISMSContentType *contentType;
+@property (nullable, readonly) ISMSContentType *transcodedContentType;
+
+@property (nullable, nonatomic, strong) NSDate *lastPlayed;
 
 - (nullable NSString *)localSuffix;
 - (nullable NSString *)localPath;
@@ -39,27 +50,20 @@
 @property (readonly) unsigned long long localFileSize;
 @property (readonly) NSUInteger estimatedBitrate;
 
-- (nullable instancetype)initWithPMSDictionary:(nonnull NSDictionary *)dictionary;
-- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element;
 - (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
-- (nullable instancetype)initWithAttributeDict:(nonnull NSDictionary *)attributeDict;
-
-- (BOOL)isEqualToSong:(nullable ISMSSong *)otherSong;
-
-/*
- New Model
- */
 
 // Returns an instance if it exists in the db, otherwise nil
 - (nullable instancetype)initWithSongId:(NSInteger)songId;
 
-- (nullable ISMSFolder *)folder;
-- (nullable ISMSArtist *)artist;
-- (nullable ISMSAlbum *)album;
-
 + (nonnull NSArray<ISMSSong*> *)songsInFolderWithId:(NSInteger)folderId;
 + (nonnull NSArray<ISMSSong*> *)songsInAlbumWithId:(NSInteger)albumId;
++ (nonnull NSArray<ISMSSong*> *)rootSongsInMediaFolder:(NSInteger)mediaFolderId;
+
+- (BOOL)isEqualToSong:(nullable ISMSSong *)otherSong;
+
+@property BOOL isPartiallyCached;
+@property BOOL isFullyCached;
+@property (readonly) CGFloat downloadProgress;
+@property (readonly) BOOL fileExists;
 
 @end
-
-#import "ISMSSong+DAO.h"

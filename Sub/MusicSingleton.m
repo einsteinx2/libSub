@@ -152,7 +152,7 @@ double startSongSeconds = 0.0;
 	playlistS.currentIndex = position;
     ISMSSong *currentSong = playlistS.currentSong;
  
-    if (!currentSong.isVideo)
+    if (currentSong.contentType.basicType != ISMSBasicContentTypeVideo)
     {
         // Remove the video player if this is not a video
         [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_RemoveMoviePlayer];
@@ -160,7 +160,7 @@ double startSongSeconds = 0.0;
     
 	if (settingsS.isJukeboxEnabled)
 	{
-        if (currentSong.isVideo)
+        if (currentSong.contentType.basicType != ISMSBasicContentTypeVideo)
         {
             currentSong = nil;
             
@@ -177,7 +177,7 @@ double startSongSeconds = 0.0;
 	{
 		[streamManagerS removeAllStreamsExceptForSong:playlistS.currentSong];
         
-        if (currentSong.isVideo)
+        if (currentSong.contentType.basicType != ISMSBasicContentTypeVideo)
         {
             [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_PlayVideo userInfo:@{@"song":currentSong}];
         }
@@ -261,10 +261,10 @@ double startSongSeconds = 0.0;
 		ISMSSong *currentSong = playlistS.currentSong;
 		if (currentSong.title)
 			[trackInfo setObject:currentSong.title forKey:MPMediaItemPropertyTitle];
-		if (currentSong.albumName)
-			[trackInfo setObject:currentSong.albumName forKey:MPMediaItemPropertyAlbumTitle];
-		if (currentSong.artistName)
-			[trackInfo setObject:currentSong.artistName forKey:MPMediaItemPropertyArtist];
+		if (currentSong.album.name)
+			[trackInfo setObject:currentSong.album.name forKey:MPMediaItemPropertyAlbumTitle];
+		if (currentSong.artist.name)
+			[trackInfo setObject:currentSong.artist.name forKey:MPMediaItemPropertyArtist];
 		if (currentSong.genre)
 			[trackInfo setObject:currentSong.genre forKey:MPMediaItemPropertyGenre];
 		if (currentSong.duration)
@@ -282,7 +282,7 @@ double startSongSeconds = 0.0;
 		
 		if (settingsS.isLockScreenArtEnabled)
 		{
-			SUSCoverArtDAO *artDataModel = [[SUSCoverArtDAO alloc] initWithDelegate:nil coverArtId:currentSong.coverArtId isLarge:YES];
+			SUSCoverArtDAO *artDataModel = [[SUSCoverArtDAO alloc] initWithDelegate:nil coverArtId:currentSong.coverArtId.stringValue isLarge:YES];
 			[trackInfo setObject:[[MPMediaItemArtwork alloc] initWithImage:artDataModel.coverArtImage] 
 						  forKey:MPMediaItemPropertyArtwork];
 		}

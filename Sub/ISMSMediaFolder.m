@@ -101,7 +101,7 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM folders WHERE mediaFolderId = ?";
+         NSString *query = @"DELETE FROM folders WHERE mediaFolderId = ? AND f.parentFolderId IS NULL";
          success = [db executeUpdate:query, self.mediaFolderId];
      }];
     return success;

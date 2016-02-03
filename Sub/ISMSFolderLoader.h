@@ -10,10 +10,11 @@
 
 @interface ISMSFolderLoader : ISMSAbstractItemLoader
 
-@property (copy) NSNumber *folderId;
-@property (copy) NSNumber *mediaFolderId;
+@property (nullable, copy) NSNumber *folderId;
+@property (nullable, copy) NSNumber *mediaFolderId;
 
-@property (readonly) NSArray *folders;
-@property (readonly) NSArray *songs;
+@property (nullable, readonly) NSArray<id<ISMSItem>> *items;
+@property (nullable, readonly) NSArray<ISMSFolder*> *folders;
+@property (nullable, readonly) NSArray<ISMSSong*> *songs;
 
 @end

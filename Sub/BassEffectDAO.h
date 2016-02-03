@@ -9,10 +9,10 @@
 #define BassEffectTempCustomPresetId 1000000
 #define BassEffectUserPresetStartId 1000
 
-typedef enum 
+typedef NS_ENUM(NSInteger, BassEffectType)
 {
 	BassEffectType_ParametricEQ = 1
-} BassEffectType;
+};
 
 @class BassEffectValue;
 @interface BassEffectDAO : NSObject

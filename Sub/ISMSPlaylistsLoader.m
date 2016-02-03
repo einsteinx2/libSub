@@ -1,24 +1,25 @@
 //
-//  ISMSServerPlaylistLoader.m
+//  ISMSPlaylistLoader.m
 //  iSub
 //
 //  Created by Benjamin Baron on 11/6/11.
 //  Copyright (c) 2011 Ben Baron. All rights reserved.
 //
 
-#import "ISMSServerPlaylistsLoader.h"
+#import "ISMSPlaylistsLoader.h"
+#import "ISMSLoader_Subclassing.h"
 #import "libSubImports.h"
-#import "SUSServerPlaylist.h"
+#import "ISMSPlaylist.h"
 #import "NSMutableURLRequest+SUS.h"
 
-@implementation ISMSServerPlaylistsLoader
+@interface ISMSFolderLoader()
+@property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;
+@end
+
+@implementation ISMSPlaylistsLoader
+@synthesize items=_items;
 
 #pragma mark - Lifecycle
-
-- (FMDatabaseQueue *)dbQueue
-{
-    return databaseS.localPlaylistsDbQueue;
-}
 
 - (ISMSLoaderType)type
 {
@@ -37,7 +38,7 @@
 	if (self.connection)
 	{
 		self.receivedData = [NSMutableData data];
-        self.serverPlaylists = nil;
+        self.playlists = nil;
 	} 
 	else 
 	{
@@ -107,12 +108,15 @@
         {
             NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:0];
             [root iterate:@"playlists.playlist" usingBlock:^(RXMLElement *e) {
-                SUSServerPlaylist *serverPlaylist = [[SUSServerPlaylist alloc] initWithRXMLElement:e];
-                [tempArray addObject:serverPlaylist];
+                ISMSPlaylist *playlist = [[ISMSPlaylist alloc] init];
+                playlist.playlistId = @([[e attribute:@"id"] integerValue]);
+                playlist.name = [e attribute:@"name"];
+                // TODO: Persist data model
+                [tempArray addObject:playlist];
             }];
         
             // Sort the array
-            self.serverPlaylists = [tempArray sortedArrayUsingSelector:@selector(compare:)];
+            self.playlists = [tempArray sortedArrayUsingSelector:@selector(compare:)];
 			            
             // Notify the delegate that the loading is finished
 			[self informDelegateLoadingFinished];

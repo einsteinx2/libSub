@@ -10,7 +10,8 @@
 
 @interface ISMSRootArtistsLoader : ISMSAbstractItemLoader
 
-@property (readonly) NSArray *ignoredArticles;
-@property (readonly) NSArray *artists;
+@property (nullable, readonly) NSArray *ignoredArticles;
+@property (nullable, readonly) NSArray<id<ISMSItem>> *items;
+@property (nullable, readonly) NSArray<ISMSArtist*> *artists;
 
 @end

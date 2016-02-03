@@ -7,6 +7,7 @@
 //
 
 #import "ISMSQuickAlbumsLoader.h"
+#import "ISMSLoader_Subclassing.h"
 #import "libSubImports.h"
 #import "NSMutableURLRequest+SUS.h"
 

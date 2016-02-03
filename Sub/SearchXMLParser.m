@@ -38,16 +38,17 @@
 {
 	if ([elementName isEqualToString:@"match"] || [elementName isEqualToString:@"song"])
 	{
-		if (![[attributeDict objectForKey:@"isVideo"] isEqualToString:@"true"])
-		{
-			ISMSSong *aSong = [[ISMSSong alloc] initWithAttributeDict:attributeDict];
-		
-			if (aSong.path)
-			{
-				[self.listOfSongs addObject:aSong];
-			}
-		
-		}
+        // Rewrite using RXML parser
+//		if (![[attributeDict objectForKey:@"isVideo"] isEqualToString:@"true"])
+//		{
+//			ISMSSong *aSong = [[ISMSSong alloc] initWithAttributeDict:attributeDict];
+//		
+//			if (aSong.path)
+//			{
+//				[self.listOfSongs addObject:aSong];
+//			}
+//		
+//		}
 	}
 	else if ([elementName isEqualToString:@"album"])
 	{

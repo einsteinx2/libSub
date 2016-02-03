@@ -11,11 +11,12 @@
 @class ISMSFolder, ISMSSong;
 @interface ISMSNewRootFoldersLoader : ISMSAbstractItemLoader
 
-@property (copy) NSNumber *mediaFolderId;
+@property (nullable, copy) NSNumber *mediaFolderId;
 
-@property (readonly) NSArray<NSString*> *ignoredArticles;
-@property (readonly) NSArray<ISMSFolder*> *folders;
-@property (readonly) NSArray<ISMSSong*> *songs;
+@property (nullable, readonly) NSArray<NSString*> *ignoredArticles;
+@property (nullable, readonly) NSArray<id<ISMSItem>> *items;
+@property (nullable, readonly) NSArray<ISMSFolder*> *folders;
+@property (nullable, readonly) NSArray<ISMSSong*> *songs;
 
 - (void)persistModels;
 - (BOOL)loadModelsFromCache;

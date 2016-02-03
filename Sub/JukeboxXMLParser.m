@@ -58,21 +58,19 @@
 		self.isPlaying = [[attributeDict objectForKey:@"playing"] boolValue];
 		self.gain = [[attributeDict objectForKey:@"gain"] floatValue];
 		
-		if (playlistS.isShuffle)
-			[databaseS resetShufflePlaylist];
-		else
-			[databaseS resetJukeboxPlaylist];
-	}
+        [[ISMSPlaylist playQueue] removeAllSongs];
+    }
 	else if ([elementName isEqualToString:@"entry"])
 	{
-		ISMSSong *aSong = [[ISMSSong alloc] initWithAttributeDict:attributeDict];
-		if (aSong.path)
-		{
-			if (playlistS.isShuffle)
-				[aSong insertIntoTable:@"jukeboxShufflePlaylist" inDatabaseQueue:databaseS.currentPlaylistDbQueue];
-			else
-				[aSong insertIntoTable:@"jukeboxCurrentPlaylist" inDatabaseQueue:databaseS.currentPlaylistDbQueue];
-		}
+        // TODO: Rewrite this using RXML parser
+//		ISMSSong *aSong = [[ISMSSong alloc] initWithAttributeDict:attributeDict];
+//		if (aSong.path)
+//		{
+//			if (playlistS.isShuffle)
+//				[aSong insertIntoTable:@"jukeboxShufflePlaylist" inDatabaseQueue:databaseS.currentPlaylistDbQueue];
+//			else
+//				[aSong insertIntoTable:@"jukeboxCurrentPlaylist" inDatabaseQueue:databaseS.currentPlaylistDbQueue];
+//		}
 	}
 }
 
