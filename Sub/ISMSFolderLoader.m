@@ -111,7 +111,7 @@
 - (BOOL)loadModelsFromCache
 {
     ISMSFolder *folder = [self associatedObject];
-    _folders = folder.subfolders;
+    _folders = folder.folders;
     _songs = folder.songs;
     _items = [(NSArray<id<ISMSItem>> *)_folders arrayByAddingObjectsFromArray:(NSArray<id<ISMSItem>> *)_songs];
     

@@ -20,11 +20,6 @@ static NSArray *_ignoredArticles = nil;
 
 @implementation ISMSFolder
 
-- (instancetype)initWithItemId:(NSInteger)itemId
-{
-    return [self initWithFolderId:itemId];
-}
-
 - (instancetype)initWithFolderId:(NSInteger)folderId
 {
     if (self = [super init])
@@ -117,7 +112,7 @@ static NSArray *_ignoredArticles = nil;
     }
 }
 
-- (NSArray<ISMSFolder*> *)subfolders
+- (NSArray<ISMSFolder*> *)folders
 {
     @synchronized(self)
     {
@@ -166,6 +161,11 @@ static NSArray *_ignoredArticles = nil;
 
 #pragma mark - ISMSItem -
 
+- (instancetype)initWithItemId:(NSInteger)itemId
+{
+    return [self initWithFolderId:itemId];
+}
+
 - (NSNumber *)itemId
 {
     return self.folderId;
@@ -174,6 +174,44 @@ static NSArray *_ignoredArticles = nil;
 - (NSString *)itemName
 {
     return [_name copy];
+}
+
+#pragma mark - NSCoding -
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeObject:self.folderId       forKey:@"folderId"];
+    [encoder encodeObject:self.parentFolderId forKey:@"parentFolderId"];
+    [encoder encodeObject:self.mediaFolderId  forKey:@"mediaFolderId"];
+    [encoder encodeObject:self.coverArtId     forKey:@"coverArtId"];
+    [encoder encodeObject:self.name           forKey:@"name"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    if ((self = [super init]))
+    {
+        _folderId       = [decoder decodeObjectForKey:@"chatMessageId"];
+        _parentFolderId = [decoder decodeObjectForKey:@"user"];
+        _mediaFolderId  = [decoder decodeObjectForKey:@"message"];
+        _coverArtId     = [decoder decodeObjectForKey:@"timestamp"];
+        _name           = [decoder decodeObjectForKey:@"name"];
+    }
+    
+    return self;
+}
+
+#pragma mark - NSCopying -
+
+- (instancetype)copyWithZone:(NSZone *)zone
+{
+    ISMSFolder *folder    = [[ISMSFolder alloc] init];
+    folder.folderId       = self.folderId;
+    folder.parentFolderId = self.parentFolderId;
+    folder.mediaFolderId  = self.mediaFolderId;
+    folder.coverArtId     = self.coverArtId;
+    folder.name           = self.name;
+    return folder;
 }
 
 @end

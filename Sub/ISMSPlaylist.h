@@ -14,7 +14,7 @@ static const NSInteger downloadQueuePlaylistId   = NSIntegerMax - 2;
 static const NSInteger downloadedSongsPlaylistId = NSIntegerMax - 3;
 
 @class ISMSSong, RXMLElement;
-@interface ISMSPlaylist : NSObject <NSCopying, ISMSItem>
+@interface ISMSPlaylist : NSObject <ISMSItem, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *playlistId;
 @property (nullable, copy) NSString *name;

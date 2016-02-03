@@ -42,11 +42,6 @@
     return self;
 }
 
-- (instancetype)initWithItemId:(NSInteger)itemId
-{
-    return [self initWithAlbumId:itemId];
-}
-
 - (instancetype)initWithAlbumId:(NSInteger)albumId
 {
     if (self = [super init])
@@ -74,14 +69,14 @@
 
 - (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
 {
-    _albumId = [resultSet objectForColumnIndex:0];
-    _artistId = N2n([resultSet objectForColumnIndex:1]);
-    _genreId = N2n([resultSet objectForColumnIndex:2]);
-    _name = N2n([resultSet objectForColumnIndex:3]);
+    _albumId    = [resultSet objectForColumnIndex:0];
+    _artistId   = N2n([resultSet objectForColumnIndex:1]);
+    _genreId    = N2n([resultSet objectForColumnIndex:2]);
+    _name       = N2n([resultSet objectForColumnIndex:3]);
     _coverArtId = N2n([resultSet objectForColumnIndex:4]);
-    _name = N2n([resultSet objectForColumnIndex:5]);
-    _songCount = N2n([resultSet objectForColumnIndex:6]);
-    _year = N2n([resultSet objectForColumnIndex:7]);
+    _name       = N2n([resultSet objectForColumnIndex:5]);
+    _songCount  = N2n([resultSet objectForColumnIndex:6]);
+    _year       = N2n([resultSet objectForColumnIndex:7]);
 }
 
 - (NSString *)description
@@ -108,6 +103,11 @@
 }
 
 #pragma mark - ISMSItem -
+
+- (instancetype)initWithItemId:(NSInteger)itemId
+{
+    return [self initWithAlbumId:itemId];
+}
 
 - (NSNumber *)itemId
 {
@@ -191,15 +191,15 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:self.albumId forKey:@"albumId"];
-    [encoder encodeObject:self.artistId forKey:@"artistId"];
-    [encoder encodeObject:self.genreId forKey:@"genreId"];
+    [encoder encodeObject:self.albumId    forKey:@"albumId"];
+    [encoder encodeObject:self.artistId   forKey:@"artistId"];
+    [encoder encodeObject:self.genreId    forKey:@"genreId"];
     [encoder encodeObject:self.coverArtId forKey:@"coverArtId"];
     
-	[encoder encodeObject:self.name forKey:@"name"];
-    [encoder encodeObject:self.songCount forKey:@"songCount"];
-    [encoder encodeObject:self.duration forKey:@"duration"];
-    [encoder encodeObject:self.year forKey:@"year"];
+	[encoder encodeObject:self.name       forKey:@"name"];
+    [encoder encodeObject:self.songCount  forKey:@"songCount"];
+    [encoder encodeObject:self.duration   forKey:@"duration"];
+    [encoder encodeObject:self.year       forKey:@"year"];
     
 }
 
@@ -208,15 +208,15 @@
 {
 	if ((self = [super init]))
 	{
-        _albumId = [decoder decodeObjectForKey:@"albumId"];
-        _artistId = [decoder decodeObjectForKey:@"artistId"];
-        _genreId = [decoder decodeObjectForKey:@"genreId"];
+        _albumId    = [decoder decodeObjectForKey:@"albumId"];
+        _artistId   = [decoder decodeObjectForKey:@"artistId"];
+        _genreId    = [decoder decodeObjectForKey:@"genreId"];
         _coverArtId = [decoder decodeObjectForKey:@"coverArtId"];
         
-        _name = [decoder decodeObjectForKey:@"name"];
-        _songCount = [decoder decodeObjectForKey:@"songCount"];
-        _duration = [decoder decodeObjectForKey:@"duration"];
-        _year = [decoder decodeObjectForKey:@"year"];
+        _name       = [decoder decodeObjectForKey:@"name"];
+        _songCount  = [decoder decodeObjectForKey:@"songCount"];
+        _duration   = [decoder decodeObjectForKey:@"duration"];
+        _year       = [decoder decodeObjectForKey:@"year"];
 	}
 	
 	return self;
@@ -228,15 +228,15 @@
 {
 	ISMSAlbum *anAlbum = [[ISMSAlbum alloc] init];
 	
-    anAlbum.albumId = self.albumId;
-    anAlbum.artistId = self.artistId;
-    anAlbum.genreId = self.genreId;
+    anAlbum.albumId    = self.albumId;
+    anAlbum.artistId   = self.artistId;
+    anAlbum.genreId    = self.genreId;
     anAlbum.coverArtId = self.coverArtId;
     
-	anAlbum.name = self.name;
-    anAlbum.songCount = self.songCount;
-    anAlbum.duration = self.duration;
-    anAlbum.year = self.year;
+	anAlbum.name       = self.name;
+    anAlbum.songCount  = self.songCount;
+    anAlbum.duration   = self.duration;
+    anAlbum.year       = self.year;
 	
 	return anAlbum;
 }

@@ -9,7 +9,7 @@
 #import "ISMSPersistedModel.h"
 
 @class ISMSSong;
-@interface ISMSFolder : NSObject <ISMSPersistedModel>
+@interface ISMSFolder : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *folderId;
 @property (nullable, strong) NSNumber *parentFolderId;
@@ -17,7 +17,7 @@
 @property (nullable, strong) NSNumber *coverArtId;
 @property (nullable, copy) NSString *name;
 
-@property (nonnull, strong, readonly) NSArray<ISMSFolder*> *subfolders;
+@property (nonnull, strong, readonly) NSArray<ISMSFolder*> *folders;
 @property (nonnull, strong, readonly) NSArray<ISMSSong*> *songs;
 
 + (void)loadIgnoredArticles;

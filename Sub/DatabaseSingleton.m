@@ -127,6 +127,11 @@ LOG_LEVEL_ISUB_DEFAULT
             [db executeUpdate:@"INSERT OR IGNORE INTO playlists (playlistId, name) VALUES (?, ?)", @(downloadQueuePlaylistId), @"Download Queue"];
             [db executeUpdate:@"INSERT OR IGNORE INTO playlists (playlistId, name) VALUES (?, ?)", @(downloadedSongsPlaylistId), @"Downloaded Songs"];
         }
+        
+        if (![db tableExists:@"chatMessages"])
+        {
+            [db executeUpdate:@"CREATE TABLE playlists (chatMessageId INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, message TEXT, timestamp REAL)"];
+        }
     }];
 	
     // TODO: Stop storing image files in fucking databases

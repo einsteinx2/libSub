@@ -376,24 +376,24 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
-    [encoder encodeObject:self.songId                   forKey:@"songId"];
-    [encoder encodeObject:self.contentTypeId            forKey:@"contentTypeId"];
-    [encoder encodeObject:self.transcodedContentTypeId  forKey:@"transcodedContentTypeId"];
-    [encoder encodeObject:self.mediaFolderId            forKey:@"mediaFolderId"];
-    [encoder encodeObject:self.folderId                 forKey:@"folderId"];
-    [encoder encodeObject:self.artistId                 forKey:@"artistId"];
-    [encoder encodeObject:self.albumId                  forKey:@"albumId"];
-    [encoder encodeObject:self.genreId                  forKey:@"genreId"];
-    [encoder encodeObject:self.coverArtId               forKey:@"coverArtId"];
-    
-    [encoder encodeObject:self.title                    forKey:@"title"];
-    [encoder encodeObject:self.duration                 forKey:@"duration"];
-    [encoder encodeObject:self.bitrate                  forKey:@"bitrate"];
-    [encoder encodeObject:self.trackNumber              forKey:@"trackNumber"];
-    [encoder encodeObject:self.discNumber               forKey:@"discNumber"];
-    [encoder encodeObject:self.year                     forKey:@"year"];
-    [encoder encodeObject:self.size                     forKey:@"size"];
-    [encoder encodeObject:self.path                     forKey:@"path"];
+    [encoder encodeObject:self.songId                  forKey:@"songId"];
+    [encoder encodeObject:self.contentTypeId           forKey:@"contentTypeId"];
+    [encoder encodeObject:self.transcodedContentTypeId forKey:@"transcodedContentTypeId"];
+    [encoder encodeObject:self.mediaFolderId           forKey:@"mediaFolderId"];
+    [encoder encodeObject:self.folderId                forKey:@"folderId"];
+    [encoder encodeObject:self.artistId                forKey:@"artistId"];
+    [encoder encodeObject:self.albumId                 forKey:@"albumId"];
+    [encoder encodeObject:self.genreId                 forKey:@"genreId"];
+    [encoder encodeObject:self.coverArtId              forKey:@"coverArtId"];
+
+    [encoder encodeObject:self.title                   forKey:@"title"];
+    [encoder encodeObject:self.duration                forKey:@"duration"];
+    [encoder encodeObject:self.bitrate                 forKey:@"bitrate"];
+    [encoder encodeObject:self.trackNumber             forKey:@"trackNumber"];
+    [encoder encodeObject:self.discNumber              forKey:@"discNumber"];
+    [encoder encodeObject:self.year                    forKey:@"year"];
+    [encoder encodeObject:self.size                    forKey:@"size"];
+    [encoder encodeObject:self.path                    forKey:@"path"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -427,24 +427,24 @@
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    ISMSSong *song = [[ISMSSong alloc] init];
-    song.songId = self.songId;
-    song.contentTypeId = self.contentTypeId;
+    ISMSSong *song               = [[ISMSSong alloc] init];
+    song.songId                  = self.songId;
+    song.contentTypeId           = self.contentTypeId;
     song.transcodedContentTypeId = self.transcodedContentTypeId;
-    song.mediaFolderId = self.mediaFolderId;
-    song.folderId = self.folderId;
-    song.artistId = self.artistId;
-    song.albumId = self.albumId;
-    song.genreId = self.genreId;
-    song.coverArtId = self.coverArtId;
-    song.title = self.title;
-    song.duration = self.duration;
-    song.bitrate = self.bitrate;
-    song.trackNumber = self.trackNumber;
-    song.discNumber = self.discNumber;
-    song.year = self.year;
-    song.size = self.size;
-    song.path = self.path;
+    song.mediaFolderId           = self.mediaFolderId;
+    song.folderId                = self.folderId;
+    song.artistId                = self.artistId;
+    song.albumId                 = self.albumId;
+    song.genreId                 = self.genreId;
+    song.coverArtId              = self.coverArtId;
+    song.title                   = self.title;
+    song.duration                = self.duration;
+    song.bitrate                 = self.bitrate;
+    song.trackNumber             = self.trackNumber;
+    song.discNumber              = self.discNumber;
+    song.year                    = self.year;
+    song.size                    = self.size;
+    song.path                    = self.path;
     return song;
 }
 
