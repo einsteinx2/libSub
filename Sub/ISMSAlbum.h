@@ -6,30 +6,26 @@
 //  Copyright 2010 Ben Baron. All rights reserved.
 //
 
-#import <TBXML/TBXML.h>
+#import "ISMSItem.h"
 
-@class ISMSArtist, RXMLElement;
-@interface ISMSAlbum : NSObject <NSCoding, NSCopying> 
+@class ISMSArtist, ISMSGenre, RXMLElement;
+@interface ISMSAlbum : NSObject <ISMSItem, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *albumId;
-@property (nullable, copy) NSString *name;
-@property (nullable, copy) NSString *coverArtId;
-@property (nullable, copy) NSString *artistName;
 @property (nullable, strong) NSNumber *artistId;
+@property (nullable, strong) NSNumber *genreId;
+@property (nullable, copy) NSString *coverArtId; // Look into storing this as an integer
 
+@property (nullable, copy) NSString *name;
 @property (nullable, strong) NSNumber *songCount;
 @property (nullable, strong) NSNumber *duration;
-@property (nullable, strong) NSNumber *createdDate;
 @property (nullable, strong) NSNumber *year;
-@property (nullable, copy) NSString *genre;
 
-- (nullable instancetype)initWithAttributeDict:(nonnull NSDictionary *)attributeDict;
-- (nullable instancetype)initWithAttributeDict:(nonnull NSDictionary *)attributeDict artist:(nullable ISMSArtist *)myArtist;
-- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element;
-- (nullable instancetype)initWithTBXMLElement:(nonnull TBXMLElement *)element artistId:(nullable NSString *)artistIdToSet artistName:(nullable NSString *)artistNameToSet;
+@property (nullable, readonly) ISMSArtist *artist;
+@property (nullable, readonly) ISMSGenre *genre;
+
 - (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
-- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element artistId:(nullable NSString *)artistIdToSet artistName:(nullable NSString *)artistNameToSet;
 
-+ (nonnull NSArray<ISMSAlbum*> *)albumsInArtistWithId:(NSInteger)artistId;
++ (nonnull NSArray<ISMSAlbum*> *)albumsInArtist:(NSInteger)artistId;
 
 @end

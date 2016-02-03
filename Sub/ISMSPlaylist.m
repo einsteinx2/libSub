@@ -134,12 +134,12 @@
 
 - (NSNumber *)itemId
 {
-    return _playlistId;
+    return self.playlistId;
 }
 
 - (NSString *)itemName
 {
-    return [_name copy];
+    return [self.name copy];
 }
 
 @end

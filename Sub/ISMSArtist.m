@@ -121,6 +121,9 @@
 
 - (BOOL)deleteModel
 {
+    if (!self.artistId)
+        return NO;
+    
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
@@ -135,7 +138,7 @@
     @synchronized(self)
     {
         NSInteger artistId = self.artistId.integerValue;
-        _albums = [ISMSAlbum albumsInArtistWithId:artistId];
+        _albums = [ISMSAlbum albumsInArtist:artistId];
     }
 }
 
@@ -201,7 +204,7 @@
 
 - (NSNumber *)itemId
 {
-    return _artistId;
+    return self.artistId;
 }
 
 - (NSString *)itemName

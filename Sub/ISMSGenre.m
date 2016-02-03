@@ -96,6 +96,9 @@
 
 - (BOOL)replaceModel
 {
+    if (!self.genreId)
+        return NO;
+    
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
