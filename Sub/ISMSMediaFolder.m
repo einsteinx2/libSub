@@ -64,6 +64,9 @@
 
 - (BOOL)deleteModel
 {
+    if (!self.mediaFolderId)
+        return NO;
+    
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
@@ -203,12 +206,12 @@
 
 - (NSNumber *)itemId
 {
-    return _mediaFolderId;
+    return self.mediaFolderId;
 }
 
 - (NSString *)itemName
 {
-    return [_name copy];
+    return [self.name copy];
 }
 
 @end

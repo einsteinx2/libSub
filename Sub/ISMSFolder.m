@@ -95,12 +95,15 @@ static NSArray *_ignoredArticles = nil;
 
 - (BOOL)deleteModel
 {
+    if (!self.folderId)
+        return NO;
+    
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
-    {
-        NSString *query = @"DELETE FROM folders WHERE folderId = ?";
-        success = [db executeUpdate:query, self.folderId];
-    }];
+     {
+         NSString *query = @"DELETE FROM folders WHERE folderId = ?";
+         success = [db executeUpdate:query, self.folderId];
+     }];
     return success;
 }
 
@@ -109,8 +112,8 @@ static NSArray *_ignoredArticles = nil;
     @synchronized(self)
     {
         NSInteger folderId = self.folderId.integerValue;
-        _subfolders = [self.class foldersInFolderWithId:folderId];
-        _songs = [ISMSSong songsInFolderWithId:folderId];
+        _subfolders = [self.class foldersInFolder:folderId];
+        _songs = [ISMSSong songsInFolder:folderId];
     }
 }
 
@@ -140,7 +143,7 @@ static NSArray *_ignoredArticles = nil;
     }
 }
 
-+ (NSArray<ISMSFolder*> *)foldersInFolderWithId:(NSInteger)folderId
++ (NSArray<ISMSFolder*> *)foldersInFolder:(NSInteger)folderId
 {
     NSMutableArray<ISMSFolder*> *folders = [[NSMutableArray alloc] init];
     
@@ -165,7 +168,7 @@ static NSArray *_ignoredArticles = nil;
 
 - (NSNumber *)itemId
 {
-    return _folderId;
+    return self.folderId;
 }
 
 - (NSString *)itemName

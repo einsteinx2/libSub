@@ -15,10 +15,6 @@
 #import "ISMSContentType.h"
 #include <sys/stat.h>
 
-#ifdef IOS
-#import <MediaPlayer/MediaPlayer.h>
-#endif
-
 @interface ISMSSong()
 {
     ISMSFolder *_folder;
@@ -276,12 +272,12 @@
 
 - (NSNumber *)itemId
 {
-    return _songId ? @(_songId.integerValue) : nil;
+    return self.songId;
 }
 
 - (NSString *)itemName
 {
-    return [_title copy];
+    return [self.title copy];
 }
 
 #pragma mark - ISMSPersistedModel -
@@ -311,6 +307,9 @@
 
 - (BOOL)deleteModel
 {
+    if (!self.songId)
+        return NO;
+    
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
@@ -451,7 +450,7 @@
 
 #pragma mark - Sort this stuff -
 
-+ (NSArray<ISMSSong*> *)songsInFolderWithId:(NSInteger)folderId
++ (NSArray<ISMSSong*> *)songsInFolder:(NSInteger)folderId
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
@@ -470,7 +469,7 @@
     return songs;
 }
 
-+ (NSArray<ISMSSong*> *)songsInAlbumWithId:(NSInteger)albumId
++ (NSArray<ISMSSong*> *)songsInAlbum:(NSInteger)albumId
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     

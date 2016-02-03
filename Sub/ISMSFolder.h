@@ -25,6 +25,6 @@
 // Returns an instance if it exists in the db, otherwise nil
 - (nullable instancetype)initWithFolderId:(NSInteger)folderId;
 
-+ (nonnull NSArray<ISMSFolder*> *)foldersInFolderWithId:(NSInteger)folderId;
++ (nonnull NSArray<ISMSFolder*> *)foldersInFolder:(NSInteger)folderId;
 
 @end

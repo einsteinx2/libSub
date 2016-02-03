@@ -55,8 +55,8 @@
 // Returns an instance if it exists in the db, otherwise nil
 - (nullable instancetype)initWithSongId:(NSInteger)songId;
 
-+ (nonnull NSArray<ISMSSong*> *)songsInFolderWithId:(NSInteger)folderId;
-+ (nonnull NSArray<ISMSSong*> *)songsInAlbumWithId:(NSInteger)albumId;
++ (nonnull NSArray<ISMSSong*> *)songsInFolder:(NSInteger)folderId;
++ (nonnull NSArray<ISMSSong*> *)songsInAlbum:(NSInteger)albumId;
 + (nonnull NSArray<ISMSSong*> *)rootSongsInMediaFolder:(NSInteger)mediaFolderId;
 
 - (BOOL)isEqualToSong:(nullable ISMSSong *)otherSong;
