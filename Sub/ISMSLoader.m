@@ -17,6 +17,12 @@
 
 @interface ISMSLoader ()
 @property (nonatomic, strong) ISMSLoader *selfRef;
+
+// From ISMSLoader_Subclassing
+@property (nullable, nonatomic, strong) NSURLConnection *connection;
+@property (nullable, nonatomic, strong) NSURLRequest *request;
+@property (nullable, nonatomic, strong) NSURLResponse *response;
+@property (nullable, nonatomic, strong) NSMutableData *receivedData;
 @end
 
 @implementation ISMSLoader
