@@ -618,6 +618,11 @@
 	return paths[0];
 }
 
+- (NSURL *)cachesUrl
+{
+    return [NSURL URLWithString:self.cachesPath];
+}
+
 // As of 5.0.1, it's possible to mark files in the Documents folder to not be backed up. Therefore
 // we want to use that if possible, so that our cache doesn't get wiped when the device has no
 // more space left, as will happen if we put the files inside ./Library/Caches
@@ -1692,23 +1697,6 @@
 - (BOOL)isTestServer
 {
 	return [_urlString isEqualToString:DEFAULT_URL];
-}
-
-- (NSUInteger)oneTimeRunIncrementor
-{
-	@synchronized(self)
-	{
-		return [_userDefaults integerForKey:@"oneTimeRunIncrementor"];
-	}
-}
-
-- (void)setOneTimeRunIncrementor:(NSUInteger)oneTimeRunIncrementor
-{
-	@synchronized(self)
-	{
-        [_userDefaults setInteger:oneTimeRunIncrementor forKey:@"oneTimeRunIncrementor"];
-        [_userDefaults synchronize];
-	}
 }
 
 - (BOOL)isStopCheckingWaveboxRelease

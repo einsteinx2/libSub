@@ -52,4 +52,6 @@
 #import "SUSErrorDomain.h"
 #import "NSError+ISMSError.h"
 
+#import "HLSProxyConnection.h"
+
 //#endif

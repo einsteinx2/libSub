@@ -27,7 +27,7 @@
 @class ISMSSong, BassParamEqValue, BassStream, SUSRegisterActionLoader, EX2RingBuffer;
 @interface AudioEngine : NSObject <AVAudioSessionDelegate>
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 @property BOOL shouldResumeFromInterruption;
 

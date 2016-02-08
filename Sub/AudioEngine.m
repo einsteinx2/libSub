@@ -165,7 +165,7 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     }];
 }
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static dispatch_once_t once = 0;
     dispatch_once(&once, ^{

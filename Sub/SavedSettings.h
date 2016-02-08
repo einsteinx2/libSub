@@ -102,8 +102,6 @@ typedef NS_ENUM(NSInteger, ISMSCachingType)
 
 @property BOOL isEqualizerOn;
 
-@property NSUInteger oneTimeRunIncrementor;
-
 @property BOOL isDisableUsageOver3G;
 @property (nullable, strong) NSString *currentTwitterAccount;
 
@@ -123,6 +121,7 @@ typedef NS_ENUM(NSInteger, ISMSCachingType)
 - (nonnull NSString *)documentsPath;
 - (nonnull NSString *)databasePath;
 - (nonnull NSString *)cachesPath;
+- (nonnull NSURL *)cachesUrl;
 - (nonnull NSString *)currentCacheRoot;
 - (nonnull NSString *)songCachePath;
 - (nonnull NSString *)tempCachePath;
