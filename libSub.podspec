@@ -27,7 +27,6 @@ Pod::Spec.new do |s|
   s.source       = { :git => "http://github.com/einsteinx2/libSub.git", :tag => "#{s.version}" }
 
   s.source_files  = "Sub", "Sub/**/*.{h,m}", "Frameworks", "Frameworks/**/*.{h,m}"
-  s.exclude_files = "Frameworks/EX2Kit"
   s.platform	 = :ios, "7.0"
 
   s.dependency "TBXML"
