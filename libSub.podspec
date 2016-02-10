@@ -49,7 +49,6 @@ Pod::Spec.new do |s|
                  'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1' }
   s.vendored_libraries = "Frameworks/libBASS/*.a"
   s.libraries = "z", "xml2", "bass", "bass_ape", "bass_fx", "bass_mpc", "bassflac", "bassmix", "bassopus", "basswv"
-  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
