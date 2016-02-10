@@ -30,16 +30,13 @@ Pod::Spec.new do |s|
   s.exclude_files = "Frameworks/EX2Kit"
   s.platform	 = :ios, "7.0"
 
-  s.dependency "EX2Kit"
   s.dependency "TBXML"
   s.dependency "SBJson", "~> 3.0"
   s.dependency "ZipKit"
   s.dependency "RaptureXML"
   s.dependency "FMDB"
   s.dependency "MKStoreKit"
-  s.dependency "CocoaHTTPServer"
   s.dependency "Flurry-iOS-SDK"
-  s.dependency "EX2Kit"
 
   s.frameworks = "Security"
   s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',

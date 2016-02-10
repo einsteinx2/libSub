@@ -26,6 +26,10 @@ static const NSInteger downloadedSongsPlaylistId = NSIntegerMax - 3;
 + (nonnull ISMSPlaylist *)downloadQueue;
 + (nonnull ISMSPlaylist *)downloadedSongs;
 
+// Create new playlist tables
++ (nullable ISMSPlaylist *)createPlaylistWithName:(nonnull NSString *)name;
++ (nullable ISMSPlaylist *)createPlaylistWithName:(nonnull NSString *)name andId:(NSInteger)playlistId;
+
 // Returns an instance if it exists in the db, otherwise nil
 - (nullable instancetype)initWithPlaylistId:(NSInteger)playlistId;
 

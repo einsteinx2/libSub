@@ -26,6 +26,7 @@ LOG_LEVEL_ISUB_DEFAULT
     // Setup the new data model (WAL enabled)
     NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db", self.databaseFolderPath, urlStringMd5];
     NSLog(@"new model db: %@", path);
+    __block BOOL createDefaultPlaylistTables = NO;
     self.songModelReadDb = [FMDatabase databaseWithPath:path];
     [self.songModelReadDb open];
     [self.songModelReadDb executeStatements:@"PRAGMA journal_mode=WAL"];
@@ -123,9 +124,7 @@ LOG_LEVEL_ISUB_DEFAULT
             [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)"];
             [db executeUpdate:@"CREATE INDEX playlists_name ON playlists (name)"];
             
-            [db executeUpdate:@"INSERT OR IGNORE INTO playlists (playlistId, name) VALUES (?, ?)", @(playQueuePlaylistId), @"Play Queue"];
-            [db executeUpdate:@"INSERT OR IGNORE INTO playlists (playlistId, name) VALUES (?, ?)", @(downloadQueuePlaylistId), @"Download Queue"];
-            [db executeUpdate:@"INSERT OR IGNORE INTO playlists (playlistId, name) VALUES (?, ?)", @(downloadedSongsPlaylistId), @"Downloaded Songs"];
+            createDefaultPlaylistTables = YES;
         }
         
         if (![db tableExists:@"chatMessages"])
@@ -133,6 +132,13 @@ LOG_LEVEL_ISUB_DEFAULT
             [db executeUpdate:@"CREATE TABLE playlists (chatMessageId INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, message TEXT, timestamp REAL)"];
         }
     }];
+    
+    if (createDefaultPlaylistTables)
+    {
+        [ISMSPlaylist createPlaylistWithName:@"Play Queue" andId:playQueuePlaylistId];
+        [ISMSPlaylist createPlaylistWithName:@"Download Queue" andId:downloadQueuePlaylistId];
+        [ISMSPlaylist createPlaylistWithName:@"Downloaded Songs" andId:downloadedSongsPlaylistId];
+    }
 	
     // TODO: Stop storing image files in fucking databases
 	// Setup music player cover art cache database

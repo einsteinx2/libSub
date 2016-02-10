@@ -50,6 +50,13 @@
     return [self.name caseInsensitiveCompare:otherObject.name];
 }
 
+- (NSString *)_tableName
+{
+    if (self.playlistId
+    
+    return [NSString stringWithFormat:@"playlist%@", self.playlistId];
+}
+
 - (NSArray<ISMSSong*> *)songs
 {
     // TODO: Fill this in
@@ -107,19 +114,57 @@
 
 #pragma mark - Special Playlists -
 
-+ (nonnull ISMSPlaylist *)playQueue
++ (ISMSPlaylist *)playQueue
 {
     return [[ISMSPlaylist alloc] initWithPlaylistId:playQueuePlaylistId];
 }
 
-+ (nonnull ISMSPlaylist *)downloadQueue
++ (ISMSPlaylist *)downloadQueue
 {
     return [[ISMSPlaylist alloc] initWithPlaylistId:downloadQueuePlaylistId];
 }
 
-+ (nonnull ISMSPlaylist *)downloadedSongs
++ (ISMSPlaylist *)downloadedSongs
 {
     return [[ISMSPlaylist alloc] initWithPlaylistId:downloadedSongsPlaylistId];
+}
+
+#pragma mark - Create new DB tables -
+
++ (ISMSPlaylist *)createPlaylistWithName:(NSString *)name
+{
+    __block NSInteger playlistId;
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db) {
+        // Find the first available playlist id. Local playlists (before being synced) start from NSIntegerMax and count down.
+        // So since NSIntegerMax is so huge, look for the lowest ID above NSIntegerMax - 1,000,000 to give room for virtually
+        // unlimited local playlists without ever hitting the server playlists which start from 0 and go up.
+        NSInteger lastPlaylistId = [db longForQuery:@"SELECT playlistId FROM playlists WHERE playlistId > ?", @(NSIntegerMax - 1000000)];
+        
+        // Next available ID
+        playlistId = lastPlaylistId - 1;
+        
+        // Do the creation here instead of calling createPlaylistWithName:andId: so it's all in one transaction
+        NSString *table = [NSString stringWithFormat:@"playlist%li", playlistId];
+        [db executeUpdate:@"INSERT INTO playlists VALUES (?, ?)", @(playlistId), name];
+        [db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE %@ (index INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)", table]];
+        [db executeUpdate:[NSString stringWithFormat:@"CREATE INDEX %@_songId ON %@ (songId)", table, table]];
+    }];
+    
+    return [[ISMSPlaylist alloc] initWithPlaylistId:playlistId];
+}
+
++ (ISMSPlaylist *)createPlaylistWithName:(NSString *)name andId:(NSInteger)playlistId
+{
+    // TODO: Handle case where table already exists
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db) {
+        // Do the creation here instead of calling createPlaylistWithName:andId: so it's all in one transaction
+        NSString *table = [NSString stringWithFormat:@"playlist%li", playlistId];
+        [db executeUpdate:@"INSERT INTO playlists VALUES (?, ?)", @(playlistId), name];
+        [db executeUpdate:[NSString stringWithFormat:@"CREATE TABLE %@ (index INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)", table]];
+        [db executeUpdate:[NSString stringWithFormat:@"CREATE INDEX %@_songId ON %@ (songId)", table, table]];
+    }];
+    
+    return [[ISMSPlaylist alloc] initWithPlaylistId:playlistId];
 }
 
 #pragma mark - ISMSItem -
