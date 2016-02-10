@@ -260,6 +260,10 @@
 		53146D441A630FCD007D4163 /* ISMSRootArtistsLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 53146D411A630FCD007D4163 /* ISMSRootArtistsLoader.h */; };
 		53146D451A630FCD007D4163 /* ISMSRootArtistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53146D421A630FCD007D4163 /* ISMSRootArtistsLoader.m */; };
 		53146D461A630FCD007D4163 /* ISMSRootArtistsLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53146D421A630FCD007D4163 /* ISMSRootArtistsLoader.m */; };
+		5322760D1C6BFF5100291227 /* RXMLElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 5322760B1C6BFF5100291227 /* RXMLElement.h */; };
+		5322760E1C6BFF5100291227 /* RXMLElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 5322760B1C6BFF5100291227 /* RXMLElement.h */; };
+		5322760F1C6BFF5100291227 /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 5322760C1C6BFF5100291227 /* RXMLElement.m */; };
+		532276101C6BFF5100291227 /* RXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 5322760C1C6BFF5100291227 /* RXMLElement.m */; };
 		5322B09F1C6BED3B001E63C0 /* EX2Categories.h in Headers */ = {isa = PBXBuildFile; fileRef = 5322AFCA1C6BED3B001E63C0 /* EX2Categories.h */; };
 		5322B0A01C6BED3B001E63C0 /* EX2Categories.h in Headers */ = {isa = PBXBuildFile; fileRef = 5322AFCA1C6BED3B001E63C0 /* EX2Categories.h */; };
 		5322B0A11C6BED3B001E63C0 /* EX2FoundationCategories.h in Headers */ = {isa = PBXBuildFile; fileRef = 5322AFCC1C6BED3B001E63C0 /* EX2FoundationCategories.h */; };
@@ -1073,6 +1077,8 @@
 		530ABE391A5226DB005ACE6B /* ISMSMediaFolder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSMediaFolder.m; sourceTree = "<group>"; };
 		53146D411A630FCD007D4163 /* ISMSRootArtistsLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSRootArtistsLoader.h; sourceTree = "<group>"; };
 		53146D421A630FCD007D4163 /* ISMSRootArtistsLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSRootArtistsLoader.m; sourceTree = "<group>"; };
+		5322760B1C6BFF5100291227 /* RXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXMLElement.h; sourceTree = "<group>"; };
+		5322760C1C6BFF5100291227 /* RXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXMLElement.m; sourceTree = "<group>"; };
 		5322AFCA1C6BED3B001E63C0 /* EX2Categories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EX2Categories.h; sourceTree = "<group>"; };
 		5322AFCC1C6BED3B001E63C0 /* EX2FoundationCategories.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EX2FoundationCategories.h; sourceTree = "<group>"; };
 		5322AFCE1C6BED3B001E63C0 /* NSArray+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+Additions.h"; sourceTree = "<group>"; };
@@ -1777,6 +1783,16 @@
 			name = "Old Model";
 			sourceTree = "<group>";
 		};
+		5322760A1C6BFF5100291227 /* RaptureXML */ = {
+			isa = PBXGroup;
+			children = (
+				5322760B1C6BFF5100291227 /* RXMLElement.h */,
+				5322760C1C6BFF5100291227 /* RXMLElement.m */,
+			);
+			name = RaptureXML;
+			path = Frameworks/RaptureXML;
+			sourceTree = "<group>";
+		};
 		5322AFC81C6BED3B001E63C0 /* EX2Kit */ = {
 			isa = PBXGroup;
 			children = (
@@ -2263,6 +2279,7 @@
 				5322B27D1C6BEDEC001E63C0 /* CocoaHTTPServer */,
 				5322B2ED1C6BEDF4001E63C0 /* CocoaAsyncSocket */,
 				5322AFC81C6BED3B001E63C0 /* EX2Kit */,
+				5322760A1C6BFF5100291227 /* RaptureXML */,
 				536C97F116619B25005A73C6 /* libBASS */,
 				536C947616618FA4005A73C6 /* Foundation.framework */,
 				5304A01F168FB35F009B2732 /* UIKit.framework */,
@@ -2668,6 +2685,7 @@
 				5322B24E1C6BEDE4001E63C0 /* CocoaLumberjack.h in Headers */,
 				53067E7E1694F11C00600396 /* ISMSStreamHandler.h in Headers */,
 				5322B1C61C6BED3B001E63C0 /* EX2Reachability.h in Headers */,
+				5322760E1C6BFF5100291227 /* RXMLElement.h in Headers */,
 				5322B1921C6BED3B001E63C0 /* UIView+Glow.h in Headers */,
 				53067E7F1694F11C00600396 /* ISMSURLConnectionStreamHandler.h in Headers */,
 				53067E801694F11C00600396 /* ISMSStreamHandlerDelegate.h in Headers */,
@@ -2906,6 +2924,7 @@
 				5322B24D1C6BEDE4001E63C0 /* CocoaLumberjack.h in Headers */,
 				536C97A216619820005A73C6 /* sqlite3.h in Headers */,
 				5322B1C51C6BED3B001E63C0 /* EX2Reachability.h in Headers */,
+				5322760D1C6BFF5100291227 /* RXMLElement.h in Headers */,
 				5322B1911C6BED3B001E63C0 /* UIView+Glow.h in Headers */,
 				536C993D16619F39005A73C6 /* ISMSErrorDomain.h in Headers */,
 				536C993E16619F39005A73C6 /* ISMSNotificationNames.h in Headers */,
@@ -3356,6 +3375,7 @@
 				5322B1EE1C6BED3B001E63C0 /* RNOpenSSLDecryptor.m in Sources */,
 				5322B1FC1C6BED3B001E63C0 /* EX2Dispatch.m in Sources */,
 				5304A1C8169017C4009B2732 /* NSMutableURLRequest+PMS.m in Sources */,
+				532276101C6BFF5100291227 /* RXMLElement.m in Sources */,
 				5304A1C9169017C4009B2732 /* ISMSUpdateChecker.m in Sources */,
 				530ABE2D1A522158005ACE6B /* ISMSNewRootFoldersLoader.m in Sources */,
 				5304A1A91690173B009B2732 /* libSubOSX.m in Sources */,
@@ -3502,6 +3522,7 @@
 				5322B1471C6BED3B001E63C0 /* CALayer+SublayerWithName.m in Sources */,
 				536C9771166197B8005A73C6 /* SocialSingleton.m in Sources */,
 				53ABE15D1C615FD100E0E72B /* ISMSContentType.m in Sources */,
+				5322760F1C6BFF5100291227 /* RXMLElement.m in Sources */,
 				5322B2E31C6BEDEC001E63C0 /* HTTPFileResponse.m in Sources */,
 				5322B0EB1C6BED3B001E63C0 /* NSOrderedSet+FilterBlock.m in Sources */,
 				5322B1271C6BED3B001E63C0 /* NSString+time.m in Sources */,

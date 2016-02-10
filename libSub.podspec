@@ -36,7 +36,6 @@ Pod::Spec.new do |s|
   s.dependency "TBXML"
   s.dependency "SBJson", "~> 3.0"
   s.dependency "ZipKit"
-  s.dependency "RaptureXML"
   s.dependency "FMDB"
   s.dependency "MKStoreKit"
   s.dependency "Flurry-iOS-SDK"
@@ -45,8 +44,8 @@ Pod::Spec.new do |s|
   s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
                  'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1' }
   s.vendored_libraries = "Frameworks/libBASS/*.a"
-  s.libraries = "xml2", "bass", "bass_ape", "bass_fx", "bass_mpc", "bassflac", "bassmix", "bassopus", "basswv"
-
+  s.libraries = "z", "xml2", "bass", "bass_ape", "bass_fx", "bass_mpc", "bassflac", "bassmix", "bassopus", "basswv"
+  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

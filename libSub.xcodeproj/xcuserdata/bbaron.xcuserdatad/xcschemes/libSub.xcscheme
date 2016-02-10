@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "536C947216618FA4005A73C6"
-               BuildableName = "libSub.a"
+               BuildableName = "libSub.framework"
                BlueprintName = "libSub"
                ReferencedContainer = "container:libSub.xcodeproj">
             </BuildableReference>
@@ -46,7 +46,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "536C947216618FA4005A73C6"
-            BuildableName = "libSub.a"
+            BuildableName = "libSub.framework"
             BlueprintName = "libSub"
             ReferencedContainer = "container:libSub.xcodeproj">
          </BuildableReference>
