@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
   s.author             = { "Justin Hill" => "jhill.d@gmail.com" }
   s.source       = { :git => "http://github.com/einsteinx2/libSub.git", :tag => "#{s.version}" }
 
-  s.source_files  = "Sub", "Sub/**/*.{h,m}", "Frameworks", "Frameworks/**/*.{h,m}"
+  s.source_files  = "Sub", "Sub/**/*.{h,m,swift}", "Frameworks", "Frameworks/**/*.{h,m,swift}"
   s.platform	 = :ios, "7.0"
 
   noarc_files = "Frameworks/EX2Kit/Categories/Foundation/NSString/GTMNSString+HTML.m",
