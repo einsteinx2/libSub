@@ -29,6 +29,10 @@ Pod::Spec.new do |s|
   s.source_files  = "Sub", "Sub/**/*.{h,m}", "Frameworks", "Frameworks/**/*.{h,m}"
   s.platform	 = :ios, "7.0"
 
+  noarc_files = "Frameworks/EX2Kit/Categories/Foundation/NSString/GTMNSString+HTML.m",
+  				"Frameworks/EX2Kit/Categories/UIKit/UIImage+RoundedImage.m",
+				"Frameworks/EX2Kit/Components/EX2Reachability.m"
+
   s.dependency "TBXML"
   s.dependency "SBJson", "~> 3.0"
   s.dependency "ZipKit"
