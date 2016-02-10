@@ -52,7 +52,7 @@
 
 - (NSString *)_tableName
 {
-    if (self.playlistId
+    //if (self.playlistId
     
     return [NSString stringWithFormat:@"playlist%@", self.playlistId];
 }

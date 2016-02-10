@@ -32,6 +32,10 @@ Pod::Spec.new do |s|
   noarc_files = "Frameworks/EX2Kit/Categories/Foundation/NSString/GTMNSString+HTML.m",
   				"Frameworks/EX2Kit/Categories/UIKit/UIImage+RoundedImage.m",
 				"Frameworks/EX2Kit/Components/EX2Reachability.m"
+  s.subspec 'noarc' do |noarc|
+	noarc.source_files = noarc_files
+	noarc.requires_arc = false
+  end
 
   s.dependency "TBXML"
   s.dependency "SBJson", "~> 3.0"
