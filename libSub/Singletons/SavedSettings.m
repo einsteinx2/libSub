@@ -8,7 +8,6 @@
 
 #import "SavedSettings.h"
 #import "LibSub.h"
-#import "PlaylistSingleton.h"
 #import "BassGaplessPlayer.h"
 
 #ifdef IOS
@@ -50,10 +49,9 @@
     
     // State Saving
     BOOL _isPlaying;
-    BOOL _isShuffle;
-    NSInteger _normalPlaylistIndex;
-    NSInteger _shufflePlaylistIndex;
-    ISMSRepeatMode _repeatMode;
+    NSInteger _playQueueIndex;
+    RepeatMode _repeatMode;
+    ShuffleMode _shuffleMode;
     NSInteger _bitRate;
     unsigned long long _byteOffset;
     double _secondsOffset;
@@ -94,19 +92,17 @@
 	else
 		_isPlaying = [_userDefaults boolForKey:@"isPlaying"];
 		
-	_isShuffle = [_userDefaults boolForKey:@"isShuffle"];
-	playlistS.isShuffle = _isShuffle;
+	_shuffleMode = (ShuffleMode)[_userDefaults integerForKey:@"shuffleMode"];
+	[PlayQueue sharedInstance].shuffleMode = _shuffleMode;
 	
-	_normalPlaylistIndex = [_userDefaults integerForKey:@"normalPlaylistIndex"];
-	playlistS.normalIndex = _normalPlaylistIndex;
+	_playQueueIndex = [_userDefaults integerForKey:@"playQueueIndex"];
+    // TODO: Is this next line necessary?
+	//[PlayQueue sharedInstance].currentIndex = _playQueueIndex;
 	
-	_shufflePlaylistIndex = [_userDefaults integerForKey:@"shufflePlaylistIndex"];
-	playlistS.shuffleIndex = _shufflePlaylistIndex;
-    
     _currentTwitterAccount = [_userDefaults objectForKey:@"currentTwitterAccount"];
 	
-	_repeatMode = (ISMSRepeatMode)[_userDefaults integerForKey:@"repeatMode"];
-	playlistS.repeatMode = _repeatMode;
+	_repeatMode = (RepeatMode)[_userDefaults integerForKey:@"repeatMode"];
+	[PlayQueue sharedInstance].repeatMode = _repeatMode;
 	
 	_bitRate = [_userDefaults integerForKey:@"bitRate"];
 	_byteOffset = self.byteOffset;
@@ -136,45 +132,41 @@
 	{
 		BOOL isDefaultsDirty = NO;
 		
-		if (audioEngineS.player.isPlaying != _isPlaying)
+		if ([PlayQueue sharedInstance].isPlaying != _isPlaying)
 		{
 			if (self.isJukeboxEnabled)
 				_isPlaying = NO;
 			else
-				_isPlaying = audioEngineS.player.isPlaying;
+				_isPlaying = [PlayQueue sharedInstance].isPlaying;
 			
 			[_userDefaults setBool:_isPlaying forKey:@"isPlaying"];
 			isDefaultsDirty = YES;
 		}
+        
+        PlayQueue *playQueue = [PlayQueue sharedInstance];
 		
-		if (playlistS.isShuffle != _isShuffle)
+		if (playQueue.shuffleMode != _shuffleMode)
 		{
-			_isShuffle = playlistS.isShuffle;
-			[_userDefaults setBool:_isShuffle forKey:@"isShuffle"];
+			_shuffleMode = playQueue.shuffleMode;
+			[_userDefaults setBool:_shuffleMode forKey:@"shuffleMode"];
 			isDefaultsDirty = YES;
 		}
 		
-		if (playlistS.normalIndex != _normalPlaylistIndex)
+		if (playQueue.currentIndex != _playQueueIndex)
 		{
-			_normalPlaylistIndex = playlistS.normalIndex;
-			[_userDefaults setInteger:_normalPlaylistIndex forKey:@"normalPlaylistIndex"];
+			_playQueueIndex = playQueue.currentIndex;
+			[_userDefaults setInteger:_playQueueIndex forKey:@"playQueueIndex"];
 			isDefaultsDirty = YES;
 		}
 		
-		if (playlistS.shuffleIndex != _shufflePlaylistIndex)
+		if (playQueue.repeatMode != _repeatMode)
 		{
-			_shufflePlaylistIndex = playlistS.shuffleIndex;
-			[_userDefaults setInteger:_shufflePlaylistIndex forKey:@"shufflePlaylistIndex"];
-			isDefaultsDirty = YES;
-		}
-		
-		if (playlistS.repeatMode != _repeatMode)
-		{
-			_repeatMode = playlistS.repeatMode;
+			_repeatMode = playQueue.repeatMode;
 			[_userDefaults setInteger:_repeatMode forKey:@"repeatMode"];
 			isDefaultsDirty = YES;
 		}
 		
+        // TODO: Stop interacting directly with AudioEngine
 		if (audioEngineS.player.bitRate != _bitRate && audioEngineS.player.bitRate >= 0)
 		{
 			_bitRate = audioEngineS.player.bitRate;
@@ -182,13 +174,14 @@
 			isDefaultsDirty = YES;
 		}
 		
-		if (_secondsOffset != audioEngineS.player.progress)
+        if (_secondsOffset != [PlayQueue sharedInstance].currentSongProgress)
 		{
-			_secondsOffset = audioEngineS.player.progress;
+			_secondsOffset = [PlayQueue sharedInstance].currentSongProgress;
 			[_userDefaults setDouble:_secondsOffset forKey:@"seekTime"];
 			isDefaultsDirty = YES;
 		}
 		
+        // TODO: Stop interacting directly with AudioEngine
 		if (_byteOffset != audioEngineS.player.currentByteOffset)
 		{
 			_byteOffset = audioEngineS.player.currentByteOffset;

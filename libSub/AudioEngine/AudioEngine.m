@@ -10,7 +10,6 @@
 #import "LibSub.h"
 #import "BassParamEqValue.h"
 #import <AudioToolbox/AudioToolbox.h>
-#import "MusicSingleton.h"
 #import "BassEffectDAO.h"
 #import <sys/stat.h>
 #import "BassStream.h"
@@ -122,6 +121,51 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
     }
 }
 
+- (void)play
+{
+    [self.player play];
+}
+
+- (void)pause
+{
+    [self.player pause];
+}
+
+- (void)playPause
+{
+    [self.player playPause];
+}
+
+- (void)stop
+{
+    [self.player stop];
+}
+
+- (BOOL)isStarted
+{
+    return self.player.isStarted;
+}
+
+- (BOOL)isPlaying
+{
+    return self.player.isPlaying;
+}
+
+- (void)seekToPositionInBytes:(QWORD)bytes fadeVolume:(BOOL)fadeVolume
+{
+    [self.player seekToPositionInBytes:bytes fadeVolume:fadeVolume];
+}
+
+- (void)seekToPositionInSeconds:(double)seconds fadeVolume:(BOOL)fadeVolume
+{
+    [self.player seekToPositionInSeconds:seconds fadeVolume:fadeVolume];
+}
+
+- (double)progress
+{
+    return self.player.progress;
+}
+
 - (BassEqualizer *)equalizer
 {
 	return self.player.equalizer;
@@ -157,7 +201,7 @@ void audioRouteChangeListenerCallback(void *inUserData, AudioSessionPropertyID i
 #pragma clang diagnostic pop
 #endif
     
-    _delegate = [[iSubBassGaplessPlayerDelegate alloc] init];
+    _delegate = [PlayQueue sharedInstance];
     
     // Run async to prevent potential deadlock from dispatch_once
     [EX2Dispatch runInMainThreadAsync:^{

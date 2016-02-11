@@ -625,8 +625,9 @@
     if (self.isPartiallyCached)
     {
         CGFloat bitrate = (CGFloat)self.estimatedBitrate;
-        if (audioEngineS.player.isPlaying)
+        if ([PlayQueue sharedInstance].isPlaying)
         {
+            // TODO: Stop interacting directly with AudioEngine
             bitrate = [BassWrapper estimateBitrate:audioEngineS.player.currentStream];
         }
         
@@ -634,9 +635,10 @@
         if (self.transcodedContentType)
         {
             // This is a transcode, so we'll want to use the actual bitrate if possible
-            if ([playlistS.currentSong isEqualToSong:self])
+            if ([[PlayQueue sharedInstance].currentSong isEqualToSong:self])
             {
                 // This is the current playing song, so see if BASS has an actual bitrate for it
+                // TODO: Stop interacting directly with AudioEngine
                 if (audioEngineS.player.bitRate > 0)
                 {
                     // Bass has a non-zero bitrate, so use that for the calculation

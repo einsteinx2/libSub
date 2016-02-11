@@ -27,8 +27,9 @@
 	
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:connDelegate startImmediately:NO];
 	if (connection)
-	{		
-		playlistS.currentIndex = [position intValue];
+	{
+        // TODO: Figure out how to handle this for Jukebox mode
+		//[PlayQueue sharedInstance].currentIndex = [position intValue];
 		
 		[self.connectionQueue registerConnection:connection];
 		[self.connectionQueue startQueue];
@@ -99,19 +100,23 @@
 
 - (void)jukeboxPrevSong
 {
-    NSInteger index = playlistS.currentIndex - 1;
+    NSInteger index = [PlayQueue sharedInstance].previousIndex;
     if (index >= 0)
     {
         [self jukeboxPlaySongAtPosition:@(index)];
         
         self.jukeboxIsPlaying = YES;
     }
+    else
+    {
+        [self jukeboxStop];
+    }
 }
 
 - (void)jukeboxNextSong
 {
-    NSInteger index = playlistS.currentIndex + 1;
-    if (index <= ([[ISMSPlaylist playQueue] songCount] - 1))
+    NSInteger index = [PlayQueue sharedInstance].nextIndex;
+    if (index <= ([[PlayQueue sharedInstance] songCount] - 1))
     {
         [self jukeboxPlaySongAtPosition:@(index)];
         

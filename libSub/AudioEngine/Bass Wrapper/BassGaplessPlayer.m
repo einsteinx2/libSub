@@ -1019,6 +1019,12 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
     [self cleanup];
 }
 
+- (void)play
+{
+    if (!self.isPlaying)
+        [self playPause];
+}
+
 - (void)pause
 {
 	if (self.isPlaying)

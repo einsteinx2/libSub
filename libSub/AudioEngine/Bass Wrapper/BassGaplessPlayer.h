@@ -61,8 +61,8 @@
 
 // Playback methods
 //
-//- (void)start;
 - (void)stop;
+- (void)play;
 - (void)pause;
 - (void)playPause;
 - (void)seekToPositionInBytes:(QWORD)bytes fadeVolume:(BOOL)fadeVolume;

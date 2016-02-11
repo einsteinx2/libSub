@@ -19,7 +19,6 @@
 #import "BassEqualizer.h"
 #import "BassVisualizer.h"
 #import "BassGaplessPlayer.h"
-#import "iSubBassGaplessPlayerDelegate.h"
 #import <AVFoundation/AVFoundation.h>
 
 #define audioEngineS ((AudioEngine *)[AudioEngine sharedInstance])
@@ -38,12 +37,24 @@
 @property NSUInteger startByteOffset;
 @property NSUInteger startSecondsOffset;
 
-@property (strong) iSubBassGaplessPlayerDelegate *delegate;
+@property (strong) id<BassGaplessPlayerDelegate> delegate;
 
 // BASS methods
 //
 - (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds;
 - (void)startEmptyPlayer;
+
+// Player control (no longer directly touch the BassGaplessPlayer from outside the audio engine
+//
+- (void)play;
+- (void)pause;
+- (void)playPause;
+- (void)stop;
+- (BOOL)isStarted;
+- (BOOL)isPlaying;
+- (void)seekToPositionInBytes:(QWORD)bytes fadeVolume:(BOOL)fadeVolume;
+- (void)seekToPositionInSeconds:(double)seconds fadeVolume:(BOOL)fadeVolume;
+- (double)progress;
 
 @end
 

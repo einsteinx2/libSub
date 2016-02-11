@@ -10,21 +10,21 @@
 @protocol BassGaplessPlayerDelegate <NSObject>
 
 @optional
-- (void)bassSeekToPositionStarted:(BassGaplessPlayer*)player;
-- (void)bassSeekToPositionSuccess:(BassGaplessPlayer*)player;
-- (void)bassStopped:(BassGaplessPlayer*)player;
-- (void)bassFirstStreamStarted:(BassGaplessPlayer*)player;
-- (void)bassSongEndedCalled:(BassGaplessPlayer*)player;
-- (void)bassFreed:(BassGaplessPlayer *)player;
-- (void)bassUpdateLockScreenInfo:(BassGaplessPlayer *)player;
-- (void)bassFailedToCreateNextStreamForIndex:(NSUInteger)index player:(BassGaplessPlayer *)player;
-- (void)bassRetrievingOutputData:(BassGaplessPlayer *)player;
+- (void)bassSeekToPositionStarted:(nonnull BassGaplessPlayer*)player;
+- (void)bassSeekToPositionSuccess:(nonnull BassGaplessPlayer*)player;
+- (void)bassStopped:(nonnull BassGaplessPlayer*)player;
+- (void)bassFirstStreamStarted:(nonnull BassGaplessPlayer*)player;
+- (void)bassSongEndedCalled:(nonnull BassGaplessPlayer*)player;
+- (void)bassFreed:(nonnull BassGaplessPlayer *)player;
+- (void)bassUpdateLockScreenInfo:(nonnull BassGaplessPlayer *)player;
+- (void)bassFailedToCreateNextStreamForIndex:(NSInteger)index player:(nonnull BassGaplessPlayer *)player;
+- (void)bassRetrievingOutputData:(nonnull BassGaplessPlayer *)player;
 
 @required
-- (ISMSSong *)bassSongForIndex:(NSUInteger)index player:(BassGaplessPlayer *)player;
-- (NSUInteger)bassIndexAtOffset:(NSInteger)offset fromIndex:(NSUInteger)index player:(BassGaplessPlayer *)player;
-- (NSUInteger)bassCurrentPlaylistIndex:(BassGaplessPlayer *)player;
-- (void)bassRetrySongAtIndex:(NSUInteger)index player:(BassGaplessPlayer*)player;
-- (void)bassRetrySongAtOffsetInBytes:(NSUInteger)bytes andSeconds:(NSUInteger)seconds player:(BassGaplessPlayer*)player;
+- (nullable ISMSSong *)bassSongForIndex:(NSInteger)index player:(nonnull BassGaplessPlayer *)player;
+- (NSInteger)bassIndexAtOffset:(NSInteger)offset fromIndex:(NSInteger)index player:(nonnull BassGaplessPlayer *)player;
+- (NSInteger)bassCurrentPlaylistIndex:(nonnull BassGaplessPlayer *)player;
+- (void)bassRetrySongAtIndex:(NSInteger)index player:(nonnull BassGaplessPlayer*)player;
+- (void)bassRetrySongAtOffsetInBytes:(NSInteger)bytes andSeconds:(NSInteger)seconds player:(nonnull BassGaplessPlayer*)player;
 
 @end

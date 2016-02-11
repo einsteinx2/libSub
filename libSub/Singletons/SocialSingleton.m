@@ -9,7 +9,6 @@
 #import "SocialSingleton.h"
 #import "LibSub.h"
 #import "BassGaplessPlayer.h"
-#import "PlaylistSingleton.h"
 #import "ISMSStreamManager.h"
 #import <Twitter/Twitter.h>
 #import "NSMutableURLRequest+SUS.h"
@@ -36,7 +35,8 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)playerHandleSocial
 {
-    if (!self.playerHasNotifiedSubsonic && audioEngineS.player.progress >= socialS.subsonicDelay)
+    double progress = [PlayQueue sharedInstance].currentSongProgress;
+    if (!self.playerHasNotifiedSubsonic && progress >= socialS.subsonicDelay)
     {
         if ([settingsS.serverType isEqualToString:SUBSONIC])
         {
@@ -48,7 +48,7 @@ LOG_LEVEL_ISUB_DEFAULT
         self.playerHasNotifiedSubsonic = YES;
     }
     
-	if (!self.playerHasTweeted && audioEngineS.player.progress >= socialS.tweetDelay)
+	if (!self.playerHasTweeted && progress >= socialS.tweetDelay)
 	{
 		self.playerHasTweeted = YES;
 		
@@ -57,7 +57,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		}];
 	}
 	
-	if (!self.playerHasScrobbled && audioEngineS.player.progress >= socialS.scrobbleDelay)
+	if (!self.playerHasScrobbled && progress >= socialS.scrobbleDelay)
 	{
 		self.playerHasScrobbled = YES;
 		[EX2Dispatch runInMainThreadAsync:^{
@@ -77,7 +77,7 @@ LOG_LEVEL_ISUB_DEFAULT
 - (NSTimeInterval)scrobbleDelay
 {
 	// Scrobble in 30 seconds (or settings amount) if not canceled
-	ISMSSong *currentSong = audioEngineS.player.currentStream.song;
+	ISMSSong *currentSong = [PlayQueue sharedInstance].currentSong;
 	NSTimeInterval scrobbleDelay = 30.0;
 	if (currentSong.duration != nil)
 	{
@@ -105,7 +105,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	{
 		// If this song wasn't just cached, then notify Subsonic of the playback
 		ISMSSong *lastCachedSong = streamManagerS.lastCachedSong;
-		ISMSSong *currentSong = playlistS.currentSong;
+		ISMSSong *currentSong = [PlayQueue sharedInstance].currentSong;
 		if (![lastCachedSong isEqualToSong:currentSong])
 		{
 			NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:n2N(currentSong.songId), @"id", nil];
@@ -126,7 +126,7 @@ LOG_LEVEL_ISUB_DEFAULT
     //DLog(@"Asked to scrobble %@ as submission", playlistS.currentSong.title);
 	if (settingsS.isScrobbleEnabled && !settingsS.isOfflineMode)
 	{
-		ISMSSong *currentSong = playlistS.currentSong;
+		ISMSSong *currentSong = [PlayQueue sharedInstance].currentSong;
 		[self scrobbleSong:currentSong isSubmission:YES];
 	//DLog(@"Scrobbled %@ as submission", currentSong.title);
 	}
@@ -138,7 +138,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	// If scrobbling is enabled, send "now playing" call
 	if (settingsS.isScrobbleEnabled && !settingsS.isOfflineMode)
 	{
-		ISMSSong *currentSong = playlistS.currentSong;
+		ISMSSong *currentSong = [PlayQueue sharedInstance].currentSong;
 		[self scrobbleSong:currentSong isSubmission:NO];
 	//DLog(@"Scrobbled %@ as playing", currentSong.title);
 	}
@@ -210,7 +210,7 @@ LOG_LEVEL_ISUB_DEFAULT
 - (void)tweetSong
 {
 #ifdef IOS
-	ISMSSong *currentSong = playlistS.currentSong;
+	ISMSSong *currentSong = [PlayQueue sharedInstance].currentSong;
 	
     //DLog(@"Asked to tweet %@", currentSong.title);
 	

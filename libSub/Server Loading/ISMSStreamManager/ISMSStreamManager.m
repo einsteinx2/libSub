@@ -496,7 +496,7 @@ LOG_LEVEL_ISUB_DEBUG
 	{
 		for (int i = 0; i < numStreamsToQueue; i++)
 		{
-			ISMSSong *aSong = [playlistS songForIndex:[playlistS indexForOffsetFromCurrentIndex:i]];
+			ISMSSong *aSong = [[PlayQueue sharedInstance] songAtIndex:[[PlayQueue sharedInstance] indexAtOffsetFromCurrentIndex:i]];
 			if (aSong && aSong.contentType.basicType == ISMSBasicContentTypeAudio && ![self isSongInQueue:aSong] && ![self.lastTempCachedSong isEqualToSong:aSong] && !aSong.isFullyCached && !settingsS.isOfflineMode && ![cacheQueueManagerS.currentQueuedSong isEqualToSong:aSong])
 			{
 				// Queue the song for download
@@ -531,19 +531,19 @@ LOG_LEVEL_ISUB_DEBUG
 	// TODO: Fix this logic, it's wrong
 	// Verify that the last song is not constantly retrying to connect, 
 	// so the current song can download and play
-	[self removeStreamForSong:playlistS.prevSong];
+	[self removeStreamForSong:[PlayQueue sharedInstance].previousSong];
 }
 
 - (void)currentPlaylistOrderChanged
 {
-	ISMSSong *currentSong = playlistS.currentSong;
-	ISMSSong *nextSong = playlistS.nextSong;
+	ISMSSong *currentSong = [PlayQueue sharedInstance].currentSong;
+	ISMSSong *nextSong = [PlayQueue sharedInstance].nextSong;
 	NSMutableArray *songsToSkip = [NSMutableArray arrayWithCapacity:2];
 	if (currentSong) [songsToSkip addObject:currentSong];
 	if (nextSong) [songsToSkip addObject:nextSong];
 	
 	[self removeAllStreamsExceptForSongs:songsToSkip];
-	[self fillStreamQueue:audioEngineS.player.isStarted];
+	[self fillStreamQueue:[PlayQueue sharedInstance].isStarted];
 }
 
 #pragma mark - ISMSStreamHandler delegate
@@ -559,10 +559,11 @@ LOG_LEVEL_ISUB_DEBUG
 	// Update the last cached song
 	self.lastCachedSong = handler.mySong;
     
-    ISMSSong *currentSong = playlistS.currentSong;
-	if ([handler.mySong isEqualToSong:playlistS.currentSong])
+    ISMSSong *currentSong = [PlayQueue sharedInstance].currentSong;
+	if ([handler.mySong isEqualToSong:currentSong])
 	{
-		[audioEngineS startSong:currentSong atIndex:playlistS.currentIndex withOffsetInBytes:@0 orSeconds:@0];
+        // TODO: Stop interacting directly with AudioEngine
+		[audioEngineS startSong:currentSong atIndex:[PlayQueue sharedInstance].currentIndex withOffsetInBytes:@0 orSeconds:@0];
 		
 		// Only for temp cached files
 		if (handler.isTempCache)

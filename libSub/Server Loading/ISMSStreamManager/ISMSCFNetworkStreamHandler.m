@@ -238,7 +238,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 	if (CFReadStreamSetClient(_readStreamRef, kNetworkEvents, ReadStreamClientCallBack, &ctxt) == false)
 		[self bail:messageRef];
 	
-	if ([self.mySong isEqualToSong:[playlistS currentSong]])
+	if ([self.mySong isEqualToSong:[[PlayQueue sharedInstance] currentSong]])
 	{
 		self.isCurrentSong = YES;
 	}
@@ -497,6 +497,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                     if (self.totalBytesTransferred >= partialPrecacheSize)
                     {
                         // First verify that the stream can be opened
+                        // TODO: Stop interacting directly with AudioEngine
                         if (audioEngineS.player)
                         {
                             if ([audioEngineS.player testStreamForSong:self.mySong])

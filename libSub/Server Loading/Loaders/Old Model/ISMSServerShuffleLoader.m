@@ -69,7 +69,7 @@
         [playQueue addSongId:aSong.songId.integerValue];
     }
     
-    playlistS.isShuffle = NO;    
+    [PlayQueue sharedInstance].shuffleMode = ShuffleModeNormal;
     
     [NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CurrentPlaylistSongsQueued];
     [self informDelegateLoadingFinished];

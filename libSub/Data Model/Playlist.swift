@@ -113,13 +113,21 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     public func removeSong(songId: Int) {
         // TODO: Fill this in
     }
+    
+    public func removeSongs(songIds: [Int]) {
+        // TODO: Fill this in
+    }
 
     public func removeSongAtIndex(index: Int) {
-        
+        // TODO: Fill this in
+    }
+    
+    public func removeSongsAtIndexes(indexes: NSIndexSet) {
+        // TODO: Fill this in
     }
     
     public func removeAllSongs() {
-        
+        // TODO: Fill this in
     }
     
     // MARK - Create new DB tables -

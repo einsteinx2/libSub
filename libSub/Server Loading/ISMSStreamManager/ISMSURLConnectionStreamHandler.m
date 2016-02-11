@@ -109,7 +109,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	NSDate *now = [[NSDate alloc] init];
 	[self.loadingThread.threadDictionary setObject:now forKey:@"throttlingDate"];
 		
-	if ([self.mySong isEqualToSong:[playlistS currentSong]])
+	if ([self.mySong isEqualToSong:[[PlayQueue sharedInstance] currentSong]])
 	{
 		self.isCurrentSong = YES;
 	}

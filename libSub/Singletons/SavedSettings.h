@@ -12,7 +12,6 @@
 #import "BassEffectDAO.h"
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
-#import "PlaylistSingleton.h"
 #import "libSubDefines.h"
 
 #define settingsS ((SavedSettings *)[SavedSettings sharedInstance])

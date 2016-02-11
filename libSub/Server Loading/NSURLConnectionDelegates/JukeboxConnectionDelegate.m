@@ -73,8 +73,9 @@
 		JukeboxXMLParser *parser = (JukeboxXMLParser*)[[JukeboxXMLParser alloc] initXMLParser];
 		[xmlParser setDelegate:parser];
 		[xmlParser parse];
-				
-		playlistS.currentIndex = parser.currentIndex;
+		
+        // TODO: Figure out how to handle this for jukebox
+		//[PlayQueue sharedInstance].currentIndex = parser.currentIndex;
 		jukeboxS.jukeboxGain = parser.gain;
 		jukeboxS.jukeboxIsPlaying = parser.isPlaying;
 		
