@@ -8,8 +8,7 @@
 
 #import "ISMSPlaylistsLoader.h"
 #import "ISMSLoader_Subclassing.h"
-#import "libSubImports.h"
-#import "ISMSPlaylist.h"
+#import "LibSub.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "RXMLElement.h"
 
@@ -110,7 +109,7 @@
             NSMutableArray *tempArray = [NSMutableArray arrayWithCapacity:0];
             [root iterate:@"playlists.playlist" usingBlock:^(RXMLElement *e) {
                 ISMSPlaylist *playlist = [[ISMSPlaylist alloc] init];
-                playlist.playlistId = @([[e attribute:@"id"] integerValue]);
+                playlist.playlistId = [[e attribute:@"id"] integerValue];
                 playlist.name = [e attribute:@"name"];
                 // TODO: Persist data model
                 [tempArray addObject:playlist];

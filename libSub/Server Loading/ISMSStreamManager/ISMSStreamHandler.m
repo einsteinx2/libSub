@@ -7,7 +7,7 @@
 //
 
 #import "ISMSStreamHandler.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 
 
 @implementation ISMSStreamHandler

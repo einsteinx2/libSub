@@ -7,6 +7,7 @@
 //
 
 #import "libSubImports.h"
+#import "libSub-Swift.h"
 
 // Static class for shared library methods
 @interface LibSub : NSObject

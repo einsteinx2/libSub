@@ -7,7 +7,7 @@
 //
 
 #import "BassGaplessPlayer.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface BassGaplessPlayer ()
@@ -892,7 +892,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 				 {
 					 DDLogError(@"[BassGaplessPlayer] Stream for song %@ failed, file is not on disk, so calling retrying the song", userInfo.song.title);
 					 // File was removed, so start again normally
-                     [[ISMSPlaylist downloadedSongs] removeSongId:aSong.songId.integerValue];
+                     [[ISMSPlaylist downloadedSongs] removeSong:aSong.songId.integerValue];
                      
                      [self.delegate bassRetrySongAtIndex:self.currentPlaylistIndex player:self];
 				 }
@@ -909,7 +909,7 @@ DWORD CALLBACK MyStreamProc(HSTREAM handle, void *buffer, DWORD length, void *us
 			 }
 			 else
 			 {
-				 [[ISMSPlaylist downloadedSongs] removeSongId:aSong.songId.integerValue];
+				 [[ISMSPlaylist downloadedSongs] removeSong:aSong.songId.integerValue];
                  
                  [self.delegate bassRetrySongAtIndex:self.currentPlaylistIndex player:self];
 			 }

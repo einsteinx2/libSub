@@ -16,7 +16,6 @@
 #import "ISMSSong.h"
 #import "ISMSChatMessage.h"
 #import "ISMSServer.h"
-#import "ISMSPlaylist.h"
 #import "ISMSGenre.h"
 #import "ISMSContentType.h"
 

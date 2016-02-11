@@ -7,7 +7,7 @@
 //
 
 #import "SUSChatDAO.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"
 

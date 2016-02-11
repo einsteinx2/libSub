@@ -7,7 +7,7 @@
 //
 
 #import "BassEqualizer.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 
 #define ISMS_EqualizerGainReduction 0.45
 

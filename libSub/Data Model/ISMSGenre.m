@@ -7,7 +7,7 @@
 //
 
 #import "ISMSGenre.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 
 @implementation ISMSGenre
 

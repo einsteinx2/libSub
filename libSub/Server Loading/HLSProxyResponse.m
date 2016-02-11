@@ -7,7 +7,7 @@
 //
 
 #import "HLSProxyResponse.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "HTTPConnection.h"
 
 static const int ddLogLevel = DDLogLevelError;

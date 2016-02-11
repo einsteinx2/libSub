@@ -7,7 +7,7 @@
 //
 
 #import "JukeboxXMLParser.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 //#import "ServerListViewController.h"
 
 @implementation JukeboxXMLParser

@@ -7,7 +7,7 @@
 //
 
 #import "ISMSStreamManager.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "ISMSStreamHandler.h"
 #import "ISMSCFNetworkStreamHandler.h"
 #import "ISMSCoverArtLoader.h"
@@ -197,7 +197,7 @@ LOG_LEVEL_ISUB_DEBUG
             if (!handler.mySong.isFullyCached && !handler.mySong.isTempCached && !([cacheQueueManagerS.currentQueuedSong isEqualToSong:handler.mySong] && cacheQueueManagerS.isQueueDownloading))
             {
                 DLog(@"Removing song from cached songs table: %@", handler.mySong);
-                [[ISMSPlaylist downloadedSongs] removeSongId:handler.mySong.songId.integerValue];
+                [[ISMSPlaylist downloadedSongs] removeSong:handler.mySong.songId.integerValue];
             }
 			//[handler.mySong removeFromCachedSongsTableDbQueue];
 		}
@@ -277,7 +277,7 @@ LOG_LEVEL_ISUB_DEBUG
 		if (!handler.mySong.isFullyCached && !handler.mySong.isTempCached && !([cacheQueueManagerS.currentQueuedSong isEqualToSong:handler.mySong] && cacheQueueManagerS.isQueueDownloading))
         {
             DLog(@"Removing song from cached songs table: %@", handler.mySong);
-            [[ISMSPlaylist downloadedSongs] removeSongId:handler.mySong.songId.integerValue];
+            [[ISMSPlaylist downloadedSongs] removeSong:handler.mySong.songId.integerValue];
         }
         [self.handlerStack removeObjectAtIndexSafe:index];
 	}
@@ -661,7 +661,7 @@ LOG_LEVEL_ISUB_DEBUG
             if ([cacheQueueManagerS isSongInQueue:handler.mySong])
             {
                 //handler.mySong.isDownloaded = YES;
-                [[ISMSPlaylist downloadQueue] removeSongId:handler.mySong.songId.integerValue];
+                [[ISMSPlaylist downloadQueue] removeSong:handler.mySong.songId.integerValue];
             }
             
             DLog(@"Marking isFullyCached = YES for %@", handler.mySong);

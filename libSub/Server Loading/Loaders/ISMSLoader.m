@@ -8,7 +8,7 @@
 
 #import "ISMSLoader.h"
 #import "ISMSLoader_Subclassing.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "ISMSLoaderDelegate.h"
 #import "ISMSLoaderManager.h"
 #import "NSMutableURLRequest+SUS.h"

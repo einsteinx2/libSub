@@ -7,7 +7,7 @@
 //
 
 #import "BassWrapper.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 
 LOG_LEVEL_ISUB_DEFAULT
 

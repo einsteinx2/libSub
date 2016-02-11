@@ -7,7 +7,7 @@
 //
 
 #import "ISMSUpdateChecker.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "RXMLElement.h"
 
 @interface ISMSUpdateChecker ()

@@ -7,7 +7,7 @@
 //
 
 #import "MusicSingleton.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "JukeboxXMLParser.h"
 #import "JukeboxConnectionDelegate.h"
 #import "ISMSStreamHandler.h"

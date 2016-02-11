@@ -7,7 +7,7 @@
 //
 
 #import "ISMSAlbum.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "ISMSArtist.h"
 #import "ISMSGenre.h"
 #import "RXMLElement.h"

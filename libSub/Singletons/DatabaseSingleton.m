@@ -7,7 +7,7 @@
 //
 
 #import "DatabaseSingleton.h"
-#import "libSubImports.h"
+#import "LibSub.h"
 #import "ISMSStreamManager.h"
 #import "JukeboxSingleton.h"
 
@@ -135,9 +135,9 @@ LOG_LEVEL_ISUB_DEFAULT
     
     if (createDefaultPlaylistTables)
     {
-        [ISMSPlaylist createPlaylistWithName:@"Play Queue" andId:playQueuePlaylistId];
-        [ISMSPlaylist createPlaylistWithName:@"Download Queue" andId:downloadQueuePlaylistId];
-        [ISMSPlaylist createPlaylistWithName:@"Downloaded Songs" andId:downloadedSongsPlaylistId];
+        [ISMSPlaylist createPlaylist:@"Play Queue" playlistId:[ISMSPlaylist playQueuePlaylistId]];
+        [ISMSPlaylist createPlaylist:@"Download Queue" playlistId:[ISMSPlaylist downloadQueuePlaylistId]];
+        [ISMSPlaylist createPlaylist:@"Downloaded Songs" playlistId:[ISMSPlaylist downloadedSongsPlaylistId]];
     }
 	
     // TODO: Stop storing image files in fucking databases
