@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
 
   s.private_header_files = "Frameworks/EX2Kit/Dependencies/RNCryptor/*.h",
   						   "Frameworks/RaptureXML/*.h"
-  s.source_files  = "Sub", "Sub/**/*.{h,m,swift}", "Frameworks", "Frameworks/**/*.{h,m,swift}"
+  s.source_files  = "libSub", "libSub/**/*.{h,m,swift}", "Frameworks", "Frameworks/**/*.{h,m,swift}"
   s.platform	 = :ios, "8.0"
 
   noarc_files = "Frameworks/EX2Kit/Categories/Foundation/NSString/GTMNSString+HTML.m",
