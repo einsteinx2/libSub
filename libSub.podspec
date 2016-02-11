@@ -52,7 +52,7 @@ Pod::Spec.new do |s|
   s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/libSub/libxml2',
 	             'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
                  'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1',
-				 'ENABLE_BITCODE' => 'NO'
+				 'ENABLE_BITCODE' => '$(inherited)'
 			   }
   s.vendored_libraries = "Frameworks/libBASS/*.a"
   s.libraries = "c++", "z", "xml2", "bass", "bass_ape", "bass_fx", "bass_mpc", "bassflac", "bassmix", "bassopus", "basswv", "bassdsd", "bass_tta"
