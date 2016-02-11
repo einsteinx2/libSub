@@ -13,7 +13,7 @@
 
 // Frameworks
 #if IOS
-//#import <Flurry/Flurry.h>
+#import <Flurry_iOS_SDK/Flurry.h>
 #endif
 #import <SBJson/SBJson.h>
 #import <ZipKit/ZipKit.h>
