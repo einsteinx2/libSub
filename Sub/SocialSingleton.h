@@ -19,7 +19,7 @@
 @property (readonly) NSTimeInterval subsonicDelay;
 @property (readonly) NSTimeInterval tweetDelay;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 - (void)scrobbleSongAsPlaying;
 - (void)scrobbleSongAsSubmission;

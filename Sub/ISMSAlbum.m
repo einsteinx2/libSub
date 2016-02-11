@@ -10,6 +10,7 @@
 #import "libSubImports.h"
 #import "ISMSArtist.h"
 #import "ISMSGenre.h"
+#import "RXMLElement.h"
 
 @implementation ISMSAlbum
 {

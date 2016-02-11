@@ -337,7 +337,7 @@ LOG_LEVEL_ISUB_DEBUG
 #endif
 }
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static ISMSCacheQueueManager *sharedInstance = nil;
     static dispatch_once_t once = 0;

@@ -8,7 +8,6 @@
 
 #import "ISMSURLConnectionStreamHandler.h"
 #import "LibSub.h"
-#import "NSError+ISMSError.h"
 #import "DatabaseSingleton.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"

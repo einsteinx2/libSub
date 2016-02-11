@@ -1,0 +1,10 @@
+framework module libSub {
+	umbrella header "LibSub.h"
+	export *
+}
+
+module CommonCrypto [system] {
+	header "$(SDKROOT)/usr/include/CommonCrypto/CommonCrypto.h"
+	header "$(SDKROOT)/usr/include/CommonCrypto/CommonRandom.h"
+	export *
+}

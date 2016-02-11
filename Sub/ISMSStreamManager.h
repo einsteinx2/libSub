@@ -27,7 +27,7 @@
 
 @property (readonly) ISMSSong *currentStreamingSong;
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 - (void)delayedSetup;
 

@@ -28,7 +28,7 @@
 @property unsigned long long contentLength;
 @property NSUInteger numberOfContentLengthFailures;*/
 
-+ (id)sharedInstance;
++ (instancetype)sharedInstance;
 
 - (void)startDownloadQueue;
 - (void)stopDownloadQueue;

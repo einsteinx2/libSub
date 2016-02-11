@@ -6,35 +6,30 @@
 //  Copyright (c) 2011 Ben Baron. All rights reserved.
 //
 
-#pragma no_pch
+#import <Foundation/Foundation.h>
 
-#ifndef iSub_ISMSErrorCodes_h
-#define iSub_ISMSErrorCodes_h
+extern NSString * const ISMSErrorDomain;
 
-#define ISMSErrorDomain @"iSub Error Domain"
+extern NSInteger const ISMSErrorCode_NotASubsonicServer;
+extern NSString * const ISMSErrorDesc_NotASubsonicServer;
 
-#define ISMSErrorCode_NotASubsonicServer		1
-#define ISMSErrorDesc_NotASubsonicServer		@"This is not a Subsonic server"
+extern NSInteger const ISMSErrorCode_NotXML;
+extern NSString * const ISMSErrorDesc_NotXML;
 
-#define ISMSErrorCode_NotXML					2
-#define ISMSErrorDesc_NotXML					@"This is not XML data"
+extern NSInteger const ISMSErrorCode_CouldNotCreateConnection;
+extern NSString * const ISMSErrorDesc_CouldNotCreateConnection;
 
-#define ISMSErrorCode_CouldNotCreateConnection	3
-#define ISMSErrorDesc_CouldNotCreateConnection	@"Could not create network connection"
+extern NSInteger const ISMSErrorCode_CouldNotSendChatMessage;
+extern NSString * const ISMSErrorDesc_CouldNotSendChatMessage;
 
-#define ISMSErrorCode_CouldNotSendChatMessage	4
-#define ISMSErrorDesc_CouldNotSendChatMessage	@"Could not send chat message"
+extern NSInteger const ISMSErrorCode_NoLyricsElement;
+extern NSString * const ISMSErrorDesc_NoLyricsElement;
 
-#define ISMSErrorCode_NoLyricsElement           5
-#define ISMSErrorDesc_NoLyricsElement           @"No lyrics XML element found"
+extern NSInteger const ISMSErrorCode_NoLyricsFound;
+extern NSString * const ISMSErrorDesc_NoLyricsFound;
 
-#define ISMSErrorCode_NoLyricsFound             6
-#define ISMSErrorDesc_NoLyricsFound             @"No lyrics found for this song"
+extern NSInteger const ISMSErrorCode_IncorrectCredentials;
+extern NSString * const ISMSErrorDesc_IncorrectCredentials;
 
-#define ISMSErrorCode_IncorrectCredentials		7
-#define ISMSErrorDesc_IncorrectCredentials		@"Incorrect username or password."
-
-#define ISMSErrorCode_CouldNotReachServer		8
-#define ISMSErrorDesc_CouldNotReachServer		@"Could not reach the server"
-
-#endif
+extern NSInteger const ISMSErrorCode_CouldNotReachServer;
+extern NSString * const ISMSErrorDesc_CouldNotReachServer;

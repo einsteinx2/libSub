@@ -13,6 +13,7 @@
 #import "ISMSAlbum.h"
 #import "ISMSGenre.h"
 #import "ISMSContentType.h"
+#import "RXMLElement.h"
 #include <sys/stat.h>
 
 @interface ISMSSong()

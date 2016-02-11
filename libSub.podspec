@@ -21,10 +21,12 @@ Pod::Spec.new do |s|
   libSub does fancy audio things.
                    DESC
 
-  s.license      = "MIT"
-  s.homepage 	 = "http://isubapp.com"
-  s.author             = { "Justin Hill" => "jhill.d@gmail.com" }
-  s.source       = { :git => "http://github.com/einsteinx2/libSub.git", :tag => "#{s.version}" }
+  s.license        = "GPL3"
+  s.homepage 	   = "http://isubapp.com"
+  s.author         = { "Justin Hill" => "jhill.d@gmail.com" }
+  s.source         = { :git => "http://github.com/einsteinx2/libSub.git", :tag => "#{s.version}" }
+  s.module_map     = "module.modulemap"
+  s.preserve_paths = "module.modulemap"
 
   s.source_files  = "Sub", "Sub/**/*.{h,m,swift}", "Frameworks", "Frameworks/**/*.{h,m,swift}"
   s.platform	 = :ios, "7.0"
@@ -45,10 +47,13 @@ Pod::Spec.new do |s|
   s.dependency "Flurry-iOS-SDK"
 
   s.frameworks = "Security"
-  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
-                 'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1' }
+  s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/libSub/libxml2',
+	             'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
+                 'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1',
+				 'ENABLE_BITCODE' => 'NO'
+			   }
   s.vendored_libraries = "Frameworks/libBASS/*.a"
-  s.libraries = "z", "xml2", "bass", "bass_ape", "bass_fx", "bass_mpc", "bassflac", "bassmix", "bassopus", "basswv"
+  s.libraries = "c++", "z", "xml2", "bass", "bass_ape", "bass_fx", "bass_mpc", "bassflac", "bassmix", "bassopus", "basswv", "bassdsd", "bass_tta"
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #

@@ -11,6 +11,7 @@
 #import "libSubImports.h"
 #import "ISMSPlaylist.h"
 #import "NSMutableURLRequest+SUS.h"
+#import "RXMLElement.h"
 
 @interface ISMSFolderLoader()
 @property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;

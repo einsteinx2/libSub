@@ -805,6 +805,12 @@
 		5322B30A1C6BEDF5001E63C0 /* AsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 5322B2F81C6BEDF5001E63C0 /* AsyncUdpSocket.m */; };
 		5322B30C1C6BEE59001E63C0 /* libSub-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 5322B30B1C6BEE59001E63C0 /* libSub-Bridging-Header.h */; };
 		5322B30D1C6BEE59001E63C0 /* libSub-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 5322B30B1C6BEE59001E63C0 /* libSub-Bridging-Header.h */; };
+		5325185E1C6C16FB00F95468 /* bass_tta.h in Headers */ = {isa = PBXBuildFile; fileRef = 5325185C1C6C16FB00F95468 /* bass_tta.h */; };
+		5325185F1C6C16FB00F95468 /* bass_tta.h in Headers */ = {isa = PBXBuildFile; fileRef = 5325185C1C6C16FB00F95468 /* bass_tta.h */; };
+		532518601C6C16FB00F95468 /* bassdsd.h in Headers */ = {isa = PBXBuildFile; fileRef = 5325185D1C6C16FB00F95468 /* bassdsd.h */; };
+		532518611C6C16FB00F95468 /* bassdsd.h in Headers */ = {isa = PBXBuildFile; fileRef = 5325185D1C6C16FB00F95468 /* bassdsd.h */; };
+		532518641C6C170600F95468 /* libbass_tta.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 532518621C6C170600F95468 /* libbass_tta.a */; };
+		532518651C6C170600F95468 /* libbassdsd.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 532518631C6C170600F95468 /* libbassdsd.a */; };
 		533555A21C5EC5B500624F30 /* ISMSAbstractItemLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 533555A01C5EC5B500624F30 /* ISMSAbstractItemLoader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		533555A31C5EC5B500624F30 /* ISMSAbstractItemLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 533555A01C5EC5B500624F30 /* ISMSAbstractItemLoader.h */; };
 		533555A41C5EC5B500624F30 /* ISMSAbstractItemLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 533555A11C5EC5B500624F30 /* ISMSAbstractItemLoader.m */; };
@@ -1353,6 +1359,10 @@
 		5322B2F71C6BEDF5001E63C0 /* AsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncUdpSocket.h; sourceTree = "<group>"; };
 		5322B2F81C6BEDF5001E63C0 /* AsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncUdpSocket.m; sourceTree = "<group>"; };
 		5322B30B1C6BEE59001E63C0 /* libSub-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "libSub-Bridging-Header.h"; sourceTree = "<group>"; };
+		5325185C1C6C16FB00F95468 /* bass_tta.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bass_tta.h; sourceTree = "<group>"; };
+		5325185D1C6C16FB00F95468 /* bassdsd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bassdsd.h; sourceTree = "<group>"; };
+		532518621C6C170600F95468 /* libbass_tta.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbass_tta.a; sourceTree = "<group>"; };
+		532518631C6C170600F95468 /* libbassdsd.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbassdsd.a; sourceTree = "<group>"; };
 		533555A01C5EC5B500624F30 /* ISMSAbstractItemLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ISMSAbstractItemLoader.h; sourceTree = "<group>"; };
 		533555A11C5EC5B500624F30 /* ISMSAbstractItemLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ISMSAbstractItemLoader.m; sourceTree = "<group>"; };
 		5344F453166C03E50013B929 /* libSubImports.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = libSubImports.h; sourceTree = "<group>"; };
@@ -1584,12 +1594,14 @@
 			files = (
 				536C947716618FA4005A73C6 /* Foundation.framework in Frameworks */,
 				536C980A16619B25005A73C6 /* libbass.a in Frameworks */,
+				532518641C6C170600F95468 /* libbass_tta.a in Frameworks */,
 				536C980B16619B25005A73C6 /* libbass_ape.a in Frameworks */,
 				536C980C16619B25005A73C6 /* libbass_fx.a in Frameworks */,
 				536C980D16619B25005A73C6 /* libbass_mpc.a in Frameworks */,
 				536C980E16619B25005A73C6 /* libbassflac.a in Frameworks */,
 				536C980F16619B25005A73C6 /* libbassmix.a in Frameworks */,
 				536C981016619B25005A73C6 /* libbassopus.a in Frameworks */,
+				532518651C6C170600F95468 /* libbassdsd.a in Frameworks */,
 				536C981116619B25005A73C6 /* libbasswv.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2502,6 +2514,8 @@
 				536C97F716619B25005A73C6 /* bassmix.h */,
 				536C97F816619B25005A73C6 /* bassopus.h */,
 				536C97F916619B25005A73C6 /* basswv.h */,
+				5325185C1C6C16FB00F95468 /* bass_tta.h */,
+				5325185D1C6C16FB00F95468 /* bassdsd.h */,
 				536C97FA16619B25005A73C6 /* libbass.a */,
 				536C97FB16619B25005A73C6 /* libbass_ape.a */,
 				536C97FC16619B25005A73C6 /* libbass_fx.a */,
@@ -2510,6 +2524,8 @@
 				536C97FF16619B25005A73C6 /* libbassmix.a */,
 				536C980016619B25005A73C6 /* libbassopus.a */,
 				536C980116619B25005A73C6 /* libbasswv.a */,
+				532518621C6C170600F95468 /* libbass_tta.a */,
+				532518631C6C170600F95468 /* libbassdsd.a */,
 			);
 			name = libBASS;
 			path = Frameworks/libBASS;
@@ -2686,6 +2702,7 @@
 				53067E7E1694F11C00600396 /* ISMSStreamHandler.h in Headers */,
 				5322B1C61C6BED3B001E63C0 /* EX2Reachability.h in Headers */,
 				5322760E1C6BFF5100291227 /* RXMLElement.h in Headers */,
+				532518611C6C16FB00F95468 /* bassdsd.h in Headers */,
 				5322B1921C6BED3B001E63C0 /* UIView+Glow.h in Headers */,
 				53067E7F1694F11C00600396 /* ISMSURLConnectionStreamHandler.h in Headers */,
 				53067E801694F11C00600396 /* ISMSStreamHandlerDelegate.h in Headers */,
@@ -2749,6 +2766,7 @@
 				5322B2191C6BED3B001E63C0 /* EX2SlidingNotification.h in Headers */,
 				5322B1861C6BED3B001E63C0 /* UIImageView+Reflection.h in Headers */,
 				5322B11A1C6BED3B001E63C0 /* NSString+md5.h in Headers */,
+				5325185F1C6C16FB00F95468 /* bass_tta.h in Headers */,
 				5322B2721C6BEDE4001E63C0 /* DDContextFilterLogFormatter.h in Headers */,
 				5322B0CA1C6BED3B001E63C0 /* NSDate+UTC.h in Headers */,
 				5322B0AE1C6BED3B001E63C0 /* NSArray+Plist.h in Headers */,
@@ -2925,6 +2943,7 @@
 				536C97A216619820005A73C6 /* sqlite3.h in Headers */,
 				5322B1C51C6BED3B001E63C0 /* EX2Reachability.h in Headers */,
 				5322760D1C6BFF5100291227 /* RXMLElement.h in Headers */,
+				532518601C6C16FB00F95468 /* bassdsd.h in Headers */,
 				5322B1911C6BED3B001E63C0 /* UIView+Glow.h in Headers */,
 				536C993D16619F39005A73C6 /* ISMSErrorDomain.h in Headers */,
 				536C993E16619F39005A73C6 /* ISMSNotificationNames.h in Headers */,
@@ -2988,6 +3007,7 @@
 				5322B2181C6BED3B001E63C0 /* EX2SlidingNotification.h in Headers */,
 				5322B1851C6BED3B001E63C0 /* UIImageView+Reflection.h in Headers */,
 				5322B1191C6BED3B001E63C0 /* NSString+md5.h in Headers */,
+				5325185E1C6C16FB00F95468 /* bass_tta.h in Headers */,
 				5322B2711C6BEDE4001E63C0 /* DDContextFilterLogFormatter.h in Headers */,
 				5322B0C91C6BED3B001E63C0 /* NSDate+UTC.h in Headers */,
 				5322B0AD1C6BED3B001E63C0 /* NSArray+Plist.h in Headers */,
@@ -3855,6 +3875,7 @@
 					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Frameworks/libBASS\"/**",
 					"\"$(SRCROOT)/Frameworks/Flurry\"",
+					"$(PROJECT_DIR)/Frameworks/libBASS",
 				);
 				MACH_O_TYPE = mh_dylib;
 				ONLY_ACTIVE_ARCH = YES;
@@ -3890,6 +3911,7 @@
 					"\"$(SRCROOT)/Frameworks/FlurryAnalytics\"",
 					"\"$(SRCROOT)/Frameworks/libBASS\"/**",
 					"\"$(SRCROOT)/Frameworks/Flurry\"",
+					"$(PROJECT_DIR)/Frameworks/libBASS",
 				);
 				MACH_O_TYPE = mh_dylib;
 				PRODUCT_NAME = Sub;

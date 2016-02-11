@@ -8,6 +8,7 @@
 
 #import "NSMutableURLRequest+PMS.h"
 #import "libSubImports.h"
+#import <TBXML/TBXML+Compression.h>
 
 @implementation NSMutableURLRequest (PMS)
 

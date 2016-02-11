@@ -7,12 +7,15 @@
 //
 
 #import "bass.h"
-#import "bass_fx.h"
-#import "bassflac.h"
-#import "basswv.h"
-#import "bass_mpc.h"
 #import "bass_ape.h"
+#import "bass_fx.h"
+#import "bass_mpc.h"
+#import "bass_tta.h"
+#import "bassdsd.h"
+#import "bassflac.h"
 #import "bassmix.h"
+#import "bassopus.h"
+#import "basswv.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "BassStream.h"
 

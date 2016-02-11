@@ -8,6 +8,7 @@
 
 #import "ISMSChatMessage.h"
 #import "libSubImports.h"
+#import "RXMLElement.h"
 
 @implementation ISMSChatMessage
 

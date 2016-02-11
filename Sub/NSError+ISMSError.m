@@ -15,19 +15,12 @@
 {
     NSString *description = nil;
     
-    switch (code) 
-    {
-        case ISMSErrorCode_NotASubsonicServer:
-            description = ISMSErrorDesc_NotASubsonicServer;
-            break;
-        case ISMSErrorCode_NotXML:
-            description = ISMSErrorDesc_NotXML;
-            break;
-        case ISMSErrorCode_CouldNotCreateConnection:
-            description = ISMSErrorDesc_CouldNotCreateConnection;
-        default:
-            break;
-    }
+    if (code == ISMSErrorCode_NotASubsonicServer)
+        description = ISMSErrorDesc_NotASubsonicServer;
+    else if (code == ISMSErrorCode_NotXML)
+        description = ISMSErrorDesc_NotXML;
+    else if (code == ISMSErrorCode_CouldNotCreateConnection)
+        description = ISMSErrorDesc_CouldNotCreateConnection;
     
     return description;
 }

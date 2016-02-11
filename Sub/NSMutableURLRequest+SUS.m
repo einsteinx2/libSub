@@ -8,6 +8,7 @@
 
 #import "NSMutableURLRequest+SUS.h"
 #import "libSubImports.h"
+#import <TBXML/TBXML+Compression.h>
 
 @implementation NSMutableURLRequest (SUS)
 

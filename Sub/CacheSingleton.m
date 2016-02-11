@@ -324,7 +324,7 @@ LOG_LEVEL_ISUB_DEFAULT
 #endif
 }
 
-+ (id)sharedInstance
++ (instancetype)sharedInstance
 {
     static CacheSingleton *sharedInstance = nil;
     static dispatch_once_t once = 0;
