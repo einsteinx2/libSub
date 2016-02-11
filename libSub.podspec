@@ -28,6 +28,8 @@ Pod::Spec.new do |s|
   s.module_map     = "module.modulemap"
   s.preserve_paths = "module.modulemap"
 
+  s.private_header_files = "Frameworks/EX2Kit/Dependencies/RNCryptor/*.h",
+  						   "Frameworks/RaptureXML/*.h"
   s.source_files  = "Sub", "Sub/**/*.{h,m,swift}", "Frameworks", "Frameworks/**/*.{h,m,swift}"
   s.platform	 = :ios, "7.0"
 

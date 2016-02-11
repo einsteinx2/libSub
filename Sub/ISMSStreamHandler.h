@@ -7,7 +7,6 @@
 //
 
 #import "ISMSStreamHandlerDelegate.h"
-#import "libSubImports.h"
 
 #define ISMSNumSecondsToPartialPreCacheDefault 45
 #define ISMSNumBytesToPartialPreCache(bitrate) (BytesForSecondsAtBitrate(self.secondsToPartialPrecache, bitrate))
@@ -25,7 +24,7 @@
 
 #define ISMSMaxContentLengthFailures 25
 
-@class Song;
+@class ISMSSong;
 @interface ISMSStreamHandler : NSObject <NSCoding>
 
 - (id)initWithSong:(ISMSSong *)song byteOffset:(unsigned long long)bOffset secondsOffset:(double)sOffset isTemp:(BOOL)isTemp delegate:(NSObject<ISMSStreamHandlerDelegate> *)theDelegate;

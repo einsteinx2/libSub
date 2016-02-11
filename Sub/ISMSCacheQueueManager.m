@@ -90,7 +90,7 @@ LOG_LEVEL_ISUB_DEBUG
     if (self.currentQueuedSong.contentType.basicType == ISMSBasicContentTypeVideo)
     {
         // Remove from the queue
-        [[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
+        [[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId.integerValue];
         
         // Continue the queue
 		[self startDownloadQueue];
@@ -107,7 +107,7 @@ LOG_LEVEL_ISUB_DEBUG
 		//self.currentQueuedSong.isDownloaded = YES;
 		
 		// The song is fully cached, so delete it from the cache queue database
-		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
+		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId.integerValue];
 		
 		// Notify any tables
 		NSDictionary *userInfo = [NSDictionary dictionaryWithObject:self.currentQueuedSong.songId forKey:@"songId"];
@@ -197,7 +197,7 @@ LOG_LEVEL_ISUB_DEBUG
 	if (self.isQueueDownloading)
 		[self stopDownloadQueue];
 	
-    [[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
+    [[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId.integerValue];
 	
 	if (!self.isQueueDownloading)
 		[self startDownloadQueue];
@@ -233,7 +233,7 @@ LOG_LEVEL_ISUB_DEBUG
 		
 		// Tried max number of times so remove
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CacheQueueSongFailed];
-		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
+		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId.integerValue];
 		self.currentStreamHandler = nil;
 		[self startDownloadQueue];
 	}
@@ -297,7 +297,7 @@ LOG_LEVEL_ISUB_DEBUG
         self.currentQueuedSong.isFullyCached = YES;
 		
 		// Remove the song from the cache queue
-		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId];
+		[[ISMSPlaylist downloadQueue] removeSongId:self.currentQueuedSong.songId.integerValue];
 		self.currentQueuedSong = nil;
         		
 		// Remove the stream handler

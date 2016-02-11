@@ -24,9 +24,9 @@
 //  DEALINGS IN THE SOFTWARE.
 //
 
+#import <CommonCrypto/CommonCrypto.h>
+#import <CommonCrypto/CommonRandom.h>
 #import <Foundation/Foundation.h>
-#import <CommonCrypto/CommonCryptor.h>
-#import <CommonCrypto/CommonKeyDerivation.h>
 #import <Security/Security.h>
 
 extern NSString *const kRNCryptorErrorDomain;

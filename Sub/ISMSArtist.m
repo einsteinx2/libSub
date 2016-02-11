@@ -188,7 +188,7 @@
 {
     [encoder encodeObject:self.artistId    forKey:@"artistId"];
     [encoder encodeObject:self.name        forKey:@"name"];
-    [encoder encodeInteger:self.albumCount forKey:@"albumCount"];
+    [encoder encodeObject:self.albumCount forKey:@"albumCount"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder

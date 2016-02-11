@@ -90,7 +90,7 @@ static const int ddLogLevel = DDLogLevelVerbose;
 {                 
     @synchronized(self.actionQueue)
     {
-        DDLogVerbose(@"[EX2ActionQueue] startQueue, state: %u  actions: %@", self.queueState, self.actionQueue);
+        DDLogVerbose(@"[EX2ActionQueue] startQueue, state: %lu  actions: %@", self.queueState, self.actionQueue);
 
         if (self.queueState == EX2ActionQueueState_Started)
             return;

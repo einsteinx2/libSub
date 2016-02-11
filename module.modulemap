@@ -3,8 +3,3 @@ framework module libSub {
 	export *
 }
 
-module CommonCrypto [system] {
-	header "$(SDKROOT)/usr/include/CommonCrypto/CommonCrypto.h"
-	header "$(SDKROOT)/usr/include/CommonCrypto/CommonRandom.h"
-	export *
-}

@@ -5,7 +5,6 @@
 //  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
-#import "UIView+Tools.h"
 #import "EX2NotificationBar.h"
 #import "EX2Macros.h"
 #import "EX2Kit.h"

@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 Ben Baron. All rights reserved.
 //
 
-#import "UIView+Tools.h"
 #import "EX2SlidingNotification.h"
 #import "NSArray+Additions.h"
 #import "UIView+Tools.h"

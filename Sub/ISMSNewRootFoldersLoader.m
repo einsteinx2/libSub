@@ -105,7 +105,7 @@
 - (void)persistModels
 {
     // Remove existing root folders
-    [[[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId] deleteRootFolders];
+    [[[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId.integerValue] deleteRootFolders];
     
     // Save the new folders
     [self.folders makeObjectsPerformSelector:@selector(replaceModel)];
@@ -118,7 +118,7 @@
     NSArray *songs = nil;
     if (self.mediaFolderId)
     {
-        ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId];
+        ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId.integerValue];
         folders = [mediaFolder rootFolders];
         songs = [ISMSSong rootSongsInMediaFolder:self.mediaFolderId.unsignedIntegerValue];
     }

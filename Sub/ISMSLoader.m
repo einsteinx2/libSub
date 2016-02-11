@@ -224,7 +224,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)theConnection 
 {
-    DLog(@"loader type: %i response:\n%@", self.type, [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
+    DLog(@"loader type: %li response:\n%@", self.type, [[NSString alloc] initWithData:self.receivedData encoding:NSUTF8StringEncoding]);
 	[self processResponse];
 	
 	// Clean up the connection
