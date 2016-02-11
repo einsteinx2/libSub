@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.private_header_files = "Frameworks/EX2Kit/Dependencies/RNCryptor/*.h",
   						   "Frameworks/RaptureXML/*.h"
   s.source_files  = "Sub", "Sub/**/*.{h,m,swift}", "Frameworks", "Frameworks/**/*.{h,m,swift}"
-  s.platform	 = :ios, "7.0"
+  s.platform	 = :ios, "8.0"
 
   noarc_files = "Frameworks/EX2Kit/Categories/Foundation/NSString/GTMNSString+HTML.m",
   				"Frameworks/EX2Kit/Categories/UIKit/UIImage+RoundedImage.m",
@@ -48,7 +48,7 @@ Pod::Spec.new do |s|
   s.dependency "MKStoreKit"
   s.dependency "Flurry-iOS-SDK"
 
-  s.frameworks = "Security"
+  s.frameworks = "Security", "Accelerate"
   s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/libSub/libxml2',
 	             'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
                  'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1',
