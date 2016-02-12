@@ -14,24 +14,12 @@
 #import "MKStoreManager.h"
 #endif
 
-// Test server details
-#define DEFAULT_SERVER_TYPE SUBSONIC
-#define DEFAULT_URL @"http://isubapp.com:9001"
-#define DEFAULT_USER_NAME @"isub-guest"
-#define DEFAULT_PASSWORD @"1sub1snumb3r0n3"
-
 @interface SavedSettings ()
 {
-    __strong NSUserDefaults *_userDefaults;
+    NSUserDefaults *_userDefaults;
     
-    __strong NSMutableArray *_serverList;
-    __strong NSString *_serverType;
-    __strong NSString *_urlString;
-    __strong NSString *_username;
-    __strong NSString *_password;
-    __strong NSString *_uuid;
-    __strong NSString *_lastQueryId;
-    __strong NSString *_sessionId;
+    ISMSServer *_currentServer;
+    NSString *_sessionId;
     
     BOOL _isPopupsEnabled;
     BOOL _isJukeboxEnabled;
@@ -110,7 +98,6 @@
 	_isRecover = self.isRecover;
 	_recoverSetting = self.recoverSetting;
     _sessionId = self.sessionId;
-    _lastQueryId = [_userDefaults objectForKey:@"lastQueryId"];
 	
 	audioEngineS.startByteOffset = _byteOffset;
 	audioEngineS.startSecondsOffset = _secondsOffset;
@@ -218,38 +205,30 @@
 #pragma mark - Settings Setup
 
 - (void)convertFromOldSettingsType
-{	
+{
+    // TODO: Update for upgrading from this previous change to the newest settings storage
 	// Convert server list
-	id servers = [_userDefaults objectForKey:@"servers"];
-	if ([servers isKindOfClass:[NSArray class]])
+	id oldServers = [_userDefaults objectForKey:@"servers"];
+	if ([oldServers isKindOfClass:[NSArray class]])
 	{
-		if ([servers count] > 0)
+		if ([oldServers count] > 0)
 		{
-			if ([[servers objectAtIndexSafe:0] isKindOfClass:[NSArray class]])
+			if ([[oldServers objectAtIndexSafe:0] isKindOfClass:[NSArray class]])
 			{
 				NSMutableArray *newServerList = [NSMutableArray arrayWithCapacity:0];
 				
-				for (NSArray *serverInfo in servers)
+				for (NSArray *serverInfo in oldServers)
 				{
-					ISMSServer *aServer = [[ISMSServer alloc] init];
-					aServer.url = [NSString stringWithString:[serverInfo objectAtIndexSafe:0]];
-					aServer.username = [NSString stringWithString:[serverInfo objectAtIndexSafe:1]];
-					aServer.password = [NSString stringWithString:[serverInfo objectAtIndexSafe:2]];
-					aServer.type = SUBSONIC;
-					
-					[newServerList addObject:aServer];
+                    // Create database record
+                    [[ISMSServer alloc] initWithType:ServerTypeSubsonic
+                                                 url:[serverInfo objectAtIndexSafe:0]
+                                            username:[serverInfo objectAtIndexSafe:1]
+                                         lastQueryId:@""
+                                                uuid:@""
+                                            password:[serverInfo objectAtIndexSafe:2]];
 				}
-				
-				self.serverList = newServerList;
-				
-				[_userDefaults setObject:[NSKeyedArchiver archivedDataWithRootObject:_serverList] forKey:@"servers"];
 			}
 		}
-	}
-	else
-	{
-		if (servers != nil)
-			self.serverList = [NSKeyedUnarchiver unarchiveObjectWithData:servers];
 	}
 	
 	// Convert the old settings format over
@@ -429,145 +408,29 @@
 	_isLockScreenArtEnabled = [_userDefaults boolForKey:@"isLockScreenArtEnabled"];
 	_isEqualizerOn = [_userDefaults boolForKey:@"isEqualizerOn"];
 	
-	_serverType = [_userDefaults stringForKey:@"serverType"];
-	_serverType = _serverType ? _serverType : DEFAULT_SERVER_TYPE;
-	_urlString = [_userDefaults stringForKey:@"url"];
-	_urlString = _urlString ? _urlString : DEFAULT_URL;
-	_username = [_userDefaults stringForKey:@"username"];
-	_username = _username ? _username : DEFAULT_USER_NAME;
-	_password = [_userDefaults stringForKey:@"password"];
-	_password = _password ? _password : DEFAULT_PASSWORD;
-    _uuid = [_userDefaults stringForKey:@"uuid"];
-    _lastQueryId = [_userDefaults stringForKey:@"lastQueryId"];
-    _sessionId = [_userDefaults stringForKey:[NSString stringWithFormat:@"sessionId%@", self.urlString.md5]];
+    _currentServer = [_userDefaults objectForKey:@"currentServer"];
+    if (!_currentServer) {
+        _currentServer = [ISMSServer testServer];
+    }
+    _sessionId = [_userDefaults stringForKey:[NSString stringWithFormat:@"sessionId%@", _currentServer.url.md5]];
 }
 
 #pragma mark - Login Settings
 
-- (NSString *)serverType
+- (ISMSServer *)currentServer
 {
 	@synchronized(self)
 	{
-		return _serverType;
+		return _currentServer;
 	}
 }
 
-- (void)setServerType:(NSString *)type
+- (void)setCurrentServer:(ISMSServer *)currentServer
 {
 	@synchronized(self)
 	{
-		_serverType = [type copy];
-		[_userDefaults setObject:type forKey:@"serverType"];
-		[_userDefaults synchronize];
-	}
-}
-
-- (NSString *)urlString
-{
-	@synchronized(self)
-	{
-		return _urlString;
-	}
-}
-
-- (void)setUrlString:(NSString *)url
-{
-	@synchronized(self)
-	{
-		_urlString = [url copy];
-		[_userDefaults setObject:url forKey:@"url"];
-		[_userDefaults synchronize];
-	}
-}
-
-- (NSString *)username
-{
-	@synchronized(self)
-	{
-		return _username;
-	}
-}
-
-- (void)setUsername:(NSString *)user
-{
-	@synchronized(self)
-	{
-		_username = [user copy];
-		[_userDefaults setObject:user forKey:@"username"];
-		[_userDefaults synchronize];
-	}
-}
-
-- (NSString *)password
-{
-	@synchronized(self)
-	{
-		return _password;
-	}
-}
-
-- (void)setPassword:(NSString *)pass
-{
-	@synchronized(self)
-	{
-		_password = [pass copy];
-		[_userDefaults setObject:pass forKey:@"password"];
-		[_userDefaults synchronize];
-	}
-}
-
-- (NSString *)uuid
-{
-	@synchronized(self)
-	{
-		return _uuid;
-	}
-}
-
-- (void)setUuid:(NSString *)uuid
-{
-	@synchronized(self)
-	{
-		_uuid = [uuid copy];
-		[_userDefaults setObject:uuid forKey:@"uuid"];
-		[_userDefaults synchronize];
-	}
-}
-
-- (NSString *)lastQueryId
-{
-	@synchronized(self)
-	{
-		return _lastQueryId;
-	}
-}
-
-- (void)setLastQueryId:(NSString *)lastQueryId
-{
-	@synchronized(self)
-	{
-		_lastQueryId = [lastQueryId copy];
-		[_userDefaults setObject:lastQueryId forKey:@"lastQueryId"];
-		[_userDefaults synchronize];
-	}
-}
-
-- (NSString *)sessionId
-{
-	@synchronized(self)
-	{
-		return _sessionId;
-	}
-}
-
-- (void)setSessionId:(NSString *)sId
-{
-	@synchronized(self)
-	{
-		_sessionId = [sId copy];
-        
-        NSString *key = [NSString stringWithFormat:@"sessionId%@", self.urlString.md5];
-		[_userDefaults setObject:_sessionId forKey:key];
+		_currentServer = [currentServer copy];
+		[_userDefaults setObject:currentServer forKey:@"currentServer"];
 		[_userDefaults synchronize];
 	}
 }
@@ -651,7 +514,7 @@
 {
 	@synchronized(self)
 	{
-		return [_userDefaults objectForKey:[NSString stringWithFormat:@"%@rootFoldersReloadTime", _urlString]];
+		return [_userDefaults objectForKey:[NSString stringWithFormat:@"%@rootFoldersReloadTime", _currentServer.url]];
 	}
 }
 
@@ -659,7 +522,7 @@
 {
 	@synchronized(self)
 	{
-		[_userDefaults setObject:reloadTime forKey:[NSString stringWithFormat:@"%@rootFoldersReloadTime", _urlString]];
+		[_userDefaults setObject:reloadTime forKey:[NSString stringWithFormat:@"%@rootFoldersReloadTime", _currentServer.url]];
 		[_userDefaults synchronize];
 	}
 }
@@ -668,7 +531,7 @@
 {
 	@synchronized(self)
 	{
-		return [_userDefaults objectForKey:[NSString stringWithFormat:@"%@rootFoldersSelectedFolder", _urlString]];
+		return [_userDefaults objectForKey:[NSString stringWithFormat:@"%@rootFoldersSelectedFolder", _currentServer.url]];
 	}
 }
 
@@ -676,7 +539,7 @@
 {
 	@synchronized(self)
 	{
-		[_userDefaults setObject:folderId forKey:[NSString stringWithFormat:@"%@rootFoldersSelectedFolder", _urlString]];
+		[_userDefaults setObject:folderId forKey:[NSString stringWithFormat:@"%@rootFoldersSelectedFolder", _currentServer.url]];
 		[_userDefaults synchronize];
 	}
 }
@@ -1335,7 +1198,7 @@
 {
 	@synchronized(self)
 	{
-		NSString *key = [NSString stringWithFormat:@"isVideoSupported%@", _urlString.md5];
+		NSString *key = [NSString stringWithFormat:@"isVideoSupported%@", _currentServer.url.md5];
 		return [_userDefaults boolForKey:key];
 	}
 }
@@ -1344,7 +1207,7 @@
 {
 	@synchronized(self)
 	{
-		NSString *key = [NSString stringWithFormat:@"isVideoSupported%@", _urlString.md5];
+		NSString *key = [NSString stringWithFormat:@"isVideoSupported%@", _currentServer.url.md5];
 		[_userDefaults setBool:isVideoSupported forKey:key];
 		[_userDefaults synchronize];
 	}
@@ -1354,7 +1217,7 @@
 {
 	@synchronized(self)
 	{
-		NSString *key = [NSString stringWithFormat:@"isNewSearchAPI%@", _urlString.md5];
+		NSString *key = [NSString stringWithFormat:@"isNewSearchAPI%@", _currentServer.url.md5];
 		return [_userDefaults boolForKey:key];
 	}
 }
@@ -1363,7 +1226,7 @@
 {
 	@synchronized(self)
 	{
-		NSString *key = [NSString stringWithFormat:@"isNewSearchAPI%@", _urlString.md5];
+		NSString *key = [NSString stringWithFormat:@"isNewSearchAPI%@", _currentServer.url.md5];
 		[_userDefaults setBool:isNewSearchAPI forKey:key];
 		[_userDefaults synchronize];
 	}
@@ -1689,7 +1552,7 @@
 
 - (BOOL)isTestServer
 {
-	return [_urlString isEqualToString:DEFAULT_URL];
+    return [self.currentServer isEqual:[ISMSServer testServer]];
 }
 
 - (BOOL)isStopCheckingWaveboxRelease

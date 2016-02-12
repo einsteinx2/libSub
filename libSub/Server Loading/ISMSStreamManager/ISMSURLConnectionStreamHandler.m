@@ -73,7 +73,8 @@ LOG_LEVEL_ISUB_DEFAULT
 		self.fileHandle = [NSFileHandle fileHandleForWritingAtPath:self.filePath];
 	}
     
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
+    ServerType serverType = settingsS.currentServer.type;
+	if (serverType == ServerTypeSubsonic)
 	{
 		NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:n2N(self.mySong.songId), @"id", nil];
 		[parameters setObject:@"true" forKey:@"estimateContentLength"];
@@ -90,7 +91,7 @@ LOG_LEVEL_ISUB_DEFAULT
 		}
 		self.request = [NSMutableURLRequest requestWithSUSAction:@"stream" parameters:parameters byteOffset:self.byteOffset];
 	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
+	else if (serverType == ServerTypeiSubServer || serverType == ServerTypeWaveBox)
 	{
         NSDictionary *parameters = [NSDictionary dictionaryWithObject:self.mySong.songId forKey:@"id"];
 		self.request = [NSMutableURLRequest requestWithPMSAction:@"stream" parameters:parameters byteOffset:self.byteOffset];

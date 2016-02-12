@@ -35,12 +35,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     }
     
     public required init?(itemId: Int) {
-        self.playlistId = 2
-        self.name = "dfsdf"
-        
-        let query = "SELECT p.playlistId, p.name " +
-                    "FROM playlists AS p " +
-                    "WHERE p.playlistId = ?"
+        let query = "SELECT * FROM playlists WHERE p.playlistId = ?"
         do {
             let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query)
             if result.next() {

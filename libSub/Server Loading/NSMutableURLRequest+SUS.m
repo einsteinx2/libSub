@@ -161,7 +161,7 @@ static NSSet *setOfVersions = nil;
 
 + (NSMutableURLRequest *)requestWithSUSAction:(NSString *)action parameters:(NSDictionary *)parameters byteOffset:(NSUInteger)offset
 {
-	NSString *urlString = settingsS.urlString;
+	NSString *urlString = settingsS.currentServer.url;
 	if (settingsS.redirectUrlString)
 	{
 		// The redirect URL has been found, so use it
@@ -170,10 +170,11 @@ static NSSet *setOfVersions = nil;
 	
 //DLog(@"username: %@   password: %@", settingsS.username, settingsS.password);
 	
+    ISMSServer *currentServer = settingsS.currentServer;
 	return [NSMutableURLRequest requestWithSUSAction:action 
 										urlString:urlString 
-											username:settingsS.username
-											password:settingsS.password 
+											username:currentServer.username
+											password:currentServer.password
 									   parameters:parameters 
 										  byteOffset:offset];
 }

@@ -121,7 +121,8 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
     }
 	
     NSURLRequest *request;
-	if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
+    ServerType serverType = settingsS.currentServer.type;
+	if (serverType == ServerTypeSubsonic)
 	{
 		NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObjectsAndKeys:n2N(self.mySong.songId), @"id", nil];
         
@@ -135,7 +136,7 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 		}
 		request = [NSMutableURLRequest requestWithSUSAction:@"stream" parameters:parameters byteOffset:self.byteOffset];
 	}
-	else if ([settingsS.serverType isEqualToString:WAVEBOX])
+	else if (serverType == ServerTypeiSubServer || serverType == ServerTypeWaveBox)
 	{
         NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithObject:self.mySong.songId forKey:@"id"];
         

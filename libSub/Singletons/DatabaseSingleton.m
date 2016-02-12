@@ -20,7 +20,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)setupDatabases
 {
-	NSString *urlStringMd5 = [[settingsS urlString] md5];
+	NSString *urlStringMd5 = [[[settingsS currentServer] url] md5];
     DDLogVerbose(@"Database prefix: %@", urlStringMd5);
     
     // Setup the new data model (WAL enabled)
@@ -130,6 +130,15 @@ LOG_LEVEL_ISUB_DEFAULT
         if (![db tableExists:@"chatMessages"])
         {
             [db executeUpdate:@"CREATE TABLE playlists (chatMessageId INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, message TEXT, timestamp REAL)"];
+        }
+        
+        // NOTE: Passwords stored in the keychain
+        if (![db tableExists:@"servers"])
+        {
+            [db executeUpdate:@"CREATE TABLE servers (serverId INTEGER PRIMARY KEY AUTOINCREMENT, type INTEGER, url TEXT, username TEXT, lastQueryId TEXT, uuid TEXT)"];
+            
+            // Insert test server
+            (void)[[ISMSServer alloc] initWithType:ServerTypeSubsonic url:@"http://isubapp.com:9001" username:@"isub-guest" lastQueryId:@"" uuid:@"" password:@"1sub1snumb3r0n3"];
         }
     }];
     
@@ -254,7 +263,7 @@ LOG_LEVEL_ISUB_DEFAULT
 {
     self.metadataDbQueue = nil;
     
-    NSString *path = [NSString stringWithFormat:@"%@/mediadbs/%@.db", self.databaseFolderPath, settingsS.uuid];
+    NSString *path = [NSString stringWithFormat:@"%@/mediadbs/%@.db", self.databaseFolderPath, settingsS.currentServer.uuid];
     if ([[NSFileManager defaultManager] fileExistsAtPath:path])
     {
         self.metadataDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];

@@ -125,8 +125,7 @@
     NSMutableArray *artists = [[NSMutableArray alloc] init];
     NSMutableArray *artistsNumbers = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount "
-                      @"FROM artists AS ar";
+    NSString *query = @"SELECT * FROM artists";
     
     FMResultSet *r = [databaseS.songModelReadDb executeQuery:query];
     while ([r next])

@@ -114,7 +114,8 @@
 	if (settingsS.isBasicAuthEnabled)
 	{
 		DLog(@"using basic auth!");
-		NSString *authStr = [NSString stringWithFormat:@"%@:%@", settingsS.username, settingsS.password];
+        ISMSServer *currentServer = settingsS.currentServer;
+		NSString *authStr = [NSString stringWithFormat:@"%@:%@", currentServer.username, currentServer.password];
 		NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
 		NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:0]];
 		[request setValue:authValue forHTTPHeaderField:@"Authorization"];
@@ -133,7 +134,7 @@
 
 + (NSMutableURLRequest *)requestWithPMSAction:(NSString *)action parameters:(NSDictionary *)parameters byteOffset:(NSUInteger)offset
 {
-	NSString *urlString = settingsS.urlString;
+	NSString *urlString = settingsS.currentServer.url;
 	if (settingsS.redirectUrlString)
 	{
 		// The redirect URL has been found, so use it

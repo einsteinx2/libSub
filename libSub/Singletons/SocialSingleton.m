@@ -35,10 +35,11 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)playerHandleSocial
 {
+    // TODO: I don't think this works anymore
     double progress = [PlayQueue sharedInstance].currentSongProgress;
     if (!self.playerHasNotifiedSubsonic && progress >= socialS.subsonicDelay)
     {
-        if ([settingsS.serverType isEqualToString:SUBSONIC])
+        if (settingsS.currentServer.type == ServerTypeSubsonic)
         {
             [EX2Dispatch runInMainThreadAsync:^{
                 [self notifySubsonic];

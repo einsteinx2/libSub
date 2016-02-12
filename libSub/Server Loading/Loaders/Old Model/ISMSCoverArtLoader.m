@@ -163,12 +163,13 @@ static void initialize_navigationBarImages()
 					
 					NSDictionary *parameters = nil;
 					NSMutableURLRequest *request = nil;
-					if ([settingsS.serverType isEqualToString:SUBSONIC] || [settingsS.serverType isEqualToString:UBUNTU_ONE])
+                    ServerType serverType = settingsS.currentServer.type;
+					if (serverType == ServerTypeSubsonic)
 					{
 						parameters = [NSDictionary dictionaryWithObjectsAndKeys:n2N(size), @"size", n2N(self.coverArtId), @"id", nil];
 						request = [NSMutableURLRequest requestWithSUSAction:@"getCoverArt" parameters:parameters];
 					}
-					else if ([settingsS.serverType isEqualToString:WAVEBOX]) 
+					else if (serverType == ServerTypeiSubServer || serverType == ServerTypeWaveBox)
 					{
 						parameters = [NSDictionary dictionaryWithObjectsAndKeys:n2N(size), @"size", n2N(self.coverArtId), @"id", nil];
 						request = [NSMutableURLRequest requestWithPMSAction:@"art" parameters:parameters];

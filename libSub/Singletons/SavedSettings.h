@@ -22,19 +22,14 @@ typedef NS_ENUM(NSInteger, ISMSCachingType)
 	ISMSCachingType_maxSize = 1
 };
 
-@class AudioEngine;
+@class AudioEngine, ISMSServer;
 @interface SavedSettings : NSObject 
 
 @property BOOL isOfflineMode;
 
 // Server Login Settings
+@property (nullable, strong) ISMSServer *currentServer;
 @property (nullable, strong) NSMutableArray *serverList;
-@property (nullable, copy) NSString *serverType;
-@property (nullable, copy) NSString *urlString;
-@property (nullable, copy) NSString *username;
-@property (nullable, copy) NSString *password;
-@property (nullable, copy) NSString *uuid;
-@property (nullable, copy) NSString *lastQueryId;
 @property (nullable, copy) NSString *sessionId;
 
 @property (nullable, copy) NSString *redirectUrlString;
