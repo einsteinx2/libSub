@@ -12,7 +12,6 @@
 #import "ISMSItemLoader.h"
 
 #import "ISMSScrobbleLoader.h"
-#import "ISMSStatusLoader.h"
 #import "ISMSPlaylistsLoader.h"
 #import "ISMSCoverArtLoader.h"
 #import "ISMSRecursiveItemLoader.h"

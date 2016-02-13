@@ -144,7 +144,7 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         return Server(itemId: 1)!
     }
     
-    // MARK - ISMSItem -
+    // MARK: - ISMSItem -
     
     public var itemId: NSNumber? {
         return NSNumber(integer: self.serverId)
@@ -154,7 +154,7 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         return self.url
     }
     
-    // MARK - ISMSPersistantItem -
+    // MARK: - ISMSPersistantItem -
     
     public func insertModel() -> Bool {
         // TODO: Fill this in
@@ -175,7 +175,7 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         // No submodules
     }
     
-    // MARK - NSCoding -
+    // MARK: - NSCoding -
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.serverId,      forKey: "serverId")
@@ -195,9 +195,33 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         self.uuid        = aDecoder.decodeObjectForKey("uuid") as? String
     }
     
-    // MARK - NSCopying -
+    // MARK: - NSCopying -
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
         return Server(serverId: self.serverId, type: self.type, url: self.url, username: self.username, lastQueryId: self.lastQueryId, uuid: self.uuid)
     }
+}
+
+// MARK: - Equality -
+
+extension Server {
+    public override func isEqual(object: AnyObject?) -> Bool {
+        if let object = object as? Server {
+            return self.url == object.url && self.username == object.username
+        } else {
+            return false
+        }
+    }
+    
+    public override var hash: Int {
+        return (self.url + self.username).hashValue
+    }
+    
+    public override var hashValue: Int {
+        return (self.url + self.username).hashValue
+    }
+}
+
+public func ==(lhs: Server, rhs: Server) -> Bool {
+    return lhs.url == rhs.url && lhs.username == rhs.username
 }

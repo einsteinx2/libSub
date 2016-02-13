@@ -125,7 +125,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         // TODO: Fill this in
     }
     
-    // MARK - Create new DB tables -
+    // MARK: - Create new DB tables -
     
     public static func createPlaylist(name: String) -> Playlist? {
         var playlistId: Int?
@@ -179,7 +179,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         }
     }
     
-    // MARK - ISMSItem -
+    // MARK: - ISMSItem -
     
     public var itemId: NSNumber? {
         return NSNumber(integer: self.playlistId)
@@ -189,7 +189,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         return self.name
     }
     
-    // MARK - ISMSPersistantItem -
+    // MARK: - ISMSPersistantItem -
     
     public func insertModel() -> Bool {
         // TODO: Fill this in
@@ -210,7 +210,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         // TODO: Fill this in
     }
     
-    // MARK - NSCoding -
+    // MARK: - NSCoding -
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.playlistId, forKey: "playlistId")
@@ -222,7 +222,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         self.name       = aDecoder.decodeObjectForKey("name") as! String
     }
     
-    // MARK - NSCopying -
+    // MARK: - NSCopying -
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
         return Playlist(playlistId: self.playlistId, name: self.name)

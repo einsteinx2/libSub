@@ -15,6 +15,7 @@ NSString * const ISMSNotification_SongPlaybackFailed = @"ISMSNotification_SongPl
 
 NSString * const ISMSNotification_AlbumArtLargeDownloaded = @"ISMSNotification_AlbumArtLargeDownloaded";
 
+// TODO: Should these be notifications? Especially the second two
 NSString * const ISMSNotification_ServerSwitched = @"ISMSNotification_ServerSwitched";
 NSString * const ISMSNotification_ServerCheckPassed = @"ISMSNotification_ServerCheckPassed";
 NSString * const ISMSNotification_ServerCheckFailed = @"ISMSNotification_ServerCheckFailed";
