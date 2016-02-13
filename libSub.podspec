@@ -25,11 +25,10 @@ Pod::Spec.new do |s|
   s.homepage 	   = "http://isubapp.com"
   s.author         = { "Justin Hill" => "jhill.d@gmail.com" }
   s.source         = { :git => "http://github.com/einsteinx2/libSub.git", :tag => "#{s.version}" }
-  s.module_map     = "module.modulemap"
-  s.preserve_paths = "module.modulemap"
+  s.module_map     = "module/module.modulemap"
+  s.preserve_paths = "module/module.modulemap"
 
-  s.private_header_files = "Frameworks/EX2Kit/Dependencies/RNCryptor/*.h",
-  						   "Frameworks/RaptureXML/*.h"
+  s.private_header_files = "Frameworks/EX2Kit/Dependencies/RNCryptor/*.h"
   s.source_files  = "libSub", "libSub/**/*.{h,m,swift}", "Frameworks", "Frameworks/**/*.{h,m,swift}"
   s.platform	 = :ios, "8.0"
 
@@ -49,9 +48,8 @@ Pod::Spec.new do |s|
   s.dependency "Flurry-iOS-SDK"
 
   s.frameworks = "Security", "Accelerate"
-  s.xcconfig = { 'SWIFT_INCLUDE_PATHS' => '$(SRCROOT)/libSub/libxml2',
-	             'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
-                 'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1',
+  s.xcconfig = { 'HEADER_SEARCH_PATHS' => '$(SDKROOT)/usr/include/libxml2',
+				 'GCC_PREPROCESSOR_DEFINITIONS' => '$(GCC_PREPROCESSOR_DEFINITIONS) IOS=1',
 				 'ENABLE_BITCODE' => 'NO'
 			   }
   s.vendored_libraries = "Frameworks/libBASS/*.a"

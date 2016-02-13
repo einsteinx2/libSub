@@ -1,5 +1,0 @@
-framework module libSub {
-	umbrella header "LibSub.h"
-	export *
-}
-

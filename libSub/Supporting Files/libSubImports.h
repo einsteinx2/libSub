@@ -80,5 +80,6 @@
 #import "SearchXMLParser.h"
 #import "WebSocket.h"
 #import "sqlite3.h"
+#import "RXMLElement.h"
 
 #endif
