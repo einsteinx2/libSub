@@ -46,8 +46,8 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"contentTypes"])
         {
-            [db executeUpdate:@"CREATE TABLE contentTypes (contentTypeId INTEGER PRIMARY KEY, mimeType TEXT, extension TEXT, type TEXT)"];
-            [db executeUpdate:@"CREATE INDEX contentTypes_mimeTypeExtension ON contentTypes (mimeType, extention)"];
+            [db executeUpdate:@"CREATE TABLE contentTypes (contentTypeId INTEGER PRIMARY KEY, mimeType TEXT, extension TEXT, basicType TEXT)"];
+            [db executeUpdate:@"CREATE INDEX contentTypes_mimeTypeExtension ON contentTypes (mimeType, extension)"];
             
             [db executeUpdate:@"INSERT INTO contentTypes (mimeType, extension, basicType) VALUES (?, ?, ?)", @"audio/mpeg", @"mp3", @1];
             [db executeUpdate:@"INSERT INTO contentTypes (mimeType, extension, basicType) VALUES (?, ?, ?)", @"audio/ogg", @"ogg", @1];
@@ -129,16 +129,13 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"chatMessages"])
         {
-            [db executeUpdate:@"CREATE TABLE playlists (chatMessageId INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, message TEXT, timestamp REAL)"];
+            [db executeUpdate:@"CREATE TABLE chatMessages (chatMessageId INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, message TEXT, timestamp REAL)"];
         }
         
         // NOTE: Passwords stored in the keychain
         if (![db tableExists:@"servers"])
         {
             [db executeUpdate:@"CREATE TABLE servers (serverId INTEGER PRIMARY KEY AUTOINCREMENT, type INTEGER, url TEXT, username TEXT, lastQueryId TEXT, uuid TEXT)"];
-            
-            // Insert test server
-            (void)[[ISMSServer alloc] initWithType:ServerTypeSubsonic url:@"http://isubapp.com:9001" username:@"isub-guest" lastQueryId:@"" uuid:@"" password:@"1sub1snumb3r0n3"];
         }
     }];
     
@@ -355,7 +352,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)setup 
 {	
-    _databaseFolderPath = [settingsS.documentsPath stringByAppendingPathComponent:@"database"];
+    _databaseFolderPath = [[SavedSettings documentsPath] stringByAppendingPathComponent:@"database"];
 	
 	// Make sure database directory exists, if not create them
 	BOOL isDir = YES;
@@ -368,7 +365,7 @@ LOG_LEVEL_ISUB_DEFAULT
     // Create the caches folder database path if this is iOS 5.0
     if (SYSTEM_VERSION_LESS_THAN(@"5.0.1"))
     {
-        NSString *path = [settingsS.currentCacheRoot stringByAppendingPathComponent:@"database"];
+        NSString *path = [[SavedSettings currentCacheRoot] stringByAppendingPathComponent:@"database"];
         if (![[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir])
         {
             [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:NULL];
@@ -386,7 +383,7 @@ LOG_LEVEL_ISUB_DEFAULT
 + (void) setAllSongsToBackup
 {
     // Handle moving the song cache database if necessary
-    NSString *path = [[settingsS.currentCacheRoot stringByAppendingPathComponent:@"database"] stringByAppendingPathComponent:@"songCache.db"];
+    NSString *path = [[[SavedSettings currentCacheRoot] stringByAppendingPathComponent:@"database"] stringByAppendingPathComponent:@"songCache.db"];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
 #ifdef IOS
     if ([defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
@@ -400,7 +397,7 @@ LOG_LEVEL_ISUB_DEFAULT
 + (void) setAllSongsToNotBackup
 {
     // Handle moving the song cache database if necessary
-    NSString *path = [[settingsS.currentCacheRoot stringByAppendingPathComponent:@"database"] stringByAppendingPathComponent:@"songCache.db"];
+    NSString *path = [[[SavedSettings currentCacheRoot] stringByAppendingPathComponent:@"database"] stringByAppendingPathComponent:@"songCache.db"];
     NSFileManager *defaultManager = [NSFileManager defaultManager];
 #ifdef IOS
     if ([defaultManager fileExistsAtPath:path] && SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
@@ -415,10 +412,18 @@ LOG_LEVEL_ISUB_DEFAULT
 {
     static DatabaseSingleton *sharedInstance = nil;
     static dispatch_once_t once = 0;
+    
+    __block BOOL runSetup = NO;
     dispatch_once(&once, ^{
 		sharedInstance = [[self alloc] init];
-		[sharedInstance setup];
-	});
+        runSetup = YES;
+    });
+    
+    if (runSetup)
+    {
+        [sharedInstance setup];
+    }
+    
     return sharedInstance;
 }
 

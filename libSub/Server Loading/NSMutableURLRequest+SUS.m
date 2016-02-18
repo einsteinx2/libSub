@@ -36,28 +36,22 @@ static NSSet *setOfVersions = nil;
 
 + (NSMutableURLRequest *)requestWithSUSAction:(NSString *)action urlString:(NSString *)url username:(NSString *)user password:(NSString *)pass parameters:(NSDictionary *)parameters byteOffset:(NSUInteger)offset
 {
-    NSMutableString *urlString = [url isEqualToString:@"https://one.ubuntu.com/music"] ? [NSMutableString stringWithFormat:@"%@/api/1.0/%@.view", url, action] :
-                                                                                         [NSMutableString stringWithFormat:@"%@/rest/%@.view", url, action];
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"%@/rest/%@.view", url, action];
     if ([action isEqualToString:@"hls"])
         urlString = [NSMutableString stringWithFormat:@"%@/rest/%@.m3u8", url, action];
+    
 	NSString *username = [user URLEncodeString];
-	NSString *password = [pass URLEncodeString];
-	NSString *version = nil;
-	
-	// Set the API version for this call by checking the arrays
-	for (NSArray *versionArray in setOfVersions)
-	{
-		if ([versionArray containsObject:action])
-		{
-			version = [versionArray lastObject];
-			break;
-		}
-	}
-	NSAssert(version != nil, @"SUS URL API version not set!");
-	
+    
+    // Generate unique token and salt for this request. To get a long random salt, We'll generate a large
+    // random number, get its string value, and md5 it. Then to get the token, we do md5(password + salt)
+    NSString *salt = [[[@(arc4random_uniform(UINT32_MAX)) stringValue] md5] lowercaseString];
+	NSString *token = [[[pass stringByAppendingString:salt] md5] lowercaseString];
+    
+    // Only support Subsonic version 5.3 and later
+	NSString *version = @"1.13.0";
+		
 	// Setup the POST parameters
-	//NSMutableString *postString = [NSMutableString stringWithFormat:@"v=%@&c=iSub", version];
-	NSMutableString *postString = [NSMutableString stringWithFormat:@"v=%@&c=iSub&u=%@&p=%@", version, username, password];
+	NSMutableString *postString = [NSMutableString stringWithFormat:@"v=%@&c=iSub&u=%@&t=%@&s=%@", version, username, token, salt];
 	if (parameters != nil)
 	{
 		for (NSString *key in [parameters allKeys])
@@ -134,7 +128,7 @@ static NSSet *setOfVersions = nil;
 	if (settingsS.isBasicAuthEnabled)
 	{
 		//DLog(@"using basic auth!");
-		NSString *authStr = [NSString stringWithFormat:@"%@:%@", username, password];
+		NSString *authStr = [NSString stringWithFormat:@"%@:%@", username, [pass URLEncodeString]];
 		NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
 		NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:0]];
 		[request setValue:authValue forHTTPHeaderField:@"Authorization"];

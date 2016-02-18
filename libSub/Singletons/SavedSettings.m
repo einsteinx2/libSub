@@ -421,7 +421,7 @@
 {
 	@synchronized(self)
 	{
-		return _currentServer;
+        return _currentServer ?: [ISMSServer testServer];
 	}
 }
 
@@ -457,24 +457,24 @@
 
 #pragma mark - Document Folder Paths
 
-- (NSString *)documentsPath
++ (NSString *)documentsPath
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 	return paths[0];
 }
 
-- (NSString *)databasePath
++ (NSString *)databasePath
 {
 	return [self.documentsPath stringByAppendingPathComponent:@"database"];
 }
 
-- (NSString *)cachesPath
++ (NSString *)cachesPath
 {
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
 	return paths[0];
 }
 
-- (NSURL *)cachesUrl
++ (NSURL *)cachesUrl
 {
     return [NSURL URLWithString:self.cachesPath];
 }
@@ -482,7 +482,7 @@
 // As of 5.0.1, it's possible to mark files in the Documents folder to not be backed up. Therefore
 // we want to use that if possible, so that our cache doesn't get wiped when the device has no
 // more space left, as will happen if we put the files inside ./Library/Caches
-- (NSString *)currentCacheRoot
++ (NSString *)currentCacheRoot
 {
 #ifdef IOS
     if (SYSTEM_VERSION_GREATER_THAN(@"5.0.0"))
@@ -498,12 +498,12 @@
 #endif
 }
 
-- (NSString *)songCachePath
++ (NSString *)songCachePath
 {
 	return [self.currentCacheRoot stringByAppendingPathComponent:@"songCache"];
 }
 
-- (NSString *)tempCachePath
++ (NSString *)tempCachePath
 {
 	return [self.currentCacheRoot stringByAppendingPathComponent:@"tempCache"];
 }
@@ -1615,10 +1615,17 @@
 {
     static SavedSettings *sharedInstance = nil;
     static dispatch_once_t once = 0;
+    __block BOOL runSetup = NO;
     dispatch_once(&once, ^{
 		sharedInstance = [[self alloc] init];
-		[sharedInstance setup];
+        runSetup = YES;
 	});
+    
+    if (runSetup)
+    {
+        [sharedInstance setup];
+    }
+    
     return sharedInstance;
 }
 

@@ -35,9 +35,9 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     }
     
     public required init?(itemId: Int) {
-        let query = "SELECT * FROM playlists WHERE p.playlistId = ?"
+        let query = "SELECT * FROM playlists WHERE playlistId = ?"
         do {
-            let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query)
+            let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query, itemId)
             if result.next() {
                 self.playlistId = result.longForColumnIndex(0)
                 self.name = result.stringForColumnIndex(1)
@@ -143,7 +143,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             do {
                 let table = "playlist\(playlistId!)"
                 try db.executeUpdate("INSERT INTO playlists VALUES (?, ?)", playlistId!, name)
-                try db.executeUpdate("CREATE TABLE \(table) (index INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)")
+                try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)")
                 try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
             } catch {
                 playlistId = nil
@@ -165,7 +165,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 // Do the creation here instead of calling createPlaylistWithName:andId: so it's all in one transaction
                 let table = "playlist\(playlistId)"
                 try db.executeUpdate("INSERT INTO playlists VALUES (?, ?)", playlistId, name)
-                try db.executeUpdate("CREATE TABLE \(table) (index INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)")
+                try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)")
                 try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
             } catch {
                 success = false

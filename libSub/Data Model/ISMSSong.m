@@ -520,13 +520,13 @@
 - (NSString *)localPath
 {
     NSString *fileName = self.path.md5;
-    return fileName ? [settingsS.songCachePath stringByAppendingPathComponent:fileName] : nil;
+    return fileName ? [[SavedSettings songCachePath] stringByAppendingPathComponent:fileName] : nil;
 }
 
 - (NSString *)localTempPath
 {
     NSString *fileName = self.path.md5;
-    return fileName ? [settingsS.tempCachePath stringByAppendingPathComponent:fileName] : nil;
+    return fileName ? [[SavedSettings tempCachePath] stringByAppendingPathComponent:fileName] : nil;
 }
 
 - (NSString *)currentPath

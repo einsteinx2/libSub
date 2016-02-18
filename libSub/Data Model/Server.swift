@@ -141,7 +141,10 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     }
     
     public static var testServer: Server {
-        return Server(itemId: 1)!
+        // Return model directly rather than storing in the database
+        let testServer = Server(serverId: NSIntegerMax, type: .Subsonic, url: "http://isubapp.com:9001", username: "isub-guest", lastQueryId: nil, uuid: nil)
+        testServer.password = "1sub1snumb3r0n3"
+        return testServer
     }
     
     // MARK: - ISMSItem -

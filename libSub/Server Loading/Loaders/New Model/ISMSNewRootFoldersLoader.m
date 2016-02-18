@@ -27,10 +27,11 @@
 - (NSURLRequest *)createRequest
 {
     NSLog(@"loading media folder id: %@", self.mediaFolderId);
-    if (self.mediaFolderId == nil || [self.mediaFolderId intValue] == -1 || [self.mediaFolderId stringValue] == nil)
-        return nil;
+    NSDictionary *parameters = nil;
     
-    NSDictionary *parameters = @{ @"musicFolderId" : [self.mediaFolderId stringValue] };
+    if (self.mediaFolderId != nil && [self.mediaFolderId intValue] != -1 && [self.mediaFolderId stringValue] != nil)
+        parameters = @{ @"musicFolderId" : [self.mediaFolderId stringValue] };
+
     return [NSMutableURLRequest requestWithSUSAction:@"getIndexes" parameters:parameters];
 }
 

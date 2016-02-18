@@ -16,6 +16,8 @@
 
 @interface ISMSLoader ()
 @property (nonatomic, strong) ISMSLoader *selfRef;
+@property (nonatomic, strong) NSURL *redirectUrl;
+@property (nonatomic, strong) NSString *redirectUrlString;
 
 // From ISMSLoader_Subclassing
 @property (nullable, nonatomic, strong) NSURLConnection *connection;
@@ -167,15 +169,37 @@
 {
     if (inRedirectResponse)
     {
+        NSURL *url = [inRequest URL];
+        NSMutableString *redirectUrlString = [NSMutableString stringWithFormat:@"%@://%@", url.scheme, url.host];
+        if (url.port)
+            [redirectUrlString appendFormat:@":%@", url.port];
+        
+        if ([url.pathComponents count] > 3)
+        {
+            for (NSString *component in url.pathComponents)
+            {
+                if ([component isEqualToString:@"api"] || [component isEqualToString:@"rest"])
+                    break;
+                
+                if (![component isEqualToString:@"/"])
+                {
+                    [redirectUrlString appendFormat:@"/%@", component];
+                }
+            }
+        }
+
+        self.redirectUrlString = redirectUrlString;
+        self.redirectUrl = url;
+        
         // Notify the delegate
         if ([self.delegate respondsToSelector:@selector(loadingRedirected:redirectUrl:)])
         {
-			[self.delegate loadingRedirected:self redirectUrl:inRequest.URL];
+			[self.delegate loadingRedirected:self redirectUrl:url];
         }
         
         NSMutableURLRequest *r = [self.request mutableCopy]; // original request
 		[r setTimeoutInterval:ISMSServerCheckTimeout];
-        [r setURL:[inRequest URL]];
+        [r setURL:url];
         return r;
     }
     else

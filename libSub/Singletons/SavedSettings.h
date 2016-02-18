@@ -112,13 +112,13 @@ typedef NS_ENUM(NSInteger, ISMSCachingType)
 
 // Document Paths
 
-- (nonnull NSString *)documentsPath;
-- (nonnull NSString *)databasePath;
-- (nonnull NSString *)cachesPath;
-- (nonnull NSURL *)cachesUrl;
-- (nonnull NSString *)currentCacheRoot;
-- (nonnull NSString *)songCachePath;
-- (nonnull NSString *)tempCachePath;
++ (nonnull NSString *)documentsPath;
++ (nonnull NSString *)databasePath;
++ (nonnull NSString *)cachesPath;
++ (nonnull NSURL *)cachesUrl;
++ (nonnull NSString *)currentCacheRoot;
++ (nonnull NSString *)songCachePath;
++ (nonnull NSString *)tempCachePath;
 
 - (void)setupSaveState;
 - (void)loadState;

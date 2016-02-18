@@ -65,8 +65,9 @@ public class StatusLoader: ISMSLoader {
                     }
                 }
                 
+                
                 let error = root.child("error")
-                if error.isValid {
+                if error != nil && error.isValid {
                     let code = error.attribute("code")
                     if Int(code) == 40 {
                         // Incorrect credentials, so fail

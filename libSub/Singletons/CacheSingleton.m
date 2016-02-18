@@ -18,13 +18,13 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (unsigned long long)totalSpace
 {
-	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:settingsS.songCachePath error:NULL];
+	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:[SavedSettings songCachePath] error:NULL];
     return [attributes[NSFileSystemSize] unsignedLongLongValue];
 }
 
 - (unsigned long long)freeSpace
 {
-	NSString *path = settingsS.cachesPath;
+	NSString *path = [SavedSettings cachesPath];
 	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfFileSystemForPath:path error:NULL];
 	return [attributes[NSFileSystemFreeSize] unsignedLongLongValue];
 }
@@ -110,7 +110,7 @@ LOG_LEVEL_ISUB_DEFAULT
 				// Determine the name of the file we are downloading.
 				//DLog(@"currentSongObject.path: %@", currentSongObject.path);
                 
-				NSString *songPath = [settingsS.songCachePath stringByAppendingPathComponent:aSong.path.md5];
+				NSString *songPath = [[SavedSettings songCachePath] stringByAppendingPathComponent:aSong.path.md5];
 				unsigned long long songSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:songPath error:NULL] fileSize];
 				
 				//DLog(@"removing %@", songMD5);
@@ -139,7 +139,7 @@ LOG_LEVEL_ISUB_DEFAULT
         
         while ([result next])
         {
-            NSString *path = [settingsS.songCachePath stringByAppendingPathComponent:[result stringForColumn:@"md5"]];
+            NSString *path = [[SavedSettings songCachePath] stringByAppendingPathComponent:[result stringForColumn:@"md5"]];
             NSDictionary *attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
             size += [attr fileSize];
             DLog(@"Added %llu to size for partially downloaded song", [attr fileSize]);
@@ -225,8 +225,8 @@ LOG_LEVEL_ISUB_DEFAULT
 - (void)clearTempCache
 {
 	// Clear the temp cache directory
-	[[NSFileManager defaultManager] removeItemAtPath:settingsS.tempCachePath error:NULL];
-	[[NSFileManager defaultManager] createDirectoryAtPath:settingsS.tempCachePath withIntermediateDirectories:YES attributes:nil error:NULL];
+	[[NSFileManager defaultManager] removeItemAtPath:[SavedSettings tempCachePath] error:NULL];
+	[[NSFileManager defaultManager] createDirectoryAtPath:[SavedSettings tempCachePath] withIntermediateDirectories:YES attributes:nil error:NULL];
 	streamManagerS.lastTempCachedSong = nil;
 }
 
@@ -246,32 +246,32 @@ LOG_LEVEL_ISUB_DEFAULT
 	NSFileManager *defaultManager = [NSFileManager defaultManager];
         
 	// Make sure songCache directory exists, if not create it
-	if (![defaultManager fileExistsAtPath:settingsS.songCachePath])
+	if (![defaultManager fileExistsAtPath:[SavedSettings songCachePath]])
 	{
         // First check to see if it's in the old Library/Caches location
-        NSString *oldPath = [settingsS.cachesPath stringByAppendingPathComponent:@"songCache"];
+        NSString *oldPath = [[SavedSettings cachesPath] stringByAppendingPathComponent:@"songCache"];
         if ([defaultManager fileExistsAtPath:oldPath])
         {
             // It exists there, so move it to the new location
             NSError *error;
-            [defaultManager moveItemAtPath:oldPath toPath:settingsS.songCachePath error:&error];
+            [defaultManager moveItemAtPath:oldPath toPath:[SavedSettings songCachePath] error:&error];
             
             if (error)
             {
-                DDLogError(@"Error moving cache path from %@ to %@", oldPath, settingsS.songCachePath);
+                DDLogError(@"Error moving cache path from %@ to %@", oldPath, [SavedSettings songCachePath]);
             }
             else
             {
-                DDLogInfo(@"Moved cache path from %@ to %@", oldPath, settingsS.songCachePath);
+                DDLogInfo(@"Moved cache path from %@ to %@", oldPath, [SavedSettings songCachePath]);
                 
 #ifdef IOS
                 // Now set all of the files to not be backed up
                 if (!settingsS.isBackupCacheEnabled)
                 {
-                    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
+                    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:[SavedSettings songCachePath] error:nil];
                     for (NSString *songName in cachedSongNames)
                     {
-                        NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
+                        NSURL *fileUrl = [NSURL fileURLWithPath:[[SavedSettings songCachePath] stringByAppendingPathComponent:songName]];
                         [fileUrl addSkipBackupAttribute];
                     }
                 }
@@ -281,12 +281,12 @@ LOG_LEVEL_ISUB_DEFAULT
         else
         {
             // It doesn't exist in the old location, so just create it in the new one
-            [defaultManager createDirectoryAtPath:settingsS.songCachePath withIntermediateDirectories:YES attributes:nil error:NULL];
+            [defaultManager createDirectoryAtPath:[SavedSettings songCachePath] withIntermediateDirectories:YES attributes:nil error:NULL];
         }
 	}
     
     // Rename any cache files that still have extensions
-    NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:settingsS.songCachePath];
+    NSDirectoryEnumerator *direnum = [[NSFileManager defaultManager] enumeratorAtPath:[SavedSettings songCachePath]];
     NSString *filename;
     while ((filename = [direnum nextObject]))
     {
@@ -298,8 +298,8 @@ LOG_LEVEL_ISUB_DEFAULT
             DDLogVerbose(@"[CacheSingleton] Moving filename: %@ to new filename: %@", filename, filenameNew);
             if (filenameNew)
             {
-                NSString *fromPath = [settingsS.songCachePath stringByAppendingPathComponent:filename];
-                NSString *toPath = [settingsS.songCachePath stringByAppendingPathComponent:filenameNew];
+                NSString *fromPath = [[SavedSettings songCachePath] stringByAppendingPathComponent:filename];
+                NSString *toPath = [[SavedSettings songCachePath] stringByAppendingPathComponent:filenameNew];
                 NSError *error;
                 
                 if (![[NSFileManager defaultManager] moveItemAtPath:fromPath toPath:toPath error:&error])
@@ -340,10 +340,10 @@ LOG_LEVEL_ISUB_DEFAULT
     NSFileManager *defaultManager = [NSFileManager defaultManager];
     
     // Now set all of the files to be backed up
-    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
+    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:[SavedSettings songCachePath] error:nil];
     for (NSString *songName in cachedSongNames)
     {
-        NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
+        NSURL *fileUrl = [NSURL fileURLWithPath:[[SavedSettings songCachePath] stringByAppendingPathComponent:songName]];
         [fileUrl removeSkipBackupAttribute];
     }
 }
@@ -353,10 +353,10 @@ LOG_LEVEL_ISUB_DEFAULT
     NSFileManager *defaultManager = [NSFileManager defaultManager];
     
     // Now set all of the files to be backed up
-    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:settingsS.songCachePath error:nil];
+    NSArray *cachedSongNames = [defaultManager contentsOfDirectoryAtPath:[SavedSettings songCachePath] error:nil];
     for (NSString *songName in cachedSongNames)
     {
-        NSURL *fileUrl = [NSURL fileURLWithPath:[settingsS.songCachePath stringByAppendingPathComponent:songName]];
+        NSURL *fileUrl = [NSURL fileURLWithPath:[[SavedSettings songCachePath] stringByAppendingPathComponent:songName]];
         
         [fileUrl addSkipBackupAttribute];
     }

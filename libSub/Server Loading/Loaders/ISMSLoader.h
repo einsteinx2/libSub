@@ -18,6 +18,11 @@ typedef void (^LoaderCallback)(BOOL success,  NSError * _Nullable error, ISMSLoa
 
 @property (readonly) ISMSLoaderType type;
 
+@property (nullable, readonly) NSURL *redirectUrl;
+// TODO: See if this conversion logic is necessary, pulled from old iSubAppDelegate code
+@property (nullable, readonly) NSString *redirectUrlString;
+
+
 - (nullable instancetype)initWithDelegate:(nullable NSObject<ISMSLoaderDelegate> *)theDelegate;
 - (nullable instancetype)initWithCallbackBlock:(nullable LoaderCallback)theBlock;
 
