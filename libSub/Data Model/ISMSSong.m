@@ -103,7 +103,7 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT * FROM songs WHERE s.songId = ?";
+        NSString *query = @"SELECT * FROM songs WHERE songId = ?";
         
         FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(songId)];
         if ([result next])

@@ -484,7 +484,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                     
 #if isSpeedLoggingEnabled
                     double speedInKbytes = speedInBytes / 1024.;
-                    DDLogInfo(@"[ISMSURLConnectionStreamHandler] rate: %f  speedInterval: %f  transferredSinceLastCheck: %llu  song: %@", speedInKbytes, speedInteval, transferredSinceLastCheck, self.mySong);
+                    DDLogInfo(@"[ISMSCFNetworkStreamHandler] rate: %f  speedInterval: %f  transferredSinceLastCheck: %llu  song: %@", speedInKbytes, speedInteval, transferredSinceLastCheck, self.mySong);
 #endif
                     
                     self.speedLoggingLastSize = self.totalBytesTransferred;

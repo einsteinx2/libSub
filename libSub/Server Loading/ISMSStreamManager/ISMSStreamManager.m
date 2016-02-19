@@ -197,7 +197,7 @@ LOG_LEVEL_ISUB_DEBUG
             if (!handler.mySong.isFullyCached && !handler.mySong.isTempCached && !([cacheQueueManagerS.currentQueuedSong isEqualToSong:handler.mySong] && cacheQueueManagerS.isQueueDownloading))
             {
                 DLog(@"Removing song from cached songs table: %@", handler.mySong);
-                [[ISMSPlaylist downloadedSongs] removeSong:handler.mySong.songId.integerValue];
+                [[ISMSPlaylist downloadedSongs] removeSongWithSong:handler.mySong];
             }
 			//[handler.mySong removeFromCachedSongsTableDbQueue];
 		}
@@ -277,7 +277,7 @@ LOG_LEVEL_ISUB_DEBUG
 		if (!handler.mySong.isFullyCached && !handler.mySong.isTempCached && !([cacheQueueManagerS.currentQueuedSong isEqualToSong:handler.mySong] && cacheQueueManagerS.isQueueDownloading))
         {
             DLog(@"Removing song from cached songs table: %@", handler.mySong);
-            [[ISMSPlaylist downloadedSongs] removeSong:handler.mySong.songId.integerValue];
+            [[ISMSPlaylist downloadedSongs] removeSongWithSong:handler.mySong];
         }
         [self.handlerStack removeObjectAtIndexSafe:index];
 	}
@@ -662,7 +662,7 @@ LOG_LEVEL_ISUB_DEBUG
             if ([cacheQueueManagerS isSongInQueue:handler.mySong])
             {
                 //handler.mySong.isDownloaded = YES;
-                [[ISMSPlaylist downloadQueue] removeSong:handler.mySong.songId.integerValue];
+                [[ISMSPlaylist downloadQueue] removeSongWithSong:handler.mySong];
             }
             
             DLog(@"Marking isFullyCached = YES for %@", handler.mySong);

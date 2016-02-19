@@ -6,17 +6,27 @@
 //
 //
 
+// Important note: Playlist table song indexes are 0 based to better interact with Swift/ObjC arrays.
+// Normally SQLite table primary key fields start at 1 rather than 0. We force it to start at 0
+// by modifying inserting the first record with a manually chosen songIndex of 0.
+
 import Foundation
 
 @objc(ISMSPlaylist)
 public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
+    
+    public static let playlistChangedNotificationName = "playlistChangedNotificationName"
 
     public var playlistId: Int
     public var name: String
     
     public var songCount: Int {
-        // TODO: Fill this in
-        return 0
+        // SELECT COUNT(*) is O(n) while selecting the max rowId is O(1)
+        // Since songIndex is our autoincrementing primary key field, it's an alias 
+        // for rowId. So SELECT MAX instead of SELECT COUNT here.
+        let query = "SELECT MAX(songIndex) FROM \(self.tableName)"
+        let count = DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query)
+        return count == nil ? 0 : count + 1
     }
     
     // Special Playlists
@@ -74,55 +84,194 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         return self.name.caseInsensitiveCompare(otherObject.name)
     }
     
-    private func tableName() -> String {
+    private var tableName: String {
         return "playlist\(self.playlistId)"
     }
     
-    public func songs() -> [ISMSSong] {
-        return [ISMSSong]()
+    public var songs: [ISMSSong] {
+        var songs = [ISMSSong]()
+        
+        do {
+            let query = "SELECT songId FROM \(self.tableName)"
+            let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query)
+            while result.next() {
+                if let song = ISMSSong(itemId: result.longForColumnIndex(0)) {
+                    songs.append(song)
+                }
+            }
+        } catch {
+            // Do something, this would be a serious DB error
+        }
+        
+        return songs;
     }
     
     public func containsSongId(songId: Int) -> Bool {
-        // TODO: Fill this in
-        return false
+        let query = "SELECT COUNT(*) FROM \(self.tableName) WHERE songId = ?"
+        let count = DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query, songId)
+        return count > 0
     }
     
-    public func indexOfSongId(songId: Int) -> Int {
-        // TODO: Fill this in
-        return -1
+    public func indexOfSongId(songId: Int) -> Int? {
+        let query = "SELECT songIndex FROM \(self.tableName) WHERE songId = ?"
+        return DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query, songId)
     }
     
     public func songAtIndex(index: Int) -> ISMSSong? {
-        // TODO: Fill this in
-        return nil
+        let query = "SELECT songId FROM \(self.tableName) WHERE songIndex = ?"
+        let songId = DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query, index)
+        guard songId != nil else {
+            return nil
+        }
+        
+        return ISMSSong(itemId: songId)
     }
     
-    public func addSongId(songId: Int) {
-        // TODO: Fill this in
+    public func addSong(song song: ISMSSong) {
+        if let songId = song.songId?.integerValue {
+            addSong(songId: songId)
+        }
     }
     
-    public func insertSong(songId: Int, index: Int) {
-        // TODO: Fill this in
+    public func addSong(songId songId: Int) {
+        var query = ""
+        if self.songCount == 0 {
+            // Force songIndex to start at 0
+            query = "INSERT INTO \(self.tableName) VALUES (0, ?)"
+        } else {
+            query = "INSERT INTO \(self.tableName) (songId) VALUES (?)"
+        }
+        DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
+            do {
+                try db.executeUpdate(query, songId)
+            } catch {
+                // TODO: something, this would be a serious db error
+            }
+        }
+        
+        notifyPlaylistChanged()
     }
     
-    public func removeSong(songId: Int) {
-        // TODO: Fill this in
+    public func addSongs(songs songs: [ISMSSong]) {
+        var songIds = [Int]()
+        for song in songs {
+            if let songId = song.songId?.integerValue {
+                songIds.append(songId)
+            }
+        }
+        
+        addSongs(songIds: songIds)
     }
     
-    public func removeSongs(songIds: [Int]) {
-        // TODO: Fill this in
+    public func addSongs(songIds songIds: [Int]) {
+        // TODO: Improve performance
+        for songId in songIds {
+            addSong(songId: songId)
+        }
+        
+        notifyPlaylistChanged()
     }
-
+    
+    public func insertSong(song song: ISMSSong, index: Int) {
+        if let songId = song.songId?.integerValue {
+            insertSong(songId: songId, index: index)
+        }
+    }
+    
+    public func insertSong(songId songId: Int, index: Int) {
+        // TODO: See if this can be simplified by using sort by
+        DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
+            do {
+                let query1 = "UPDATE \(self.tableName) SET songIndex = -songIndex WHERE songIndex >= ?"
+                try db.executeUpdate(query1, index)
+                
+                let query2 = "INSERT INTO \(self.tableName) VALUES (?, ?)"
+                try db.executeUpdate(query2, index, songId)
+                
+                let query3 = "UPDATE \(self.tableName) SET songIndex = (-songIndex) + 1 WHERE songIndex < 0"
+                try db.executeUpdate(query3)
+            } catch {
+                // TODO: something, this would be a serious db error
+            }
+        }
+        
+        notifyPlaylistChanged()
+    }
+    
     public func removeSongAtIndex(index: Int) {
-        // TODO: Fill this in
+        DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
+            do {
+                let query1 = "DELETE FROM \(self.tableName) WHERE songIndex = ?"
+                try db.executeUpdate(query1, index)
+
+                let query2 = "UPDATE \(self.tableName) SET songIndex = songIndex - 1 WHERE songIndex > ?"
+                try db.executeUpdate(query2, index)
+            } catch {
+                // TODO: something, this would be a serious db error
+            }
+        }
+        
+        notifyPlaylistChanged()
     }
     
     public func removeSongsAtIndexes(indexes: NSIndexSet) {
-        // TODO: Fill this in
+        // TODO: Improve performance
+        for index in indexes {
+            removeSongAtIndex(index)
+        }
+        
+        notifyPlaylistChanged()
+    }
+    
+    public func removeSong(song song: ISMSSong) {
+        if let songId = song.songId?.integerValue {
+            removeSong(songId: songId)
+        }
+    }
+    
+    public func removeSong(songId songId: Int) {
+        if let index = indexOfSongId(songId) {
+            removeSongAtIndex(index)
+        }
+        
+        notifyPlaylistChanged()
+    }
+    
+    public func removeSongs(songs songs: [ISMSSong]) {
+        var songIds = [Int]()
+        for song in songs {
+            if let songId = song.songId?.integerValue {
+                songIds.append(songId)
+            }
+        }
+
+        removeSongs(songIds: songIds)
+    }
+    
+    public func removeSongs(songIds songIds: [Int]) {
+        // TODO: Improve performance
+        for songId in songIds {
+            removeSong(songId: songId)
+        }
+        
+        notifyPlaylistChanged()
     }
     
     public func removeAllSongs() {
-        // TODO: Fill this in
+        DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
+            do {
+                let query1 = "DELETE FROM \(self.tableName)"
+                try db.executeUpdate(query1)
+            } catch {
+                // TODO: something, this would be a serious db error
+            }
+        }
+        
+        notifyPlaylistChanged()
+    }
+    
+    func notifyPlaylistChanged() {
+        NSNotificationCenter.postNotificationToMainThreadWithName(Playlist.playlistChangedNotificationName, object: self.playlistId)
     }
     
     // MARK: - Create new DB tables -
@@ -145,6 +294,11 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 try db.executeUpdate("INSERT INTO playlists VALUES (?, ?)", playlistId!, name)
                 try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)")
                 try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
+                
+                // Force the auto_increment to start at 0
+                try db.executeUpdate("INSERT INTO \(table) VALUES (-1, 0)", table)
+                try db.executeUpdate("DELETE FROM \(table)")
+                
             } catch {
                 playlistId = nil
             }
@@ -165,7 +319,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 // Do the creation here instead of calling createPlaylistWithName:andId: so it's all in one transaction
                 let table = "playlist\(playlistId)"
                 try db.executeUpdate("INSERT INTO playlists VALUES (?, ?)", playlistId, name)
-                try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)")
+                try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY, songId INTEGER)")
                 try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
             } catch {
                 success = false

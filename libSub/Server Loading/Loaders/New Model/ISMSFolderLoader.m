@@ -77,6 +77,7 @@
                 else
                 {
                     ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e];
+                    [song replaceModel];
                     if (song.contentType.extension)
                     {
                         songsDuration += song.duration.doubleValue;

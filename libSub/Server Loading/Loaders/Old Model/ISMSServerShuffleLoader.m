@@ -66,7 +66,7 @@
     
     for (ISMSSong *aSong in parser.listOfSongs)
     {
-        [playQueue addSongId:aSong.songId.integerValue];
+        [playQueue addSongWithSong:aSong];
     }
     
     [PlayQueue sharedInstance].shuffleMode = ShuffleModeNormal;

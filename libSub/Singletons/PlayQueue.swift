@@ -120,6 +120,12 @@ public class PlayQueue: NSObject {
         return AudioEngine.sharedInstance()
     }
     
+    public func playSongs(songs: [ISMSSong], playIndex: Int) {
+        reset()
+        self.playlist.addSongs(songs: songs)
+        self.playSongAtIndex(playIndex)
+    }
+    
     public func reset() {
         self.playlist.removeAllSongs()
         self.audioEngine.stop()
@@ -292,7 +298,7 @@ public class PlayQueue: NSObject {
             if self.currentSong != nil {
                 // Only start the caching process if it's been a half second after the last request
                 // Prevents crash when skipping through playlist fast
-                self.startSongDelayTimer = NSTimer(timeInterval: 0.6, target: self, selector: "startSongWithByteAndSecondsOffset", userInfo: ["bytes": offsetBytes, "seconds": offsetSeconds], repeats: false)
+                self.startSongDelayTimer = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: "startSongWithByteAndSecondsOffset:", userInfo: ["bytes": offsetBytes, "seconds": offsetSeconds], repeats: false)
             }
         }
 
@@ -305,7 +311,11 @@ public class PlayQueue: NSObject {
     }
     
     // TODO: Clean this up
-    private func startSongWithByteAndSecondsOffset(userInfo: [String: AnyObject]) {
+    public func startSongWithByteAndSecondsOffset(timer: NSTimer) {
+        
+        guard let userInfo = timer.userInfo as? [String: AnyObject] else {
+            return
+        }
         
         NSNotificationCenter.postNotificationToMainThreadWithName(ISMSNotification_RemoveMoviePlayer)
 
@@ -321,7 +331,7 @@ public class PlayQueue: NSObject {
             if currentSong.isFullyCached {
                 // The song is fully cached, start streaming from the local copy
                 self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes: offsetBytes, orSeconds: offsetSeconds)
-                
+            } else {
                 // Fill the stream queue
                 if !settings.isOfflineMode {
                     streamManager.fillStreamQueue(true)

@@ -115,13 +115,13 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"genres"])
         {
-            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, songCount INTEGER, albumCount INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY, name TEXT, songCount INTEGER, albumCount INTEGER)"];
             [db executeUpdate:@"CREATE INDEX genres_name ON genres (name)"];
         }
         
         if (![db tableExists:@"playlists"])
         {
-            [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER PRIMARY KEY, name TEXT)"];
             [db executeUpdate:@"CREATE INDEX playlists_name ON playlists (name)"];
             
             createDefaultPlaylistTables = YES;

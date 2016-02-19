@@ -86,6 +86,11 @@ static NSSet *setOfVersions = nil;
 					// handle single value for key
 					[postString appendFormat:@"&%@=%@", [key URLEncodeString], [(NSString*)value URLEncodeString]];
 				}
+                else if ([value isKindOfClass:[NSNumber class]])
+                {
+                    // handle single value for key
+                    [postString appendFormat:@"&%@=%@", [key URLEncodeString], [(NSNumber*)value stringValue]];
+                }
 			}
 		}
 	}
