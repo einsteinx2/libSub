@@ -8,7 +8,7 @@
 
 // Important note: Playlist table song indexes are 0 based to better interact with Swift/ObjC arrays.
 // Normally SQLite table primary key fields start at 1 rather than 0. We force it to start at 0
-// by modifying inserting the first record with a manually chosen songIndex of 0.
+// by inserting the first record with a manually chosen songIndex of 0.
 
 import Foundation
 
