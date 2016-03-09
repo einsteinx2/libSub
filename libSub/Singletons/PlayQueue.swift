@@ -25,6 +25,16 @@ public enum ShuffleMode: Int {
 @objc
 public class PlayQueue: NSObject {
     
+    // MARK: - Notifications -
+    
+    public static let playQueueIndexChangedNotificationName = "playQueueIndexChangedNotificationName"
+    
+    func notifyPlayQueueIndexChanged() {
+        NSNotificationCenter.postNotificationToMainThreadWithName(PlayQueue.playQueueIndexChangedNotificationName, object: nil)
+    }
+    
+    // MARK: - Class -
+    
     public static let sharedInstance = PlayQueue()
     
     public var repeatMode = RepeatMode.Normal
@@ -38,6 +48,7 @@ public class PlayQueue: NSObject {
     public private(set) var currentIndex = 0 {
         didSet {
             updateLockScreenInfo()
+            notifyPlayQueueIndexChanged()
         }
     }
     

@@ -15,14 +15,22 @@ import Foundation
 @objc(ISMSPlaylist)
 public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     
+    // MARK: - Notifications -
+    
     public static let playlistChangedNotificationName = "playlistChangedNotificationName"
-
+    
+    func notifyPlaylistChanged() {
+        NSNotificationCenter.postNotificationToMainThreadWithName(Playlist.playlistChangedNotificationName, object: self.playlistId)
+    }
+    
+    // MARK: - Class -
+    
     public var playlistId: Int
     public var name: String
     
     public var songCount: Int {
         // SELECT COUNT(*) is O(n) while selecting the max rowId is O(1)
-        // Since songIndex is our autoincrementing primary key field, it's an alias 
+        // Since songIndex is our primary key field, it's an alias
         // for rowId. So SELECT MAX instead of SELECT COUNT here.
         var maxId: Int? = nil
         DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
@@ -289,10 +297,6 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         }
         
         notifyPlaylistChanged()
-    }
-    
-    func notifyPlaylistChanged() {
-        NSNotificationCenter.postNotificationToMainThreadWithName(Playlist.playlistChangedNotificationName, object: self.playlistId)
     }
     
     // MARK: - Create new DB tables -
