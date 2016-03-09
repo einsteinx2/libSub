@@ -21,18 +21,22 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT m.mediaFolderId, m.name "
-                          @"FROM mediaFolders AS m "
-                          @"WHERE m.mediaFolderId = ?";
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(mediaFolderId)];
-        if ([r next])
-        {
-            foundRecord = YES;
-            _mediaFolderId = [r objectForColumnIndex:0];
-            _name = [r stringForColumnIndex:1];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT m.mediaFolderId, m.name "
+                              @"FROM mediaFolders AS m "
+                              @"WHERE m.mediaFolderId = ?";
+            
+            FMResultSet *r = [db executeQuery:query, @(mediaFolderId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                _mediaFolderId = [r objectForColumnIndex:0];
+                _name = [r stringForColumnIndex:1];
+            }
+            [r close];
+        }];
+        
         return foundRecord ? self : nil;
     }
     
@@ -80,21 +84,23 @@
 {
     NSMutableArray<ISMSFolder*> *rootFolders = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT f.folderId, f.parentFolderId, f.name "
-                      @"FROM mediaFolders AS m "
-                      @"JOIN folders AS f ON f.mediaFolderId = m.mediaFolderId "
-                      @"WHERE m.mediaFolderId = ? AND f.parentFolderId IS NULL";
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, self.mediaFolderId];
-    while ([r next])
-    {
-        ISMSFolder *folder = [[ISMSFolder alloc] init];
-        folder.folderId = [r objectForColumnIndex:0];
-        folder.parentFolderId = [r objectForColumnIndex:1];
-        folder.mediaFolderId = self.mediaFolderId;
-        folder.name = [r stringForColumnIndex:2];
-        [rootFolders addObject:folder];
-    }
-    [r close];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT f.folderId, f.parentFolderId, f.name "
+                          @"FROM mediaFolders AS m "
+                          @"JOIN folders AS f ON f.mediaFolderId = m.mediaFolderId "
+                          @"WHERE m.mediaFolderId = ? AND f.parentFolderId IS NULL";
+        FMResultSet *r = [db executeQuery:query, self.mediaFolderId];
+        while ([r next])
+        {
+            ISMSFolder *folder = [[ISMSFolder alloc] init];
+            folder.folderId = [r objectForColumnIndex:0];
+            folder.parentFolderId = [r objectForColumnIndex:1];
+            folder.mediaFolderId = self.mediaFolderId;
+            folder.name = [r stringForColumnIndex:2];
+            [rootFolders addObject:folder];
+        }
+        [r close];
+    }];
     
     return rootFolders;
 }
@@ -126,25 +132,27 @@
     NSMutableArray<ISMSFolder*> *rootFolders = [[NSMutableArray alloc] init];
     NSMutableArray *rootFoldersNumbers = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.name "
-                      @"FROM folders AS f "
-                      @"WHERE f.parentFolderId IS NULL";
-    
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query];
-    while ([r next])
-    {
-        ISMSFolder *folder = [[ISMSFolder alloc] init];
-        folder.folderId = [r objectForColumnIndex:0];
-        folder.parentFolderId = [r objectForColumnIndex:1];
-        folder.mediaFolderId = [r objectForColumnIndex:2];
-        folder.name = [r stringForColumnIndex:3];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.name "
+                          @"FROM folders AS f "
+                          @"WHERE f.parentFolderId IS NULL";
         
-        if (folder.name.length > 0 && isnumber([folder.name characterAtIndex:0]))
-            [rootFoldersNumbers addObject:folder];
-        else
-            [rootFolders addObject:folder];
-    }
-    [r close];
+        FMResultSet *r = [db executeQuery:query];
+        while ([r next])
+        {
+            ISMSFolder *folder = [[ISMSFolder alloc] init];
+            folder.folderId = [r objectForColumnIndex:0];
+            folder.parentFolderId = [r objectForColumnIndex:1];
+            folder.mediaFolderId = [r objectForColumnIndex:2];
+            folder.name = [r stringForColumnIndex:3];
+            
+            if (folder.name.length > 0 && isnumber([folder.name characterAtIndex:0]))
+                [rootFoldersNumbers addObject:folder];
+            else
+                [rootFolders addObject:folder];
+        }
+        [r close];
+    }];
     
     NSArray *ignoredArticles = databaseS.ignoredArticles;
     
@@ -162,19 +170,22 @@
 + (NSArray<ISMSMediaFolder*> *)allMediaFolders
 {
     NSMutableArray<ISMSMediaFolder*> *mediaFolders = [[NSMutableArray alloc] init];
-    NSString *query = @"SELECT m.mediaFolderId, m.name "
-                      @"FROM mediaFolders AS m "
-                      @"ORDER BY m.name COLLATE NOCASE ASC";
-    
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query];
-    while ([r next])
-    {
-        ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] init];
-        mediaFolder.mediaFolderId = [r objectForColumnIndex:0];
-        mediaFolder.name = [r stringForColumnIndex:1];
-        [mediaFolders addObject:mediaFolder];
-    }
-    [r close];
+   
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT m.mediaFolderId, m.name "
+                          @"FROM mediaFolders AS m "
+                          @"ORDER BY m.name COLLATE NOCASE ASC";
+        
+        FMResultSet *r = [db executeQuery:query];
+        while ([r next])
+        {
+            ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] init];
+            mediaFolder.mediaFolderId = [r objectForColumnIndex:0];
+            mediaFolder.name = [r stringForColumnIndex:1];
+            [mediaFolders addObject:mediaFolder];
+        }
+        [r close];
+    }];
     
     return mediaFolders;
 }

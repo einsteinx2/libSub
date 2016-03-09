@@ -1,6 +1,6 @@
 //
 //  Playlist.swift
-//  Pods
+//  LibSub
 //
 //  Created by Benjamin Baron on 2/10/16.
 //
@@ -24,9 +24,13 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         // SELECT COUNT(*) is O(n) while selecting the max rowId is O(1)
         // Since songIndex is our autoincrementing primary key field, it's an alias 
         // for rowId. So SELECT MAX instead of SELECT COUNT here.
-        let query = "SELECT MAX(songIndex) FROM \(self.tableName)"
-        let count = DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query)
-        return count == nil ? 0 : count + 1
+        var maxId: Int? = nil
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            let query = "SELECT MAX(songIndex) FROM \(self.tableName)"
+            maxId = db.longForQuery(query)
+        }
+        
+        return maxId == nil ? 0 : maxId! + 1
     }
     
     // Special Playlists
@@ -45,25 +49,29 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     }
     
     public required init?(itemId: Int) {
-        let query = "SELECT * FROM playlists WHERE playlistId = ?"
-        do {
-            let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query, itemId)
-            if result.next() {
-                self.playlistId = result.longForColumnIndex(0)
-                self.name = result.stringForColumnIndex(1)
-            } else {
-                self.playlistId = -1; self.name = ""
-                super.init()
-                return nil
+        var playlistId: Int?, name: String?
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            let query = "SELECT * FROM playlists WHERE playlistId = ?"
+            do {
+                let result = try db.executeQuery(query, itemId)
+                if result.next() {
+                    playlistId = result.longForColumnIndex(0)
+                    name = result.stringForColumnIndex(1)
+                }
+                result.close()
+            } catch {
+                // TODO: Do something here I guess
             }
-            result.close()
-        } catch {
+        }
+        
+        if let playlistId = playlistId, name = name {
+            self.playlistId = playlistId; self.name = name
+            super.init()
+        } else {
             self.playlistId = -1; self.name = ""
             super.init()
             return nil
         }
-        
-        super.init()
     }
 
     public init(_ result: FMResultSet) {
@@ -91,40 +99,53 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     public var songs: [ISMSSong] {
         var songs = [ISMSSong]()
         
-        do {
-            let query = "SELECT songId FROM \(self.tableName)"
-            let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query)
-            while result.next() {
-                if let song = ISMSSong(itemId: result.longForColumnIndex(0)) {
-                    songs.append(song)
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            do {
+                let query = "SELECT songId FROM \(self.tableName)"
+                let result = try db.executeQuery(query)
+                while result.next() {
+                    if let song = ISMSSong(itemId: result.longForColumnIndex(0)) {
+                        songs.append(song)
+                    }
                 }
+            } catch {
+                // Do something, this would be a serious DB error
             }
-        } catch {
-            // Do something, this would be a serious DB error
         }
         
         return songs;
     }
     
     public func containsSongId(songId: Int) -> Bool {
-        let query = "SELECT COUNT(*) FROM \(self.tableName) WHERE songId = ?"
-        let count = DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query, songId)
+        var count = 0
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            let query = "SELECT COUNT(*) FROM \(self.tableName) WHERE songId = ?"
+            count = db.longForQuery(query, songId)
+        }
         return count > 0
     }
     
     public func indexOfSongId(songId: Int) -> Int? {
-        let query = "SELECT songIndex FROM \(self.tableName) WHERE songId = ?"
-        return DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query, songId)
+        var index: Int?
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            let query = "SELECT songIndex FROM \(self.tableName) WHERE songId = ?"
+            index = db.longForQuery(query, songId)
+        }
+        return index
     }
     
     public func songAtIndex(index: Int) -> ISMSSong? {
-        let query = "SELECT songId FROM \(self.tableName) WHERE songIndex = ?"
-        let songId = DatabaseSingleton.sharedInstance().songModelReadDb.longForQuery(query, index)
-        guard songId != nil else {
-            return nil
+        var songId: Int?
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            let query = "SELECT songId FROM \(self.tableName) WHERE songIndex = ?"
+            songId = db.longForQuery(query, index)
         }
         
-        return ISMSSong(itemId: songId)
+        if let songId = songId {
+            return ISMSSong(itemId: songId)
+        } else {
+            return nil
+        }
     }
     
     public func addSong(song song: ISMSSong) {

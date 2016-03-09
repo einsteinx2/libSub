@@ -16,15 +16,17 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT * FROM contentTypes WHERE contentTypeId = ?";
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(contentTypeId)];
-        if ([r next])
-        {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT * FROM contentTypes WHERE contentTypeId = ?";
+            FMResultSet *r = [db executeQuery:query, @(contentTypeId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
         return foundRecord ? self : nil;
     }
@@ -37,15 +39,17 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT * FROM contentTypes WHERE mimeType = ?";
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, mimeType];
-        if ([r next])
-        {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT * FROM contentTypes WHERE mimeType = ?";
+            FMResultSet *r = [db executeQuery:query, mimeType];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
         return foundRecord ? self : nil;
     }

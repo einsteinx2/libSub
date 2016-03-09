@@ -11,7 +11,7 @@
 
 #define databaseS ((DatabaseSingleton *)[DatabaseSingleton sharedInstance])
 
-@class FMDatabase, FMDatabaseQueue, ISMSArtist, ISMSAlbum, ISMSSong, ISMSQueueAllLoader;
+@class FMDatabase, FMDatabasePool, FMDatabaseQueue, ISMSArtist, ISMSAlbum, ISMSSong, ISMSQueueAllLoader;
 
 @interface DatabaseSingleton : NSObject 
 
@@ -22,7 +22,7 @@
 // Write using the FMDatabaseQueue so that all writes are sequential
 @property (nonnull, strong) FMDatabaseQueue *songModelWritesDbQueue;
 // Read from the FMDatabase concurrently on any thread.
-@property (nonnull, strong) FMDatabase *songModelReadDb;
+@property (nonnull, strong) FMDatabasePool *songModelReadDbPool;
 
 @property (nonnull, strong) FMDatabaseQueue *coverArtCacheDb540Queue;
 @property (nonnull, strong) FMDatabaseQueue *coverArtCacheDb320Queue;

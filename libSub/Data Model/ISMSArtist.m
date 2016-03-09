@@ -31,17 +31,20 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount "
-                          @"FROM artists AS ar "
-                          @"WHERE ar.artistId = ?";
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(artistId)];
-        if ([r next])
-        {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount "
+                              @"FROM artists AS ar "
+                              @"WHERE ar.artistId = ?";
+            
+            FMResultSet *r = [db executeQuery:query, @(artistId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
         return foundRecord ? self : nil;
     }
@@ -125,20 +128,22 @@
     NSMutableArray *artists = [[NSMutableArray alloc] init];
     NSMutableArray *artistsNumbers = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT * FROM artists";
-    
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query];
-    while ([r next])
-    {
-        ISMSArtist *artist = [[ISMSArtist alloc] init];
-        [artist _assignPropertiesFromResultSet:r];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT * FROM artists";
         
-        if (artist.name.length > 0 && isnumber([artist.name characterAtIndex:0]))
-            [artistsNumbers addObject:artist];
-        else
-            [artists addObject:artist];
-    }
-    [r close];
+        FMResultSet *r = [db executeQuery:query];
+        while ([r next])
+        {
+            ISMSArtist *artist = [[ISMSArtist alloc] init];
+            [artist _assignPropertiesFromResultSet:r];
+            
+            if (artist.name.length > 0 && isnumber([artist.name characterAtIndex:0]))
+                [artistsNumbers addObject:artist];
+            else
+                [artists addObject:artist];
+        }
+        [r close];
+    }];
     
     NSArray *ignoredArticles = databaseS.ignoredArticles;
     

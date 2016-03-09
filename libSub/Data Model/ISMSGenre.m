@@ -21,15 +21,17 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT * FROM genres WHERE genreId = ?";
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(genreId)];
-        if ([r next])
-        {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT * FROM genres WHERE genreId = ?";
+            FMResultSet *r = [db executeQuery:query, @(genreId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
         return foundRecord ? self : nil;
     }
@@ -42,15 +44,17 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT * FROM genres WHERE name = ?";
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, name];
-        if ([r next])
-        {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT * FROM genres WHERE name = ?";
+            FMResultSet *r = [db executeQuery:query, name];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
         if (!foundRecord)
         {

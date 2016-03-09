@@ -31,14 +31,16 @@
     {
         __block BOOL foundRecord = NO;
         
-        NSString *query = @"SELECT * FROM chatMessages WHERE chatMessageId = ?";
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(chatMessageId)];
-        if ([r next])
-        {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT * FROM chatMessages WHERE chatMessageId = ?";
+            FMResultSet *r = [db executeQuery:query, @(chatMessageId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
         return foundRecord ? self : nil;
     }
@@ -58,15 +60,17 @@
 {
     NSMutableArray<ISMSChatMessage*> *chatMessages = [[NSMutableArray alloc] initWithCapacity:0];
     
-    NSString *query = @"SELECT * FROM chatMessages ORDER BY rowId DESC";
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query];
-    if ([r next])
-    {
-        ISMSChatMessage *chatMessage = [[ISMSChatMessage alloc] init];
-        [chatMessage _assignPropertiesFromResultSet:r];
-        [chatMessages addObject:chatMessage];
-    }
-    [r close];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT * FROM chatMessages ORDER BY rowId DESC";
+        FMResultSet *r = [db executeQuery:query];
+        if ([r next])
+        {
+            ISMSChatMessage *chatMessage = [[ISMSChatMessage alloc] init];
+            [chatMessage _assignPropertiesFromResultSet:r];
+            [chatMessages addObject:chatMessage];
+        }
+        [r close];
+    }];
     
     return chatMessages;
 }
@@ -135,7 +139,7 @@
         return NO;
     }
     
-    return [databaseS.songModelReadDb intForQuery:@"SELECT COUNT(*) FROM chatMessages WHERE chatMessageId = ?", self.chatMessageId] > 0;
+    return [databaseS.songModelReadDbPool intForQuery:@"SELECT COUNT(*) FROM chatMessages WHERE chatMessageId = ?", self.chatMessageId] > 0;
 }
 
 - (void)reloadSubmodels

@@ -49,18 +49,22 @@
     {
         __block BOOL foundRecord = NO;
         
-        NSString *query = @"SELECT * FROM albums WHERE albumId = ?";
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT * FROM albums WHERE albumId = ?";
+            FMResultSet *r = [db executeQuery:query, @(albumId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(albumId)];
-        if ([r next])
+        if (foundRecord)
         {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-            
             // Preload all submodels
             [self reloadSubmodels];
         }
-        [r close];
         
         return foundRecord ? self : nil;
     }
@@ -89,16 +93,17 @@
 {
     NSMutableArray<ISMSAlbum*> *albums = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT * FROM albums WHERE album.artistId = ?";
-    
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(artistId)];
-    while ([r next])
-    {
-        ISMSAlbum *album = [[ISMSAlbum alloc] init];
-        [album _assignPropertiesFromResultSet:r];
-        [albums addObject:album];
-    }
-    [r close];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT * FROM albums WHERE album.artistId = ?";
+        FMResultSet *r = [db executeQuery:query, @(artistId)];
+        while ([r next])
+        {
+            ISMSAlbum *album = [[ISMSAlbum alloc] init];
+            [album _assignPropertiesFromResultSet:r];
+            [albums addObject:album];
+        }
+        [r close];
+    }];
     
     return albums;
 }
@@ -167,7 +172,7 @@
         return NO;
     }
     
-    return [databaseS.songModelReadDb intForQuery:@"SELECT COUNT(*) FROM albums WHERE albumId = ?", self.albumId] > 0;
+    return [databaseS.songModelReadDbPool intForQuery:@"SELECT COUNT(*) FROM albums WHERE albumId = ?", self.albumId] > 0;
 }
 
 - (void)reloadSubmodels

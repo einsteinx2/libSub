@@ -20,6 +20,7 @@
 #import "CocoaLumberjack.h"
 #import "CocoaAsyncSocket.h"
 #import "FMDatabaseQueueAdditions.h"
+#import "FMDatabasePoolAdditions.h"
 #import "EX2Kit.h"
 
 // Singletons

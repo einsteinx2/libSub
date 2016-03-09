@@ -25,17 +25,20 @@ static NSArray *_ignoredArticles = nil;
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
-                          @"FROM folders AS f "
-                          @"WHERE f.folderId = ?";
         
-        FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(folderId)];
-        if ([r next])
-        {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:r];
-        }
-        [r close];
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
+                              @"FROM folders AS f "
+                              @"WHERE f.folderId = ?";
+            
+            FMResultSet *r = [db executeQuery:query, @(folderId)];
+            if ([r next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:r];
+            }
+            [r close];
+        }];
         
         return foundRecord ? self : nil;
     }
@@ -56,11 +59,13 @@ static NSArray *_ignoredArticles = nil;
 {
     NSMutableArray *ignoredArticles = [[NSMutableArray alloc] init];
     
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:@"SELECT name FROM ignoredArticles"];
-    while ([r next])
-    {
-        [ignoredArticles addObject:[r stringForColumnIndex:0]];
-    }
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        FMResultSet *r = [db executeQuery:@"SELECT name FROM ignoredArticles"];
+        while ([r next])
+        {
+            [ignoredArticles addObject:[r stringForColumnIndex:0]];
+        }
+    }];
     
     _ignoredArticles = ignoredArticles;
 }
@@ -142,19 +147,20 @@ static NSArray *_ignoredArticles = nil;
 {
     NSMutableArray<ISMSFolder*> *folders = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
-                      @"FROM folders AS f "
-                      @"WHERE f.parentFolderId = ?";
-    
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:query, @(folderId)];
-    while ([r next])
-    {
-        ISMSFolder *folder = [[ISMSFolder alloc] init];
-        [folder _assignPropertiesFromResultSet:r];
-        [folders addObject:folder];
-    }
-    [r close];
-
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
+                          @"FROM folders AS f "
+                          @"WHERE f.parentFolderId = ?";
+        
+        FMResultSet *r = [db executeQuery:query, @(folderId)];
+        while ([r next])
+        {
+            ISMSFolder *folder = [[ISMSFolder alloc] init];
+            [folder _assignPropertiesFromResultSet:r];
+            [folders addObject:folder];
+        }
+        [r close];
+    }];
     
     return folders;
 }

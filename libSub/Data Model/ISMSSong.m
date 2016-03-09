@@ -81,12 +81,14 @@
         // Retreive lastPlayed date, if it exists
         if ([self isModelPersisted])
         {
-            NSString *query = @"SELECT lastPlayed FROM songs WHERE songId = ?";
-            FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, self.songId];
-            if ([result next])
-            {
-                _lastPlayed = [result dateForColumnIndex:0];
-            }
+            [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+                NSString *query = @"SELECT lastPlayed FROM songs WHERE songId = ?";
+                FMResultSet *result = [db executeQuery:query, self.songId];
+                if ([result next])
+                {
+                    _lastPlayed = [result dateForColumnIndex:0];
+                }
+            }];
         }
     }
     
@@ -103,18 +105,23 @@
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
-        NSString *query = @"SELECT * FROM songs WHERE songId = ?";
         
-        FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(songId)];
-        if ([result next])
+        [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+            NSString *query = @"SELECT * FROM songs WHERE songId = ?";
+            FMResultSet *result = [db executeQuery:query, @(songId)];
+            if ([result next])
+            {
+                foundRecord = YES;
+                [self _assignPropertiesFromResultSet:result];
+            }
+            [result close];
+        }];
+        
+        if (foundRecord)
         {
-            foundRecord = YES;
-            [self _assignPropertiesFromResultSet:result];
-            
             // Preload all submodels
             [self reloadSubmodels];
         }
-        [result close];
         
         return foundRecord ? self : nil;
     }
@@ -328,7 +335,7 @@
         return NO;
     }
     
-    return [databaseS.songModelReadDb intForQuery:@"SELECT COUNT(*) FROM songs WHERE songId = ?", self.songId] > 0;
+    return [databaseS.songModelReadDbPool intForQuery:@"SELECT COUNT(*) FROM songs WHERE songId = ?", self.songId] > 0;
 }
 
 - (void)reloadSubmodels
@@ -455,17 +462,18 @@
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT * FROM songs WHERE s.folderId = ?";
-    
-    FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(folderId)];
-    while ([result next])
-    {
-        ISMSSong *song = [[ISMSSong alloc] init];
-        [song _assignPropertiesFromResultSet:result];
-        [song reloadSubmodels];
-        [songs addObject:song];
-    }
-    [result close];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT * FROM songs WHERE folderId = ?";
+        FMResultSet *result = [db executeQuery:query, @(folderId)];
+        while ([result next])
+        {
+            ISMSSong *song = [[ISMSSong alloc] init];
+            [song _assignPropertiesFromResultSet:result];
+            [song reloadSubmodels];
+            [songs addObject:song];
+        }
+        [result close];
+    }];
     
     return songs;
 }
@@ -474,17 +482,18 @@
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT * FROM songs WHERE s.albumId = ?";
-    
-    FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(albumId)];
-    while ([result next])
-    {
-        ISMSSong *song = [[ISMSSong alloc] init];
-        [song _assignPropertiesFromResultSet:result];
-        [song reloadSubmodels];
-        [songs addObject:song];
-    }
-    [result close];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT * FROM songs WHERE albumId = ?";
+        FMResultSet *result = [db executeQuery:query, @(albumId)];
+        while ([result next])
+        {
+            ISMSSong *song = [[ISMSSong alloc] init];
+            [song _assignPropertiesFromResultSet:result];
+            [song reloadSubmodels];
+            [songs addObject:song];
+        }
+        [result close];
+    }];
     
     return songs;
 }
@@ -493,17 +502,18 @@
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
-    NSString *query = @"SELECT * FROM songs WHERE songs.mediaFolderId = ? AND songs.folderId IS NULL";
-    
-    FMResultSet *result = [databaseS.songModelReadDb executeQuery:query, @(mediaFolderId)];
-    while ([result next])
-    {
-        ISMSSong *song = [[ISMSSong alloc] init];
-        [song _assignPropertiesFromResultSet:result];
-        [song reloadSubmodels];
-        [songs addObject:song];
-    }
-    [result close];
+    [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        NSString *query = @"SELECT * FROM songs WHERE mediaFolderId = ? AND folderId IS NULL";
+        FMResultSet *result = [db executeQuery:query, @(mediaFolderId)];
+        while ([result next])
+        {
+            ISMSSong *song = [[ISMSSong alloc] init];
+            [song _assignPropertiesFromResultSet:result];
+            [song reloadSubmodels];
+            [songs addObject:song];
+        }
+        [result close];
+    }];
     
     return songs;
 }

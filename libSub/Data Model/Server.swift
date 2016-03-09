@@ -47,29 +47,38 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     public var uuid: String?
     
     public required init?(itemId: Int) {
-        let query = "SELECT * FROM servers WHERE serverId = ?"
-        do {
-            let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query)
-            if result.next() {
-                self.serverId = result.longForColumnIndex(0)
-                self.type = ServerType(rawValue: result.longForColumnIndex(1))!
-                self.url = result.stringForColumnIndex(2)
-                self.username = result.stringForColumnIndex(3)
-                self.lastQueryId = result.stringForColumnIndex(4)
-                self.uuid = result.stringForColumnIndex(5)
-            } else {
-                self.serverId = -1; self.type = .Subsonic; self.url = ""; self.username = ""
-                super.init()
-                return nil
+        var serverId: Int?, type: Int?, url: String?, username: String?, lastQueryId: String?, uuid: String?
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            let query = "SELECT * FROM servers WHERE serverId = ?"
+            do {
+                let result = try db.executeQuery(query)
+                if result.next() {
+                    serverId = result.longForColumnIndex(0)
+                    type = result.longForColumnIndex(1)
+                    url = result.stringForColumnIndex(2)
+                    username = result.stringForColumnIndex(3)
+                    lastQueryId = result.stringForColumnIndex(4)
+                    uuid = result.stringForColumnIndex(5)
+                }
+                result.close()
+            } catch {
+                // TODO: Do something here I guess
             }
-            result.close()
-        } catch {
+        }
+        
+        if let serverId = serverId, type = type, url = url, username = username {
+            self.serverId = serverId
+            self.type = ServerType(rawValue: type)!
+            self.url = url
+            self.username = username
+            self.lastQueryId = lastQueryId
+            self.uuid = uuid
+            super.init()
+        } else {
             self.serverId = -1; self.type = .Subsonic; self.url = ""; self.username = ""
             super.init()
             return nil
         }
-        
-        super.init()
     }
     
     public init(_ result: FMResultSet) {
@@ -126,15 +135,17 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     public static func allServers() -> [Server] {
         var servers = [Server]()
         
-        do {
-            let query = "SELECT * FROM servers"
-            let result = try DatabaseSingleton.sharedInstance().songModelReadDb.executeQuery(query)
-            while result.next() {
-                servers.append(Server(result))
+        DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
+            do {
+                let query = "SELECT * FROM servers"
+                let result = try db.executeQuery(query)
+                while result.next() {
+                    servers.append(Server(result))
+                }
+                result.close()
+            } catch {
+                // TODO: Do something
             }
-            result.close()
-        } catch {
-            // TODO: Do something
         }
         
         return servers

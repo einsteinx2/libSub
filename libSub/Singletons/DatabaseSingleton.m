@@ -18,6 +18,11 @@ LOG_LEVEL_ISUB_DEFAULT
 #pragma mark -
 #pragma mark class instance methods
 
+- (void)databasePool:(FMDatabasePool*)pool didAddDatabase:(FMDatabase*)database
+{
+    [database executeStatements:@"PRAGMA journal_mode=WAL"];
+}
+
 - (void)setupDatabases
 {
 	NSString *urlStringMd5 = [[[settingsS currentServer] url] md5];
@@ -27,9 +32,9 @@ LOG_LEVEL_ISUB_DEFAULT
     NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db", self.databaseFolderPath, urlStringMd5];
     NSLog(@"new model db: %@", path);
     __block BOOL createDefaultPlaylistTables = NO;
-    self.songModelReadDb = [FMDatabase databaseWithPath:path];
-    [self.songModelReadDb open];
-    [self.songModelReadDb executeStatements:@"PRAGMA journal_mode=WAL"];
+    self.songModelReadDbPool = [FMDatabasePool databasePoolWithPath:path];
+    self.songModelReadDbPool.maximumNumberOfDatabasesToCreate = 20;
+    self.songModelReadDbPool.delegate = self;
     self.songModelWritesDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
     [self.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
     {
@@ -273,7 +278,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)closeAllDatabases
 {
-    [self.songModelReadDb close];
+    [self.songModelReadDbPool releaseAllDatabases];
     [self.songModelWritesDbQueue close];
 	[self.coverArtCacheDb540Queue close];
 	[self.coverArtCacheDb320Queue close];
@@ -311,12 +316,14 @@ LOG_LEVEL_ISUB_DEFAULT
 {
     NSMutableArray *ignoredArticles = [[NSMutableArray alloc] init];
     
-    FMResultSet *r = [databaseS.songModelReadDb executeQuery:@"SELECT name FROM ignoredArticles"];
-    while ([r next])
-    {
-        [ignoredArticles addObject:[r stringForColumnIndex:0]];
-    }
-    [r close];
+    [self.songModelReadDbPool inDatabase:^(FMDatabase *db) {
+        FMResultSet *r = [db executeQuery:@"SELECT name FROM ignoredArticles"];
+        while ([r next])
+        {
+            [ignoredArticles addObject:[r stringForColumnIndex:0]];
+        }
+        [r close];
+    }];
     
     return ignoredArticles;
 }
