@@ -14,7 +14,7 @@
 - (FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray*)arrayArgs orDictionary:(NSDictionary *)dictionaryArgs orVAList:(va_list)args;
 @end
 
-@implementation FMDatabaseQueue (Additions)
+@implementation FMDatabasePool (Additions)
 
 #define RETURN_RESULT_FOR_QUERY_WITH_SELECTOR(type, sel)                                                            \
 va_list args;                                                                                                       \
