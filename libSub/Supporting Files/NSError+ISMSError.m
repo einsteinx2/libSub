@@ -15,13 +15,26 @@
 {
     NSString *description = nil;
     
+    // TODO: Do this better
     if (code == ISMSErrorCode_NotASubsonicServer)
         description = ISMSErrorDesc_NotASubsonicServer;
     else if (code == ISMSErrorCode_NotXML)
         description = ISMSErrorDesc_NotXML;
     else if (code == ISMSErrorCode_CouldNotCreateConnection)
         description = ISMSErrorDesc_CouldNotCreateConnection;
-    
+    else if (code == ISMSErrorCode_CouldNotSendChatMessage)
+        description = ISMSErrorDesc_CouldNotSendChatMessage;
+    else if (code == ISMSErrorCode_NoLyricsElement)
+        description = ISMSErrorDesc_NoLyricsElement;
+    else if (code == ISMSErrorCode_NoLyricsFound)
+        description = ISMSErrorDesc_NoLyricsFound;
+    else if (code == ISMSErrorCode_IncorrectCredentials)
+        description = ISMSErrorDesc_IncorrectCredentials;
+    else if (code == ISMSErrorCode_CouldNotReachServer)
+        description = ISMSErrorDesc_CouldNotReachServer;
+    else if (code == ISMSErrorCode_SubsonicTrialOver)
+        description = ISMSErrorDesc_SubsonicTrialOver;
+
     return description;
 }
 

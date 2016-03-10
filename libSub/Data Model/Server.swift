@@ -30,6 +30,7 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             do {
                 return try SFHFKeychainUtils.getPasswordForUsername(self.username, andServiceName: self.url)
             } catch {
+                printError(error)
                 return nil
             }
         }
@@ -37,7 +38,7 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             do {
                 try SFHFKeychainUtils.storeUsername(self.username, andPassword: newValue, forServiceName: self.url, updateExisting: true)
             } catch {
-                // TODO: Handle this
+                printError(error)
             }
         }
     }
@@ -49,9 +50,9 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     public required init?(itemId: Int) {
         var serverId: Int?, type: Int?, url: String?, username: String?, lastQueryId: String?, uuid: String?
         DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
-            let query = "SELECT * FROM servers WHERE serverId = ?"
             do {
-                let result = try db.executeQuery(query)
+                let query = "SELECT * FROM servers WHERE serverId = ?"
+                let result = try db.executeQuery(query, itemId)
                 if result.next() {
                     serverId = result.longForColumnIndex(0)
                     type = result.longForColumnIndex(1)
@@ -62,7 +63,7 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 }
                 result.close()
             } catch {
-                // TODO: Do something here I guess
+                printError(error)
             }
         }
         
@@ -105,10 +106,11 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
             do {
                 let query = "INSERT INTO servers VALUES (?, ?, ?, ?, ?, ?)"
-                try db.executeUpdate(query)
+                try db.executeUpdate(query, NSNull(), type.rawValue, url, username, n2N(lastQueryId), n2N(uuid))
                 
                 serverId = db.longForQuery("SELECT last_insert_rowid()")
             } catch {
+                printError(error)
                 success = false
             }
         }
@@ -144,16 +146,20 @@ public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 }
                 result.close()
             } catch {
-                // TODO: Do something
+                printError(error)
             }
         }
         
         return servers
     }
     
+    public static var testServerId: Int {
+        return NSIntegerMax
+    }
+    
     public static var testServer: Server {
         // Return model directly rather than storing in the database
-        let testServer = Server(serverId: NSIntegerMax, type: .Subsonic, url: "http://isubapp.com:9001", username: "isub-guest", lastQueryId: nil, uuid: nil)
+        let testServer = Server(serverId: self.testServerId, type: .Subsonic, url: "http://isubapp.com:9001", username: "isub-guest", lastQueryId: nil, uuid: nil)
         testServer.password = "1sub1snumb3r0n3"
         return testServer
     }

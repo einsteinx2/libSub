@@ -68,10 +68,14 @@ public class StatusLoader: ISMSLoader {
                 
                 let error = root.child("error")
                 if error != nil && error.isValid {
-                    let code = error.attribute("code")
-                    if Int(code) == 40 {
+                    let code = Int(error.attribute("code"))
+                    if code == 40 {
                         // Incorrect credentials, so fail
                         self.informDelegateLoadingFailed(NSError(ISMSCode: ISMSErrorCode_IncorrectCredentials))
+                        NSNotificationCenter.postNotificationToMainThreadWithName(ISMSNotification_ServerCheckFailed)
+                    } else if code == 60 {
+                        // Incorrect credentials, so fail
+                        self.informDelegateLoadingFailed(NSError(ISMSCode: ISMSErrorCode_SubsonicTrialOver))
                         NSNotificationCenter.postNotificationToMainThreadWithName(ISMSNotification_ServerCheckFailed)
                     } else {
                         // This is a Subsonic server, so pass

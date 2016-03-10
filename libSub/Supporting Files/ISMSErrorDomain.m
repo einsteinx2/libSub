@@ -33,3 +33,7 @@ NSString * const ISMSErrorDesc_IncorrectCredentials		= @"Incorrect username or p
 
 NSInteger const ISMSErrorCode_CouldNotReachServer		= 8;
 NSString * const ISMSErrorDesc_CouldNotReachServer		= @"Could not reach the server";
+
+// TODO: Update this error message to better explain and to point to free alternatives
+NSInteger const ISMSErrorCode_SubsonicTrialOver         = 9;
+NSString * const ISMSErrorDesc_SubsonicTrialOver		= @"Subsonic API Trial Expired";

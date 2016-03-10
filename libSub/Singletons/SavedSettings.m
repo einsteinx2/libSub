@@ -18,6 +18,8 @@
 {
     NSUserDefaults *_userDefaults;
     
+    NSInteger _currentServerId;
+    NSString *_currentServerUrl;
     ISMSServer *_currentServer;
     NSString *_sessionId;
     
@@ -408,30 +410,65 @@
 	_isLockScreenArtEnabled = [_userDefaults boolForKey:@"isLockScreenArtEnabled"];
 	_isEqualizerOn = [_userDefaults boolForKey:@"isEqualizerOn"];
 	
-    _currentServer = [_userDefaults objectForKey:@"currentServer"];
-    if (!_currentServer) {
+    if (![_userDefaults objectForKey:@"currentServerId"]) {
         _currentServer = [ISMSServer testServer];
+        _currentServerId = _currentServer.serverId;
+        _currentServerUrl = _currentServer.url;
+    } else {
+        _currentServerId = [_userDefaults integerForKey:@"currentServerId"];
+        _currentServerUrl = [_userDefaults stringForKey:@"currentServerUrl"];
     }
     _sessionId = [_userDefaults stringForKey:[NSString stringWithFormat:@"sessionId%@", _currentServer.url.md5]];
 }
 
 #pragma mark - Login Settings
 
+- (NSInteger)currentServerId
+{
+    @synchronized(self)
+    {
+        return _currentServerId;
+    }
+}
+
+- (void)setCurrentServerId:(NSInteger)currentServerId
+{
+    @synchronized(self)
+    {
+        _currentServer = [[ISMSServer alloc] initWithItemId:currentServerId];
+        _currentServerId = _currentServer.serverId;
+        _currentServerUrl = _currentServer.url;
+        [_userDefaults setInteger:_currentServerId forKey:@"currentServerId"];
+        [_userDefaults setObject:_currentServerUrl forKey:@"currentServerUrl"];
+        [_userDefaults synchronize];
+    }
+}
+
+// Because of the stupid way iSub creates DB filenames (using a hash of the URL at the end)
+// and due to the stupid use of fucking singletons all over the fucking app, which creates a
+// problem during initialization when the DatabaseSingleton wants the server URL to setup the
+// DB, but the SavedSettings singleton needs to ask the DatabaseSingleton for that...we need
+// to store the URL separately. Hence this property.
+- (NSString *)currentServerUrl
+{
+    return _currentServerUrl;
+}
+
 - (ISMSServer *)currentServer
 {
 	@synchronized(self)
 	{
-        return _currentServer ?: [ISMSServer testServer];
-	}
-}
-
-- (void)setCurrentServer:(ISMSServer *)currentServer
-{
-	@synchronized(self)
-	{
-		_currentServer = [currentServer copy];
-		[_userDefaults setObject:currentServer forKey:@"currentServer"];
-		[_userDefaults synchronize];
+        if (_currentServerId == [ISMSServer testServerId])
+        {
+            return [ISMSServer testServer];
+        }
+        
+        if (_currentServer == nil)
+        {
+            _currentServer = [[ISMSServer alloc] initWithItemId:_currentServerId];
+        }
+        
+        return _currentServer;
 	}
 }
 

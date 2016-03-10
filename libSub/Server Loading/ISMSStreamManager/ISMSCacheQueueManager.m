@@ -283,6 +283,7 @@ LOG_LEVEL_ISUB_DEBUG
 		{
 			// This is a trial period message, alert the user and stop streaming
 #ifdef IOS
+            // TODO: Update this error message to better explain and to point to free alternatives
 			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Subsonic API Trial Expired" message:@"You can purchase a license for Subsonic by logging in to the web interface and clicking the red Donate link on the top right.\n\nPlease remember, iSub is a 3rd party client for Subsonic, and this license and trial is for Subsonic and not iSub.\n\nIf you didn't know about the Subsonic license requirement, and do not wish to purchase it, please tap the Support button on the Home tab and contact iSub support for a refund." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
 			[alert show];
 #endif

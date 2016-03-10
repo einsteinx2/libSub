@@ -33,3 +33,6 @@ extern NSString * const ISMSErrorDesc_IncorrectCredentials;
 
 extern NSInteger const ISMSErrorCode_CouldNotReachServer;
 extern NSString * const ISMSErrorDesc_CouldNotReachServer;
+
+extern NSInteger const ISMSErrorCode_SubsonicTrialOver;
+extern NSString * const ISMSErrorDesc_SubsonicTrialOver;

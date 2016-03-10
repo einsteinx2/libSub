@@ -25,7 +25,7 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)setupDatabases
 {
-	NSString *urlStringMd5 = [[[settingsS currentServer] url] md5];
+	NSString *urlStringMd5 = [[settingsS currentServerUrl] md5];
     DDLogVerbose(@"Database prefix: %@", urlStringMd5);
     
     // Setup the new data model (WAL enabled)

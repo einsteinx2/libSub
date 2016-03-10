@@ -46,7 +46,7 @@ public func sectionIndexesForItems(items: [ISMSItem]?) -> [SectionIndex] {
                 }
                 result.close()
             } catch {
-                // TODO: Do something here, this would be a major db error
+                printError(error)
             }
         }
         

@@ -68,7 +68,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 }
                 result.close()
             } catch {
-                // TODO: Do something here I guess
+                printError(error)
             }
         }
         
@@ -117,7 +117,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                     }
                 }
             } catch {
-                // Do something, this would be a serious DB error
+                printError(error)
             }
         }
         
@@ -174,7 +174,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             do {
                 try db.executeUpdate(query, songId)
             } catch {
-                // TODO: something, this would be a serious db error
+                printError(error)
             }
         }
         
@@ -220,7 +220,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 let query3 = "UPDATE \(self.tableName) SET songIndex = (-songIndex) + 1 WHERE songIndex < 0"
                 try db.executeUpdate(query3)
             } catch {
-                // TODO: something, this would be a serious db error
+                printError(error)
             }
         }
         
@@ -236,7 +236,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 let query2 = "UPDATE \(self.tableName) SET songIndex = songIndex - 1 WHERE songIndex > ?"
                 try db.executeUpdate(query2, index)
             } catch {
-                // TODO: something, this would be a serious db error
+                printError(error)
             }
         }
         
@@ -292,7 +292,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 let query1 = "DELETE FROM \(self.tableName)"
                 try db.executeUpdate(query1)
             } catch {
-                // TODO: something, this would be a serious db error
+                printError(error)
             }
         }
         
@@ -325,6 +325,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 try db.executeUpdate("DELETE FROM \(table)")
                 
             } catch {
+                printError(error)
                 playlistId = nil
             }
         }
@@ -347,6 +348,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY, songId INTEGER)")
                 try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
             } catch {
+                printError(error)
                 success = false
             }
         }
