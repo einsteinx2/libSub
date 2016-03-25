@@ -101,8 +101,8 @@ public func sectionIndexesForItems(items: [ISMSItem]?) -> [SectionIndex] {
                 sectionIndexes.append(SectionIndex(firstIndex: index, sectionCount: 0, letter: firstLetter))
             }
             
-            index++
-            count++
+            index += 1
+            count += 1
         }
     }
     

@@ -287,7 +287,7 @@ public class PlayQueue: NSObject {
             if let lockScreenUpdateTimer = self.lockScreenUpdateTimer {
                 lockScreenUpdateTimer.invalidate()
             }
-            self.lockScreenUpdateTimer = NSTimer(timeInterval: 30.0, target: self, selector: "updateLockScreenInfo", userInfo: nil, repeats: false)
+            self.lockScreenUpdateTimer = NSTimer(timeInterval: 30.0, target: self, selector: #selector(PlayQueue.updateLockScreenInfo), userInfo: nil, repeats: false)
         #endif
     }
     
@@ -309,7 +309,7 @@ public class PlayQueue: NSObject {
             if self.currentSong != nil {
                 // Only start the caching process if it's been a half second after the last request
                 // Prevents crash when skipping through playlist fast
-                self.startSongDelayTimer = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: "startSongWithByteAndSecondsOffset:", userInfo: ["bytes": offsetBytes, "seconds": offsetSeconds], repeats: false)
+                self.startSongDelayTimer = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: #selector(PlayQueue.startSongWithByteAndSecondsOffset(_:)), userInfo: ["bytes": offsetBytes, "seconds": offsetSeconds], repeats: false)
             }
         }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 public func printError(error: Any) {
-    print("[\(__FILE__):\(__LINE__) \(__FUNCTION__)] \(error)")
+    print("[\(#file):\(#line) \(#function)] \(error)")
 }
 
 // Returns NSNull if the input is nil. Useful for things like db queries.
