@@ -8,6 +8,7 @@
 
 #import "ISMSSong.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "ISMSFolder.h"
 #import "ISMSArtist.h"
 #import "ISMSAlbum.h"

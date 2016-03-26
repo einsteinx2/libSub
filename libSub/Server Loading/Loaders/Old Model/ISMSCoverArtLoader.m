@@ -9,6 +9,7 @@
 #import "ISMSCoverArtLoader.h"
 #import "ISMSLoader_Subclassing.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "NSMutableURLRequest+SUS.h"
 #import "NSMutableURLRequest+PMS.h"
 

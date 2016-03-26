@@ -8,6 +8,7 @@
 
 #import "DatabaseSingleton.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "ISMSStreamManager.h"
 #import "JukeboxSingleton.h"
 

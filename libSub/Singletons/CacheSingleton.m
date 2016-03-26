@@ -8,7 +8,7 @@
 
 #import "CacheSingleton.h"
 #import "LibSub.h"
-
+#import <LibSub/libSub-Swift.h>
 #import "ISMSStreamManager.h"
 #import "ISMSCacheQueueManager.h"
 

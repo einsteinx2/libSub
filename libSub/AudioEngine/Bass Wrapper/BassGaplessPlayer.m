@@ -8,6 +8,7 @@
 
 #import "BassGaplessPlayer.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import <AVFoundation/AVFoundation.h>
 
 @interface BassGaplessPlayer ()

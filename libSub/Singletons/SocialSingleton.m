@@ -8,6 +8,7 @@
 
 #import "SocialSingleton.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "BassGaplessPlayer.h"
 #import "ISMSStreamManager.h"
 #import <Twitter/Twitter.h>

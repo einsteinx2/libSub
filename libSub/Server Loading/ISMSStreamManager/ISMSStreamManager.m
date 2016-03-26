@@ -8,6 +8,7 @@
 
 #import "ISMSStreamManager.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "ISMSStreamHandler.h"
 #import "ISMSCFNetworkStreamHandler.h"
 #import "ISMSCoverArtLoader.h"

@@ -8,6 +8,7 @@
 
 #import "HLSProxyConnection.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "HLSProxyResponse.h"
 
 static const int ddLogLevel = DDLogLevelError;

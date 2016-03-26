@@ -8,6 +8,7 @@
 
 #import "SavedSettings.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "BassGaplessPlayer.h"
 
 #ifdef IOS

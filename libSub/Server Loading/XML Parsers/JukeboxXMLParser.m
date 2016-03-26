@@ -8,6 +8,7 @@
 
 #import "JukeboxXMLParser.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 //#import "ServerListViewController.h"
 
 @implementation JukeboxXMLParser

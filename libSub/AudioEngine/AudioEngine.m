@@ -8,6 +8,7 @@
 
 #import "AudioEngine.h"
 #import "LibSub.h"
+#import <LibSub/libSub-Swift.h>
 #import "BassParamEqValue.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import "BassEffectDAO.h"
