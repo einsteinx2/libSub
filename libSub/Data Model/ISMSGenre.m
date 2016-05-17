@@ -11,20 +11,20 @@
 
 @implementation ISMSGenre
 
-- (instancetype)initWithItemId:(NSInteger)itemId serverId:(NSInteger)serverId
+- (instancetype)initWithItemId:(NSInteger)itemId
 {
-    return [self initWithGenreId:itemId serverId:serverId];
+    return [self initWithGenreId:itemId];
 }
 
-- (instancetype)initWithGenreId:(NSInteger)genreId serverId:(NSInteger)serverId
+- (instancetype)initWithGenreId:(NSInteger)genreId
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT * FROM genres WHERE genreId = ? AND serverId = ?";
-            FMResultSet *r = [db executeQuery:query, @(genreId), @(serverId)];
+            NSString *query = @"SELECT * FROM genres WHERE genreId = ?";
+            FMResultSet *r = [db executeQuery:query, @(genreId)];
             if ([r next])
             {
                 foundRecord = YES;
@@ -39,15 +39,15 @@
     return nil;
 }
 
-- (instancetype)initWithName:(NSString *)name serverId:(NSInteger)serverId
+- (instancetype)initWithName:(NSString *)name
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT * FROM genres WHERE name = ? AND serverId = ?";
-            FMResultSet *r = [db executeQuery:query, name, @(serverId)];
+            NSString *query = @"SELECT * FROM genres WHERE name = ?";
+            FMResultSet *r = [db executeQuery:query, name];
             if ([r next])
             {
                 foundRecord = YES;
@@ -69,7 +69,7 @@
 - (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
 {
     _genreId = [resultSet objectForColumnIndex:0];
-    _name = N2n([resultSet objectForColumnIndex:1]);
+    _name = N2n([resultSet objectForColumnIndex:2]);
 }
 
 - (BOOL)insertModel
@@ -79,8 +79,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"INSERT INTO genres VALUES (?, ?, ?)";
-         success = [db executeUpdate:query, [NSNull null], self.serverId, self.name];
+         NSString *query = @"INSERT INTO genres VALUES (?, ?)";
+         success = [db executeUpdate:query, [NSNull null], self.name];
          
          if (success)
          {
@@ -99,8 +99,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"REPLACE INTO genres VALUES (?, ?, ?)";
-         success = [db executeUpdate:query, self.genreId, self.serverId, self.name];
+         NSString *query = @"REPLACE INTO genres VALUES (?, ?)";
+         success = [db executeUpdate:query, self.genreId, self.name];
      }];
     
     return success;
@@ -111,8 +111,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM genres WHERE genreId = ? AND serverId = ?";
-         success = [db executeUpdate:query, self.genreId, self.serverId];
+         NSString *query = @"DELETE FROM genres WHERE genreId = ?";
+         success = [db executeUpdate:query, self.genreId];
      }];
     return success;
 }
@@ -134,7 +134,6 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.genreId forKey:@"genreId"];
-    [encoder encodeObject:self.serverId forKey:@"serverId"];
     [encoder encodeObject:self.name    forKey:@"name"];
 }
 
@@ -143,7 +142,6 @@
     if ((self = [super init]))
     {
         _genreId = [decoder decodeObjectForKey:@"genreId"];
-        _serverId = [decoder decodeObjectForKey:@"serverId"];
         _name    = [decoder decodeObjectForKey:@"name"];
     }
     return self;
@@ -155,7 +153,6 @@
 {
     ISMSGenre *genre = [[ISMSGenre alloc] init];
     genre.genreId    = [self.genreId copy];
-    genre.serverId    = [self.serverId copy];
     genre.name       = [self.name copy];
     return genre;
 }

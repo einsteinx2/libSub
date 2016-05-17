@@ -56,7 +56,7 @@
         NSString *genreString = [element attribute:@"genre"];
         if (genreString.length > 0)
         {
-            _genre = [[ISMSGenre alloc] initWithName:genreString serverId:_serverId.integerValue];
+            _genre = [[ISMSGenre alloc] initWithName:genreString];
             _genreId = _genre.genreId;
         }
     }
@@ -210,7 +210,7 @@
         _genre = nil;
         if (self.genreId)
         {
-            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue serverId:self.serverId.integerValue];
+            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue];
         }
         
         _songs = [ISMSSong songsInAlbum:self.albumId.integerValue serverId:self.serverId.integerValue];

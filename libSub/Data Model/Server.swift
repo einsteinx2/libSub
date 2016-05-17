@@ -46,8 +46,8 @@ public class Server: NSObject, NSCopying, NSCoding { //, ISMSPersistedModel {
     // WaveBox Data Model
     public var lastQueryId: String?
     public var uuid: String?
-    
-    public required init?(itemId: Int) {
+
+    public init?(itemId: Int) {
         var serverId: Int?, type: Int?, url: String?, username: String?, lastQueryId: String?, uuid: String?
         DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
             do {

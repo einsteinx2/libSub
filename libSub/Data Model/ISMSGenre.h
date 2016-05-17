@@ -11,14 +11,13 @@
 @interface ISMSGenre : NSObject <ISMSItem, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *genreId;
-@property (nullable, strong) NSNumber *serverId;
 @property (nullable, copy) NSString *name;
 
 // Returns an instance if it exists in the db, otherwise nil
-- (nullable instancetype)initWithGenreId:(NSInteger)genreId serverId:(NSInteger)serverId;
+- (nullable instancetype)initWithGenreId:(NSInteger)genreId;
 
 // Returns an instance if it exists in the db, otherwise inserts a new record
 // and returns a genre object containing a genre id. Never returns nil.
-- (nonnull instancetype)initWithName:(nonnull NSString *)name serverId:(NSInteger)serverId;
+- (nonnull instancetype)initWithName:(nonnull NSString *)name;
 
 @end
