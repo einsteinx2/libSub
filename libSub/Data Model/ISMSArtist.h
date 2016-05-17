@@ -8,12 +8,15 @@
 
 #import "ISMSPersistedModel.h"
 
+@class ISMSAlbum;
 @interface ISMSArtist : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *artistId;
 @property (nullable, strong) NSNumber *serverId;
 @property (nullable, copy) NSString *name;
 @property (nullable, strong) NSNumber *albumCount;
+
+@property (nonnull, strong, readonly) NSArray<ISMSAlbum*> *albums;
 
 // Use nil for serverId to apply to all records
 + (nonnull NSArray<ISMSArtist*> *)allArtistsWithServerId:(nullable NSNumber *)serverId;

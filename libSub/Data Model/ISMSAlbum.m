@@ -16,22 +16,41 @@
 {
     ISMSArtist *_artist;
     ISMSGenre *_genre;
+    NSArray<ISMSSong*> *_songs;
+}
+
++ (NSDateFormatter *)createdDateFormatter
+{
+    static NSDateFormatter *createdDateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        createdDateFormatter = [[NSDateFormatter alloc] init];
+        [createdDateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssz"];
+    });
+    
+    return createdDateFormatter;
 }
 
 - (id)initWithRXMLElement:(RXMLElement *)element serverId:(NSInteger)serverId
 {
     if ((self = [super init]))
     {
+        
         _albumId = @([[element attribute:@"id"] integerValue]);
         
         _serverId = @(serverId);
         _artistId = @([[element attribute:@"artistId"] integerValue]);
         _coverArtId = [[element attribute:@"coverArt"] cleanString];
         
-        _name = [[element attribute:@"title"] cleanString];
+        _name = [[element attribute:@"name"] cleanString];
         _songCount = @([[element attribute:@"songCount"] integerValue]);
         _duration = @([[element attribute:@"duration"] integerValue]);
         _year = @([[element attribute:@"duration"] integerValue]);
+        
+        NSString *createdString = [element attribute:@"created"];
+        if (createdString.length > 0) {
+            _created = [[self.class createdDateFormatter] dateFromString:createdString];
+        }
         
         // Retreive genreId
         NSString *genreString = [element attribute:@"genre"];
@@ -84,7 +103,7 @@
     _coverArtId = N2n([resultSet objectForColumnIndex:5]);
     _name       = N2n([resultSet objectForColumnIndex:6]);
     _songCount  = N2n([resultSet objectForColumnIndex:7]);
-    _year       = N2n([resultSet objectForColumnIndex:8]);
+    _year       = N2n([resultSet dateForColumnIndex:8]);
 }
 
 - (NSString *)description
@@ -136,9 +155,9 @@
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
-         NSString *query = [insertType stringByAppendingString:@" INTO albums VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"];
+         NSString *query = [insertType stringByAppendingString:@" INTO albums VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"];
          
-         success = [db executeUpdate:query, self.albumId, self.serverId, self.artistId, self.genreId, self.coverArtId, self.name, self.songCount, self.duration, self.year];
+         success = [db executeUpdate:query, self.albumId, self.serverId, self.artistId, self.genreId, self.coverArtId, self.name, self.songCount, self.duration, self.year, self.created];
      }];
     return success;
 }
@@ -193,6 +212,21 @@
         {
             _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue serverId:self.serverId.integerValue];
         }
+        
+        _songs = [ISMSSong songsInAlbum:self.albumId.integerValue serverId:self.serverId.integerValue];
+    }
+}
+
+- (NSArray<ISMSSong*> *)songs
+{
+    @synchronized(self)
+    {
+        if (!_songs)
+        {
+            [self reloadSubmodels];
+        }
+        
+        return _songs;
     }
 }
 
@@ -212,6 +246,7 @@
     [encoder encodeObject:self.duration   forKey:@"duration"];
     [encoder encodeObject:self.year       forKey:@"year"];
     
+    [encoder encodeObject:self.created    forKey:@"created"];
 }
 
 
@@ -230,6 +265,8 @@
         _songCount  = [decoder decodeObjectForKey:@"songCount"];
         _duration   = [decoder decodeObjectForKey:@"duration"];
         _year       = [decoder decodeObjectForKey:@"year"];
+        
+        _created    = [decoder decodeObjectForKey:@"created"];
 	}
 	
 	return self;
@@ -253,6 +290,8 @@
     anAlbum.duration   = self.duration;
     anAlbum.year       = self.year;
 	
+    anAlbum.created    = self.created;
+    
 	return anAlbum;
 }
 

@@ -1,25 +1,25 @@
 //
-//  ISMSNewRootFoldersLoader.m
+//  ISMSRootFoldersLoader.m
 //  libSub
 //
 //  Created by Benjamin Baron on 12/29/14.
 //  Copyright (c) 2014 Einstein Times Two Software. All rights reserved.
 //
 
-#import "ISMSNewRootFoldersLoader.h"
+#import "ISMSRootFoldersLoader.h"
 #import "ISMSLoader_Subclassing.h"
 #import "LibSub.h"
 #import "NSMutableURLRequest+SUS.h"
 #import "RXMLElement.h"
 
-@interface ISMSNewRootFoldersLoader()
+@interface ISMSRootFoldersLoader()
 @property (nonatomic, readwrite) NSArray<NSString*> *ignoredArticles;
 @property (nonatomic, readwrite) NSArray<id<ISMSItem>> *items;
 @property (nonatomic, readwrite) NSArray<ISMSFolder*> *folders;
 @property (nonatomic, readwrite) NSArray<ISMSSong*> *songs;
 @end
 
-@implementation ISMSNewRootFoldersLoader
+@implementation ISMSRootFoldersLoader
 @synthesize ignoredArticles=_ignoredArticles, items=_items, folders=_folders, songs=_songs;
 
 #pragma mark - Data loading -
@@ -70,10 +70,7 @@
                         // array for this section if not named .AppleDouble
                         if (![[artist attribute:@"name"] isEqualToString:@".AppleDouble"])
                         {
-                            ISMSFolder *folder = [[ISMSFolder alloc] init];
-                            folder.folderId = @([[artist attribute:@"id"] intValue]);
-                            folder.mediaFolderId = self.mediaFolderId;
-                            folder.name = [artist attribute:@"name"];
+                            ISMSFolder *folder = [[ISMSFolder alloc] initWithRXMLElement:artist serverId:settingsS.currentServerId mediaFolderId:self.mediaFolderId.integerValue];
                             [folders addObject:folder];
                         }
                     }

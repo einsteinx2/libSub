@@ -80,7 +80,7 @@
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *query = @"INSERT INTO genres VALUES (?, ?, ?)";
-         success = [db executeUpdate:query, [NSNull null], self.name, self.serverId];
+         success = [db executeUpdate:query, [NSNull null], self.serverId, self.name];
          
          if (success)
          {

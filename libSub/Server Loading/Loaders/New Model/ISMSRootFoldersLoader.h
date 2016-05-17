@@ -1,5 +1,5 @@
 //
-//  ISMSNewRootFoldersLoader.h
+//  ISMSRootFoldersLoader.h
 //  libSub
 //
 //  Created by Benjamin Baron on 12/29/14.
@@ -9,7 +9,7 @@
 #import "ISMSAbstractItemLoader.h"
 
 @class ISMSFolder, ISMSSong;
-@interface ISMSNewRootFoldersLoader : ISMSAbstractItemLoader
+@interface ISMSRootFoldersLoader : ISMSAbstractItemLoader
 
 @property (nullable, copy) NSNumber *mediaFolderId;
 

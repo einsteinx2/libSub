@@ -145,7 +145,7 @@
     [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT folderId, serverId, parentFolderId, mediaFolderId, name "
                           @"FROM folders "
-                          @"parentFolderId IS NULL";
+                          @"WHERE parentFolderId IS NULL";
         
         FMResultSet *r = nil;
         if (serverId) {

@@ -119,7 +119,10 @@ static void initialize_navigationBarImages()
 
 - (BOOL)isCoverArtCached
 {
-	return [self.dbQueue stringForQuery:@"SELECT id FROM coverArtCache WHERE id = ?", [self.coverArtId md5]] ? YES : NO;
+    if (!self.coverArtId)
+        return NO;
+    
+    return [self.dbQueue intForQuery:@"SELECT COUNT(*) FROM coverArtCache WHERE coverArtId = ?", self.coverArtId] > 0;
 }
 
 #pragma mark - Data loading
@@ -273,7 +276,7 @@ static void initialize_navigationBarImages()
         DLog(@"art loading completed for: %@", self.coverArtId);
 		[self.dbQueue inDatabase:^(FMDatabase *db)
 		{
-			[db executeUpdate:@"REPLACE INTO coverArtCache (id, data) VALUES (?, ?)", [self.coverArtId md5], self.receivedData];
+			[db executeUpdate:@"REPLACE INTO coverArtCache (coverArtId, data) VALUES (?, ?)", self.coverArtId, self.receivedData];
 		}];
 		
 		[NSNotificationCenter postNotificationToMainThreadWithName:ISMSNotification_CoverArtFinishedInternal object:[self.coverArtId copy]];

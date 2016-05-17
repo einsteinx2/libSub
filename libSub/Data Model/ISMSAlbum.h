@@ -8,7 +8,7 @@
 
 #import "ISMSPersistedModel.h"
 
-@class ISMSArtist, ISMSGenre, RXMLElement;
+@class ISMSArtist, ISMSGenre, ISMSSong, RXMLElement;
 @interface ISMSAlbum : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *albumId;
@@ -23,8 +23,12 @@
 @property (nullable, strong) NSNumber *duration;
 @property (nullable, strong) NSNumber *year;
 
+@property (nullable, strong) NSDate *created;
+
 @property (nullable, readonly) ISMSArtist *artist;
 @property (nullable, readonly) ISMSGenre *genre;
+
+@property (nonnull, strong, readonly) NSArray<ISMSSong*> *songs;
 
 - (nullable instancetype)initWithAlbumId:(NSInteger)albumId serverId:(NSInteger)serverId;
 

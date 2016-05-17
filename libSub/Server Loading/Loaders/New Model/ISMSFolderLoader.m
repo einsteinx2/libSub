@@ -65,12 +65,7 @@
                 {
                     if (![[e attribute:@"title"] isEqualToString:@".AppleDouble"])
                     {
-                        ISMSFolder *folder = [[ISMSFolder alloc] init];
-                        folder.folderId = @([[e attribute:@"id"] integerValue]);
-                        folder.parentFolderId = @([[e attribute:@"parent"] integerValue]);
-                        folder.mediaFolderId = self.mediaFolderId;
-                        folder.coverArtId = @([[e attribute:@"coverArt"] integerValue]);
-                        folder.name = [e attribute:@"title"];
+                        ISMSFolder *folder = [[ISMSFolder alloc] initWithRXMLElement:e serverId:settingsS.currentServerId mediaFolderId:self.mediaFolderId.integerValue];
                         [folders addObject:folder];
                     }
                 }

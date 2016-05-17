@@ -13,7 +13,7 @@
 
 @implementation SUSCoverArtDAO
 
-- (id)initWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
+- (instancetype)initWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate
 {
 	if ((self = [super init]))
 	{
@@ -22,7 +22,7 @@
 	return self;
 }
 
-- (id)initWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate coverArtId:(NSString *)artId isLarge:(BOOL)large
+- (instancetype)initWithDelegate:(NSObject<ISMSLoaderDelegate> *)theDelegate coverArtId:(NSString *)artId isLarge:(BOOL)large
 {
 	if ((self = [super init]))
 	{
@@ -55,7 +55,7 @@
 
 - (UIImage *)coverArtImage
 {
-    NSData *imageData = [self.dbQueue dataForQuery:@"SELECT data FROM coverArtCache WHERE id = ?", [self.coverArtId md5]];
+    NSData *imageData = [self.dbQueue dataForQuery:@"SELECT data FROM coverArtCache WHERE coverArtId = ?", self.coverArtId];
     return imageData ? [UIImage imageWithData:imageData] : self.defaultCoverArtImage;
 }
 
@@ -71,7 +71,7 @@
 
 - (NSImage *)coverArtImage
 {
-    NSData *imageData = [self.dbQueue dataForQuery:@"SELECT data FROM coverArtCache WHERE id = ?", [self.coverArtId md5]];
+    NSData *imageData = [self.dbQueue dataForQuery:@"SELECT data FROM coverArtCache WHERE coverArtId = ?", self.coverArtId];
     return imageData ? [[NSImage alloc] initWithData:imageData] : self.defaultCoverArtImage;
 }
 
@@ -90,7 +90,7 @@
 	if (!self.coverArtId) 
 		return NO;
 	
-    return [self.dbQueue stringForQuery:@"SELECT id FROM coverArtCache WHERE id = ?", [self.coverArtId md5]] ? YES : NO;
+    return [self.dbQueue intForQuery:@"SELECT COUNT(*) FROM coverArtCache WHERE coverArtId = ?", self.coverArtId] > 0;
 }
 
 - (void)downloadArtIfNotExists

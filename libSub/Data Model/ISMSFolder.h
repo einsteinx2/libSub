@@ -8,7 +8,7 @@
 
 #import "ISMSPersistedModel.h"
 
-@class ISMSSong;
+@class ISMSSong, RXMLElement;
 @interface ISMSFolder : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *folderId;
@@ -22,6 +22,8 @@
 @property (nonnull, strong, readonly) NSArray<ISMSSong*> *songs;
 
 + (void)loadIgnoredArticles;
+
+- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element serverId:(NSInteger)serverId mediaFolderId:(NSInteger)mediaFolderId;
 
 // Returns an instance if it exists in the db, otherwise nil
 - (nullable instancetype)initWithFolderId:(NSInteger)folderId serverId:(NSInteger)serverId;

@@ -20,6 +20,28 @@ static NSArray *_ignoredArticles = nil;
 
 @implementation ISMSFolder
 
+- (instancetype)initWithRXMLElement:(RXMLElement *)element serverId:(NSInteger)serverId mediaFolderId:(NSInteger)mediaFolderId
+{
+    if (self = [super init])
+    {
+        self.folderId = @([[element attribute:@"id"] integerValue]);
+        self.serverId = @(serverId);
+        NSString *parentString = [element attribute:@"parent"];
+        if (parentString)
+            self.parentFolderId = @([parentString integerValue]);
+        self.mediaFolderId = @(mediaFolderId);
+        self.coverArtId = [element attribute:@"coverArt"];
+        NSString *titleString = [element attribute:@"title"];
+        if (titleString)
+            self.name = [titleString cleanString];
+        NSString *nameString = [element attribute:@"name"];
+        if (nameString)
+            self.name = [nameString cleanString];
+    }
+    
+    return self;
+}
+
 - (instancetype)initWithFolderId:(NSInteger)folderId serverId:(NSInteger)serverId
 {
     if (self = [super init])

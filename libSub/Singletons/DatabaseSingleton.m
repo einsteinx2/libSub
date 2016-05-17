@@ -117,7 +117,7 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"genres"])
         {
-            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER, serverId INTEGER, name TEXT, songCount INTEGER, albumCount INTEGER, PRIMARY KEY (genreId, serverId))"];
+            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER, serverId INTEGER, name TEXT, PRIMARY KEY (genreId, serverId))"];
             [db executeUpdate:@"CREATE INDEX genres_name ON genres (name)"];
         }
         

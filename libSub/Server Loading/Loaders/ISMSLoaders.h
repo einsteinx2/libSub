@@ -22,8 +22,10 @@
 #import "ISMSQuickAlbumsLoader.h"
 
 #import "ISMSMediaFoldersLoader.h"
-#import "ISMSNewRootFoldersLoader.h"
-#import "ISMSFolderLoader.h"
+#import "ISMSRootFoldersLoader.h"
 #import "ISMSRootArtistsLoader.h"
+#import "ISMSFolderLoader.h"
+#import "ISMSArtistLoader.h"
+#import "ISMSAlbumLoader.h"
 
 #endif
