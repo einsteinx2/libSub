@@ -39,7 +39,7 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"songs"])
         {
-            [db executeUpdate:@"CREATE TABLE songs (songId INTEGER PRIMARY KEY, serverId INTEGER, contentTypeId INTEGER, transcodedContentTypeId INTEGER, mediaFolderId INTEGER, folderId INTEGER, artistId INTEGER, albumId INTEGER, genreId TEXT, coverArtId INTEGER, title TEXT, duration INTEGER, bitrate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, path TEXT, lastPlayed REAL)"];
+            [db executeUpdate:@"CREATE TABLE songs (songId INTEGER, serverId INTEGER, contentTypeId INTEGER, transcodedContentTypeId INTEGER, mediaFolderId INTEGER, folderId INTEGER, artistId INTEGER, albumId INTEGER, genreId TEXT, coverArtId INTEGER, title TEXT, duration INTEGER, bitrate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, path TEXT, lastPlayed REAL, PRIMARY KEY (songId, serverId))"];
             [db executeUpdate:@"CREATE INDEX songs_mediaFolderId ON songs (mediaFolderId)"];
             [db executeUpdate:@"CREATE INDEX songs_folderId ON songs (folderId)"];
             [db executeUpdate:@"CREATE INDEX songs_artistId ON songs (artistId)"];
@@ -89,41 +89,41 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"mediaFolders"])
         {
-            [db executeUpdate:@"CREATE TABLE mediaFolders (mediaFolderId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE mediaFolders (mediaFolderId INTEGER, serverId INTEGER, name TEXT, PRIMARY KEY (mediaFolderId, serverId))"];
         }
         
         if (![db tableExists:@"ignoredArticles"])
         {
-            [db executeUpdate:@"CREATE TABLE ignoredArticles (articleId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE ignoredArticles (articleId INTEGER, serverId INTEGER, name TEXT, PRIMARY KEY (articleId, serverId))"];
         }
         
         if (![db tableExists:@"folders"])
         {
-            [db executeUpdate:@"CREATE TABLE folders (folderId INTEGER PRIMARY KEY, serverId INTEGER, parentFolderId INTEGER, mediaFolderId INTEGER, coverArtId INTEGER, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE folders (folderId INTEGER, serverId INTEGER, parentFolderId INTEGER, mediaFolderId INTEGER, coverArtId TEXT, name TEXT, PRIMARY KEY (folderId, serverId))"];
             [db executeUpdate:@"CREATE INDEX folders_parentFolderId ON folders (parentFolderId)"];
             [db executeUpdate:@"CREATE INDEX folders_mediaFolderId ON folders (mediaFolderId)"];
         }
         
         if (![db tableExists:@"artists"])
         {
-            [db executeUpdate:@"CREATE TABLE artists (artistId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT, albumCount INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE artists (artistId INTEGER, serverId INTEGER, name TEXT, albumCount INTEGER, PRIMARY KEY (artistId, serverId))"];
         }
         
         //[db executeUpdate:@"DROP TABLE albums"];
         if (![db tableExists:@"albums"])
         {
-            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, serverId INTEGER, artistId INTEGER, genreId INTEGER, coverArtId TEXT, name TEXT, songCount INTEGER, duration INTEGER, year INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER, serverId INTEGER, artistId INTEGER, genreId INTEGER, coverArtId TEXT, name TEXT, songCount INTEGER, duration INTEGER, year INTEGER, created REAL, PRIMARY KEY (albumId, serverId))"];
         }
         
         if (![db tableExists:@"genres"])
         {
-            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT, songCount INTEGER, albumCount INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER, serverId INTEGER, name TEXT, songCount INTEGER, albumCount INTEGER, PRIMARY KEY (genreId, serverId))"];
             [db executeUpdate:@"CREATE INDEX genres_name ON genres (name)"];
         }
         
         if (![db tableExists:@"playlists"])
         {
-            [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER, serverId INTEGER, name TEXT, PRIMARY KEY (playlistId, serverId))"];
             [db executeUpdate:@"CREATE INDEX playlists_name ON playlists (name)"];
         }
         
