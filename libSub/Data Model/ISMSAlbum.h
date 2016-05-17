@@ -12,6 +12,8 @@
 @interface ISMSAlbum : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *albumId;
+
+@property (nullable, strong) NSNumber *serverId;
 @property (nullable, strong) NSNumber *artistId;
 @property (nullable, strong) NSNumber *genreId;
 @property (nullable, copy) NSString *coverArtId; // Look into storing this as an integer
@@ -24,8 +26,10 @@
 @property (nullable, readonly) ISMSArtist *artist;
 @property (nullable, readonly) ISMSGenre *genre;
 
-- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
+- (nullable instancetype)initWithAlbumId:(NSInteger)albumId serverId:(NSInteger)serverId;
 
-+ (nonnull NSArray<ISMSAlbum*> *)albumsInArtist:(NSInteger)artistId;
+- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element serverId:(NSInteger)serverId;
+
++ (nonnull NSArray<ISMSAlbum*> *)albumsInArtist:(NSInteger)artistId serverId:(NSInteger)serverId;
 
 @end

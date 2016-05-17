@@ -17,7 +17,7 @@ public enum ServerType: Int {
 }
 
 @objc(ISMSServer)
-public class Server: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
+public class Server: NSObject, NSCopying, NSCoding { //, ISMSPersistedModel {
     
     public var serverId: Int
     public var type: ServerType

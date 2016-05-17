@@ -122,16 +122,6 @@ LOG_LEVEL_ISUB_DEBUG
 	
 	self.isQueueDownloading = YES;
 	
-	// Grab the lyrics
-	if (self.currentQueuedSong.artist.name && self.currentQueuedSong.title && settingsS.isLyricsEnabled)
-	{
-        ISMSLyricsLoader *lyricsLoader = [[ISMSLyricsLoader alloc] initWithDelegate:self];
-		//DLog(@"lyricsLoader: %@", lyricsLoader);
-        lyricsLoader.artist = self.currentQueuedSong.artist.name;
-        lyricsLoader.title = self.currentQueuedSong.title;
-        [lyricsLoader startLoad];        
-	}
-	
 	// Download the art
 	if (self.currentQueuedSong.coverArtId)
 	{

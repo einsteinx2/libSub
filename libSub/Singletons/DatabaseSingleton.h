@@ -28,9 +28,7 @@
 @property (nonnull, strong) FMDatabaseQueue *coverArtCacheDb320Queue;
 @property (nonnull, strong) FMDatabaseQueue *coverArtCacheDb60Queue;
 
-@property (nonnull, strong) FMDatabaseQueue *lyricsDbQueue;
 @property (nonnull, strong) FMDatabaseQueue *bookmarksDbQueue;
-@property (nullable, strong) FMDatabaseQueue *metadataDbQueue;
 
 @property (nonnull, strong) ISMSQueueAllLoader *queueAll;
 
@@ -39,7 +37,6 @@
 + (void) setAllSongsToNotBackup;
 
 - (void)setupDatabases;
-- (void)setCurrentMetadataDatabase;
 - (void)closeAllDatabases;
 - (void)resetCoverArtCache;
 - (void)resetFolderCache;

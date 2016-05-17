@@ -20,18 +20,18 @@ static NSArray *_ignoredArticles = nil;
 
 @implementation ISMSFolder
 
-- (instancetype)initWithFolderId:(NSInteger)folderId
+- (instancetype)initWithFolderId:(NSInteger)folderId serverId:(NSInteger)serverId
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
-                              @"FROM folders AS f "
-                              @"WHERE f.folderId = ?";
+            NSString *query = @"SELECT folderId, parentFolderId, mediaFolderId, coverArtId, name "
+                              @"FROM folders "
+                              @"WHERE folderId = ? AND serverId = ?";
             
-            FMResultSet *r = [db executeQuery:query, @(folderId)];
+            FMResultSet *r = [db executeQuery:query, @(folderId), @(serverId)];
             if ([r next])
             {
                 foundRecord = YES;
@@ -49,10 +49,11 @@ static NSArray *_ignoredArticles = nil;
 - (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
 {
     _folderId = N2n([resultSet objectForColumnIndex:0]);
-    _parentFolderId = N2n([resultSet objectForColumnIndex:1]);
-    _mediaFolderId = N2n([resultSet objectForColumnIndex:2]);
-    _coverArtId = N2n([resultSet objectForColumnIndex:3]);
-    _name = N2n([resultSet objectForColumnIndex:4]);
+    _serverId = N2n([resultSet objectForColumnIndex:1]);
+    _parentFolderId = N2n([resultSet objectForColumnIndex:2]);
+    _mediaFolderId = N2n([resultSet objectForColumnIndex:3]);
+    _coverArtId = N2n([resultSet objectForColumnIndex:4]);
+    _name = N2n([resultSet objectForColumnIndex:5]);
 }
 
 + (void)loadIgnoredArticles
@@ -76,9 +77,9 @@ static NSArray *_ignoredArticles = nil;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
-         NSString *query = [insertType stringByAppendingString:@" INTO folders (folderId, parentFolderId, mediaFolderId, coverArtId, name) VALUES (?, ?, ?, ?, ?)"];
+         NSString *query = [insertType stringByAppendingString:@" INTO folders (folderId, serverId, parentFolderId, mediaFolderId, coverArtId, name) VALUES (?, ?, ?, ?, ?, ?)"];
          
-         success = [db executeUpdate:query, self.folderId, self.parentFolderId, self.mediaFolderId, self.coverArtId, self.name];
+         success = [db executeUpdate:query, self.folderId, self.serverId, self.parentFolderId, self.mediaFolderId, self.coverArtId, self.name];
      }];
     return success;
 }
@@ -101,8 +102,8 @@ static NSArray *_ignoredArticles = nil;
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM folders WHERE folderId = ?";
-         success = [db executeUpdate:query, self.folderId];
+         NSString *query = @"DELETE FROM folders WHERE folderId = ? AND serverId = ?";
+         success = [db executeUpdate:query, self.folderId, self.serverId];
      }];
     return success;
 }
@@ -112,8 +113,8 @@ static NSArray *_ignoredArticles = nil;
     @synchronized(self)
     {
         NSInteger folderId = self.folderId.integerValue;
-        _subfolders = [self.class foldersInFolder:folderId];
-        _songs = [ISMSSong songsInFolder:folderId];
+        _subfolders = [self.class foldersInFolder:folderId serverId:self.serverId.integerValue];
+        _songs = [ISMSSong songsInFolder:folderId serverId:self.serverId.integerValue];
     }
 }
 
@@ -143,16 +144,16 @@ static NSArray *_ignoredArticles = nil;
     }
 }
 
-+ (NSArray<ISMSFolder*> *)foldersInFolder:(NSInteger)folderId
++ (NSArray<ISMSFolder*> *)foldersInFolder:(NSInteger)folderId serverId:(NSInteger)serverId
 {
     NSMutableArray<ISMSFolder*> *folders = [[NSMutableArray alloc] init];
     
     [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT f.folderId, f.parentFolderId, f.mediaFolderId, f.coverArtId, f.name "
-                          @"FROM folders AS f "
-                          @"WHERE f.parentFolderId = ?";
+        NSString *query = @"SELECT folderId, parentFolderId, mediaFolderId, coverArtId, name "
+                          @"FROM folders "
+                          @"WHERE parentFolderId = ? AND serverId = ?";
         
-        FMResultSet *r = [db executeQuery:query, @(folderId)];
+        FMResultSet *r = [db executeQuery:query, @(folderId), @(serverId)];
         while ([r next])
         {
             ISMSFolder *folder = [[ISMSFolder alloc] init];
@@ -167,9 +168,9 @@ static NSArray *_ignoredArticles = nil;
 
 #pragma mark - ISMSItem -
 
-- (instancetype)initWithItemId:(NSInteger)itemId
+- (instancetype)initWithItemId:(NSInteger)itemId serverId:(NSInteger)serverId
 {
-    return [self initWithFolderId:itemId];
+    return [self initWithFolderId:itemId serverId:serverId];
 }
 
 - (NSNumber *)itemId
@@ -187,6 +188,7 @@ static NSArray *_ignoredArticles = nil;
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.folderId       forKey:@"folderId"];
+    [encoder encodeObject:self.serverId       forKey:@"serverId"];
     [encoder encodeObject:self.parentFolderId forKey:@"parentFolderId"];
     [encoder encodeObject:self.mediaFolderId  forKey:@"mediaFolderId"];
     [encoder encodeObject:self.coverArtId     forKey:@"coverArtId"];
@@ -197,10 +199,11 @@ static NSArray *_ignoredArticles = nil;
 {
     if ((self = [super init]))
     {
-        _folderId       = [decoder decodeObjectForKey:@"chatMessageId"];
-        _parentFolderId = [decoder decodeObjectForKey:@"user"];
-        _mediaFolderId  = [decoder decodeObjectForKey:@"message"];
-        _coverArtId     = [decoder decodeObjectForKey:@"timestamp"];
+        _folderId       = [decoder decodeObjectForKey:@"folderId"];
+        _serverId       = [decoder decodeObjectForKey:@"serverId"];
+        _parentFolderId = [decoder decodeObjectForKey:@"parentFolderId"];
+        _mediaFolderId  = [decoder decodeObjectForKey:@"mediaFolderId"];
+        _coverArtId     = [decoder decodeObjectForKey:@"coverArtId"];
         _name           = [decoder decodeObjectForKey:@"name"];
     }
     
@@ -213,6 +216,7 @@ static NSArray *_ignoredArticles = nil;
 {
     ISMSFolder *folder    = [[ISMSFolder alloc] init];
     folder.folderId       = self.folderId;
+    folder.serverId       = self.serverId;
     folder.parentFolderId = self.parentFolderId;
     folder.mediaFolderId  = self.mediaFolderId;
     folder.coverArtId     = self.coverArtId;

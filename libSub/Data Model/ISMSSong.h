@@ -15,6 +15,7 @@
 @interface ISMSSong : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *songId;
+@property (nullable, strong) NSNumber *serverId;
 @property (nullable, strong) NSNumber *contentTypeId;
 @property (nullable, strong) NSNumber *transcodedContentTypeId;
 @property (nullable, strong) NSNumber *mediaFolderId;
@@ -50,14 +51,14 @@
 @property (readonly) unsigned long long localFileSize;
 @property (readonly) NSUInteger estimatedBitrate;
 
-- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element;
+- (nullable instancetype)initWithRXMLElement:(nonnull RXMLElement *)element serverId:(NSInteger)serverId;
 
 // Returns an instance if it exists in the db, otherwise nil
-- (nullable instancetype)initWithSongId:(NSInteger)songId;
+- (nullable instancetype)initWithSongId:(NSInteger)songId serverId:(NSInteger)serverId;
 
-+ (nonnull NSArray<ISMSSong*> *)songsInFolder:(NSInteger)folderId;
-+ (nonnull NSArray<ISMSSong*> *)songsInAlbum:(NSInteger)albumId;
-+ (nonnull NSArray<ISMSSong*> *)rootSongsInMediaFolder:(NSInteger)mediaFolderId;
++ (nonnull NSArray<ISMSSong*> *)songsInFolder:(NSInteger)folderId serverId:(NSInteger)serverId;
++ (nonnull NSArray<ISMSSong*> *)songsInAlbum:(NSInteger)albumId serverId:(NSInteger)serverId;
++ (nonnull NSArray<ISMSSong*> *)rootSongsInMediaFolder:(NSInteger)mediaFolderId serverId:(NSInteger)serverId;
 
 - (BOOL)isEqualToSong:(nullable ISMSSong *)otherSong;
 

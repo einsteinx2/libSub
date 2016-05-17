@@ -26,13 +26,9 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (void)setupDatabases
 {
-	NSString *urlStringMd5 = [[settingsS currentServerUrl] md5];
-    DDLogVerbose(@"Database prefix: %@", urlStringMd5);
-    
     // Setup the new data model (WAL enabled)
-    NSString *path = [NSString stringWithFormat:@"%@/%@newSongModel.db", self.databaseFolderPath, urlStringMd5];
+    NSString *path = [self.databaseFolderPath stringByAppendingPathComponent:@"newSongModel.db"];
     NSLog(@"new model db: %@", path);
-    __block BOOL createDefaultPlaylistTables = NO;
     self.songModelReadDbPool = [FMDatabasePool databasePoolWithPath:path];
     self.songModelReadDbPool.maximumNumberOfDatabasesToCreate = 20;
     self.songModelReadDbPool.delegate = self;
@@ -43,7 +39,7 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"songs"])
         {
-            [db executeUpdate:@"CREATE TABLE songs (songId INTEGER PRIMARY KEY, contentTypeId INTEGER, transcodedContentTypeId INTEGER, mediaFolderId INTEGER, folderId INTEGER, artistId INTEGER, albumId INTEGER, genreId TEXT, coverArtId INTEGER, title TEXT, duration INTEGER, bitrate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, path TEXT, lastPlayed REAL)"];
+            [db executeUpdate:@"CREATE TABLE songs (songId INTEGER PRIMARY KEY, serverId INTEGER, contentTypeId INTEGER, transcodedContentTypeId INTEGER, mediaFolderId INTEGER, folderId INTEGER, artistId INTEGER, albumId INTEGER, genreId TEXT, coverArtId INTEGER, title TEXT, duration INTEGER, bitrate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, path TEXT, lastPlayed REAL)"];
             [db executeUpdate:@"CREATE INDEX songs_mediaFolderId ON songs (mediaFolderId)"];
             [db executeUpdate:@"CREATE INDEX songs_folderId ON songs (folderId)"];
             [db executeUpdate:@"CREATE INDEX songs_artistId ON songs (artistId)"];
@@ -93,49 +89,42 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"mediaFolders"])
         {
-            [db executeUpdate:@"CREATE TABLE mediaFolders (mediaFolderId INTEGER PRIMARY KEY, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE mediaFolders (mediaFolderId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT)"];
         }
         
         if (![db tableExists:@"ignoredArticles"])
         {
-            [db executeUpdate:@"CREATE TABLE ignoredArticles (articleId INTEGER PRIMARY KEY, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE ignoredArticles (articleId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT)"];
         }
         
         if (![db tableExists:@"folders"])
         {
-            [db executeUpdate:@"CREATE TABLE folders (folderId INTEGER PRIMARY KEY, parentFolderId INTEGER, mediaFolderId INTEGER, coverArtId INTEGER, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE folders (folderId INTEGER PRIMARY KEY, serverId INTEGER, parentFolderId INTEGER, mediaFolderId INTEGER, coverArtId INTEGER, name TEXT)"];
             [db executeUpdate:@"CREATE INDEX folders_parentFolderId ON folders (parentFolderId)"];
             [db executeUpdate:@"CREATE INDEX folders_mediaFolderId ON folders (mediaFolderId)"];
         }
         
         if (![db tableExists:@"artists"])
         {
-            [db executeUpdate:@"CREATE TABLE artists (artistId INTEGER PRIMARY KEY, name TEXT, albumCount INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE artists (artistId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT, albumCount INTEGER)"];
         }
         
         //[db executeUpdate:@"DROP TABLE albums"];
         if (![db tableExists:@"albums"])
         {
-            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, artistId INTEGER, genreId INTEGER, coverArtId TEXT, name TEXT, songCount INTEGER, duration INTEGER, year INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE albums (albumId INTEGER PRIMARY KEY, serverId INTEGER, artistId INTEGER, genreId INTEGER, coverArtId TEXT, name TEXT, songCount INTEGER, duration INTEGER, year INTEGER)"];
         }
         
         if (![db tableExists:@"genres"])
         {
-            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY, name TEXT, songCount INTEGER, albumCount INTEGER)"];
+            [db executeUpdate:@"CREATE TABLE genres (genreId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT, songCount INTEGER, albumCount INTEGER)"];
             [db executeUpdate:@"CREATE INDEX genres_name ON genres (name)"];
         }
         
         if (![db tableExists:@"playlists"])
         {
-            [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER PRIMARY KEY, name TEXT)"];
+            [db executeUpdate:@"CREATE TABLE playlists (playlistId INTEGER PRIMARY KEY, serverId INTEGER, name TEXT)"];
             [db executeUpdate:@"CREATE INDEX playlists_name ON playlists (name)"];
-            
-            createDefaultPlaylistTables = YES;
-        }
-        
-        if (![db tableExists:@"chatMessages"])
-        {
-            [db executeUpdate:@"CREATE TABLE chatMessages (chatMessageId INTEGER PRIMARY KEY AUTOINCREMENT, user TEXT, message TEXT, timestamp REAL)"];
         }
         
         // NOTE: Passwords stored in the keychain
@@ -145,19 +134,17 @@ LOG_LEVEL_ISUB_DEFAULT
         }
     }];
     
-    if (createDefaultPlaylistTables)
-    {
-        [ISMSPlaylist createPlaylist:@"Play Queue" playlistId:[ISMSPlaylist playQueuePlaylistId]];
-        [ISMSPlaylist createPlaylist:@"Download Queue" playlistId:[ISMSPlaylist downloadQueuePlaylistId]];
-        [ISMSPlaylist createPlaylist:@"Downloaded Songs" playlistId:[ISMSPlaylist downloadedSongsPlaylistId]];
-    }
+    // Create the playlist tables if necessary (does nothing if they exist)
+    [ISMSPlaylist createPlaylist:@"Play Queue" playlistId:[ISMSPlaylist playQueuePlaylistId] serverId:settingsS.currentServerId];
+    [ISMSPlaylist createPlaylist:@"Download Queue" playlistId:[ISMSPlaylist downloadQueuePlaylistId] serverId:settingsS.currentServerId];
+    [ISMSPlaylist createPlaylist:@"Downloaded Songs" playlistId:[ISMSPlaylist downloadedSongsPlaylistId] serverId:settingsS.currentServerId];
 	
     // TODO: Stop storing image files in fucking databases
 	// Setup music player cover art cache database
 	if (IS_IPAD())
 	{
 		// Only load large album art DB if this is an iPad
-		path = [NSString stringWithFormat:@"%@/coverArtCache540.db", self.databaseFolderPath];
+		path = [self.databaseFolderPath stringByAppendingPathComponent:@"coverArtCache540.db"];
 		self.coverArtCacheDb540Queue = [FMDatabaseQueue databaseQueueWithPath:path];
 		[self.coverArtCacheDb540Queue inDatabase:^(FMDatabase *db) 
 		{
@@ -165,14 +152,14 @@ LOG_LEVEL_ISUB_DEFAULT
 			
 			if (![db tableExists:@"coverArtCache"]) 
 			{
-				[db executeUpdate:@"CREATE TABLE coverArtCache (id TEXT PRIMARY KEY, data BLOB)"];
+				[db executeUpdate:@"CREATE TABLE coverArtCache (coverArtId TEXT PRIMARY KEY, serverId INTEGER, data BLOB)"];
 			}
 		}];
 	}
 	else
 	{
 		// Only load small album art DB if this is not an iPad
-		path = [NSString stringWithFormat:@"%@/coverArtCache320.db", self.databaseFolderPath];
+        path = [self.databaseFolderPath stringByAppendingPathComponent:@"coverArtCache320.db"];
 		self.coverArtCacheDb320Queue = [FMDatabaseQueue databaseQueueWithPath:path];
 		[self.coverArtCacheDb320Queue inDatabase:^(FMDatabase *db) 
 		{
@@ -180,13 +167,13 @@ LOG_LEVEL_ISUB_DEFAULT
 			
 			if (![db tableExists:@"coverArtCache"]) 
 			{
-				[db executeUpdate:@"CREATE TABLE coverArtCache (id TEXT PRIMARY KEY, data BLOB)"];
+				[db executeUpdate:@"CREATE TABLE coverArtCache (coverArtId TEXT PRIMARY KEY, serverId INTEGER, data BLOB)"];
 			}
 		}];
 	}
 	
 	// Setup album cell cover art cache database
-	path = [NSString stringWithFormat:@"%@/coverArtCache60.db", self.databaseFolderPath];
+    path = [self.databaseFolderPath stringByAppendingPathComponent:@"coverArtCache60.db"];
 	self.coverArtCacheDb60Queue = [FMDatabaseQueue databaseQueueWithPath:path];
 	[self.coverArtCacheDb60Queue inDatabase:^(FMDatabase *db) 
 	{
@@ -194,33 +181,12 @@ LOG_LEVEL_ISUB_DEFAULT
 		
 		if (![db tableExists:@"coverArtCache"])
 		{
-			[db executeUpdate:@"CREATE TABLE coverArtCache (id TEXT PRIMARY KEY, data BLOB)"];
-		}
-	}];
-		
-	// Setup the lyrics database
-	path = [NSString stringWithFormat:@"%@/lyrics.db", self.databaseFolderPath];
-	self.lyricsDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
-	[self.lyricsDbQueue inDatabase:^(FMDatabase *db)
-	{
-		[db executeUpdate:@"PRAGMA cache_size = 1"];
-		
-		if (![db tableExists:@"lyrics"])
-		{
-			[db executeUpdate:@"CREATE TABLE lyrics (artist TEXT, title TEXT, lyrics TEXT)"];
-			[db executeUpdate:@"CREATE INDEX artistTitle ON lyrics (artist, title)"];
+			[db executeUpdate:@"CREATE TABLE coverArtCache (coverArtId TEXT PRIMARY KEY, serverId INTEGER, data BLOB)"];
 		}
 	}];
 	
 	// Setup the bookmarks database
-	if (settingsS.isOfflineMode) 
-	{
-		path = [NSString stringWithFormat:@"%@/bookmarks.db", self.databaseFolderPath];
-	}
-	else
-	{
-		path = [NSString stringWithFormat:@"%@/%@bookmarks.db", self.databaseFolderPath, urlStringMd5];
-	}
+	path = [self.databaseFolderPath stringByAppendingPathComponent:@"bookmarks.db"];
 	
     // TODO: Rewrite with new data model
     /*
@@ -254,27 +220,6 @@ LOG_LEVEL_ISUB_DEFAULT
 		}
 	}];
      */
-	
-    [self setCurrentMetadataDatabase];
-}
-
-/* 
-    The metadata database houses all the metadata for a WaveBox server.  This db queue will get changed every
-    time a new WaveBox server is selected.
-*/
-- (void)setCurrentMetadataDatabase
-{
-    self.metadataDbQueue = nil;
-    
-    NSString *path = [NSString stringWithFormat:@"%@/mediadbs/%@.db", self.databaseFolderPath, settingsS.currentServer.uuid];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:path])
-    {
-        self.metadataDbQueue = [FMDatabaseQueue databaseQueueWithPath:path];
-        [self.metadataDbQueue inDatabase:^(FMDatabase *db)
-         {
-             [db executeUpdate:@"PRAGMA cache_size = 1"];
-         }];
-    }
 }
 
 - (void)closeAllDatabases
@@ -293,7 +238,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	[self.coverArtCacheDb60Queue inDatabase:^(FMDatabase *db)
 	{
 		[db executeUpdate:@"DROP TABLE IF EXISTS coverArtCache"];
-		[db executeUpdate:@"CREATE TABLE coverArtCache (id TEXT PRIMARY KEY, data BLOB)"];
+		[db executeUpdate:@"CREATE TABLE coverArtCache (coverArtId TEXT PRIMARY KEY, serverId INTEGER, data BLOB)"];
 	}];
 	
 	
@@ -302,7 +247,7 @@ LOG_LEVEL_ISUB_DEFAULT
 	[dbQueue inDatabase:^(FMDatabase *db)
 	{
 		[db executeUpdate:@"DROP TABLE IF EXISTS coverArtCache"];
-		[db executeUpdate:@"CREATE TABLE coverArtCache (id TEXT PRIMARY KEY, data BLOB)"];
+		[db executeUpdate:@"CREATE TABLE coverArtCache (coverArtId TEXT PRIMARY KEY, serverId INTEGER, data BLOB)"];
 	}];
 }
 

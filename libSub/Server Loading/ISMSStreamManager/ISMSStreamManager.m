@@ -12,7 +12,6 @@
 #import "ISMSStreamHandler.h"
 #import "ISMSCFNetworkStreamHandler.h"
 #import "ISMSCoverArtLoader.h"
-#import "SUSLyricsDAO.h"
 #import "ISMSCacheQueueManager.h"
 
 LOG_LEVEL_ISUB_DEBUG
@@ -366,7 +365,6 @@ LOG_LEVEL_ISUB_DEBUG
 	else
 	{
 		[handler start:resume];
-		[self.lyricsDAO loadLyricsForArtist:handler.mySong.artist.name andTitle:handler.mySong.title];
 	}
 }
 
@@ -754,7 +752,6 @@ LOG_LEVEL_ISUB_DEBUG
 	}
 	
 	self.lastCachedSong = nil;
-	self.lyricsDAO = [[SUSLyricsDAO alloc] initWithDelegate:self]; 
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songCachingToggled) name:ISMSNotification_SongCachingEnabled object:nil];
 	

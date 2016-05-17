@@ -18,11 +18,13 @@
     ISMSGenre *_genre;
 }
 
-- (id)initWithRXMLElement:(RXMLElement *)element
+- (id)initWithRXMLElement:(RXMLElement *)element serverId:(NSInteger)serverId
 {
     if ((self = [super init]))
     {
         _albumId = @([[element attribute:@"id"] integerValue]);
+        
+        _serverId = @(serverId);
         _artistId = @([[element attribute:@"artistId"] integerValue]);
         _coverArtId = [[element attribute:@"coverArt"] cleanString];
         
@@ -35,7 +37,7 @@
         NSString *genreString = [element attribute:@"genre"];
         if (genreString.length > 0)
         {
-            _genre = [[ISMSGenre alloc] initWithName:genreString];
+            _genre = [[ISMSGenre alloc] initWithName:genreString serverId:_serverId.integerValue];
             _genreId = _genre.genreId;
         }
     }
@@ -43,15 +45,15 @@
     return self;
 }
 
-- (instancetype)initWithAlbumId:(NSInteger)albumId
+- (instancetype)initWithAlbumId:(NSInteger)albumId serverId:(NSInteger)serverId
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT * FROM albums WHERE albumId = ?";
-            FMResultSet *r = [db executeQuery:query, @(albumId)];
+            NSString *query = @"SELECT * FROM albums WHERE albumId = ? AND serverId = ?";
+            FMResultSet *r = [db executeQuery:query, @(albumId), @(serverId)];
             if ([r next])
             {
                 foundRecord = YES;
@@ -75,27 +77,28 @@
 - (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
 {
     _albumId    = [resultSet objectForColumnIndex:0];
-    _artistId   = N2n([resultSet objectForColumnIndex:1]);
-    _genreId    = N2n([resultSet objectForColumnIndex:2]);
-    _name       = N2n([resultSet objectForColumnIndex:3]);
-    _coverArtId = N2n([resultSet objectForColumnIndex:4]);
-    _name       = N2n([resultSet objectForColumnIndex:5]);
-    _songCount  = N2n([resultSet objectForColumnIndex:6]);
-    _year       = N2n([resultSet objectForColumnIndex:7]);
+    _serverId   = N2n([resultSet objectForColumnIndex:1]);
+    _artistId   = N2n([resultSet objectForColumnIndex:2]);
+    _genreId    = N2n([resultSet objectForColumnIndex:3]);
+    _name       = N2n([resultSet objectForColumnIndex:4]);
+    _coverArtId = N2n([resultSet objectForColumnIndex:5]);
+    _name       = N2n([resultSet objectForColumnIndex:6]);
+    _songCount  = N2n([resultSet objectForColumnIndex:7]);
+    _year       = N2n([resultSet objectForColumnIndex:8]);
 }
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"%@: name: %@, albumId: %@, coverArtId: %@, artistName: %@, artistId: %@", [super description], self.name, self.self.albumId, self.coverArtId, self.artist.name, self.artistId];
+    return [NSString stringWithFormat:@"%@: name: %@, serverId: %@, albumId: %@, coverArtId: %@, artistName: %@, artistId: %@", [super description], self.name, self.serverId, self.self.albumId, self.coverArtId, self.artist.name, self.artistId];
 }
 
-+ (NSArray<ISMSAlbum*> *)albumsInArtist:(NSInteger)artistId
++ (NSArray<ISMSAlbum*> *)albumsInArtist:(NSInteger)artistId serverId:(NSInteger)serverId
 {
     NSMutableArray<ISMSAlbum*> *albums = [[NSMutableArray alloc] init];
     
     [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT * FROM albums WHERE album.artistId = ?";
-        FMResultSet *r = [db executeQuery:query, @(artistId)];
+        NSString *query = @"SELECT * FROM albums WHERE artistId = ? AND serverId = ?";
+        FMResultSet *r = [db executeQuery:query, @(artistId), @(serverId)];
         while ([r next])
         {
             ISMSAlbum *album = [[ISMSAlbum alloc] init];
@@ -110,9 +113,9 @@
 
 #pragma mark - ISMSItem -
 
-- (instancetype)initWithItemId:(NSInteger)itemId
+- (instancetype)initWithItemId:(NSInteger)itemId serverId:(NSInteger)serverId
 {
-    return [self initWithAlbumId:itemId];
+    return [self initWithAlbumId:itemId serverId:serverId];
 }
 
 - (NSNumber *)itemId
@@ -133,9 +136,9 @@
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
-         NSString *query = [insertType stringByAppendingString:@" INTO albums VALUES (?, ?, ?, ?, ?, ?, ?, ?)"];
+         NSString *query = [insertType stringByAppendingString:@" INTO albums VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"];
          
-         success = [db executeUpdate:query, self.albumId, self.artistId, self.genreId, self.coverArtId, self.name, self.songCount, self.duration, self.year];
+         success = [db executeUpdate:query, self.albumId, self.serverId, self.artistId, self.genreId, self.coverArtId, self.name, self.songCount, self.duration, self.year];
      }];
     return success;
 }
@@ -158,8 +161,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM albums WHERE albumId = ?";
-         success = [db executeUpdate:query, self.albumId];
+         NSString *query = @"DELETE FROM albums WHERE albumId = ? AND serverId = ?";
+         success = [db executeUpdate:query, self.albumId, self.serverId];
      }];
     return success;
 }
@@ -172,7 +175,7 @@
         return NO;
     }
     
-    return [databaseS.songModelReadDbPool intForQuery:@"SELECT COUNT(*) FROM albums WHERE albumId = ?", self.albumId] > 0;
+    return [databaseS.songModelReadDbPool intForQuery:@"SELECT COUNT(*) FROM albums WHERE albumId = ? AND serverId = ?", self.albumId, self.serverId] > 0;
 }
 
 - (void)reloadSubmodels
@@ -182,13 +185,13 @@
         _artist = nil;
         if (self.artistId)
         {
-            _artist = [[ISMSArtist alloc] initWithArtistId:self.artistId.integerValue];
+            _artist = [[ISMSArtist alloc] initWithArtistId:self.artistId.integerValue serverId:self.serverId.integerValue];
         }
         
         _genre = nil;
         if (self.genreId)
         {
-            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue];
+            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue serverId:self.serverId.integerValue];
         }
     }
 }
@@ -198,6 +201,8 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.albumId    forKey:@"albumId"];
+    
+    [encoder encodeObject:self.serverId   forKey:@"serverId"];
     [encoder encodeObject:self.artistId   forKey:@"artistId"];
     [encoder encodeObject:self.genreId    forKey:@"genreId"];
     [encoder encodeObject:self.coverArtId forKey:@"coverArtId"];
@@ -215,6 +220,8 @@
 	if ((self = [super init]))
 	{
         _albumId    = [decoder decodeObjectForKey:@"albumId"];
+        
+        _serverId    = [decoder decodeObjectForKey:@"serverId"];
         _artistId   = [decoder decodeObjectForKey:@"artistId"];
         _genreId    = [decoder decodeObjectForKey:@"genreId"];
         _coverArtId = [decoder decodeObjectForKey:@"coverArtId"];
@@ -235,6 +242,8 @@
 	ISMSAlbum *anAlbum = [[ISMSAlbum alloc] init];
 	
     anAlbum.albumId    = self.albumId;
+    
+    anAlbum.serverId   = self.serverId;
     anAlbum.artistId   = self.artistId;
     anAlbum.genreId    = self.genreId;
     anAlbum.coverArtId = self.coverArtId;

@@ -12,17 +12,17 @@
 @interface ISMSMediaFolder : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *mediaFolderId;
+@property (nullable, strong) NSNumber *serverId;
 @property (nullable, copy) NSString *name;
 
-- (nullable instancetype)initWithMediaFolderId:(NSInteger)mediaFolderId;
+- (nullable instancetype)initWithMediaFolderId:(NSInteger)mediaFolderId serverId:(NSInteger)serverId;
 
 - (nonnull NSArray<ISMSFolder*> *)rootFolders;
 - (BOOL)deleteRootFolders;
 
-+ (BOOL)deleteAllMediaFolders;
-
-+ (nonnull NSArray<ISMSFolder*> *)allRootFolders; // Sorted alphabetically
-+ (nonnull NSArray<ISMSMediaFolder*> *)allMediaFolders; // Sorted alphabetically
-+ (nonnull NSArray<ISMSMediaFolder*> *)allMediaFoldersIncludingAllFolders; // Has all folders option (id = -1) as first element
+// nil server id for all root folders
++ (BOOL)deleteAllMediaFoldersWithServerId:(nullable NSNumber *)serverId;
++ (nonnull NSArray<ISMSFolder*> *)allRootFoldersWithServerId:(nullable NSNumber *)serverId; // Sorted alphabetically
++ (nonnull NSArray<ISMSMediaFolder*> *)allMediaFoldersWithServerId:(nullable NSNumber *)serverId; // Sorted alphabetically
 
 @end

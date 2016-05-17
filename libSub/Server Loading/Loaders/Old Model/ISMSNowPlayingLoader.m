@@ -55,7 +55,7 @@
             [root iterate:@"nowPlaying.entry" usingBlock:^(RXMLElement *e) {
                 NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithCapacity:0];
                 
-                [dict setObjectSafe:[[ISMSSong alloc] initWithRXMLElement:e] forKey:@"song"];
+                [dict setObjectSafe:[[ISMSSong alloc] initWithRXMLElement:e serverId:settingsS.currentServerId] forKey:@"song"];
                 [dict setObjectSafe:[e attribute:@"username"] forKey:@"username"];
                 [dict setObjectSafe:[e attribute:@"minutesAgo"] forKey:@"minutesAgo"];
                 [dict setObjectSafe:[e attribute:@"playerId"] forKey:@"playerId"];

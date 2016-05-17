@@ -76,7 +76,7 @@
                 }
                 else
                 {
-                    ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e];
+                    ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e serverId:settingsS.currentServerId];
                     [song replaceModel];
                     if (song.contentType.extension)
                     {
@@ -133,7 +133,7 @@
     {
         if (!_associatedObject)
         {
-            _associatedObject = [[ISMSFolder alloc] initWithFolderId:self.folderId.integerValue];
+            _associatedObject = [[ISMSFolder alloc] initWithFolderId:self.folderId.integerValue serverId:settingsS.currentServerId];
         }
         
         return _associatedObject;

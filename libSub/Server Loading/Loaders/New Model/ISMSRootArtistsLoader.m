@@ -85,7 +85,7 @@
 - (void)persistModels
 {
     // Remove existing artists
-    [ISMSArtist deleteAllArtists];
+    [ISMSArtist deleteAllArtistsWithServerId:@(settingsS.currentServerId)];
     
     // Save the new artists
     [self.artists makeObjectsPerformSelector:@selector(insertModel)];
@@ -93,7 +93,7 @@
 
 - (BOOL)loadModelsFromCache
 {
-    NSArray *artists = [ISMSArtist allArtists];
+    NSArray *artists = [ISMSArtist allArtistsWithServerId:@(settingsS.currentServerId)];
     
     if (artists.count > 0)
     {

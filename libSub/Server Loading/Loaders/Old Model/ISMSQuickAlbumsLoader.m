@@ -52,7 +52,7 @@
         {
             self.listOfAlbums = [NSMutableArray arrayWithCapacity:0];
             [root iterate:@"albumList.album" usingBlock:^(RXMLElement *e) {
-                ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithRXMLElement:e];
+                ISMSAlbum *anAlbum = [[ISMSAlbum alloc] initWithRXMLElement:e serverId:settingsS.currentServerId];
                 
                 //Add album object to lookup dictionary and list array
                 if (![anAlbum.name isEqualToString:@".AppleDouble"])

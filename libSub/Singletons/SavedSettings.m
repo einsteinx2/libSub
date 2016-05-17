@@ -218,17 +218,15 @@
 		{
 			if ([[oldServers objectAtIndexSafe:0] isKindOfClass:[NSArray class]])
 			{
-				NSMutableArray *newServerList = [NSMutableArray arrayWithCapacity:0];
-				
 				for (NSArray *serverInfo in oldServers)
 				{
                     // Create database record
-                    [[ISMSServer alloc] initWithType:ServerTypeSubsonic
-                                                 url:[serverInfo objectAtIndexSafe:0]
-                                            username:[serverInfo objectAtIndexSafe:1]
-                                         lastQueryId:@""
-                                                uuid:@""
-                                            password:[serverInfo objectAtIndexSafe:2]];
+                    (void)[[ISMSServer alloc] initWithType:ServerTypeSubsonic
+                                                       url:[serverInfo objectAtIndexSafe:0]
+                                                  username:[serverInfo objectAtIndexSafe:1]
+                                               lastQueryId:@""
+                                                      uuid:@""
+                                                  password:[serverInfo objectAtIndexSafe:2]];
 				}
 			}
 		}

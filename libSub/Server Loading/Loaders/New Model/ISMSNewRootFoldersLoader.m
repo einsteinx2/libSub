@@ -79,7 +79,7 @@
                     }
                 }
                 
-                ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e];
+                ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e serverId:settingsS.currentServerId];
                 if (song.contentType)
                 {
                     //songsDuration += song.duration.doubleValue;
@@ -106,7 +106,7 @@
 - (void)persistModels
 {
     // Remove existing root folders
-    [[[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId.integerValue] deleteRootFolders];
+    [[[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId.integerValue serverId:settingsS.currentServerId] deleteRootFolders];
     
     // Save the new folders
     [self.folders makeObjectsPerformSelector:@selector(replaceModel)];
@@ -119,13 +119,13 @@
     NSArray *songs = nil;
     if (self.mediaFolderId)
     {
-        ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId.integerValue];
+        ISMSMediaFolder *mediaFolder = [[ISMSMediaFolder alloc] initWithMediaFolderId:self.mediaFolderId.integerValue serverId:settingsS.currentServerId];
         folders = [mediaFolder rootFolders];
-        songs = [ISMSSong rootSongsInMediaFolder:self.mediaFolderId.unsignedIntegerValue];
+        songs = [ISMSSong rootSongsInMediaFolder:self.mediaFolderId.unsignedIntegerValue serverId:settingsS.currentServerId];
     }
     else
     {
-        folders = [ISMSMediaFolder allRootFolders];
+        folders = [ISMSMediaFolder allRootFoldersWithServerId:@(settingsS.currentServerId)];
     }
     
     _folders = folders;

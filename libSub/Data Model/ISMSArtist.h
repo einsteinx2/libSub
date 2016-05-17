@@ -11,14 +11,14 @@
 @interface ISMSArtist : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *artistId;
+@property (nullable, strong) NSNumber *serverId;
 @property (nullable, copy) NSString *name;
 @property (nullable, strong) NSNumber *albumCount;
 
-+ (nullable ISMSArtist *) artistWithName:(nullable NSString *)theName andArtistId:(nullable NSNumber *)theId;
+// Use nil for serverId to apply to all records
++ (nonnull NSArray<ISMSArtist*> *)allArtistsWithServerId:(nullable NSNumber *)serverId;
++ (BOOL)deleteAllArtistsWithServerId:(nullable NSNumber *)serverId;
 
-+ (nonnull NSArray<ISMSArtist*> *)allArtists;
-+ (BOOL)deleteAllArtists;
-
-- (nullable instancetype)initWithArtistId:(NSInteger)artistId;
+- (nullable instancetype)initWithArtistId:(NSInteger)artistId serverId:(NSInteger)serverId;
 
 @end

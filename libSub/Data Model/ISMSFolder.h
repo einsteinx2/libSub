@@ -12,6 +12,7 @@
 @interface ISMSFolder : NSObject <ISMSPersistedModel, NSCoding, NSCopying>
 
 @property (nullable, strong) NSNumber *folderId;
+@property (nullable, strong) NSNumber *serverId;
 @property (nullable, strong) NSNumber *parentFolderId;
 @property (nullable, strong) NSNumber *mediaFolderId;
 @property (nullable, strong) NSNumber *coverArtId;
@@ -23,8 +24,8 @@
 + (void)loadIgnoredArticles;
 
 // Returns an instance if it exists in the db, otherwise nil
-- (nullable instancetype)initWithFolderId:(NSInteger)folderId;
+- (nullable instancetype)initWithFolderId:(NSInteger)folderId serverId:(NSInteger)serverId;
 
-+ (nonnull NSArray<ISMSFolder*> *)foldersInFolder:(NSInteger)folderId;
++ (nonnull NSArray<ISMSFolder*> *)foldersInFolder:(NSInteger)folderId serverId:(NSInteger)serverId;
 
 @end

@@ -60,7 +60,7 @@
 
 - (void)persistModels
 {
-    [ISMSMediaFolder deleteAllMediaFolders];
+    [ISMSMediaFolder deleteAllMediaFoldersWithServerId:@(settingsS.currentServerId)];
     [self.mediaFolders makeObjectsPerformSelector:@selector(replaceModel)];
 }
 

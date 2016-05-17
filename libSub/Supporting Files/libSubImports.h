@@ -37,7 +37,6 @@
 #import "ISMSDataModelObjects.h"
 #import "ISMSLoader.h"
 #import "ISMSLoaders.h"
-#import "ISMSDataAccessObjects.h"
 #import "ISMSErrorDomain.h"
 #import "SUSErrorDomain.h"
 #import "NSError+ISMSError.h"

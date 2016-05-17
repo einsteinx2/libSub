@@ -11,20 +11,20 @@
 
 @implementation ISMSGenre
 
-- (instancetype)initWithItemId:(NSInteger)itemId
+- (instancetype)initWithItemId:(NSInteger)itemId serverId:(NSInteger)serverId
 {
-    return [self initWithGenreId:itemId];
+    return [self initWithGenreId:itemId serverId:serverId];
 }
 
-- (instancetype)initWithGenreId:(NSInteger)genreId
+- (instancetype)initWithGenreId:(NSInteger)genreId serverId:(NSInteger)serverId
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT * FROM genres WHERE genreId = ?";
-            FMResultSet *r = [db executeQuery:query, @(genreId)];
+            NSString *query = @"SELECT * FROM genres WHERE genreId = ? AND serverId = ?";
+            FMResultSet *r = [db executeQuery:query, @(genreId), @(serverId)];
             if ([r next])
             {
                 foundRecord = YES;
@@ -39,15 +39,15 @@
     return nil;
 }
 
-- (instancetype)initWithName:(NSString *)name
+- (instancetype)initWithName:(NSString *)name serverId:(NSInteger)serverId
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT * FROM genres WHERE name = ?";
-            FMResultSet *r = [db executeQuery:query, name];
+            NSString *query = @"SELECT * FROM genres WHERE name = ? AND serverId = ?";
+            FMResultSet *r = [db executeQuery:query, name, @(serverId)];
             if ([r next])
             {
                 foundRecord = YES;
@@ -79,19 +79,12 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"INSERT INTO genres (name) VALUES (?)";
-         success = [db executeUpdate:query, self.name];
+         NSString *query = @"INSERT INTO genres VALUES (?, ?, ?)";
+         success = [db executeUpdate:query, [NSNull null], self.name, self.serverId];
          
          if (success)
          {
-             // Load the new genre id
-             NSString *query = @"SELECT * FROM genres WHERE name = ?";
-             FMResultSet *r = [db executeQuery:query, self.name];
-             if ([r next])
-             {
-                 [self _assignPropertiesFromResultSet:r];
-             }
-             [r close];
+             self.genreId = @([db longForQuery:@"SELECT last_insert_rowid()"]);
          }
      }];
     
@@ -106,8 +99,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"REPLACE INTO genres (genreId, name) VALUES (?, ?)";
-         success = [db executeUpdate:query, self.genreId, self.name];
+         NSString *query = @"REPLACE INTO genres VALUES (?, ?, ?)";
+         success = [db executeUpdate:query, self.genreId, self.serverId, self.name];
      }];
     
     return success;
@@ -118,8 +111,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM genres WHERE genreId = ?";
-         success = [db executeUpdate:query, self.genreId];
+         NSString *query = @"DELETE FROM genres WHERE genreId = ? AND serverId = ?";
+         success = [db executeUpdate:query, self.genreId, self.serverId];
      }];
     return success;
 }
@@ -141,6 +134,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.genreId forKey:@"genreId"];
+    [encoder encodeObject:self.serverId forKey:@"serverId"];
     [encoder encodeObject:self.name    forKey:@"name"];
 }
 
@@ -149,6 +143,7 @@
     if ((self = [super init]))
     {
         _genreId = [decoder decodeObjectForKey:@"genreId"];
+        _serverId = [decoder decodeObjectForKey:@"serverId"];
         _name    = [decoder decodeObjectForKey:@"name"];
     }
     return self;
@@ -160,6 +155,7 @@
 {
     ISMSGenre *genre = [[ISMSGenre alloc] init];
     genre.genreId    = [self.genreId copy];
+    genre.serverId    = [self.serverId copy];
     genre.name       = [self.name copy];
     return genre;
 }

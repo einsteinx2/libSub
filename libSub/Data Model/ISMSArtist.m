@@ -17,27 +17,18 @@
 
 @implementation ISMSArtist
 
-+ (ISMSArtist *) artistWithName:(NSString *)theName andArtistId:(NSNumber *)theId;
-{
-	ISMSArtist *anArtist = [[ISMSArtist alloc] init];
-    anArtist.artistId = theId;
-	anArtist.name = theName;
-	
-	return anArtist;
-}
-
-- (instancetype)initWithArtistId:(NSInteger)artistId
+- (instancetype)initWithArtistId:(NSInteger)artistId serverId:(NSInteger)serverId
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT ar.artistId, ar.name, ar.albumCount "
-                              @"FROM artists AS ar "
-                              @"WHERE ar.artistId = ?";
+            NSString *query = @"SELECT artistId, name, albumCount "
+                              @"FROM artists "
+                              @"WHERE artistId = ? AND serverId = ?";
             
-            FMResultSet *r = [db executeQuery:query, @(artistId)];
+            FMResultSet *r = [db executeQuery:query, @(artistId), @(serverId)];
             if ([r next])
             {
                 foundRecord = YES;
@@ -55,13 +46,14 @@
 - (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
 {
     _artistId = N2n([resultSet objectForColumnIndex:0]);
-    _name = N2n([resultSet objectForColumnIndex:1]);
-    _albumCount = N2n([resultSet objectForColumnIndex:2]);
+    _serverId = N2n([resultSet objectForColumnIndex:1]);
+    _name = N2n([resultSet objectForColumnIndex:2]);
+    _albumCount = N2n([resultSet objectForColumnIndex:3]);
 }
 
 - (NSString *)description
 {
-	return [NSString stringWithFormat:@"%@: name: %@, artistId: %@, albumCount: %li", [super description], self.name, self.artistId, (long)self.albumCount];
+	return [NSString stringWithFormat:@"%@: name: %@, serverId: %@, artistId: %@, albumCount: %li", [super description], self.name, self.serverId, self.artistId, (long)self.albumCount];
 }
 
 - (BOOL)_insertModel:(BOOL)replace
@@ -70,9 +62,9 @@
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
-         NSString *query = [insertType stringByAppendingString:@" INTO artists (artistId, name, albumCount) VALUES (?, ?, ?)"];
+         NSString *query = [insertType stringByAppendingString:@" INTO artists (artistId, serverId, name, albumCount) VALUES (?, ?, ?, ?)"];
          
-         success = [db executeUpdate:query, self.artistId, self.name, self.albumCount];
+         success = [db executeUpdate:query, self.artistId, self.serverId, self.name, self.albumCount];
      }];
     return success;
 }
@@ -95,8 +87,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM artists WHERE artistId = ?";
-         success = [db executeUpdate:query, self.artistId];
+         NSString *query = @"DELETE FROM artists WHERE artistId = ? AND serverId = ?";
+         success = [db executeUpdate:query, self.artistId, self.serverId];
      }];
     return success;
 }
@@ -105,8 +97,7 @@
 {
     @synchronized(self)
     {
-        NSInteger artistId = self.artistId.integerValue;
-        _albums = [ISMSAlbum albumsInArtist:artistId];
+        _albums = [ISMSAlbum albumsInArtist:self.artistId.integerValue serverId:self.serverId.integerValue];
     }
 }
 
@@ -123,15 +114,22 @@
     }
 }
 
-+ (NSArray<ISMSArtist*> *)allArtists
++ (NSArray<ISMSArtist*> *)allArtistsWithServerId:(NSNumber *)serverId
 {
     NSMutableArray *artists = [[NSMutableArray alloc] init];
     NSMutableArray *artistsNumbers = [[NSMutableArray alloc] init];
     
     [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
         NSString *query = @"SELECT * FROM artists";
-        
-        FMResultSet *r = [db executeQuery:query];
+
+        FMResultSet *r = nil;
+        if (serverId) {
+            query = [query stringByAppendingString:@" WHERE serverId = ?"];
+            r = [db executeQuery:query, serverId];
+        } else {
+            r = [db executeQuery:query];
+        }
+ 
         while ([r next])
         {
             ISMSArtist *artist = [[ISMSArtist alloc] init];
@@ -158,22 +156,27 @@
     return artists;
 }
 
-+ (BOOL)deleteAllArtists
++ (BOOL)deleteAllArtistsWithServerId:(NSNumber *)serverId
 {
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM artists";
-         success = [db executeUpdate:query];
+         if (serverId) {
+             NSString *query = @"DELETE FROM artists WHERE serverId = ?";
+             success = [db executeUpdate:query, serverId];
+         } else {
+             NSString *query = @"DELETE FROM artists";
+             success = [db executeUpdate:query];
+         }
      }];
     return success;
 }
 
 #pragma mark - ISMSItem -
 
-- (instancetype)initWithItemId:(NSInteger)itemId
+- (instancetype)initWithItemId:(NSInteger)itemId serverId:(NSInteger)serverId
 {
-    return [self initWithArtistId:itemId];
+    return [self initWithArtistId:itemId serverId:serverId];
 }
 
 - (NSNumber *)itemId
@@ -191,6 +194,7 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.artistId    forKey:@"artistId"];
+    [encoder encodeObject:self.serverId    forKey:@"serverId"];
     [encoder encodeObject:self.name        forKey:@"name"];
     [encoder encodeObject:self.albumCount forKey:@"albumCount"];
 }
@@ -200,6 +204,7 @@
     if ((self = [super init]))
     {
         _artistId   = [decoder decodeObjectForKey:@"artistId"];
+        _serverId   = [decoder decodeObjectForKey:@"serverId"];
         _name       = [decoder decodeObjectForKey:@"name"];
         _albumCount = [decoder decodeObjectForKey:@"albumCount"];
     }

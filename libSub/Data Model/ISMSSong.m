@@ -30,11 +30,13 @@
 
 @implementation ISMSSong
 
-- (instancetype)initWithRXMLElement:(RXMLElement *)element
+- (instancetype)initWithRXMLElement:(RXMLElement *)element serverId:(NSInteger)serverId
 {
     if ((self = [super init]))
     {
         _songId = @([[element attribute:@"id"] integerValue]);
+        
+        _serverId = @(serverId);
         _folderId = @([[element attribute:@"parent"] integerValue]);
         _artistId = @([[element attribute:@"artistId"] integerValue]);
         _albumId = @([[element attribute:@"albumId"] integerValue]);
@@ -75,7 +77,7 @@
         NSString *genreString = [element attribute:@"genre"];
         if (genreString.length > 0)
         {
-            _genre = [[ISMSGenre alloc] initWithName:genreString];
+            _genre = [[ISMSGenre alloc] initWithName:genreString serverId:self.serverId.integerValue];
             _genreId = _genre.genreId;
         }
         
@@ -83,8 +85,8 @@
         if ([self isModelPersisted])
         {
             [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-                NSString *query = @"SELECT lastPlayed FROM songs WHERE songId = ?";
-                FMResultSet *result = [db executeQuery:query, self.songId];
+                NSString *query = @"SELECT lastPlayed FROM songs WHERE songId = ? AND serverId = ?";
+                FMResultSet *result = [db executeQuery:query, self.songId, self.serverId];
                 if ([result next])
                 {
                     _lastPlayed = [result dateForColumnIndex:0];
@@ -96,20 +98,20 @@
     return self;
 }
 
-- (instancetype)initWithItemId:(NSInteger)itemId
+- (instancetype)initWithItemId:(NSInteger)itemId serverId:(NSInteger)serverId
 {
-    return [self initWithSongId:itemId];
+    return [self initWithSongId:itemId serverId:serverId];
 }
 
-- (instancetype)initWithSongId:(NSInteger)songId
+- (instancetype)initWithSongId:(NSInteger)songId serverId:(NSInteger)serverId
 {
     if (self = [super init])
     {
         __block BOOL foundRecord = NO;
         
         [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-            NSString *query = @"SELECT * FROM songs WHERE songId = ?";
-            FMResultSet *result = [db executeQuery:query, @(songId)];
+            NSString *query = @"SELECT * FROM songs WHERE songId = ? AND serverId = ?";
+            FMResultSet *result = [db executeQuery:query, @(songId), @(serverId)];
             if ([result next])
             {
                 foundRecord = YES;
@@ -133,23 +135,24 @@
 - (void)_assignPropertiesFromResultSet:(FMResultSet *)resultSet
 {
     _songId                  = [resultSet objectForColumnIndex:0];
-    _contentTypeId           = N2n([resultSet objectForColumnIndex:1]);
-    _transcodedContentTypeId = N2n([resultSet objectForColumnIndex:2]);
-    _mediaFolderId           = N2n([resultSet objectForColumnIndex:3]);
-    _folderId                = N2n([resultSet objectForColumnIndex:4]);
-    _artistId                = N2n([resultSet objectForColumnIndex:5]);
-    _albumId                 = N2n([resultSet objectForColumnIndex:6]);
-    _genreId                 = N2n([resultSet objectForColumnIndex:7]);
-    _coverArtId              = N2n([resultSet objectForColumnIndex:8]);
-    _title                   = N2n([resultSet objectForColumnIndex:9]);
-    _duration                = N2n([resultSet objectForColumnIndex:10]);
-    _bitrate                 = N2n([resultSet objectForColumnIndex:11]);
-    _trackNumber             = N2n([resultSet objectForColumnIndex:12]);
-    _discNumber              = N2n([resultSet objectForColumnIndex:13]);
-    _year                    = N2n([resultSet objectForColumnIndex:14]);
-    _size                    = N2n([resultSet objectForColumnIndex:15]);
-    _path                    = N2n([resultSet objectForColumnIndex:16]);
-    _lastPlayed              = N2n([resultSet objectForColumnIndex:17]);
+    _serverId                = N2n([resultSet objectForColumnIndex:1]);
+    _contentTypeId           = N2n([resultSet objectForColumnIndex:2]);
+    _transcodedContentTypeId = N2n([resultSet objectForColumnIndex:3]);
+    _mediaFolderId           = N2n([resultSet objectForColumnIndex:4]);
+    _folderId                = N2n([resultSet objectForColumnIndex:5]);
+    _artistId                = N2n([resultSet objectForColumnIndex:6]);
+    _albumId                 = N2n([resultSet objectForColumnIndex:7]);
+    _genreId                 = N2n([resultSet objectForColumnIndex:8]);
+    _coverArtId              = N2n([resultSet objectForColumnIndex:9]);
+    _title                   = N2n([resultSet objectForColumnIndex:10]);
+    _duration                = N2n([resultSet objectForColumnIndex:11]);
+    _bitrate                 = N2n([resultSet objectForColumnIndex:12]);
+    _trackNumber             = N2n([resultSet objectForColumnIndex:13]);
+    _discNumber              = N2n([resultSet objectForColumnIndex:14]);
+    _year                    = N2n([resultSet objectForColumnIndex:15]);
+    _size                    = N2n([resultSet objectForColumnIndex:16]);
+    _path                    = N2n([resultSet objectForColumnIndex:17]);
+    _lastPlayed              = N2n([resultSet objectForColumnIndex:18]);
 }
 
 - (NSString *)description
@@ -167,10 +170,10 @@
     if (self == otherSong)
         return YES;
 	
-	if (!self.songId || !otherSong.songId || !self.path || !otherSong.path)
+	if (!self.songId || !otherSong.songId || !self.serverId || !otherSong.serverId)
 		return NO;
 	
-	if ([self.songId isEqual:otherSong.songId] || [self.path isEqualToString:otherSong.path])
+	if ([self.songId isEqual:otherSong.songId] && [self.serverId isEqual:otherSong.serverId])
 		return YES;
 	
 	return NO;
@@ -195,7 +198,7 @@
     {
         if (!_folder && self.folderId)
         {
-            _folder = [[ISMSFolder alloc] initWithFolderId:self.folderId.integerValue];
+            _folder = [[ISMSFolder alloc] initWithFolderId:self.folderId.integerValue serverId:self.serverId.integerValue];
         }
         
         return _folder;
@@ -208,7 +211,7 @@
     {
         if (!_artist && self.artistId)
         {
-            _artist = [[ISMSArtist alloc] initWithArtistId:self.artistId.integerValue];
+            _artist = [[ISMSArtist alloc] initWithArtistId:self.artistId.integerValue serverId:self.serverId.integerValue];
         }
         
         return _artist;
@@ -221,7 +224,7 @@
     {
         if (!_album && self.albumId)
         {
-            //_album = [[ISMSAlbum alloc] initWithAlbumId:self.albumId.integerValue];
+            _album = [[ISMSAlbum alloc] initWithAlbumId:self.albumId.integerValue serverId:self.serverId.integerValue];
         }
         
         return _album;
@@ -234,7 +237,7 @@
     {
         if (!_genre && self.genreId)
         {
-            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue];
+            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue serverId:self.serverId.integerValue];
         }
         
         return _genre;
@@ -297,9 +300,9 @@
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
-         NSString *query = [insertType stringByAppendingString:@" INTO songs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"];
+         NSString *query = [insertType stringByAppendingString:@" INTO songs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"];
          
-         success = [db executeUpdate:query, self.songId, self.contentTypeId, self.transcodedContentTypeId, self.mediaFolderId, self.folderId, self.artistId, self.albumId, self.genreId, self.coverArtId, self.title, self.duration, self.bitrate, self.trackNumber, self.discNumber, self.year, self.size, self.path, self.lastPlayed];
+         success = [db executeUpdate:query, self.songId, self.serverId, self.contentTypeId, self.transcodedContentTypeId, self.mediaFolderId, self.folderId, self.artistId, self.albumId, self.genreId, self.coverArtId, self.title, self.duration, self.bitrate, self.trackNumber, self.discNumber, self.year, self.size, self.path, self.lastPlayed];
      }];
     return success;
 }
@@ -322,8 +325,8 @@
     __block BOOL success = NO;
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
-         NSString *query = @"DELETE FROM songs WHERE songId = ?";
-         success = [db executeUpdate:query, self.songId];
+         NSString *query = @"DELETE FROM songs WHERE songId = ? AND serverId = ?";
+         success = [db executeUpdate:query, self.songId, self.serverId];
      }];
     return success;
 }
@@ -336,7 +339,7 @@
         return NO;
     }
     
-    return [databaseS.songModelReadDbPool intForQuery:@"SELECT COUNT(*) FROM songs WHERE songId = ?", self.songId] > 0;
+    return [databaseS.songModelReadDbPool intForQuery:@"SELECT COUNT(*) FROM songs WHERE songId = ? AND serverId = ?", self.songId, self.serverId] > 0;
 }
 
 - (void)reloadSubmodels
@@ -346,25 +349,25 @@
         _folder = nil;
         if (self.folderId)
         {
-            _folder = [[ISMSFolder alloc] initWithFolderId:self.folderId.integerValue];
+            _folder = [[ISMSFolder alloc] initWithFolderId:self.folderId.integerValue serverId:self.serverId.integerValue];
         }
         
         _artist = nil;
         if (self.artistId)
         {
-            _artist = [[ISMSArtist alloc] initWithArtistId:self.artistId.integerValue];
+            _artist = [[ISMSArtist alloc] initWithArtistId:self.artistId.integerValue serverId:self.serverId.integerValue];
         }
         
         _album = nil;
         if (self.albumId)
         {
-            //_album = [[ISMSAlbum alloc] initWithAlbumId:self.albumId.integerValue];
+            _album = [[ISMSAlbum alloc] initWithAlbumId:self.albumId.integerValue serverId:self.serverId.integerValue];
         }
         
         _genre = nil;
         if (self.genreId)
         {
-            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue];
+            _genre = [[ISMSGenre alloc] initWithGenreId:self.genreId.integerValue serverId:self.serverId.integerValue];
         }
         
         _contentType = nil;
@@ -386,6 +389,8 @@
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
     [encoder encodeObject:self.songId                  forKey:@"songId"];
+    
+    [encoder encodeObject:self.serverId                forKey:@"serverId"];
     [encoder encodeObject:self.contentTypeId           forKey:@"contentTypeId"];
     [encoder encodeObject:self.transcodedContentTypeId forKey:@"transcodedContentTypeId"];
     [encoder encodeObject:self.mediaFolderId           forKey:@"mediaFolderId"];
@@ -410,6 +415,8 @@
     if ((self = [super init]))
     {
         _songId                  = [decoder decodeObjectForKey:@"songId"];
+        
+        _serverId                = [decoder decodeObjectForKey:@"serverId"];
         _contentTypeId           = [decoder decodeObjectForKey:@"contentTypeId"];
         _transcodedContentTypeId = [decoder decodeObjectForKey:@"transcodedContentTypeId"];
         _mediaFolderId           = [decoder decodeObjectForKey:@"mediaFolderId"];
@@ -438,6 +445,7 @@
 {
     ISMSSong *song               = [[ISMSSong alloc] init];
     song.songId                  = self.songId;
+    song.serverId                = self.serverId;
     song.contentTypeId           = self.contentTypeId;
     song.transcodedContentTypeId = self.transcodedContentTypeId;
     song.mediaFolderId           = self.mediaFolderId;
@@ -459,13 +467,13 @@
 
 #pragma mark - Sort this stuff -
 
-+ (NSArray<ISMSSong*> *)songsInFolder:(NSInteger)folderId
++ (NSArray<ISMSSong*> *)songsInFolder:(NSInteger)folderId serverId:(NSInteger)serverId
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
     [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT * FROM songs WHERE folderId = ?";
-        FMResultSet *result = [db executeQuery:query, @(folderId)];
+        NSString *query = @"SELECT * FROM songs WHERE folderId = ? AND serverId = ?";
+        FMResultSet *result = [db executeQuery:query, @(folderId), @(serverId)];
         while ([result next])
         {
             ISMSSong *song = [[ISMSSong alloc] init];
@@ -479,13 +487,13 @@
     return songs;
 }
 
-+ (NSArray<ISMSSong*> *)songsInAlbum:(NSInteger)albumId
++ (NSArray<ISMSSong*> *)songsInAlbum:(NSInteger)albumId serverId:(NSInteger)serverId
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
     [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT * FROM songs WHERE albumId = ?";
-        FMResultSet *result = [db executeQuery:query, @(albumId)];
+        NSString *query = @"SELECT * FROM songs WHERE albumId = ? AND serverId = ?";
+        FMResultSet *result = [db executeQuery:query, @(albumId), @(serverId)];
         while ([result next])
         {
             ISMSSong *song = [[ISMSSong alloc] init];
@@ -499,13 +507,13 @@
     return songs;
 }
 
-+ (NSArray<ISMSSong*> *)rootSongsInMediaFolder:(NSInteger)mediaFolderId
++ (NSArray<ISMSSong*> *)rootSongsInMediaFolder:(NSInteger)mediaFolderId serverId:(NSInteger)serverId
 {
     NSMutableArray<ISMSSong*> *songs = [[NSMutableArray alloc] init];
     
     [databaseS.songModelReadDbPool inDatabase:^(FMDatabase *db) {
-        NSString *query = @"SELECT * FROM songs WHERE mediaFolderId = ? AND folderId IS NULL";
-        FMResultSet *result = [db executeQuery:query, @(mediaFolderId)];
+        NSString *query = @"SELECT * FROM songs WHERE mediaFolderId = ? AND serverId = ? AND folderId IS NULL";
+        FMResultSet *result = [db executeQuery:query, @(mediaFolderId), @(serverId)];
         while ([result next])
         {
             ISMSSong *song = [[ISMSSong alloc] init];

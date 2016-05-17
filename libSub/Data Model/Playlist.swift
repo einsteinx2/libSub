@@ -26,6 +26,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     // MARK: - Class -
     
     public var playlistId: Int
+    public var playlistServerId: Int // This will just be serverId once ISMSPersistedModel is swift
     public var name: String
     
     public var songCount: Int {
@@ -47,24 +48,23 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     public static let downloadedSongsPlaylistId = NSIntegerMax - 3
     
     public static var playQueue: Playlist {
-        return Playlist(itemId: playQueuePlaylistId)!
+        return Playlist(itemId: playQueuePlaylistId, serverId: SavedSettings.sharedInstance().currentServerId)!
     }
     public static var downloadQueue: Playlist {
-        return Playlist(itemId: downloadQueuePlaylistId)!
+        return Playlist(itemId: downloadQueuePlaylistId, serverId: SavedSettings.sharedInstance().currentServerId)!
     }
     public static var downloadedSongs: Playlist {
-        return Playlist(itemId: downloadedSongsPlaylistId)!
+        return Playlist(itemId: downloadedSongsPlaylistId, serverId: SavedSettings.sharedInstance().currentServerId)!
     }
     
-    public required init?(itemId: Int) {
-        var playlistId: Int?, name: String?
+    public required init?(itemId: Int, serverId: Int) {
+        var name: String?
         DatabaseSingleton.sharedInstance().songModelReadDbPool.inDatabase { db in
-            let query = "SELECT * FROM playlists WHERE playlistId = ?"
+            let query = "SELECT name FROM playlists WHERE playlistId = ? AND serverId = ?"
             do {
-                let result = try db.executeQuery(query, itemId)
+                let result = try db.executeQuery(query, itemId, serverId)
                 if result.next() {
-                    playlistId = result.longForColumnIndex(0)
-                    name = result.stringForColumnIndex(1)
+                    name = result.stringForColumnIndex(0)
                 }
                 result.close()
             } catch {
@@ -72,11 +72,13 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             }
         }
         
-        if let playlistId = playlistId, name = name {
-            self.playlistId = playlistId; self.name = name
+        if let name = name {
+            self.playlistId = itemId
+            self.playlistServerId = serverId
+            self.name = name
             super.init()
         } else {
-            self.playlistId = -1; self.name = ""
+            self.playlistId = -1; self.playlistServerId = -1; self.name = ""
             super.init()
             return nil
         }
@@ -84,13 +86,15 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
 
     public init(_ result: FMResultSet) {
         self.playlistId = result.longForColumnIndex(0)
-        self.name = result.stringForColumnIndex(1)
+        self.playlistServerId = result.longForColumnIndex(1)
+        self.name = result.stringForColumnIndex(2)
         
         super.init()
     }
     
-    public init(playlistId: Int, name: String) {
+    public init(playlistId: Int, serverId: Int, name: String) {
         self.playlistId = playlistId
+        self.playlistServerId = serverId
         self.name = name
         
         super.init()
@@ -100,8 +104,12 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         return self.name.caseInsensitiveCompare(otherObject.name)
     }
     
+    private static func tableName(playlistId: Int, serverId: Int) -> String {
+        return "playlist\(playlistId)_server\(serverId)"
+    }
+    
     private var tableName: String {
-        return "playlist\(self.playlistId)"
+        return Playlist.tableName(self.playlistId, serverId: self.playlistServerId)
     }
     
     public var songs: [ISMSSong] {
@@ -112,7 +120,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
                 let query = "SELECT songId FROM \(self.tableName)"
                 let result = try db.executeQuery(query)
                 while result.next() {
-                    if let song = ISMSSong(itemId: result.longForColumnIndex(0)) {
+                    if let song = ISMSSong(itemId: result.longForColumnIndex(0), serverId: self.playlistServerId) {
                         songs.append(song)
                     }
                 }
@@ -150,7 +158,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         }
         
         if let songId = songId {
-            return ISMSSong(itemId: songId)
+            return ISMSSong(itemId: songId, serverId: playlistServerId)
         } else {
             return nil
         }
@@ -301,22 +309,22 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     
     // MARK: - Create new DB tables -
     
-    public static func createPlaylist(name: String) -> Playlist? {
+    public static func createPlaylist(name: String, serverId: Int) -> Playlist? {
         var playlistId: Int?
         
         DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
             // Find the first available playlist id. Local playlists (before being synced) start from NSIntegerMax and count down.
             // So since NSIntegerMax is so huge, look for the lowest ID above NSIntegerMax - 1,000,000 to give room for virtually
             // unlimited local playlists without ever hitting the server playlists which start from 0 and go up.
-            let lastPlaylistId = db.longForQuery("SELECT playlistId FROM playlists WHERE playlistId > ?", NSIntegerMax - 1000000)
+            let lastPlaylistId = db.longForQuery("SELECT playlistId FROM playlists WHERE playlistId > ? AND serverId = ?", NSIntegerMax - 1000000, serverId)
 
             // Next available ID
             playlistId = lastPlaylistId - 1
 
             // Do the creation here instead of calling createPlaylistWithName:andId: so it's all in one transaction
             do {
-                let table = "playlist\(playlistId!)"
-                try db.executeUpdate("INSERT INTO playlists VALUES (?, ?)", playlistId!, name)
+                let table = Playlist.tableName(playlistId!, serverId: serverId)
+                try db.executeUpdate("INSERT INTO playlists VALUES (?, ?, ?)", playlistId!, serverId, name)
                 try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY AUTOINCREMENT, songId INTEGER)")
                 try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
                 
@@ -331,22 +339,24 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         }
         
         if let playlistId = playlistId {
-            return Playlist(itemId: playlistId)
+            return Playlist(itemId: playlistId, serverId: serverId)
         } else {
             return nil
         }
     }
     
-    public static func createPlaylist(name: String, playlistId: Int) -> Playlist? {
-        // TODO: Handle case where table already exists
+    public static func createPlaylist(name: String, playlistId: Int, serverId: Int) -> Playlist? {
         var success = true
         DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
             do {
-                // Do the creation here instead of calling createPlaylistWithName:andId: so it's all in one transaction
-                let table = "playlist\(playlistId)"
-                try db.executeUpdate("INSERT INTO playlists VALUES (?, ?)", playlistId, name)
-                try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY, songId INTEGER)")
-                try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
+                let exists = db.longForQuery("SELECT COUNT(*) FROM playlists WHERE playlistId = ? AND serverId = ?", playlistId, serverId) > 0
+                if !exists {
+                    // Do the creation here instead of calling createPlaylistWithName:andId: so it's all in one transaction
+                    let table = Playlist.tableName(playlistId, serverId: serverId)
+                    try db.executeUpdate("INSERT INTO playlists VALUES (?, ?, ?)", playlistId, serverId, name)
+                    try db.executeUpdate("CREATE TABLE \(table) (songIndex INTEGER PRIMARY KEY, songId INTEGER)")
+                    try db.executeUpdate("CREATE INDEX \(table)_songId ON \(table) (songId)")
+                }
             } catch {
                 printError(error)
                 success = false
@@ -354,7 +364,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         }
         
         if success {
-            return Playlist(itemId: playlistId)
+            return Playlist(itemId: playlistId, serverId: serverId)
         } else {
             return nil
         }
@@ -364,6 +374,10 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     
     public var itemId: NSNumber? {
         return NSNumber(integer: self.playlistId)
+    }
+    
+    public var serverId: NSNumber? {
+        return NSNumber(integer: self.playlistServerId)
     }
     
     public var itemName: String? {
@@ -395,17 +409,19 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     
     public func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(self.playlistId, forKey: "playlistId")
+        aCoder.encodeObject(self.playlistServerId, forKey: "serverId")
         aCoder.encodeObject(self.name, forKey: "name")
     }
     
     public required init?(coder aDecoder: NSCoder) {
         self.playlistId = aDecoder.decodeIntegerForKey("playlistId")
+        self.playlistServerId = aDecoder.decodeIntegerForKey("serverId")
         self.name       = aDecoder.decodeObjectForKey("name") as! String
     }
     
     // MARK: - NSCopying -
     
     public func copyWithZone(zone: NSZone) -> AnyObject {
-        return Playlist(playlistId: self.playlistId, name: self.name)
+        return Playlist(playlistId: self.playlistId, serverId: self.playlistServerId, name: self.name)
     }
 }
