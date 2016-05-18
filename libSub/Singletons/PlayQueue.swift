@@ -27,10 +27,12 @@ public class PlayQueue: NSObject {
     
     // MARK: - Notifications -
     
-    public static let playQueueIndexChangedNotificationName = "playQueueIndexChangedNotificationName"
+    public struct Notifications {
+        public static let playQueueIndexChanged = "playQueueIndexChanged"
+    }
     
     func notifyPlayQueueIndexChanged() {
-        NSNotificationCenter.postNotificationToMainThreadWithName(PlayQueue.playQueueIndexChangedNotificationName, object: nil)
+        NSNotificationCenter.postNotificationToMainThreadWithName(PlayQueue.Notifications.playQueueIndexChanged, object: nil)
     }
     
     // MARK: - Class -
@@ -357,10 +359,11 @@ public class PlayQueue: NSObject {
                     
                     if streamManager.isSongDownloading(currentSong) {
                         // The song is caching, start streaming from the local copy
-                        let handler = streamManager.handlerForSong(currentSong)
-                        if !self.audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
-                            // Only start the player if the handler isn't going to do it itself
-                            self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes:offsetBytes, orSeconds:offsetSeconds)
+                        if let handler = streamManager.handlerForSong(currentSong) {
+                            if !self.audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
+                                // Only start the player if the handler isn't going to do it itself
+                                self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes:offsetBytes, orSeconds:offsetSeconds)
+                            }
                         }
                     } else if streamManager.isSongFirstInQueue(currentSong) && !streamManager.isQueueDownloading {
                         // The song is first in queue, but the queue is not downloading. Probably the song was downloading
@@ -368,10 +371,11 @@ public class PlayQueue: NSObject {
                         streamManager.resumeQueue()
                         
                         // The song is caching, start streaming from the local copy
-                        let handler = streamManager.handlerForSong(currentSong)
-                        if !self.audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
-                            // Only start the player if the handler isn't going to do it itself
-                            self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes:offsetBytes, orSeconds:offsetSeconds)
+                        if let handler = streamManager.handlerForSong(currentSong) {
+                            if !self.audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
+                                // Only start the player if the handler isn't going to do it itself
+                                self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes:offsetBytes, orSeconds:offsetSeconds)
+                            }
                         }
                     } else {
                         // Clear the stream manager
@@ -444,13 +448,12 @@ extension PlayQueue: BassGaplessPlayerDelegate {
     
     public func bassFailedToCreateNextStreamForIndex(index: Int, player: BassGaplessPlayer) {
         // The song ended, and we tried to make the next stream but it failed
-        let song = self.songAtIndex(index)
-        let handler = ISMSStreamManager.sharedInstance().handlerForSong(song)
-        
-        if !handler.isDownloading || handler.isDelegateNotifiedToStartPlayback {
-            // If the song isn't downloading, or it is and it already informed the player to play (i.e. the playlist will stop if we don't force a retry), then retry
-            EX2Dispatch.runInMainThreadAsync() {
-                self.playSongAtIndex(index)
+        if let song = self.songAtIndex(index), handler = ISMSStreamManager.sharedInstance().handlerForSong(song) {
+            if !handler.isDownloading || handler.isDelegateNotifiedToStartPlayback {
+                // If the song isn't downloading, or it is and it already informed the player to play (i.e. the playlist will stop if we don't force a retry), then retry
+                EX2Dispatch.runInMainThreadAsync() {
+                    self.playSongAtIndex(index)
+                }
             }
         }
     }

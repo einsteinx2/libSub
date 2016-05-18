@@ -17,10 +17,16 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     
     // MARK: - Notifications -
     
-    public static let playlistChangedNotificationName = "playlistChangedNotificationName"
+    public struct Notifications {
+        public static let playlistChanged = "playlistChanged"
+        
+        public static let playlistIdKey   = "playlistIdKey"
+    }
     
     func notifyPlaylistChanged() {
-        NSNotificationCenter.postNotificationToMainThreadWithName(Playlist.playlistChangedNotificationName, object: self.playlistId)
+        NSNotificationCenter.postNotificationToMainThreadWithName(Playlist.Notifications.playlistChanged,
+                                                                  object: self,
+                                                                  userInfo: [Notifications.playlistIdKey: self.playlistId])
     }
     
     // MARK: - Class -
@@ -424,4 +430,17 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     public func copyWithZone(zone: NSZone) -> AnyObject {
         return Playlist(playlistId: self.playlistId, serverId: self.playlistServerId, name: self.name)
     }
+    
+    // MARK: - Equality -
+    
+    override public func isEqual(object: AnyObject?) -> Bool {
+        if let playlist = object as? Playlist {
+            return self.playlistId == playlist.playlistId
+        }
+        return false
+    }
+}
+
+func ==(lhs: Playlist, rhs: Playlist) -> Bool {
+    return lhs.playlistId == rhs.playlistId
 }
