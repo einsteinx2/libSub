@@ -417,6 +417,7 @@ LOG_LEVEL_ISUB_DEBUG
 
 #pragma mark Download
 
+// TODO: Why do we take both offset seconds and bytes?
 - (void)queueStreamForSong:(ISMSSong *)song byteOffset:(unsigned long long)byteOffset secondsOffset:(double)secondsOffset atIndex:(NSUInteger)index isTempCache:(BOOL)isTemp isStartDownload:(BOOL)isStartDownload
 {
 	if (!song)
@@ -562,7 +563,7 @@ LOG_LEVEL_ISUB_DEBUG
 	if ([handler.mySong isEqualToSong:currentSong])
 	{
         // TODO: Stop interacting directly with AudioEngine
-		[audioEngineS startSong:currentSong atIndex:[PlayQueue sharedInstance].currentIndex withOffsetInBytes:@0 orSeconds:@0];
+		[audioEngineS startSong:currentSong index:[PlayQueue sharedInstance].currentIndex];
 		
 		// Only for temp cached files
 		if (handler.isTempCache)

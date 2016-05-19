@@ -9,153 +9,88 @@
 import Foundation
 import MediaPlayer
 
-@objc
-public enum RepeatMode: Int {
+@objc public enum RepeatMode: Int {
     case Normal
     case RepeatOne
     case RepeatAll
 }
 
-@objc
-public enum ShuffleMode: Int {
+@objc public enum ShuffleMode: Int {
     case Normal
     case Shuffle
 }
 
-@objc
-public class PlayQueue: NSObject {
+@objc public class PlayQueue: NSObject {
     
+    //
     // MARK: - Notifications -
+    //
     
     public struct Notifications {
         public static let playQueueIndexChanged = "playQueueIndexChanged"
     }
     
-    func notifyPlayQueueIndexChanged() {
+    private func notifyPlayQueueIndexChanged() {
         NSNotificationCenter.postNotificationToMainThreadWithName(PlayQueue.Notifications.playQueueIndexChanged, object: nil)
     }
     
-    // MARK: - Class -
+    private func registerForNotifications() {
+        // Watch for changes to the play queue playlist
+        NSNotificationCenter.addObserverOnMainThread(self, selector: #selector(PlayQueue.playlistChanged(_:)), name: Playlist.Notifications.playlistChanged, object: nil)
+    }
+    
+    private func unregisterForNotifications() {
+        NSNotificationCenter.removeObserverOnMainThread(self, name: Playlist.Notifications.playlistChanged, object: nil)
+    }
+    
+    @objc private func playlistChanged(notification: NSNotification) {
+        
+    }
+    
+    //
+    // MARK: - Properties -
+    //
     
     public static let sharedInstance = PlayQueue()
     
     public var repeatMode = RepeatMode.Normal
+    public var shuffleMode = ShuffleMode.Normal { didSet { /* TODO: Do something */ } }
     
-    public var shuffleMode = ShuffleMode.Normal {
-        didSet {
-            // TODO: Do something
-        }
-    }
+    public private(set) var currentIndex = 0 { didSet { updateLockScreenInfo(); notifyPlayQueueIndexChanged() } }
+    public var previousIndex: Int { return indexAtOffset(-1, fromIndex: currentIndex) }
+    public var nextIndex: Int { return indexAtOffset(1, fromIndex: currentIndex) }
+    public var currentDisplaySong: ISMSSong? { return currentSong ?? previousSong }
+    public var currentSong: ISMSSong? { return playlist.songAtIndex(currentIndex) }
+    public var previousSong: ISMSSong? { return playlist.songAtIndex(previousIndex) }
+    public var nextSong: ISMSSong? { return playlist.songAtIndex(nextIndex) }
+    public var songCount: Int { return playlist.songCount }
+    public var isPlaying: Bool { return audioEngine.isPlaying() }
+    public var isStarted: Bool { return audioEngine.isStarted() }
+    public var currentSongProgress: Double { return audioEngine.progress() }
+    public var songs: [ISMSSong] { return playlist.songs }
+    public var playlist: Playlist { return Playlist.playQueue }
     
-    public private(set) var currentIndex = 0 {
-        didSet {
-            updateLockScreenInfo()
-            notifyPlayQueueIndexChanged()
-        }
-    }
+    private var audioEngine: AudioEngine { return AudioEngine.sharedInstance() }
     
-    public var previousIndex: Int {
-        switch self.repeatMode {
-        case .Normal:
-            return self.currentIndex - 1
-        case .RepeatAll:
-            let index = self.currentIndex - 1
-            if index < 0 {
-                // Roll over to end of playlist
-                return self.playlist.songCount - 1
-            } else {
-                return index
-            }
-        case .RepeatOne:
-            return self.currentIndex
-        }
-    }
-    
-    public var nextIndex: Int {
-        switch self.repeatMode {
-        case .Normal:
-            return self.currentIndex + 1
-        case .RepeatAll:
-            let index = self.currentIndex + 1
-            if index >= self.playlist.songCount {
-                // Roll over to beginning of playlist
-                return 0
-            } else {
-                return index
-            }
-        case .RepeatOne:
-            return self.currentIndex
-        }
-    }
-    
-    public var currentDisplaySong: ISMSSong? {
-        // Either the current song, or the previous song if we're past the end of the playlist
-        if let song = self.currentSong {
-            return song
-        } else {
-            return self.previousSong
-        }
-    }
-
-    public var currentSong: ISMSSong? {
-        return self.playlist.songAtIndex(self.currentIndex)
-    }
-    
-    public var previousSong: ISMSSong? {
-        return self.playlist.songAtIndex(self.previousIndex)
-    }
-    
-    public var nextSong: ISMSSong? {
-        return self.playlist.songAtIndex(self.nextIndex)
-    }
-    
-    public var songCount: Int {
-        return self.playlist.songCount
-    }
-    
-    public var isPlaying: Bool {
-        return self.audioEngine.isPlaying()
-    }
-    
-    public var isStarted: Bool {
-        return self.audioEngine.isStarted()
-    }
-    
-    public var currentSongProgress: Double {
-        return self.audioEngine.progress()
-    }
-    
-    private var playlist: Playlist {
-        return Playlist.playQueue
-    }
-    
-    private var audioEngine: AudioEngine {
-        return AudioEngine.sharedInstance()
-    }
-    
-    public func playSongs(songs: [ISMSSong], playIndex: Int) {
-        reset()
-        self.playlist.addSongs(songs: songs)
-        self.playSongAtIndex(playIndex)
-    }
+    //
+    // MARK: - Play Queue -
+    //
     
     public func reset() {
-        self.playlist.removeAllSongs()
-        self.audioEngine.stop()
+        playlist.removeAllSongs()
+        audioEngine.stop()
     }
     
     public func removeSongsAtIndexes(indexes: NSIndexSet) {
-        self.playlist.removeSongsAtIndexes(indexes)
+        playlist.removeSongsAtIndexes(indexes)
     }
     
     public func songAtIndex(index: Int) -> ISMSSong? {
-        return self.playlist.songAtIndex(index)
+        return playlist.songAtIndex(index)
     }
     
     public func indexAtOffset(offset: Int, fromIndex: Int) -> Int {
-        let songCount = self.songCount
-        
-        switch self.repeatMode {
+        switch repeatMode {
         case .Normal:
             if offset >= 0 {
                 if fromIndex + offset > songCount {
@@ -168,21 +103,16 @@ public class PlayQueue: NSObject {
                 return fromIndex + offset >= 0 ? fromIndex + offset : 0;
             }
         case .RepeatAll:
-            return fromIndex
-            // TODO: Finish implementing this, needs to roll over as many times as necessary
-//            if offset >= 0 {
-//                if fromIndex + offset >= songCount {
-//                    var tempIndex = songCount - 1
-//                    var remainder = fromIndex + offset - songCount
-//                    while remainder > 0 {
-//                        
-//                    }
-//                } else {
-//                    return fromIndex + offset
-//                }
-//            } else {
-//                return fromIndex + offset >= 0 ? fromIndex + offset : songCount + fromIndex + offset;
-//            }
+            if offset >= 0 {
+                if fromIndex + offset >= songCount {
+                    let remainder = offset - (songCount - fromIndex)
+                    return indexAtOffset(remainder, fromIndex: 0)
+                } else {
+                    return fromIndex + offset
+                }
+            } else {
+                return fromIndex + offset >= 0 ? fromIndex + offset : songCount + fromIndex + offset;
+            }
         case .RepeatOne:
             return fromIndex
         }
@@ -192,9 +122,19 @@ public class PlayQueue: NSObject {
         return indexAtOffset(offset, fromIndex: self.currentIndex)
     }
     
+    //
+    // MARK: - Player Control -
+    //
+    
+    public func playSongs(songs: [ISMSSong], playIndex: Int) {
+        reset()
+        playlist.addSongs(songs: songs)
+        playSongAtIndex(playIndex)
+    }
+    
     public func playSongAtIndex(index: Int) {
-        self.currentIndex = index
-        if let currentSong = self.currentSong {
+        currentIndex = index
+        if let currentSong = currentSong {
             if currentSong.contentType?.basicType != .Video {
                 // Remove the video player if this is not a video
                 NSNotificationCenter.postNotificationToMainThreadWithName(ISMSNotification_RemoveMoviePlayer)
@@ -233,20 +173,139 @@ public class PlayQueue: NSObject {
     }
     
     public func play() {
-        self.audioEngine.play()
+        audioEngine.play()
     }
     
     public func pause() {
-        self.audioEngine.pause()
+        audioEngine.pause()
     }
     
     public func playPause() {
-        self.audioEngine.playPause()
+        audioEngine.playPause()
     }
     
     public func stop() {
-        self.audioEngine.stop()
+        audioEngine.stop()
     }
+    
+    public func startSong() {
+        startSong(offsetBytes: 0, offsetSeconds: 0)
+    }
+    
+    private var startSongDelayTimer: NSTimer?
+    public func startSong(offsetBytes offsetBytes: Int, offsetSeconds: Int) {
+        let work = {
+            if let startSongDelayTimer = self.startSongDelayTimer {
+                startSongDelayTimer.invalidate()
+                self.startSongDelayTimer = nil
+            }
+            
+            // Destroy the streamer to start a new song
+            self.audioEngine.stop()
+            
+            if self.currentSong != nil {
+                // Only start the caching process if it's been a half second after the last request
+                // Prevents crash when skipping through playlist fast
+                self.startSongDelayTimer = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: #selector(PlayQueue.startSongWithByteAndSecondsOffset(_:)), userInfo: ["bytes": offsetBytes, "seconds": offsetSeconds], repeats: false)
+            }
+        }
+        
+        // Only allowed to manipulate BASS from the main thread
+        if NSThread.isMainThread() {
+            work()
+        } else {
+            EX2Dispatch.runInMainThreadAsync(work)
+        }
+    }
+    
+    public func startSongWithByteAndSecondsOffset(timer: NSTimer) {
+        guard let userInfo = timer.userInfo as? [String: AnyObject] else {
+            return
+        }
+        
+        NSNotificationCenter.postNotificationToMainThreadWithName(ISMSNotification_RemoveMoviePlayer)
+        
+        if let currentSong = currentSong {
+            let settings = SavedSettings.sharedInstance()
+            let streamManager = ISMSStreamManager.sharedInstance()
+            let cacheQueueManager = ISMSCacheQueueManager.sharedInstance()
+            let offsetBytes = userInfo["bytes"] as? NSNumber
+            let offsetSeconds = userInfo["seconds"] as? NSNumber
+            let audioEngineStartSong = {
+                if let bytes = offsetBytes?.integerValue {
+                    self.audioEngine.startSong(currentSong, index: self.currentIndex, offsetInBytes: bytes)
+                } else if let seconds = offsetSeconds?.integerValue {
+                    self.audioEngine.startSong(currentSong, index: self.currentIndex, offsetInSeconds: seconds)
+                }
+            }
+            
+            // Check to see if the song is already cached
+            if currentSong.isFullyCached {
+                // The song is fully cached, start streaming from the local copy
+                audioEngineStartSong()
+            } else {
+                // Fill the stream queue
+                if !settings.isOfflineMode {
+                    streamManager.fillStreamQueue(true)
+                } else if !currentSong.isFullyCached && settings.isOfflineMode {
+                    // TODO: Prevent this running forever in RepeatAll mode with no songs available
+                    self.playSongAtIndex(nextIndex)
+                } else {
+                    if cacheQueueManager.currentQueuedSong.isEqualToSong(currentSong) {
+                        // The cache queue is downloading this song, remove it before continuing
+                        cacheQueueManager.removeCurrentSong()
+                    }
+                    
+                    if streamManager.isSongDownloading(currentSong) {
+                        // The song is caching, start streaming from the local copy
+                        if let handler = streamManager.handlerForSong(currentSong) {
+                            if !audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
+                                // Only start the player if the handler isn't going to do it itself
+                                audioEngineStartSong()
+                            }
+                        }
+                    } else if streamManager.isSongFirstInQueue(currentSong) && !streamManager.isQueueDownloading {
+                        // The song is first in queue, but the queue is not downloading. Probably the song was downloading
+                        // when the app quit. Resume the download and start the player
+                        streamManager.resumeQueue()
+                        
+                        // The song is caching, start streaming from the local copy
+                        if let handler = streamManager.handlerForSong(currentSong) {
+                            if !self.audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
+                                // Only start the player if the handler isn't going to do it itself
+                                audioEngineStartSong()
+                            }
+                        }
+                    } else {
+                        // Clear the stream manager
+                        streamManager.removeAllStreams()
+                        
+                        var isTempCache = false
+                        if let offsetBytes = offsetBytes {
+                            if offsetBytes.integerValue > 0 || !settings.isSongCachingEnabled {
+                                isTempCache = true
+                            }
+                        }
+                        
+                        let bytes = offsetBytes?.unsignedLongLongValue ?? 0
+                        let seconds = offsetSeconds?.doubleValue ?? 0
+                        
+                        // Start downloading the current song from the correct offset
+                        streamManager.queueStreamForSong(currentSong, byteOffset: bytes, secondsOffset: seconds, atIndex: 0, isTempCache: isTempCache, isStartDownload: true)
+                        
+                        // Fill the stream queue
+                        if settings.isSongCachingEnabled {
+                            streamManager.fillStreamQueue(self.audioEngine.isStarted())
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    //
+    // MARK: - Lock Screen -
+    //
     
     private var lockScreenUpdateTimer: NSTimer?
     public func updateLockScreenInfo() {
@@ -268,11 +327,11 @@ public class PlayQueue: NSObject {
                 if let duration = song.duration {
                     trackInfo[MPMediaItemPropertyPlaybackDuration] = duration
                 }
-                trackInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = self.currentIndex
-                trackInfo[MPNowPlayingInfoPropertyPlaybackQueueCount] = self.songCount
-                trackInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = self.audioEngine.progress()
+                trackInfo[MPNowPlayingInfoPropertyPlaybackQueueIndex] = currentIndex
+                trackInfo[MPNowPlayingInfoPropertyPlaybackQueueCount] = songCount
+                trackInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = audioEngine.progress()
                 trackInfo[MPNowPlayingInfoPropertyPlaybackRate] = 1.0
-
+                
                 if SavedSettings.sharedInstance().isLockScreenArtEnabled {
                     if let coverArtId = song.coverArtId {
                         let artDataModel = SUSCoverArtDAO(delegate: nil, coverArtId: coverArtId, isLarge: true)
@@ -289,114 +348,8 @@ public class PlayQueue: NSObject {
             if let lockScreenUpdateTimer = self.lockScreenUpdateTimer {
                 lockScreenUpdateTimer.invalidate()
             }
-            self.lockScreenUpdateTimer = NSTimer(timeInterval: 30.0, target: self, selector: #selector(PlayQueue.updateLockScreenInfo), userInfo: nil, repeats: false)
+            lockScreenUpdateTimer = NSTimer(timeInterval: 30.0, target: self, selector: #selector(PlayQueue.updateLockScreenInfo), userInfo: nil, repeats: false)
         #endif
-    }
-    
-    public func startSong() {
-        startSong(offsetBytes: 0, offsetSeconds: 0)
-    }
-    
-    private var startSongDelayTimer: NSTimer?
-    public func startSong(offsetBytes offsetBytes: Int, offsetSeconds: Double) {
-        let work = {
-            if let startSongDelayTimer = self.startSongDelayTimer {
-                startSongDelayTimer.invalidate()
-                self.startSongDelayTimer = nil
-            }
-            
-            // Destroy the streamer to start a new song
-            self.audioEngine.stop()
-        
-            if self.currentSong != nil {
-                // Only start the caching process if it's been a half second after the last request
-                // Prevents crash when skipping through playlist fast
-                self.startSongDelayTimer = NSTimer.scheduledTimerWithTimeInterval(0.6, target: self, selector: #selector(PlayQueue.startSongWithByteAndSecondsOffset(_:)), userInfo: ["bytes": offsetBytes, "seconds": offsetSeconds], repeats: false)
-            }
-        }
-
-        // Only allowed to manipulate BASS from the main thread
-        if NSThread.isMainThread() {
-            work()
-        } else {
-            EX2Dispatch.runInMainThreadAsync(work)
-        }
-    }
-    
-    // TODO: Clean this up
-    public func startSongWithByteAndSecondsOffset(timer: NSTimer) {
-        
-        guard let userInfo = timer.userInfo as? [String: AnyObject] else {
-            return
-        }
-        
-        NSNotificationCenter.postNotificationToMainThreadWithName(ISMSNotification_RemoveMoviePlayer)
-
-        if let currentSong = self.currentSong {
-            let settings = SavedSettings.sharedInstance()
-            let streamManager = ISMSStreamManager.sharedInstance()
-            let cacheQueueManager = ISMSCacheQueueManager.sharedInstance()
-            let offsetBytes = userInfo["bytes"] as! NSNumber
-            let offsetSeconds = userInfo["seconds"] as! NSNumber
-            let currentIndex = self.currentIndex
-            
-            // Check to see if the song is already cached
-            if currentSong.isFullyCached {
-                // The song is fully cached, start streaming from the local copy
-                self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes: offsetBytes, orSeconds: offsetSeconds)
-            } else {
-                // Fill the stream queue
-                if !settings.isOfflineMode {
-                    streamManager.fillStreamQueue(true)
-                } else if !currentSong.isFullyCached && settings.isOfflineMode {
-                    // TODO: Prevent this running forever in RepeatAll mode with no songs available
-                    self.playSongAtIndex(self.nextIndex)
-                } else {
-                    if cacheQueueManager.currentQueuedSong.isEqualToSong(currentSong) {
-                        // The cache queue is downloading this song, remove it before continuing
-                        cacheQueueManager.removeCurrentSong()
-                    }
-                    
-                    if streamManager.isSongDownloading(currentSong) {
-                        // The song is caching, start streaming from the local copy
-                        if let handler = streamManager.handlerForSong(currentSong) {
-                            if !self.audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
-                                // Only start the player if the handler isn't going to do it itself
-                                self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes:offsetBytes, orSeconds:offsetSeconds)
-                            }
-                        }
-                    } else if streamManager.isSongFirstInQueue(currentSong) && !streamManager.isQueueDownloading {
-                        // The song is first in queue, but the queue is not downloading. Probably the song was downloading
-                        // when the app quit. Resume the download and start the player
-                        streamManager.resumeQueue()
-                        
-                        // The song is caching, start streaming from the local copy
-                        if let handler = streamManager.handlerForSong(currentSong) {
-                            if !self.audioEngine.isPlaying() && handler.isDelegateNotifiedToStartPlayback {
-                                // Only start the player if the handler isn't going to do it itself
-                                self.audioEngine.startSong(currentSong, atIndex: UInt(currentIndex), withOffsetInBytes:offsetBytes, orSeconds:offsetSeconds)
-                            }
-                        }
-                    } else {
-                        // Clear the stream manager
-                        streamManager.removeAllStreams()
-                        
-                        var isTempCache = false
-                        if offsetBytes.integerValue > 0 || !settings.isSongCachingEnabled {
-                            isTempCache = true
-                        }
-                        
-                        // Start downloading the current song from the correct offset
-                        streamManager.queueStreamForSong(currentSong, byteOffset: offsetBytes.unsignedLongLongValue, secondsOffset: offsetSeconds.doubleValue, atIndex: 0, isTempCache: isTempCache, isStartDownload: true)
-                        
-                        // Fill the stream queue
-                        if settings.isSongCachingEnabled {
-                            streamManager.fillStreamQueue(self.audioEngine.isStarted())
-                        }
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -409,7 +362,7 @@ extension PlayQueue: BassGaplessPlayerDelegate {
     
     public func bassSongEndedCalled(player: BassGaplessPlayer) {
         // Increment current playlist index
-        self.currentIndex = self.nextIndex
+        currentIndex = nextIndex
         
         // TODO: Is this the best place for this?
         SocialSingleton.sharedInstance().playerClearSocial()
@@ -421,15 +374,15 @@ extension PlayQueue: BassGaplessPlayerDelegate {
     }
 
     public func bassIndexAtOffset(offset: Int, fromIndex index: Int, player: BassGaplessPlayer) -> Int {
-        return self.indexAtOffset(offset, fromIndex: index)
+        return indexAtOffset(offset, fromIndex: index)
     }
     
     public func bassSongForIndex(index: Int, player: BassGaplessPlayer) -> ISMSSong? {
-        return self.songAtIndex(index)
+        return songAtIndex(index)
     }
     
     public func bassCurrentPlaylistIndex(player: BassGaplessPlayer) -> Int {
-        return self.currentIndex
+        return currentIndex
     }
     
     public func bassRetrySongAtIndex(index: Int, player: BassGaplessPlayer) {
@@ -439,11 +392,11 @@ extension PlayQueue: BassGaplessPlayerDelegate {
     }
     
     public func bassUpdateLockScreenInfo(player: BassGaplessPlayer) {
-        self.updateLockScreenInfo()
+        updateLockScreenInfo()
     }
     
     public func bassRetrySongAtOffsetInBytes(bytes: Int, andSeconds seconds: Int, player: BassGaplessPlayer) {
-        //MusicSingleton.sharedInstance().startSongAtOffsetInBytes(bytes, andSeconds: seconds)
+        startSong(offsetBytes: bytes, offsetSeconds: seconds)
     }
     
     public func bassFailedToCreateNextStreamForIndex(index: Int, player: BassGaplessPlayer) {

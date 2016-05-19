@@ -41,7 +41,9 @@
 
 // BASS methods
 //
-- (void)startSong:(ISMSSong *)aSong atIndex:(NSUInteger)index withOffsetInBytes:(NSNumber *)byteOffset orSeconds:(NSNumber *)seconds;
+- (void)startSong:(nonnull ISMSSong *)song index:(NSInteger)index;
+- (void)startSong:(nonnull ISMSSong *)song index:(NSInteger)index offsetInBytes:(NSInteger)bytesOffset;
+- (void)startSong:(nonnull ISMSSong *)song index:(NSInteger)index offsetInSeconds:(NSInteger)secondsOffset;
 - (void)startEmptyPlayer;
 
 // Player control (no longer directly touch the BassGaplessPlayer from outside the audio engine
