@@ -125,7 +125,7 @@ LOG_LEVEL_ISUB_DEBUG
 	// Download the art
 	if (self.currentQueuedSong.coverArtId)
 	{
-		NSString *coverArtId = self.currentQueuedSong.coverArtId.stringValue;
+		NSString *coverArtId = self.currentQueuedSong.coverArtId;
 		ISMSCoverArtLoader *playerArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self 
 																		coverArtId:coverArtId
 																		   isLarge:YES];

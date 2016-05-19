@@ -435,12 +435,12 @@ LOG_LEVEL_ISUB_DEBUG
 		// Also download the album art
 		if (song.coverArtId)
 		{
-			ISMSCoverArtLoader *playerArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId.stringValue isLarge:YES];
+			ISMSCoverArtLoader *playerArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId isLarge:YES];
 			[playerArt downloadArtIfNotExists];
 			//if (![playerArt downloadArtIfNotExists])
 			//	;
 			
-			ISMSCoverArtLoader *tableArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId.stringValue isLarge:NO];
+			ISMSCoverArtLoader *tableArt = [[ISMSCoverArtLoader alloc] initWithDelegate:self coverArtId:song.coverArtId isLarge:NO];
 			[tableArt downloadArtIfNotExists];
 			//if (![tableArt downloadArtIfNotExists])
 			//	;

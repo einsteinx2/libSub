@@ -15,7 +15,7 @@
 @property (nullable, strong) NSNumber *serverId;
 @property (nullable, strong) NSNumber *parentFolderId;
 @property (nullable, strong) NSNumber *mediaFolderId;
-@property (nullable, strong) NSNumber *coverArtId;
+@property (nullable, strong) NSString *coverArtId;
 @property (nullable, copy) NSString *name;
 
 @property (nonnull, strong, readonly) NSArray<ISMSFolder*> *folders;

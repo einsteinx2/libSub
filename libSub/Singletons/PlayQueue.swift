@@ -275,7 +275,7 @@ public class PlayQueue: NSObject {
 
                 if SavedSettings.sharedInstance().isLockScreenArtEnabled {
                     if let coverArtId = song.coverArtId {
-                        let artDataModel = SUSCoverArtDAO(delegate: nil, coverArtId: coverArtId.stringValue, isLarge: true)
+                        let artDataModel = SUSCoverArtDAO(delegate: nil, coverArtId: coverArtId, isLarge: true)
                         trackInfo[MPMediaItemPropertyArtwork] = MPMediaItemArtwork(image: artDataModel.coverArtImage())
                     } else {
                         trackInfo[MPMediaItemPropertyArtwork] = NSNull()

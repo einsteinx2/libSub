@@ -23,7 +23,7 @@
 @property (nullable, strong) NSNumber *artistId;
 @property (nullable, strong) NSNumber *albumId;
 @property (nullable, strong) NSNumber *genreId;
-@property (nullable, strong) NSNumber *coverArtId;
+@property (nullable, strong) NSString *coverArtId;
 
 @property (nullable, copy) NSString *title;
 @property (nullable, strong) NSNumber *duration;

@@ -61,13 +61,13 @@
 
 - (void)resumeQueue;
 
-- (void)resumeHandler:(ISMSStreamHandler *)handler;
-- (void)startHandler:(ISMSStreamHandler *)handler resume:(BOOL)resume;
-- (void)startHandler:(ISMSStreamHandler *)handler;
+- (void)resumeHandler:(nonnull ISMSStreamHandler *)handler;
+- (void)startHandler:(nonnull ISMSStreamHandler *)handler resume:(BOOL)resume;
+- (void)startHandler:(nonnull ISMSStreamHandler *)handler;
 
 - (void)saveHandlerStack;
 - (void)loadHandlerStack;
 
-- (void)stealHandlerForCacheQueue:(ISMSStreamHandler *)handler;
+- (void)stealHandlerForCacheQueue:(nonnull ISMSStreamHandler *)handler;
 
 @end

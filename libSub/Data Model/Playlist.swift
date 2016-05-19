@@ -25,7 +25,7 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
     
     func notifyPlaylistChanged() {
         NSNotificationCenter.postNotificationToMainThreadWithName(Playlist.Notifications.playlistChanged,
-                                                                  object: self,
+                                                                  object: nil,
                                                                   userInfo: [Notifications.playlistIdKey: self.playlistId])
     }
     
