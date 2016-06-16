@@ -20,6 +20,8 @@
 // Transition to using this single array
 @property (nullable, readonly) NSArray<id<ISMSItem>> *items;
 
+@property (readonly) ISMSLoaderState loaderState;
+
 - (void)persistModels;
 - (BOOL)loadModelsFromCache;
 

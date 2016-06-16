@@ -8,6 +8,14 @@
 
 #import "ISMSLoaderDelegate.h"
 
+typedef NS_ENUM(NSInteger, ISMSLoaderState) {
+    ISMSLoaderState_New,
+    ISMSLoaderState_Loading,
+    ISMSLoaderState_Canceled,
+    ISMSLoaderState_Failed,
+    ISMSLoaderState_Finished
+};
+
 // Loader callback block, make sure to always check success bool, not error, as error can be nil when success is NO
 typedef void (^LoaderCallback)(BOOL success,  NSError * _Nullable error, ISMSLoader * _Nonnull loader);
 
@@ -21,6 +29,8 @@ typedef void (^LoaderCallback)(BOOL success,  NSError * _Nullable error, ISMSLoa
 @property (nullable, readonly) NSURL *redirectUrl;
 // TODO: See if this conversion logic is necessary, pulled from old iSubAppDelegate code
 @property (nullable, readonly) NSString *redirectUrlString;
+
+@property (readonly) ISMSLoaderState loaderState;
 
 
 - (nullable instancetype)initWithDelegate:(nullable NSObject<ISMSLoaderDelegate> *)theDelegate;

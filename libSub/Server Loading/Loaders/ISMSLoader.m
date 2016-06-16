@@ -18,6 +18,7 @@
 @property (nonatomic, strong) ISMSLoader *selfRef;
 @property (nonatomic, strong) NSURL *redirectUrl;
 @property (nonatomic, strong) NSString *redirectUrlString;
+@property (readwrite) ISMSLoaderState loaderState;
 
 // From ISMSLoader_Subclassing
 @property (nullable, nonatomic, strong) NSURLConnection *connection;
@@ -75,6 +76,10 @@
 
 - (void)startLoad
 {
+    // Do nothing if already loading
+    if (self.loaderState == ISMSLoaderState_Loading)
+        return;
+    
     self.request = [self createRequest];
     if (self.request)
     {
@@ -85,11 +90,15 @@
             // receivedData is an instance variable declared elsewhere.
             self.receivedData = [NSMutableData data];
             
+            self.loaderState = ISMSLoaderState_Loading;
+            
             if (!self.selfRef)
                 self.selfRef = self;
         }
         else
         {
+            self.loaderState = ISMSLoaderState_Failed;
+            
             // Inform the delegate that the loading failed.
             NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_CouldNotCreateConnection];
             [self informDelegateLoadingFailed:error];
@@ -97,6 +106,8 @@
     }
     else
     {
+        self.loaderState = ISMSLoaderState_Failed;
+        
         // Inform the delegate that the loading failed.
 		NSError *error = [NSError errorWithISMSCode:ISMSErrorCode_CouldNotCreateConnection];
 		[self informDelegateLoadingFailed:error];
@@ -105,12 +116,17 @@
 
 - (void)cancelLoad
 {
-	// Clean up connection objects
-	[self.connection cancel];
-	self.connection = nil;
-	self.receivedData = nil;
-    
-    self.selfRef = nil;
+    if (self.loaderState == ISMSLoaderState_Loading)
+    {
+        // Clean up connection objects
+        [self.connection cancel];
+        self.connection = nil;
+        self.receivedData = nil;
+        
+        self.loaderState = ISMSLoaderState_Canceled;
+        
+        self.selfRef = nil;
+    }
 }
 
 - (NSURLRequest *)createRequest
@@ -135,6 +151,8 @@
 
 - (void)informDelegateLoadingFailed:(NSError *)error
 {
+    self.loaderState = ISMSLoaderState_Failed;
+    
 	if ([self.delegate respondsToSelector:@selector(loadingFailed:withError:)])
 	{
 		[self.delegate loadingFailed:self withError:error];
@@ -150,6 +168,8 @@
 
 - (void)informDelegateLoadingFinished
 {
+    self.loaderState = ISMSLoaderState_Finished;
+    
 	if ([self.delegate respondsToSelector:@selector(loadingFinished:)])
 	{
 		[self.delegate loadingFinished:self];
