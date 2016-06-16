@@ -59,7 +59,7 @@
     [xmlParser parse];
     
     ISMSPlaylist *playQueue = [ISMSPlaylist playQueue];
-    [playQueue removeAllSongs];
+    [playQueue removeAllSongs:YES];
     if (settingsS.isJukeboxEnabled)
     {
         [jukeboxS jukeboxClearRemotePlaylist];
@@ -67,7 +67,7 @@
     
     for (ISMSSong *aSong in parser.listOfSongs)
     {
-        [playQueue addSongWithSong:aSong];
+        [playQueue addSongWithSong:aSong notify:YES];
     }
     
     [PlayQueue sharedInstance].shuffleMode = ShuffleModeNormal;

@@ -59,7 +59,7 @@
 		self.isPlaying = [[attributeDict objectForKey:@"playing"] boolValue];
 		self.gain = [[attributeDict objectForKey:@"gain"] floatValue];
 		
-        [[ISMSPlaylist playQueue] removeAllSongs];
+        [[ISMSPlaylist playQueue] removeAllSongs:YES];
     }
 	else if ([elementName isEqualToString:@"entry"])
 	{

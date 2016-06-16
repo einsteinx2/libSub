@@ -260,7 +260,7 @@
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:connDelegate startImmediately:NO];
 	if (connection)
 	{
-        [[ISMSPlaylist playQueue] removeAllSongs];
+        [[ISMSPlaylist playQueue] removeAllSongs:YES];
         
 		[self.connectionQueue registerConnection:connection];
 		[self.connectionQueue startQueue];
@@ -310,7 +310,7 @@
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:connDelegate startImmediately:NO];
 	if (connection)
 	{
-		[[ISMSPlaylist playQueue] removeAllSongs];
+        [[ISMSPlaylist playQueue] removeAllSongs:YES];
 		
 		[self.connectionQueue registerConnection:connection];
 		[self.connectionQueue startQueue];
@@ -340,7 +340,7 @@
 	NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:connDelegate startImmediately:NO];
 	if (connection)
 	{
-		[[ISMSPlaylist playQueue] removeAllSongs];
+        [[ISMSPlaylist playQueue] removeAllSongs:YES];
 		
 		[self.connectionQueue registerConnection:connection];
 		[self.connectionQueue startQueue];

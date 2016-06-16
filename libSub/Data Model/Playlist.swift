@@ -170,13 +170,13 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         }
     }
     
-    public func addSong(song song: ISMSSong) {
+    public func addSong(song song: ISMSSong, notify: Bool = false) {
         if let songId = song.songId?.integerValue {
-            addSong(songId: songId)
+            addSong(songId: songId, notify: notify)
         }
     }
     
-    public func addSong(songId songId: Int) {
+    public func addSong(songId songId: Int, notify: Bool = false) {
         var query = ""
         if self.songCount == 0 {
             // Force songIndex to start at 0
@@ -192,10 +192,12 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             }
         }
         
-        notifyPlaylistChanged()
+        if notify {
+            notifyPlaylistChanged()
+        }
     }
     
-    public func addSongs(songs songs: [ISMSSong]) {
+    public func addSongs(songs songs: [ISMSSong], notify: Bool = false) {
         var songIds = [Int]()
         for song in songs {
             if let songId = song.songId?.integerValue {
@@ -203,25 +205,27 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             }
         }
         
-        addSongs(songIds: songIds)
+        addSongs(songIds: songIds, notify: notify)
     }
     
-    public func addSongs(songIds songIds: [Int]) {
+    public func addSongs(songIds songIds: [Int], notify: Bool = false) {
         // TODO: Improve performance
         for songId in songIds {
             addSong(songId: songId)
         }
         
-        notifyPlaylistChanged()
-    }
-    
-    public func insertSong(song song: ISMSSong, index: Int) {
-        if let songId = song.songId?.integerValue {
-            insertSong(songId: songId, index: index)
+        if notify {
+            notifyPlaylistChanged()
         }
     }
     
-    public func insertSong(songId songId: Int, index: Int) {
+    public func insertSong(song song: ISMSSong, index: Int, notify: Bool = false) {
+        if let songId = song.songId?.integerValue {
+            insertSong(songId: songId, index: index, notify: notify)
+        }
+    }
+    
+    public func insertSong(songId songId: Int, index: Int, notify: Bool = false) {
         // TODO: See if this can be simplified by using sort by
         DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
             do {
@@ -238,10 +242,12 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             }
         }
         
-        notifyPlaylistChanged()
+        if notify {
+            notifyPlaylistChanged()
+        }
     }
     
-    public func removeSongAtIndex(index: Int) {
+    public func removeSongAtIndex(index: Int, notify: Bool = false) {
         DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
             do {
                 let query1 = "DELETE FROM \(self.tableName) WHERE songIndex = ?"
@@ -254,33 +260,35 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             }
         }
         
-        notifyPlaylistChanged()
+        if notify {
+            notifyPlaylistChanged()
+        }
     }
     
-    public func removeSongsAtIndexes(indexes: NSIndexSet) {
+    public func removeSongsAtIndexes(indexes: NSIndexSet, notify: Bool = false) {
         // TODO: Improve performance
         for index in indexes {
-            removeSongAtIndex(index)
+            removeSongAtIndex(index, notify: false)
         }
         
-        notifyPlaylistChanged()
+        if notify {
+            notifyPlaylistChanged()
+        }
     }
     
-    public func removeSong(song song: ISMSSong) {
+    public func removeSong(song song: ISMSSong, notify: Bool = false) {
         if let songId = song.songId?.integerValue {
-            removeSong(songId: songId)
+            removeSong(songId: songId, notify: notify)
         }
     }
     
-    public func removeSong(songId songId: Int) {
+    public func removeSong(songId songId: Int, notify: Bool = false) {
         if let index = indexOfSongId(songId) {
-            removeSongAtIndex(index)
+            removeSongAtIndex(index, notify: notify)
         }
-        
-        notifyPlaylistChanged()
     }
     
-    public func removeSongs(songs songs: [ISMSSong]) {
+    public func removeSongs(songs songs: [ISMSSong], notify: Bool = false) {
         var songIds = [Int]()
         for song in songs {
             if let songId = song.songId?.integerValue {
@@ -288,19 +296,21 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             }
         }
 
-        removeSongs(songIds: songIds)
+        removeSongs(songIds: songIds, notify: notify)
     }
     
-    public func removeSongs(songIds songIds: [Int]) {
+    public func removeSongs(songIds songIds: [Int], notify: Bool = false) {
         // TODO: Improve performance
         for songId in songIds {
-            removeSong(songId: songId)
+            removeSong(songId: songId, notify: false)
         }
         
-        notifyPlaylistChanged()
+        if notify {
+            notifyPlaylistChanged()
+        }
     }
     
-    public func removeAllSongs() {
+    public func removeAllSongs(notify: Bool = false) {
         DatabaseSingleton.sharedInstance().songModelWritesDbQueue.inDatabase { db in
             do {
                 let query1 = "DELETE FROM \(self.tableName)"
@@ -310,7 +320,17 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
             }
         }
         
-        notifyPlaylistChanged()
+        if notify {
+            notifyPlaylistChanged()
+        }
+    }
+    
+    public func moveSong(fromIndex fromIndex: Int, toIndex: Int) {
+        if let songId = songAtIndex(fromIndex)?.songId?.integerValue {
+            let finalToIndex = fromIndex < toIndex ? toIndex - 1 : toIndex
+            removeSongAtIndex(fromIndex, notify: false)
+            insertSong(songId: songId, index: finalToIndex, notify: true)
+        }
     }
     
     // MARK: - Create new DB tables -
