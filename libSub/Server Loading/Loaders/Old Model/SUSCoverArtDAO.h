@@ -21,9 +21,11 @@
 #ifdef IOS
 - (UIImage *)coverArtImage;
 - (UIImage *)defaultCoverArtImage;
++ (UIImage *)defaultCoverArtImageForSize:(BOOL)large;
 #else
 - (NSImage *)coverArtImage;
 - (NSImage *)defaultCoverArtImage;
++ (NSImage *)defaultCoverArtImageForSize:(BOOL)large;
 #endif
 @property (readonly) BOOL isCoverArtCached;
 

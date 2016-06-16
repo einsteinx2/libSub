@@ -60,11 +60,16 @@
 }
 
 - (UIImage *)defaultCoverArtImage
-{	
-	if (self.isLarge)
-		return IS_IPAD() ? [UIImage imageNamed:@"default-album-art-ipad"] : [UIImage imageNamed:@"default-album-art"];
-	else
-		return [UIImage imageNamed:@"default-album-art-small"];
+{
+    return [self.class defaultCoverArtImageForSize:self.isLarge];
+}
+
++ (UIImage *)defaultCoverArtImageForSize:(BOOL)large
+{
+    if (large)
+        return IS_IPAD() ? [UIImage imageNamed:@"default-album-art-ipad"] : [UIImage imageNamed:@"default-album-art"];
+    else
+        return [UIImage imageNamed:@"default-album-art-small"];
 }
 
 #else
@@ -77,10 +82,15 @@
 
 - (NSImage *)defaultCoverArtImage
 {
-	if (self.isLarge)
-		return IS_IPAD() ? [NSImage imageNamed:@"default-album-art-ipad"] : [NSImage imageNamed:@"default-album-art"];
-	else
-		return [NSImage imageNamed:@"default-album-art-small"];
+	return [self.class defaultCoverArtImageForSize:self.isLarge];
+}
+
++ (NSImage *)defaultCoverArtImageForSize:(BOOL)large
+{
+    if (large)
+        return IS_IPAD() ? [NSImage imageNamed:@"default-album-art-ipad"] : [NSImage imageNamed:@"default-album-art"];
+    else
+        return [NSImage imageNamed:@"default-album-art-small"];
 }
 
 #endif
