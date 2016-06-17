@@ -46,6 +46,11 @@ LOG_LEVEL_ISUB_DEFAULT
             [db executeUpdate:@"CREATE INDEX songs_albumId ON songs (albumId)"];
         }
         
+        if (![db tableExists:@"cachedSongs"])
+        {
+            [db executeUpdate:@"CREATE TABLE cachedSongs (songId INTEGER, serverId INTEGER, partiallyCached INTEGER, fullyCached INTEGER, PRIMARY KEY (songId, serverId))"];
+        }
+        
         if (![db tableExists:@"contentTypes"])
         {
             [db executeUpdate:@"CREATE TABLE contentTypes (contentTypeId INTEGER PRIMARY KEY, mimeType TEXT, extension TEXT, basicType TEXT)"];

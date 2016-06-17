@@ -275,15 +275,12 @@ static const CFOptionFlags kNetworkEvents = kCFStreamEventOpenCompleted | kCFStr
 
 - (void)cancel
 {    
-    if (self.isCanceled)
+    if (self.isCanceled || !self.isDownloading)
         return;
     
-	DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler request canceled for %@", self.mySong);
-	
+    DDLogVerbose(@"[ISMSCFNetworkStreamHandler] Stream handler request canceled for %@", self.mySong);
+    
     self.isCanceled = YES;
-    
-    if (!self.isDownloading)
-        return;
     
 	self.isDownloading = NO;
 	
@@ -429,7 +426,7 @@ static void ReadStreamClientCallBack(CFReadStreamRef stream, CFStreamEventType t
                 NSUInteger bytesPerSec = self.totalBytesTransferred / [[NSDate date] timeIntervalSinceDate:self.startDate];
 				if (!self.isDelegateNotifiedToStartPlayback && self.totalBytesTransferred >= [self.class minBytesToStartPlaybackForKiloBitrate:self.bitrate speedInBytesPerSec:bytesPerSec])
 				{
-					DDLogVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %lu, total bytes: %llu, bitrate: %lu, bytesPerSec: %lu  song: %@", (unsigned long)ISMSMinBytesToStartPlayback(self.bitrate), self.totalBytesTransferred, (unsigned long)self.bitrate, (unsigned long)bytesPerSec, self.mySong);
+                    DDLogVerbose(@"[ISMSCFNetworkStreamHandler] telling player to start, min bytes: %lu, total bytes: %llu, bitrate: %lu, bytesPerSec: %lu  song: %@", (unsigned long)[self.class minBytesToStartPlaybackForKiloBitrate:self.bitrate speedInBytesPerSec:bytesPerSec], self.totalBytesTransferred, (unsigned long)self.bitrate, (unsigned long)bytesPerSec, self.mySong);
 					self.isDelegateNotifiedToStartPlayback = YES;
 					
 					if ([self.delegate respondsToSelector:@selector(ISMSStreamHandlerStartPlayback:)])

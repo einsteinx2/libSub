@@ -327,6 +327,9 @@
      {
          NSString *query = @"DELETE FROM songs WHERE songId = ? AND serverId = ?";
          success = [db executeUpdate:query, self.songId, self.serverId];
+         
+         query = @"DELETE FROM cachedSongs WHERE songId = ? AND serverId = ?";
+         success = [db executeUpdate:query, self.songId, self.serverId];
      }];
     return success;
 }
@@ -614,32 +617,45 @@
 
 - (BOOL)isPartiallyCached
 {
-    // TODO: Fill this in
-    return NO;
+    NSString *query = @"SELECT partiallyCached FROM cachedSongs WHERE songId = ? AND serverId = ?";
+    return [databaseS.songModelReadDbPool boolForQuery:query, self.songId, self.serverId];
 }
 
 - (void)setIsPartiallyCached:(BOOL)isPartiallyCached
 {
-    // TODO: Fill this in
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db) {
+        NSString *query = @"INSERT OR REPLACE INTO cachedSongs (songId, serverId, partiallyCached, fullyCached) VALUES (?, ?, ?, ?)";
+        [db executeUpdate:query, self.songId, self.serverId, @YES, @NO];
+    }];
 }
 
 - (BOOL)isFullyCached
 {
-    // TODO: Fill this in
-    return NO;
+    NSString *query = @"SELECT fullyCached FROM cachedSongs WHERE songId = ? AND serverId = ?";
+    return [databaseS.songModelReadDbPool boolForQuery:query, self.songId, self.serverId];
 }
 
 - (void)setIsFullyCached:(BOOL)isFullyCached
 {
-    // TODO: Fill this in
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db) {
+        NSString *query = @"INSERT OR REPLACE INTO cachedSongs (songId, serverId, partiallyCached, fullyCached) VALUES (?, ?, ?, ?)";
+        [db executeUpdate:query, self.songId, self.serverId, @NO, @YES];
+    }];
+}
+
+- (void)removeFromCachedSongsTable {
+    [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db) {
+        NSString *query = @"DELETE FROM cachedSongs WHERE songId = ? AND serverId = ?";
+        [db executeUpdate:query, self.songId, self.serverId];
+    }];
 }
 
 - (CGFloat)downloadProgress
 {
-    CGFloat downloadProgress = 0.;
+    CGFloat downloadProgress = 0;
     
     if (self.isFullyCached)
-        downloadProgress = 1.;
+        downloadProgress = 1;
     
     if (self.isPartiallyCached)
     {

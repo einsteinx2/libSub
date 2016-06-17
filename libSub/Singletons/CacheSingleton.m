@@ -44,7 +44,10 @@ LOG_LEVEL_ISUB_DEFAULT
 
 - (NSUInteger)numberOfCachedSongs
 {
-    return [[ISMSPlaylist downloadedSongs] songCount];
+    NSString *query = @"SELECT COUNT(*) FROM cachedSongs WHERE fullyCached = 1";
+    return [databaseS.songModelReadDbPool intForQuery:query];
+    
+    //return [[ISMSPlaylist downloadedSongs] songCount];
 }
 
 //
