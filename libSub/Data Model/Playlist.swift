@@ -325,12 +325,17 @@ public class Playlist: NSObject, ISMSPersistedModel, NSCopying, NSCoding {
         }
     }
     
-    public func moveSong(fromIndex fromIndex: Int, toIndex: Int) {
-        if let songId = songAtIndex(fromIndex)?.songId?.integerValue {
+    public func moveSong(fromIndex fromIndex: Int, toIndex: Int, notify: Bool = false) -> Bool {
+        if fromIndex != toIndex, let songId = songAtIndex(fromIndex)?.songId?.integerValue {
             let finalToIndex = fromIndex < toIndex ? toIndex - 1 : toIndex
-            removeSongAtIndex(fromIndex, notify: false)
-            insertSong(songId: songId, index: finalToIndex, notify: true)
+            if finalToIndex >= 0 && finalToIndex < songCount {
+                removeSongAtIndex(fromIndex, notify: false)
+                insertSong(songId: songId, index: finalToIndex, notify: notify)
+                return true
+            }
         }
+        
+        return false
     }
     
     // MARK: - Create new DB tables -

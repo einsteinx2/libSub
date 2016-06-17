@@ -82,7 +82,43 @@ import MediaPlayer
     }
     
     public func removeSongsAtIndexes(indexes: NSIndexSet) {
+        // Stop the music if we're removing the current song
+        let containsCurrentIndex = indexes.containsIndex(currentIndex)
+        if containsCurrentIndex {
+            audioEngine.stop()
+        }
+        
+        // Remove the songs
         playlist.removeSongsAtIndexes(indexes)
+        
+        // Adjust the current index if songs are removed below it
+        let range = NSMakeRange(0, currentIndex)
+        let countOfIndexesBelowCurrent = indexes.countOfIndexesInRange(range)
+        currentIndex = currentIndex - countOfIndexesBelowCurrent
+        
+        // If we removed the current song, start the next one
+        if containsCurrentIndex {
+            playSongAtIndex(currentIndex)
+        }
+    }
+    
+    public func moveSong(fromIndex fromIndex: Int, toIndex: Int, notify: Bool = false) {
+        let original = currentIndex
+        if playlist.moveSong(fromIndex: fromIndex, toIndex: toIndex, notify: notify) {
+            if fromIndex == currentIndex && toIndex < currentIndex {
+                // Moved the current song to a lower index
+                currentIndex = toIndex
+            } else if fromIndex == currentIndex && toIndex > currentIndex {
+                // Moved the current song to a higher index
+                currentIndex = toIndex - 1
+            } else if fromIndex > currentIndex && toIndex <= currentIndex {
+                // Moved a song from after the current song to before
+                currentIndex += 1
+            } else if fromIndex < currentIndex && toIndex >= currentIndex {
+                // Moved a song from before the current song to after
+                currentIndex -= 1
+            }
+        }
     }
     
     public func songAtIndex(index: Int) -> ISMSSong? {
