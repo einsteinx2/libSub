@@ -40,7 +40,7 @@
         _folderId = @([[element attribute:@"parent"] integerValue]);
         _artistId = @([[element attribute:@"artistId"] integerValue]);
         _albumId = @([[element attribute:@"albumId"] integerValue]);
-        _coverArtId = @([[element attribute:@"coverArt"] integerValue]);
+        _coverArtId = [element attribute:@"coverArt"];
         
         _title = [[element attribute:@"title"] cleanString];
         NSString *durationString = [element attribute:@"duration"];
@@ -56,6 +56,9 @@
         NSString *sizeString = [element attribute:@"size"];
         _size = sizeString ? @(sizeString.longLongValue) : nil;
         _path = [[element attribute:@"path"] cleanString];
+        
+        _artistName = [[element attribute:@"artist"] cleanString];
+        _albumName = [[element attribute:@"album"] cleanString];
         
         // Retreive contentTypeId
         NSString *contentTypeString = [element attribute:@"contentType"];
@@ -153,6 +156,9 @@
     _size                    = N2n([resultSet objectForColumnIndex:16]);
     _path                    = N2n([resultSet objectForColumnIndex:17]);
     _lastPlayed              = N2n([resultSet objectForColumnIndex:18]);
+    
+    _artistName              = N2n([resultSet objectForColumnIndex:19]);
+    _albumName               = N2n([resultSet objectForColumnIndex:20]);
 }
 
 - (NSString *)description
@@ -300,9 +306,9 @@
     [databaseS.songModelWritesDbQueue inDatabase:^(FMDatabase *db)
      {
          NSString *insertType = replace ? @"REPLACE" : @"INSERT";
-         NSString *query = [insertType stringByAppendingString:@" INTO songs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"];
+         NSString *query = [insertType stringByAppendingString:@" INTO songs VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"];
          
-         success = [db executeUpdate:query, self.songId, self.serverId, self.contentTypeId, self.transcodedContentTypeId, self.mediaFolderId, self.folderId, self.artistId, self.albumId, self.genreId, self.coverArtId, self.title, self.duration, self.bitrate, self.trackNumber, self.discNumber, self.year, self.size, self.path, self.lastPlayed];
+         success = [db executeUpdate:query, self.songId, self.serverId, self.contentTypeId, self.transcodedContentTypeId, self.mediaFolderId, self.folderId, self.artistId, self.albumId, self.genreId, self.coverArtId, self.title, self.duration, self.bitrate, self.trackNumber, self.discNumber, self.year, self.size, self.path, self.lastPlayed, self.artistName, self.albumName];
      }];
     return success;
 }
@@ -411,6 +417,9 @@
     [encoder encodeObject:self.year                    forKey:@"year"];
     [encoder encodeObject:self.size                    forKey:@"size"];
     [encoder encodeObject:self.path                    forKey:@"path"];
+    
+    [encoder encodeObject:self.artistName              forKey:@"artistName"];
+    [encoder encodeObject:self.albumName               forKey:@"albumName"];
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -437,6 +446,9 @@
         _year                    = [decoder decodeObjectForKey:@"year"];
         _size                    = [decoder decodeObjectForKey:@"size"];
         _path                    = [decoder decodeObjectForKey:@"path"];
+        
+        _artistName              = [decoder decodeObjectForKey:@"artistName"];
+        _albumName               = [decoder decodeObjectForKey:@"albumName"];
     }
     
     return self;
@@ -447,24 +459,26 @@
 - (id)copyWithZone:(NSZone *)zone
 {
     ISMSSong *song               = [[ISMSSong alloc] init];
-    song.songId                  = self.songId;
-    song.serverId                = self.serverId;
-    song.contentTypeId           = self.contentTypeId;
-    song.transcodedContentTypeId = self.transcodedContentTypeId;
-    song.mediaFolderId           = self.mediaFolderId;
-    song.folderId                = self.folderId;
-    song.artistId                = self.artistId;
-    song.albumId                 = self.albumId;
-    song.genreId                 = self.genreId;
-    song.coverArtId              = self.coverArtId;
+    song.songId                  = [self.songId copy];
+    song.serverId                = [self.serverId copy];
+    song.contentTypeId           = [self.contentTypeId copy];
+    song.transcodedContentTypeId = [self.transcodedContentTypeId copy];
+    song.mediaFolderId           = [self.mediaFolderId copy];
+    song.folderId                = [self.folderId copy];
+    song.artistId                = [self.artistId copy];
+    song.albumId                 = [self.albumId copy];
+    song.genreId                 = [self.genreId copy];
+    song.coverArtId              = [self.coverArtId copy];
     song.title                   = self.title;
-    song.duration                = self.duration;
-    song.bitrate                 = self.bitrate;
-    song.trackNumber             = self.trackNumber;
-    song.discNumber              = self.discNumber;
-    song.year                    = self.year;
-    song.size                    = self.size;
+    song.duration                = [self.duration copy];
+    song.bitrate                 = [self.bitrate copy];
+    song.trackNumber             = [self.trackNumber copy];
+    song.discNumber              = [self.discNumber copy];
+    song.year                    = [self.year copy];
+    song.size                    = [self.size copy];
     song.path                    = self.path;
+    song.artistName              = self.artistName;
+    song.albumName               = self.albumName;
     return song;
 }
 
@@ -694,6 +708,16 @@
     
     // The song hasn't started downloading yet
     return downloadProgress;
+}
+
+- (NSString *)artistDisplayName
+{
+    return self.artist.name ?: self.artistName;
+}
+
+- (NSString *)albumDisplayName
+{
+    return self.album.name ?: self.albumName;
 }
 
 @end

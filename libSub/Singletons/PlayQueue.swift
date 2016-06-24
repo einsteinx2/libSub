@@ -26,8 +26,9 @@ import MediaPlayer
     // MARK: - Notifications -
     //
     
+    // TODO: Make these available in Obj-C
     public struct Notifications {
-        public static let playQueueIndexChanged = "playQueueIndexChanged"
+        public static let playQueueIndexChanged = ISMSNotification_CurrentPlaylistIndexChanged
     }
     
     private func notifyPlayQueueIndexChanged() {
@@ -354,7 +355,7 @@ import MediaPlayer
                 if let albumName = song.album?.name {
                     trackInfo[MPMediaItemPropertyAlbumTitle] = albumName
                 }
-                if let artistName = song.artist?.name {
+                if let artistName = song.artistDisplayName {
                     trackInfo[MPMediaItemPropertyArtist] = artistName
                 }
                 if let genre = song.genre?.name {

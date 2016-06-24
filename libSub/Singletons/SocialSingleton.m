@@ -218,10 +218,10 @@ LOG_LEVEL_ISUB_DEFAULT
 	
 	if (settingsS.currentTwitterAccount && settingsS.isTwitterEnabled && !settingsS.isOfflineMode)
 	{
-		if (currentSong.artist.name && currentSong.title)
+		if (currentSong.artistDisplayName && currentSong.title)
 		{
 			//DLog(@"------------- tweeting song --------------");
-			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@ #isubapp", currentSong.title, currentSong.artist.name];
+			NSString *tweet = [NSString stringWithFormat:@"is listening to \"%@\" by %@ #isubapp", currentSong.title, currentSong.artistDisplayName];
             if (tweet.length > 140)
                 tweet = [tweet substringToIndex:140];
             

@@ -21,7 +21,9 @@
 @property (nullable, strong) NSNumber *mediaFolderId;
 @property (nullable, strong) NSNumber *folderId;
 @property (nullable, strong) NSNumber *artistId;
+@property (nullable, copy) NSString *artistName;
 @property (nullable, strong) NSNumber *albumId;
+@property (nullable, copy) NSString *albumName;
 @property (nullable, strong) NSNumber *genreId;
 @property (nullable, strong) NSString *coverArtId;
 
@@ -40,6 +42,13 @@
 @property (nullable, readonly) ISMSGenre *genre;
 @property (nullable, readonly) ISMSContentType *contentType;
 @property (nullable, readonly) ISMSContentType *transcodedContentType;
+
+// Automatically chooses either the artist/album model name or uses the song property if it's not available
+// NOTE: Not every song has an Artist or Album object in Subsonic. So when folder browsing this is especially
+// important. Also, we need to have some background process to load albums and artists that don't exist in the
+// local db whenever we browse in Folder mode.
+@property (nullable, readonly) NSString *artistDisplayName;
+@property (nullable, readonly) NSString *albumDisplayName;
 
 @property (nullable, nonatomic, strong) NSDate *lastPlayed;
 

@@ -39,7 +39,7 @@ LOG_LEVEL_ISUB_DEFAULT
         
         if (![db tableExists:@"songs"])
         {
-            [db executeUpdate:@"CREATE TABLE songs (songId INTEGER, serverId INTEGER, contentTypeId INTEGER, transcodedContentTypeId INTEGER, mediaFolderId INTEGER, folderId INTEGER, artistId INTEGER, albumId INTEGER, genreId TEXT, coverArtId TEXT, title TEXT, duration INTEGER, bitrate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, path TEXT, lastPlayed REAL, PRIMARY KEY (songId, serverId))"];
+            [db executeUpdate:@"CREATE TABLE songs (songId INTEGER, serverId INTEGER, contentTypeId INTEGER, transcodedContentTypeId INTEGER, mediaFolderId INTEGER, folderId INTEGER, artistId INTEGER, albumId INTEGER, genreId TEXT, coverArtId TEXT, title TEXT, duration INTEGER, bitrate INTEGER, trackNumber INTEGER, discNumber INTEGER, year INTEGER, size INTEGER, path TEXT, lastPlayed REAL, artistName TEXT, albumName TEXT, PRIMARY KEY (songId, serverId))"];
             [db executeUpdate:@"CREATE INDEX songs_mediaFolderId ON songs (mediaFolderId)"];
             [db executeUpdate:@"CREATE INDEX songs_folderId ON songs (folderId)"];
             [db executeUpdate:@"CREATE INDEX songs_artistId ON songs (artistId)"];
