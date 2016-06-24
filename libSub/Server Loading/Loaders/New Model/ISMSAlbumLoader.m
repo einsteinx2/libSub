@@ -58,7 +58,11 @@
             
             [root iterate:@"album.song" usingBlock: ^(RXMLElement *e) {
                 ISMSSong *song = [[ISMSSong alloc] initWithRXMLElement:e serverId:settingsS.currentServerId];
-                [songs addObject:song];
+                [song replaceModel];
+                if (song.contentType.extension)
+                {
+                    [songs addObject:song];
+                }
             }];
             
             _items = songs;
