@@ -11,7 +11,6 @@
 NSString * const ISMSNotification_SongPlaybackStarted = @"ISMSNotification_SongPlaybackStarted";
 NSString * const ISMSNotification_SongPlaybackPaused = @"ISMSNotification_SongPlaybackPaused";
 NSString * const ISMSNotification_SongPlaybackEnded = @"ISMSNotification_SongPlaybackEnded";
-NSString * const ISMSNotification_SongPlaybackFailed = @"ISMSNotification_SongPlaybackFailed";
 
 NSString * const ISMSNotification_AlbumArtLargeDownloaded = @"ISMSNotification_AlbumArtLargeDownloaded";
 

@@ -11,7 +11,6 @@
 extern NSString * const ISMSNotification_SongPlaybackStarted;
 extern NSString * const ISMSNotification_SongPlaybackPaused;
 extern NSString * const ISMSNotification_SongPlaybackEnded;
-extern NSString * const ISMSNotification_SongPlaybackFailed;
 
 extern NSString * const ISMSNotification_AlbumArtLargeDownloaded;
 
