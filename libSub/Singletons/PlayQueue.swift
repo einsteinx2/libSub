@@ -103,8 +103,12 @@ import MediaPlayer
         }
     }
     
+    public func insertSong(song song: ISMSSong, index: Int) {
+        playlist.insertSong(song: song, index: index)
+        ISMSStreamManager.sharedInstance().fillStreamQueue(self.audioEngine.isStarted())
+    }
+    
     public func moveSong(fromIndex fromIndex: Int, toIndex: Int, notify: Bool = false) {
-        let original = currentIndex
         if playlist.moveSong(fromIndex: fromIndex, toIndex: toIndex, notify: notify) {
             if fromIndex == currentIndex && toIndex < currentIndex {
                 // Moved the current song to a lower index
@@ -119,6 +123,8 @@ import MediaPlayer
                 // Moved a song from before the current song to after
                 currentIndex -= 1
             }
+            
+            ISMSStreamManager.sharedInstance().fillStreamQueue(self.audioEngine.isStarted())
         }
     }
     
