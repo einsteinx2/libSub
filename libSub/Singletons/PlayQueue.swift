@@ -103,8 +103,8 @@ import MediaPlayer
         }
     }
     
-    public func insertSong(song song: ISMSSong, index: Int) {
-        playlist.insertSong(song: song, index: index)
+    public func insertSong(song song: ISMSSong, index: Int, notify: Bool = false) {
+        playlist.insertSong(song: song, index: index, notify: notify)
         ISMSStreamManager.sharedInstance().fillStreamQueue(self.audioEngine.isStarted())
     }
     
